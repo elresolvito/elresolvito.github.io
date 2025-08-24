@@ -296,7 +296,7 @@
     // Función principal que se ejecuta cuando la página carga
     document.addEventListener('DOMContentLoaded', function() {
         // 1. Cargamos el inventario desde productos.json
-        fetch('productos.json?v=' + new Date().getTime()) // El '?v=' evita problemas de caché
+        fetch('/productos.json?v=' + new Date().getTime()) // El '?v=' evita problemas de caché
             .then(response => {
                 if (!response.ok) {
                     throw new Error('La respuesta de la red no fue correcta: ' + response.statusText);
@@ -659,5 +659,6 @@
 
 </body>
 </html>
+
 
 
