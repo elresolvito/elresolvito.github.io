@@ -9,24 +9,14 @@
     <meta name="keywords" content="tienda online habana, mercado habana, entrega a domicilio cuba, mandados habana, el resolvito">
     <meta name="author" content="El Resolvito">
 
-  <!-- ========================================================= -->
-<!-- === BLOQUE DE ÍCONOS Y MANIFEST PROFESIONAL (HÍBRIDO) === -->
-<!-- ========================================================= -->
-
-<!-- 1. Instrucción principal para Android y navegadores modernos -->
-<link rel="manifest" href="/manifest.json?v=4"> <!-- Incrementamos la versión -->
-
-<!-- 2. Color de la barra del navegador -->
-<meta name="theme-color" content="#0d3b33">
-
-<!-- 3. Instrucción de respaldo para Android y principal para iOS -->
-<!--    Chrome la usará si el manifest falla. Safari (iPhone) la usará siempre. -->
-<!--    Apuntamos al ícono más grande que tenemos para asegurar la calidad. -->
-<link rel="apple-touch-icon" href="/android-chrome-512x512.png">
-
-<!-- 4. Favicons estándar para pestañas de navegador, marcadores, etc. -->
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <!-- ========================================================= -->
+    <!-- === BLOQUE DE ÍCONOS Y MANIFEST PROFESIONAL (HÍBRIDO) === -->
+    <!-- ========================================================= -->
+    <link rel="manifest" href="manifest.json?v=5">
+    <meta name="theme-color" content="#0d3b33">
+    <link rel="apple-touch-icon" href="android-chrome-512x512.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -120,7 +110,7 @@
         <div class="hero-overlay absolute inset-0 opacity-75"></div>
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center text-white">
             <h1 class="text-fixed-4xl md:text-fixed-6xl font-extrabold mb-4 drop-shadow-lg fade-in-up">EL RESOLVITO</h1>
-            <p class="text-fixed-lg md:text-fixed-xl max-w-2xl mx-auto mb-8 drop-shadow-md fade-in-up" style="transition-delay: 150ms;">Mercado y víveres... a un clic de distancia.</p>
+            <p class="text-fixed-lg md:text-fixed-xl max-w-2xl mx-auto mb-8 drop-shadow-md fade-in-up" style="transition-delay: 150ms;">Tu tienda a un clic de distancia.</p>
             <a href="#mercado" class="bg-[var(--accent-color)] text-white font-bold py-3 px-8 rounded-full text-fixed-lg hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg fade-in-up" style="transition-delay: 300ms;">Explorar Productos</a>
         </div>
     </section>
@@ -128,13 +118,10 @@
     <section id="mercado" class="py-16 lg:py-24 bg-gray-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 fade-in-up">
-                <h2 class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--text-dark)]">Mercado y Víveres</h2>
-                <p class="mt-4 text-fixed-lg text-[var(--text-medium)] max-w-3xl mx-auto">Encuentra productos que necesitas para tu hogar, desde bebidas refrescantes hasta productos frescos.</p>
+                <h2 class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--text-dark)]">Nuestros Productos</h2>
+                <p class="mt-4 text-fixed-lg text-[var(--text-medium)] max-w-3xl mx-auto">Encuentra todo lo que necesitas para tu hogar, desde víveres hasta productos de aseo.</p>
             </div>
             
-            <!-- ======================================================= -->
-            <!-- === INICIO DEL BANNER DE PROMOCIÓN DE ENVÍOS === -->
-            <!-- ======================================================= -->
             <div class="bg-white border-2 border-dashed border-green-200 p-4 rounded-xl shadow-md mb-8 text-center fade-in-up">
                 <h3 class="text-fixed-lg md:text-fixed-xl font-bold text-[var(--primary-color)] mb-3">¡Ahorra en cada pedido en La Habana Vieja!</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm md:text-base">
@@ -152,12 +139,9 @@
                     </div>
                 </div>
             </div>
-            <!-- ======================================================= -->
-            <!-- === FIN DEL BANNER DE PROMOCIÓN DE ENVÍOS === -->
-            <!-- ======================================================= -->
 
             <div class="bg-white p-4 rounded-xl shadow-lg mb-8 fade-in-up" style="transition-delay: 150ms;">
-                <input type="text" id="mercadoSearchInput" placeholder="Buscar en Mercado y Víveres..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base">
+                <input type="text" id="mercadoSearchInput" placeholder="Buscar productos..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base">
             </div>
             <div id="mercadoCategoryFilters" class="flex flex-wrap justify-center gap-2 mb-8 fade-in-up" style="transition-delay: 300ms;"></div>
             <div id="mercadoProductGrid"></div>
@@ -168,17 +152,17 @@
     <section id="como-comprar" class="py-16 lg:py-24 bg-white">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 fade-in-up">
-                <h2 class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--text-dark)]">¿Cómo Comprar en Línea?</h2>
+                <h2 class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--text-dark)]">¿Cómo Comprar?</h2>
                 <p class="mt-4 text-fixed-lg text-[var(--text-medium)] max-w-3xl mx-auto">Hacer tu pedido es muy fácil. Sigue estos sencillos pasos para recibir tus productos sin complicaciones.</p>
             </div>
             <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
-                <div class="fade-in-left"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">1.</div><h3 class="text-fixed-xl font-bold mb-2">Elige Productos</h3><p class="text-fixed-base text-[var(--text-medium)]">Navega por nuestra tienda y añade los artículos que desees a tu carrito de compras.</p></div>
+                <div class="fade-in-left"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">1.</div><h3 class="text-fixed-xl font-bold mb-2">Elige Productos</h3><p class="text-fixed-base text-[var(--text-medium)]">Navega por nuestra tienda y añade los artículos que desees a tu carrito.</p></div>
                 <div class="flex items-center justify-center text-gray-300 text-fixed-4xl font-light hidden md:flex">→</div>
-                <div class="fade-in-right" style="transition-delay: 150ms;"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">2.</div><h3 class="text-fixed-xl font-bold mb-2">Revisa tu Carrito</h3><p class="text-fixed-base text-[var(--text-medium)]">Abre tu carrito, revisa tu selección y las cantidades. Cuando estés listo, pulsa "Enviar Pedido".</p></div>
+                <div class="fade-in-right" style="transition-delay: 150ms;"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">2.</div><h3 class="text-fixed-xl font-bold mb-2">Revisa tu Carrito</h3><p class="text-fixed-base text-[var(--text-medium)]">Abre tu carrito, revisa tu selección y pulsa "Enviar Pedido".</p></div>
                 <div class="flex items-center justify-center text-gray-300 text-fixed-4xl font-light hidden md:flex">→</div>
-                <div class="fade-in-left" style="transition-delay: 300ms;"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">3.</div><h3 class="text-fixed-xl font-bold mb-2">Completa tus Datos</h3><p class="text-fixed-base text-[var(--text-medium)]">Llena el formulario con tu información de contacto, dirección de entrega, y método de pago preferido.</p></div>
+                <div class="fade-in-left" style="transition-delay: 300ms;"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">3.</div><h3 class="text-fixed-xl font-bold mb-2">Completa tus Datos</h3><p class="text-fixed-base text-[var(--text-medium)]">Llena el formulario con tu información de contacto y entrega.</p></div>
                 <div class="flex items-center justify-center text-gray-300 text-fixed-4xl font-light hidden md:flex">→</div>
-                <div class="fade-in-right" style="transition-delay: 450ms;"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">4.</div><h3 class="text-fixed-xl font-bold mb-2">Confirma y Recibe</h3><p class="text-fixed-base text-[var(--text-medium)]">Confirma tu pedido y te contactaremos por WhatsApp para coordinar la entrega.</p></div>
+                <div class="fade-in-right" style="transition-delay: 450ms;"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">4.</div><h3 class="text-fixed-xl font-bold mb-2">Confirma y Recibe</h3><p class="text-fixed-base text-[var(--text-medium)]">Confirma por WhatsApp y coordinamos la entrega a tu puerta.</p></div>
             </div>
             <div class="mt-12 max-w-4xl mx-auto bg-blue-50 p-6 rounded-xl fade-in-up">
                 <h3 class="text-fixed-xl font-bold text-[var(--text-dark)] mb-4 text-center">Nuestra Política de Envíos</h3>
@@ -271,20 +255,19 @@
             <div class="p-6 border-b">
                 <h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">1. Resumen de tu Pedido</h4>
                 <div id="checkoutOrderSummary" class="space-y-3 mb-4"></div>
-                <!-- ======================================================= -->
-                <!-- === INICIO DEL MENSAJE DE VENTA INTELIGENTE === -->
-                <!-- ======================================================= -->
-                <div id="upsellMessage" class="my-4 p-3 rounded-lg text-center font-semibold text-sm transition-all duration-300">
-                    <!-- El mensaje se generará aquí con JavaScript -->
+                <div id="upsellMessage" class="my-4 p-3 rounded-lg text-center font-semibold text-sm transition-all duration-300" style="display: none;"></div>
+                <div class="bg-gray-50 p-4 rounded-lg space-y-2">
+                    <div class="flex justify-between text-fixed-base"><span>Subtotal de productos:</span><span id="checkoutSubtotal" class="font-semibold">$0</span></div>
+                    <div class="flex justify-between text-fixed-base text-gray-600"><span>Servicio y Empaque:</span><span id="checkoutServiceFee" class="font-semibold">$50</span></div>
+                    <div class="flex justify-between text-fixed-base"><span>Costo de envío:</span><span id="checkoutShipping" class="font-semibold">$0</span></div>
+                    <div id="shippingNote" class="text-fixed-sm text-gray-600 hidden"></div>
+                    <hr class="my-2">
+                    <div class="flex justify-between text-fixed-lg font-bold text-[var(--primary-color)]"><span>Total a Pagar:</span><span id="checkoutTotal">$0</span></div>
                 </div>
-                <!-- ======================================================= -->
-                <!-- === FIN DEL MENSAJE DE VENTA INTELIGENTE === -->
-                <!-- ======================================================= -->
-                <div class="bg-gray-50 p-4 rounded-lg space-y-2"><div class="flex justify-between text-fixed-base"><span>Subtotal de productos:</span><span id="checkoutSubtotal" class="font-semibold">$0</span></div><div class="flex justify-between text-fixed-base text-gray-600"><span>Servicio y Empaque:</span><span id="checkoutServiceFee" class="font-semibold">$50</span></div><div class="flex justify-between text-fixed-base"><span>Costo de envío:</span><span id="checkoutShipping" class="font-semibold">$0</span></div><div id="shippingNote" class="text-fixed-sm text-gray-600 hidden"></div><hr class="my-2"><div class="flex justify-between text-fixed-lg font-bold text-[var(--primary-color)]"><span>Total a Pagar:</span><span id="checkoutTotal">$0</span></div></div>
             </div>
             <div class="p-6 border-b"><h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">2. Datos de Contacto</h4><div class="space-y-4"><div><label for="customerName" class="block text-fixed-base font-semibold text-gray-700 mb-2">Nombre completo *</label><input type="text" id="customerName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base" required></div><div><label for="customerAddress" class="block text-fixed-base font-semibold text-gray-700 mb-2">Calle y número (ej: Aguiar #230 apto 1) *</label><input type="text" id="customerAddress" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base" required></div><div><label for="customerReferences" class="block text-fixed-base font-semibold text-gray-700 mb-2">Puntos de Referencia (ej: Frente a la bodega)</label><input type="text" id="customerReferences" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base"></div><div><label for="customerPhone" class="block text-fixed-base font-semibold text-gray-700 mb-2">Número de teléfono *</label><input type="tel" id="customerPhone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base" required></div><div><label for="deliveryLocation" class="block text-fixed-base font-semibold text-gray-700 mb-2">Ubicación *</label><select id="deliveryLocation" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base" required><option value="">Selecciona tu ubicación</option><option value="habana-vieja">Habana Vieja</option><option value="otros">Otros municipios</option></select></div></div></div>
             <div class="p-6 border-b"><h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">3. Detalles del Pago</h4><div class="space-y-4"><div><label class="block text-fixed-base font-semibold text-gray-700 mb-2">Método de pago *</label><div class="space-y-2"><label class="flex items-center"><input type="radio" name="paymentMethod" value="efectivo" class="mr-3 text-[var(--primary-color)] focus:ring-[var(--primary-color)]"><span class="text-fixed-base">Efectivo</span></label><label class="flex items-center"><input type="radio" name="paymentMethod" value="transferencia" class="mr-3 text-[var(--primary-color)] focus:ring-[var(--primary-color)]"><span class="text-fixed-base">Transferencia</span></label></div></div><div id="cashPaymentField" class="hidden"><label class="block text-fixed-base font-semibold text-gray-700 mb-2">Pagaré con...</label><div class="flex flex-wrap gap-2"><button type="button" class="cash-btn" data-amount="20">$20</button><button type="button" class="cash-btn" data-amount="50">$50</button><button type="button" class="cash-btn" data-amount="100">$100</button><button type="button" class="cash-btn" data-amount="200">$200</button><button type="button" class="cash-btn" data-amount="500">$500</button><button type="button" class="cash-btn" data-amount="1000">$1000</button><button type="button" class="cash-btn" data-amount="otro">Otro</button></div><input type="text" id="otherCashAmount" placeholder="Especifica otro monto" class="hidden w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] transition text-fixed-base"></div></div></div>
-            <div class="p-6"><h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">4. Política de Envíos</h4><div class="bg-blue-50 p-4 rounded-lg text-fixed-sm text-gray-700 space-y-2"><p><strong>Horarios de entrega:</strong> 9:00 a.m. a 8:00 p.m.</p><p><strong>Habana Vieja:</strong></p><ul class="list-disc list-inside ml-4 space-y-1"><li>Tarifa de envío: <strong>$150 CUP</strong>.</li><li class="font-semibold text-green-600">¡Envío GRATIS en compras de $1,500 CUP o más!</li></ul><p><strong>Otros municipios:</strong></p><ul class="list-disc list-inside ml-4 space-y-1"><li>El costo de envío se ajustará al precio de la agencia de mensajería externa</li><li>Se lo confirmaremos por WhatsApp antes de procesar su pedido</li></ul><p class="text-xs text-gray-600 mt-3">Al confirmar su pedido, acepta nuestras condiciones de envío y horarios establecidos.</p></div></div>
+            <div class="p-6"><h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">4. Política de Envíos</h4><div class="bg-blue-50 p-4 rounded-lg text-fixed-sm text-gray-700 space-y-2"><p><strong>Horarios de entrega:</strong> 9:00 a.m. a 8:00 p.m.</p><p><strong>Habana Vieja:</strong></p><ul class="list-disc list-inside ml-4 space-y-1"><li>Tarifa regular: <strong>$150 CUP</strong></li><li class="font-semibold text-green-600">En compras de $1,500 o más: <strong>¡Paga solo $50 CUP!</strong></li><li class="font-semibold text-green-600">En compras de $3,500 o más: <strong>¡Envío GRATIS!</strong></li></ul><p><strong>Otros municipios:</strong></p><ul class="list-disc list-inside ml-4 space-y-1"><li>El costo de envío se ajustará al precio de la agencia de mensajería externa</li><li>Se lo confirmaremos por WhatsApp antes de procesar su pedido</li></ul><p class="text-xs text-gray-600 mt-3">Al confirmar su pedido, acepta nuestras condiciones de envío y horarios establecidos.</p></div></div>
         </div>
         <div class="p-6 border-t bg-gray-50"><button id="confirmOrderBtn" class="w-full bg-green-500 text-white font-bold py-4 px-4 rounded-lg text-fixed-base hover:bg-green-600 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]">Confirmar y Enviar Pedido</button></div>
     </div>
@@ -302,56 +285,37 @@
 </button>
 
 <script>
-    // ===================================================================
-    // === INICIO DEL CATÁLOGO DE PRODUCTOS - "EL RESOLVITO" ===
-    // ===================================================================
-    var products = [
-        // --- PRODUCTOS DE MERCADO ---
-        { id: 1, name: "Aceite", price: 900, image: "https://i.postimg.cc/FFdbnBBS/aceite.jpg", description: "Botella de aceite vegetal.", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 2, name: "Arroz", price: 650, image: "https://i.postimg.cc/ZRR352mX/arroz.jpg", description: "Precio de oferta. Paquete de 1 kg aprox.", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 3, name: "Spaghetti", price: 350, image: "https://i.postimg.cc/rpBWC2DW/spaguetis.png", description: "Paquete de spaghetti de 400g.", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 4, name: "Picadillo", price: 380, image: "https://i.postimg.cc/pdhzFLLR/picadillo-de-pollo.png", description: "Paquete de picadillo de ave.", category: "Cárnicos", status: "available", hasBoxOption: false },
-        { id: 5, name: "Salchichas (Perritos)", price: 400, image: "https://i.postimg.cc/R0mKFv73/salchichas-1-paquete.png", description: "Paquete de salchichas tipo perrito.", category: "Cárnicos", status: "available", hasBoxOption: false },
-        { id: 6, name: "Cerveza Presidente", price: 220, image: "https://i.postimg.cc/sXBWqMwz/cerveza-predidente-precio-220.png", description: "Lata de 355 ml.", category: "Líquidos", status: "available", hasBoxOption: true, boxPrice: 5280, boxQuantity: 24 },
-        { id: 7, name: "Malta Guajira", price: 250, image: "https://i.postimg.cc/mD0wD6fZ/malta-guajira.jpg", description: "Lata de malta refrescante.", category: "Líquidos", status: "available", hasBoxOption: false },
-        { id: 8, name: "Leche Condensada", price: 520, image: "https://i.postimg.cc/fRbxMK43/leche-condensada.jpg", description: "Lata de leche condensada.", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 9, name: "Jabón de Baño", price: 160, image: "https://i.postimg.cc/G2L6d16q/Jab-n-Ridel-100g.png", description: "Pastilla de jabón de baño.", category: "Aseo Personal", status: "available", hasBoxOption: false },
-        { id: 10, name: "Refresco Instantáneo", price: 40, image: "https://i.postimg.cc/MTzsbBM1/refresco-1.png", description: "Sobre de refresco en polvo. Varios sabores.", category: "Líquidos", status: "available", hasBoxOption: false },
-        { id: 11, name: "Hígado de Pollo", price: 850, image: "https://i.postimg.cc/52k8yC1s/hiogado_de_pollo.jpg", description: "Paquete de 1 kg.", category: "Cárnicos", status: "available", hasBoxOption: false },
-        { id: 12, name: "Whisky Jolly", price: 400, image: "https://i.postimg.cc/8zBPM9Yn/grok_image_xotf0za.jpg", description: "Botella de 200 ml.", category: "Líquidos", status: "available", hasBoxOption: false },
-        { id: 13, name: "Frijol Negro", price: 680, image: "https://i.postimg.cc/rFt14B4k/frijol_negro.jpg", description: "Paquete de 1 kg.", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 14, name: "Galletas SaltiBloks", price: 890, image: "https://i.postimg.cc/c4qpfNz7/Galletas-7-tacos.png", description: "1 paquete de galletas.", category: "Confituras", status: "available", hasBoxOption: false },
-        { id: 15, name: "Detergente Brillante", price: 350, image: "https://i.postimg.cc/NfD6hnnq/detergente_brillante.jpg", description: "Bolsa de detergente en polvo.", category: "Aseo Personal", status: "available", hasBoxOption: false },
-        { id: 16, name: "Cerveza Unlaguer", price: 250, image: "https://i.postimg.cc/HLv56w03/cerveza-ulaguer-precio-300.png", description: "Lata de cerveza Unlaguer.", category: "Líquidos", status: "available", hasBoxOption: true, boxPrice: 6000, boxQuantity: 24 },
-        { id: 17, name: "Cerveza Cristal", price: 280, image: "https://i.postimg.cc/MZ5gbYw8/cristal.png", description: "Lata de cerveza Cristal.", category: "Líquidos", status: "available", hasBoxOption: true, boxPrice: 6720, boxQuantity: 24 },
-        { id: 18, name: "Azúcar Blanca", price: 600, image: "https://i.postimg.cc/c40RbWXB/azucar_blanca.jpg", description: "Paquete de 1 kg.", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 19, name: "Papel Sanitario", price: 530, image: "https://i.postimg.cc/Znt5rmJ2/grok_image_xypezad.jpg", description: "Paquete de 4 rollos.", category: "Aseo Personal", status: "available", hasBoxOption: false },
-        { id: 20, name: "Malta Morena", price: 210, image: "https://i.postimg.cc/pLsccNs6/Malta-Morena-8-oz-Lata.jpg", description: "Lata de 8 oz.", category: "Líquidos", status: "available", hasBoxOption: false }
-    ];
-    
-    // =================================================================
-    // === ORDENAMIENTO AUTOMÁTICO DEL CATÁLOGO ===
-    // =================================================================
-    products.sort((a, b) => {
-        if (a.category < b.category) return -1;
-        if (a.category > b.category) return 1;
-        if (a.name < b.name) return -1;
-        if (a.name > b.name) return 1;
-        return 0;
-    });
-    
+    var products = [];
     var cart = JSON.parse(localStorage.getItem('cart')) || [];
-    var whatsappGroupLink = 'https://chat.whatsapp.com/H19dIofkINdHrVApA4jbvW?mode=ac_t'; // Pega aquí tu enlace de grupo
+    var whatsappGroupLink = 'https://chat.whatsapp.com/H19dIofkINdHrVApA4jbvW?mode=ac_t';
     var currentProductForModal = null;
     var currentUnitType = 'individual';
     var selectedCashAmount = '';
 
     document.addEventListener('DOMContentLoaded', function() {
-        setupStoreSection('mercado', products);
-        updateCartUI();
-        setupGeneralEventListeners();
-        setupScrollAnimations();
-        setupScrollHeader();
+        fetch('productos.json?v=' + new Date().getTime())
+            .then(response => response.json())
+            .then(data => {
+                products = data;
+                
+                products.sort((a, b) => {
+                    if (a.category < b.category) return -1;
+                    if (a.category > b.category) return 1;
+                    if (a.name < b.name) return -1;
+                    if (a.name > b.name) return 1;
+                    return 0;
+                });
+                
+                setupStoreSection('mercado', products);
+                updateCartUI();
+                setupGeneralEventListeners();
+                setupScrollAnimations();
+                setupScrollHeader();
+            })
+            .catch(error => {
+                console.error("¡Error fatal! No se pudo cargar el catálogo de productos.", error);
+                document.getElementById('mercadoProductGrid').innerHTML = '<p class="text-center text-red-500 font-bold">No se pudo cargar el catálogo de productos en este momento. Por favor, intente más tarde.</p>';
+            });
     });
 
     function setupStoreSection(sectionPrefix, productsForSection) {
@@ -365,7 +329,6 @@
     
     function setupCategoryFiltersAndSearch(productsForSection, filtersId, searchId, gridId, noResultsId) {
         var uniqueCategories = [];
-        var categoryOrder = {};
         for (var i = 0; i < productsForSection.length; i++) {
             if (uniqueCategories.indexOf(productsForSection[i].category) === -1) {
                 uniqueCategories.push(productsForSection[i].category);
@@ -495,9 +458,20 @@
     function closeMobileMenu(){document.getElementById('mobile-menu').classList.remove('open');document.getElementById('mobile-backdrop').classList.remove('open');}
     function setupScrollAnimations(){if('IntersectionObserver' in window){var elements=document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right');var observer=new IntersectionObserver(function(entries){for(var i=0;i<entries.length;i++){if(entries[i].isIntersecting){entries[i].target.classList.add('is-visible');}}}, {threshold:0.1});for(var j=0;j<elements.length;j++){observer.observe(elements[j]);}}else{var elements=document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right');for(var k=0;k<elements.length;k++){elements[k].classList.add('is-visible');}}}
     function setupScrollHeader(){var header=document.getElementById('mainHeader');window.addEventListener('scroll',function(){if(window.scrollY>100){header.classList.add('scrolled');}else{header.classList.remove('scrolled');}});}
-    function showCheckoutModal(){if(cart.length===0){alert('Tu carrito está vacío');return;}
-    var savedData=JSON.parse(localStorage.getItem('customerData'));if(savedData){document.getElementById('customerName').value=savedData.name||'';document.getElementById('customerAddress').value=savedData.address||'';document.getElementById('customerReferences').value=savedData.references||'';document.getElementById('customerPhone').value=savedData.phone||'';document.getElementById('deliveryLocation').value='habana-vieja';}
-    updateCheckoutSummary();document.getElementById('checkoutModal').classList.add('show');}
+    
+    function showCheckoutModal(){
+        if(cart.length===0){alert('Tu carrito está vacío');return;}
+        var savedData=JSON.parse(localStorage.getItem('customerData'));
+        if(savedData){
+            document.getElementById('customerName').value=savedData.name||'';
+            document.getElementById('customerAddress').value=savedData.address||'';
+            document.getElementById('customerReferences').value=savedData.references||'';
+            document.getElementById('customerPhone').value=savedData.phone||'';
+            document.getElementById('deliveryLocation').value='habana-vieja';
+        }
+        updateCheckoutSummary();
+        document.getElementById('checkoutModal').classList.add('show');
+    }
     
     function updateCheckoutSummary(){
         var checkoutOrderSummary=document.getElementById('checkoutOrderSummary');
@@ -554,7 +528,9 @@
         if (upsellElement) {
             upsellElement.textContent = upsellMessage;
             if(upsellMessage === '') {
-                upsellElement.className = 'hidden';
+                upsellElement.style.display = 'none';
+            } else {
+                upsellElement.style.display = 'block';
             }
         }
         
@@ -665,3 +641,4 @@
 
 </body>
 </html>
+

@@ -1,0 +1,24 @@
+--- START OF FILE productos.json ---
+[
+    { "id": 1, "name": "Aceite", "price": 900, "image": "https://i.postimg.cc/FFdbnBBS/aceite.jpg", "description": "Botella de aceite vegetal.", "category": "Mercado", "status": "available", "hasBoxOption": false },
+    { "id": 2, "name": "Arroz", "price": 650, "image": "https://i.postimg.cc/ZRR352mX/arroz.jpg", "description": "Precio de oferta. Paquete de 1 kg aprox.", "category": "Mercado", "status": "available", "hasBoxOption": false },
+    { "id": 3, "name": "Spaghetti", "price": 350, "image": "https://i.postimg.cc/rpBWC2DW/spaguetis.png", "description": "Paquete de spaghetti de 400g.", "category": "Mercado", "status": "available", "hasBoxOption": false },
+    { "id": 4, "name": "Picadillo", "price": 380, "image": "https://i.postimg.cc/pdhzFLLR/picadillo-de-pollo.png", "description": "Paquete de picadillo de ave.", "category": "Cárnicos", "status": "available", "hasBoxOption": false },
+    { "id": 5, "name": "Salchichas (Perritos)", "price": 400, "image": "https://i.postimg.cc/R0mKFv73/salchichas-1-paquete.png", "description": "Paquete de salchichas tipo perrito.", "category": "Cárnicos", "status": "available", "hasBoxOption": false },
+    { "id": 6, "name": "Cerveza Presidente", "price": 220, "image": "https://i.postimg.cc/sXBWqMwz/cerveza-predidente-precio-220.png", "description": "Lata de 355 ml.", "category": "Líquidos", "status": "available", "hasBoxOption": true, "boxPrice": 5280, "boxQuantity": 24 },
+    { "id": 7, "name": "Malta Guajira", "price": 250, "image": "https://i.postimg.cc/mD0wD6fZ/malta-guajira.jpg", "description": "Lata de malta refrescante.", "category": "Líquidos", "status": "available", "hasBoxOption": false },
+    { "id": 8, "name": "Leche Condensada", "price": 520, "image": "https://i.postimg.cc/fRbxMK43/leche-condensada.jpg", "description": "Lata de leche condensada.", "category": "Mercado", "status": "available", "hasBoxOption": false },
+    { "id": 9, "name": "Jabón de Baño", "price": 160, "image": "https://i.postimg.cc/G2L6d16q/Jab-n-Ridel-100g.png", "description": "Pastilla de jabón de baño.", "category": "Aseo Personal", "status": "available", "hasBoxOption": false },
+    { "id": 10, "name": "Refresco Instantáneo", "price": 40, "image": "https://i.postimg.cc/MTzsbBM1/refresco-1.png", "description": "Sobre de refresco en polvo. Varios sabores.", "category": "Líquidos", "status": "available", "hasBoxOption": false },
+    { "id": 11, "name": "Hígado de Pollo", "price": 850, "image": "https://i.postimg.cc/52k8yC1s/hiogado_de_pollo.jpg", "description": "Paquete de 1 kg.", "category": "Cárnicos", "status": "available", "hasBoxOption": false },
+    { "id": 12, "name": "Whisky Jolly", "price": 400, "image": "https://i.postimg.cc/8zBPM9Yn/grok_image_xotf0za.jpg", "description": "Botella de 200 ml.", "category": "Líquidos", "status": "available", "hasBoxOption": false },
+    { "id": 13, "name": "Frijol Negro", "price": 680, "image": "https://i.postimg.cc/rFt14B4k/frijol_negro.jpg", "description": "Paquete de 1 kg.", "category": "Mercado", "status": "available", "hasBoxOption": false },
+    { "id": 14, "name": "Galletas SaltiBloks", "price": 890, "image": "https://i.postimg.cc/c4qpfNz7/Galletas-7-tacos.png", "description": "1 paquete de galletas.", "category": "Confituras", "status": "available", "hasBoxOption": false },
+    { "id": 15, "name": "Detergente Brillante", "price": 350, "image": "https://i.postimg.cc/NfD6hnnq/detergente_brillante.jpg", "description": "Bolsa de detergente en polvo.", "category": "Aseo Personal", "status": "available", "hasBoxOption": false },
+    { "id": 16, "name": "Cerveza Unlaguer", "price": 250, "image": "https://i.postimg.cc/HLv56w03/cerveza-ulaguer-precio-300.png", "description": "Lata de cerveza Unlaguer.", "category": "Líquidos", "status": "available", "hasBoxOption": true, "boxPrice": 6000, "boxQuantity": 24 },
+    { "id": 17, "name": "Cerveza Cristal", "price": 280, "image": "https://i.postimg.cc/MZ5gbYw8/cristal.png", "description": "Lata de cerveza Cristal.", "category": "Líquidos", "status": "available", "hasBoxOption": true, "boxPrice": 6720, "boxQuantity": 24 },
+    { "id": 18, "name": "Azúcar Blanca", "price": 600, "image": "https://i.postimg.cc/c40RbWXB/azucar_blanca.jpg", "description": "Paquete de 1 kg.", "category": "Mercado", "status": "available", "hasBoxOption": false },
+    { "id": 19, "name": "Papel Sanitario", "price": 530, "image": "https://i.postimg.cc/Znt5rmJ2/grok_image_xypezad.jpg", "description": "Paquete de 4 rollos.", "category": "Aseo Personal", "status": "available", "hasBoxOption": false },
+    { "id": 20, "name": "Malta Morena", "price": 210, "image": "https://i.postimg.cc/pLsccNs6/Malta-Morena-8-oz-Lata.jpg", "description": "Lata de 8 oz.", "category": "Líquidos", "status": "available", "hasBoxOption": false }
+]
+--- END OF FILE productos.json ---
