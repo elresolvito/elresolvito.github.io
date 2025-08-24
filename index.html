@@ -135,9 +135,356 @@
 
     // Variables globales
     var cart = JSON.parse(localStorage.getItem('cart')) || [];
-    var whatsappGrou
+    var whatsappGroupLink = 'https://chat.whatsapp.com/H19dIofkINdHrVApA4jbvW?mode=ac_t';
+    var currentProductForModal = null;
+    var currentUnitType = 'individual';
+    var selectedCashAmount = '';
 
+    // Función principal que se ejecuta cuando la página carga
+    document.addEventListener('DOMContentLoaded', function() {
+        // Ordenamos los productos
+        products.sort((a, b) => {
+            if (a.category < b.category) return -1;
+            if (a.category > b.category) return 1;
+            if (a.name < b.name) return -1;
+            if (a.name > b.name) return 1;
+            return 0;
+        });
 
+        // Inicializamos la tienda
+        setupStoreSection('mercado', products);
+        updateCartUI();
+        setupGeneralEventListeners();
+        setupScrollAnimations();
+        setupScrollHeader();
+    });
+
+    // ... y aquí va el RESTO de tus funciones, desde setupStoreSection hasta confirmOrder ...
+    // ... (incluyo todo abajo para que sea un solo bloque) ...
+
+    function setupStoreSection(sectionPrefix, productsForSection) {
+        var filtersId = sectionPrefix + 'CategoryFilters';
+        var searchId = sectionPrefix + 'SearchInput';
+        var gridId = sectionPrefix + 'ProductGrid';
+        var noResultsId = sectionPrefix + 'NoResultsMessage';
+        setupCategoryFiltersAndSearch(productsForSection, filtersId, searchId, gridId, noResultsId);
+        renderProducts(productsForSection, gridId, noResultsId);
+    }
+    
+    function setupCategoryFiltersAndSearch(productsForSection, filtersId, searchId, gridId, noResultsId) {
+        var uniqueCategories = [];
+        for (var i = 0; i < productsForSection.length; i++) {
+            if (uniqueCategories.indexOf(productsForSection[i].category) === -1) {
+                uniqueCategories.push(productsForSection[i].category);
+            }
+        }
+
+        var categories = ['all'].concat(uniqueCategories);
+        var filtersContainer = document.getElementById(filtersId);
+        if (!filtersContainer) return;
+
+        var buttonsHtml = categories.map(function(category) {
+            return '<button class="category-btn ' + (category === 'all' ? 'active' : '') + '" data-category="' + category + '">' + (category === 'all' ? 'Todos' : category) + '</button>';
+        }).join('');
+        filtersContainer.innerHTML = buttonsHtml;
+
+        var currentCategory = 'all';
+        var categoryButtons = filtersContainer.querySelectorAll('.category-btn');
+        var searchInput = document.getElementById(searchId);
+
+        function filterAndRender() {
+            var searchTerm = searchInput.value.toLowerCase();
+            var filteredProducts = [];
+            for (var i = 0; i < productsForSection.length; i++) {
+                var product = productsForSection[i];
+                var categoryMatch = (currentCategory === 'all' || product.category === currentCategory);
+                var searchMatch = (!searchTerm || product.name.toLowerCase().indexOf(searchTerm) > -1 || product.description.toLowerCase().indexOf(searchTerm) > -1);
+                if (categoryMatch && searchMatch) {
+                    filteredProducts.push(product);
+                }
+            }
+            renderProducts(filteredProducts, gridId, noResultsId);
+        }
+
+        for (var j = 0; j < categoryButtons.length; j++) {
+            categoryButtons[j].addEventListener('click', function() {
+                for (var k = 0; k < categoryButtons.length; k++) { categoryButtons[k].classList.remove('active'); }
+                this.classList.add('active');
+                currentCategory = this.getAttribute('data-category');
+                filterAndRender();
+            });
+        }
+        searchInput.addEventListener('input', filterAndRender);
+    }
+
+    function renderProducts(productsToRender, gridId, noResultsId) {
+        var productGrid = document.getElementById(gridId);
+        var noResultsMessage = document.getElementById(noResultsId);
+        if (!productGrid || !noResultsMessage) return;
+        if (productsToRender.length === 0) {
+            productGrid.innerHTML = '';
+            noResultsMessage.classList.remove('hidden');
+            return;
+        }
+        noResultsMessage.classList.add('hidden');
+        
+        var groupedProducts = productsToRender.reduce(function(acc, product) {
+            (acc[product.category] = acc[product.category] || []).push(product);
+            return acc;
+        }, {});
+
+        var html = '';
+        var sortedCategories = Object.keys(groupedProducts).sort();
+
+        for (var i = 0; i < sortedCategories.length; i++) {
+            var category = sortedCategories[i];
+            if (groupedProducts.hasOwnProperty(category)) {
+                html += '<div class="col-span-full fade-in-up"><h3 class="text-2xl font-bold text-center text-[var(--primary-color)] my-8 border-b-2 border-gray-200 pb-2">— ' + category + ' —</h3></div>';
+                html += groupedProducts[category].map(function(product, index) {
+                    return '<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer fade-in-up" style="transition-delay: ' + (index * 50) + 'ms" onclick="showProductDetailsModal(' + product.id + ')">' +
+                           '<div class="w-full h-56 md:h-64 overflow-hidden bg-transparent flex items-center justify-center"><img src="' + product.image + '" alt="' + product.name + '" class="w-full h-full object-contain transition-all duration-300"></div>' +
+                           '<div class="p-4">' +
+                           '<h3 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-2">' + product.name + '</h3>' +
+                           '<p class="text-fixed-sm text-[var(--text-medium)] mb-2">' + product.description + '</p>' +
+                           '<p class="text-fixed-xl font-bold text-[var(--primary-color)] mb-4">$' + product.price.toLocaleString() + '</p>' +
+                           (product.status === 'unavailable' ? '<span class="text-red-500 text-fixed-sm font-semibold">No disponible</span>' : '<button class="w-full bg-[var(--primary-color)] text-white font-bold py-2 px-4 rounded-lg text-fixed-base hover:bg-opacity-90 transition-colors duration-300">Ver Detalles</button>') +
+                           '</div></div>';
+                }).join('');
+            }
+        }
+        productGrid.innerHTML = '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">' + html + '</div>';
+        setupScrollAnimations();
+    }
+    
+    function showProductDetailsModal(productId){var product=null;for(var i=0;i<products.length;i++){if(products[i].id===productId){product=products[i];break;}}
+    if(!product||product.status==='unavailable')return;currentProductForModal=JSON.parse(JSON.stringify(product));currentProductForModal.quantity=1;currentUnitType='individual';document.getElementById('productDetailsTitle').textContent=product.name;document.getElementById('productDetailsImage').src=product.image;document.getElementById('productDetailsDescription').textContent=product.description;document.getElementById('productQuantityDisplay').textContent='1';var unitTypeSection=document.getElementById('unitTypeSection');if(product.hasBoxOption){unitTypeSection.classList.remove('hidden');updateUnitTypeButtons();}else{unitTypeSection.classList.add('hidden');}
+    updateModalPricing();document.getElementById('productDetailsModal').classList.add('show');}
+    function updateUnitTypeButtons(){var individualBtn=document.getElementById('unitTypeIndividual');var boxBtn=document.getElementById('unitTypeBox');if(currentUnitType==='individual'){individualBtn.classList.add('active');boxBtn.classList.remove('active');}else{boxBtn.classList.add('active');individualBtn.classList.remove('active');}}
+    function updateModalPricing(){if(!currentProductForModal)return;var unitPrice,unitDescription;if(currentProductForModal.hasBoxOption&&currentUnitType==='box'){unitPrice=currentProductForModal.boxPrice;unitDescription='Caja ('+currentProductForModal.boxQuantity+' unidades)';}else{unitPrice=currentProductForModal.price;unitDescription='Unidad';}
+    var totalPrice=unitPrice*currentProductForModal.quantity;document.getElementById('productDetailsPrice').textContent='$'+unitPrice.toLocaleString()+' / '+unitDescription;document.getElementById('modalTotalPrice').textContent='$'+totalPrice.toLocaleString();}
+    function addToCartFromModal(){if(!currentProductForModal)return;var cartItem={id:currentProductForModal.id+(currentUnitType==='box'?'_box':''),name:currentProductForModal.name,image:currentProductForModal.image,quantity:currentProductForModal.quantity,unitType:currentUnitType};if(currentProductForModal.hasBoxOption&&currentUnitType==='box'){cartItem.price=currentProductForModal.boxPrice;cartItem.name+=' (Caja x'+currentProductForModal.boxQuantity+')';}else{cartItem.price=currentProductForModal.price;}
+    var existingItemIndex=-1;for(var i=0;i<cart.length;i++){if(cart[i].id===cartItem.id){existingItemIndex=i;break;}}
+    if(existingItemIndex!==-1){cart[existingItemIndex].quantity+=cartItem.quantity;}else{cart.push(cartItem);}
+    updateCartUI();localStorage.setItem('cart',JSON.stringify(cart));document.getElementById('productDetailsModal').classList.remove('show');currentProductForModal=null;showCartAnimation();}
+    
+    function updateCartUI(){
+        var totalItems=cart.reduce(function(sum,item){return sum+item.quantity;},0);
+        var totalPrice=cart.reduce(function(sum,item){return sum+(item.price*item.quantity);},0);
+        document.getElementById('cartCount').textContent=totalItems;
+        document.getElementById('cartTotal').textContent='$'+totalPrice.toLocaleString();
+        document.getElementById('floatingCartTotal').textContent = '$' + totalPrice.toLocaleString();
+        var cartItems=document.getElementById('cartItems');
+        var sendWhatsAppOrder=document.getElementById('sendWhatsAppOrder');
+        if(cart.length===0){
+            cartItems.innerHTML='<p class="text-center text-[var(--text-medium)] text-fixed-base">Tu carrito está vacío</p>';
+            sendWhatsAppOrder.disabled=true;
+        }else{
+            cartItems.innerHTML=cart.map(function(item,index){return('<div class="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0">'+
+            '<div class="flex-1"><h4 class="text-fixed-base font-semibold text-[var(--text-dark)]">'+item.name+'</h4><p class="text-fixed-sm text-[var(--text-medium)]">$'+item.price.toLocaleString()+' c/u</p></div>'+
+            '<div class="flex items-center gap-2">'+
+            '<button onclick="updateCartQuantity('+index+', '+(item.quantity-1)+')" class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-fixed-sm font-bold hover:bg-gray-300 transition-colors">-</button>'+
+            '<span class="text-fixed-base font-semibold w-8 text-center">'+item.quantity+'</span>'+
+            '<button onclick="updateCartQuantity('+index+', '+(item.quantity+1)+')" class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-fixed-sm font-bold hover:bg-gray-300 transition-colors">+</button>'+
+            '<button onclick="removeFromCart('+index+')" class="ml-2 text-red-500 hover:text-red-700 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button>'+
+            '</div></div>');
+        }).join('');
+        sendWhatsAppOrder.disabled=false;
+        }
+    }
+
+    function updateCartQuantity(index,newQuantity){if(newQuantity<=0){removeFromCart(index);return;} cart[index].quantity=newQuantity;updateCartUI();localStorage.setItem('cart',JSON.stringify(cart));}
+    function removeFromCart(index){cart.splice(index,1);updateCartUI();localStorage.setItem('cart',JSON.stringify(cart));}
+    function showCartAnimation(){var floatingCartBtn=document.getElementById('floatingCartBtn');floatingCartBtn.classList.add('shake');setTimeout(function(){floatingCartBtn.classList.remove('shake');},600);}
+    function setupGeneralEventListeners(){document.getElementById('floatingCartBtn').addEventListener('click',function(){document.getElementById('cartModal').classList.add('show');});document.getElementById('closeCartModal').addEventListener('click',function(){document.getElementById('cartModal').classList.remove('show');});document.getElementById('cartModal').addEventListener('click',function(e){if(e.target.id==='cartModal')document.getElementById('cartModal').classList.remove('show');});document.getElementById('closeProductDetailsModalBtn').addEventListener('click',function(){document.getElementById('productDetailsModal').classList.remove('show');currentProductForModal=null;});document.getElementById('productDetailsModal').addEventListener('click',function(e){if(e.target.id==='productDetailsModal'){document.getElementById('productDetailsModal').classList.remove('show');currentProductForModal=null;}});document.getElementById('unitTypeIndividual').addEventListener('click',function(){currentUnitType='individual';updateUnitTypeButtons();updateModalPricing();});document.getElementById('unitTypeBox').addEventListener('click',function(){currentUnitType='box';updateUnitTypeButtons();updateModalPricing();});document.getElementById('decreaseQuantityBtn').addEventListener('click',function(){if(currentProductForModal&&currentProductForModal.quantity>1){currentProductForModal.quantity--;document.getElementById('productQuantityDisplay').textContent=currentProductForModal.quantity;updateModalPricing();}});document.getElementById('increaseQuantityBtn').addEventListener('click',function(){if(currentProductForModal){currentProductForModal.quantity++;document.getElementById('productQuantityDisplay').textContent=currentProductForModal.quantity;updateModalPricing();}});document.getElementById('addProductToCartModalBtn').addEventListener('click',addToCartFromModal);document.getElementById('sendWhatsAppOrder').addEventListener('click',function(){document.getElementById('cartModal').classList.remove('show');showCheckoutModal();});document.getElementById('contactWhatsappBtn').addEventListener('click',function(e){e.preventDefault();window.open(whatsappGroupLink,'_blank');});document.getElementById('mobile-menu-button').addEventListener('click',function(){document.getElementById('mobile-menu').classList.add('open');document.getElementById('mobile-backdrop').classList.add('open');});document.getElementById('close-mobile-menu').addEventListener('click',closeMobileMenu);document.getElementById('mobile-backdrop').addEventListener('click',closeMobileMenu);
+    var anchorLinks=document.querySelectorAll('a[href^="#"]');for(var i=0;i<anchorLinks.length;i++){anchorLinks[i].addEventListener('click',function(e){e.preventDefault();var targetId=this.getAttribute('href');var targetElement=document.querySelector(targetId);if(targetElement){if(this.classList.contains('mobile-nav-link')){closeMobileMenu();}
+    setTimeout(function(){var targetPosition=targetElement.getBoundingClientRect().top+window.pageYOffset;var headerOffset=80;var offsetPosition=targetPosition-headerOffset;window.scrollTo(0,offsetPosition);},100);}});}
+    setupCheckoutEventListeners();}
+    function closeMobileMenu(){document.getElementById('mobile-menu').classList.remove('open');document.getElementById('mobile-backdrop').classList.remove('open');}
+    function setupScrollAnimations(){if('IntersectionObserver' in window){var elements=document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right');var observer=new IntersectionObserver(function(entries){for(var i=0;i<entries.length;i++){if(entries[i].isIntersecting){entries[i].target.classList.add('is-visible');}}}, {threshold:0.1});for(var j=0;j<elements.length;j++){observer.observe(elements[j]);}}else{var elements=document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right');for(var k=0;k<elements.length;k++){elements[k].classList.add('is-visible');}}}
+    function setupScrollHeader(){var header=document.getElementById('mainHeader');window.addEventListener('scroll',function(){if(window.scrollY>100){header.classList.add('scrolled');}else{header.classList.remove('scrolled');}});}
+    
+    function showCheckoutModal(){
+        if(cart.length===0){alert('Tu carrito está vacío');return;}
+        var savedData=JSON.parse(localStorage.getItem('customerData'));
+        if(savedData){
+            document.getElementById('customerName').value=savedData.name||'';
+            document.getElementById('customerAddress').value=savedData.address||'';
+            document.getElementById('customerReferences').value=savedData.references||'';
+            document.getElementById('customerPhone').value=savedData.phone||'';
+            document.getElementById('deliveryLocation').value='habana-vieja';
+        }
+        updateCheckoutSummary();
+        document.getElementById('checkoutModal').classList.add('show');
+    }
+    
+    function updateCheckoutSummary(){
+        var checkoutOrderSummary=document.getElementById('checkoutOrderSummary');
+        var subtotal=cart.reduce(function(sum,item){return sum+(item.price*item.quantity);},0);
+        checkoutOrderSummary.innerHTML=cart.map(function(item){return('<div class="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">'+
+        '<div class="flex-1"><h5 class="text-fixed-base font-semibold text-[var(--text-dark)]">'+item.name+'</h5><p class="text-fixed-sm text-[var(--text-medium)]">$'+item.price.toLocaleString()+' c/u × '+item.quantity+'</p></div>'+
+        '<div class="text-fixed-base font-semibold">$'+(item.price*item.quantity).toLocaleString()+'</div></div>');
+        }).join('');
+        document.getElementById('checkoutSubtotal').textContent='$'+subtotal.toLocaleString();
+        updateShippingAndTotal();
+    }
+
+    function updateShippingAndTotal() {
+        var subtotal = cart.reduce(function(sum, item) { return sum + (item.price * item.quantity); }, 0);
+        var serviceFee = 50;
+        document.getElementById('checkoutServiceFee').textContent = '$' + serviceFee;
+        var deliveryLocation = document.getElementById('deliveryLocation').value;
+        var shippingCost = 0;
+        var shippingText = '$0';
+        var showNote = false;
+        var noteText = '';
+        var upsellMessage = '';
+        var upsellElement = document.getElementById('upsellMessage');
+
+        if (deliveryLocation === 'habana-vieja') {
+            if (subtotal >= 3500) {
+                shippingCost = 0;
+                shippingText = 'GRATIS (Pedido Mayor a $3,500)';
+                upsellMessage = '¡Felicidades! Has desbloqueado el Envío GRATIS.';
+                upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-green-100 text-green-800';
+            } else if (subtotal >= 1500) {
+                shippingCost = 50;
+                shippingText = 'Envío con Descuento: $50 CUP';
+                var neededForFree = 3500 - subtotal;
+                upsellMessage = '¡Estás a solo $' + neededForFree.toLocaleString() + ' de conseguir el Envío GRATIS!';
+                upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-blue-100 text-blue-800';
+            } else {
+                shippingCost = 150;
+                shippingText = '$150 CUP';
+                var neededForDiscount = 1500 - subtotal;
+                upsellMessage = '¡Añade $' + neededForDiscount.toLocaleString() + ' más a tu carrito y paga solo $50 de envío!';
+                upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-yellow-100 text-yellow-800';
+            }
+        } else if (deliveryLocation === 'otros') {
+            shippingCost = 0;
+            shippingText = 'A confirmar';
+            showNote = true;
+            noteText = 'El costo de envío se ajustará al precio de la agencia de mensajería externa, se lo confirmaremos por WhatsApp.';
+            upsellMessage = '';
+        } else {
+            upsellMessage = '';
+        }
+
+        if (upsellElement) {
+            upsellElement.textContent = upsellMessage;
+            if(upsellMessage === '') {
+                upsellElement.style.display = 'none';
+            } else {
+                upsellElement.style.display = 'block';
+            }
+        }
+        
+        document.getElementById('checkoutShipping').textContent = shippingText;
+        var shippingNote = document.getElementById('shippingNote');
+        if (showNote) {
+            shippingNote.textContent = noteText;
+            shippingNote.classList.remove('hidden');
+        } else {
+            shippingNote.classList.add('hidden');
+        }
+        var total = subtotal + serviceFee + shippingCost;
+        document.getElementById('checkoutTotal').textContent = '$' + total.toLocaleString();
+    }
+
+    function setupCheckoutEventListeners(){document.getElementById('closeCheckoutModal').addEventListener('click',function(){document.getElementById('checkoutModal').classList.remove('show');});document.getElementById('checkoutModal').addEventListener('click',function(e){if(e.target.id==='checkoutModal'){document.getElementById('checkoutModal').classList.remove('show');}});document.getElementById('deliveryLocation').addEventListener('change',updateShippingAndTotal);
+    var paymentRadios=document.querySelectorAll('input[name="paymentMethod"]');for(var i=0;i<paymentRadios.length;i++){paymentRadios[i].addEventListener('change',function(){var cashField=document.getElementById('cashPaymentField');if(this.value==='efectivo'){cashField.classList.remove('hidden');}else{cashField.classList.add('hidden');selectedCashAmount='';var cashButtons=document.querySelectorAll('.cash-btn');for(var j=0;j<cashButtons.length;j++){cashButtons[j].classList.remove('active');}
+    document.getElementById('otherCashAmount').classList.add('hidden');}});}
+    var cashButtons=document.querySelectorAll('.cash-btn');for(var k=0;k<cashButtons.length;k++){cashButtons[k].addEventListener('click',function(){for(var l=0;l<cashButtons.length;l++){cashButtons[l].classList.remove('active');}
+    this.classList.add('active');selectedCashAmount=this.getAttribute('data-amount');var otherInput=document.getElementById('otherCashAmount');if(selectedCashAmount==='otro'){otherInput.classList.remove('hidden');otherInput.focus();}else{otherInput.classList.add('hidden');}});}
+    document.getElementById('confirmOrderBtn').addEventListener('click',confirmOrder);}
+    function validateCheckoutForm(){var requiredFields=[{id:'customerName',name:'Nombre completo'},{id:'customerAddress',name:'Dirección de entrega'},{id:'customerPhone',name:'Número de teléfono'},{id:'deliveryLocation',name:'Ubicación'}];var errors=[];for(var i=0;i<requiredFields.length;i++){var field=requiredFields[i];var element=document.getElementById(field.id);if(!element.value.trim()){errors.push(field.name);element.classList.add('border-red-500');}else{element.classList.remove('border-red-500');}}
+    var paymentMethod=document.querySelector('input[name="paymentMethod"]:checked');if(!paymentMethod){errors.push('Método de pago');}
+    if(errors.length>0){alert('Por favor completa los siguientes campos:\n• '+errors.join('\n• '));return false;}
+    return true;}
+    
+    function confirmOrder() {
+        if (!validateCheckoutForm()) {
+            return;
+        }
+        var customerName = document.getElementById('customerName').value.trim();
+        var customerAddress = document.getElementById('customerAddress').value.trim();
+        var customerReferences = document.getElementById('customerReferences').value.trim();
+        var customerPhone = document.getElementById('customerPhone').value.trim();
+        var deliveryLocation = document.getElementById('deliveryLocation').value;
+        var paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+        var cashAmount = selectedCashAmount === 'otro' ? document.getElementById('otherCashAmount').value.trim() : selectedCashAmount;
+        var subtotal = cart.reduce(function(sum, item) { return sum + (item.price * item.quantity); }, 0);
+        var serviceFee = 50;
+        var shippingCost = 0;
+        var shippingText = '$0';
+
+        if (deliveryLocation === 'habana-vieja') {
+            if (subtotal >= 3500) {
+                shippingCost = 0;
+                shippingText = 'GRATIS (Pedido Mayor a $3,500)';
+            } else if (subtotal >= 1500) {
+                shippingCost = 50;
+                shippingText = 'Envío con Descuento: $50 CUP';
+            } else {
+                shippingCost = 150;
+                shippingText = '$150 CUP';
+            }
+        } else {
+            shippingText = 'A confirmar por agencia de mensajería';
+        }
+
+        var total = subtotal + serviceFee + shippingCost;
+        var orderItems = cart.map(function(item) { return '• ' + item.name + ' x' + item.quantity + ' - $' + (item.price * item.quantity).toLocaleString(); }).join('\n');
+        var locationText = deliveryLocation === 'habana-vieja' ? 'Habana Vieja' : 'Otros municipios';
+        var paymentText = paymentMethod === 'efectivo' ? 'Efectivo' + (cashAmount ? ' (pagaré con ' + cashAmount + ')' : '') : 'Transferencia';
+        var finalMessage = "*🛒 NUEVO PEDIDO - EL RESOLVITO*\n\n" +
+            "*👤 DATOS DEL CLIENTE:*\n" + "• Nombre: " + customerName + "\n" + "• Teléfono: " + customerPhone + "\n" + "• Dirección: " + customerAddress + "\n" + "• Referencias: " + (customerReferences || 'No especificadas') + "\n" + "• Ubicación: " + locationText + "\n\n" + "*📦 PRODUCTOS:*\n" + orderItems + "\n\n" + "*💰 RESUMEN DE PAGO:*\n" + "• Subtotal de productos: $" + subtotal.toLocaleString() + "\n" + "• Servicio y Empaque: $" + serviceFee + "\n" + "• Envío: " + shippingText + "\n" + "• TOTAL A PAGAR: $" + total.toLocaleString() + "\n\n" + "*💳 MÉTODO DE PAGO:*\n" + paymentText + "\n\n" + "*⏰ Horario de entrega preferido:* Se coordinará para la próxima ronda de entrega.\n\n" + "_¡Gracias por su pedido!_ 🙏";
+
+        var telegramToken = 'TU_TOKEN_DE_TELEGRAM_AQUI';
+        var telegramChatId = 'TU_CHAT_ID_AQUI';
+        fetch('https://api.telegram.org/bot' + telegramToken + '/sendMessage', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: telegramChatId, text: finalMessage, parse_mode: 'Markdown' })
+        });
+
+        var googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycby9Sk3Fz2_WqRQsEXrezpwqKbpYhqW_-ialMJcYKPdvZkrBfNReWWFfQ-VnXTrkJY8W/exec';
+        var orderData = {
+            idPedido: new Date().getTime(),
+            customerName: customerName,
+            customerPhone: customerPhone,
+            customerAddress: customerAddress,
+            customerReferences: customerReferences,
+            total: total,
+            paymentMethod: paymentMethod,
+            shippingText: shippingText,
+            orderItems: orderItems
+        };
+        var formData = new FormData();
+        for (var key in orderData) {
+            if (orderData.hasOwnProperty(key)) {
+                formData.append(key, orderData[key]);
+            }
+        }
+        fetch(googleAppsScriptUrl, { method: 'POST', body: formData, mode: 'no-cors' }).catch(function(error) { console.error('Error enviando a Google Sheets:', error); });
+
+        var whatsappPhoneNumber = '56382909';
+        var whatsappMessage = encodeURIComponent(finalMessage.replace(/\*/g, '').replace(/_/g, ''));
+        window.open('https://wa.me/' + whatsappPhoneNumber + '?text=' + whatsappMessage, '_blank');
+
+        document.getElementById('checkoutModal').classList.remove('show');
+        cart = [];
+        updateCartUI();
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        var customerData = { name: customerName, address: customerAddress, references: customerReferences, phone: customerPhone };
+        localStorage.setItem('customerData', JSON.stringify(customerData));
+        
+        alert('¡Pedido enviado! Te contactaremos pronto para confirmar los detalles.');
+    }
+</script>
+
+</body>
+</html>
 
 
 
