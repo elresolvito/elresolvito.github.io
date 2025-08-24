@@ -285,39 +285,43 @@
 </button>
 
 <script>
-    // Variables globales
-    var products = [];
+    // Se inicializan todas las variables globales al principio.
+    var products = []; 
     var cart = JSON.parse(localStorage.getItem('cart')) || [];
     var whatsappGroupLink = 'https://chat.whatsapp.com/H19dIofkINdHrVApA4jbvW?mode=ac_t';
     var currentProductForModal = null;
     var currentUnitType = 'individual';
     var selectedCashAmount = '';
 
-    // Función principal que se ejecuta cuando la página carga
+    // Esta es la función principal que se ejecuta cuando la página ha cargado completamente.
     document.addEventListener('DOMContentLoaded', function() {
-        // 1. Cargamos el inventario desde productos.json
-        fetch('/productos.json?v=' + new Date().getTime()) // El '?v=' evita problemas de caché
+        // Primero, intentamos cargar el inventario desde productos.json
+        fetch('/productos.json?v=' + new Date().getTime())
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('La respuesta de la red no fue correcta: ' + response.statusText);
+                    throw new Error('La respuesta de la red no fue correcta.');
                 }
                 return response.json();
             })
             .then(data => {
-                // 2. Si la carga es exitosa, guardamos los productos
-                products = data;
+                // Si la carga es exitosa, guardamos los productos en la variable global.
+                products = data; 
                 
-                // 3. Con los productos cargados, inicializamos la tienda
+                // AHORA SÍ, con los productos ya en memoria, llamamos a la función que construye la tienda.
                 initializeStore();
             })
             .catch(error => {
-                // 4. Si hay un error, lo mostramos
+                // Si hay un error en la carga del JSON, mostramos un mensaje claro.
                 console.error("¡Error fatal! No se pudo cargar el catálogo de productos.", error);
-                document.getElementById('mercadoProductGrid').innerHTML = '<p class="text-center text-red-500 font-bold">No se pudo cargar el catálogo de productos en este momento. Por favor, intente más tarde.</p>';
+                const productGrid = document.getElementById('mercadoProductGrid');
+                if (productGrid) {
+                    productGrid.innerHTML = '<p class="text-center text-red-500 font-bold">No se pudo cargar el catálogo de productos en este momento. Por favor, intente más tarde.</p>';
+                }
             });
     });
 
-    // Nueva función que inicializa toda la tienda DESPUÉS de que los productos se cargan
+    // Esta función se encarga de poner en marcha TODA la funcionalidad de la tienda.
+    // SOLO se llama después de que el archivo productos.json se ha cargado con éxito.
     function initializeStore() {
         // Ordenamos los productos
         products.sort((a, b) => {
@@ -328,13 +332,16 @@
             return 0;
         });
         
-        // Ejecutamos el resto de las funciones de la tienda
+        // Ejecutamos el resto de las funciones que dependen de la lista de productos y del HTML.
         setupStoreSection('mercado', products);
         updateCartUI();
         setupGeneralEventListeners();
         setupScrollAnimations();
         setupScrollHeader();
     }
+
+    // A partir de aquí, el resto de tus funciones no necesitan cambios.
+    // ... [Aquí van todas tus otras funciones, desde setupStoreSection hasta confirmOrder] ...
 
     function setupStoreSection(sectionPrefix, productsForSection) {
         var filtersId = sectionPrefix + 'CategoryFilters';
@@ -627,38 +634,11 @@
             customerName: customerName,
             customerPhone: customerPhone,
             customerAddress: customerAddress,
-            customerReferences: customerReferences,
-            total: total,
-            paymentMethod: paymentMethod,
-            shippingText: shippingText,
-            orderItems: orderItems
-        };
-        var formData = new FormData();
-        for (var key in orderData) {
-            if (orderData.hasOwnProperty(key)) {
-                formData.append(key, orderData[key]);
-            }
-        }
-        fetch(googleAppsScriptUrl, { method: 'POST', body: formData, mode: 'no-cors' }).catch(function(error) { console.error('Error enviando a Google Sheets:', error); });
-
-        var whatsappPhoneNumber = '56382909';
-        var whatsappMessage = encodeURIComponent(finalMessage.replace(/\*/g, '').replace(/_/g, ''));
-        window.open('https://wa.me/' + whatsappPhoneNumber + '?text=' + whatsappMessage, '_blank');
-
-        document.getElementById('checkoutModal').classList.remove('show');
-        cart = [];
-        updateCartUI();
-        localStorage.setItem('cart', JSON.stringify(cart));
-        
-        var customerData = { name: customerName, address: customerAddress, references: customerReferences, phone: customerPhone };
-        localStorage.setItem('customerData', JSON.stringify(customerData));
-        
-        alert('¡Pedido enviado! Te contactaremos pronto para confirmar los detalles.');
-    }
-</script>
+            customerReferences: customerRefe
 
 </body>
 </html>
+
 
 
 
