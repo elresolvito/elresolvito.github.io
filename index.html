@@ -285,6 +285,7 @@
 </button>
 
 <script>
+    // Variables globales
     var products = [];
     var cart = JSON.parse(localStorage.getItem('cart')) || [];
     var whatsappGroupLink = 'https://chat.whatsapp.com/H19dIofkINdHrVApA4jbvW?mode=ac_t';
@@ -292,31 +293,48 @@
     var currentUnitType = 'individual';
     var selectedCashAmount = '';
 
+    // Función principal que se ejecuta cuando la página carga
     document.addEventListener('DOMContentLoaded', function() {
-        fetch('productos.json?v=' + new Date().getTime())
-            .then(response => response.json())
+        // 1. Cargamos el inventario desde productos.json
+        fetch('productos.json?v=' + new Date().getTime()) // El '?v=' evita problemas de caché
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('La respuesta de la red no fue correcta: ' + response.statusText);
+                }
+                return response.json();
+            })
             .then(data => {
+                // 2. Si la carga es exitosa, guardamos los productos
                 products = data;
                 
-                products.sort((a, b) => {
-                    if (a.category < b.category) return -1;
-                    if (a.category > b.category) return 1;
-                    if (a.name < b.name) return -1;
-                    if (a.name > b.name) return 1;
-                    return 0;
-                });
-                
-                setupStoreSection('mercado', products);
-                updateCartUI();
-                setupGeneralEventListeners();
-                setupScrollAnimations();
-                setupScrollHeader();
+                // 3. Con los productos cargados, inicializamos la tienda
+                initializeStore();
             })
             .catch(error => {
+                // 4. Si hay un error, lo mostramos
                 console.error("¡Error fatal! No se pudo cargar el catálogo de productos.", error);
                 document.getElementById('mercadoProductGrid').innerHTML = '<p class="text-center text-red-500 font-bold">No se pudo cargar el catálogo de productos en este momento. Por favor, intente más tarde.</p>';
             });
     });
+
+    // Nueva función que inicializa toda la tienda DESPUÉS de que los productos se cargan
+    function initializeStore() {
+        // Ordenamos los productos
+        products.sort((a, b) => {
+            if (a.category < b.category) return -1;
+            if (a.category > b.category) return 1;
+            if (a.name < b.name) return -1;
+            if (a.name > b.name) return 1;
+            return 0;
+        });
+        
+        // Ejecutamos el resto de las funciones de la tienda
+        setupStoreSection('mercado', products);
+        updateCartUI();
+        setupGeneralEventListeners();
+        setupScrollAnimations();
+        setupScrollHeader();
+    }
 
     function setupStoreSection(sectionPrefix, productsForSection) {
         var filtersId = sectionPrefix + 'CategoryFilters';
@@ -641,4 +659,5 @@
 
 </body>
 </html>
+
 
