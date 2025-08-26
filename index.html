@@ -40,7 +40,8 @@
             --light-background-gray: #f9fafb;
             --text-dark: #1f2937;
             --text-medium: #4b5563;
-            --dark-overlay: rgba(0, 0, 0, 0.6);
+            /* CORRECCIÓN: Overlay más oscuro para mayor contraste */
+            --dark-overlay: rgba(0, 0, 0, 0.7); 
         }
         html { scroll-behavior: smooth; }
         body { font-family: 'Inter', sans-serif; background-color: var(--light-background-gray); }
@@ -62,9 +63,9 @@
         .slider-nav button { background-color: rgba(255, 255, 255, 0.2); color: white; border: 1px solid white; border-radius: 50%; width: 40px; height: 40px; font-size: 24px; cursor: pointer; transition: background-color 0.3s; }
         .slider-nav button:hover { background-color: rgba(255, 255, 255, 0.4); }
         
-        /* CORRECCIÓN: Sombra de texto para mejorar la legibilidad */
+        /* CORRECCIÓN: Sombra de texto profesional para legibilidad */
         .hero-text-shadow {
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8), 0 0 5px rgba(0,0,0,0.5);
         }
 
         .slide-content > * {
@@ -159,7 +160,7 @@
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex items-center justify-center lg:justify-start">
                     <div class="slide-content text-center lg:text-left">
                         <h1 class="text-fixed-4xl md:text-fixed-6xl font-extrabold mb-4 hero-text-shadow">EL RESOLVITO</h1>
-                        <p class="text-fixed-lg md:text-fixed-xl max-w-lg mx-auto lg:mx-0 mb-8 hero-text-shadow">Mercado y víveres... a un clic de distancia.</p>
+                        <p class="text-fixed-xl md:text-fixed-2xl font-semibold max-w-lg mx-auto lg:mx-0 mb-8 hero-text-shadow">Mercado y víveres... a un clic de distancia.</p>
                         <a href="#mercado" class="bg-[var(--accent-color)] text-white font-bold py-3 px-8 rounded-full text-fixed-lg hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg">Explorar Productos</a>
                     </div>
                 </div>
@@ -172,7 +173,7 @@
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex items-center justify-center lg:justify-end">
                     <div class="slide-content text-center lg:text-right">
                         <h1 class="text-fixed-4xl md:text-fixed-6xl font-extrabold mb-4 hero-text-shadow">¡NUESTRAS PIZZAS!</h1>
-                        <p class="text-fixed-lg md:text-fixed-xl max-w-lg mx-auto lg:mx-0 mb-8 hero-text-shadow">Calientes y deliciosas, directas a tu puerta.</p>
+                        <p class="text-fixed-xl md:text-fixed-2xl font-semibold max-w-lg mx-auto lg:mx-0 mb-8 hero-text-shadow">Calientes y deliciosas, directas a tu puerta.</p>
                         <a href="#pizzas" class="bg-[var(--accent-color)] text-white font-bold py-3 px-8 rounded-full text-fixed-lg hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg">Ver Menú</a>
                     </div>
                 </div>
