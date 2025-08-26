@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-9">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>El Resolvito | Tu Tienda a Domicilio en La Habana</title>
-    <meta name="description" content="Encuentra víveres y más en El Resolvito. Haz tu pedido online y recíbelo en La Habana. Compra fácil y rápido por WhatsApp.">
-    <meta name="keywords" content="tienda online habana, mercado habana, entrega a domicilio cuba, mandados habana, el resolvito">
+    <meta name="description" content="Encuentra víveres, pizzas y más en El Resolvito. Haz tu pedido online y recíbelo en La Habana. Compra fácil y rápido por WhatsApp.">
+    <meta name="keywords" content="tienda online habana, mercado habana, entrega a domicilio cuba, mandados habana, pizzas habana, el resolvito">
     <meta name="author" content="El Resolvito">
 
   <!-- ========================================================= -->
@@ -52,8 +52,37 @@
         .text-fixed-3xl { font-size: 1.5rem; } @media (min-width: 768px) { .text-fixed-3xl { font-size: 1.875rem; } }
         .text-fixed-4xl { font-size: 1.875rem; } @media (min-width: 768px) { .text-fixed-4xl { font-size: 2.25rem; } }
         .text-fixed-6xl { font-size: 2.5rem; } @media (min-width: 768px) { .text-fixed-6xl { font-size: 3.75rem; } }
-        .hero-banner { background-image: url('https://i.postimg.cc/rsCKV7LZ/1755367982611.jpg'); background-size: cover; background-position: center; }
-        .hero-overlay { background-color: var(--dark-overlay); }
+        
+        /* Ajustes para el slider */
+        .hero-slider-container { position: relative; width: 100%; height: 100%; background-color: #000; overflow: hidden; }
+        .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; visibility: hidden; transition: opacity 1s ease-in-out; }
+        .hero-slide.active { opacity: 1; visibility: visible; }
+        .hero-slide .hero-overlay { background-color: var(--dark-overlay); }
+        .slider-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; display: flex; justify-content: space-between; padding: 0 1rem; z-index: 20; }
+        .slider-nav button { background-color: rgba(255, 255, 255, 0.2); color: white; border: 1px solid white; border-radius: 50%; width: 40px; height: 40px; font-size: 24px; cursor: pointer; transition: background-color 0.3s; }
+        .slider-nav button:hover { background-color: rgba(255, 255, 255, 0.4); }
+        
+        /* CORRECCIÓN: Sombra de texto para mejorar la legibilidad */
+        .hero-text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .slide-content > * {
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .hero-slide:not(.active) .slide-content > * {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .hero-slide.active .slide-content > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .hero-slide.active .slide-content > *:nth-child(1) { transition-delay: 0.3s; }
+        .hero-slide.active .slide-content > *:nth-child(2) { transition-delay: 0.4s; }
+        .hero-slide.active .slide-content > *:nth-child(3) { transition-delay: 0.5s; }
+
+
         header.scrolled { background-color: rgba(13, 59, 51, 0.95); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
         .modal-overlay { opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
         .modal-overlay.show { opacity: 1; visibility: visible; }
@@ -85,12 +114,13 @@
         <div class="flex items-center gap-4">
             <button id="mobile-menu-button" class="md:hidden text-white"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg></button>
             <a href="#" class="flex items-center gap-3 flex-shrink-0">
-                <img src="https://i.postimg.cc/s2FHrX2Y/logo_el_resolvito.jpg" class="h-12 w-12 md:h-16 md:w-16 rounded-full shadow-md object-cover">
+                <img src="https://i.postimg.cc/s2FHrX2Y/logo_el_resolvito.jpg" class="h-12 w-12 md:h-16 md-w-16 rounded-full shadow-md object-cover">
                 <span class="text-white text-fixed-lg md:text-xl font-bold hidden sm:block">El Resolvito</span>
             </a>
         </div>
         <nav class="hidden md:flex items-center gap-4 md:gap-6 text-white font-semibold">
             <a href="#mercado" class="text-fixed-lg hover:text-gray-300 transition-colors duration-300">Mercado</a>
+            <a href="#pizzas" class="text-fixed-lg hover:text-gray-300 transition-colors duration-300">Pizzas</a>
             <a href="#como-comprar" class="text-fixed-lg hover:text-gray-300 transition-colors duration-300">¿Cómo Comprar?</a>
             <a href="#contacto" class="text-fixed-lg hover:text-gray-300 transition-colors duration-300">Contacto</a>
         </nav>
@@ -108,6 +138,7 @@
         </div>
         <nav class="flex flex-col space-y-4 text-fixed-lg font-semibold text-white">
             <a href="#mercado" class="hover:text-gray-300 transition-colors mobile-nav-link">Mercado</a>
+            <a href="#pizzas" class="hover:text-gray-300 transition-colors mobile-nav-link">Pizzas</a>
             <a href="#como-comprar" class="hover:text-gray-300 transition-colors mobile-nav-link">¿Cómo Comprar?</a>
             <a href="#contacto" class="hover:text-gray-300 transition-colors mobile-nav-link">Contacto</a>
         </nav>
@@ -116,14 +147,47 @@
 <div id="mobile-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"></div>
 
 <main>
-    <section class="hero-banner relative pt-24 pb-16 md:pt-32 md:pb-24">
-        <div class="hero-overlay absolute inset-0 opacity-75"></div>
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center text-white">
-            <h1 class="text-fixed-4xl md:text-fixed-6xl font-extrabold mb-4 drop-shadow-lg fade-in-up">EL RESOLVITO</h1>
-            <p class="text-fixed-lg md:text-fixed-xl max-w-2xl mx-auto mb-8 drop-shadow-md fade-in-up" style="transition-delay: 150ms;">Mercado y víveres... a un clic de distancia.</p>
-            <a href="#mercado" class="bg-[var(--accent-color)] text-white font-bold py-3 px-8 rounded-full text-fixed-lg hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg fade-in-up" style="transition-delay: 300ms;">Explorar Productos</a>
+    <!-- ======================================================= -->
+    <!-- === INICIO DEL HERO SLIDER === -->
+    <!-- ======================================================= -->
+    <section class="relative h-[60vh] md:h-[80vh] min-h-[400px]">
+        <div id="heroSlider" class="hero-slider-container">
+            <!-- Slide 1: Mercado -->
+            <div class="hero-slide" style="background-image: url('https://i.postimg.cc/rsCKV7LZ/1755367982611.jpg');">
+                <div class="hero-overlay absolute inset-0"></div>
+                <!-- Contenido alineado a la izquierda en pantallas grandes -->
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex items-center justify-center lg:justify-start">
+                    <div class="slide-content text-center lg:text-left">
+                        <h1 class="text-fixed-4xl md:text-fixed-6xl font-extrabold mb-4 hero-text-shadow">EL RESOLVITO</h1>
+                        <p class="text-fixed-lg md:text-fixed-xl max-w-lg mx-auto lg:mx-0 mb-8 hero-text-shadow">Mercado y víveres... a un clic de distancia.</p>
+                        <a href="#mercado" class="bg-[var(--accent-color)] text-white font-bold py-3 px-8 rounded-full text-fixed-lg hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg">Explorar Productos</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Pizzas -->
+            <div class="hero-slide" style="background-image: url('https://i.postimg.cc/Xvb6nzgY/pizza-1.png');">
+                <div class="hero-overlay absolute inset-0"></div>
+                <!-- Contenido alineado a la derecha en pantallas grandes -->
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex items-center justify-center lg:justify-end">
+                    <div class="slide-content text-center lg:text-right">
+                        <h1 class="text-fixed-4xl md:text-fixed-6xl font-extrabold mb-4 hero-text-shadow">¡NUESTRAS PIZZAS!</h1>
+                        <p class="text-fixed-lg md:text-fixed-xl max-w-lg mx-auto lg:mx-0 mb-8 hero-text-shadow">Calientes y deliciosas, directas a tu puerta.</p>
+                        <a href="#pizzas" class="bg-[var(--accent-color)] text-white font-bold py-3 px-8 rounded-full text-fixed-lg hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg">Ver Menú</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botones de Navegación -->
+        <div class="slider-nav hidden md:flex">
+            <button id="prevSlideBtn" aria-label="Anterior">&lt;</button>
+            <button id="nextSlideBtn" aria-label="Siguiente">&gt;</button>
         </div>
     </section>
+    <!-- ======================================================= -->
+    <!-- === FIN DEL HERO SLIDER === -->
+    <!-- ======================================================= -->
 
     <section id="mercado" class="py-16 lg:py-24 bg-gray-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -132,9 +196,6 @@
                 <p class="mt-4 text-fixed-lg text-[var(--text-medium)] max-w-3xl mx-auto">Encuentra productos que necesitas para tu hogar, desde bebidas refrescantes hasta productos frescos.</p>
             </div>
             
-            <!-- ======================================================= -->
-            <!-- === INICIO DEL BANNER DE PROMOCIÓN DE ENVÍOS === -->
-            <!-- ======================================================= -->
             <div class="bg-white border-2 border-dashed border-green-200 p-4 rounded-xl shadow-md mb-8 text-center fade-in-up">
                 <h3 class="text-fixed-lg md:text-fixed-xl font-bold text-[var(--primary-color)] mb-3">¡Ahorra en cada pedido en La Habana Vieja!</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm md:text-base">
@@ -152,9 +213,6 @@
                     </div>
                 </div>
             </div>
-            <!-- ======================================================= -->
-            <!-- === FIN DEL BANNER DE PROMOCIÓN DE ENVÍOS === -->
-            <!-- ======================================================= -->
 
             <div class="bg-white p-4 rounded-xl shadow-lg mb-8 fade-in-up" style="transition-delay: 150ms;">
                 <input type="text" id="mercadoSearchInput" placeholder="Buscar en Mercado y Víveres..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base">
@@ -164,8 +222,22 @@
             <p id="mercadoNoResultsMessage" class="hidden text-center text-fixed-lg text-[var(--text-medium)] mt-8">No se encontraron productos que coincidan con tu búsqueda.</p>
         </div>
     </section>
+
+    <!-- ======================================================= -->
+    <!-- === NUEVA SECCIÓN PARA PIZZAS (PLACEHOLDER) === -->
+    <!-- ======================================================= -->
+    <section id="pizzas" class="py-16 lg:py-24 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in-up">
+                <h2 class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--text-dark)]">Pizzas</h2>
+                <p class="mt-4 text-fixed-lg text-[var(--text-medium)] max-w-3xl mx-auto">Próximamente... Nuestro delicioso menú de pizzas estará disponible aquí.</p>
+            </div>
+            <!-- Aquí iría el contenedor para los productos de pizza, similar a la sección de mercado -->
+            <!-- <div id="pizzaProductGrid"></div> -->
+        </div>
+    </section>
     
-    <section id="como-comprar" class="py-16 lg:py-24 bg-white">
+    <section id="como-comprar" class="py-16 lg:py-24 bg-gray-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 fade-in-up">
                 <h2 class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--text-dark)]">¿Cómo Comprar en Línea?</h2>
@@ -206,7 +278,7 @@
         </div>
     </section>
 
-    <section id="contacto" class="py-16 lg:py-24">
+    <section id="contacto" class="py-16 lg:py-24 bg-white">
          <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 fade-in-up">
                 <h2 class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--text-dark)]">Únete a Nuestro Club de Ofertas</h2>
@@ -271,15 +343,7 @@
             <div class="p-6 border-b">
                 <h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">1. Resumen de tu Pedido</h4>
                 <div id="checkoutOrderSummary" class="space-y-3 mb-4"></div>
-                <!-- ======================================================= -->
-                <!-- === INICIO DEL MENSAJE DE VENTA INTELIGENTE === -->
-                <!-- ======================================================= -->
-                <div id="upsellMessage" class="my-4 p-3 rounded-lg text-center font-semibold text-sm transition-all duration-300">
-                    <!-- El mensaje se generará aquí con JavaScript -->
-                </div>
-                <!-- ======================================================= -->
-                <!-- === FIN DEL MENSAJE DE VENTA INTELIGENTE === -->
-                <!-- ======================================================= -->
+                <div id="upsellMessage" class="my-4 p-3 rounded-lg text-center font-semibold text-sm transition-all duration-300"></div>
                 <div class="bg-gray-50 p-4 rounded-lg space-y-2"><div class="flex justify-between text-fixed-base"><span>Subtotal de productos:</span><span id="checkoutSubtotal" class="font-semibold">$0</span></div><div class="flex justify-between text-fixed-base text-gray-600"><span>Servicio y Empaque:</span><span id="checkoutServiceFee" class="font-semibold">$50</span></div><div class="flex justify-between text-fixed-base"><span>Costo de envío:</span><span id="checkoutShipping" class="font-semibold">$0</span></div><div id="shippingNote" class="text-fixed-sm text-gray-600 hidden"></div><hr class="my-2"><div class="flex justify-between text-fixed-lg font-bold text-[var(--primary-color)]"><span>Total a Pagar:</span><span id="checkoutTotal">$0</span></div></div>
             </div>
             <div class="p-6 border-b"><h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">2. Datos de Contacto</h4><div class="space-y-4"><div><label for="customerName" class="block text-fixed-base font-semibold text-gray-700 mb-2">Nombre completo *</label><input type="text" id="customerName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base" required></div><div><label for="customerAddress" class="block text-fixed-base font-semibold text-gray-700 mb-2">Calle y número (ej: Aguiar #230 apto 1) *</label><input type="text" id="customerAddress" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base" required></div><div><label for="customerReferences" class="block text-fixed-base font-semibold text-gray-700 mb-2">Puntos de Referencia (ej: Frente a la bodega)</label><input type="text" id="customerReferences" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base"></div><div><label for="customerPhone" class="block text-fixed-base font-semibold text-gray-700 mb-2">Número de teléfono *</label><input type="tel" id="customerPhone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base" required></div><div><label for="deliveryLocation" class="block text-fixed-base font-semibold text-gray-700 mb-2">Ubicación *</label><select id="deliveryLocation" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base" required><option value="">Selecciona tu ubicación</option><option value="habana-vieja">Habana Vieja</option><option value="otros">Otros municipios</option></select></div></div></div>
@@ -290,7 +354,6 @@
     </div>
 </div>
 
-<!-- BOTÓN DEL CARRITO MODIFICADO -->
 <button id="floatingCartBtn" class="fixed bottom-6 right-6 bg-[var(--primary-color)] text-white px-5 py-3 rounded-full shadow-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 z-40 flex items-center gap-3">
     <div class="relative">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
@@ -302,11 +365,7 @@
 </button>
 
 <script>
-    // ===================================================================
-    // === INICIO DEL CATÁLOGO DE PRODUCTOS - "EL RESOLVITO" ===
-    // ===================================================================
     var products = [
-        // --- PRODUCTOS DE MERCADO ---
         { id: 1, name: "Aceite", price: 900, image: "https://i.postimg.cc/FFdbnBBS/aceite.jpg", description: "Botella de aceite vegetal.", category: "Mercado", status: "available", hasBoxOption: false },
         { id: 2, name: "Arroz", price: 650, image: "https://i.postimg.cc/ZRR352mX/arroz.jpg", description: "Precio de oferta. Paquete de 1 kg aprox.", category: "Mercado", status: "available", hasBoxOption: false },
         { id: 3, name: "Spaghetti", price: 350, image: "https://i.postimg.cc/rpBWC2DW/spaguetis.png", description: "Paquete de spaghetti de 400g.", category: "Mercado", status: "available", hasBoxOption: false },
@@ -329,9 +388,6 @@
         { id: 20, name: "Malta Morena", price: 210, image: "https://i.postimg.cc/pLsccNs6/Malta-Morena-8-oz-Lata.jpg", description: "Lata de 8 oz.", category: "Líquidos", status: "available", hasBoxOption: false }
     ];
     
-    // =================================================================
-    // === ORDENAMIENTO AUTOMÁTICO DEL CATÁLOGO ===
-    // =================================================================
     products.sort((a, b) => {
         if (a.category < b.category) return -1;
         if (a.category > b.category) return 1;
@@ -341,7 +397,7 @@
     });
     
     var cart = JSON.parse(localStorage.getItem('cart')) || [];
-    var whatsappGroupLink = 'https://chat.whatsapp.com/H19dIofkINdHrVApA4jbvW?mode=ac_t'; // Pega aquí tu enlace de grupo
+    var whatsappGroupLink = 'https://chat.whatsapp.com/H19dIofkINdHrVApA4jbvW?mode=ac_t';
     var currentProductForModal = null;
     var currentUnitType = 'individual';
     var selectedCashAmount = '';
@@ -352,7 +408,74 @@
         setupGeneralEventListeners();
         setupScrollAnimations();
         setupScrollHeader();
+        setupHeroSlider();
     });
+
+    function setupHeroSlider() {
+        const slides = document.querySelectorAll('#heroSlider .hero-slide');
+        if (slides.length <= 1) return;
+
+        const prevBtn = document.getElementById('prevSlideBtn');
+        const nextBtn = document.getElementById('nextSlideBtn');
+        let currentSlide = 0;
+        let slideInterval;
+        let isTransitioning = false;
+
+        function showSlide(nextIndex) {
+            if (isTransitioning || nextIndex === currentSlide) return;
+            isTransitioning = true;
+
+            const currentSlideEl = slides[currentSlide];
+            const nextSlideEl = slides[nextIndex];
+
+            nextSlideEl.style.zIndex = 2;
+            nextSlideEl.classList.add('active');
+
+            setTimeout(() => {
+                currentSlideEl.classList.remove('active');
+                currentSlideEl.style.zIndex = 1;
+                nextSlideEl.style.zIndex = 1;
+                
+                currentSlide = nextIndex;
+                isTransitioning = false;
+            }, 1000); 
+        }
+
+        function nextSlide() {
+            const nextIndex = (currentSlide + 1) % slides.length;
+            showSlide(nextIndex);
+        }
+
+        function prevSlide() {
+            const nextIndex = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(nextIndex);
+        }
+        
+        function startSlider() {
+            slideInterval = setInterval(nextSlide, 3000);
+        }
+
+        function resetSliderInterval() {
+            clearInterval(slideInterval);
+            startSlider();
+        }
+        
+        slides.forEach(slide => slide.style.zIndex = 1);
+        slides[currentSlide].classList.add('active');
+
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetSliderInterval();
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetSliderInterval();
+        });
+
+        startSlider();
+    }
+
 
     function setupStoreSection(sectionPrefix, productsForSection) {
         var filtersId = sectionPrefix + 'CategoryFilters';
@@ -364,22 +487,13 @@
     }
     
     function setupCategoryFiltersAndSearch(productsForSection, filtersId, searchId, gridId, noResultsId) {
-        var uniqueCategories = [];
-        var categoryOrder = {};
-        for (var i = 0; i < productsForSection.length; i++) {
-            if (uniqueCategories.indexOf(productsForSection[i].category) === -1) {
-                uniqueCategories.push(productsForSection[i].category);
-            }
-        }
-
-        var categories = ['all'].concat(uniqueCategories);
+        var uniqueCategories = ['all', ...new Set(productsForSection.map(p => p.category))];
         var filtersContainer = document.getElementById(filtersId);
         if (!filtersContainer) return;
 
-        var buttonsHtml = categories.map(function(category) {
-            return '<button class="category-btn ' + (category === 'all' ? 'active' : '') + '" data-category="' + category + '">' + (category === 'all' ? 'Todos' : category) + '</button>';
-        }).join('');
-        filtersContainer.innerHTML = buttonsHtml;
+        filtersContainer.innerHTML = uniqueCategories.map(category => 
+            `<button class="category-btn ${category === 'all' ? 'active' : ''}" data-category="${category}">${category === 'all' ? 'Todos' : category}</button>`
+        ).join('');
 
         var currentCategory = 'all';
         var categoryButtons = filtersContainer.querySelectorAll('.category-btn');
@@ -387,26 +501,22 @@
 
         function filterAndRender() {
             var searchTerm = searchInput.value.toLowerCase();
-            var filteredProducts = [];
-            for (var i = 0; i < productsForSection.length; i++) {
-                var product = productsForSection[i];
+            var filteredProducts = productsForSection.filter(product => {
                 var categoryMatch = (currentCategory === 'all' || product.category === currentCategory);
-                var searchMatch = (!searchTerm || product.name.toLowerCase().indexOf(searchTerm) > -1 || product.description.toLowerCase().indexOf(searchTerm) > -1);
-                if (categoryMatch && searchMatch) {
-                    filteredProducts.push(product);
-                }
-            }
+                var searchMatch = (!searchTerm || product.name.toLowerCase().includes(searchTerm) || product.description.toLowerCase().includes(searchTerm));
+                return categoryMatch && searchMatch;
+            });
             renderProducts(filteredProducts, gridId, noResultsId);
         }
 
-        for (var j = 0; j < categoryButtons.length; j++) {
-            categoryButtons[j].addEventListener('click', function() {
-                for (var k = 0; k < categoryButtons.length; k++) { categoryButtons[k].classList.remove('active'); }
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
                 this.classList.add('active');
-                currentCategory = this.getAttribute('data-category');
+                currentCategory = this.dataset.category;
                 filterAndRender();
             });
-        }
+        });
         searchInput.addEventListener('input', filterAndRender);
     }
 
@@ -414,255 +524,176 @@
         var productGrid = document.getElementById(gridId);
         var noResultsMessage = document.getElementById(noResultsId);
         if (!productGrid || !noResultsMessage) return;
-        if (productsToRender.length === 0) {
-            productGrid.innerHTML = '';
-            noResultsMessage.classList.remove('hidden');
-            return;
-        }
-        noResultsMessage.classList.add('hidden');
+
+        noResultsMessage.classList.toggle('hidden', productsToRender.length > 0);
+        productGrid.innerHTML = '';
+
+        if (productsToRender.length === 0) return;
         
-        var groupedProducts = productsToRender.reduce(function(acc, product) {
+        var groupedProducts = productsToRender.reduce((acc, product) => {
             (acc[product.category] = acc[product.category] || []).push(product);
             return acc;
         }, {});
 
-        var html = '';
-        var sortedCategories = Object.keys(groupedProducts).sort();
+        var html = Object.keys(groupedProducts).sort().map(category => {
+            const productsHtml = groupedProducts[category].map((product, index) => `
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer fade-in-up" style="transition-delay: ${index * 50}ms" onclick="showProductDetailsModal(${product.id})">
+                    <div class="w-full h-56 md:h-64 overflow-hidden bg-transparent flex items-center justify-center">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-contain transition-all duration-300">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-2">${product.name}</h3>
+                        <p class="text-fixed-sm text-[var(--text-medium)] mb-2">${product.description}</p>
+                        <p class="text-fixed-xl font-bold text-[var(--primary-color)] mb-4">$${product.price.toLocaleString()}</p>
+                        ${product.status === 'unavailable' ? '<span class="text-red-500 text-fixed-sm font-semibold">No disponible</span>' : '<button class="w-full bg-[var(--primary-color)] text-white font-bold py-2 px-4 rounded-lg text-fixed-base hover:bg-opacity-90 transition-colors duration-300">Ver Detalles</button>'}
+                    </div>
+                </div>`).join('');
+            
+            return `<div class="col-span-full fade-in-up">
+                        <h3 class="text-2xl font-bold text-center text-[var(--primary-color)] my-8 border-b-2 border-gray-200 pb-2">— ${category} —</h3>
+                    </div>
+                    ${productsHtml}`;
+        }).join('');
 
-        for (var i = 0; i < sortedCategories.length; i++) {
-            var category = sortedCategories[i];
-            if (groupedProducts.hasOwnProperty(category)) {
-                html += '<div class="col-span-full fade-in-up"><h3 class="text-2xl font-bold text-center text-[var(--primary-color)] my-8 border-b-2 border-gray-200 pb-2">— ' + category + ' —</h3></div>';
-                html += groupedProducts[category].map(function(product, index) {
-                    return '<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer fade-in-up" style="transition-delay: ' + (index * 50) + 'ms" onclick="showProductDetailsModal(' + product.id + ')">' +
-                           '<div class="w-full h-56 md:h-64 overflow-hidden bg-transparent flex items-center justify-center"><img src="' + product.image + '" alt="' + product.name + '" class="w-full h-full object-contain transition-all duration-300"></div>' +
-                           '<div class="p-4">' +
-                           '<h3 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-2">' + product.name + '</h3>' +
-                           '<p class="text-fixed-sm text-[var(--text-medium)] mb-2">' + product.description + '</p>' +
-                           '<p class="text-fixed-xl font-bold text-[var(--primary-color)] mb-4">$' + product.price.toLocaleString() + '</p>' +
-                           (product.status === 'unavailable' ? '<span class="text-red-500 text-fixed-sm font-semibold">No disponible</span>' : '<button class="w-full bg-[var(--primary-color)] text-white font-bold py-2 px-4 rounded-lg text-fixed-base hover:bg-opacity-90 transition-colors duration-300">Ver Detalles</button>') +
-                           '</div></div>';
-                }).join('');
-            }
-        }
-        productGrid.innerHTML = '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">' + html + '</div>';
+        productGrid.innerHTML = `<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">${html}</div>`;
         setupScrollAnimations();
     }
     
-    function showProductDetailsModal(productId){var product=null;for(var i=0;i<products.length;i++){if(products[i].id===productId){product=products[i];break;}}
-    if(!product||product.status==='unavailable')return;currentProductForModal=JSON.parse(JSON.stringify(product));currentProductForModal.quantity=1;currentUnitType='individual';document.getElementById('productDetailsTitle').textContent=product.name;document.getElementById('productDetailsImage').src=product.image;document.getElementById('productDetailsDescription').textContent=product.description;document.getElementById('productQuantityDisplay').textContent='1';var unitTypeSection=document.getElementById('unitTypeSection');if(product.hasBoxOption){unitTypeSection.classList.remove('hidden');updateUnitTypeButtons();}else{unitTypeSection.classList.add('hidden');}
+    function showProductDetailsModal(productId){var product=products.find(p=>p.id===productId);if(!product||product.status==='unavailable')return;currentProductForModal={...product,quantity:1};currentUnitType='individual';document.getElementById('productDetailsTitle').textContent=product.name;document.getElementById('productDetailsImage').src=product.image;document.getElementById('productDetailsDescription').textContent=product.description;document.getElementById('productQuantityDisplay').textContent='1';document.getElementById('unitTypeSection').classList.toggle('hidden',!product.hasBoxOption);if(product.hasBoxOption){updateUnitTypeButtons();}
     updateModalPricing();document.getElementById('productDetailsModal').classList.add('show');}
-    function updateUnitTypeButtons(){var individualBtn=document.getElementById('unitTypeIndividual');var boxBtn=document.getElementById('unitTypeBox');if(currentUnitType==='individual'){individualBtn.classList.add('active');boxBtn.classList.remove('active');}else{boxBtn.classList.add('active');individualBtn.classList.remove('active');}}
-    function updateModalPricing(){if(!currentProductForModal)return;var unitPrice,unitDescription;if(currentProductForModal.hasBoxOption&&currentUnitType==='box'){unitPrice=currentProductForModal.boxPrice;unitDescription='Caja ('+currentProductForModal.boxQuantity+' unidades)';}else{unitPrice=currentProductForModal.price;unitDescription='Unidad';}
-    var totalPrice=unitPrice*currentProductForModal.quantity;document.getElementById('productDetailsPrice').textContent='$'+unitPrice.toLocaleString()+' / '+unitDescription;document.getElementById('modalTotalPrice').textContent='$'+totalPrice.toLocaleString();}
-    function addToCartFromModal(){if(!currentProductForModal)return;var cartItem={id:currentProductForModal.id+(currentUnitType==='box'?'_box':''),name:currentProductForModal.name,image:currentProductForModal.image,quantity:currentProductForModal.quantity,unitType:currentUnitType};if(currentProductForModal.hasBoxOption&&currentUnitType==='box'){cartItem.price=currentProductForModal.boxPrice;cartItem.name+=' (Caja x'+currentProductForModal.boxQuantity+')';}else{cartItem.price=currentProductForModal.price;}
-    var existingItemIndex=-1;for(var i=0;i<cart.length;i++){if(cart[i].id===cartItem.id){existingItemIndex=i;break;}}
-    if(existingItemIndex!==-1){cart[existingItemIndex].quantity+=cartItem.quantity;}else{cart.push(cartItem);}
+    function updateUnitTypeButtons(){document.getElementById('unitTypeIndividual').classList.toggle('active',currentUnitType==='individual');document.getElementById('unitTypeBox').classList.toggle('active',currentUnitType==='box');}
+    function updateModalPricing(){if(!currentProductForModal)return;let unitPrice,unitDescription;if(currentProductForModal.hasBoxOption&&currentUnitType==='box'){unitPrice=currentProductForModal.boxPrice;unitDescription=`Caja (${currentProductForModal.boxQuantity}u)`;}else{unitPrice=currentProductForModal.price;unitDescription='Unidad';}
+    let totalPrice=unitPrice*currentProductForModal.quantity;document.getElementById('productDetailsPrice').textContent=`$${unitPrice.toLocaleString()} / ${unitDescription}`;document.getElementById('modalTotalPrice').textContent=`$${totalPrice.toLocaleString()}`;}
+    function addToCartFromModal(){if(!currentProductForModal)return;let cartItem={id:currentProductForModal.id+(currentUnitType==='box'?'_box':''),name:currentProductForModal.name,image:currentProductForModal.image,quantity:currentProductForModal.quantity,unitType:currentUnitType};if(currentProductForModal.hasBoxOption&&currentUnitType==='box'){cartItem.price=currentProductForModal.boxPrice;cartItem.name+=` (Caja x${currentProductForModal.boxQuantity})`;}else{cartItem.price=currentProductForModal.price;}
+    let existingItem=cart.find(item=>item.id===cartItem.id);if(existingItem){existingItem.quantity+=cartItem.quantity;}else{cart.push(cartItem);}
     updateCartUI();localStorage.setItem('cart',JSON.stringify(cart));document.getElementById('productDetailsModal').classList.remove('show');currentProductForModal=null;showCartAnimation();}
     
     function updateCartUI(){
-        var totalItems=cart.reduce(function(sum,item){return sum+item.quantity;},0);
-        var totalPrice=cart.reduce(function(sum,item){return sum+(item.price*item.quantity);},0);
+        var totalItems=cart.reduce((sum,item)=>sum+item.quantity,0);
+        var totalPrice=cart.reduce((sum,item)=>sum+(item.price*item.quantity),0);
         document.getElementById('cartCount').textContent=totalItems;
-        document.getElementById('cartTotal').textContent='$'+totalPrice.toLocaleString();
-        document.getElementById('floatingCartTotal').textContent = '$' + totalPrice.toLocaleString();
+        document.getElementById('cartTotal').textContent=`$${totalPrice.toLocaleString()}`;
+        document.getElementById('floatingCartTotal').textContent=`$${totalPrice.toLocaleString()}`;
         var cartItems=document.getElementById('cartItems');
         var sendWhatsAppOrder=document.getElementById('sendWhatsAppOrder');
+        sendWhatsAppOrder.disabled=cart.length===0;
         if(cart.length===0){
             cartItems.innerHTML='<p class="text-center text-[var(--text-medium)] text-fixed-base">Tu carrito está vacío</p>';
-            sendWhatsAppOrder.disabled=true;
         }else{
-            cartItems.innerHTML=cart.map(function(item,index){return('<div class="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0">'+
-            '<div class="flex-1"><h4 class="text-fixed-base font-semibold text-[var(--text-dark)]">'+item.name+'</h4><p class="text-fixed-sm text-[var(--text-medium)]">$'+item.price.toLocaleString()+' c/u</p></div>'+
-            '<div class="flex items-center gap-2">'+
-            '<button onclick="updateCartQuantity('+index+', '+(item.quantity-1)+')" class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-fixed-sm font-bold hover:bg-gray-300 transition-colors">-</button>'+
-            '<span class="text-fixed-base font-semibold w-8 text-center">'+item.quantity+'</span>'+
-            '<button onclick="updateCartQuantity('+index+', '+(item.quantity+1)+')" class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-fixed-sm font-bold hover:bg-gray-300 transition-colors">+</button>'+
-            '<button onclick="removeFromCart('+index+')" class="ml-2 text-red-500 hover:text-red-700 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button>'+
-            '</div></div>');
-        }).join('');
-        sendWhatsAppOrder.disabled=false;
+            cartItems.innerHTML=cart.map((item,index)=>`
+            <div class="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0">
+                <div class="flex-1">
+                    <h4 class="text-fixed-base font-semibold text-[var(--text-dark)]">${item.name}</h4>
+                    <p class="text-fixed-sm text-[var(--text-medium)]">$${item.price.toLocaleString()} c/u</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="updateCartQuantity(${index},${item.quantity-1})" class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-fixed-sm font-bold hover:bg-gray-300 transition-colors">-</button>
+                    <span class="text-fixed-base font-semibold w-8 text-center">${item.quantity}</span>
+                    <button onclick="updateCartQuantity(${index},${item.quantity+1})" class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-fixed-sm font-bold hover:bg-gray-300 transition-colors">+</button>
+                    <button onclick="removeFromCart(${index})" class="ml-2 text-red-500 hover:text-red-700 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button>
+                </div>
+            </div>`).join('');
         }
     }
 
-    function updateCartQuantity(index,newQuantity){if(newQuantity<=0){removeFromCart(index);return;} cart[index].quantity=newQuantity;updateCartUI();localStorage.setItem('cart',JSON.stringify(cart));}
+    function updateCartQuantity(index,newQuantity){if(newQuantity<=0){removeFromCart(index);}else{cart[index].quantity=newQuantity;}updateCartUI();localStorage.setItem('cart',JSON.stringify(cart));}
     function removeFromCart(index){cart.splice(index,1);updateCartUI();localStorage.setItem('cart',JSON.stringify(cart));}
-    function showCartAnimation(){var floatingCartBtn=document.getElementById('floatingCartBtn');floatingCartBtn.classList.add('shake');setTimeout(function(){floatingCartBtn.classList.remove('shake');},600);}
-    function setupGeneralEventListeners(){document.getElementById('floatingCartBtn').addEventListener('click',function(){document.getElementById('cartModal').classList.add('show');});document.getElementById('closeCartModal').addEventListener('click',function(){document.getElementById('cartModal').classList.remove('show');});document.getElementById('cartModal').addEventListener('click',function(e){if(e.target.id==='cartModal')document.getElementById('cartModal').classList.remove('show');});document.getElementById('closeProductDetailsModalBtn').addEventListener('click',function(){document.getElementById('productDetailsModal').classList.remove('show');currentProductForModal=null;});document.getElementById('productDetailsModal').addEventListener('click',function(e){if(e.target.id==='productDetailsModal'){document.getElementById('productDetailsModal').classList.remove('show');currentProductForModal=null;}});document.getElementById('unitTypeIndividual').addEventListener('click',function(){currentUnitType='individual';updateUnitTypeButtons();updateModalPricing();});document.getElementById('unitTypeBox').addEventListener('click',function(){currentUnitType='box';updateUnitTypeButtons();updateModalPricing();});document.getElementById('decreaseQuantityBtn').addEventListener('click',function(){if(currentProductForModal&&currentProductForModal.quantity>1){currentProductForModal.quantity--;document.getElementById('productQuantityDisplay').textContent=currentProductForModal.quantity;updateModalPricing();}});document.getElementById('increaseQuantityBtn').addEventListener('click',function(){if(currentProductForModal){currentProductForModal.quantity++;document.getElementById('productQuantityDisplay').textContent=currentProductForModal.quantity;updateModalPricing();}});document.getElementById('addProductToCartModalBtn').addEventListener('click',addToCartFromModal);document.getElementById('sendWhatsAppOrder').addEventListener('click',function(){document.getElementById('cartModal').classList.remove('show');showCheckoutModal();});document.getElementById('contactWhatsappBtn').addEventListener('click',function(e){e.preventDefault();window.open(whatsappGroupLink,'_blank');});document.getElementById('mobile-menu-button').addEventListener('click',function(){document.getElementById('mobile-menu').classList.add('open');document.getElementById('mobile-backdrop').classList.add('open');});document.getElementById('close-mobile-menu').addEventListener('click',closeMobileMenu);document.getElementById('mobile-backdrop').addEventListener('click',closeMobileMenu);
-    var anchorLinks=document.querySelectorAll('a[href^="#"]');for(var i=0;i<anchorLinks.length;i++){anchorLinks[i].addEventListener('click',function(e){e.preventDefault();var targetId=this.getAttribute('href');var targetElement=document.querySelector(targetId);if(targetElement){if(this.classList.contains('mobile-nav-link')){closeMobileMenu();}
-    setTimeout(function(){var targetPosition=targetElement.getBoundingClientRect().top+window.pageYOffset;var headerOffset=80;var offsetPosition=targetPosition-headerOffset;window.scrollTo(0,offsetPosition);},100);}});}
+    function showCartAnimation(){var floatingCartBtn=document.getElementById('floatingCartBtn');floatingCartBtn.classList.add('shake');setTimeout(()=>floatingCartBtn.classList.remove('shake'),600);}
+    function setupGeneralEventListeners(){document.getElementById('floatingCartBtn').addEventListener('click',()=>document.getElementById('cartModal').classList.add('show'));document.getElementById('closeCartModal').addEventListener('click',()=>document.getElementById('cartModal').classList.remove('show'));document.getElementById('cartModal').addEventListener('click',e=>{if(e.target.id==='cartModal')document.getElementById('cartModal').classList.remove('show');});document.getElementById('closeProductDetailsModalBtn').addEventListener('click',()=>{document.getElementById('productDetailsModal').classList.remove('show');currentProductForModal=null;});document.getElementById('productDetailsModal').addEventListener('click',e=>{if(e.target.id==='productDetailsModal'){document.getElementById('productDetailsModal').classList.remove('show');currentProductForModal=null;}});document.getElementById('unitTypeIndividual').addEventListener('click',()=>{currentUnitType='individual';updateUnitTypeButtons();updateModalPricing();});document.getElementById('unitTypeBox').addEventListener('click',()=>{currentUnitType='box';updateUnitTypeButtons();updateModalPricing();});document.getElementById('decreaseQuantityBtn').addEventListener('click',()=>{if(currentProductForModal&&currentProductForModal.quantity>1){currentProductForModal.quantity--;document.getElementById('productQuantityDisplay').textContent=currentProductForModal.quantity;updateModalPricing();}});document.getElementById('increaseQuantityBtn').addEventListener('click',()=>{if(currentProductForModal){currentProductForModal.quantity++;document.getElementById('productQuantityDisplay').textContent=currentProductForModal.quantity;updateModalPricing();}});document.getElementById('addProductToCartModalBtn').addEventListener('click',addToCartFromModal);document.getElementById('sendWhatsAppOrder').addEventListener('click',()=>{document.getElementById('cartModal').classList.remove('show');showCheckoutModal();});document.getElementById('contactWhatsappBtn').addEventListener('click',e=>{e.preventDefault();window.open(whatsappGroupLink,'_blank');});document.getElementById('mobile-menu-button').addEventListener('click',()=>{document.getElementById('mobile-menu').classList.add('open');document.getElementById('mobile-backdrop').classList.add('open');});document.getElementById('close-mobile-menu').addEventListener('click',closeMobileMenu);document.getElementById('mobile-backdrop').addEventListener('click',closeMobileMenu);
+    document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener('click',function(e){e.preventDefault();const targetId=this.getAttribute('href');const targetElement=document.querySelector(targetId);if(targetElement){if(this.classList.contains('mobile-nav-link')){closeMobileMenu();}
+    setTimeout(()=>{const headerOffset=80;const elementPosition=targetElement.getBoundingClientRect().top;const offsetPosition=elementPosition+window.pageYOffset-headerOffset;window.scrollTo({top:offsetPosition});},100);}});});
     setupCheckoutEventListeners();}
     function closeMobileMenu(){document.getElementById('mobile-menu').classList.remove('open');document.getElementById('mobile-backdrop').classList.remove('open');}
-    function setupScrollAnimations(){if('IntersectionObserver' in window){var elements=document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right');var observer=new IntersectionObserver(function(entries){for(var i=0;i<entries.length;i++){if(entries[i].isIntersecting){entries[i].target.classList.add('is-visible');}}}, {threshold:0.1});for(var j=0;j<elements.length;j++){observer.observe(elements[j]);}}else{var elements=document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right');for(var k=0;k<elements.length;k++){elements[k].classList.add('is-visible');}}}
-    function setupScrollHeader(){var header=document.getElementById('mainHeader');window.addEventListener('scroll',function(){if(window.scrollY>100){header.classList.add('scrolled');}else{header.classList.remove('scrolled');}});}
+    function setupScrollAnimations(){if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');}});},{threshold:0.1});document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right').forEach(el=>observer.observe(el));}else{document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right').forEach(el=>el.classList.add('is-visible'));}}
+    function setupScrollHeader(){const header=document.getElementById('mainHeader');window.addEventListener('scroll',()=>{header.classList.toggle('scrolled',window.scrollY>100);});}
     function showCheckoutModal(){if(cart.length===0){alert('Tu carrito está vacío');return;}
-    var savedData=JSON.parse(localStorage.getItem('customerData'));if(savedData){document.getElementById('customerName').value=savedData.name||'';document.getElementById('customerAddress').value=savedData.address||'';document.getElementById('customerReferences').value=savedData.references||'';document.getElementById('customerPhone').value=savedData.phone||'';document.getElementById('deliveryLocation').value='habana-vieja';}
+    const savedData=JSON.parse(localStorage.getItem('customerData'));if(savedData){document.getElementById('customerName').value=savedData.name||'';document.getElementById('customerAddress').value=savedData.address||'';document.getElementById('customerReferences').value=savedData.references||'';document.getElementById('customerPhone').value=savedData.phone||'';document.getElementById('deliveryLocation').value='habana-vieja';}
     updateCheckoutSummary();document.getElementById('checkoutModal').classList.add('show');}
     
     function updateCheckoutSummary(){
-        var checkoutOrderSummary=document.getElementById('checkoutOrderSummary');
-        var subtotal=cart.reduce(function(sum,item){return sum+(item.price*item.quantity);},0);
-        checkoutOrderSummary.innerHTML=cart.map(function(item){return('<div class="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">'+
-        '<div class="flex-1"><h5 class="text-fixed-base font-semibold text-[var(--text-dark)]">'+item.name+'</h5><p class="text-fixed-sm text-[var(--text-medium)]">$'+item.price.toLocaleString()+' c/u × '+item.quantity+'</p></div>'+
-        '<div class="text-fixed-base font-semibold">$'+(item.price*item.quantity).toLocaleString()+'</div></div>');
-        }).join('');
-        document.getElementById('checkoutSubtotal').textContent='$'+subtotal.toLocaleString();
+        const checkoutOrderSummary=document.getElementById('checkoutOrderSummary');
+        const subtotal=cart.reduce((sum,item)=>sum+(item.price*item.quantity),0);
+        checkoutOrderSummary.innerHTML=cart.map(item=>`
+            <div class="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
+                <div class="flex-1">
+                    <h5 class="text-fixed-base font-semibold text-[var(--text-dark)]">${item.name}</h5>
+                    <p class="text-fixed-sm text-[var(--text-medium)]">$${item.price.toLocaleString()} c/u × ${item.quantity}</p>
+                </div>
+                <div class="text-fixed-base font-semibold">$${(item.price*item.quantity).toLocaleString()}</div>
+            </div>`).join('');
+        document.getElementById('checkoutSubtotal').textContent=`$${subtotal.toLocaleString()}`;
         updateShippingAndTotal();
     }
 
     function updateShippingAndTotal() {
-        var subtotal = cart.reduce(function(sum, item) { return sum + (item.price * item.quantity); }, 0);
-        var serviceFee = 50;
-        document.getElementById('checkoutServiceFee').textContent = '$' + serviceFee;
-        var deliveryLocation = document.getElementById('deliveryLocation').value;
-        var shippingCost = 0;
-        var shippingText = '$0';
-        var showNote = false;
-        var noteText = '';
-        var upsellMessage = '';
-        var upsellElement = document.getElementById('upsellMessage');
+        const subtotal=cart.reduce((sum, item)=>sum+(item.price*item.quantity),0);
+        const serviceFee=50;
+        document.getElementById('checkoutServiceFee').textContent=`$${serviceFee}`;
+        const deliveryLocation=document.getElementById('deliveryLocation').value;
+        let shippingCost=0;
+        let shippingText='$0';
+        let showNote=false;
+        let noteText='';
+        let upsellMessage='';
+        const upsellElement=document.getElementById('upsellMessage');
 
-        if (deliveryLocation === 'habana-vieja') {
-            if (subtotal >= 3500) {
-                shippingCost = 0;
-                shippingText = 'GRATIS (Pedido Mayor a $3,500)';
-                upsellMessage = '¡Felicidades! Has desbloqueado el Envío GRATIS.';
-                upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-green-100 text-green-800';
-            } else if (subtotal >= 1500) {
-                shippingCost = 50;
-                shippingText = 'Envío con Descuento: $50 CUP';
-                var neededForFree = 3500 - subtotal;
-                upsellMessage = '¡Estás a solo $' + neededForFree.toLocaleString() + ' de conseguir el Envío GRATIS!';
-                upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-blue-100 text-blue-800';
-            } else {
-                shippingCost = 150;
-                shippingText = '$150 CUP';
-                var neededForDiscount = 1500 - subtotal;
-                upsellMessage = '¡Añade $' + neededForDiscount.toLocaleString() + ' más a tu carrito y paga solo $50 de envío!';
-                upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-yellow-100 text-yellow-800';
-            }
-        } else if (deliveryLocation === 'otros') {
-            shippingCost = 0;
-            shippingText = 'A confirmar';
-            showNote = true;
-            noteText = 'El costo de envío se ajustará al precio de la agencia de mensajería externa, se lo confirmaremos por WhatsApp.';
-            upsellMessage = '';
-        } else {
-            upsellMessage = '';
-        }
+        if(deliveryLocation==='habana-vieja'){
+            if(subtotal>=3500){shippingCost=0;shippingText='GRATIS (Pedido > $3,500)';upsellMessage='¡Felicidades! Tienes Envío GRATIS.';upsellElement.className='my-4 p-3 rounded-lg text-center font-semibold text-sm bg-green-100 text-green-800';}
+            else if(subtotal>=1500){shippingCost=50;shippingText='Descuento: $50 CUP';const neededForFree=3500-subtotal;upsellMessage=`¡A solo $${neededForFree.toLocaleString()} del Envío GRATIS!`;upsellElement.className='my-4 p-3 rounded-lg text-center font-semibold text-sm bg-blue-100 text-blue-800';}
+            else{shippingCost=150;shippingText='$150 CUP';const neededForDiscount=1500-subtotal;upsellMessage=`¡Añade $${neededForDiscount.toLocaleString()} y paga solo $50 de envío!`;upsellElement.className='my-4 p-3 rounded-lg text-center font-semibold text-sm bg-yellow-100 text-yellow-800';}
+        }else if(deliveryLocation==='otros'){shippingCost=0;shippingText='A confirmar';showNote=true;noteText='El costo se ajustará al precio de la mensajería. Te confirmaremos por WhatsApp.';upsellMessage='';}
+        else{upsellMessage='';}
 
-        if (upsellElement) {
-            upsellElement.textContent = upsellMessage;
-            if(upsellMessage === '') {
-                upsellElement.className = 'hidden';
-            }
-        }
+        upsellElement.textContent=upsellMessage;
+        upsellElement.style.display=upsellMessage?'block':'none';
         
-        document.getElementById('checkoutShipping').textContent = shippingText;
-        var shippingNote = document.getElementById('shippingNote');
-        if (showNote) {
-            shippingNote.textContent = noteText;
-            shippingNote.classList.remove('hidden');
-        } else {
-            shippingNote.classList.add('hidden');
-        }
-        var total = subtotal + serviceFee + shippingCost;
-        document.getElementById('checkoutTotal').textContent = '$' + total.toLocaleString();
+        document.getElementById('checkoutShipping').textContent=shippingText;
+        const shippingNote=document.getElementById('shippingNote');
+        shippingNote.textContent=noteText;
+        shippingNote.classList.toggle('hidden',!showNote);
+        const total=subtotal+serviceFee+shippingCost;
+        document.getElementById('checkoutTotal').textContent=`$${total.toLocaleString()}`;
     }
 
-    function setupCheckoutEventListeners(){document.getElementById('closeCheckoutModal').addEventListener('click',function(){document.getElementById('checkoutModal').classList.remove('show');});document.getElementById('checkoutModal').addEventListener('click',function(e){if(e.target.id==='checkoutModal'){document.getElementById('checkoutModal').classList.remove('show');}});document.getElementById('deliveryLocation').addEventListener('change',updateShippingAndTotal);
-    var paymentRadios=document.querySelectorAll('input[name="paymentMethod"]');for(var i=0;i<paymentRadios.length;i++){paymentRadios[i].addEventListener('change',function(){var cashField=document.getElementById('cashPaymentField');if(this.value==='efectivo'){cashField.classList.remove('hidden');}else{cashField.classList.add('hidden');selectedCashAmount='';var cashButtons=document.querySelectorAll('.cash-btn');for(var j=0;j<cashButtons.length;j++){cashButtons[j].classList.remove('active');}
-    document.getElementById('otherCashAmount').classList.add('hidden');}});}
-    var cashButtons=document.querySelectorAll('.cash-btn');for(var k=0;k<cashButtons.length;k++){cashButtons[k].addEventListener('click',function(){for(var l=0;l<cashButtons.length;l++){cashButtons[l].classList.remove('active');}
-    this.classList.add('active');selectedCashAmount=this.getAttribute('data-amount');var otherInput=document.getElementById('otherCashAmount');if(selectedCashAmount==='otro'){otherInput.classList.remove('hidden');otherInput.focus();}else{otherInput.classList.add('hidden');}});}
+    function setupCheckoutEventListeners(){document.getElementById('closeCheckoutModal').addEventListener('click',()=>document.getElementById('checkoutModal').classList.remove('show'));document.getElementById('checkoutModal').addEventListener('click',e=>{if(e.target.id==='checkoutModal')document.getElementById('checkoutModal').classList.remove('show');});document.getElementById('deliveryLocation').addEventListener('change',updateShippingAndTotal);
+    document.querySelectorAll('input[name="paymentMethod"]').forEach(radio=>{radio.addEventListener('change',function(){document.getElementById('cashPaymentField').classList.toggle('hidden',this.value!=='efectivo');if(this.value!=='efectivo'){selectedCashAmount='';document.querySelectorAll('.cash-btn').forEach(b=>b.classList.remove('active'));document.getElementById('otherCashAmount').classList.add('hidden');}});});
+    document.querySelectorAll('.cash-btn').forEach(button=>{button.addEventListener('click',function(){document.querySelectorAll('.cash-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active');selectedCashAmount=this.dataset.amount;const otherInput=document.getElementById('otherCashAmount');otherInput.classList.toggle('hidden',selectedCashAmount!=='otro');if(selectedCashAmount==='otro'){otherInput.focus();}});});
     document.getElementById('confirmOrderBtn').addEventListener('click',confirmOrder);}
-    function validateCheckoutForm(){var requiredFields=[{id:'customerName',name:'Nombre completo'},{id:'customerAddress',name:'Dirección de entrega'},{id:'customerPhone',name:'Número de teléfono'},{id:'deliveryLocation',name:'Ubicación'}];var errors=[];for(var i=0;i<requiredFields.length;i++){var field=requiredFields[i];var element=document.getElementById(field.id);if(!element.value.trim()){errors.push(field.name);element.classList.add('border-red-500');}else{element.classList.remove('border-red-500');}}
-    var paymentMethod=document.querySelector('input[name="paymentMethod"]:checked');if(!paymentMethod){errors.push('Método de pago');}
-    if(errors.length>0){alert('Por favor completa los siguientes campos:\n• '+errors.join('\n• '));return false;}
+    function validateCheckoutForm(){const requiredFields=[{id:'customerName',name:'Nombre'},{id:'customerAddress',name:'Dirección'},{id:'customerPhone',name:'Teléfono'},{id:'deliveryLocation',name:'Ubicación'}];let errors=[];requiredFields.forEach(field=>{const element=document.getElementById(field.id);if(!element.value.trim()){errors.push(field.name);element.classList.add('border-red-500');}else{element.classList.remove('border-red-500');}});
+    if(!document.querySelector('input[name="paymentMethod"]:checked')){errors.push('Método de pago');}
+    if(errors.length>0){alert('Por favor completa los campos:\n• '+errors.join('\n• '));return false;}
     return true;}
     
-    function confirmOrder() {
-        if (!validateCheckoutForm()) {
-            return;
-        }
-        var customerName = document.getElementById('customerName').value.trim();
-        var customerAddress = document.getElementById('customerAddress').value.trim();
-        var customerReferences = document.getElementById('customerReferences').value.trim();
-        var customerPhone = document.getElementById('customerPhone').value.trim();
-        var deliveryLocation = document.getElementById('deliveryLocation').value;
-        var paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-        var cashAmount = selectedCashAmount === 'otro' ? document.getElementById('otherCashAmount').value.trim() : selectedCashAmount;
-        var subtotal = cart.reduce(function(sum, item) { return sum + (item.price * item.quantity); }, 0);
-        var serviceFee = 50;
-        var shippingCost = 0;
-        var shippingText = '$0';
-
-        if (deliveryLocation === 'habana-vieja') {
-            if (subtotal >= 3500) {
-                shippingCost = 0;
-                shippingText = 'GRATIS (Pedido Mayor a $3,500)';
-            } else if (subtotal >= 1500) {
-                shippingCost = 50;
-                shippingText = 'Envío con Descuento: $50 CUP';
-            } else {
-                shippingCost = 150;
-                shippingText = '$150 CUP';
-            }
-        } else {
-            shippingText = 'A confirmar por agencia de mensajería';
-        }
-
-        var total = subtotal + serviceFee + shippingCost;
-        var orderItems = cart.map(function(item) { return '• ' + item.name + ' x' + item.quantity + ' - $' + (item.price * item.quantity).toLocaleString(); }).join('\n');
-        var locationText = deliveryLocation === 'habana-vieja' ? 'Habana Vieja' : 'Otros municipios';
-        var paymentText = paymentMethod === 'efectivo' ? 'Efectivo' + (cashAmount ? ' (pagaré con ' + cashAmount + ')' : '') : 'Transferencia';
-        var finalMessage = "*🛒 NUEVO PEDIDO - EL RESOLVITO*\n\n" +
-            "*👤 DATOS DEL CLIENTE:*\n" + "• Nombre: " + customerName + "\n" + "• Teléfono: " + customerPhone + "\n" + "• Dirección: " + customerAddress + "\n" + "• Referencias: " + (customerReferences || 'No especificadas') + "\n" + "• Ubicación: " + locationText + "\n\n" + "*📦 PRODUCTOS:*\n" + orderItems + "\n\n" + "*💰 RESUMEN DE PAGO:*\n" + "• Subtotal de productos: $" + subtotal.toLocaleString() + "\n" + "• Servicio y Empaque: $" + serviceFee + "\n" + "• Envío: " + shippingText + "\n" + "• TOTAL A PAGAR: $" + total.toLocaleString() + "\n\n" + "*💳 MÉTODO DE PAGO:*\n" + paymentText + "\n\n" + "*⏰ Horario de entrega preferido:* Se coordinará para la próxima ronda de entrega.\n\n" + "_¡Gracias por su pedido!_ 🙏";
-
-        var telegramToken = 'TU_TOKEN_DE_TELEGRAM_AQUI';
-        var telegramChatId = 'TU_CHAT_ID_AQUI';
-        fetch('https://api.telegram.org/bot' + telegramToken + '/sendMessage', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: telegramChatId, text: finalMessage, parse_mode: 'Markdown' })
-        });
-
-        var googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycby9Sk3Fz2_WqRQsEXrezpwqKbpYhqW_-ialMJcYKPdvZkrBfNReWWFfQ-VnXTrkJY8W/exec';
-        var orderData = {
-            idPedido: new Date().getTime(),
-            customerName: customerName,
-            customerPhone: customerPhone,
-            customerAddress: customerAddress,
-            customerReferences: customerReferences,
-            total: total,
-            paymentMethod: paymentMethod,
-            shippingText: shippingText,
-            orderItems: orderItems
-        };
-        var formData = new FormData();
-        for (var key in orderData) {
-            if (orderData.hasOwnProperty(key)) {
-                formData.append(key, orderData[key]);
-            }
-        }
-        fetch(googleAppsScriptUrl, { method: 'POST', body: formData, mode: 'no-cors' }).catch(function(error) { console.error('Error enviando a Google Sheets:', error); });
-
-        var whatsappPhoneNumber = '56382909';
-        var whatsappMessage = encodeURIComponent(finalMessage.replace(/\*/g, '').replace(/_/g, ''));
-        window.open('https://wa.me/' + whatsappPhoneNumber + '?text=' + whatsappMessage, '_blank');
-
+    function confirmOrder(){if(!validateCheckoutForm())return;
+        const customerName=document.getElementById('customerName').value.trim();
+        const customerAddress=document.getElementById('customerAddress').value.trim();
+        const customerReferences=document.getElementById('customerReferences').value.trim();
+        const customerPhone=document.getElementById('customerPhone').value.trim();
+        const deliveryLocation=document.getElementById('deliveryLocation').value;
+        const paymentMethod=document.querySelector('input[name="paymentMethod"]:checked').value;
+        const cashAmount=selectedCashAmount==='otro'?document.getElementById('otherCashAmount').value.trim():selectedCashAmount;
+        const subtotal=cart.reduce((sum,item)=>sum+(item.price*item.quantity),0);
+        const serviceFee=50;let shippingCost=0;let shippingText='$0';
+        if(deliveryLocation==='habana-vieja'){if(subtotal>=3500){shippingCost=0;shippingText='GRATIS (Pedido > $3,500)';}else if(subtotal>=1500){shippingCost=50;shippingText='Descuento: $50 CUP';}else{shippingCost=150;shippingText='$150 CUP';}}else{shippingText='A confirmar por mensajería';}
+        const total=subtotal+serviceFee+shippingCost;
+        const orderItems=cart.map(item=>`• ${item.name} x${item.quantity} - $${(item.price*item.quantity).toLocaleString()}`).join('\n');
+        const locationText=deliveryLocation==='habana-vieja'?'Habana Vieja':'Otros municipios';
+        const paymentText=paymentMethod==='efectivo'?`Efectivo${cashAmount?' (pagaré con '+cashAmount+')':''}`:'Transferencia';
+        const finalMessage=`*🛒 NUEVO PEDIDO - EL RESOLVITO*\n\n*👤 DATOS DEL CLIENTE:*\n• Nombre: ${customerName}\n• Teléfono: ${customerPhone}\n• Dirección: ${customerAddress}\n• Referencias: ${customerReferences||'No especificadas'}\n• Ubicación: ${locationText}\n\n*📦 PRODUCTOS:*\n${orderItems}\n\n*💰 RESUMEN DE PAGO:*\n• Subtotal: $${subtotal.toLocaleString()}\n• Servicio/Empaque: $${serviceFee}\n• Envío: ${shippingText}\n• TOTAL A PAGAR: $${total.toLocaleString()}\n\n*💳 MÉTODO DE PAGO:*\n${paymentText}\n\n*⏰ Horario de entrega:* Se coordinará para la próxima ronda de entrega.\n\n_¡Gracias por su pedido!_ 🙏`;
+        
+        const whatsappPhoneNumber='56382909';
+        const whatsappMessage=encodeURIComponent(finalMessage.replace(/\*/g,'').replace(/_/g,''));
+        window.open(`https://wa.me/${whatsappPhoneNumber}?text=${whatsappMessage}`,'_blank');
         document.getElementById('checkoutModal').classList.remove('show');
-        cart = [];
-        updateCartUI();
-        localStorage.setItem('cart', JSON.stringify(cart));
-        
-        var customerData = { name: customerName, address: customerAddress, references: customerReferences, phone: customerPhone };
-        localStorage.setItem('customerData', JSON.stringify(customerData));
-        
-        alert('¡Pedido enviado! Te contactaremos pronto para confirmar los detalles.');
+        cart=[];updateCartUI();
+        localStorage.setItem('cart',JSON.stringify(cart));
+        const customerData={name:customerName,address:customerAddress,references:customerReferences,phone:customerPhone};
+        localStorage.setItem('customerData',JSON.stringify(customerData));
+        alert('¡Pedido enviado! Serás redirigido a WhatsApp para confirmar. ¡Gracias!');
     }
 </script>
 
 </body>
 </html>
+
 
