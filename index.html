@@ -40,8 +40,6 @@
             --light-background-gray: #f9fafb;
             --text-dark: #1f2937;
             --text-medium: #4b5563;
-            /* CORRECCIÓN: Overlay más oscuro para mayor contraste */
-            --dark-overlay: rgba(0, 0, 0, 0.7); 
         }
         html { scroll-behavior: smooth; }
         body { font-family: 'Inter', sans-serif; background-color: var(--light-background-gray); }
@@ -58,33 +56,20 @@
         .hero-slider-container { position: relative; width: 100%; height: 100%; background-color: #000; overflow: hidden; }
         .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; visibility: hidden; transition: opacity 1s ease-in-out; }
         .hero-slide.active { opacity: 1; visibility: visible; }
-        .hero-slide .hero-overlay { background-color: var(--dark-overlay); }
+        .hero-slide .hero-overlay { background: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.1) 100%); }
+        .hero-slide:nth-child(2) .hero-overlay { background: linear-gradient(270deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.1) 100%); }
         .slider-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; display: flex; justify-content: space-between; padding: 0 1rem; z-index: 20; }
         .slider-nav button { background-color: rgba(255, 255, 255, 0.2); color: white; border: 1px solid white; border-radius: 50%; width: 40px; height: 40px; font-size: 24px; cursor: pointer; transition: background-color 0.3s; }
         .slider-nav button:hover { background-color: rgba(255, 255, 255, 0.4); }
         
-        /* CORRECCIÓN: Sombra de texto profesional para legibilidad */
-        .hero-text-shadow {
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8), 0 0 5px rgba(0,0,0,0.5);
+        .slide-content { transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
+        .slide-content.is-exiting { opacity: 0; transform: translateY(20px); }
+        .slide-content.is-entering { opacity: 1; transform: translateY(0); }
+        
+        header#mainHeader {
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-
-        .slide-content > * {
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .hero-slide:not(.active) .slide-content > * {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        .hero-slide.active .slide-content > * {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .hero-slide.active .slide-content > *:nth-child(1) { transition-delay: 0.3s; }
-        .hero-slide.active .slide-content > *:nth-child(2) { transition-delay: 0.4s; }
-        .hero-slide.active .slide-content > *:nth-child(3) { transition-delay: 0.5s; }
-
-
-        header.scrolled { background-color: rgba(13, 59, 51, 0.95); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
         .modal-overlay { opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
         .modal-overlay.show { opacity: 1; visibility: visible; }
         .modal-content { transform: translateY(-20px); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease; }
@@ -110,7 +95,7 @@
 </head>
 <body class="text-gray-800">
 
-<header id="mainHeader" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+<header id="mainHeader" class="fixed top-0 left-0 right-0 z-50">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-2">
         <div class="flex items-center gap-4">
             <button id="mobile-menu-button" class="md:hidden text-white"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg></button>
@@ -148,47 +133,36 @@
 <div id="mobile-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"></div>
 
 <main>
-    <!-- ======================================================= -->
-    <!-- === INICIO DEL HERO SLIDER === -->
-    <!-- ======================================================= -->
-    <section class="relative h-[60vh] md:h-[80vh] min-h-[400px]">
+    <section class="relative h-[70vh] md:h-[85vh] min-h-[500px]">
         <div id="heroSlider" class="hero-slider-container">
             <!-- Slide 1: Mercado -->
             <div class="hero-slide" style="background-image: url('https://i.postimg.cc/rsCKV7LZ/1755367982611.jpg');">
                 <div class="hero-overlay absolute inset-0"></div>
-                <!-- Contenido alineado a la izquierda en pantallas grandes -->
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex items-center justify-center lg:justify-start">
-                    <div class="slide-content text-center lg:text-left">
-                        <h1 class="text-fixed-4xl md:text-fixed-6xl font-extrabold mb-4 hero-text-shadow">EL RESOLVITO</h1>
-                        <p class="text-fixed-xl md:text-fixed-2xl font-semibold max-w-lg mx-auto lg:mx-0 mb-8 hero-text-shadow">Mercado y víveres... a un clic de distancia.</p>
+                <div class="container mx-auto px-8 relative z-10 h-full flex items-center justify-center md:justify-start text-center md:text-left">
+                    <div class="slide-content">
+                        <h1 class="text-fixed-4xl md:text-fixed-6xl font-extrabold mb-4 text-white drop-shadow-xl">EL RESOLVITO</h1>
+                        <p class="text-fixed-xl md:text-fixed-2xl font-semibold max-w-lg mb-8 text-white drop-shadow-lg">Mercado y víveres... a un clic de distancia.</p>
                         <a href="#mercado" class="bg-[var(--accent-color)] text-white font-bold py-3 px-8 rounded-full text-fixed-lg hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg">Explorar Productos</a>
                     </div>
                 </div>
             </div>
-
             <!-- Slide 2: Pizzas -->
             <div class="hero-slide" style="background-image: url('https://i.postimg.cc/Xvb6nzgY/pizza-1.png');">
                 <div class="hero-overlay absolute inset-0"></div>
-                <!-- Contenido alineado a la derecha en pantallas grandes -->
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex items-center justify-center lg:justify-end">
-                    <div class="slide-content text-center lg:text-right">
-                        <h1 class="text-fixed-4xl md:text-fixed-6xl font-extrabold mb-4 hero-text-shadow">¡NUESTRAS PIZZAS!</h1>
-                        <p class="text-fixed-xl md:text-fixed-2xl font-semibold max-w-lg mx-auto lg:mx-0 mb-8 hero-text-shadow">Calientes y deliciosas, directas a tu puerta.</p>
+                <div class="container mx-auto px-8 relative z-10 h-full flex items-center justify-center md:justify-end text-center md:text-right">
+                    <div class="slide-content">
+                        <h1 class="text-fixed-4xl md:text-fixed-6xl font-extrabold mb-4 text-white drop-shadow-xl">¡NUESTRAS PIZZAS!</h1>
+                        <p class="text-fixed-xl md:text-fixed-2xl font-semibold max-w-lg mb-8 text-white drop-shadow-lg">Calientes y deliciosas, directas a tu puerta.</p>
                         <a href="#pizzas" class="bg-[var(--accent-color)] text-white font-bold py-3 px-8 rounded-full text-fixed-lg hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg">Ver Menú</a>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Botones de Navegación -->
         <div class="slider-nav hidden md:flex">
             <button id="prevSlideBtn" aria-label="Anterior">&lt;</button>
             <button id="nextSlideBtn" aria-label="Siguiente">&gt;</button>
         </div>
     </section>
-    <!-- ======================================================= -->
-    <!-- === FIN DEL HERO SLIDER === -->
-    <!-- ======================================================= -->
 
     <section id="mercado" class="py-16 lg:py-24 bg-gray-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -224,17 +198,19 @@
         </div>
     </section>
 
-    <!-- ======================================================= -->
-    <!-- === NUEVA SECCIÓN PARA PIZZAS (PLACEHOLDER) === -->
-    <!-- ======================================================= -->
     <section id="pizzas" class="py-16 lg:py-24 bg-white">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 fade-in-up">
                 <h2 class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--text-dark)]">Pizzas</h2>
-                <p class="mt-4 text-fixed-lg text-[var(--text-medium)] max-w-3xl mx-auto">Próximamente... Nuestro delicioso menú de pizzas estará disponible aquí.</p>
+                <p class="mt-4 text-fixed-lg text-[var(--text-medium)] max-w-3xl mx-auto">Elige tus favoritas. Todas nuestras pizzas son preparadas al momento con ingredientes frescos.</p>
             </div>
-            <!-- Aquí iría el contenedor para los productos de pizza, similar a la sección de mercado -->
-            <!-- <div id="pizzaProductGrid"></div> -->
+            
+            <div class="bg-white p-4 rounded-xl shadow-lg mb-8 fade-in-up" style="transition-delay: 150ms;">
+                <input type="text" id="pizzaSearchInput" placeholder="Buscar en Pizzas..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base">
+            </div>
+            <div id="pizzaCategoryFilters" class="flex flex-wrap justify-center gap-2 mb-8 fade-in-up" style="transition-delay: 300ms;"></div>
+            <div id="pizzaProductGrid"></div>
+            <p id="pizzaNoResultsMessage" class="hidden text-center text-fixed-lg text-[var(--text-medium)] mt-8">No se encontraron pizzas que coincidan con tu búsqueda.</p>
         </div>
     </section>
     
@@ -367,36 +343,51 @@
 
 <script>
     var products = [
-        { id: 1, name: "Aceite", price: 900, image: "https://i.postimg.cc/FFdbnBBS/aceite.jpg", description: "Botella de aceite vegetal.", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 2, name: "Arroz", price: 650, image: "https://i.postimg.cc/ZRR352mX/arroz.jpg", description: "Precio de oferta. Paquete de 1 kg aprox.", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 3, name: "Spaghetti", price: 350, image: "https://i.postimg.cc/rpBWC2DW/spaguetis.png", description: "Paquete de spaghetti de 400g.", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 4, name: "Picadillo", price: 380, image: "https://i.postimg.cc/pdhzFLLR/picadillo-de-pollo.png", description: "Paquete de picadillo de ave.", category: "Cárnicos", status: "available", hasBoxOption: false },
-        { id: 5, name: "Salchichas (Perritos)", price: 400, image: "https://i.postimg.cc/R0mKFv73/salchichas-1-paquete.png", description: "Paquete de salchichas tipo perrito.", category: "Cárnicos", status: "available", hasBoxOption: false },
-        { id: 6, name: "Cerveza Presidente", price: 220, image: "https://i.postimg.cc/sXBWqMwz/cerveza-predidente-precio-220.png", description: "Lata de 355 ml.", category: "Líquidos", status: "available", hasBoxOption: true, boxPrice: 5280, boxQuantity: 24 },
-        { id: 7, name: "Malta Guajira", price: 250, image: "https://i.postimg.cc/mD0wD6fZ/malta-guajira.jpg", description: "Lata de malta refrescante.", category: "Líquidos", status: "available", hasBoxOption: false },
-        { id: 8, name: "Leche Condensada", price: 520, image: "https://i.postimg.cc/fRbxMK43/leche-condensada.jpg", description: "Lata de leche condensada.", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 9, name: "Jabón de Baño", price: 160, image: "https://i.postimg.cc/G2L6d16q/Jab-n-Ridel-100g.png", description: "Pastilla de jabón de baño.", category: "Aseo Personal", status: "available", hasBoxOption: false },
-        { id: 10, name: "Refresco Instantáneo", price: 40, image: "https://i.postimg.cc/MTzsbBM1/refresco-1.png", description: "Sobre de refresco en polvo. Varios sabores.", category: "Líquidos", status: "available", hasBoxOption: false },
-        { id: 11, name: "Hígado de Pollo", price: 850, image: "https://i.postimg.cc/52k8yC1s/hiogado_de_pollo.jpg", description: "Paquete de 1 kg.", category: "Cárnicos", status: "available", hasBoxOption: false },
-        { id: 12, name: "Whisky Jolly", price: 400, image: "https://i.postimg.cc/8zBPM9Yn/grok_image_xotf0za.jpg", description: "Botella de 200 ml.", category: "Líquidos", status: "available", hasBoxOption: false },
-        { id: 13, name: "Frijol Negro", price: 680, image: "https://i.postimg.cc/rFt14B4k/frijol_negro.jpg", description: "Paquete de 1 kg.", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 14, name: "Galletas SaltiBloks", price: 890, image: "https://i.postimg.cc/c4qpfNz7/Galletas-7-tacos.png", description: "1 paquete de galletas.", category: "Confituras", status: "available", hasBoxOption: false },
-        { id: 15, name: "Detergente Brillante", price: 350, image: "https://i.postimg.cc/NfD6hnnq/detergente_brillante.jpg", description: "Bolsa de detergente en polvo.", category: "Aseo Personal", status: "available", hasBoxOption: false },
-        { id: 16, name: "Cerveza Unlaguer", price: 250, image: "https://i.postimg.cc/HLv56w03/cerveza-ulaguer-precio-300.png", description: "Lata de cerveza Unlaguer.", category: "Líquidos", status: "available", hasBoxOption: true, boxPrice: 6000, boxQuantity: 24 },
-        { id: 17, name: "Cerveza Cristal", price: 280, image: "https://i.postimg.cc/MZ5gbYw8/cristal.png", description: "Lata de cerveza Cristal.", category: "Líquidos", status: "available", hasBoxOption: true, boxPrice: 6720, boxQuantity: 24 },
-        { id: 18, name: "Azúcar Blanca", price: 600, image: "https://i.postimg.cc/c40RbWXB/azucar_blanca.jpg", description: "Paquete de 1 kg.", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 19, name: "Papel Sanitario", price: 530, image: "https://i.postimg.cc/Znt5rmJ2/grok_image_xypezad.jpg", description: "Paquete de 4 rollos.", category: "Aseo Personal", status: "available", hasBoxOption: false },
-        { id: 20, name: "Malta Morena", price: 210, image: "https://i.postimg.cc/pLsccNs6/Malta-Morena-8-oz-Lata.jpg", description: "Lata de 8 oz.", category: "Líquidos", status: "available", hasBoxOption: false }
+        { id: 1, name: "Aceite", price: 900, image: "https://i.postimg.cc/FFdbnBBS/aceite.jpg", description: "Botella de aceite vegetal.", category: "Mercado", type: "market", status: "available", hasBoxOption: false },
+        { id: 2, name: "Arroz", price: 650, image: "https://i.postimg.cc/ZRR352mX/arroz.jpg", description: "Precio de oferta. Paquete de 1 kg aprox.", category: "Mercado", type: "market", status: "available", hasBoxOption: false },
+        { id: 3, name: "Spaghetti", price: 350, image: "https://i.postimg.cc/rpBWC2DW/spaguetis.png", description: "Paquete de spaghetti de 400g.", category: "Mercado", type: "market", status: "available", hasBoxOption: false },
+        { id: 4, name: "Picadillo", price: 380, image: "https://i.postimg.cc/pdhzFLLR/picadillo-de-pollo.png", description: "Paquete de picadillo de ave.", category: "Cárnicos", type: "market", status: "available", hasBoxOption: false },
+        { id: 5, name: "Salchichas (Perritos)", price: 400, image: "https://i.postimg.cc/R0mKFv73/salchichas-1-paquete.png", description: "Paquete de salchichas tipo perrito.", category: "Cárnicos", type: "market", status: "available", hasBoxOption: false },
+        { id: 6, name: "Cerveza Presidente", price: 220, image: "https://i.postimg.cc/sXBWqMwz/cerveza-predidente-precio-220.png", description: "Lata de 355 ml.", category: "Líquidos", type: "market", status: "available", hasBoxOption: true, boxPrice: 5280, boxQuantity: 24 },
+        { id: 7, name: "Malta Guajira", price: 250, image: "https://i.postimg.cc/mD0wD6fZ/malta-guajira.jpg", description: "Lata de malta refrescante.", category: "Líquidos", type: "market", status: "available", hasBoxOption: false },
+        { id: 8, name: "Leche Condensada", price: 520, image: "https://i.postimg.cc/fRbxMK43/leche-condensada.jpg", description: "Lata de leche condensada.", category: "Mercado", type: "market", status: "available", hasBoxOption: false },
+        { id: 9, name: "Jabón de Baño", price: 160, image: "https://i.postimg.cc/G2L6d16q/Jab-n-Ridel-100g.png", description: "Pastilla de jabón de baño.", category: "Aseo Personal", type: "market", status: "available", hasBoxOption: false },
+        { id: 10, name: "Refresco Instantáneo", price: 40, image: "https://i.postimg.cc/MTzsbBM1/refresco-1.png", description: "Sobre de refresco en polvo. Varios sabores.", category: "Líquidos", type: "market", status: "available", hasBoxOption: false },
+        { id: 11, name: "Hígado de Pollo", price: 850, image: "https://i.postimg.cc/52k8yC1s/hiogado_de_pollo.jpg", description: "Paquete de 1 kg.", category: "Cárnicos", type: "market", status: "available", hasBoxOption: false },
+        { id: 12, name: "Whisky Jolly", price: 400, image: "https://i.postimg.cc/8zBPM9Yn/grok_image_xotf0za.jpg", description: "Botella de 200 ml.", category: "Líquidos", type: "market", status: "available", hasBoxOption: false },
+        { id: 13, name: "Frijol Negro", price: 680, image: "https://i.postimg.cc/rFt14B4k/frijol_negro.jpg", description: "Paquete de 1 kg.", category: "Mercado", type: "market", status: "available", hasBoxOption: false },
+        { id: 14, name: "Galletas SaltiBloks", price: 890, image: "https://i.postimg.cc/c4qpfNz7/Galletas-7-tacos.png", description: "1 paquete de galletas.", category: "Confituras", type: "market", status: "available", hasBoxOption: false },
+        { id: 15, name: "Detergente Brillante", price: 350, image: "https://i.postimg.cc/NfD6hnnq/detergente_brillante.jpg", description: "Bolsa de detergente en polvo.", category: "Aseo Personal", type: "market", status: "available", hasBoxOption: false },
+        { id: 16, name: "Cerveza Unlaguer", price: 250, image: "https://i.postimg.cc/HLv56w03/cerveza-ulaguer-precio-300.png", description: "Lata de cerveza Unlaguer.", category: "Líquidos", type: "market", status: "available", hasBoxOption: true, boxPrice: 6000, boxQuantity: 24 },
+        { id: 17, name: "Cerveza Cristal", price: 280, image: "https://i.postimg.cc/MZ5gbYw8/cristal.png", description: "Lata de cerveza Cristal.", category: "Líquidos", type: "market", status: "available", hasBoxOption: true, boxPrice: 6720, boxQuantity: 24 },
+        { id: 18, name: "Azúcar Blanca", price: 600, image: "https://i.postimg.cc/c40RbWXB/azucar_blanca.jpg", description: "Paquete de 1 kg.", category: "Mercado", type: "market", status: "available", hasBoxOption: false },
+        { id: 19, name: "Papel Sanitario", price: 530, image: "https://i.postimg.cc/Znt5rmJ2/grok_image_xypezad.jpg", description: "Paquete de 4 rollos.", category: "Aseo Personal", type: "market", status: "available", hasBoxOption: false },
+        { id: 20, name: "Malta Morena", price: 210, image: "https://i.postimg.cc/pLsccNs6/Malta-Morena-8-oz-Lata.jpg", description: "Lata de 8 oz.", category: "Líquidos", type: "market", status: "available", hasBoxOption: false }
+    ];
+
+    var pizzas = [
+        { id: 101, name: "Pizza de Queso 🧀", price: 600, image: "https://i.postimg.cc/Xvb6nzgY/pizza-1.png", description: "La clásica y deliciosa pizza de queso.", category: "Pizzas Familiares (30cm)", type: "pizza", status: "available", hasBoxOption: false },
+        { id: 102, name: "Pizza de Jamón 🥩", price: 800, image: "https://i.postimg.cc/Xvb6nzgY/pizza-1.png", description: "Con jamón de primera calidad y queso derretido.", category: "Pizzas Familiares (30cm)", type: "pizza", status: "available", hasBoxOption: false },
+        { id: 103, name: "Pizza de Chorizo 🥩", price: 800, image: "https://i.postimg.cc/Xvb6nzgY/pizza-1.png", description: "Para los amantes del sabor intenso.", category: "Pizzas Familiares (30cm)", type: "pizza", status: "available", hasBoxOption: false },
+        { id: 104, name: "Pizza de Cebolla 🧅", price: 700, image: "https://i.postimg.cc/Xvb6nzgY/pizza-1.png", description: "El toque dulce y sabroso de la cebolla.", category: "Pizzas Familiares (30cm)", type: "pizza", status: "available", hasBoxOption: false },
+        { id: 105, name: "Pizza de Ají 🫑", price: 700, image: "https://i.postimg.cc/Xvb6nzgY/pizza-1.png", description: "Con pimientos frescos para un sabor vibrante.", category: "Pizzas Familiares (30cm)", type: "pizza", status: "available", hasBoxOption: false },
+        { id: 106, name: "Pizza de Piña 🍍", price: 900, image: "https://i.postimg.cc/Xvb6nzgY/pizza-1.png", description: "El clásico tropical que nunca falla.", category: "Pizzas Familiares (30cm)", type: "pizza", status: "available", hasBoxOption: false },
+        { id: 107, name: "Pizza Hawaiana 🍍🥩", price: 1100, image: "https://i.postimg.cc/Xvb6nzgY/pizza-1.png", description: "La combinación perfecta de jamón y piña.", category: "Pizzas Familiares (30cm)", type: "pizza", status: "available", hasBoxOption: false },
+        { id: 108, name: "Pizza de Aceitunas", price: 900, image: "https://i.postimg.cc/Xvb6nzgY/pizza-1.png", description: "Un sabor mediterráneo y audaz.", category: "Pizzas Familiares (30cm)", type: "pizza", status: "available", hasBoxOption: false },
+        { id: 109, name: "Pizza Doble Queso 🧀🧀", price: 1000, image: "https://i.postimg.cc/Xvb6nzgY/pizza-1.png", description: "Doble ración de mozzarella para los más queseros.", category: "Pizzas Familiares (30cm)", type: "pizza", status: "available", hasBoxOption: false },
+        { id: 110, name: "Pizza Mixta 🫑🍍🧅🥩", price: 1300, image: "https://i.postimg.cc/Xvb6nzgY/pizza-1.png", description: "Una explosión de todos los sabores.", category: "Pizzas Familiares (30cm)", type: "pizza", status: "available", hasBoxOption: false },
+        { id: 111, name: "Pizza 4 Estaciones", price: 1300, image: "https://i.postimg.cc/Xvb6nzgY/pizza-1.png", description: "Cuatro sabores en una sola pizza.", category: "Pizzas Familiares (30cm)", type: "pizza", status: "available", hasBoxOption: false },
+        { id: 112, name: "Pizza de Atún 🐟", price: 1000, image: "https://i.postimg.cc/Xvb6nzgY/pizza-1.png", description: "El sabor del mar en tu pizza.", category: "Pizzas Familiares (30cm)", type: "pizza", status: "available", hasBoxOption: false },
+        { id: 113, name: "Pizza con Cheddar", price: 1200, image: "https://i.postimg.cc/Xvb6nzgY/pizza-1.png", description: "Cremosa y con un sabor inconfundible.", category: "Pizzas Familiares (30cm)", type: "pizza", status: "available", hasBoxOption: false },
+        { id: 114, name: "Pizza con Mozzarella", price: 1200, image: "https://i.postimg.cc/Xvb6nzgY/pizza-1.png", description: "Auténtico queso mozzarella de calidad superior.", category: "Pizzas Familiares (30cm)", type: "pizza", status: "available", hasBoxOption: false },
+        { id: 115, name: "Pizza con Gouda", price: 1200, image: "https://i.postimg.cc/Xvb6nzgY/pizza-1.png", description: "Un toque ahumado y delicioso.", category: "Pizzas Familiares (30cm)", type: "pizza", status: "available", hasBoxOption: false },
+        { id: 116, name: "Pizza de Queso Pequeña 🧀", price: 200, image: "https://i.postimg.cc/Xvb6nzgY/pizza-1.png", description: "El tamaño perfecto para un antojo.", category: "Pizzas Pequeñas (15cm)", type: "pizza", status: "available", hasBoxOption: false }
     ];
     
-    products.sort((a, b) => {
-        if (a.category < b.category) return -1;
-        if (a.category > b.category) return 1;
-        if (a.name < b.name) return -1;
-        if (a.name > b.name) return 1;
-        return 0;
-    });
+    products.sort((a, b) => a.name.localeCompare(b.name));
+    pizzas.sort((a, b) => a.name.localeCompare(b.name));
     
+    var allProducts = [...products, ...pizzas];
     var cart = JSON.parse(localStorage.getItem('cart')) || [];
     var whatsappGroupLink = 'https://chat.whatsapp.com/H19dIofkINdHrVApA4jbvW?mode=ac_t';
     var currentProductForModal = null;
@@ -405,16 +396,23 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         setupStoreSection('mercado', products);
+        setupStoreSection('pizza', pizzas);
         updateCartUI();
         setupGeneralEventListeners();
         setupScrollAnimations();
-        setupScrollHeader();
         setupHeroSlider();
     });
 
     function setupHeroSlider() {
         const slides = document.querySelectorAll('#heroSlider .hero-slide');
-        if (slides.length <= 1) return;
+        if (slides.length <= 1) {
+            if (slides.length === 1) {
+                slides[0].classList.add('active');
+                const content = slides[0].querySelector('.slide-content');
+                if (content) content.classList.add('is-entering');
+            }
+            return;
+        }
 
         const prevBtn = document.getElementById('prevSlideBtn');
         const nextBtn = document.getElementById('nextSlideBtn');
@@ -428,19 +426,38 @@
 
             const currentSlideEl = slides[currentSlide];
             const nextSlideEl = slides[nextIndex];
-
-            nextSlideEl.style.zIndex = 2;
-            nextSlideEl.classList.add('active');
+            const currentContent = currentSlideEl.querySelector('.slide-content');
+            
+            if(currentContent) currentContent.classList.add('is-exiting');
 
             setTimeout(() => {
                 currentSlideEl.classList.remove('active');
-                currentSlideEl.style.zIndex = 1;
-                nextSlideEl.style.zIndex = 1;
+                nextSlideEl.classList.add('active');
+                
+                const nextContent = nextSlideEl.querySelector('.slide-content');
+                if(nextContent) {
+                    nextContent.classList.remove('is-exiting'); // Reset state
+                    nextContent.classList.add('is-entering');
+                }
                 
                 currentSlide = nextIndex;
                 isTransitioning = false;
-            }, 1000); 
+            }, 500); // Wait for content to exit before switching slide
         }
+        
+        // Inicialización
+        slides.forEach((slide, index) => {
+            const content = slide.querySelector('.slide-content');
+            if (content) {
+                if(index !== currentSlide) {
+                    content.classList.add('is-exiting');
+                } else {
+                    content.classList.add('is-entering');
+                }
+            }
+        });
+        slides[currentSlide].classList.add('active');
+
 
         function nextSlide() {
             const nextIndex = (currentSlide + 1) % slides.length;
@@ -453,7 +470,7 @@
         }
         
         function startSlider() {
-            slideInterval = setInterval(nextSlide, 3000);
+            slideInterval = setInterval(nextSlide, 4000);
         }
 
         function resetSliderInterval() {
@@ -461,9 +478,6 @@
             startSlider();
         }
         
-        slides.forEach(slide => slide.style.zIndex = 1);
-        slides[currentSlide].classList.add('active');
-
         prevBtn.addEventListener('click', () => {
             prevSlide();
             resetSliderInterval();
@@ -560,12 +574,12 @@
         setupScrollAnimations();
     }
     
-    function showProductDetailsModal(productId){var product=products.find(p=>p.id===productId);if(!product||product.status==='unavailable')return;currentProductForModal={...product,quantity:1};currentUnitType='individual';document.getElementById('productDetailsTitle').textContent=product.name;document.getElementById('productDetailsImage').src=product.image;document.getElementById('productDetailsDescription').textContent=product.description;document.getElementById('productQuantityDisplay').textContent='1';document.getElementById('unitTypeSection').classList.toggle('hidden',!product.hasBoxOption);if(product.hasBoxOption){updateUnitTypeButtons();}
+    function showProductDetailsModal(productId){var product=allProducts.find(p=>p.id===productId);if(!product||product.status==='unavailable')return;currentProductForModal={...product,quantity:1};currentUnitType='individual';document.getElementById('productDetailsTitle').textContent=product.name;document.getElementById('productDetailsImage').src=product.image;document.getElementById('productDetailsDescription').textContent=product.description;document.getElementById('productQuantityDisplay').textContent='1';document.getElementById('unitTypeSection').classList.toggle('hidden',!product.hasBoxOption);if(product.hasBoxOption){updateUnitTypeButtons();}
     updateModalPricing();document.getElementById('productDetailsModal').classList.add('show');}
     function updateUnitTypeButtons(){document.getElementById('unitTypeIndividual').classList.toggle('active',currentUnitType==='individual');document.getElementById('unitTypeBox').classList.toggle('active',currentUnitType==='box');}
     function updateModalPricing(){if(!currentProductForModal)return;let unitPrice,unitDescription;if(currentProductForModal.hasBoxOption&&currentUnitType==='box'){unitPrice=currentProductForModal.boxPrice;unitDescription=`Caja (${currentProductForModal.boxQuantity}u)`;}else{unitPrice=currentProductForModal.price;unitDescription='Unidad';}
     let totalPrice=unitPrice*currentProductForModal.quantity;document.getElementById('productDetailsPrice').textContent=`$${unitPrice.toLocaleString()} / ${unitDescription}`;document.getElementById('modalTotalPrice').textContent=`$${totalPrice.toLocaleString()}`;}
-    function addToCartFromModal(){if(!currentProductForModal)return;let cartItem={id:currentProductForModal.id+(currentUnitType==='box'?'_box':''),name:currentProductForModal.name,image:currentProductForModal.image,quantity:currentProductForModal.quantity,unitType:currentUnitType};if(currentProductForModal.hasBoxOption&&currentUnitType==='box'){cartItem.price=currentProductForModal.boxPrice;cartItem.name+=` (Caja x${currentProductForModal.boxQuantity})`;}else{cartItem.price=currentProductForModal.price;}
+    function addToCartFromModal(){if(!currentProductForModal)return;let cartItem={id:currentProductForModal.id+(currentUnitType==='box'?'_box':''),name:currentProductForModal.name,image:currentProductForModal.image,quantity:currentProductForModal.quantity,unitType:currentUnitType,type:currentProductForModal.type};if(currentProductForModal.hasBoxOption&&currentUnitType==='box'){cartItem.price=currentProductForModal.boxPrice;cartItem.name+=` (Caja x${currentProductForModal.boxQuantity})`;}else{cartItem.price=currentProductForModal.price;}
     let existingItem=cart.find(item=>item.id===cartItem.id);if(existingItem){existingItem.quantity+=cartItem.quantity;}else{cart.push(cartItem);}
     updateCartUI();localStorage.setItem('cart',JSON.stringify(cart));document.getElementById('productDetailsModal').classList.remove('show');currentProductForModal=null;showCartAnimation();}
     
@@ -606,7 +620,7 @@
     setupCheckoutEventListeners();}
     function closeMobileMenu(){document.getElementById('mobile-menu').classList.remove('open');document.getElementById('mobile-backdrop').classList.remove('open');}
     function setupScrollAnimations(){if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');}});},{threshold:0.1});document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right').forEach(el=>observer.observe(el));}else{document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right').forEach(el=>el.classList.add('is-visible'));}}
-    function setupScrollHeader(){const header=document.getElementById('mainHeader');window.addEventListener('scroll',()=>{header.classList.toggle('scrolled',window.scrollY>100);});}
+    
     function showCheckoutModal(){if(cart.length===0){alert('Tu carrito está vacío');return;}
     const savedData=JSON.parse(localStorage.getItem('customerData'));if(savedData){document.getElementById('customerName').value=savedData.name||'';document.getElementById('customerAddress').value=savedData.address||'';document.getElementById('customerReferences').value=savedData.references||'';document.getElementById('customerPhone').value=savedData.phone||'';document.getElementById('deliveryLocation').value='habana-vieja';}
     updateCheckoutSummary();document.getElementById('checkoutModal').classList.add('show');}
@@ -627,33 +641,69 @@
     }
 
     function updateShippingAndTotal() {
-        const subtotal=cart.reduce((sum, item)=>sum+(item.price*item.quantity),0);
-        const serviceFee=50;
-        document.getElementById('checkoutServiceFee').textContent=`$${serviceFee}`;
-        const deliveryLocation=document.getElementById('deliveryLocation').value;
-        let shippingCost=0;
-        let shippingText='$0';
-        let showNote=false;
-        let noteText='';
-        let upsellMessage='';
-        const upsellElement=document.getElementById('upsellMessage');
-
-        if(deliveryLocation==='habana-vieja'){
-            if(subtotal>=3500){shippingCost=0;shippingText='GRATIS (Pedido > $3,500)';upsellMessage='¡Felicidades! Tienes Envío GRATIS.';upsellElement.className='my-4 p-3 rounded-lg text-center font-semibold text-sm bg-green-100 text-green-800';}
-            else if(subtotal>=1500){shippingCost=50;shippingText='Descuento: $50 CUP';const neededForFree=3500-subtotal;upsellMessage=`¡A solo $${neededForFree.toLocaleString()} del Envío GRATIS!`;upsellElement.className='my-4 p-3 rounded-lg text-center font-semibold text-sm bg-blue-100 text-blue-800';}
-            else{shippingCost=150;shippingText='$150 CUP';const neededForDiscount=1500-subtotal;upsellMessage=`¡Añade $${neededForDiscount.toLocaleString()} y paga solo $50 de envío!`;upsellElement.className='my-4 p-3 rounded-lg text-center font-semibold text-sm bg-yellow-100 text-yellow-800';}
-        }else if(deliveryLocation==='otros'){shippingCost=0;shippingText='A confirmar';showNote=true;noteText='El costo se ajustará al precio de la mensajería. Te confirmaremos por WhatsApp.';upsellMessage='';}
-        else{upsellMessage='';}
-
-        upsellElement.textContent=upsellMessage;
-        upsellElement.style.display=upsellMessage?'block':'none';
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const serviceFee = 50;
+        document.getElementById('checkoutServiceFee').textContent = `$${serviceFee}`;
         
-        document.getElementById('checkoutShipping').textContent=shippingText;
-        const shippingNote=document.getElementById('shippingNote');
-        shippingNote.textContent=noteText;
-        shippingNote.classList.toggle('hidden',!showNote);
-        const total=subtotal+serviceFee+shippingCost;
-        document.getElementById('checkoutTotal').textContent=`$${total.toLocaleString()}`;
+        const hasMarketItems = cart.some(item => item.type === 'market');
+        const hasPizzaItems = cart.some(item => item.type === 'pizza');
+        
+        const deliveryLocation = document.getElementById('deliveryLocation').value;
+        let shippingCost = 0;
+        let shippingText = '$0';
+        let showNote = false;
+        let noteText = '';
+        let upsellMessage = '';
+        const upsellElement = document.getElementById('upsellMessage');
+
+        if (deliveryLocation === 'habana-vieja') {
+            if (!hasPizzaItems && !hasMarketItems) {
+                shippingCost = 150;
+                shippingText = '$150 CUP';
+            } else if (hasPizzaItems && !hasMarketItems) {
+                shippingCost = 200;
+                shippingText = '$200 CUP (Entrega Especial)';
+                upsellMessage = '¡Añade un producto de mercado y podrías reducir tu costo de envío!';
+                upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-blue-100 text-blue-800';
+            } else {
+                if (subtotal >= 3500) {
+                    shippingCost = 0;
+                    shippingText = 'GRATIS (Pedido > $3,500)';
+                    upsellMessage = '¡Felicidades! Tienes Envío GRATIS.';
+                    upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-green-100 text-green-800';
+                } else if (subtotal >= 1500) {
+                    shippingCost = 50;
+                    shippingText = 'Descuento: $50 CUP';
+                    const neededForFree = 3500 - subtotal;
+                    upsellMessage = `¡Estás a solo $${neededForFree.toLocaleString()} del Envío GRATIS!`;
+                    upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-blue-100 text-blue-800';
+                } else {
+                    shippingCost = 150;
+                    shippingText = '$150 CUP';
+                    const neededForDiscount = 1500 - subtotal;
+                    upsellMessage = `¡Añade $${neededForDiscount.toLocaleString()} y paga solo $50 de envío!`;
+                    upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-yellow-100 text-yellow-800';
+                }
+            }
+        } else if (deliveryLocation === 'otros') {
+            shippingCost = 0;
+            shippingText = 'A confirmar';
+            showNote = true;
+            noteText = 'El costo se ajustará al precio de la mensajería. Te confirmaremos por WhatsApp.';
+            upsellMessage = '';
+        } else {
+            upsellMessage = '';
+        }
+
+        upsellElement.textContent = upsellMessage;
+        upsellElement.style.display = upsellMessage ? 'block' : 'none';
+        
+        document.getElementById('checkoutShipping').textContent = shippingText;
+        const shippingNote = document.getElementById('shippingNote');
+        shippingNote.textContent = noteText;
+        shippingNote.classList.toggle('hidden', !showNote);
+        const total = subtotal + serviceFee + shippingCost;
+        document.getElementById('checkoutTotal').textContent = `$${total.toLocaleString()}`;
     }
 
     function setupCheckoutEventListeners(){document.getElementById('closeCheckoutModal').addEventListener('click',()=>document.getElementById('checkoutModal').classList.remove('show'));document.getElementById('checkoutModal').addEventListener('click',e=>{if(e.target.id==='checkoutModal')document.getElementById('checkoutModal').classList.remove('show');});document.getElementById('deliveryLocation').addEventListener('change',updateShippingAndTotal);
@@ -675,7 +725,20 @@
         const cashAmount=selectedCashAmount==='otro'?document.getElementById('otherCashAmount').value.trim():selectedCashAmount;
         const subtotal=cart.reduce((sum,item)=>sum+(item.price*item.quantity),0);
         const serviceFee=50;let shippingCost=0;let shippingText='$0';
-        if(deliveryLocation==='habana-vieja'){if(subtotal>=3500){shippingCost=0;shippingText='GRATIS (Pedido > $3,500)';}else if(subtotal>=1500){shippingCost=50;shippingText='Descuento: $50 CUP';}else{shippingCost=150;shippingText='$150 CUP';}}else{shippingText='A confirmar por mensajería';}
+        
+        const hasMarketItems = cart.some(item => item.type === 'market');
+        const hasPizzaItems = cart.some(item => item.type === 'pizza');
+
+        if (deliveryLocation === 'habana-vieja') {
+             if (hasPizzaItems && !hasMarketItems) {
+                shippingCost = 200; shippingText = '$200 CUP (Entrega Especial)';
+            } else {
+                if (subtotal >= 3500) { shippingCost = 0; shippingText = 'GRATIS (Pedido > $3,500)'; }
+                else if (subtotal >= 1500) { shippingCost = 50; shippingText = 'Descuento: $50 CUP'; }
+                else { shippingCost = 150; shippingText = '$150 CUP'; }
+            }
+        } else { shippingText = 'A confirmar por mensajería'; }
+
         const total=subtotal+serviceFee+shippingCost;
         const orderItems=cart.map(item=>`• ${item.name} x${item.quantity} - $${(item.price*item.quantity).toLocaleString()}`).join('\n');
         const locationText=deliveryLocation==='habana-vieja'?'Habana Vieja':'Otros municipios';
@@ -696,5 +759,6 @@
 
 </body>
 </html>
+
 
 
