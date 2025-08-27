@@ -19,14 +19,10 @@
 <!-- 2. Color de la barra del navegador -->
 <meta name="theme-color" content="#0d3b33">
 
-<!-- 3. Instrucción de respaldo para Android y principal para iOS -->
-<!--    Chrome la usará si el manifest falla. Safari (iPhone) la usará siempre. -->
-<!--    Apuntamos al ícono más grande que tenemos para asegurar la calidad. -->
-<link rel="apple-touch-icon" href="/android-chrome-512x512.png">
-
-<!-- 4. Favicons estándar para pestañas de navegador, marcadores, etc. -->
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<!-- 3. Iconos -->
+<link rel="apple-touch-icon" href="https://i.postimg.cc/s2FHrX2Y/logo_el_resolvito.jpg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://i.postimg.cc/s2FHrX2Y/logo_el_resolvito.jpg">
+<link rel="icon" type="image/png" sizes="16x16" href="https://i.postimg.cc/s2FHrX2Y/logo_el_resolvito.jpg">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -362,7 +358,13 @@
         { id: 17, name: "Cerveza Cristal", price: 280, image: "https://i.postimg.cc/MZ5gbYw8/cristal.png", description: "Lata de cerveza Cristal.", category: "Líquidos", type: "market", status: "available", hasBoxOption: true, boxPrice: 6720, boxQuantity: 24 },
         { id: 18, name: "Azúcar Blanca", price: 600, image: "https://i.postimg.cc/c40RbWXB/azucar_blanca.jpg", description: "Paquete de 1 kg.", category: "Mercado", type: "market", status: "available", hasBoxOption: false },
         { id: 19, name: "Papel Sanitario", price: 530, image: "https://i.postimg.cc/Znt5rmJ2/grok_image_xypezad.jpg", description: "Paquete de 4 rollos.", category: "Aseo Personal", type: "market", status: "available", hasBoxOption: false },
-        { id: 20, name: "Malta Morena", price: 210, image: "https://i.postimg.cc/pLsccNs6/Malta-Morena-8-oz-Lata.jpg", description: "Lata de 8 oz.", category: "Líquidos", type: "market", status: "available", hasBoxOption: false }
+        { id: 20, name: "Malta Morena", price: 210, image: "https://i.postimg.cc/pLsccNs6/Malta-Morena-8-oz-Lata.jpg", description: "Lata de 8 oz.", category: "Líquidos", type: "market", status: "available", hasBoxOption: false },
+        { id: 21, name: "Fritos", price: 200, image: "https://i.postimg.cc/GhqTCs0B/fritos.jpg", description: "Crujientes frituras para picar.", category: "Confituras", type: "market", status: "available", hasBoxOption: false },
+        { id: 22, name: "Jabón de Baño Pemila", price: 160, image: "https://i.postimg.cc/7P1TKWmn/jabon-de-ba-o-pemila.jpg", description: "Pastilla de jabón de baño Pemila.", category: "Aseo Personal", type: "market", status: "available", hasBoxOption: false },
+        { id: 23, name: "Pasta de Tomate", price: 120, image: "https://i.postimg.cc/m2b1Jynf/pasta-de-tomate.jpg", description: "Concentrado de tomate para tus comidas.", category: "Mercado", type: "market", status: "available", hasBoxOption: false },
+        { id: 24, name: "Pelly de Queso", price: 500, image: "https://i.postimg.cc/Zq1yQkGV/pelly.jpg", description: "Deliciosos Pellys con sabor a queso.", category: "Confituras", type: "market", status: "available", hasBoxOption: false },
+        { id: 25, name: "Ron Capitán Cortez", price: 1500, image: "https://i.postimg.cc/QdC9xxsf/ron-capitan-cortez.jpg", description: "Botella de ron Capitán Cortez.", category: "Líquidos", type: "market", status: "available", hasBoxOption: false },
+        { id: 26, name: "Sorbeto Renata", price: 300, image: "https://i.postimg.cc/Wb6CbTSq/sorbeto-renata.jpg", description: "Paquete de sorbetos Renata.", category: "Confituras", type: "market", status: "available", hasBoxOption: false }
     ];
 
     var pizzas = [
@@ -441,8 +443,8 @@
                 }
                 
                 currentSlide = nextIndex;
-                isTransitioning = false;
-            }, 500); // Wait for content to exit before switching slide
+                setTimeout(() => { isTransitioning = false; }, 400); // Liberar bloqueo
+            }, 500); 
         }
         
         // Inicialización
@@ -457,7 +459,6 @@
             }
         });
         slides[currentSlide].classList.add('active');
-
 
         function nextSlide() {
             const nextIndex = (currentSlide + 1) % slides.length;
@@ -759,6 +760,7 @@
 
 </body>
 </html>
+
 
 
 
