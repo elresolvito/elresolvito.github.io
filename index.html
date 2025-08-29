@@ -1,3 +1,5 @@
+--- START OF FILE index.html ---
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -133,22 +135,29 @@
             </div>
             
             <!-- ======================================================= -->
-            <!-- === INICIO DEL BANNER DE PROMOCIÓN DE ENVÍOS === -->
+            <!-- === INICIO DEL BANNER DE PROMOCIÓN DE ENVÍOS (ACTUALIZADO) === -->
             <!-- ======================================================= -->
             <div class="bg-white border-2 border-dashed border-green-200 p-4 rounded-xl shadow-md mb-8 text-center fade-in-up">
-                <h3 class="text-fixed-lg md:text-fixed-xl font-bold text-[var(--primary-color)] mb-3">¡Ahorra en cada pedido en La Habana Vieja!</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm md:text-base">
-                    <div class="bg-green-50 p-3 rounded-lg">
-                        <p class="font-semibold text-gray-800">Compras de $1,500+</p>
-                        <p class="text-green-700 font-bold">Paga solo $50 de envío</p>
+                <h3 class="text-fixed-lg md:text-fixed-xl font-extrabold text-[var(--primary-color)] mb-4">
+                    ¡Evita la Tarifa de Envío y Ahorra en Grande!
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 items-stretch gap-4 text-sm md:text-base">
+                    <!-- Oferta Intermedia -->
+                    <div class="bg-green-50 p-3 rounded-lg flex flex-col justify-center border border-green-200">
+                        <p class="font-semibold text-gray-800 text-base">Envío a solo <strong class="text-green-700">$50</strong></p>
+                        <p class="text-xs md:text-sm text-gray-600">Ahorra $100 (en compras de $1,500+)</p>
                     </div>
-                    <div class="bg-green-100 p-3 rounded-lg ring-2 ring-[var(--accent-color)]">
-                        <p class="font-semibold text-gray-800">Compras de $3,500+</p>
-                        <p class="text-[var(--accent-color)] font-extrabold text-lg">¡ENVÍO GRATIS!</p>
+                    
+                    <!-- Oferta Principal: ¡ENVÍO GRATIS! -->
+                    <div class="bg-green-600 text-white p-4 rounded-xl shadow-lg ring-4 ring-yellow-400 transform scale-105 relative z-10 flex flex-col justify-center items-center transition-all duration-300 hover:scale-100 hover:ring-green-500">
+                        <p class="font-extrabold text-2xl md:text-3xl lg:text-4xl leading-none mb-1 text-center">¡ENVÍO GRATIS!</p>
+                        <p class="text-sm md:text-base text-center">Supera los $3,500 y Ahorra $150</p>
                     </div>
-                    <div class="bg-green-50 p-3 rounded-lg">
-                        <p class="font-semibold text-gray-800">Tarifa Regular</p>
-                        <p class="text-gray-600 font-bold">$150</p>
+
+                    <!-- Tarifa Regular (Ancla) -->
+                    <div class="bg-green-50 p-3 rounded-lg flex flex-col justify-center text-gray-500 border border-green-200">
+                        <p class="font-semibold text-gray-700 text-base">Tarifa Regular</p>
+                        <p class="text-xs md:text-sm font-bold">$150</p>
                     </div>
                 </div>
             </div>
@@ -264,6 +273,10 @@
         </div>
     </div>
 </div>
+
+<!-- ======================================================= -->
+<!-- === CHECKOUT MODAL (ACTUALIZADO) === -->
+<!-- ======================================================= -->
 <div id="checkoutModal" class="modal-overlay fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4">
     <div class="modal-content bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden">
         <div class="p-6 border-b"><div class="flex justify-between items-center"><h3 class="text-fixed-2xl font-bold text-[var(--text-dark)]">Finalizar Pedido</h3><button id="closeCheckoutModal" class="text-gray-500 hover:text-gray-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button></div></div>
@@ -282,11 +295,99 @@
                 <!-- ======================================================= -->
                 <div class="bg-gray-50 p-4 rounded-lg space-y-2"><div class="flex justify-between text-fixed-base"><span>Subtotal de productos:</span><span id="checkoutSubtotal" class="font-semibold">$0</span></div><div class="flex justify-between text-fixed-base text-gray-600"><span>Servicio y Empaque:</span><span id="checkoutServiceFee" class="font-semibold">$50</span></div><div class="flex justify-between text-fixed-base"><span>Costo de envío:</span><span id="checkoutShipping" class="font-semibold">$0</span></div><div id="shippingNote" class="text-fixed-sm text-gray-600 hidden"></div><hr class="my-2"><div class="flex justify-between text-fixed-lg font-bold text-[var(--primary-color)]"><span>Total a Pagar:</span><span id="checkoutTotal">$0</span></div></div>
             </div>
-            <div class="p-6 border-b"><h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">2. Datos de Contacto</h4><div class="space-y-4"><div><label for="customerName" class="block text-fixed-base font-semibold text-gray-700 mb-2">Nombre completo *</label><input type="text" id="customerName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base" required></div><div><label for="customerAddress" class="block text-fixed-base font-semibold text-gray-700 mb-2">Calle y número (ej: Aguiar #230 apto 1) *</label><input type="text" id="customerAddress" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base" required></div><div><label for="customerReferences" class="block text-fixed-base font-semibold text-gray-700 mb-2">Puntos de Referencia (ej: Frente a la bodega)</label><input type="text" id="customerReferences" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base"></div><div><label for="customerPhone" class="block text-fixed-base font-semibold text-gray-700 mb-2">Número de teléfono *</label><input type="tel" id="customerPhone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base" required></div><div><label for="deliveryLocation" class="block text-fixed-base font-semibold text-gray-700 mb-2">Ubicación *</label><select id="deliveryLocation" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base" required><option value="">Selecciona tu ubicación</option><option value="habana-vieja">Habana Vieja</option><option value="otros">Otros municipios</option></select></div></div></div>
-            <div class="p-6 border-b"><h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">3. Detalles del Pago</h4><div class="space-y-4"><div><label class="block text-fixed-base font-semibold text-gray-700 mb-2">Método de pago *</label><div class="space-y-2"><label class="flex items-center"><input type="radio" name="paymentMethod" value="efectivo" class="mr-3 text-[var(--primary-color)] focus:ring-[var(--primary-color)]"><span class="text-fixed-base">Efectivo</span></label><label class="flex items-center"><input type="radio" name="paymentMethod" value="transferencia" class="mr-3 text-[var(--primary-color)] focus:ring-[var(--primary-color)]"><span class="text-fixed-base">Transferencia</span></label></div></div><div id="cashPaymentField" class="hidden"><label class="block text-fixed-base font-semibold text-gray-700 mb-2">Pagaré con...</label><div class="flex flex-wrap gap-2"><button type="button" class="cash-btn" data-amount="20">$20</button><button type="button" class="cash-btn" data-amount="50">$50</button><button type="button" class="cash-btn" data-amount="100">$100</button><button type="button" class="cash-btn" data-amount="200">$200</button><button type="button" class="cash-btn" data-amount="500">$500</button><button type="button" class="cash-btn" data-amount="1000">$1000</button><button type="button" class="cash-btn" data-amount="otro">Otro</button></div><input type="text" id="otherCashAmount" placeholder="Especifica otro monto" class="hidden w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] transition text-fixed-base"></div></div></div>
-            <div class="p-6"><h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">4. Política de Envíos</h4><div class="bg-blue-50 p-4 rounded-lg text-fixed-sm text-gray-700 space-y-2"><p><strong>Horarios de entrega:</strong> 9:00 a.m. a 8:00 p.m.</p><p><strong>Habana Vieja:</strong></p><ul class="list-disc list-inside ml-4 space-y-1"><li>Tarifa de envío: <strong>$150 CUP</strong>.</li><li class="font-semibold text-green-600">¡Envío GRATIS en compras de $1,500 CUP o más!</li></ul><p><strong>Otros municipios:</strong></p><ul class="list-disc list-inside ml-4 space-y-1"><li>El costo de envío se ajustará al precio de la agencia de mensajería externa</li><li>Se lo confirmaremos por WhatsApp antes de procesar su pedido</li></ul><p class="text-xs text-gray-600 mt-3">Al confirmar su pedido, acepta nuestras condiciones de envío y horarios establecidos.</p></div></div>
+            <div class="p-6 border-b">
+                <h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">2. Datos de Contacto</h4>
+                <div class="space-y-4">
+                    <div>
+                        <label for="customerName" class="block text-fixed-base font-semibold text-gray-700 mb-2">Nombre completo *</label>
+                        <input type="text" id="customerName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base" required>
+                    </div>
+                    <div>
+                        <label for="customerAddress" class="block text-fixed-base font-semibold text-gray-700 mb-2">Calle y número (ej: Aguiar #230 apto 1) *</label>
+                        <input type="text" id="customerAddress" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base" required>
+                    </div>
+                    <div>
+                        <label for="customerReferences" class="block text-fixed-base font-semibold text-gray-700 mb-2">Puntos de Referencia (ej: Frente a la bodega)</label>
+                        <input type="text" id="customerReferences" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base">
+                    </div>
+                    <div>
+                        <label for="customerPhone" class="block text-fixed-base font-semibold text-gray-700 mb-2">Número de teléfono *</label>
+                        <input type="tel" id="customerPhone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base" required>
+                    </div>
+                    <div>
+                        <label for="deliveryLocation" class="block text-fixed-base font-semibold text-gray-700 mb-2">Ubicación *</label>
+                        <select id="deliveryLocation" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base" required>
+                            <option value="">Selecciona tu ubicación</option>
+                            <option value="habana-vieja">Habana Vieja</option>
+                            <option value="otros">Otros municipios</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="p-6 border-b">
+                <h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">3. Detalles del Pago</h4>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-fixed-base font-semibold text-gray-700 mb-2">Método de pago *</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="paymentMethod" value="efectivo" class="mr-3 text-[var(--primary-color)] focus:ring-[var(--primary-color)]">
+                                <span class="text-fixed-base">Efectivo</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="paymentMethod" value="transferencia" class="mr-3 text-[var(--primary-color)] focus:ring-[var(--primary-color)]">
+                                <span class="text-fixed-base">Transferencia</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="cashPaymentField" class="hidden">
+                        <label class="block text-fixed-base font-semibold text-gray-700 mb-2">Pagaré con...</label>
+                        <div class="flex flex-wrap gap-2">
+                            <button type="button" class="cash-btn" data-amount="20">$20</button>
+                            <button type="button" class="cash-btn" data-amount="50">$50</button>
+                            <button type="button" class="cash-btn" data-amount="100">$100</button>
+                            <button type="button" class="cash-btn" data-amount="200">$200</button>
+                            <button type="button" class="cash-btn" data-amount="500">$500</button>
+                            <button type="button" class="cash-btn" data-amount="1000">$1000</button>
+                            <button type="button" class="cash-btn" data-amount="otro">Otro</button>
+                        </div>
+                        <input type="text" id="otherCashAmount" placeholder="Especifica otro monto" class="hidden w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] transition text-fixed-base">
+                    </div>
+                </div>
+            </div>
+            <div class="p-6">
+                <h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">4. Política de Envíos</h4>
+                <div class="bg-blue-50 p-4 rounded-lg text-fixed-sm text-gray-700 space-y-2">
+                    <p><strong>Horarios de entrega:</strong> 9:00 a.m. a 8:00 p.m.</p>
+                    <p><strong>Habana Vieja:</strong></p>
+                    <ul class="list-disc list-inside ml-4 space-y-1">
+                        <li>Tarifa de envío: <strong>$150 CUP</strong>.</li>
+                        <li class="font-semibold text-green-600">¡Envío GRATIS en compras de $3,500 CUP o más!</li>
+                        <li>Costo de envío $50 CUP en compras de $1,500 CUP o más.</li>
+                    </ul>
+                    <p><strong>Otros municipios:</strong></p>
+                    <ul class="list-disc list-inside ml-4 space-y-1">
+                        <li>El costo de envío se ajustará al precio de la agencia de mensajería externa.</li>
+                        <li>Se lo confirmaremos por WhatsApp antes de procesar su pedido.</li>
+                    </ul>
+                    <p class="text-xs text-gray-600 mt-3">Al confirmar su pedido, acepta nuestras condiciones de envío y horarios establecidos.</p>
+                </div>
+            </div>
         </div>
-        <div class="p-6 border-t bg-gray-50"><button id="confirmOrderBtn" class="w-full bg-green-500 text-white font-bold py-4 px-4 rounded-lg text-fixed-base hover:bg-green-600 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]">Confirmar y Enviar Pedido</button></div>
+        <div class="p-6 border-t bg-gray-50">
+            <button id="confirmOrderBtn" class="w-full bg-green-500 text-white font-bold py-4 px-4 rounded-lg text-fixed-base hover:bg-green-600 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]">Confirmar y Enviar Pedido</button>
+        </div>
+    </div>
+</div>
+<!-- ======================================================= -->
+<!-- === FIN DEL CHECKOUT MODAL === -->
+<!-- ======================================================= -->
+
+<div id="confirmationModal" class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[1000]">
+    <div class="modal-content bg-white rounded-lg shadow-xl w-11/12 max-w-md p-6 text-center">
+        <h3 class="text-fixed-2xl font-bold text-[var(--text-dark)] mb-4">¡Pedido Confirmado!</h3>
+        <p class="text-fixed-base text-[var(--text-medium)] mb-6">Tu pedido ha sido enviado. Te contactaremos pronto por WhatsApp para coordinar la entrega.</p>
+        <button id="closeConfirmationModal" class="bg-[var(--primary-color)] text-white font-bold py-2 px-6 rounded-lg hover:bg-opacity-90 transition-colors duration-300 text-fixed-base">Cerrar</button>
     </div>
 </div>
 
@@ -376,7 +477,6 @@
     
     function setupCategoryFiltersAndSearch(productsForSection, filtersId, searchId, gridId, noResultsId) {
         var uniqueCategories = [];
-        var categoryOrder = {};
         for (var i = 0; i < productsForSection.length; i++) {
             if (uniqueCategories.indexOf(productsForSection[i].category) === -1) {
                 uniqueCategories.push(productsForSection[i].category);
@@ -507,7 +607,7 @@
     function setupScrollAnimations(){if('IntersectionObserver' in window){var elements=document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right');var observer=new IntersectionObserver(function(entries){for(var i=0;i<entries.length;i++){if(entries[i].isIntersecting){entries[i].target.classList.add('is-visible');}}}, {threshold:0.1});for(var j=0;j<elements.length;j++){observer.observe(elements[j]);}}else{var elements=document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right');for(var k=0;k<elements.length;k++){elements[k].classList.add('is-visible');}}}
     function setupScrollHeader(){var header=document.getElementById('mainHeader');window.addEventListener('scroll',function(){if(window.scrollY>100){header.classList.add('scrolled');}else{header.classList.remove('scrolled');}});}
     function showCheckoutModal(){if(cart.length===0){alert('Tu carrito está vacío');return;}
-    var savedData=JSON.parse(localStorage.getItem('customerData'));if(savedData){document.getElementById('customerName').value=savedData.name||'';document.getElementById('customerAddress').value=savedData.address||'';document.getElementById('customerReferences').value=savedData.references||'';document.getElementById('customerPhone').value=savedData.phone||'';document.getElementById('deliveryLocation').value='habana-vieja';}
+    var savedData=JSON.parse(localStorage.getItem('customerData'));if(savedData){document.getElementById('customerName').value=savedData.name||'';document.getElementById('customerAddress').value=savedData.address||'';document.getElementById('customerReferences').value=savedData.references||'';document.getElementById('customerPhone').value=savedData.phone||'';document.getElementById('deliveryLocation').value=savedData.location||'';} // Cargar la ubicación guardada
     updateCheckoutSummary();document.getElementById('checkoutModal').classList.add('show');}
     
     function updateCheckoutSummary(){
@@ -536,36 +636,45 @@
         if (deliveryLocation === 'habana-vieja') {
             if (subtotal >= 3500) {
                 shippingCost = 0;
-                shippingText = 'GRATIS (Pedido Mayor a $3,500)';
-                upsellMessage = '¡Felicidades! Has desbloqueado el Envío GRATIS.';
+                shippingText = 'GRATIS';
+                upsellMessage = '¡Felicidades! Has desbloqueado el Envío GRATIS en Habana Vieja. Ahorras $150.';
                 upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-green-100 text-green-800';
             } else if (subtotal >= 1500) {
                 shippingCost = 50;
-                shippingText = 'Envío con Descuento: $50 CUP';
+                shippingText = '$50 CUP';
                 var neededForFree = 3500 - subtotal;
-                upsellMessage = '¡Estás a solo $' + neededForFree.toLocaleString() + ' de conseguir el Envío GRATIS!';
+                upsellMessage = `¡Estás a solo $${neededForFree.toLocaleString()} de conseguir el Envío GRATIS! Ahorrarías $50 adicionales.`;
                 upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-blue-100 text-blue-800';
             } else {
                 shippingCost = 150;
                 shippingText = '$150 CUP';
                 var neededForDiscount = 1500 - subtotal;
-                upsellMessage = '¡Añade $' + neededForDiscount.toLocaleString() + ' más a tu carrito y paga solo $50 de envío!';
+                upsellMessage = `¡Añade $${neededForDiscount.toLocaleString()} más a tu carrito y paga solo $50 de envío! Ahorrarías $100.`;
                 upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-yellow-100 text-yellow-800';
             }
         } else if (deliveryLocation === 'otros') {
-            shippingCost = 0;
+            shippingCost = 0; // Se asume 0 para el cálculo inicial, luego se confirma
             shippingText = 'A confirmar';
             showNote = true;
             noteText = 'El costo de envío se ajustará al precio de la agencia de mensajería externa, se lo confirmaremos por WhatsApp.';
             upsellMessage = '';
+            upsellElement.classList.add('hidden'); // Ocultar mensaje upsell para otros municipios
         } else {
-            upsellMessage = '';
+            // Cuando no hay ubicación seleccionada
+            shippingCost = 0;
+            shippingText = '$0';
+            upsellMessage = 'Selecciona tu ubicación para calcular el envío.';
+            upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-gray-100 text-gray-800';
+            upsellElement.classList.remove('hidden');
+            showNote = false;
         }
 
         if (upsellElement) {
             upsellElement.textContent = upsellMessage;
-            if(upsellMessage === '') {
-                upsellElement.className = 'hidden';
+            if(upsellMessage === '' || deliveryLocation === '') { // Ocultar si no hay mensaje o ubicación
+                upsellElement.classList.add('hidden');
+            } else {
+                upsellElement.classList.remove('hidden');
             }
         }
         
@@ -582,15 +691,80 @@
     }
 
     function setupCheckoutEventListeners(){document.getElementById('closeCheckoutModal').addEventListener('click',function(){document.getElementById('checkoutModal').classList.remove('show');});document.getElementById('checkoutModal').addEventListener('click',function(e){if(e.target.id==='checkoutModal'){document.getElementById('checkoutModal').classList.remove('show');}});document.getElementById('deliveryLocation').addEventListener('change',updateShippingAndTotal);
-    var paymentRadios=document.querySelectorAll('input[name="paymentMethod"]');for(var i=0;i<paymentRadios.length;i++){paymentRadios[i].addEventListener('change',function(){var cashField=document.getElementById('cashPaymentField');if(this.value==='efectivo'){cashField.classList.remove('hidden');}else{cashField.classList.add('hidden');selectedCashAmount='';var cashButtons=document.querySelectorAll('.cash-btn');for(var j=0;j<cashButtons.length;j++){cashButtons[j].classList.remove('active');}
-    document.getElementById('otherCashAmount').classList.add('hidden');}});}
-    var cashButtons=document.querySelectorAll('.cash-btn');for(var k=0;k<cashButtons.length;k++){cashButtons[k].addEventListener('click',function(){for(var l=0;l<cashButtons.length;l++){cashButtons[l].classList.remove('active');}
-    this.classList.add('active');selectedCashAmount=this.getAttribute('data-amount');var otherInput=document.getElementById('otherCashAmount');if(selectedCashAmount==='otro'){otherInput.classList.remove('hidden');otherInput.focus();}else{otherInput.classList.add('hidden');}});}
-    document.getElementById('confirmOrderBtn').addEventListener('click',confirmOrder);}
-    function validateCheckoutForm(){var requiredFields=[{id:'customerName',name:'Nombre completo'},{id:'customerAddress',name:'Dirección de entrega'},{id:'customerPhone',name:'Número de teléfono'},{id:'deliveryLocation',name:'Ubicación'}];var errors=[];for(var i=0;i<requiredFields.length;i++){var field=requiredFields[i];var element=document.getElementById(field.id);if(!element.value.trim()){errors.push(field.name);element.classList.add('border-red-500');}else{element.classList.remove('border-red-500');}}
-    var paymentMethod=document.querySelector('input[name="paymentMethod"]:checked');if(!paymentMethod){errors.push('Método de pago');}
-    if(errors.length>0){alert('Por favor completa los siguientes campos:\n• '+errors.join('\n• '));return false;}
-    return true;}
+    
+    var paymentRadios=document.querySelectorAll('input[name="paymentMethod"]');
+    for(var i=0;i<paymentRadios.length;i++){
+        paymentRadios[i].addEventListener('change',function(){
+            var cashField=document.getElementById('cashPaymentField');
+            if(this.value==='efectivo'){
+                cashField.classList.remove('hidden');
+            }else{
+                cashField.classList.add('hidden');
+                selectedCashAmount=''; // Reset selected cash amount
+                var cashButtons=document.querySelectorAll('.cash-btn');
+                for(var j=0;j<cashButtons.length;j++){cashButtons[j].classList.remove('active');}
+                document.getElementById('otherCashAmount').classList.add('hidden');
+                document.getElementById('otherCashAmount').value = ''; // Clear other amount input
+            }
+        });
+    }
+
+    var cashButtons=document.querySelectorAll('.cash-btn');
+    for(var k=0;k<cashButtons.length;k++){
+        cashButtons[k].addEventListener('click',function(){
+            for(var l=0;l<cashButtons.length;l++){cashButtons[l].classList.remove('active');}
+            this.classList.add('active');
+            selectedCashAmount=this.getAttribute('data-amount');
+            var otherInput=document.getElementById('otherCashAmount');
+            if(selectedCashAmount==='otro'){
+                otherInput.classList.remove('hidden');
+                otherInput.focus();
+            }else{
+                otherInput.classList.add('hidden');
+                otherInput.value = ''; // Clear if not 'otro'
+            }
+        });
+    }
+
+    document.getElementById('confirmOrderBtn').addEventListener('click',confirmOrder);
+    }
+
+    function validateCheckoutForm(){
+        var requiredFields=[
+            {id:'customerName',name:'Nombre completo'},
+            {id:'customerAddress',name:'Calle y número'},
+            {id:'customerPhone',name:'Número de teléfono'},
+            {id:'deliveryLocation',name:'Ubicación'}
+        ];
+        var errors=[];
+        for(var i=0;i<requiredFields.length;i++){
+            var field=requiredFields[i];
+            var element=document.getElementById(field.id);
+            if(!element.value.trim()){
+                errors.push(field.name);
+                element.classList.add('border-red-500'); // Add visual cue for error
+            }else{
+                element.classList.remove('border-red-500');
+            }
+        }
+        
+        var paymentMethod=document.querySelector('input[name="paymentMethod"]:checked');
+        if(!paymentMethod){
+            errors.push('Método de pago');
+            // No direct element to highlight easily, could add a message next to radio buttons
+        } else if (paymentMethod.value === 'efectivo') {
+            if (!selectedCashAmount && !document.getElementById('otherCashAmount').value.trim()) {
+                 errors.push('Monto de pago en efectivo');
+                 // Could highlight the cash payment field or buttons
+            }
+        }
+
+        if(errors.length>0){
+            alert('Por favor completa o corrige los siguientes campos:\n• '+errors.join('\n• '));
+            return false;
+        }
+        return true;
+    }
     
     function confirmOrder() {
         if (!validateCheckoutForm()) {
@@ -602,7 +776,14 @@
         var customerPhone = document.getElementById('customerPhone').value.trim();
         var deliveryLocation = document.getElementById('deliveryLocation').value;
         var paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-        var cashAmount = selectedCashAmount === 'otro' ? document.getElementById('otherCashAmount').value.trim() : selectedCashAmount;
+        var cashAmount = '';
+        if (paymentMethod === 'efectivo') {
+            cashAmount = selectedCashAmount === 'otro' ? document.getElementById('otherCashAmount').value.trim() : selectedCashAmount;
+            if (!cashAmount) { // Fallback if 'otro' was selected but left empty
+                cashAmount = 'Sin especificar';
+            }
+        }
+
         var subtotal = cart.reduce(function(sum, item) { return sum + (item.price * item.quantity); }, 0);
         var serviceFee = 50;
         var shippingCost = 0;
@@ -619,8 +800,9 @@
                 shippingCost = 150;
                 shippingText = '$150 CUP';
             }
-        } else {
+        } else { // Otros municipios
             shippingText = 'A confirmar por agencia de mensajería';
+            // shippingCost remains 0 for initial calculation, actual cost will be confirmed.
         }
 
         var total = subtotal + serviceFee + shippingCost;
@@ -630,35 +812,38 @@
         var finalMessage = "*🛒 NUEVO PEDIDO - EL RESOLVITO*\n\n" +
             "*👤 DATOS DEL CLIENTE:*\n" + "• Nombre: " + customerName + "\n" + "• Teléfono: " + customerPhone + "\n" + "• Dirección: " + customerAddress + "\n" + "• Referencias: " + (customerReferences || 'No especificadas') + "\n" + "• Ubicación: " + locationText + "\n\n" + "*📦 PRODUCTOS:*\n" + orderItems + "\n\n" + "*💰 RESUMEN DE PAGO:*\n" + "• Subtotal de productos: $" + subtotal.toLocaleString() + "\n" + "• Servicio y Empaque: $" + serviceFee + "\n" + "• Envío: " + shippingText + "\n" + "• TOTAL A PAGAR: $" + total.toLocaleString() + "\n\n" + "*💳 MÉTODO DE PAGO:*\n" + paymentText + "\n\n" + "*⏰ Horario de entrega preferido:* Se coordinará para la próxima ronda de entrega.\n\n" + "_¡Gracias por su pedido!_ 🙏";
 
-        var telegramToken = 'TU_TOKEN_DE_TELEGRAM_AQUI';
-        var telegramChatId = 'TU_CHAT_ID_AQUI';
-        fetch('https://api.telegram.org/bot' + telegramToken + '/sendMessage', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: telegramChatId, text: finalMessage, parse_mode: 'Markdown' })
-        });
+        // Aquí irían tus integraciones con Telegram y Google Apps Script
+        // Asegúrate de reemplazar 'TU_TOKEN_DE_TELEGRAM_AQUI' y 'TU_CHAT_ID_AQUI' con tus valores reales
+        // var telegramToken = 'TU_TOKEN_DE_TELEGRAM_AQUI';
+        // var telegramChatId = 'TU_CHAT_ID_AQUI';
+        // fetch('https://api.telegram.org/bot' + telegramToken + '/sendMessage', {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({ chat_id: telegramChatId, text: finalMessage, parse_mode: 'Markdown' })
+        // });
 
-        var googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycby9Sk3Fz2_WqRQsEXrezpwqKbpYhqW_-ialMJcYKPdvZkrBfNReWWFfQ-VnXTrkJY8W/exec';
-        var orderData = {
-            idPedido: new Date().getTime(),
-            customerName: customerName,
-            customerPhone: customerPhone,
-            customerAddress: customerAddress,
-            customerReferences: customerReferences,
-            total: total,
-            paymentMethod: paymentMethod,
-            shippingText: shippingText,
-            orderItems: orderItems
-        };
-        var formData = new FormData();
-        for (var key in orderData) {
-            if (orderData.hasOwnProperty(key)) {
-                formData.append(key, orderData[key]);
-            }
-        }
-        fetch(googleAppsScriptUrl, { method: 'POST', body: formData, mode: 'no-cors' }).catch(function(error) { console.error('Error enviando a Google Sheets:', error); });
+        // Asegúrate de reemplazar la URL de Google Apps Script con la tuya si la usas
+        // var googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycby9Sk3Fz2_WqRQsEXrezpwqKbpYhqW_-ialMJcYKPdvZkrBfNReWWFfQ-VnXTrkJY8W/exec';
+        // var orderData = {
+        //     idPedido: new Date().getTime(),
+        //     customerName: customerName,
+        //     customerPhone: customerPhone,
+        //     customerAddress: customerAddress,
+        //     customerReferences: customerReferences,
+        //     total: total,
+        //     paymentMethod: paymentMethod,
+        //     shippingText: shippingText,
+        //     orderItems: orderItems
+        // };
+        // var formData = new FormData();
+        // for (var key in orderData) {
+        //     if (orderData.hasOwnProperty(key)) {
+        //         formData.append(key, orderData[key]);
+        //     }
+        // }
+        // fetch(googleAppsScriptUrl, { method: 'POST', body: formData, mode: 'no-cors' }).catch(function(error) { console.error('Error enviando a Google Sheets:', error); });
 
-        var whatsappPhoneNumber = '56382909';
+        var whatsappPhoneNumber = '5356382909'; // Tu número de WhatsApp
         var whatsappMessage = encodeURIComponent(finalMessage.replace(/\*/g, '').replace(/_/g, ''));
         window.open('https://wa.me/' + whatsappPhoneNumber + '?text=' + whatsappMessage, '_blank');
 
@@ -667,15 +852,17 @@
         updateCartUI();
         localStorage.setItem('cart', JSON.stringify(cart));
         
-        var customerData = { name: customerName, address: customerAddress, references: customerReferences, phone: customerPhone };
+        var customerData = { name: customerName, address: customerAddress, references: customerReferences, phone: customerPhone, location: deliveryLocation };
         localStorage.setItem('customerData', JSON.stringify(customerData));
         
-        alert('¡Pedido enviado! Te contactaremos pronto para confirmar los detalles.');
+        // Muestra el modal de confirmación en lugar del alert
+        document.getElementById('confirmationModal').classList.add('show');
     }
 </script>
 
 </body>
 </html>
+
 
 
 
