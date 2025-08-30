@@ -532,6 +532,19 @@
     var selectedCashAmount = '';
     var toastTimeout; // Variable para controlar el temporizador del toast
 
+    // Referencias a modales y botones de cierre al inicio del script para asegurar que existen.
+    // Declaraciones movidas aquí para asegurar disponibilidad global
+    const cartModal = document.getElementById('cartModal');
+    const productDetailsModal = document.getElementById('productDetailsModal');
+    const checkoutModal = document.getElementById('checkoutModal');
+    const confirmationModal = document.getElementById('confirmationModal'); 
+    // Otros elementos que pueden necesitar una referencia temprana
+    const floatingCartBtn = document.getElementById('floatingCartBtn');
+    const closeCartModalBtn = document.getElementById('closeCartModal');
+    const closeProductDetailsModalBtn = document.getElementById('closeProductDetailsModalBtn');
+    const closeCheckoutModalBtn = document.getElementById('closeCheckoutModal');
+    const closeConfirmationModalBtn = document.getElementById('closeConfirmationModal'); // Botón de cerrar del modal de confirmación
+
     document.addEventListener('DOMContentLoaded', function() {
         setupStoreSection('mercado', products);
         updateCartUI();
@@ -646,14 +659,15 @@
     
     function showProductDetailsModal(productId){var product=null;for(var i=0;i<products.length;i++){if(products[i].id===productId){product=products[i];break;}}
     if(!product||product.status==='unavailable')return;currentProductForModal=JSON.parse(JSON.stringify(product));currentProductForModal.quantity=1;currentUnitType='individual';document.getElementById('productDetailsTitle').textContent=product.name;document.getElementById('productDetailsImage').src=product.image;document.getElementById('productDetailsDescription').textContent=product.description;document.getElementById('productQuantityDisplay').textContent='1';var unitTypeSection=document.getElementById('unitTypeSection');if(product.hasBoxOption){unitTypeSection.classList.remove('hidden');updateUnitTypeButtons();}else{unitTypeSection.classList.add('hidden');}
-    updateModalPricing();document.getElementById('productDetailsModal').classList.add('show');}
+    updateModalPricing();showModal(productDetailsModal);} // Usar showModal
+
     function updateUnitTypeButtons(){var individualBtn=document.getElementById('unitTypeIndividual');var boxBtn=document.getElementById('unitTypeBox');if(currentUnitType==='individual'){individualBtn.classList.add('active');boxBtn.classList.remove('active');}else{boxBtn.classList.add('active');individualBtn.classList.remove('active');}}
     function updateModalPricing(){if(!currentProductForModal)return;var unitPrice,unitDescription;if(currentProductForModal.hasBoxOption&&currentUnitType==='box'){unitPrice=currentProductForModal.boxPrice;unitDescription='Caja ('+currentProductForModal.boxQuantity+' unidades)';}else{unitPrice=currentProductForModal.price;unitDescription='Unidad';}
     var totalPrice=unitPrice*currentProductForModal.quantity;document.getElementById('productDetailsPrice').textContent='$'+unitPrice.toLocaleString()+' / '+unitDescription;document.getElementById('modalTotalPrice').textContent='$'+totalPrice.toLocaleString();}
     function addToCartFromModal(){if(!currentProductForModal)return;var cartItem={id:currentProductForModal.id+(currentUnitType==='box'?'_box':''),name:currentProductForModal.name,image:currentProductForModal.image,quantity:currentProductForModal.quantity,unitType:currentUnitType};if(currentProductForModal.hasBoxOption&&currentUnitType==='box'){cartItem.price=currentProductForModal.boxPrice;cartItem.name+=' (Caja x'+currentProductForModal.boxQuantity+')';}else{cartItem.price=currentProductForModal.price;}
     var existingItemIndex=-1;for(var i=0;i<cart.length;i++){if(cart[i].id===cartItem.id){existingItemIndex=i;break;}}
     if(existingItemIndex!==-1){cart[existingItemIndex].quantity+=cartItem.quantity;}else{cart.push(cartItem);}
-    updateCartUI();localStorage.setItem('cart',JSON.stringify(cart));document.getElementById('productDetailsModal').classList.remove('show');currentProductForModal=null;showCartAnimation(); showCartToast('Producto añadido al carrito');}
+    updateCartUI();localStorage.setItem('cart',JSON.stringify(cart));hideModal(productDetailsModal);currentProductForModal=null;showCartAnimation(); showCartToast('Producto añadido al carrito');} // Usar hideModal
     
     function updateCartUI(){
         var totalItems=cart.reduce(function(sum,item){return sum+item.quantity;},0);
@@ -718,19 +732,53 @@
         }, 3000);
     }
 
-    // Referencias a modales y botones de cierre al inicio del script para asegurar que existen.
-    const cartModal = document.getElementById('cartModal');
-    const productDetailsModal = document.getElementById('productDetailsModal');
-    const checkoutModal = document.getElementById('checkoutModal');
-    const confirmationModal = document.getElementById('confirmationModal'); // Aseguramos la referencia aquí
+    // Función para mostrar cualquier modal.
+    function showModal(modalElement) {
+        if (!modalElement) {
+            console.error("Error: Intentando mostrar un elemento modal nulo.");
+            return;
+        }
+        modalElement.classList.add('show');
+        document.body.style.overflow = 'hidden'; // Evita scroll en el body
+    }
+
+    // Función para ocultar cualquier modal.
+    function hideModal(modalElement) {
+        if (!modalElement) {
+            console.error("Error: Intentando ocultar un elemento modal nulo.");
+            return;
+        }
+        modalElement.classList.remove('show');
+        document.body.style.overflow = ''; // Restaura scroll en el body
+    }
+
 
     function setupGeneralEventListeners(){
-        document.getElementById('floatingCartBtn').addEventListener('click',function(){showModal(cartModal);});
-        document.getElementById('closeCartModal').addEventListener('click',function(){hideModal(cartModal);});
-        document.getElementById('cartModal').addEventListener('click',function(e){if(e.target.id==='cartModal')hideModal(cartModal);});
+        // Botón flotante del carrito
+        if (floatingCartBtn) {
+            floatingCartBtn.addEventListener('click',function(){
+                console.log("Floating cart button clicked!"); // DEBUG
+                showModal(cartModal);
+            });
+        } else {
+            console.error("Floating cart button not found!"); // DEBUG
+        }
+
+        // Cierre del modal del carrito
+        if (closeCartModalBtn) {
+            closeCartModalBtn.addEventListener('click',function(){hideModal(cartModal);});
+        }
+        if (cartModal) {
+            cartModal.addEventListener('click',function(e){if(e.target === cartModal)hideModal(cartModal);});
+        }
         
-        document.getElementById('closeProductDetailsModalBtn').addEventListener('click',function(){hideModal(productDetailsModal);currentProductForModal=null;});
-        document.getElementById('productDetailsModal').addEventListener('click',function(e){if(e.target.id==='productDetailsModal'){hideModal(productDetailsModal);currentProductForModal=null;}});
+        // Cierre del modal de detalles del producto
+        if (closeProductDetailsModalBtn) {
+            closeProductDetailsModalBtn.addEventListener('click',function(){hideModal(productDetailsModal);currentProductForModal=null;});
+        }
+        if (productDetailsModal) {
+            productDetailsModal.addEventListener('click',function(e){if(e.target === productDetailsModal){hideModal(productDetailsModal);currentProductForModal=null;}});
+        }
         
         document.getElementById('unitTypeIndividual').addEventListener('click',function(){currentUnitType='individual';updateUnitTypeButtons();updateModalPricing();});
         document.getElementById('unitTypeBox').addEventListener('click',function(){currentUnitType='box';updateUnitTypeButtons();updateModalPricing();});
@@ -751,10 +799,20 @@
         // **********************************************
         // === CAMBIO AQUÍ para el modal de confirmación ===
         // **********************************************
-        document.getElementById('closeConfirmationModal').addEventListener('click',function(){
-            console.log("Cerrar botón del modal de confirmación clicado."); // Para depuración
-            hideModal(confirmationModal);
-        });
+        if (closeConfirmationModalBtn) {
+            closeConfirmationModalBtn.addEventListener('click',function(){
+                console.log("Cerrar botón del modal de confirmación clicado."); // Para depuración
+                hideModal(confirmationModal);
+            });
+        }
+        if (confirmationModal) {
+            confirmationModal.addEventListener('click', function(e) {
+                if (e.target === confirmationModal) {
+                    console.log("Overlay del modal de confirmación clicado."); // Para depuración
+                    hideModal(confirmationModal);
+                }
+            });
+        }
         // **********************************************
 
         var anchorLinks=document.querySelectorAll('a[href^="#"]');for(var i=0;i<anchorLinks.length;i++){anchorLinks[i].addEventListener('click',function(e){e.preventDefault();var targetId=this.getAttribute('href');var targetElement=document.querySelector(targetId);if(targetElement){if(this.classList.contains('mobile-nav-link')){closeMobileMenu();}
@@ -867,9 +925,14 @@
         return true; // Not a required field, or element not found
     }
 
-    function setupCheckoutEventListeners(){document.getElementById('closeCheckoutModal').addEventListener('click',function(){hideModal(checkoutModal);}); // Usar hideModal
-    document.getElementById('checkoutModal').addEventListener('click',function(e){if(e.target.id==='checkoutModal'){hideModal(checkoutModal);}}); // Usar hideModal
-    document.getElementById('deliveryLocation').addEventListener('change',updateShippingAndTotal);
+    function setupCheckoutEventListeners(){
+        if (closeCheckoutModalBtn) {
+            closeCheckoutModalBtn.addEventListener('click',function(){hideModal(checkoutModal);});
+        }
+        if (checkoutModal) {
+            checkoutModal.addEventListener('click',function(e){if(e.target === checkoutModal){hideModal(checkoutModal);}});
+        }
+        document.getElementById('deliveryLocation').addEventListener('change',updateShippingAndTotal);
     
     // Attach real-time validation to required fields
     const requiredInputIds = ['customerName', 'customerAddress', 'customerPhone'];
@@ -1094,6 +1157,7 @@
 
 </body>
 </html>
+
 
 
 
