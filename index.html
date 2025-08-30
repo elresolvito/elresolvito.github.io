@@ -1,1170 +1,1251 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>El Resolvito | Tu Tienda a Domicilio en La Habana</title>
-    <meta name="description" content="Encuentra víveres y más en El Resolvito. Haz tu pedido online y recíbelo en La Habana. Compra fácil y rápido por WhatsApp.">
-    <meta name="keywords" content="tienda online habana, mercado habana, entrega a domicilio cuba, mandados habana, el resolvito">
-    <meta name="author" content="El Resolvito">
-
-  <!-- ========================================================= -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+code
+Code
+<title>El Resolvito | Tu Tienda a Domicilio en La Habana</title>
+<meta name="description" content="Encuentra víveres y más en El Resolvito. Haz tu pedido online y recíbelo en La Habana. Compra fácil y rápido por WhatsApp.">
+<meta name="keywords" content="tienda online habana, mercado habana, entrega a domicilio cuba, mandados habana, el resolvito">
+<meta name="author" content="El Resolvito">
+<!-- ========================================================= -->
 <!-- === BLOQUE DE ÍCONOS Y MANIFEST PROFESIONAL (HÍBRIDO) === -->
 <!-- ========================================================= -->
-
 <!-- 1. Instrucción principal para Android y navegadores modernos -->
 <link rel="manifest" href="/manifest.json?v=4"> <!-- Incrementamos la versión -->
-
 <!-- 2. Color de la barra del navegador -->
 <meta name="theme-color" content="#0d3b33">
-
 <!-- 3. Instrucción de respaldo para Android y principal para iOS -->
-<!--    Chrome la usará si el manifest falla. Safari (iPhone) la usará siempre. -->
-<!--    Apuntamos al ícono más grande que tenemos para asegurar la calidad. -->
+<!-- Chrome la usará si el manifest falla. Safari (iPhone) la usará siempre. -->
+<!-- Apuntamos al ícono más grande que tenemos para asegurar la calidad. -->
 <link rel="apple-touch-icon" href="/android-chrome-512x512.png">
-
 <!-- 4. Favicons estándar para pestañas de navegador, marcadores, etc. -->
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+code
+Code
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+    /* Variables CSS */
+    :root {
+        --primary-color: #0d3b33;
+        --accent-color: #c94a37;
+        --background-white: #ffffff;
+        --light-background-gray: #f9fafb;
+        --text-dark: #1f2937;
+        --text-medium: #4b5563;
+        --dark-overlay: rgba(0, 0, 0, 0.6);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background-color: var(--light-background-gray); }
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #0d3b33;
-            --accent-color: #c94a37;
-            --background-white: #ffffff;
-            --light-background-gray: #f9fafb;
-            --text-dark: #1f2937;
-            --text-medium: #4b5563;
-            --dark-overlay: rgba(0, 0, 0, 0.6);
-        }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--light-background-gray); }
-        .text-fixed-sm { font-size: 0.75rem; } @media (min-width: 768px) { .text-fixed-sm { font-size: 0.875rem; } }
-        .text-fixed-base { font-size: 0.875rem; } @media (min-width: 768px) { .text-fixed-base { font-size: 1rem; } }
-        .text-fixed-lg { font-size: 1rem; } @media (min-width: 768px) { .text-fixed-lg { font-size: 1.125rem; } }
-        .text-fixed-xl { font-size: 1.125rem; } @media (min-width: 768px) { .text-fixed-xl { font-size: 1.25rem; } }
-        .text-fixed-2xl { font-size: 1.25rem; } @media (min-width: 768px) { .text-fixed-2xl { font-size: 1.5rem; } }
-        .text-fixed-3xl { font-size: 1.5rem; } @media (min-width: 768px) { .text-fixed-3xl { font-size: 1.875rem; } }
-        .text-fixed-4xl { font-size: 1.875rem; } @media (min-width: 768px) { .text-fixed-4xl { font-size: 2.25rem; } }
-        .text-fixed-6xl { font-size: 2.5rem; } @media (min-width: 768px) { .text-fixed-6xl { font-size: 3.75rem; } }
-        .hero-banner { background-image: url('https://i.postimg.cc/rsCKV7LZ/1755367982611.jpg'); background-size: cover; background-position: center; }
-        .hero-overlay { background-color: var(--dark-overlay); }
-        header.scrolled { background-color: rgba(13, 59, 51, 0.95); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
-        .modal-overlay { opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
-        .modal-overlay.show { opacity: 1; visibility: visible; }
-        .modal-content { transform: translateY(-20px); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease; }
-        .modal-overlay.show .modal-content { transform: translateY(0); opacity: 1; }
-        #mobile-menu { transform: translateX(-100%); transition: transform 0.3s ease-in-out; }
-        #mobile-menu.open { transform: translateX(0); }
-        #mobile-backdrop { opacity: 0; visibility: hidden; transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; }
-        #mobile-backdrop.open { opacity: 1; visibility: visible; }
-        .unit-type-btn.active { background-color: var(--primary-color); color: white; }
-        .shake { animation: shake-animation 0.6s ease-in-out; }
-        @keyframes shake-animation { 0% { transform: translateX(0); } 15% { transform: translateX(-8px) rotate(-5deg); } 30% { transform: translateX(8px) rotate(5deg); } 45% { transform: translateX(-8px) rotate(-5deg); } 60% { transform: translateX(8px) rotate(5deg); } 75% { transform: translateX(-5px) rotate(-2deg); } 90% { transform: translateX(5px) rotate(2deg); } 100% { transform: translateX(0); } }
-        .cash-btn { border: 1px solid #d1d5db; padding: 8px 12px; border-radius: 8px; font-size: 0.875rem; transition: all 0.2s; }
-        .cash-btn.active { background-color: var(--primary-color); color: white; border-color: var(--primary-color); }
-        .fade-in-up, .fade-in-left, .fade-in-right { opacity: 0; transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-        .fade-in-up { transform: translateY(30px); }
-        .fade-in-left { transform: translateX(-30px); }
-        .fade-in-right { transform: translateX(30px); }
-        .is-visible { opacity: 1; transform: none; }
-        .category-btn { background-color: #f3f4f6; color: var(--text-medium); padding: 8px 16px; border-radius: 9999px; font-weight: 600; transition: all 0.2s; border: 1px solid transparent; }
-        .category-btn:hover { background-color: #e5e7eb; }
-        .category-btn.active { background-color: var(--primary-color); color: white; border-color: var(--primary-color); }
+    /* Ajustes de tamaño de fuente responsive */
+    .text-fixed-sm { font-size: 0.75rem; } @media (min-width: 768px) { .text-fixed-sm { font-size: 0.875rem; } }
+    .text-fixed-base { font-size: 0.875rem; } @media (min-width: 768px) { .text-fixed-base { font-size: 1rem; } }
+    .text-fixed-lg { font-size: 1rem; } @media (min-width: 768px) { .text-fixed-lg { font-size: 1.125rem; } }
+    .text-fixed-xl { font-size: 1.125rem; } @media (min-width: 768px) { .text-fixed-xl { font-size: 1.25rem; } }
+    .text-fixed-2xl { font-size: 1.25rem; } @media (min-width: 768px) { .text-fixed-2xl { font-size: 1.5rem; } }
+    .text-fixed-3xl { font-size: 1.5rem; } @media (min-width: 768px) { .text-fixed-3xl { font-size: 1.875rem; } }
+    .text-fixed-4xl { font-size: 1.875rem; } @media (min-width: 768px) { .text-fixed-4xl { font-size: 2.25rem; } }
+    .text-fixed-6xl { font-size: 2.5rem; } @media (min-width: 768px) { .text-fixed-6xl { font-size: 3.75rem; } }
+    
+    /* Estilos de secciones */
+    .hero-banner { background-image: url('https://i.postimg.cc/rsCKV7LZ/1755367982611.jpg'); background-size: cover; background-position: center; }
+    .hero-overlay { background-color: var(--dark-overlay); }
+    header.scrolled { background-color: rgba(13, 59, 51, 0.95); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
+    
+    /* Estilos de Modales */
+    .modal-overlay { opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+    .modal-overlay.show { opacity: 1; visibility: visible; }
+    .modal-content { transform: translateY(-20px); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease; }
+    .modal-overlay.show .modal-content { transform: translateY(0); opacity: 1; }
+    
+    /* Estilos de Menú Móvil */
+    #mobile-menu { transform: translateX(-100%); transition: transform 0.3s ease-in-out; }
+    #mobile-menu.open { transform: translateX(0); }
+    #mobile-backdrop { opacity: 0; visibility: hidden; transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; }
+    #mobile-backdrop.open { opacity: 1; visibility: visible; }
+    
+    /* Estilos de Producto */
+    .unit-type-btn.active { background-color: var(--primary-color); color: white; }
+    
+    /* Animación Shake */
+    .shake { animation: shake-animation 0.6s ease-in-out; }
+    @keyframes shake-animation { 0% { transform: translateX(0); } 15% { transform: translateX(-8px) rotate(-5deg); } 30% { transform: translateX(8px) rotate(5deg); } 45% { transform: translateX(-8px) rotate(-5deg); } 60% { transform: translateX(8px) rotate(5deg); } 75% { transform: translateX(-5px) rotate(-2deg); } 90% { transform: translateX(5px) rotate(2deg); } 100% { transform: translateX(0); } }
+    
+    /* Estilos de Botones de Pago en Efectivo */
+    .cash-btn { border: 1px solid #d1d5db; padding: 8px 12px; border-radius: 8px; font-size: 0.875rem; transition: all 0.2s; }
+    .cash-btn.active { background-color: var(--primary-color); color: white; border-color: var(--primary-color); }
+    
+    /* Animaciones Fade-in */
+    .fade-in-up, .fade-in-left, .fade-in-right { opacity: 0; transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .fade-in-up { transform: translateY(30px); }
+    .fade-in-left { transform: translateX(-30px); }
+    .fade-in-right { transform: translateX(30px); }
+    .is-visible { opacity: 1; transform: none; }
+    
+    /* Estilos de Botones de Categoría */
+    .category-btn { background-color: #f3f4f6; color: var(--text-medium); padding: 8px 16px; border-radius: 9999px; font-weight: 600; transition: all 0.2s; border: 1px solid transparent; }
+    .category-btn:hover { background-color: #e5e7eb; }
+    .category-btn.active { background-color: var(--primary-color); color: white; border-color: var(--primary-color); }
 
-        /* Estilos para la notificación Toast/Banner */
-        #cartToast {
-            position: fixed;
-            bottom: 24px; /* bottom-6 */
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--text-dark); /* bg-gray-800 */
-            color: var(--background-white); /* text-white */
-            padding: 12px 20px; /* px-4 py-2 más generoso */
-            border-radius: 8px; /* rounded-lg */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* shadow-lg */
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-            pointer-events: none; /* Permite hacer clic a través cuando está oculto */
-            z-index: 9999; /* Asegura que esté por encima de otros elementos */
-            font-size: 0.875rem; /* text-sm */
-            min-width: 200px; /* Ancho mínimo para legibilidad */
-            text-align: center;
-        }
-        #cartToast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
+    /* Estilos para la notificación Toast/Banner */
+    #cartToast {
+        position: fixed;
+        bottom: 24px; /* bottom-6 */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--text-dark); /* bg-gray-800 */
+        color: var(--background-white); /* text-white */
+        padding: 12px 20px; /* px-4 py-2 más generoso */
+        border-radius: 8px; /* rounded-lg */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* shadow-lg */
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        pointer-events: none; /* Permite hacer clic a través cuando está oculto */
+        z-index: 9999; /* Asegura que esté por encima de otros elementos */
+        font-size: 0.875rem; /* text-sm */
+        min-width: 200px; /* Ancho mínimo para legibilidad */
+        text-align: center;
+    }
+    #cartToast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
 
-        /* Estilo para productos no disponibles */
-        .unavailable-product-card {
-            background-color: #f8f8f8; /* Un gris muy claro */
-            cursor: not-allowed !important;
-            filter: grayscale(80%); /* Hace la imagen en blanco y negro */
-        }
-        .unavailable-product-card .add-to-cart-btn {
-            background-color: #ef4444 !important; /* Rojo suave */
-            color: white !important;
-            cursor: not-allowed !important;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        .unavailable-product-card .add-to-cart-btn:hover {
-            background-color: #dc2626 !important; /* Un rojo más fuerte al pasar el mouse */
-            transform: none !important;
-        }
-        .unavailable-product-card .product-name,
-        .unavailable-product-card .product-description {
-            color: var(--text-medium) !important; /* Menos prominente */
-        }
-    </style>
+    /* Estilo para productos no disponibles */
+    .unavailable-product-card {
+        background-color: #f8f8f8; /* Un gris muy claro */
+        cursor: not-allowed !important;
+        filter: grayscale(80%); /* Hace la imagen en blanco y negro */
+    }
+    .unavailable-product-card .add-to-cart-btn {
+        background-color: #ef4444 !important; /* Rojo suave */
+        color: white !important;
+        cursor: not-allowed !important;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+    .unavailable-product-card .add-to-cart-btn:hover {
+        background-color: #dc2626 !important; /* Un rojo más fuerte al pasar el mouse */
+        transform: none !important;
+    }
+    .unavailable-product-card .product-name,
+    .unavailable-product-card .product-description {
+        color: var(--text-medium) !important; /* Menos prominente */
+    }
+</style>
 </head>
 <body class="text-gray-800">
-
 <header id="mainHeader" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-2">
-        <div class="flex items-center gap-4">
-            <button id="mobile-menu-button" class="md:hidden text-white"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg></button>
-            <a href="#" class="flex items-center gap-3 flex-shrink-0">
-                <img src="https://i.postimg.cc/s2FHrX2Y/logo_el_resolvito.jpg" class="h-12 w-12 md:h-16 md:w-16 rounded-full shadow-md object-cover">
-                <span class="text-white text-fixed-lg md:text-xl font-bold hidden sm:block">El Resolvito</span>
-            </a>
-        </div>
-        <nav class="hidden md:flex items-center gap-4 md:gap-6 text-white font-semibold">
-            <a href="#mercado" class="text-fixed-lg hover:text-gray-300 transition-colors duration-300">Mercado</a>
-            <a href="#como-comprar" class="text-fixed-lg hover:text-gray-300 transition-colors duration-300">¿Cómo Comprar?</a>
-            <a href="#contacto" class="text-fixed-lg hover:text-gray-300 transition-colors duration-300">Contacto</a>
-        </nav>
-    </div>
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-2">
+<div class="flex items-center gap-4">
+<button id="mobile-menu-button" class="md:hidden text-white"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg></button>
+<a href="#" class="flex items-center gap-3 flex-shrink-0">
+<img src="https://i.postimg.cc/s2FHrX2Y/logo_el_resolvito.jpg" alt="Logo El Resolvito" class="h-12 w-12 md:h-16 md:w-16 rounded-full shadow-md object-cover">
+<span class="text-white text-fixed-lg md:text-xl font-bold hidden sm:block">El Resolvito</span>
+</a>
+</div>
+<nav class="hidden md:flex items-center gap-4 md:gap-6 text-white font-semibold">
+<a href="#mercado" class="text-fixed-lg hover:text-gray-300 transition-colors duration-300">Mercado</a>
+<a href="#como-comprar" class="text-fixed-lg hover:text-gray-300 transition-colors duration-300">¿Cómo Comprar?</a>
+<a href="#contacto" class="text-fixed-lg hover:text-gray-300 transition-colors duration-300">Contacto</a>
+</nav>
+</div>
 </header>
-
 <div id="mobile-menu" class="fixed top-0 left-0 h-full w-64 bg-[var(--primary-color)] z-50 shadow-xl md:hidden">
-    <div class="p-6">
-        <div class="flex justify-between items-center mb-8">
-            <a href="#" class="flex items-center gap-2">
-                <img src="https://i.postimg.cc/s2FHrX2Y/logo_el_resolvito.jpg" alt="El Resolvito Logo" class="h-12 w-12 rounded-full object-cover">
-                <span class="text-white text-fixed-lg font-bold">El Resolvito</span>
-            </a>
-            <button id="close-mobile-menu" class="text-white"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
-        </div>
-        <nav class="flex flex-col space-y-4 text-fixed-lg font-semibold text-white">
-            <a href="#mercado" class="hover:text-gray-300 transition-colors mobile-nav-link">Mercado</a>
-            <a href="#como-comprar" class="hover:text-gray-300 transition-colors mobile-nav-link">¿Cómo Comprar?</a>
-            <a href="#contacto" class="hover:text-gray-300 transition-colors mobile-nav-link">Contacto</a>
-        </nav>
-    </div>
+<div class="p-6">
+<div class="flex justify-between items-center mb-8">
+<a href="#" class="flex items-center gap-2">
+<img src="https://i.postimg.cc/s2FHrX2Y/logo_el_resolvito.jpg" alt="El Resolvito Logo" class="h-12 w-12 rounded-full object-cover">
+<span class="text-white text-fixed-lg font-bold">El Resolvito</span>
+</a>
+<button id="close-mobile-menu" class="text-white"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
+</div>
+<nav class="flex flex-col space-y-4 text-fixed-lg font-semibold text-white">
+<a href="#mercado" class="hover:text-gray-300 transition-colors mobile-nav-link">Mercado</a>
+<a href="#como-comprar" class="hover:text-gray-300 transition-colors mobile-nav-link">¿Cómo Comprar?</a>
+<a href="#contacto" class="hover:text-gray-300 transition-colors mobile-nav-link">Contacto</a>
+</nav>
+</div>
 </div>
 <div id="mobile-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"></div>
-
 <main>
-    <section class="hero-banner relative pt-24 pb-16 md:pt-32 md:pb-24">
-        <div class="hero-overlay absolute inset-0 opacity-75"></div>
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center text-white">
-            <h1 class="text-fixed-4xl md:text-fixed-6xl font-extrabold mb-4 drop-shadow-lg fade-in-up">EL RESOLVITO</h1>
-            <p class="text-fixed-lg md:text-fixed-xl max-w-2xl mx-auto mb-8 drop-shadow-md fade-in-up" style="transition-delay: 150ms;">Mercado y víveres... a un clic de distancia.</p>
-            <a href="#mercado" class="bg-[var(--accent-color)] text-white font-bold py-3 px-8 rounded-full text-fixed-lg hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg fade-in-up" style="transition-delay: 300ms;">Explorar Productos</a>
+<section class="hero-banner relative pt-24 pb-16 md:pt-32 md:pb-24">
+<div class="hero-overlay absolute inset-0 opacity-75"></div>
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center text-white">
+<h1 class="text-fixed-4xl md:text-fixed-6xl font-extrabold mb-4 drop-shadow-lg fade-in-up">EL RESOLVITO</h1>
+<p class="text-fixed-lg md:text-fixed-xl max-w-2xl mx-auto mb-8 drop-shadow-md fade-in-up" style="transition-delay: 150ms;">Mercado y víveres... a un clic de distancia.</p>
+<a href="#mercado" class="bg-[var(--accent-color)] text-white font-bold py-3 px-8 rounded-full text-fixed-lg hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg fade-in-up" style="transition-delay: 300ms;">Explorar Productos</a>
+</div>
+</section>
+code
+Code
+<section id="mercado" class="py-16 lg:py-24 bg-gray-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 fade-in-up">
+            <h2 class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--text-dark)]">Mercado y Víveres</h2>
+            <p class="mt-4 text-fixed-lg text-[var(--text-medium)] max-w-3xl mx-auto">Encuentra productos que necesitas para tu hogar, desde bebidas refrescantes hasta productos frescos.</p>
         </div>
-    </section>
+        
+        <!-- ======================================================= -->
+        <!-- === INICIO DEL BANNER DE PROMOCIÓN DE ENVÍOS MEJORADO (CON BARRA DE PROGRESO) === -->
+        <!-- ======================================================= -->
+        <div class="bg-white border-2 border-dashed border-green-200 p-4 rounded-xl shadow-md mb-8 text-center fade-in-up" id="deliveryPromoBanner">
+            <h3 class="text-fixed-xl md:text-fixed-2xl font-extrabold text-[var(--primary-color)] mb-4">¡Ahorra en tu Envío a La Habana Vieja!</h3>
+            
+            <!-- Barra de Progreso -->
+            <div class="w-full bg-gray-200 rounded-full h-3 mb-4 relative">
+                <div id="promoProgressBar" class="bg-[var(--accent-color)] h-3 rounded-full transition-all duration-500" style="width: 0%;"></div>
+                <div id="progressText" class="absolute top-0 left-0 w-full h-full flex items-center justify-center px-2 text-xs font-bold text-[var(--primary-color)]">
+                </div>
+            </div>
 
-    <section id="mercado" class="py-16 lg:py-24 bg-gray-50">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12 fade-in-up">
-                <h2 class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--text-dark)]">Mercado y Víveres</h2>
-                <p class="mt-4 text-fixed-lg text-[var(--text-medium)] max-w-3xl mx-auto">Encuentra productos que necesitas para tu hogar, desde bebidas refrescantes hasta productos frescos.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-fixed-sm md:text-fixed-base">
+                <!-- Nivel 1: Tarifa Regular -->
+                <div id="promoLevelRegular" class="bg-gray-50 p-3 rounded-lg flex flex-col justify-center items-center opacity-75 transition-all duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                    <p class="font-semibold text-gray-800">Costo Base</p>
+                    <p class="text-gray-600 font-bold">$150 CUP</p>
+                </div>
+                <!-- Nivel 2: Descuento -->
+                <div id="promoLevelDiscount" class="bg-green-50 p-3 rounded-lg flex flex-col justify-center items-center ring-2 ring-transparent transition-all duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-700 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 14l6-6m-5.5.5h.01m4.99 4.99h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"/></svg>
+                    <p class="font-semibold text-gray-800">Compras de $1,500+</p>
+                    <p class="text-green-700 font-bold">$50 CUP de envío</p>
+                </div>
+                <!-- Nivel 3: Envío Gratis -->
+                <div id="promoLevelFree" class="bg-green-100 p-3 rounded-lg flex flex-col justify-center items-center ring-2 ring-transparent transition-all duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[var(--accent-color)] mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+                    <p class="font-semibold text-gray-800">Compras de $3,500+</p>
+                    <p class="text-[var(--accent-color)] font-extrabold text-lg">¡ENVÍO GRATIS!</p>
+                </div>
+            </div>
+        </div>
+        <!-- ======================================================= -->
+        <!-- === FIN DEL BANNER DE PROMOCIÓN DE ENVÍOS MEJORADO === -->
+        <!-- ======================================================= -->
+
+        <div class="bg-white p-4 rounded-xl shadow-lg mb-8 fade-in-up" style="transition-delay: 150ms;">
+            <input type="text" id="mercadoSearchInput" placeholder="Buscar en Mercado y Víveres..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base">
+        </div>
+        <div id="mercadoCategoryFilters" class="flex flex-wrap justify-center gap-2 mb-8 fade-in-up" style="transition-delay: 300ms;"></div>
+        <div id="mercadoProductGrid"></div>
+        <p id="mercadoNoResultsMessage" class="hidden text-center text-fixed-lg text-[var(--text-medium)] mt-8">No se encontraron productos que coincidan con tu búsqueda.</p>
+    </div>
+</section>
+
+<section id="como-comprar" class="py-16 lg:py-24 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 fade-in-up">
+            <h2 class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--text-dark)]">¿Cómo Comprar en Línea?</h2>
+            <p class="mt-4 text-fixed-lg text-[var(--text-medium)] max-w-3xl mx-auto">Hacer tu pedido es muy fácil. Sigue estos sencillos pasos para recibir tus productos sin complicaciones.</p>
+        </div>
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
+            <div class="fade-in-left"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">1.</div><h3 class="text-fixed-xl font-bold mb-2">Elige Productos</h3><p class="text-fixed-base text-[var(--text-medium)]">Navega por nuestra tienda y añade los artículos que desees a tu carrito de compras.</p></div>
+            <div class="flex items-center justify-center text-gray-300 text-fixed-4xl font-light hidden md:flex">→</div>
+            <div class="fade-in-right" style="transition-delay: 150ms;"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">2.</div><h3 class="text-fixed-xl font-bold mb-2">Revisa tu Carrito</h3><p class="text-fixed-base text-[var(--text-medium)]">Abre tu carrito, revisa tu selección y las cantidades. Cuando estés listo, pulsa "Enviar Pedido".</p></div>
+            <div class="flex items-center justify-center text-gray-300 text-fixed-4xl font-light hidden md:flex">→</div>
+            <div class="fade-in-left" style="transition-delay: 300ms;"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">3.</div><h3 class="text-fixed-xl font-bold mb-2">Completa tus Datos</h3><p class="text-fixed-base text-[var(--text-medium)]">Llena el formulario con tu información de contacto, dirección de entrega, y método de pago preferido.</p></div>
+            <div class="flex items-center justify-center text-gray-300 text-fixed-4xl font-light hidden md:flex">→</div>
+            <div class="fade-in-right" style="transition-delay: 450ms;"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">4.</div><h3 class="text-fixed-xl font-bold mb-2">Confirma y Recibe</h3><p class="text-fixed-base text-[var(--text-medium)]">Confirma tu pedido y te contactaremos por WhatsApp para coordinar la entrega.</p></div>
+        </div>
+        <!-- ======================================================= -->
+        <!-- === INICIO DEL BANNER DE PROMOCIÓN DE ENVÍOS (REESTRUCTURADO EN "CÓMO COMPRAR") === -->
+        <!-- ======================================================= -->
+        <div class="mt-12 max-w-4xl mx-auto p-6 rounded-xl fade-in-up">
+            <h3 class="text-fixed-xl font-bold text-[var(--text-dark)] mb-6 text-center">Nuestra Política de Envíos</h3>
+            
+            <div class="bg-blue-50 p-4 rounded-lg shadow-inner mb-6">
+                <h4 class="font-bold text-fixed-lg text-[var(--primary-color)] mb-3 text-center">Envíos en Habana Vieja</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                    <!-- Tarifa Regular -->
+                    <div class="bg-white p-3 rounded-md border border-gray-200 shadow-sm flex flex-col justify-between">
+                        <p class="text-base font-semibold text-gray-700">Tarifa Regular</p>
+                        <p class="text-xl font-bold text-[var(--accent-color)] mt-1">$150 CUP</p>
+                    </div>
+                    <!-- Oferta Intermedia -->
+                    <div class="bg-green-100 p-3 rounded-md border border-green-300 shadow-md flex flex-col justify-between">
+                        <p class="text-base font-semibold text-green-800">Ahorra en envíos</p>
+                        <p class="text-xl font-bold text-green-700 mt-1">¡Solo $50 CUP!</p>
+                        <p class="text-xs text-gray-600 mt-1">(Compras de $1,500+)</p>
+                    </div>
+                    <!-- Oferta Principal: GRATIS -->
+                    <div class="bg-green-600 text-white p-3 rounded-md border border-green-700 shadow-lg flex flex-col justify-between transform scale-[1.03] relative">
+                        <p class="text-base font-semibold">Máximo Ahorro</p>
+                        <p class="text-xl md:text-2xl font-extrabold mt-1">¡ENVÍO GRATIS!</p>
+                        <p class="text-xs text-green-100 mt-1">(Compras de $3,500+)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 p-4 rounded-lg shadow-inner mb-6">
+                <h4 class="font-bold text-fixed-lg text-[var(--primary-color)] mb-3 text-center">Otros Municipios</h4>
+                <p class="text-fixed-base text-[var(--text-medium)] text-center">El costo de envío se ajustará al precio de la agencia de mensajería externa.</p>
+                <p class="text-fixed-base text-[var(--text-medium)] text-center">Te lo confirmaremos por WhatsApp antes de procesar tu pedido.</p>
             </div>
             
-            <!-- ======================================================= -->
-            <!-- === INICIO DEL BANNER DE PROMOCIÓN DE ENVÍOS (ACTUALIZADO) === -->
-            <!-- ======================================================= -->
-            <div class="bg-white border-2 border-dashed border-green-200 p-4 rounded-xl shadow-md mb-8 text-center fade-in-up">
-                <h3 class="text-fixed-lg md:text-fixed-xl font-extrabold text-[var(--primary-color)] mb-4">
-                    ¡Evita la Tarifa de Envío y Ahorra en Grande!
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 items-stretch gap-4 text-sm md:text-base">
-                    <!-- Oferta Intermedia -->
-                    <div class="bg-green-50 p-3 rounded-lg flex flex-col justify-center border border-green-200">
-                        <p class="font-semibold text-gray-800 text-base">Envío a solo <strong class="text-green-700">$50</strong></p>
-                        <p class="text-xs md:text-sm text-gray-600">Ahorra $100 (en compras de $1,500+)</p>
-                    </div>
-                    
-                    <!-- Oferta Principal: ¡ENVÍO GRATIS! -->
-                    <div class="bg-green-600 text-white p-4 rounded-xl shadow-lg ring-4 ring-yellow-400 transform scale-105 relative z-10 flex flex-col justify-center items-center transition-all duration-300 hover:scale-100 hover:ring-green-500">
-                        <p class="font-extrabold text-2xl md:text-3xl lg:text-4xl leading-none mb-1 text-center">¡ENVÍO GRATIS!</p>
-                        <p class="text-sm md:text-base text-center">Supera los $3,500 y Ahorra $150</p>
-                    </div>
-
-                    <!-- Tarifa Regular (Ancla) -->
-                    <div class="bg-green-50 p-3 rounded-lg flex flex-col justify-center text-gray-500 border border-green-200">
-                        <p class="font-semibold text-gray-700 text-base">Tarifa Regular</p>
-                        <p class="text-xs md:text-sm font-bold">$150</p>
-                    </div>
-                </div>
+            <div class="text-center mt-6 border-t pt-4">
+                <p class="font-bold text-gray-800 text-fixed-lg mb-2">Horarios de Reparto:</p>
+                <p class="text-fixed-base text-[var(--text-medium)]">Pedidos recibidos antes de las 11:00 AM se entregan de 12 PM a 2 PM.</p>
+                <p class="text-fixed-base text-[var(--text-medium)]">Pedidos recibidos antes de las 4:00 PM se entregan de 5 PM a 7 PM.</p>
             </div>
-            <!-- ======================================================= -->
-            <!-- === FIN DEL BANNER DE PROMOCIÓN DE ENVÍOS === -->
-            <!-- ======================================================= -->
-
-            <div class="bg-white p-4 rounded-xl shadow-lg mb-8 fade-in-up" style="transition-delay: 150ms;">
-                <input type="text" id="mercadoSearchInput" placeholder="Buscar en Mercado y Víveres..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base">
-            </div>
-            <div id="mercadoCategoryFilters" class="flex flex-wrap justify-center gap-2 mb-8 fade-in-up" style="transition-delay: 300ms;"></div>
-            <div id="mercadoProductGrid"></div>
-            <p id="mercadoNoResultsMessage" class="hidden text-center text-fixed-lg text-[var(--text-medium)] mt-8">No se encontraron productos que coincidan con tu búsqueda.</p>
         </div>
-    </section>
-    
-    <section id="como-comprar" class="py-16 lg:py-24 bg-white">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12 fade-in-up">
-                <h2 class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--text-dark)]">¿Cómo Comprar en Línea?</h2>
-                <p class="mt-4 text-fixed-lg text-[var(--text-medium)] max-w-3xl mx-auto">Hacer tu pedido es muy fácil. Sigue estos sencillos pasos para recibir tus productos sin complicaciones.</p>
-            </div>
-            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
-                <div class="fade-in-left"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">1.</div><h3 class="text-fixed-xl font-bold mb-2">Elige Productos</h3><p class="text-fixed-base text-[var(--text-medium)]">Navega por nuestra tienda y añade los artículos que desees a tu carrito de compras.</p></div>
-                <div class="flex items-center justify-center text-gray-300 text-fixed-4xl font-light hidden md:flex">→</div>
-                <div class="fade-in-right" style="transition-delay: 150ms;"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">2.</div><h3 class="text-fixed-xl font-bold mb-2">Revisa tu Carrito</h3><p class="text-fixed-base text-[var(--text-medium)]">Abre tu carrito, revisa tu selección y las cantidades. Cuando estés listo, pulsa "Enviar Pedido".</p></div>
-                <div class="flex items-center justify-center text-gray-300 text-fixed-4xl font-light hidden md:flex">→</div>
-                <div class="fade-in-left" style="transition-delay: 300ms;"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">3.</div><h3 class="text-fixed-xl font-bold mb-2">Completa tus Datos</h3><p class="text-fixed-base text-[var(--text-medium)]">Llena el formulario con tu información de contacto, dirección de entrega, y método de pago preferido.</p></div>
-                <div class="flex items-center justify-center text-gray-300 text-fixed-4xl font-light hidden md:flex">→</div>
-                <div class="fade-in-right" style="transition-delay: 450ms;"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">4.</div><h3 class="text-fixed-xl font-bold mb-2">Confirma y Recibe</h3><p class="text-fixed-base text-[var(--text-medium)]">Confirma tu pedido y te contactaremos por WhatsApp para coordinar la entrega.</p></div>
-            </div>
-            <!-- ======================================================= -->
-            <!-- === INICIO DEL BANNER DE PROMOCIÓN DE ENVÍOS (REESTRUCTURADO) === -->
-            <!-- ======================================================= -->
-            <div class="mt-12 max-w-4xl mx-auto p-6 rounded-xl fade-in-up">
-                <h3 class="text-fixed-xl font-bold text-[var(--text-dark)] mb-6 text-center">Nuestra Política de Envíos</h3>
-                
-                <div class="bg-blue-50 p-4 rounded-lg shadow-inner mb-6">
-                    <h4 class="font-bold text-fixed-lg text-[var(--primary-color)] mb-3 text-center">Envíos en Habana Vieja</h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-                        <!-- Tarifa Regular -->
-                        <div class="bg-white p-3 rounded-md border border-gray-200 shadow-sm flex flex-col justify-between">
-                            <p class="text-base font-semibold text-gray-700">Tarifa Regular</p>
-                            <p class="text-xl font-bold text-[var(--accent-color)] mt-1">$150 CUP</p>
-                        </div>
-                        <!-- Oferta Intermedia -->
-                        <div class="bg-green-100 p-3 rounded-md border border-green-300 shadow-md flex flex-col justify-between">
-                            <p class="text-base font-semibold text-green-800">Ahorra en envíos</p>
-                            <p class="text-xl font-bold text-green-700 mt-1">¡Solo $50 CUP!</p>
-                            <p class="text-xs text-gray-600 mt-1">(Compras de $1,500+)</p>
-                        </div>
-                        <!-- Oferta Principal: GRATIS -->
-                        <div class="bg-green-600 text-white p-3 rounded-md border border-green-700 shadow-lg flex flex-col justify-between transform scale-[1.03] relative">
-                            <p class="text-base font-semibold">Máximo Ahorro</p>
-                            <p class="text-xl md:text-2xl font-extrabold mt-1">¡ENVÍO GRATIS!</p>
-                            <p class="text-xs text-green-100 mt-1">(Compras de $3,500+)</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-blue-50 p-4 rounded-lg shadow-inner mb-6">
-                    <h4 class="font-bold text-fixed-lg text-[var(--primary-color)] mb-3 text-center">Otros Municipios</h4>
-                    <p class="text-fixed-base text-[var(--text-medium)] text-center">El costo de envío se ajustará al precio de la agencia de mensajería externa.</p>
-                    <p class="text-fixed-base text-[var(--text-medium)] text-center">Te lo confirmaremos por WhatsApp antes de procesar tu pedido.</p>
-                </div>
-                
-                <div class="text-center mt-6 border-t pt-4">
-                    <p class="font-bold text-gray-800 text-fixed-lg mb-2">Horarios de Reparto:</p>
-                    <p class="text-fixed-base text-[var(--text-medium)]">Pedidos recibidos antes de las 11:00 AM se entregan de 12 PM a 2 PM.</p>
-                    <p class="text-fixed-base text-[var(--text-medium)]">Pedidos recibidos antes de las 4:00 PM se entregan de 5 PM a 7 PM.</p>
-                </div>
-            </div>
-            <!-- ======================================================= -->
-            <!-- === FIN DEL BANNER DE PROMOCIÓN DE ENVÍOS (REESTRUCTURADO) === -->
-            <!-- ======================================================= -->
-        </div>
-    </section>
-
-    <section id="contacto" class="py-16 lg:py-24">
-         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12 fade-in-up">
-                <h2 class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--text-dark)]">Únete a Nuestro Club de Ofertas</h2>
-                <p class="mt-4 text-fixed-lg text-[var(--text-medium)] max-w-3xl mx-auto">Sé el primero en enterarte de nuevos productos y promociones exclusivas uniéndote a nuestro grupo de WhatsApp.</p>
-            </div>
-            <div class="max-w-lg mx-auto bg-white p-8 rounded-xl shadow-lg text-center fade-in-up" style="transition-delay: 150ms;">
-                <div class="space-y-4">
-                    <p class="text-fixed-lg"><strong>Canal de anuncios:</strong> Solo administradores</p>
-                    <p class="text-fixed-lg"><strong>Cero spam,</strong> solo información útil.</p>
-                </div>
-                <a href="#" id="contactWhatsappBtn" class="mt-8 inline-block bg-green-500 text-white font-bold py-3 px-8 rounded-full text-fixed-lg hover:bg-green-600 transform hover:scale-105 transition-all duration-300 shadow-lg">Unirse al Grupo de WhatsApp</a>
-            </div>
-         </div>
-    </section>
-</main>
-
-<footer class="bg-[var(--text-dark)] text-white py-8">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
-        <div class="flex justify-center items-center gap-6 mb-6">
-            <a href="https://wa.me/5356382909?text=¡Hola!%20Me%20interesa%20hacer%20un%20pedido." target="_blank" class="text-gray-400 hover:text-white transition-transform hover:scale-110"><svg class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C7.38 2 3.51 5.87 3.51 10.53C3.51 12.02 3.9 13.43 4.6 14.65L3.32 20.02L8.76 18.73C9.9 19.37 11.19 19.72 12.51 19.72H12.53C17.19 19.72 21.06 15.85 21.06 11.19C21.06 6.53 17.19 2.66 12.53 2.66H12.51Z"/></svg></a>
-        </div>
-        <p class="text-fixed-sm">&copy; 2024 El Resolvito. Todos los derechos reservados.</p>
+        <!-- ======================================================= -->
+        <!-- === FIN DEL BANNER DE PROMOCIÓN DE ENVÍOS (REESTRUCTURADO EN "CÓMO COMPRAR") === -->
+        <!-- ======================================================= -->
     </div>
+</section>
+
+<section id="contacto" class="py-16 lg:py-24">
+     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 fade-in-up">
+            <h2 class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--text-dark)]">Únete a Nuestro Club de Ofertas</h2>
+            <p class="mt-4 text-fixed-lg text-[var(--text-medium)] max-w-3xl mx-auto">Sé el primero en enterarte de nuevos productos y promociones exclusivas uniéndote a nuestro grupo de WhatsApp.</p>
+        </div>
+        <div class="max-w-lg mx-auto bg-white p-8 rounded-xl shadow-lg text-center fade-in-up" style="transition-delay: 150ms;">
+            <div class="space-y-4">
+                <p class="text-fixed-lg"><strong>Canal de anuncios:</strong> Solo administradores</p>
+                <p class="text-fixed-lg"><strong>Cero spam,</strong> solo información útil.</p>
+            </div>
+            <a href="#" id="contactWhatsappBtn" class="mt-8 inline-block bg-green-500 text-white font-bold py-3 px-8 rounded-full text-fixed-lg hover:bg-green-600 transform hover:scale-105 transition-all duration-300 shadow-lg">Unirse al Grupo de WhatsApp</a>
+        </div>
+     </div>
+</section>
+</main>
+<footer class="bg-[var(--text-dark)] text-white py-8">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+<div class="flex justify-center items-center gap-6 mb-6">
+<a href="https://wa.me/5356382909?text=¡Hola!%20Me%20interesa%20hacer%20un%20pedido." target="_blank" class="text-gray-400 hover:text-white transition-transform hover:scale-110"><svg class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C7.38 2 3.51 5.87 3.51 10.53C3.51 12.02 3.9 13.43 4.6 14.65L3.32 20.02L8.76 18.73C9.9 19.37 11.19 19.72 12.51 19.72H12.53C17.19 19.72 21.06 15.85 21.06 11.19C21.06 6.53 17.19 2.66 12.53 2.66H12.51Z"/></svg></a>
+</div>
+<p class="text-fixed-sm">&copy; 2024 El Resolvito. Todos los derechos reservados.</p>
+</div>
 </footer>
-    
 <!-- Modals (Carrito, Detalles de Producto, Checkout) -->
 <div id="cartModal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-    <div class="modal-content bg-white rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] flex flex-col">
-        <div class="p-6 border-b"><div class="flex justify-between items-center"><h3 class="text-fixed-xl font-bold text-[var(--text-dark)]">Tu Carrito</h3><button id="closeCartModal" class="text-gray-500 hover:text-gray-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button></div></div>
-        <div id="cartItems" class="p-6 overflow-y-auto"><p class="text-center text-[var(--text-medium)] text-fixed-base">Tu carrito está vacío</p></div>
-        <div class="p-6 border-t"><div class="flex justify-between items-center mb-4"><span class="text-fixed-lg font-bold">Total:</span><span id="cartTotal" class="text-fixed-lg font-bold text-[var(--primary-color)]">$0</span></div><button id="sendWhatsAppOrder" class="w-full bg-green-500 text-white font-bold py-3 px-6 rounded-lg text-fixed-base hover:bg-green-600 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed" disabled>Enviar Pedido por WhatsApp</button></div>
-    </div>
+<div class="modal-content bg-white rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] flex flex-col">
+<div class="p-6 border-b"><div class="flex justify-between items-center"><h3 class="text-fixed-xl font-bold text-[var(--text-dark)]">Tu Carrito</h3><button id="closeCartModal" class="text-gray-500 hover:text-gray-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button></div></div>
+<div id="cartItems" class="p-6 overflow-y-auto"><p class="text-center text-[var(--text-medium)] text-fixed-base">Tu carrito está vacío</p></div>
+<div class="p-6 border-t"><div class="flex justify-between items-center mb-4"><span class="text-fixed-lg font-bold">Total:</span><span id="cartTotal" class="text-fixed-lg font-bold text-[var(--primary-color)]">$0</span></div><button id="sendWhatsAppOrder" class="w-full bg-green-500 text-white font-bold py-3 px-6 rounded-lg text-fixed-base hover:bg-green-600 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed" disabled>Enviar Pedido por WhatsApp</button></div>
+</div>
 </div>
 <div id="productDetailsModal" class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[1000]">
-    <div class="modal-content bg-white rounded-lg shadow-xl w-11/12 max-w-md max-h-[90vh] flex flex-col">
-        <div class="flex justify-between items-center p-4 border-b"><h2 id="productDetailsTitle" class="text-fixed-2xl font-bold"></h2><button id="closeProductDetailsModalBtn" class="text-gray-500 hover:text-gray-800 text-fixed-3xl">&times;</button></div>
-        <div class="p-6 overflow-y-auto">
-            <img id="productDetailsImage" src="" alt="Imagen del Producto" class="w-full h-64 object-contain rounded-lg mb-4">
-            <p id="productDetailsDescription" class="text-fixed-base text-[var(--text-medium)] mb-4"></p>
-            <div id="unitTypeSection" class="mb-4 hidden">
-                <label class="block text-fixed-base font-semibold text-gray-700 mb-2">Tipo de compra:</label>
-                <div class="flex gap-2">
-                    <button id="unitTypeIndividual" class="unit-type-btn flex-1 py-2 px-4 border border-gray-300 rounded-lg text-fixed-sm font-medium transition-colors active">Individual</button>
-                    <button id="unitTypeBox" class="unit-type-btn flex-1 py-2 px-4 border border-gray-300 rounded-lg text-fixed-sm font-medium transition-colors">Por Caja (24 unidades)</button>
-                </div>
-            </div>
-            <p id="productDetailsPrice" class="text-fixed-3xl font-bold text-[var(--primary-color)] mb-6 text-center"></p>
-            <div class="flex items-center justify-center space-x-4 mb-4">
-                <button id="decreaseQuantityBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold w-10 h-10 rounded-full text-fixed-xl">-</button>
-                <span id="productQuantityDisplay" class="text-fixed-2xl font-bold w-12 text-center">1</span>
-                <button id="increaseQuantityBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold w-10 h-10 rounded-full text-fixed-xl">+</button>
-            </div>
-            <div class="bg-gray-50 p-4 rounded-lg mb-4"><div class="flex justify-between items-center"><span class="text-fixed-lg font-semibold">Total:</span><span id="modalTotalPrice" class="text-fixed-2xl font-bold text-[var(--accent-color)]">$0</span></div></div>
-            <button id="addProductToCartModalBtn" class="w-full bg-[var(--accent-color)] text-white font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition-all duration-300 text-fixed-lg">Añadir al Carrito</button>
-        </div>
-    </div>
+<div class="modal-content bg-white rounded-lg shadow-xl w-11/12 max-w-md max-h-[90vh] flex flex-col">
+<div class="flex justify-between items-center p-4 border-b"><h2 id="productDetailsTitle" class="text-fixed-2xl font-bold"></h2><button id="closeProductDetailsModalBtn" class="text-gray-500 hover:text-gray-800 text-fixed-3xl">&times;</button></div>
+<div class="p-6 overflow-y-auto">
+<img id="productDetailsImage" src="" alt="Imagen del Producto" class="w-full h-64 object-contain rounded-lg mb-4">
+<p id="productDetailsDescription" class="text-fixed-base text-[var(--text-medium)] mb-4"></p>
+<div id="unitTypeSection" class="mb-4 hidden">
+<label class="block text-fixed-base font-semibold text-gray-700 mb-2">Tipo de compra:</label>
+<div class="flex gap-2">
+<button id="unitTypeIndividual" class="unit-type-btn flex-1 py-2 px-4 border border-gray-300 rounded-lg text-fixed-sm font-medium transition-colors active">Individual</button>
+<button id="unitTypeBox" class="unit-type-btn flex-1 py-2 px-4 border border-gray-300 rounded-lg text-fixed-sm font-medium transition-colors">Por Caja (24 unidades)</button>
 </div>
-
+</div>
+<p id="productDetailsPrice" class="text-fixed-3xl font-bold text-[var(--primary-color)] mb-6 text-center"></p>
+<div class="flex items-center justify-center space-x-4 mb-4">
+<button id="decreaseQuantityBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold w-10 h-10 rounded-full text-fixed-xl">-</button>
+<span id="productQuantityDisplay" class="text-fixed-2xl font-bold w-12 text-center">1</span>
+<button id="increaseQuantityBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold w-10 h-10 rounded-full text-fixed-xl">+</button>
+</div>
+<div class="bg-gray-50 p-4 rounded-lg mb-4"><div class="flex justify-between items-center"><span class="text-fixed-lg font-semibold">Total:</span><span id="modalTotalPrice" class="text-fixed-2xl font-bold text-[var(--accent-color)]">$0</span></div></div>
+<button id="addProductToCartModalBtn" class="w-full bg-[var(--accent-color)] text-white font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition-all duration-300 text-fixed-lg">Añadir al Carrito</button>
+</div>
+</div>
+</div>
 <!-- ======================================================= -->
 <!-- === CHECKOUT MODAL (ACTUALIZADO) === -->
 <!-- ======================================================= -->
 <div id="checkoutModal" class="modal-overlay fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4">
-    <div class="modal-content bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden">
-        <div class="p-6 border-b"><div class="flex justify-between items-center"><h3 class="text-fixed-2xl font-bold text-[var(--text-dark)]">Finalizar Pedido</h3><button id="closeCheckoutModal" class="text-gray-500 hover:text-gray-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button></div></div>
-        <div class="flex-1 overflow-y-auto">
-            <div class="p-6 border-b">
-                <h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">1. Resumen de tu Pedido</h4>
-                <div id="checkoutOrderSummary" class="space-y-3 mb-4"></div>
-                <!-- ======================================================= -->
-                <!-- === INICIO DEL MENSAJE DE VENTA INTELIGENTE === -->
-                <!-- ======================================================= -->
-                <div id="upsellMessage" class="my-4 p-3 rounded-lg text-center font-semibold text-sm transition-all duration-300">
-                    <!-- El mensaje se generará aquí con JavaScript -->
-                </div>
-                <!-- ======================================================= -->
-                <!-- === FIN DEL MENSAJE DE VENTA INTELIGENTE === -->
-                <!-- ======================================================= -->
-                <div class="bg-gray-50 p-4 rounded-lg space-y-2"><div class="flex justify-between text-fixed-base"><span>Subtotal de productos:</span><span id="checkoutSubtotal" class="font-semibold">$0</span></div><div class="flex justify-between text-fixed-base text-gray-600"><span>Servicio y Empaque:</span><span id="checkoutServiceFee" class="font-semibold">$50</span></div><div class="flex justify-between text-fixed-base"><span>Costo de envío:</span><span id="checkoutShipping" class="font-semibold">$0</span></div><div id="shippingNote" class="text-fixed-sm text-gray-600 hidden"></div><hr class="my-2"><div class="flex justify-between text-fixed-lg font-bold text-[var(--primary-color)]"><span>Total a Pagar:</span><span id="checkoutTotal">$0</span></div></div>
-            </div>
-            <div class="p-6 border-b">
-                <h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">2. Datos de Contacto</h4>
-                <div class="space-y-4">
-                    <div>
-                        <label for="customerName" class="block text-fixed-base font-semibold text-gray-700 mb-2">Nombre completo *</label>
-                        <input type="text" id="customerName" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm p-2 text-fixed-base focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)]" required>
-                    </div>
-                    <div>
-                        <label for="customerAddress" class="block text-fixed-base font-semibold text-gray-700 mb-2">Calle y número (ej: Aguiar #230 apto 1) *</label>
-                        <input type="text" id="customerAddress" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm p-2 text-fixed-base focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)]" required>
-                    </div>
-                    <div>
-                        <label for="customerReferences" class="block text-fixed-base font-semibold text-gray-700 mb-2">Puntos de Referencia (Opcional)</label>
-                        <input type="text" id="customerReferences" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm p-2 text-fixed-base focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)]">
-                    </div>
-                    <div>
-                        <label for="customerPhone" class="block text-fixed-base font-semibold text-gray-700 mb-2">Número de teléfono *</label>
-                        <input type="tel" id="customerPhone" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm p-2 text-fixed-base focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)]" required>
-                    </div>
-                    <div>
-                        <label for="deliveryLocation" class="block text-fixed-base font-semibold text-gray-700 mb-2">Ubicación *</label>
-                        <select id="deliveryLocation" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm p-2 text-fixed-base focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)]" required>
-                            <option value="">Selecciona tu ubicación</option>
-                            <option value="habana-vieja">Habana Vieja</option>
-                            <option value="otros">Otros municipios</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="p-6 border-b">
-                <h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">3. Detalles del Pago</h4>
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-fixed-base font-semibold text-gray-700 mb-2">Método de pago *</label>
-                        <div class="space-y-2">
-                            <label class="flex items-center">
-                                <input type="radio" name="paymentMethod" value="efectivo" class="mr-3 text-[var(--primary-color)] focus:ring-[var(--primary-color)]">
-                                <span class="text-fixed-base">Efectivo</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="radio" name="paymentMethod" value="transferencia" class="mr-3 text-[var(--primary-color)] focus:ring-[var(--primary-color)]">
-                                <span class="text-fixed-base">Transferencia</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div id="cashPaymentField" class="hidden">
-                        <label class="block text-fixed-base font-semibold text-gray-700 mb-2">Pagaré con...</label>
-                        <div class="flex flex-wrap gap-2">
-                            <button type="button" class="cash-btn" data-amount="20">$20</button>
-                            <button type="button" class="cash-btn" data-amount="50">$50</button>
-                            <button type="button" class="cash-btn" data-amount="100">$100</button>
-                            <button type="button" class="cash-btn" data-amount="200">$200</button>
-                            <button type="button" class="cash-btn" data-amount="500">$500</button>
-                            <button type="button" class="cash-btn" data-amount="1000">$1000</button>
-                            <button type="button" class="cash-btn" data-amount="otro">Otro</button>
-                        </div>
-                        <input type="text" id="otherCashAmount" placeholder="Especifica otro monto" class="hidden w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] transition text-fixed-base">
-                    </div>
-                </div>
-            </div>
-            <div class="p-6">
-                <h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">4. Política de Envíos</h4>
-                <div class="bg-blue-50 p-4 rounded-lg text-fixed-sm text-gray-700 space-y-2">
-                    <p><strong>Horarios de entrega:</strong> 9:00 a.m. a 8:00 p.m.</p>
-                    <p><strong>Habana Vieja:</strong></p>
-                    <ul class="list-disc list-inside ml-4 space-y-1">
-                        <li>Tarifa de envío: <strong>$150 CUP</strong>.</li>
-                        <li class="font-semibold text-green-600">¡Envío GRATIS en compras de $3,500 CUP o más!</li>
-                        <li>Costo de envío $50 CUP en compras de $1,500 CUP o más.</li>
-                    </ul>
-                    <p><strong>Otros municipios:</strong></p>
-                    <ul class="list-disc list-inside ml-4 space-y-1">
-                        <li>El costo de envío se ajustará al precio de la agencia de mensajería externa.</li>
-                        <li>Se lo confirmaremos por WhatsApp antes de procesar su pedido.</li>
-                    </ul>
-                    <p class="text-xs text-gray-600 mt-3">Al confirmar su pedido, acepta nuestras condiciones de envío y horarios establecidos.</p>
-                </div>
-            </div>
-        </div>
-        <div class="p-6 border-t bg-gray-50">
-            <button id="confirmOrderBtn" class="w-full bg-green-500 text-white font-bold py-4 px-4 rounded-lg text-fixed-base hover:bg-green-600 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]">Confirmar y Enviar Pedido</button>
-        </div>
-    </div>
+<div class="modal-content bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden">
+<div class="p-6 border-b"><div class="flex justify-between items-center"><h3 class="text-fixed-2xl font-bold text-[var(--text-dark)]">Finalizar Pedido</h3><button id="closeCheckoutModal" class="text-gray-500 hover:text-gray-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button></div></div>
+<div class="flex-1 overflow-y-auto">
+<div class="p-6 border-b">
+<h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">1. Resumen de tu Pedido</h4>
+<div id="checkoutOrderSummary" class="space-y-3 mb-4"></div>
+<!-- ======================================================= -->
+<!-- === INICIO DEL MENSAJE DE VENTA INTELIGENTE === -->
+<!-- ======================================================= -->
+<div id="upsellMessage" class="my-4 p-3 rounded-lg text-center font-semibold text-sm transition-all duration-300">
+<!-- El mensaje se generará aquí con JavaScript -->
+</div>
+<!-- ======================================================= -->
+<!-- === FIN DEL MENSAJE DE VENTA INTELIGENTE === -->
+<!-- ======================================================= -->
+<div class="bg-gray-50 p-4 rounded-lg space-y-2"><div class="flex justify-between text-fixed-base"><span>Subtotal de productos:</span><span id="checkoutSubtotal" class="font-semibold">$0</span></div><div class="flex justify-between text-fixed-base text-gray-600"><span>Servicio y Empaque:</span><span id="checkoutServiceFee" class="font-semibold">$50</span></div><div class="flex justify-between text-fixed-base"><span>Costo de envío:</span><span id="checkoutShipping" class="font-semibold">$0</span></div><div id="shippingNote" class="text-fixed-sm text-gray-600 hidden"></div><hr class="my-2"><div class="flex justify-between text-fixed-lg font-bold text-[var(--primary-color)]"><span>Total a Pagar:</span><span id="checkoutTotal">$0</span></div></div>
+</div>
+<div class="p-6 border-b">
+<h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">2. Datos de Contacto</h4>
+<div class="space-y-4">
+<div>
+<label for="customerName" class="block text-fixed-base font-semibold text-gray-700 mb-2">Nombre completo *</label>
+<input type="text" id="customerName" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm p-2 text-fixed-base focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)]" required>
+</div>
+<div>
+<label for="customerAddress" class="block text-fixed-base font-semibold text-gray-700 mb-2">Calle y número (ej: Aguiar #230 apto 1) *</label>
+<input type="text" id="customerAddress" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm p-2 text-fixed-base focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)]" required>
+</div>
+<div>
+<label for="customerReferences" class="block text-fixed-base font-semibold text-gray-700 mb-2">Puntos de Referencia (Opcional)</label>
+<input type="text" id="customerReferences" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm p-2 text-fixed-base focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)]">
+</div>
+<div>
+<label for="customerPhone" class="block text-fixed-base font-semibold text-gray-700 mb-2">Número de teléfono *</label>
+<input type="tel" id="customerPhone" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm p-2 text-fixed-base focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)]" required>
+</div>
+<div>
+<label for="deliveryLocation" class="block text-fixed-base font-semibold text-gray-700 mb-2">Ubicación *</label>
+<select id="deliveryLocation" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm p-2 text-fixed-base focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)]" required>
+<option value="">Selecciona tu ubicación</option>
+<option value="habana-vieja">Habana Vieja</option>
+<option value="otros">Otros municipios</option>
+</select>
+</div>
+</div>
+</div>
+<div class="p-6 border-b">
+<h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">3. Detalles del Pago</h4>
+<div class="space-y-4">
+<div>
+<label class="block text-fixed-base font-semibold text-gray-700 mb-2">Método de pago *</label>
+<div class="space-y-2">
+<label class="flex items-center">
+<input type="radio" name="paymentMethod" value="efectivo" class="mr-3 text-[var(--primary-color)] focus:ring-[var(--primary-color)]">
+<span class="text-fixed-base">Efectivo</span>
+</label>
+<label class="flex items-center">
+<input type="radio" name="paymentMethod" value="transferencia" class="mr-3 text-[var(--primary-color)] focus:ring-[var(--primary-color)]">
+<span class="text-fixed-base">Transferencia</span>
+</label>
+</div>
+</div>
+<div id="cashPaymentField" class="hidden">
+<label class="block text-fixed-base font-semibold text-gray-700 mb-2">Pagaré con...</label>
+<div class="flex flex-wrap gap-2">
+<button type="button" class="cash-btn" data-amount="20">$20</button>
+<button type="button" class="cash-btn" data-amount="50">$50</button>
+<button type="button" class="cash-btn" data-amount="100">$100</button>
+<button type="button" class="cash-btn" data-amount="200">$200</button>
+<button type="button" class="cash-btn" data-amount="500">$500</button>
+<button type="button" class="cash-btn" data-amount="1000">$1000</button>
+<button type="button" class="cash-btn" data-amount="otro">Otro</button>
+</div>
+<input type="text" id="otherCashAmount" placeholder="Especifica otro monto" class="hidden w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] transition text-fixed-base">
+</div>
+</div>
+</div>
+<div class="p-6">
+<h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">4. Política de Envíos</h4>
+<div class="bg-blue-50 p-4 rounded-lg text-fixed-sm text-gray-700 space-y-2">
+<p><strong>Horarios de entrega:</strong> 9:00 a.m. a 8:00 p.m.</p>
+<p><strong>Habana Vieja:</strong></p>
+<ul class="list-disc list-inside ml-4 space-y-1">
+<li>Tarifa de envío: <strong>$150 CUP</strong>.</li>
+<li class="font-semibold text-green-600">¡Envío GRATIS en compras de $3,500 CUP o más!</li>
+<li>Costo de envío $50 CUP en compras de $1,500 CUP o más.</li>
+</ul>
+<p><strong>Otros municipios:</strong></p>
+<ul class="list-disc list-inside ml-4 space-y-1">
+<li>El costo de envío se ajustará al precio de la agencia de mensajería externa.</li>
+<li>Se lo confirmaremos por WhatsApp antes de procesar su pedido.</li>
+</ul>
+<p class="text-xs text-gray-600 mt-3">Al confirmar su pedido, acepta nuestras condiciones de envío y horarios establecidos.</p>
+</div>
+</div>
+</div>
+<div class="p-6 border-t bg-gray-50">
+<button id="confirmOrderBtn" class="w-full bg-green-500 text-white font-bold py-4 px-4 rounded-lg text-fixed-base hover:bg-green-600 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]">Confirmar y Enviar Pedido</button>
+</div>
+</div>
 </div>
 <!-- ======================================================= -->
 <!-- === FIN DEL CHECKOUT MODAL === -->
 <!-- ======================================================= -->
-
+<!-- ======================================================= -->
+<!-- === INICIO DEL NUEVO MODAL DE CONFIRMACIÓN === -->
+<!-- ======================================================= -->
 <div id="confirmationModal" class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[1000]">
-    <div class="modal-content bg-white rounded-lg shadow-xl w-11/12 max-w-md p-6 text-center">
-        <h3 class="text-fixed-2xl font-bold text-[var(--text-dark)] mb-4">¡Pedido Confirmado!</h3>
-        <p class="text-fixed-base text-[var(--text-medium)] mb-6">Tu pedido ha sido enviado. Te contactaremos pronto por WhatsApp para coordinar la entrega.</p>
-        <button id="closeConfirmationModal" class="bg-[var(--primary-color)] text-white font-bold py-2 px-6 rounded-lg hover:bg-opacity-90 transition-colors duration-300 text-fixed-base">Cerrar</button>
-    </div>
+<div class="modal-content bg-white rounded-lg shadow-xl w-11/12 max-w-md p-6 text-center">
+<h3 class="text-fixed-2xl font-bold text-[var(--text-dark)] mb-4">¡Pedido Confirmado!</h3>
+<p class="text-fixed-base text-[var(--text-medium)] mb-6">Tu pedido ha sido enviado. Te contactaremos pronto por WhatsApp para coordinar la entrega.</p>
+<button id="closeConfirmationModal" class="bg-[var(--primary-color)] text-white font-bold py-2 px-6 rounded-lg hover:bg-opacity-90 transition-colors duration-300 text-fixed-base">Cerrar</button>
 </div>
-
+</div>
+<!-- ======================================================= -->
+<!-- === FIN DEL NUEVO MODAL DE CONFIRMACIÓN === -->
+<!-- ======================================================= -->
 <!-- BOTÓN DEL CARRITO MODIFICADO -->
 <button id="floatingCartBtn" class="fixed bottom-6 right-6 bg-[var(--primary-color)] text-white px-5 py-3 rounded-full shadow-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 z-40 flex items-center gap-3">
-    <div class="relative">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.402H3.62a.5.5 0 0 1-.49-.598l-1-5A.5.5 0 0 1 2 1H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2.5h7.45l.5-2.5H3.14zM5 12a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-        </svg>
-        <span id="cartCount" class="absolute -top-1 -right-1 bg-[var(--accent-color)] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">0</span>
-    </div>
-    <span id="floatingCartTotal" class="text-fixed-lg font-bold">$0</span>
+<div class="relative">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+<path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.402H3.62a.5.5 0 0 1-.49-.598l-1-5A.5.5 0 0 1 2 1H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2.5h7.45l.5-2.5H3.14zM5 12a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+</svg>
+<span id="cartCount" class="absolute -top-1 -right-1 bg-[var(--accent-color)] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">0</span>
+</div>
+<span id="floatingCartTotal" class="text-fixed-lg font-bold">$0</span>
 </button>
-
 <!-- Notificación Toast/Banner para el Carrito -->
 <div id="cartToast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none z-[9999]">
-    <p id="cartToastMessage" class="text-fixed-sm"></p>
+<p id="cartToastMessage" class="text-fixed-sm"></p>
 </div>
-
 <script>
-    // ===================================================================
-    // === INICIO DEL CATÁLOGO DE PRODUCTOS - "EL RESOLVITO" ===
-    // ===================================================================
-    var products = [
-        // --- PRODUCTOS DE MERCADO ---
-        { id: 1, name: "Aceite", price: 900, image: "https://i.postimg.cc/FFdbnBBS/aceite.jpg", description: "Botella de aceite vegetal.", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 2, name: "Arroz", price: 650, image: "https://i.postimg.cc/ZRR352mX/arroz.jpg", description: "Precio de oferta. Paquete de 1 kg aprox.", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 3, name: "Spaghetti", price: 350, image: "https://i.postimg.cc/rpBWC2DW/spaguetis.png", description: "Paquete de spaghetti de 400g.", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 4, name: "Picadillo", price: 380, image: "https://i.postimg.cc/pdhzFLLR/picadillo-de-pollo.png", description: "Paquete de picadillo de ave.", category: "Cárnicos", status: "available", hasBoxOption: false },
-        { id: 5, name: "Salchichas (Perritos)", price: 400, image: "https://i.postimg.cc/R0mKFv73/salchichas-1-paquete.png", description: "Paquete de salchichas tipo perrito.", category: "Cárnicos", status: "available", hasBoxOption: false },
-        { id: 6, name: "Cerveza Presidente", price: 220, image: "https://i.postimg.cc/sXBWqMwz/cerveza-predidente-precio-220.png", description: "Lata de 355 ml.", category: "Líquidos", status: "available", hasBoxOption: true, boxPrice: 5280, boxQuantity: 24 },
-        { id: 7, name: "Malta Guajira", price: 250, image: "https://i.postimg.cc/mD0wD6fZ/malta-guajira.jpg", description: "Lata de malta refrescante.", category: "Líquidos", status: "available", hasBoxOption: false },
-        { id: 8, name: "Leche Condensada", price: 520, image: "https://i.postimg.cc/fRbxMK43/leche-condensada.jpg", description: "Lata de leche condensada.", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 9, name: "Jabón de Baño", price: 160, image: "https://i.postimg.cc/7LDd9DVz/Jab-n-Ridel-100g-r.png", description: "Pastilla de jabón de baño.", category: "Aseo Personal", status: "available", hasBoxOption: false },
-        { id: 10, name: "Refresco Instantáneo", price: 40, image: "https://i.postimg.cc/MTzsbBM1/refresco-1.png", description: "Sobre de refresco en polvo. Varios sabores.", category: "Líquidos", status: "available", hasBoxOption: false },
-        { id: 11, name: "Hígado de Pollo", price: 850, image: "https://i.postimg.cc/52k8yC1s/hiogado_de_pollo.jpg", description: "Paquete de 1 kg.", category: "Cárnicos", status: "available", hasBoxOption: false },
-        { id: 12, name: "Whisky Jolly", price: 400, image: "https://i.postimg.cc/8zBPM9Yn/grok_image_xotf0za.jpg", description: "Botella de 200 ml.", category: "Líquidos", status: "available", hasBoxOption: false },
-        { id: 13, name: "Frijol Negro", price: 680, image: "https://i.postimg.cc/rFt14B4k/frijol_negro.jpg", description: "Paquete de 1 kg.", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 14, name: "Galletas SaltiBloks", price: 890, image: "https://i.postimg.cc/c4qpfNz7/Galletas-7-tacos.png", description: "1 paquete de galletas.", category: "Confituras", status: "available", hasBoxOption: false },
-        { id: 15, name: "Detergente Brillante", price: 350, image: "https://i.postimg.cc/NfD6hnnq/detergente_brillante.jpg", description: "Bolsa de detergente en polvo.", category: "Aseo Personal", status: "available", hasBoxOption: false },
-        { id: 16, name: "Cerveza Unlaguer", price: 250, image: "https://i.postimg.cc/HLv56w03/cerveza-ulaguer-precio-300.png", description: "Lata de cerveza Unlaguer.", category: "Líquidos", status: "available", hasBoxOption: true, boxPrice: 6000, boxQuantity: 24 },
-        { id: 17, name: "Cerveza Cristal", price: 280, image: "https://i.postimg.cc/MZ5gbYw8/cristal.png", description: "Lata de cerveza Cristal.", category: "Líquidos", status: "available", hasBoxOption: true, boxPrice: 6720, boxQuantity: 24 },
-        { id: 18, name: "Azúcar Blanca", price: 600, image: "https://i.postimg.cc/c40RbWXB/azucar_blanca.jpg", description: "Paquete de 1 kg.", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 19, name: "Papel Sanitario", price: 530, image: "https://i.postimg.cc/Znt5rmJ2/grok_image_xypezad.jpg", description: "Paquete de 4 rollos.", category: "Aseo Personal", status: "available", hasBoxOption: false },
-        { id: 20, name: "Malta Morena", price: 210, image: "https://i.postimg.cc/pLsccNs6/Malta-Morena-8-oz-Lata.jpg", description: "Lata de 8 oz.", category: "Líquidos", status: "available", hasBoxOption: false },
-        { id: 21, name: "Fritos", price: 200, image: "https://i.postimg.cc/GhqTCs0B/fritos.jpg", description: "Crujientes frituras para picar.", category: "Confituras", status: "available", hasBoxOption: false },
-        { id: 22, name: "Jabón de Baño Pemila", price: 160, image: "https://i.postimg.cc/5t3GkG7R/jabon-de-ba-o-pemila.png", description: "Pastilla de jabón de baño Pemila.", category: "Aseo Personal", status: "available", hasBoxOption: false },
-        { id: 23, name: "Pasta de Tomate", price: 120, image: "https://i.postimg.cc/m2b1Jynf/pasta-de-tomate.jpg", description: "Concentrado de tomate para tus comidas.", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 24, name: "Pelly de Queso", price: 500, image: "https://i.postimg.cc/Zq1yQkGV/pelly.jpg", description: "Deliciosos Pellys con sabor a queso.", category: "Confituras", status: "available", hasBoxOption: false },
-        { id: 25, name: "Ron Capitán Cortez", price: 1500, image: "https://i.postimg.cc/QdC9xxsf/ron-capitan-cortez.jpg", description: "Botella de ron Capitán Cortez.", category: "Líquidos", status: "available", hasBoxOption: false },
-        { id: 26, name: "Sorbeto Renata", price: 300, image: "https://i.postimg.cc/Wb6CbTSq/sorbeto-renata.jpg", description: "Paquete de sorbetos Renata.", category: "Confituras", status: "available", hasBoxOption: false },
-        // --- NUEVOS PRODUCTOS AÑADIDOS ---
-        { id: 27, name: "Gel de Ducha", price: 1200, image: "https://i.postimg.cc/J4dFhC21/gel_de_ducha-precio_1200.png", description: "Gel de ducha refrescante.", category: "Aseo Personal", status: "available", hasBoxOption: false },
-        { id: 28, name: "Loción Corporal Isana Q10 + Vit. C", price: 1500, image: "https://i.postimg.cc/nLKTBy09/locion_corporal_reafirmante_isanaQ___vitamina_c-precio_1500.png", category: "Aseo Personal", status: "available", hasBoxOption: false },
-        { id: 29, name: "Mermelada de Fresa", price: 600, image: "https://i.postimg.cc/mD8w6Qxb/mermelada-de-fresa-200-g-precio_600.png", description: "Mermelada de fresa en envase de 200g.", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 30, name: "Loción Corporal Garnier", price: 1500, image: "https://i.postimg.cc/T1NthnQk/locion_corporal_Garnier-precio_1500.png", description: "Loción corporal hidratante Garnier.", category: "Aseo Personal", status: "available", hasBoxOption: false }
-    ];
-    
-    // =================================================================
-    // === ORDENAMIENTO AUTOMÁTICO DEL CATÁLOGO ===
-    // =================================================================
-    products.sort((a, b) => {
-        if (a.category < b.category) return -1;
-        if (a.category > b.category) return 1;
-        if (a.name < b.name) return -1;
-        if (a.name > b.name) return 1;
-        return 0;
-    });
-    
-    var cart = JSON.parse(localStorage.getItem('cart')) || [];
-    var whatsappGroupLink = 'https://chat.whatsapp.com/H19dIofkINdHrVApA4jbvW?mode=ac_t'; // Pega aquí tu enlace de grupo
-    var currentProductForModal = null;
-    var currentUnitType = 'individual';
-    var selectedCashAmount = '';
-    var toastTimeout; // Variable para controlar el temporizador del toast
+// ===================================================================
+// === INICIO DEL CATÁLOGO DE PRODUCTOS - "EL RESOLVITO" ===
+// ===================================================================
+var products = [
+// --- PRODUCTOS DE MERCADO ---
+{ id: 1, name: "Aceite", price: 900, image: "https://i.postimg.cc/FFdbnBBS/aceite.jpg", description: "Botella de aceite vegetal.", category: "Mercado", status: "available", hasBoxOption: false },
+{ id: 2, name: "Arroz", price: 650, image: "https://i.postimg.cc/ZRR352mX/arroz.jpg", description: "Precio de oferta. Paquete de 1 kg aprox.", category: "Mercado", status: "available", hasBoxOption: false },
+{ id: 3, name: "Spaghetti", price: 350, image: "https://i.postimg.cc/rpBWC2DW/spaguetis.png", description: "Paquete de spaghetti de 400g.", category: "Mercado", status: "available", hasBoxOption: false },
+{ id: 4, name: "Picadillo", price: 380, image: "https://i.postimg.cc/pdhzFLLR/picadillo-de-pollo.png", description: "Paquete de picadillo de ave.", category: "Cárnicos", status: "available", hasBoxOption: false },
+{ id: 5, name: "Salchichas (Perritos)", price: 400, image: "https://i.postimg.cc/R0mKFv73/salchichas-1-paquete.png", description: "Paquete de salchichas tipo perrito.", category: "Cárnicos", status: "available", hasBoxOption: false },
+{ id: 6, name: "Cerveza Presidente", price: 220, image: "https://i.postimg.cc/sXBWqMwz/cerveza-predidente-precio-220.png", description: "Lata de 355 ml.", category: "Líquidos", status: "available", hasBoxOption: true, boxPrice: 5280, boxQuantity: 24 },
+{ id: 7, name: "Malta Guajira", price: 250, image: "https://i.postimg.cc/mD0wD6fZ/malta-guajira.jpg", description: "Lata de malta refrescante.", category: "Líquidos", status: "available", hasBoxOption: false },
+{ id: 8, name: "Leche Condensada", price: 520, image: "https://i.postimg.cc/fRbxMK43/leche-condensada.jpg", description: "Lata de leche condensada.", category: "Mercado", status: "available", hasBoxOption: false },
+{ id: 9, name: "Jabón de Baño Ridel", price: 160, image: "https://i.postimg.cc/7LDd9DVz/Jab-n-Ridel-100g-r.png", description: "Pastilla de jabón de baño Ridel de 100g.", category: "Aseo Personal", status: "available", hasBoxOption: false },
+{ id: 10, name: "Refresco Instantáneo", price: 40, image: "https://i.postimg.cc/MTzsbBM1/refresco-1.png", description: "Sobre de refresco en polvo. Varios sabores.", category: "Líquidos", status: "available", hasBoxOption: false },
+{ id: 11, name: "Hígado de Pollo", price: 850, image: "https://i.postimg.cc/52k8yC1s/hiogado_de_pollo.jpg", description: "Paquete de 1 kg.", category: "Cárnicos", status: "available", hasBoxOption: false },
+{ id: 12, name: "Whisky Jolly", price: 400, image: "https://i.postimg.cc/8zBPM9Yn/grok_image_xotf0za.jpg", description: "Botella de 200 ml.", category: "Líquidos", status: "available", hasBoxOption: false },
+{ id: 13, name: "Frijol Negro", price: 680, image: "https://i.postimg.cc/rFt14B4k/frijol_negro.jpg", description: "Paquete de 1 kg.", category: "Mercado", status: "available", hasBoxOption: false },
+{ id: 14, name: "Galletas SaltiBloks", price: 890, image: "https://i.postimg.cc/c4qpfNz7/Galletas-7-tacos.png", description: "1 paquete de galletas.", category: "Confituras", status: "available", hasBoxOption: false },
+{ id: 15, name: "Detergente Brillante", price: 350, image: "https://i.postimg.cc/NfD6hnnq/detergente_brillante.jpg", description: "Bolsa de detergente en polvo.", category: "Aseo Personal", status: "available", hasBoxOption: false },
+{ id: 16, name: "Cerveza Unlaguer", price: 250, image: "https://i.postimg.cc/HLv56w03/cerveza-ulaguer-precio-300.png", description: "Lata de cerveza Unlaguer.", category: "Líquidos", status: "available", hasBoxOption: true, boxPrice: 6000, boxQuantity: 24 },
+{ id: 17, name: "Cerveza Cristal", price: 280, image: "https://i.postimg.cc/MZ5gbYw8/cristal.png", description: "Lata de cerveza Cristal.", category: "Líquidos", status: "available", hasBoxOption: true, boxPrice: 6720, boxQuantity: 24 },
+{ id: 18, name: "Azúcar Blanca", price: 600, image: "https://i.postimg.cc/c40RbWXB/azucar_blanca.jpg", description: "Paquete de 1 kg.", category: "Mercado", status: "available", hasBoxOption: false },
+{ id: 19, name: "Papel Sanitario", price: 530, image: "https://i.postimg.cc/Znt5rmJ2/grok_image_xypezad.jpg", description: "Paquete de 4 rollos.", category: "Aseo Personal", status: "available", hasBoxOption: false },
+{ id: 20, name: "Malta Morena", price: 210, image: "https://i.postimg.cc/pLsccNs6/Malta-Morena-8-oz-Lata.jpg", description: "Lata de 8 oz.", category: "Líquidos", status: "available", hasBoxOption: false },
+{ id: 21, name: "Fritos", price: 200, image: "https://i.postimg.cc/GhqTCs0B/fritos.jpg", description: "Crujientes frituras para picar.", category: "Confituras", status: "available", hasBoxOption: false },
+{ id: 22, name: "Jabón de Baño Pemila", price: 160, image: "https://i.postimg.cc/5t3GkG7R/jabon-de-ba-o-pemila.png", description: "Pastilla de jabón de baño Pemila.", category: "Aseo Personal", status: "available", hasBoxOption: false },
+{ id: 23, name: "Pasta de Tomate", price: 120, image: "https://i.postimg.cc/m2b1Jynf/pasta-de-tomate.jpg", description: "Concentrado de tomate para tus comidas.", category: "Mercado", status: "available", hasBoxOption: false },
+{ id: 24, name: "Pelly de Queso", price: 500, image: "https://i.postimg.cc/Zq1yQkGV/pelly.jpg", description: "Deliciosos Pellys con sabor a queso.", category: "Confituras", status: "available", hasBoxOption: false },
+{ id: 25, name: "Ron Capitán Cortez", price: 1500, image: "https://i.postimg.cc/QdC9xxsf/ron-capitan-cortez.jpg", description: "Botella de ron Capitán Cortez.", category: "Líquidos", status: "available", hasBoxOption: false },
+{ id: 26, name: "Sorbeto Renata", price: 300, image: "https://i.postimg.cc/Wb6CbTSq/sorbeto-renata.jpg", description: "Paquete de sorbetos Renata.", category: "Confituras", status: "available", hasBoxOption: false },
+// --- NUEVOS PRODUCTOS AÑADIDOS ---
+{ id: 27, name: "Gel de Ducha", price: 1200, image: "https://i.postimg.cc/J4dFhC21/gel_de_ducha-precio_1200.png", description: "Gel de ducha refrescante.", category: "Aseo Personal", status: "available", hasBoxOption: false },
+{ id: 28, name: "Loción Corporal Isana Q10 + Vit. C", price: 1500, image: "https://i.postimg.cc/nLKTBy09/locion_corporal_reafirmante_isanaQ___vitamina_c-precio_1500.png", description: "Loción corporal reafirmante Isana Q10 + Vit. C.", category: "Aseo Personal", status: "available", hasBoxOption: false },
+{ id: 29, name: "Mermelada de Fresa", price: 600, image: "https://i.postimg.cc/mD8w6Qxb/mermelada-de-fresa-200-g-precio_600.png", description: "Mermelada de fresa en envase de 200g.", category: "Mercado", status: "available", hasBoxOption: false },
+{ id: 30, name: "Loción Corporal Garnier", price: 1500, image: "https://i.postimg.cc/T1NthnQk/locion_corporal_Garnier-precio_1500.png", description: "Loción corporal hidratante Garnier.", category: "Aseo Personal", status: "available", hasBoxOption: false }
+];
 
-    // Referencias a modales y botones de cierre al inicio del script para asegurar que existen.
-    // Declaraciones movidas aquí para asegurar disponibilidad global
-    const cartModal = document.getElementById('cartModal');
-    const productDetailsModal = document.getElementById('productDetailsModal');
-    const checkoutModal = document.getElementById('checkoutModal');
-    const confirmationModal = document.getElementById('confirmationModal'); 
-    // Otros elementos que pueden necesitar una referencia temprana
-    const floatingCartBtn = document.getElementById('floatingCartBtn');
-    const closeCartModalBtn = document.getElementById('closeCartModal');
-    const closeProductDetailsModalBtn = document.getElementById('closeProductDetailsModalBtn');
-    const closeCheckoutModalBtn = document.getElementById('closeCheckoutModal');
-    const closeConfirmationModalBtn = document.getElementById('closeConfirmationModal'); // Botón de cerrar del modal de confirmación
+// =================================================================
+// === ORDENAMIENTO AUTOMÁTICO DEL CATÁLOGO ===
+// =================================================================
+products.sort((a, b) => {
+if (a.category < b.category) return -1;
+if (a.category > b.category) return 1;
+if (a.name < b.name) return -1;
+if (a.name > b.name) return 1;
+return 0;
+});
 
-    document.addEventListener('DOMContentLoaded', function() {
-        setupStoreSection('mercado', products);
-        updateCartUI();
-        setupGeneralEventListeners();
-        setupScrollAnimations();
-        setupScrollHeader();
-    });
+var cart = JSON.parse(localStorage.getItem('cart')) || [];
+var whatsappGroupLink = 'https://chat.whatsapp.com/H19dIofkINdHrVApA4jbvW?mode=ac_t'; // Pega aquí tu enlace de grupo
+var currentProductForModal = null;
+var currentUnitType = 'individual';
+var selectedCashAmount = '';
+var toastTimeout; // Variable para controlar el temporizador del toast
 
-    function setupStoreSection(sectionPrefix, productsForSection) {
-        var filtersId = sectionPrefix + 'CategoryFilters';
-        var searchId = sectionPrefix + 'SearchInput';
-        var gridId = sectionPrefix + 'ProductGrid';
-        var noResultsId = sectionPrefix + 'NoResultsMessage';
-        setupCategoryFiltersAndSearch(productsForSection, filtersId, searchId, gridId, noResultsId);
-        renderProducts(productsForSection, gridId, noResultsId);
-    }
-    
-    function setupCategoryFiltersAndSearch(productsForSection, filtersId, searchId, gridId, noResultsId) {
-        var uniqueCategories = [];
-        for (var i = 0; i < productsForSection.length; i++) {
-            if (uniqueCategories.indexOf(productsForSection[i].category) === -1) {
-                uniqueCategories.push(productsForSection[i].category);
-            }
-        }
+// Referencias a modales y botones de cierre al inicio del script para asegurar que existen.
+const cartModal = document.getElementById('cartModal');
+const productDetailsModal = document.getElementById('productDetailsModal');
+const checkoutModal = document.getElementById('checkoutModal');
+const confirmationModal = document.getElementById('confirmationModal');
+const floatingCartBtn = document.getElementById('floatingCartBtn');
+const closeCartModalBtn = document.getElementById('closeCartModal');
+const closeProductDetailsModalBtn = document.getElementById('closeProductDetailsModalBtn');
+const closeCheckoutModalBtn = document.getElementById('closeCheckoutModal');
+const closeConfirmationModalBtn = document.getElementById('closeConfirmationModal');
 
-        var categories = ['all'].concat(uniqueCategories);
-        var filtersContainer = document.getElementById(filtersId);
-        if (!filtersContainer) return;
+document.addEventListener('DOMContentLoaded', function() {
+setupStoreSection('mercado', products);
+updateCartUI();
+updateDeliveryPromoBanner(); // Añadir esta línea
+setupGeneralEventListeners();
+setupScrollAnimations();
+setupScrollHeader();
+});
 
-        var buttonsHtml = categories.map(function(category) {
-            return '<button class="category-btn ' + (category === 'all' ? 'active' : '') + '" data-category="' + category + '">' + (category === 'all' ? 'Todos' : category) + '</button>';
-        }).join('');
-        filtersContainer.innerHTML = buttonsHtml;
+function setupStoreSection(sectionPrefix, productsForSection) {
+var filtersId = sectionPrefix + 'CategoryFilters';
+var searchId = sectionPrefix + 'SearchInput';
+var gridId = sectionPrefix + 'ProductGrid';
+var noResultsId = sectionPrefix + 'NoResultsMessage';
+setupCategoryFiltersAndSearch(productsForSection, filtersId, searchId, gridId, noResultsId);
+renderProducts(productsForSection, gridId, noResultsId);
+}
 
-        var currentCategory = 'all';
-        var categoryButtons = filtersContainer.querySelectorAll('.category-btn');
-        var searchInput = document.getElementById(searchId);
+function setupCategoryFiltersAndSearch(productsForSection, filtersId, searchId, gridId, noResultsId) {
+var uniqueCategories = [];
+for (var i = 0; i < productsForSection.length; i++) {
+if (uniqueCategories.indexOf(productsForSection[i].category) === -1) {
+uniqueCategories.push(productsForSection[i].category);
+}
+}
 
-        function filterAndRender() {
-            var searchTerm = searchInput.value.toLowerCase();
-            var filteredProducts = [];
-            for (var i = 0; i < productsForSection.length; i++) {
-                var product = productsForSection[i];
-                var categoryMatch = (currentCategory === 'all' || product.category === currentCategory);
-                var searchMatch = (!searchTerm || product.name.toLowerCase().indexOf(searchTerm) > -1 || product.description.toLowerCase().indexOf(searchTerm) > -1);
-                if (categoryMatch && searchMatch) {
-                    filteredProducts.push(product);
-                }
-            }
-            renderProducts(filteredProducts, gridId, noResultsId);
-        }
+var categories = ['all'].concat(uniqueCategories);
+var filtersContainer = document.getElementById(filtersId);
+if (!filtersContainer) return;
 
-        for (var j = 0; j < categoryButtons.length; j++) {
-            categoryButtons[j].addEventListener('click', function() {
-                for (var k = 0; k < categoryButtons.length; k++) { categoryButtons[k].classList.remove('active'); }
-                this.classList.add('active');
-                currentCategory = this.getAttribute('data-category');
-                filterAndRender();
-            });
-        }
-        searchInput.addEventListener('input', filterAndRender);
-    }
+var buttonsHtml = categories.map(function(category) {
+return '<button class="category-btn ' + (category === 'all' ? 'active' : '') + '" data-category="' + category + '">' + (category === 'all' ? 'Todos' : category) + '</button>';
+}).join('');
+filtersContainer.innerHTML = buttonsHtml;
 
-    function renderProducts(productsToRender, gridId, noResultsId) {
-        var productGrid = document.getElementById(gridId);
-        var noResultsMessage = document.getElementById(noResultsId);
-        if (!productGrid || !noResultsMessage) return;
-        if (productsToRender.length === 0) {
-            productGrid.innerHTML = '';
-            noResultsMessage.classList.remove('hidden');
-            return;
-        }
-        noResultsMessage.classList.add('hidden');
-        
-        var groupedProducts = productsToRender.reduce(function(acc, product) {
-            (acc[product.category] = acc[product.category] || []).push(product);
-            return acc;
-        }, {});
+var currentCategory = 'all';
+var categoryButtons = filtersContainer.querySelectorAll('.category-btn');
+var searchInput = document.getElementById(searchId);
 
-        var html = '';
-        var sortedCategories = Object.keys(groupedProducts).sort();
+function filterAndRender() {
+var searchTerm = searchInput.value.toLowerCase();
+var filteredProducts = [];
+for (var i = 0; i < productsForSection.length; i++) {
+var product = productsForSection[i];
+var categoryMatch = (currentCategory === 'all' || product.category === currentCategory);
+var searchMatch = (!searchTerm || product.name.toLowerCase().indexOf(searchTerm) > -1 || product.description.toLowerCase().indexOf(searchTerm) > -1);
+if (categoryMatch && searchMatch) {
+filteredProducts.push(product);
+}
+}
+renderProducts(filteredProducts, gridId, noResultsId);
+}
 
-        for (var i = 0; i < sortedCategories.length; i++) {
-            var category = sortedCategories[i];
-            if (groupedProducts.hasOwnProperty(category)) {
-                html += '<div class="col-span-full fade-in-up"><h3 class="text-2xl font-bold text-center text-[var(--primary-color)] my-8 border-b-2 border-gray-200 pb-2">— ' + category + ' —</h3></div>';
-                html += groupedProducts[category].map(function(product, index) {
-                    const isUnavailable = product.status === 'unavailable';
-                    // Modificamos el onclick para los productos no disponibles
-                    const onClickHandler = isUnavailable ? '' : `onclick="showProductDetailsModal(${product.id})"`;
-                    const cursorStyle = isUnavailable ? 'cursor-not-allowed' : 'cursor-pointer';
+for (var j = 0; j < categoryButtons.length; j++) {
+categoryButtons[j].addEventListener('click', function() {
+for (var k = 0; k < categoryButtons.length; k++) { categoryButtons[k].classList.remove('active'); }
+this.classList.add('active');
+currentCategory = this.getAttribute('data-category');
+filterAndRender();
+});
+}
+searchInput.addEventListener('input', filterAndRender);
+}
 
-                    // Determinar el padding para la imagen, específicamente para SaltiBloks (ID 14)
-                    // También aumento la altura de los contenedores para todas las imágenes.
-                    const imageWrapperClasses = (product.id === 14) 
-                        ? 'w-full h-64 md:h-72 overflow-hidden bg-transparent flex items-center justify-center p-2' 
-                        : 'w-full h-64 md:h-72 overflow-hidden bg-transparent flex items-center justify-center p-4'; 
+function renderProducts(productsToRender, gridId, noResultsId) {
+var productGrid = document.getElementById(gridId);
+var noResultsMessage = document.getElementById(noResultsId);
+if (!productGrid || !noResultsMessage) return;
+if (productsToRender.length === 0) {
+productGrid.innerHTML = '';
+noResultsMessage.classList.remove('hidden');
+return;
+}
+noResultsMessage.classList.add('hidden');
 
-                    return '<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ' + cursorStyle + ' flex flex-col ' + (isUnavailable ? 'unavailable-product-card' : '') + ' fade-in-up" style="transition-delay: ' + (index * 50) + 'ms" ' + onClickHandler + '>' +
-                               '<div class="' + imageWrapperClasses + '">' + /* Aplicamos las clases de padding y altura aquí */
-                                 '<img src="' + product.image + '" alt="' + product.name + '" class="w-full h-full object-contain transition-all duration-300">' +
-                               '</div>' +
-                               '<div class="p-4 flex-grow flex flex-col">' +
-                               '<h3 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-2 product-name">' + product.name + '</h3>' +
-                               '<p class="text-fixed-sm text-[var(--text-medium)] mb-2 flex-grow product-description">' + product.description + '</p>' +
-                               '<p class="text-fixed-xl font-bold text-[var(--primary-color)] mb-4 product-price">$' + product.price.toLocaleString() + '</p>' +
-                               (isUnavailable ? 
-                                   '<div class="add-to-cart-btn mt-auto py-2 px-4 rounded-lg flex items-center justify-center bg-gray-400 text-white font-bold text-fixed-base cursor-not-allowed">' +
-                                       '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-7-8a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" /></svg>' + /* Icono de círculo tachado o similar */
-                                       'No Disponible' +
-                                   '</div>' : 
-                                   '<button class="add-to-cart-btn mt-auto w-full bg-[var(--primary-color)] text-white font-bold py-2 px-4 rounded-lg text-fixed-base hover:bg-opacity-90 transition-colors duration-300">Ver Detalles</button>') +
-                               '</div></div>';
-                }).join('');
-            }
-        }
-        productGrid.innerHTML = '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">' + html + '</div>';
-        setupScrollAnimations();
-    }
-    
-    function showProductDetailsModal(productId){var product=null;for(var i=0;i<products.length;i++){if(products[i].id===productId){product=products[i];break;}}
-    if(!product||product.status==='unavailable')return;currentProductForModal=JSON.parse(JSON.stringify(product));currentProductForModal.quantity=1;currentUnitType='individual';document.getElementById('productDetailsTitle').textContent=product.name;document.getElementById('productDetailsImage').src=product.image;document.getElementById('productDetailsDescription').textContent=product.description;document.getElementById('productQuantityDisplay').textContent='1';var unitTypeSection=document.getElementById('unitTypeSection');if(product.hasBoxOption){unitTypeSection.classList.remove('hidden');updateUnitTypeButtons();}else{unitTypeSection.classList.add('hidden');}
-    updateModalPricing();showModal(productDetailsModal);} // Usar showModal
+var groupedProducts = productsToRender.reduce(function(acc, product) {
+(acc[product.category] = acc[product.category] || []).push(product);
+return acc;
+}, {});
 
-    function updateUnitTypeButtons(){var individualBtn=document.getElementById('unitTypeIndividual');var boxBtn=document.getElementById('unitTypeBox');if(currentUnitType==='individual'){individualBtn.classList.add('active');boxBtn.classList.remove('active');}else{boxBtn.classList.add('active');individualBtn.classList.remove('active');}}
-    function updateModalPricing(){if(!currentProductForModal)return;var unitPrice,unitDescription;if(currentProductForModal.hasBoxOption&&currentUnitType==='box'){unitPrice=currentProductForModal.boxPrice;unitDescription='Caja ('+currentProductForModal.boxQuantity+' unidades)';}else{unitPrice=currentProductForModal.price;unitDescription='Unidad';}
-    var totalPrice=unitPrice*currentProductForModal.quantity;document.getElementById('productDetailsPrice').textContent='$'+unitPrice.toLocaleString()+' / '+unitDescription;document.getElementById('modalTotalPrice').textContent='$'+totalPrice.toLocaleString();}
-    function addToCartFromModal(){if(!currentProductForModal)return;var cartItem={id:currentProductForModal.id+(currentUnitType==='box'?'_box':''),name:currentProductForModal.name,image:currentProductForModal.image,quantity:currentProductForModal.quantity,unitType:currentUnitType};if(currentProductForModal.hasBoxOption&&currentUnitType==='box'){cartItem.price=currentProductForModal.boxPrice;cartItem.name+=' (Caja x'+currentProductForModal.boxQuantity+')';}else{cartItem.price=currentProductForModal.price;}
-    var existingItemIndex=-1;for(var i=0;i<cart.length;i++){if(cart[i].id===cartItem.id){existingItemIndex=i;break;}}
-    if(existingItemIndex!==-1){cart[existingItemIndex].quantity+=cartItem.quantity;}else{cart.push(cartItem);}
-    updateCartUI();localStorage.setItem('cart',JSON.stringify(cart));hideModal(productDetailsModal);currentProductForModal=null;showCartAnimation(); showCartToast('Producto añadido al carrito');} // Usar hideModal
-    
-    function updateCartUI(){
-        var totalItems=cart.reduce(function(sum,item){return sum+item.quantity;},0);
-        var totalPrice=cart.reduce(function(sum,item){return sum+(item.price*item.quantity);},0);
-        document.getElementById('cartCount').textContent=totalItems;
-        document.getElementById('cartTotal').textContent='$'+totalPrice.toLocaleString();
-        document.getElementById('floatingCartTotal').textContent = '$' + totalPrice.toLocaleString();
-        var cartItems=document.getElementById('cartItems');
-        var sendWhatsAppOrder=document.getElementById('sendWhatsAppOrder');
-        if(cart.length===0){
-            cartItems.innerHTML='<p class="text-center text-[var(--text-medium)] text-fixed-base">Tu carrito está vacío</p>';
-            sendWhatsAppOrder.disabled=true;
-        }else{
-            cartItems.innerHTML=cart.map(function(item,index){return('<div class="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0">'+
-            '<div class="flex-1"><h4 class="text-fixed-base font-semibold text-[var(--text-dark)]">'+item.name+'</h4><p class="text-fixed-sm text-[var(--text-medium)]">$'+item.price.toLocaleString()+' c/u</p></div>'+
-            '<div class="flex items-center gap-2">'+
-            '<button onclick="updateCartQuantity('+index+', '+(item.quantity-1)+')" class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-fixed-sm font-bold hover:bg-gray-300 transition-colors">-</button>'+
-            '<span class="text-fixed-base font-semibold w-8 text-center">'+item.quantity+'</span>'+
-            '<button onclick="updateCartQuantity('+index+', '+(item.quantity+1)+')" class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-fixed-sm font-bold hover:bg-gray-300 transition-colors">+</button>'+
-            '<button onclick="removeFromCart('+index+')" class="ml-2 text-red-500 hover:text-red-700 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button>'+
-            '</div></div>');
-        }).join('');
-        sendWhatsAppOrder.disabled=false;
-        }
-    }
+var html = '';
+var sortedCategories = Object.keys(groupedProducts).sort();
 
-    function updateCartQuantity(index,newQuantity){
-        if(newQuantity<=0){
-            removeFromCart(index);
-            showCartToast('Producto eliminado del carrito'); // Muestra toast al eliminar
-            return;
-        } 
-        cart[index].quantity=newQuantity;
-        updateCartUI();
-        localStorage.setItem('cart',JSON.stringify(cart));
-        showCartToast('Carrito actualizado'); // Muestra toast al actualizar cantidad
-    }
+for (var i = 0; i < sortedCategories.length; i++) {
+var category = sortedCategories[i];
+if (groupedProducts.hasOwnProperty(category)) {
+html += '<div class="col-span-full fade-in-up"><h3 class="text-2xl font-bold text-center text-[var(--primary-color)] my-8 border-b-2 border-gray-200 pb-2">— ' + category + ' —</h3></div>';
+html += groupedProducts[category].map(function(product, index) {
+const isUnavailable = product.status === 'unavailable';
+const onClickHandler = isUnavailable ? '' : `onclick="showProductDetailsModal(${product.id})"`;
+const cursorStyle = isUnavailable ? 'cursor-not-allowed' : 'cursor-pointer';
 
-    function removeFromCart(index){
-        cart.splice(index,1);
-        updateCartUI();
-        localStorage.setItem('cart',JSON.stringify(cart));
-        showCartToast('Producto eliminado del carrito'); // Muestra toast al eliminar
-    }
+const imageWrapperClasses = (product.id === 14)
+? 'w-full h-64 md:h-72 overflow-hidden bg-transparent flex items-center justify-center p-2'
+: 'w-full h-64 md:h-72 overflow-hidden bg-transparent flex items-center justify-center p-4';
 
-    function showCartAnimation(){var floatingCartBtn=document.getElementById('floatingCartBtn');floatingCartBtn.classList.add('shake');setTimeout(function(){floatingCartBtn.classList.remove('shake');},600);}
-    
-    // Función para mostrar el Toast/Banner
-    function showCartToast(message) {
-        const toast = document.getElementById('cartToast');
-        const toastMessage = document.getElementById('cartToastMessage');
+return '<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ' + cursorStyle + ' flex flex-col ' + (isUnavailable ? 'unavailable-product-card' : '') + ' fade-in-up" style="transition-delay: ' + (index * 50) + 'ms" ' + onClickHandler + '>' +
+'<div class="' + imageWrapperClasses + '">' +
+'<img src="' + product.image + '" alt="' + product.name + ' - El Resolvito" class="w-full h-full object-contain transition-all duration-300">' +
+'</div>' +
+'<div class="p-4 flex-grow flex flex-col">' +
+'<h3 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-2 product-name">' + product.name + '</h3>' +
+'<p class="text-fixed-sm text-[var(--text-medium)] mb-2 flex-grow product-description">' + product.description + '</p>' +
+'<p class="text-fixed-xl font-bold text-[var(--primary-color)] mb-4 product-price">$' + product.price.toLocaleString() + '</p>' +
+(isUnavailable ?
+'<div class="add-to-cart-btn mt-auto py-2 px-4 rounded-lg flex items-center justify-center bg-gray-400 text-white font-bold text-fixed-base cursor-not-allowed">' +
+'<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-7-8a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" /></svg>' +
+'No Disponible' +
+'</div>' :
+'<button class="add-to-cart-btn mt-auto w-full bg-[var(--primary-color)] text-white font-bold py-2 px-4 rounded-lg text-fixed-base hover:bg-opacity-90 transition-colors duration-300">Ver Detalles</button>') +
+'</div></div>';
+}).join('');
+}
+}
+productGrid.innerHTML = '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">' + html + '</div>';
+setupScrollAnimations();
+}
 
-        // Limpiar cualquier temporizador existente para evitar solapamientos
-        clearTimeout(toastTimeout);
+function showProductDetailsModal(productId){var product=null;for(var i=0;i<products.length;i++){if(products[i].id===productId){product=products[i];break;}}
+if(!product||product.status==='unavailable')return;currentProductForModal=JSON.parse(JSON.stringify(product));currentProductForModal.quantity=1;currentUnitType='individual';document.getElementById('productDetailsTitle').textContent=product.name;document.getElementById('productDetailsImage').src=product.image;document.getElementById('productDetailsDescription').textContent=product.description;document.getElementById('productQuantityDisplay').textContent='1';var unitTypeSection=document.getElementById('unitTypeSection');if(product.hasBoxOption){unitTypeSection.classList.remove('hidden');updateUnitTypeButtons();}else{unitTypeSection.classList.add('hidden');}
+updateModalPricing();showModal(productDetailsModal);}
+function updateUnitTypeButtons(){var individualBtn=document.getElementById('unitTypeIndividual');var boxBtn=document.getElementById('unitTypeBox');if(currentUnitType==='individual'){individualBtn.classList.add('active');boxBtn.classList.remove('active');}else{boxBtn.classList.add('active');individualBtn.classList.remove('active');}}
+function updateModalPricing(){if(!currentProductForModal)return;var unitPrice,unitDescription;if(currentProductForModal.hasBoxOption&&currentUnitType==='box'){unitPrice=currentProductForModal.boxPrice;unitDescription='Caja ('+currentProductForModal.boxQuantity+' unidades)';}else{unitPrice=currentProductForModal.price;unitDescription='Unidad';}
+var totalPrice=unitPrice*currentProductForModal.quantity;document.getElementById('productDetailsPrice').textContent='$'+unitPrice.toLocaleString()+' / '+unitDescription;document.getElementById('modalTotalPrice').textContent='$'+totalPrice.toLocaleString();}
+function addToCartFromModal(){if(!currentProductForModal)return;var cartItem={id:currentProductForModal.id+(currentUnitType==='box'?'_box':''),name:currentProductForModal.name,image:currentProductForModal.image,quantity:currentProductForModal.quantity,unitType:currentUnitType};if(currentProductForModal.hasBoxOption&&currentUnitType==='box'){cartItem.price=currentProductForModal.boxPrice;cartItem.name+=' (Caja x'+currentProductForModal.boxQuantity+')';}else{cartItem.price=currentProductForModal.price;}
+var existingItemIndex=-1;for(var i=0;i<cart.length;i++){if(cart[i].id===cartItem.id){existingItemIndex=i;break;}}
+if(existingItemIndex!==-1){cart[existingItemIndex].quantity+=cartItem.quantity;}else{cart.push(cartItem);}
+updateCartUI();localStorage.setItem('cart',JSON.stringify(cart));hideModal(productDetailsModal);currentProductForModal=null;showCartAnimation(); showCartToast('Producto añadido al carrito');}
 
-        toastMessage.textContent = message;
-        toast.classList.add('show');
+function updateCartUI(){
+var totalItems=cart.reduce(function(sum,item){return sum+item.quantity;},0);
+var totalPrice=cart.reduce(function(sum,item){return sum+(item.price*item.quantity);},0);
+document.getElementById('cartCount').textContent=totalItems;
+document.getElementById('cartTotal').textContent='$'+totalPrice.toLocaleString();
+document.getElementById('floatingCartTotal').textContent = '$' + totalPrice.toLocaleString();
+var cartItems=document.getElementById('cartItems');
+var sendWhatsAppOrder=document.getElementById('sendWhatsAppOrder');
+if(cart.length===0){
+cartItems.innerHTML='<p class="text-center text-[var(--text-medium)] text-fixed-base">Tu carrito está vacío</p>';
+sendWhatsAppOrder.disabled=true;
+}else{
+cartItems.innerHTML=cart.map(function(item,index){return('<div class="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0">'+
+'<div class="flex-1"><h4 class="text-fixed-base font-semibold text-[var(--text-dark)]">'+item.name+'</h4><p class="text-fixed-sm text-[var(--text-medium)]">$'+item.price.toLocaleString()+' c/u</p></div>'+
+'<div class="flex items-center gap-2">'+
+'<button onclick="updateCartQuantity('+index+', '+(item.quantity-1)+')" class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-fixed-sm font-bold hover:bg-gray-300 transition-colors">-</button>'+
+'<span class="text-fixed-base font-semibold w-8 text-center">'+item.quantity+'</span>'+
+'<button onclick="updateCartQuantity('+index+', '+(item.quantity+1)+')" class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-fixed-sm font-bold hover:bg-gray-300 transition-colors">+</button>'+
+'<button onclick="removeFromCart('+index+')" class="ml-2 text-red-500 hover:text-red-700 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button>'+
+'</div></div>');
+}).join('');
+sendWhatsAppOrder.disabled=false;
+}
+updateDeliveryPromoBanner(); // Llama al banner de promoción aquí
+}
 
-        // Ocultar el toast después de 3 segundos
-        toastTimeout = setTimeout(() => {
-            toast.classList.remove('show');
-        }, 3000);
-    }
+function updateCartQuantity(index,newQuantity){
+if(newQuantity<=0){
+removeFromCart(index);
+showCartToast('Producto eliminado del carrito'); // Muestra toast al eliminar
+return;
+}
+cart[index].quantity=newQuantity;
+updateCartUI();
+localStorage.setItem('cart',JSON.stringify(cart));
+showCartToast('Carrito actualizado'); // Muestra toast al actualizar cantidad
+}
 
-    // Función para mostrar cualquier modal.
-    function showModal(modalElement) {
-        if (!modalElement) {
-            console.error("Error: Intentando mostrar un elemento modal nulo.");
-            return;
-        }
-        modalElement.classList.add('show');
-        document.body.style.overflow = 'hidden'; // Evita scroll en el body
-    }
+function removeFromCart(index){
+cart.splice(index,1);
+updateCartUI();
+localStorage.setItem('cart',JSON.stringify(cart));
+showCartToast('Producto eliminado del carrito'); // Muestra toast al eliminar
+}
 
-    // Función para ocultar cualquier modal.
-    function hideModal(modalElement) {
-        if (!modalElement) {
-            console.error("Error: Intentando ocultar un elemento modal nulo.");
-            return;
-        }
-        modalElement.classList.remove('show');
-        document.body.style.overflow = ''; // Restaura scroll en el body
-    }
+function showCartAnimation(){var floatingCartBtn=document.getElementById('floatingCartBtn');floatingCartBtn.classList.add('shake');setTimeout(function(){floatingCartBtn.classList.remove('shake');},600);}
+
+// Función para mostrar el Toast/Banner
+function showCartToast(message) {
+const toast = document.getElementById('cartToast');
+const toastMessage = document.getElementById('cartToastMessage');
+
+clearTimeout(toastTimeout); // Limpiar cualquier temporizador existente
+
+toastMessage.textContent = message;
+toast.classList.add('show');
+
+toastTimeout = setTimeout(() => {
+toast.classList.remove('show');
+}, 3000); // Ocultar después de 3 segundos
+}
+
+// Función para mostrar cualquier modal.
+function showModal(modalElement) {
+if (!modalElement) {
+console.error("Error: Intentando mostrar un elemento modal nulo.");
+return;
+}
+modalElement.classList.add('show');
+document.body.style.overflow = 'hidden'; // Evita scroll en el body
+}
+
+// Función para ocultar cualquier modal.
+function hideModal(modalElement) {
+if (!modalElement) {
+console.error("Error: Intentando ocultar un elemento modal nulo.");
+return;
+}
+modalElement.classList.remove('show');
+document.body.style.overflow = ''; // Restaura scroll en el body
+}
 
 
-    function setupGeneralEventListeners(){
-        // Botón flotante del carrito
-        if (floatingCartBtn) {
-            floatingCartBtn.addEventListener('click',function(){
-                console.log("Floating cart button clicked!"); // DEBUG
-                showModal(cartModal);
-            });
-        } else {
-            console.error("Floating cart button not found!"); // DEBUG
-        }
+function setupGeneralEventListeners(){
+// Botón flotante del carrito
+if (floatingCartBtn) {
+floatingCartBtn.addEventListener('click',function(){
+showModal(cartModal);
+});
+}
 
-        // Cierre del modal del carrito
-        if (closeCartModalBtn) {
-            closeCartModalBtn.addEventListener('click',function(){hideModal(cartModal);});
-        }
-        if (cartModal) {
-            cartModal.addEventListener('click',function(e){if(e.target === cartModal)hideModal(cartModal);});
-        }
-        
-        // Cierre del modal de detalles del producto
-        if (closeProductDetailsModalBtn) {
-            closeProductDetailsModalBtn.addEventListener('click',function(){hideModal(productDetailsModal);currentProductForModal=null;});
-        }
-        if (productDetailsModal) {
-            productDetailsModal.addEventListener('click',function(e){if(e.target === productDetailsModal){hideModal(productDetailsModal);currentProductForModal=null;}});
-        }
-        
-        document.getElementById('unitTypeIndividual').addEventListener('click',function(){currentUnitType='individual';updateUnitTypeButtons();updateModalPricing();});
-        document.getElementById('unitTypeBox').addEventListener('click',function(){currentUnitType='box';updateUnitTypeButtons();updateModalPricing();});
-        
-        document.getElementById('decreaseQuantityBtn').addEventListener('click',function(){if(currentProductForModal&&currentProductForModal.quantity>1){currentProductForModal.quantity--;document.getElementById('productQuantityDisplay').textContent=currentProductForModal.quantity;updateModalPricing();}});
-        document.getElementById('increaseQuantityBtn').addEventListener('click',function(){if(currentProductForModal){currentProductForModal.quantity++;document.getElementById('productQuantityDisplay').textContent=currentProductForModal.quantity;updateModalPricing();}});
-        
-        document.getElementById('addProductToCartModalBtn').addEventListener('click',addToCartFromModal);
-        
-        document.getElementById('sendWhatsAppOrder').addEventListener('click',function(){hideModal(cartModal);showCheckoutModal();});
-        
-        document.getElementById('contactWhatsappBtn').addEventListener('click',function(e){e.preventDefault();window.open(whatsappGroupLink,'_blank');});
-        
-        document.getElementById('mobile-menu-button').addEventListener('click',function(){document.getElementById('mobile-menu').classList.add('open');document.getElementById('mobile-backdrop').classList.add('open');});
-        document.getElementById('close-mobile-menu').addEventListener('click',closeMobileMenu);
-        document.getElementById('mobile-backdrop').addEventListener('click',closeMobileMenu);
-        
-        // **********************************************
-        // === CAMBIO AQUÍ para el modal de confirmación ===
-        // **********************************************
-        if (closeConfirmationModalBtn) {
-            closeConfirmationModalBtn.addEventListener('click',function(){
-                console.log("Cerrar botón del modal de confirmación clicado."); // Para depuración
-                hideModal(confirmationModal);
-            });
-        }
-        if (confirmationModal) {
-            confirmationModal.addEventListener('click', function(e) {
-                if (e.target === confirmationModal) {
-                    console.log("Overlay del modal de confirmación clicado."); // Para depuración
-                    hideModal(confirmationModal);
-                }
-            });
-        }
-        // **********************************************
+// Cierre del modal del carrito
+if (closeCartModalBtn) {
+closeCartModalBtn.addEventListener('click',function(){hideModal(cartModal);});
+}
+if (cartModal) {
+cartModal.addEventListener('click',function(e){if(e.target === cartModal)hideModal(cartModal);});
+}
 
-        var anchorLinks=document.querySelectorAll('a[href^="#"]');for(var i=0;i<anchorLinks.length;i++){anchorLinks[i].addEventListener('click',function(e){e.preventDefault();var targetId=this.getAttribute('href');var targetElement=document.querySelector(targetId);if(targetElement){if(this.classList.contains('mobile-nav-link')){closeMobileMenu();}
-        setTimeout(function(){var targetPosition=targetElement.getBoundingClientRect().top+window.pageYOffset;var headerOffset=80;var offsetPosition=targetPosition-headerOffset;window.scrollTo(0,offsetPosition);},100);}});}
-        setupCheckoutEventListeners();
-    }
-    
-    function closeMobileMenu(){document.getElementById('mobile-menu').classList.remove('open');document.getElementById('mobile-backdrop').classList.remove('open');}
-    
-    function setupScrollAnimations(){if('IntersectionObserver' in window){var elements=document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right');var observer=new IntersectionObserver(function(entries){for(var i=0;i<entries.length;i++){if(entries[i].isIntersecting){entries[i].target.classList.add('is-visible');}}}, {threshold:0.1});for(var j=0;j<elements.length;j++){observer.observe(elements[j]);}}else{var elements=document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right');for(var k=0;k<elements.length;k++){elements[k].classList.add('is-visible');}}}
-    
-    function setupScrollHeader(){var header=document.getElementById('mainHeader');window.addEventListener('scroll',function(){if(window.scrollY>100){header.classList.add('scrolled');}else{header.classList.remove('scrolled');}});}
-    
-    function showCheckoutModal(){if(cart.length===0){alert('Tu carrito está vacío');return;}
-    var savedData=JSON.parse(localStorage.getItem('customerData'));if(savedData){document.getElementById('customerName').value=savedData.name||'';document.getElementById('customerAddress').value=savedData.address||'';document.getElementById('customerReferences').value=savedData.references||'';document.getElementById('customerPhone').value=savedData.phone||'';document.getElementById('deliveryLocation').value=savedData.location||'';} // Cargar la ubicación guardada
-    updateCheckoutSummary();showModal(checkoutModal);} // Usar showModal aquí también
-    
-    function updateCheckoutSummary(){
-        var checkoutOrderSummary=document.getElementById('checkoutOrderSummary');
-        var subtotal=cart.reduce(function(sum,item){return sum+(item.price*item.quantity);},0);
-        checkoutOrderSummary.innerHTML=cart.map(function(item){return('<div class="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">'+
-        '<div class="flex-1"><h5 class="text-fixed-base font-semibold text-[var(--text-dark)]">'+item.name+'</h5><p class="text-fixed-sm text-[var(--text-medium)]">$'+item.price.toLocaleString()+' c/u × '+item.quantity+'</p></div>'+
-        '<div class="text-fixed-base font-semibold">$'+(item.price*item.quantity).toLocaleString()+'</div></div>');
-        }).join('');
-        document.getElementById('checkoutSubtotal').textContent='$'+subtotal.toLocaleString();
-        updateShippingAndTotal();
-    }
+// Cierre del modal de detalles del producto
+if (closeProductDetailsModalBtn) {
+closeProductDetailsModalBtn.addEventListener('click',function(){hideModal(productDetailsModal);currentProductForModal=null;});
+}
+if (productDetailsModal) {
+productDetailsModal.addEventListener('click',function(e){if(e.target === productDetailsModal){hideModal(productDetailsModal);currentProductForModal=null;}});
+}
 
-    function updateShippingAndTotal() {
-        var subtotal = cart.reduce(function(sum, item) { return sum + (item.price * item.quantity); }, 0);
-        var serviceFee = 50;
-        document.getElementById('checkoutServiceFee').textContent = '$' + serviceFee;
-        var deliveryLocation = document.getElementById('deliveryLocation').value;
-        var shippingCost = 0;
-        var shippingText = '$0';
-        var showNote = false;
-        var noteText = '';
-        var upsellMessage = '';
-        var upsellElement = document.getElementById('upsellMessage');
+document.getElementById('unitTypeIndividual').addEventListener('click',function(){currentUnitType='individual';updateUnitTypeButtons();updateModalPricing();});
+document.getElementById('unitTypeBox').addEventListener('click',function(){currentUnitType='box';updateUnitTypeButtons();updateModalPricing();});
 
-        if (deliveryLocation === 'habana-vieja') {
-            if (subtotal >= 3500) {
-                shippingCost = 0;
-                shippingText = 'GRATIS';
-                upsellMessage = '¡Felicidades! Has desbloqueado el Envío GRATIS en Habana Vieja. Ahorras $150.';
-                upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-green-100 text-green-800';
-            } else if (subtotal >= 1500) {
-                shippingCost = 50;
-                shippingText = '$50 CUP';
-                var neededForFree = 3500 - subtotal;
-                upsellMessage = `¡Estás a solo $${neededForFree.toLocaleString()} de conseguir el Envío GRATIS! Ahorrarías $50 adicionales.`;
-                upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-blue-100 text-blue-800';
-            } else {
-                shippingCost = 150;
-                shippingText = '$150 CUP';
-                var neededForDiscount = 1500 - subtotal;
-                upsellMessage = `¡Añade $${neededForDiscount.toLocaleString()} más a tu carrito y paga solo $50 de envío! Ahorrarías $100.`;
-                upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-yellow-100 text-yellow-800';
-            }
-        } else if (deliveryLocation === 'otros') {
-            shippingCost = 0; // Se asume 0 para el cálculo inicial, luego se confirma
-            shippingText = 'A confirmar';
-            showNote = true;
-            noteText = 'El costo de envío se ajustará al precio de la agencia de mensajería externa, se lo confirmaremos por WhatsApp.';
-            upsellMessage = '';
-            upsellElement.classList.add('hidden'); // Ocultar mensaje upsell para otros municipios
-        } else {
-            // Cuando no hay ubicación seleccionada
-            shippingCost = 0;
-            shippingText = '$0';
-            upsellMessage = 'Selecciona tu ubicación para calcular el envío.';
-            upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-gray-100 text-gray-800';
-            upsellElement.classList.remove('hidden');
-            showNote = false;
-        }
+document.getElementById('decreaseQuantityBtn').addEventListener('click',function(){if(currentProductForModal&&currentProductForModal.quantity>1){currentProductForModal.quantity--;document.getElementById('productQuantityDisplay').textContent=currentProductForModal.quantity;updateModalPricing();}});
+document.getElementById('increaseQuantityBtn').addEventListener('click',function(){if(currentProductForModal){currentProductForModal.quantity++;document.getElementById('productQuantityDisplay').textContent=currentProductForModal.quantity;updateModalPricing();}});
 
-        if (upsellElement) {
-            upsellElement.textContent = upsellMessage;
-            if(upsellMessage === '' || deliveryLocation === '') { // Ocultar si no hay mensaje o ubicación
-                upsellElement.classList.add('hidden');
-            } else {
-                upsellElement.classList.remove('hidden');
-            }
-        }
-        
-        document.getElementById('checkoutShipping').textContent = shippingText;
-        var shippingNote = document.getElementById('shippingNote');
-        if (showNote) {
-            shippingNote.textContent = noteText;
-            shippingNote.classList.remove('hidden');
-        } else {
-            shippingNote.classList.add('hidden');
-        }
-        var total = subtotal + serviceFee + shippingCost;
-        document.getElementById('checkoutTotal').textContent = '$' + total.toLocaleString();
-    }
+document.getElementById('addProductToCartModalBtn').addEventListener('click',addToCartFromModal);
 
-    // Generic validation function for form fields
-    function validateField(fieldId) {
-        const element = document.getElementById(fieldId);
-        if (element && element.required) {
-            if (!element.value.trim() || element.value === '') { // Also check for empty string for select
-                element.classList.add('border-red-500');
-                return false;
-            } else {
-                element.classList.remove('border-red-500');
-                return true;
-            }
-        }
-        return true; // Not a required field, or element not found
-    }
+document.getElementById('sendWhatsAppOrder').addEventListener('click',function(){hideModal(cartModal);showCheckoutModal();});
 
-    function setupCheckoutEventListeners(){
-        if (closeCheckoutModalBtn) {
-            closeCheckoutModalBtn.addEventListener('click',function(){hideModal(checkoutModal);});
-        }
-        if (checkoutModal) {
-            checkoutModal.addEventListener('click',function(e){if(e.target === checkoutModal){hideModal(checkoutModal);}});
-        }
-        document.getElementById('deliveryLocation').addEventListener('change',updateShippingAndTotal);
-    
-    // Attach real-time validation to required fields
-    const requiredInputIds = ['customerName', 'customerAddress', 'customerPhone'];
-    requiredInputIds.forEach(id => {
-        const inputElement = document.getElementById(id);
-        if (inputElement) {
-            inputElement.addEventListener('blur', () => validateField(id));
-            inputElement.addEventListener('input', () => validateField(id)); // Validate while typing too
-        }
-    });
-    // Special handling for select input
-    const deliveryLocationSelect = document.getElementById('deliveryLocation');
-    if (deliveryLocationSelect) {
-        deliveryLocationSelect.addEventListener('change', () => {
-            validateField('deliveryLocation');
-            updateShippingAndTotal(); // Also update totals when location changes
-        });
-    }
+document.getElementById('contactWhatsappBtn').addEventListener('click',function(e){e.preventDefault();window.open(whatsappGroupLink,'_blank');});
 
-    var paymentRadios=document.querySelectorAll('input[name="paymentMethod"]');
-    for(var i=0;i<paymentRadios.length;i++){
-        paymentRadios[i].addEventListener('change',function(){
-            var cashField=document.getElementById('cashPaymentField');
-            if(this.value==='efectivo'){
-                cashField.classList.remove('hidden');
-            }else{
-                cashField.classList.add('hidden');
-                selectedCashAmount=''; // Reset selected cash amount
-                var cashButtons=document.querySelectorAll('.cash-btn');
-                for(var j=0;j<cashButtons.length;j++){cashButtons[j].classList.remove('active');}
-                document.getElementById('otherCashAmount').classList.add('hidden');
-                document.getElementById('otherCashAmount').value = ''; // Clear other amount input
-            }
-        });
-    }
+document.getElementById('mobile-menu-button').addEventListener('click',function(){document.getElementById('mobile-menu').classList.add('open');document.getElementById('mobile-backdrop').classList.add('open');});
+document.getElementById('close-mobile-menu').addEventListener('click',closeMobileMenu);
+document.getElementById('mobile-backdrop').addEventListener('click',closeMobileMenu);
 
-    var cashButtons=document.querySelectorAll('.cash-btn');
-    for(var k=0;k<cashButtons.length;k++){
-        cashButtons[k].addEventListener('click',function(){
-            for(var l=0;l<cashButtons.length;l++){cashButtons[l].classList.remove('active');}
-            this.classList.add('active');
-            selectedCashAmount=this.getAttribute('data-amount');
-            var otherInput=document.getElementById('otherCashAmount');
-            if(selectedCashAmount==='otro'){
-                otherInput.classList.remove('hidden');
-                otherInput.focus();
-                // Add validation listener for 'otherCashAmount' if it's visible and required
-                otherInput.addEventListener('blur', () => validateCashAmount());
-                otherInput.addEventListener('input', () => validateCashAmount());
-            }else{
-                otherInput.classList.add('hidden');
-                otherInput.value = ''; // Clear if not 'otro'
-                validateCashAmount(); // Re-validate if payment method changes from 'otro'
-            }
-        });
-    }
+// Cierre del modal de confirmación
+if (closeConfirmationModalBtn) {
+closeConfirmationModalBtn.addEventListener('click',function(){
+hideModal(confirmationModal);
+});
+}
+if (confirmationModal) {
+confirmationModal.addEventListener('click', function(e) {
+if (e.target === confirmationModal) {
+hideModal(confirmationModal);
+}
+});
+}
 
-    // New validation for cash amount
-    function validateCashAmount() {
-        const paymentMethodRadio = document.querySelector('input[name="paymentMethod"]:checked');
-        const otherCashAmountInput = document.getElementById('otherCashAmount');
-        if (paymentMethodRadio && paymentMethodRadio.value === 'efectivo' && selectedCashAmount === 'otro') {
-            if (!otherCashAmountInput.value.trim()) {
-                otherCashAmountInput.classList.add('border-red-500');
-                return false;
-            } else {
-                otherCashAmountInput.classList.remove('border-red-500');
-                return true;
-            }
-        }
-        return true;
-    }
+var anchorLinks=document.querySelectorAll('a[href^="#"]');for(var i=0;i<anchorLinks.length;i++){anchorLinks[i].addEventListener('click',function(e){e.preventDefault();var targetId=this.getAttribute('href');var targetElement=document.querySelector(targetId);if(targetElement){if(this.classList.contains('mobile-nav-link')){closeMobileMenu();}
+setTimeout(function(){var targetPosition=targetElement.getBoundingClientRect().top+window.pageYOffset;var headerOffset=80;var offsetPosition=targetPosition-headerOffset;window.scrollTo(0,offsetPosition);},100);}});}
+setupCheckoutEventListeners();
+}
 
-    document.getElementById('confirmOrderBtn').addEventListener('click',confirmOrder);
-    }
+function closeMobileMenu(){document.getElementById('mobile-menu').classList.remove('open');document.getElementById('mobile-backdrop').classList.remove('open');}
 
-    function validateCheckoutForm(){
-        const requiredFieldIds = ['customerName', 'customerAddress', 'customerPhone', 'deliveryLocation'];
-        let allFieldsValid = true;
-        let errors = [];
+function setupScrollAnimations(){if('IntersectionObserver' in window){var elements=document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right');var observer=new IntersectionObserver(function(entries){for(var i=0;i<entries.length;i++){if(entries[i].isIntersecting){entries[i].target.classList.add('is-visible');}}}, {threshold:0.1});for(var j=0;j<elements.length;j++){observer.observe(elements[j]);}}else{var elements=document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right');for(var k=0;k<elements.length;k++){elements[k].classList.add('is-visible');}}}
 
-        requiredFieldIds.forEach(id => {
-            const isValid = validateField(id);
-            if (!isValid) {
-                // Get the label text for a more user-friendly error message
-                const labelElement = document.querySelector(`label[for="${id}"]`);
-                const fieldName = labelElement ? labelElement.textContent.replace(' *', '').trim() : id;
-                errors.push(fieldName);
-                allFieldsValid = false;
-            }
-        });
-        
-        var paymentMethod=document.querySelector('input[name="paymentMethod"]:checked');
-        if(!paymentMethod){
-            errors.push('Método de pago');
-            allFieldsValid = false;
-        } else if (paymentMethod.value === 'efectivo') {
-            if (!selectedCashAmount && !document.getElementById('otherCashAmount').value.trim()) {
-                 errors.push('Monto de pago en efectivo');
-                 document.getElementById('otherCashAmount').classList.add('border-red-500'); // Highlight 'otro' field if active
-                 allFieldsValid = false;
-            } else {
-                document.getElementById('otherCashAmount').classList.remove('border-red-500');
-            }
-        }
+function setupScrollHeader(){var header=document.getElementById('mainHeader');window.addEventListener('scroll',function(){if(window.scrollY>100){header.classList.add('scrolled');}else{header.classList.remove('scrolled');}});}
 
-        if(errors.length > 0){
-            alert('Por favor completa o corrige los siguientes campos:\n• '+errors.join('\n• '));
-            return false;
-        }
-        return true;
-    }
-    
-    function confirmOrder() {
-        if (!validateCheckoutForm()) {
-            return;
-        }
-        var customerName = document.getElementById('customerName').value.trim();
-        var customerAddress = document.getElementById('customerAddress').value.trim();
-        var customerReferences = document.getElementById('customerReferences').value.trim();
-        var customerPhone = document.getElementById('customerPhone').value.trim();
-        var deliveryLocation = document.getElementById('deliveryLocation').value;
-        var paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-        var cashAmount = '';
-        if (paymentMethod === 'efectivo') {
-            cashAmount = selectedCashAmount === 'otro' ? document.getElementById('otherCashAmount').value.trim() : selectedCashAmount;
-            if (!cashAmount) { // Fallback if 'otro' was selected but left empty
-                cashAmount = 'Sin especificar';
-            }
-        }
+function showCheckoutModal(){if(cart.length===0){alert('Tu carrito está vacío');return;}
+var savedData=JSON.parse(localStorage.getItem('customerData'));if(savedData){document.getElementById('customerName').value=savedData.name||'';document.getElementById('customerAddress').value=savedData.address||'';document.getElementById('customerReferences').value=savedData.references||'';document.getElementById('customerPhone').value=savedData.phone||'';document.getElementById('deliveryLocation').value=savedData.location||'';}
+updateCheckoutSummary();showModal(checkoutModal);}
 
-        var subtotal = cart.reduce(function(sum, item) { return sum + (item.price * item.quantity); }, 0);
-        var serviceFee = 50;
-        var shippingCost = 0;
-        var shippingText = '$0';
+function updateCheckoutSummary(){
+var checkoutOrderSummary=document.getElementById('checkoutOrderSummary');
+var subtotal=cart.reduce(function(sum,item){return sum+(item.price*item.quantity);},0);
+checkoutOrderSummary.innerHTML=cart.map(function(item){return('<div class="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">'+
+'<div class="flex-1"><h5 class="text-fixed-base font-semibold text-[var(--text-dark)]">'+item.name+'</h5><p class="text-fixed-sm text-[var(--text-medium)]">$'+item.price.toLocaleString()+' c/u × '+item.quantity+'</p></div>'+
+'<div class="text-fixed-base font-semibold">$'+(item.price*item.quantity).toLocaleString()+'</div></div>');
+}).join('');
+document.getElementById('checkoutSubtotal').textContent='$'+subtotal.toLocaleString();
+updateShippingAndTotal();
+}
 
-        if (deliveryLocation === 'habana-vieja') {
-            if (subtotal >= 3500) {
-                shippingCost = 0;
-                shippingText = 'GRATIS (Pedido Mayor a $3,500)';
-            } else if (subtotal >= 1500) {
-                shippingCost = 50;
-                shippingText = 'Envío con Descuento: $50 CUP';
-            } else {
-                shippingCost = 150;
-                shippingText = '$150 CUP';
-            }
-        } else { // Otros municipios
-            shippingText = 'A confirmar por agencia de mensajería';
-            // shippingCost remains 0 for initial calculation, actual cost will be confirmed.
-        }
+function updateShippingAndTotal() {
+var subtotal = cart.reduce(function(sum, item) { return sum + (item.price * item.quantity); }, 0);
+var serviceFee = 50;
+document.getElementById('checkoutServiceFee').textContent = '$' + serviceFee;
+var deliveryLocation = document.getElementById('deliveryLocation').value;
+var shippingCost = 0;
+var shippingText = '$0';
+var showNote = false;
+var noteText = '';
+var upsellMessage = '';
+var upsellElement = document.getElementById('upsellMessage');
 
-        var total = subtotal + serviceFee + shippingCost;
-        var orderItems = cart.map(function(item) { return '• ' + item.name + ' x' + item.quantity + ' - $' + (item.price * item.quantity).toLocaleString(); }).join('\n');
-        var locationText = deliveryLocation === 'habana-vieja' ? 'Habana Vieja' : 'Otros municipios';
-        var paymentText = paymentMethod === 'efectivo' ? 'Efectivo' + (cashAmount ? ' (pagaré con ' + cashAmount + ')' : '') : 'Transferencia';
-        var finalMessage = "*🛒 NUEVO PEDIDO - EL RESOLVITO*\n\n" +
-            "*👤 DATOS DEL CLIENTE:*\n" + "• Nombre: " + customerName + "\n" + "• Teléfono: " + customerPhone + "\n" + "• Dirección: " + customerAddress + "\n" + "• Referencias: " + (customerReferences || 'No especificadas') + "\n" + "• Ubicación: " + locationText + "\n\n" + "*📦 PRODUCTOS:*\n" + orderItems + "\n\n" + "*💰 RESUMEN DE PAGO:*\n" + "• Subtotal de productos: $" + subtotal.toLocaleString() + "\n" + "• Servicio y Empaque: $" + serviceFee + "\n" + "• Envío: " + shippingText + "\n" + "• TOTAL A PAGAR: $" + total.toLocaleString() + "\n\n" + "*💳 MÉTODO DE PAGO:*\n" + paymentText + "\n\n" + "*⏰ Horario de entrega preferido:* Se coordinará para la próxima ronda de entrega.\n\n" + "_¡Gracias por su pedido!_ 🙏";
+if (deliveryLocation === 'habana-vieja') {
+if (subtotal >= 3500) {
+shippingCost = 0;
+shippingText = 'GRATIS';
+upsellMessage = '¡Felicidades! Has desbloqueado el Envío GRATIS en Habana Vieja. Ahorras $150.';
+upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-green-100 text-green-800';
+} else if (subtotal >= 1500) {
+shippingCost = 50;
+shippingText = '$50 CUP';
+var neededForFree = 3500 - subtotal;
+upsellMessage = `¡Estás a solo $${neededForFree.toLocaleString()} de conseguir el Envío GRATIS! Ahorrarías $50 adicionales.`;
+upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-blue-100 text-blue-800';
+} else {
+shippingCost = 150;
+shippingText = '$150 CUP';
+var neededForDiscount = 1500 - subtotal;
+upsellMessage = `¡Añade $${neededForDiscount.toLocaleString()} más a tu carrito y paga solo $50 de envío! Ahorrarías $100.`;
+upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-yellow-100 text-yellow-800';
+}
+} else if (deliveryLocation === 'otros') {
+shippingCost = 0; // Se asume 0 para el cálculo inicial, luego se confirma
+shippingText = 'A confirmar';
+showNote = true;
+noteText = 'El costo de envío se ajustará al precio de la agencia de mensajería externa, se lo confirmaremos por WhatsApp.';
+upsellMessage = '';
+upsellElement.classList.add('hidden'); // Ocultar mensaje upsell para otros municipios
+} else {
+// Cuando no hay ubicación seleccionada
+shippingCost = 0;
+shippingText = '$0';
+upsellMessage = 'Selecciona tu ubicación para calcular el envío.';
+upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-gray-100 text-gray-800';
+upsellElement.classList.remove('hidden');
+showNote = false;
+}
 
-        // Aquí irían tus integraciones con Telegram y Google Apps Script
-        // Asegúrate de reemplazar 'TU_TOKEN_DE_TELEGRAM_AQUI' y 'TU_CHAT_ID_AQUI' con tus valores reales
-        // var telegramToken = 'TU_TOKEN_DE_TELEGRAM_AQUI';
-        // var telegramChatId = 'TU_CHAT_ID_AQUI';
-        // fetch('https://api.telegram.org/bot' + telegramToken + '/sendMessage', {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({ chat_id: telegramChatId, text: finalMessage, parse_mode: 'Markdown' })
-        // });
+if (upsellElement) {
+upsellElement.textContent = upsellMessage;
+if(upsellMessage === '' || deliveryLocation === '') { // Ocultar si no hay mensaje o ubicación
+upsellElement.classList.add('hidden');
+} else {
+upsellElement.classList.remove('hidden');
+}
+}
 
-        // Asegúrate de reemplazar la URL de Google Apps Script con la tuya si la usas
-        // var googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycby9Sk3Fz2_WqRQsEXrezpwqKbpYhqW_-ialMJcYKPdvZkrBfNReWWFfQ-VnXTrkJY8W/exec';
-        // var orderData = {
-        //     idPedido: new Date().getTime(),
-        //     customerName: customerName,
-        //     customerPhone: customerPhone,
-        //     customerAddress: customerAddress,
-        //     customerReferences: customerReferences,
-        //     total: total,
-        //     paymentMethod: paymentMethod,
-        //     shippingText: shippingText,
-        //     orderItems: orderItems
-        // };
-        // var formData = new FormData();
-        // for (var key in orderData) {
-        //     if (orderData.hasOwnProperty(key)) {
-        //         formData.append(key, orderData[key]);
-        //     }
-        // }
-        // fetch(googleAppsScriptUrl, { method: 'POST', body: formData, mode: 'no-cors' }).catch(function(error) { console.error('Error enviando a Google Sheets:', error); });
+document.getElementById('checkoutShipping').textContent = shippingText;
+var shippingNote = document.getElementById('shippingNote');
+if (showNote) {
+shippingNote.textContent = noteText;
+shippingNote.classList.remove('hidden');
+} else {
+shippingNote.classList.add('hidden');
+}
+var total = subtotal + serviceFee + shippingCost;
+document.getElementById('checkoutTotal').textContent = '$' + total.toLocaleString();
+}
 
-        var whatsappPhoneNumber = '5356382909'; // Tu número de WhatsApp
-        var whatsappMessage = encodeURIComponent(finalMessage.replace(/\*/g, '').replace(/_/g, ''));
-        window.open('https://wa.me/' + whatsappPhoneNumber + '?text=' + whatsappMessage, '_blank');
+// New function for the interactive delivery promo banner at the top of Mercado section
+function updateDeliveryPromoBanner() {
+var subtotal = cart.reduce(function(sum, item) { return sum + (item.price * item.quantity); }, 0);
+var progressBar = document.getElementById('promoProgressBar');
+var progressTextSpan = document.getElementById('progressText');
+var levelRegular = document.getElementById('promoLevelRegular');
+var levelDiscount = document.getElementById('promoLevelDiscount');
+var levelFree = document.getElementById('promoLevelFree');
 
-        hideModal(checkoutModal); // Usar hideModal
-        cart = [];
-        updateCartUI();
-        localStorage.setItem('cart', JSON.stringify(cart));
-        
-        var customerData = { name: customerName, address: customerAddress, references: customerReferences, phone: customerPhone, location: deliveryLocation };
-        localStorage.setItem('customerData', JSON.stringify(customerData));
-        
-        // Muestra el modal de confirmación
-        showModal(confirmationModal);
-    }
-    
-    // =================================================================
-    // === REGISTRO DEL SERVICE WORKER PARA PWA ===
-    // =================================================================
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js')
-                .then(registration => {
-                    console.log('ServiceWorker registrado con éxito:', registration.scope);
-                })
-                .catch(error => {
-                    console.log('Fallo el registro del ServiceWorker:', error);
-                });
-        });
-    }
+// Resetear estilos
+levelRegular.classList.remove('opacity-100', 'ring-[var(--accent-color)]');
+levelDiscount.classList.remove('opacity-100', 'ring-[var(--accent-color)]');
+levelFree.classList.remove('opacity-100', 'ring-[var(--accent-color)]');
+levelRegular.classList.add('opacity-75');
+levelDiscount.classList.add('opacity-75');
+levelFree.classList.add('opacity-75');
+
+var progressWidth = 0;
+var message = '';
+
+if (subtotal >= 3500) {
+progressWidth = 100;
+message = '¡Envío GRATIS alcanzado!';
+levelFree.classList.add('opacity-100', 'ring-[var(--accent-color)]');
+levelFree.classList.remove('opacity-75');
+// Asegurar que los pasos previos también muestren que fueron pasados
+levelDiscount.classList.add('opacity-100');
+levelDiscount.classList.remove('opacity-75');
+} else if (subtotal >= 1500) {
+progressWidth = ((subtotal - 1500) / (3500 - 1500)) * 50 + 50; // Progreso entre 1500 y 3500, empezando en 50%
+progressWidth = Math.min(Math.max(progressWidth, 50), 100); // Asegurar que esté entre 50 y 100
+message = '¡Estás a solo $' + (3500 - subtotal).toLocaleString() + ' del Envío GRATIS!';
+levelDiscount.classList.add('opacity-100', 'ring-[var(--accent-color)]');
+levelDiscount.classList.remove('opacity-75');
+} else if (subtotal > 0) {
+progressWidth = (subtotal / 1500) * 50; // Progreso hasta 1500 (hasta 50%)
+progressWidth = Math.min(Math.max(progressWidth, 0), 50); // Asegurar que esté entre 0 y 50
+message = 'Añade $' + (1500 - subtotal).toLocaleString() + ' para pagar solo $50 de envío.';
+levelRegular.classList.add('opacity-100'); // Resaltar el nivel actual
+levelRegular.classList.remove('opacity-75');
+} else {
+progressWidth = 0;
+message = 'Tu envío regular cuesta $150 CUP.';
+levelRegular.classList.add('opacity-100'); // Resaltar el nivel actual
+levelRegular.classList.remove('opacity-75');
+}
+
+progressBar.style.width = progressWidth + '%';
+progressTextSpan.innerHTML = message; // Actualiza el texto de la barra de progreso
+
+// Ajustar el color del texto de la barra de progreso dinámicamente
+if (progressWidth > 50) {
+progressTextSpan.style.color = 'white';
+progressTextSpan.style.textShadow = '0 0 3px rgba(0,0,0,0.5)';
+} else {
+progressTextSpan.style.color = 'var(--primary-color)';
+progressTextSpan.style.textShadow = 'none';
+}
+}
+
+// Generic validation function for form fields
+function validateField(fieldId) {
+const element = document.getElementById(fieldId);
+if (element && element.required) {
+if (!element.value.trim() || element.value === '') { // Also check for empty string for select
+element.classList.add('border-red-500');
+return false;
+} else {
+element.classList.remove('border-red-500');
+return true;
+}
+}
+return true; // Not a required field, or element not found
+}
+
+function setupCheckoutEventListeners(){
+if (closeCheckoutModalBtn) {
+closeCheckoutModalBtn.addEventListener('click',function(){hideModal(checkoutModal);});
+}
+if (checkoutModal) {
+checkoutModal.addEventListener('click',function(e){if(e.target === checkoutModal){hideModal(checkoutModal);}});
+}
+
+// Attach real-time validation to required fields
+const requiredInputIds = ['customerName', 'customerAddress', 'customerPhone'];
+requiredInputIds.forEach(id => {
+const inputElement = document.getElementById(id);
+if (inputElement) {
+inputElement.addEventListener('blur', () => validateField(id));
+inputElement.addEventListener('input', () => validateField(id)); // Validate while typing too
+}
+});
+// Special handling for select input
+const deliveryLocationSelect = document.getElementById('deliveryLocation');
+if (deliveryLocationSelect) {
+deliveryLocationSelect.addEventListener('change', () => {
+validateField('deliveryLocation');
+updateShippingAndTotal(); // Also update totals when location changes
+});
+}
+
+var paymentRadios=document.querySelectorAll('input[name="paymentMethod"]');
+for(var i=0;i<paymentRadios.length;i++){
+paymentRadios[i].addEventListener('change',function(){
+var cashField=document.getElementById('cashPaymentField');
+if(this.value==='efectivo'){
+cashField.classList.remove('hidden');
+}else{
+cashField.classList.add('hidden');
+selectedCashAmount=''; // Reset selected cash amount
+var cashButtons=document.querySelectorAll('.cash-btn');
+for(var j=0;j<cashButtons.length;j++){cashButtons[j].classList.remove('active');}
+document.getElementById('otherCashAmount').classList.add('hidden');
+document.getElementById('otherCashAmount').value = ''; // Clear other amount input
+}
+});
+}
+
+var cashButtons=document.querySelectorAll('.cash-btn');
+for(var k=0;k<cashButtons.length;k++){
+cashButtons[k].addEventListener('click',function(){
+for(var l=0;l<cashButtons.length;l++){cashButtons[l].classList.remove('active');}
+this.classList.add('active');
+selectedCashAmount=this.getAttribute('data-amount');
+var otherInput=document.getElementById('otherCashAmount');
+if(selectedCashAmount==='otro'){
+otherInput.classList.remove('hidden');
+otherInput.focus();
+// Add validation listener for 'otherCashAmount' if it's visible and required
+otherInput.addEventListener('blur', () => validateCashAmount());
+otherInput.addEventListener('input', () => validateCashAmount());
+}else{
+otherInput.classList.add('hidden');
+otherInput.value = ''; // Clear if not 'otro'
+validateCashAmount(); // Re-validate if payment method changes from 'otro'
+}
+});
+}
+
+// New validation for cash amount
+function validateCashAmount() {
+const paymentMethodRadio = document.querySelector('input[name="paymentMethod"]:checked');
+const otherCashAmountInput = document.getElementById('otherCashAmount');
+if (paymentMethodRadio && paymentMethodRadio.value === 'efectivo' && selectedCashAmount === 'otro') {
+if (!otherCashAmountInput.value.trim()) {
+otherCashAmountInput.classList.add('border-red-500');
+return false;
+} else {
+otherCashAmountInput.classList.remove('border-red-500');
+return true;
+}
+}
+return true;
+}
+
+document.getElementById('confirmOrderBtn').addEventListener('click',confirmOrder);
+}
+
+function validateCheckoutForm(){
+const requiredFieldIds = ['customerName', 'customerAddress', 'customerPhone', 'deliveryLocation'];
+let allFieldsValid = true;
+let errors = [];
+
+requiredFieldIds.forEach(id => {
+const isValid = validateField(id);
+if (!isValid) {
+// Get the label text for a more user-friendly error message
+const labelElement = document.querySelector(`label[for="${id}"]`);
+const fieldName = labelElement ? labelElement.textContent.replace(' *', '').trim() : id;
+errors.push(fieldName);
+allFieldsValid = false;
+}
+});
+
+var paymentMethod=document.querySelector('input[name="paymentMethod"]:checked');
+if(!paymentMethod){
+errors.push('Método de pago');
+allFieldsValid = false;
+} else if (paymentMethod.value === 'efectivo') {
+if (!selectedCashAmount && !document.getElementById('otherCashAmount').value.trim()) {
+errors.push('Monto de pago en efectivo');
+document.getElementById('otherCashAmount').classList.add('border-red-500'); // Highlight 'otro' field if active
+allFieldsValid = false;
+} else {
+document.getElementById('otherCashAmount').classList.remove('border-red-500');
+}
+}
+
+if(errors.length > 0){
+alert('Por favor completa o corrige los siguientes campos:\n• '+errors.join('\n• '));
+return false;
+}
+return true;
+}
+
+function confirmOrder() {
+if (!validateCheckoutForm()) {
+return;
+}
+var customerName = document.getElementById('customerName').value.trim();
+var customerAddress = document.getElementById('customerAddress').value.trim();
+var customerReferences = document.getElementById('customerReferences').value.trim();
+var customerPhone = document.getElementById('customerPhone').value.trim();
+var deliveryLocation = document.getElementById('deliveryLocation').value;
+var paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+var cashAmount = '';
+if (paymentMethod === 'efectivo') {
+cashAmount = selectedCashAmount === 'otro' ? document.getElementById('otherCashAmount').value.trim() : selectedCashAmount;
+if (!cashAmount) { // Fallback if 'otro' was selected but left empty
+cashAmount = 'Sin especificar';
+}
+}
+
+var subtotal = cart.reduce(function(sum, item) { return sum + (item.price * item.quantity); }, 0);
+var serviceFee = 50;
+var shippingCost = 0;
+var shippingText = '$0';
+
+if (deliveryLocation === 'habana-vieja') {
+if (subtotal >= 3500) {
+shippingCost = 0;
+shippingText = 'GRATIS (Pedido Mayor a $3,500)';
+} else if (subtotal >= 1500) {
+shippingCost = 50;
+shippingText = 'Envío con Descuento: $50 CUP';
+} else {
+shippingCost = 150;
+shippingText = '$150 CUP';
+}
+} else { // Otros municipios
+shippingText = 'A confirmar por agencia de mensajería';
+// shippingCost remains 0 for initial calculation, actual cost will be confirmed.
+}
+
+var total = subtotal + serviceFee + shippingCost;
+// Modifica la línea de orderItems para asegurarte de que cada item se muestre con su precio total individual
+var orderItems = cart.map(function(item) {
+let itemDescription = item.name + ' x' + item.quantity;
+// Solo añadir "Caja" si realmente es una caja y tiene boxQuantity
+if (item.unitType === 'box' && item.boxQuantity) {
+itemDescription += ` (Caja de ${item.boxQuantity}u)`;
+}
+return '• ' + itemDescription + ' - $' + (item.price * item.quantity).toLocaleString();
+}).join('\n');
+
+var locationText = deliveryLocation === 'habana-vieja' ? 'Habana Vieja' : 'Otros municipios';
+var paymentText = paymentMethod === 'efectivo' ? 'Efectivo' + (cashAmount ? ' (pagaré con ' + cashAmount + ')' : '') : 'Transferencia';
+var finalMessage = "*🛒 NUEVO PEDIDO - EL RESOLVITO*\n\n" +
+"*👤 DATOS DEL CLIENTE:*\n" + "• Nombre: " + customerName + "\n" + "• Teléfono: " + customerPhone + "\n" + "• Dirección: " + customerAddress + "\n" + "• Referencias: " + (customerReferences || 'No especificadas') + "\n" + "• Ubicación: " + locationText + "\n\n" + "*📦 PRODUCTOS:*\n" + orderItems + "\n\n" + "*💰 RESUMEN DE PAGO:*\n" + "• Subtotal de productos: $" + subtotal.toLocaleString() + "\n" + "• Servicio y Empaque: $" + serviceFee + "\n" + "• Envío: " + shippingText + "\n" + "• TOTAL A PAGAR: $" + total.toLocaleString() + "\n\n" + "*💳 MÉTODO DE PAGO:*\n" + paymentText + "\n\n" + "*⏰ Horario de entrega preferido:* Se coordinará para la próxima ronda de entrega.\n\n" + "_¡Gracias por su pedido!_ 🙏";
+
+// Aquí irían tus integraciones con Telegram y Google Apps Script
+// Asegúrate de reemplazar 'TU_TOKEN_DE_TELEGRAM_AQUI' y 'TU_CHAT_ID_AQUI' con tus valores reales
+// var telegramToken = 'TU_TOKEN_DE_TELEGRAM_AQUI';
+// var telegramChatId = 'TU_CHAT_ID_AQUI';
+// fetch('https://api.telegram.org/bot' + telegramToken + '/sendMessage', {
+// method: 'POST',
+// headers: { 'Content-Type': 'application/json' },
+// body: JSON.stringify({ chat_id: telegramChatId, text: finalMessage, parse_mode: 'Markdown' })
+// });
+
+// === BLOQUE PARA GOOGLE APPS SCRIPT - DESCOMENTADO Y CONFIGURADO ===
+// URL de tu Google Apps Script - ¡ASEGÚRATE DE QUE ESTA ES LA URL EXACTA DE TU ÚLTIMA IMPLEMENTACIÓN ACTIVA!
+var googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycby9Sk3Fz2_WqRQsEXrezpwqKbpYhqW_-ialMJcYKPdvZkrBfNReWWFfQ-VnXTrkJY8W/exec';
+var orderData = {
+idPedido: new Date().getTime(), // Genera un ID de pedido único
+customerName: customerName,
+customerPhone: customerPhone,
+customerAddress: customerAddress + (customerReferences ? ' (Ref: ' + customerReferences + ')' : ''), // Combina dirección y referencias
+customerReferences: customerReferences, // También lo guardamos por separado si quieres
+total: total,
+paymentMethod: paymentMethod,
+shippingText: shippingText,
+orderItems: orderItems,
+cashAmount: cashAmount, // Agrega el monto en efectivo
+location: locationText // Agrega la ubicación
+};
+var formData = new FormData();
+for (var key in orderData) {
+if (orderData.hasOwnProperty(key)) {
+formData.append(key, orderData[key]);
+}
+}
+fetch(googleAppsScriptUrl, { method: 'POST', body: formData, mode: 'no-cors' })
+.then(() => console.log('Pedido enviado a Google Sheets.'))
+.catch(function(error) { console.error('Error enviando a Google Sheets:', error); });
+// === FIN DEL BLOQUE PARA GOOGLE APPS SCRIPT ===
+
+var whatsappPhoneNumber = '5356382909'; // Tu número de WhatsApp
+var whatsappMessage = encodeURIComponent(finalMessage.replace(/\*/g, '').replace(/_/g, ''));
+window.open('https://wa.me/' + whatsappPhoneNumber + '?text=' + whatsappMessage, '_blank');
+
+hideModal(checkoutModal);
+cart = [];
+updateCartUI();
+localStorage.setItem('cart', JSON.stringify(cart));
+
+var customerData = { name: customerName, address: customerAddress, references: customerReferences, phone: customerPhone, location: deliveryLocation };
+localStorage.setItem('customerData', JSON.stringify(customerData));
+
+showModal(confirmationModal);
+}
+
+// =================================================================
+// === REGISTRO DEL SERVICE WORKER PARA PWA ===
+// =================================================================
+if ('serviceWorker' in navigator) {
+window.addEventListener('load', () => {
+navigator.serviceWorker.register('/sw.js')
+.then(registration => {
+console.log('ServiceWorker registrado con éxito:', registration.scope);
+})
+.catch(error => {
+console.log('Fallo el registro del ServiceWorker:', error);
+});
+});
+}
 </script>
-
 </body>
 </html>
+```
+
+
 
 
 
