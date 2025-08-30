@@ -1,3 +1,5 @@
+--- START OF FILE index (1) - copia.html ---
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -182,34 +184,41 @@
             </div>
             
             <!-- ======================================================= -->
-            <!-- === INICIO DEL BANNER DE PROMOCIÓN DE ENVÍOS (ACTUALIZADO) === -->
+            <!-- === INICIO DEL BANNER DE PROMOCIÓN DE ENVÍOS MEJORADO (CON BARRA DE PROGRESO) === -->
             <!-- ======================================================= -->
-            <div class="bg-white border-2 border-dashed border-green-200 p-4 rounded-xl shadow-md mb-8 text-center fade-in-up">
-                <h3 class="text-fixed-lg md:text-fixed-xl font-extrabold text-[var(--primary-color)] mb-4">
-                    ¡Evita la Tarifa de Envío y Ahorra en Grande!
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 items-stretch gap-4 text-sm md:text-base">
-                    <!-- Oferta Intermedia -->
-                    <div class="bg-green-50 p-3 rounded-lg flex flex-col justify-center border border-green-200">
-                        <p class="font-semibold text-gray-800 text-base">Envío a solo <strong class="text-green-700">$50</strong></p>
-                        <p class="text-xs md:text-sm text-gray-600">Ahorra $100 (en compras de $1,500+)</p>
+            <div class="bg-white border-2 border-dashed border-green-200 p-4 rounded-xl shadow-md mb-8 text-center fade-in-up" id="deliveryPromoBanner">
+                <h3 class="text-fixed-xl md:text-fixed-2xl font-extrabold text-[var(--primary-color)] mb-4">¡Ahorra en tu Envío a La Habana Vieja!</h3>
+                
+                <!-- Barra de Progreso -->
+                <div class="w-full bg-gray-200 rounded-full h-3 mb-4 relative">
+                    <div id="promoProgressBar" class="bg-[var(--accent-color)] h-3 rounded-full transition-all duration-500" style="width: 0%;"></div>
+                    <div id="progressText" class="absolute top-0 left-0 w-full h-full flex items-center justify-center px-2 text-xs font-bold text-[var(--primary-color)]">
                     </div>
-                    
-                    <!-- Oferta Principal: ¡ENVÍO GRATIS! -->
-                    <div class="bg-green-600 text-white p-4 rounded-xl shadow-lg ring-4 ring-yellow-400 transform scale-105 relative z-10 flex flex-col justify-center items-center transition-all duration-300 hover:scale-100 hover:ring-green-500">
-                        <p class="font-extrabold text-2xl md:text-3xl lg:text-4xl leading-none mb-1 text-center">¡ENVÍO GRATIS!</p>
-                        <p class="text-sm md:text-base text-center">Supera los $3,500 y Ahorra $150</p>
-                    </div>
+                </div>
 
-                    <!-- Tarifa Regular (Ancla) -->
-                    <div class="bg-green-50 p-3 rounded-lg flex flex-col justify-center text-gray-500 border border-green-200">
-                        <p class="font-semibold text-gray-700 text-base">Tarifa Regular</p>
-                        <p class="text-xs md:text-sm font-bold">$150</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-fixed-sm md:text-fixed-base">
+                    <!-- Nivel 1: Tarifa Regular -->
+                    <div id="promoLevelRegular" class="bg-gray-50 p-3 rounded-lg flex flex-col justify-center items-center opacity-75 transition-all duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                        <p class="font-semibold text-gray-800">Costo Base</p>
+                        <p class="text-gray-600 font-bold">$150 CUP</p>
+                    </div>
+                    <!-- Nivel 2: Descuento -->
+                    <div id="promoLevelDiscount" class="bg-green-50 p-3 rounded-lg flex flex-col justify-center items-center ring-2 ring-transparent transition-all duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-700 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 14l6-6m-5.5.5h.01m4.99 4.99h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"/></svg>
+                        <p class="font-semibold text-gray-800">Compras de $1,500+</p>
+                        <p class="text-green-700 font-bold">$50 CUP de envío</p>
+                    </div>
+                    <!-- Nivel 3: Envío Gratis -->
+                    <div id="promoLevelFree" class="bg-green-100 p-3 rounded-lg flex flex-col justify-center items-center ring-2 ring-transparent transition-all duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[var(--accent-color)] mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+                        <p class="font-semibold text-gray-800">Compras de $3,500+</p>
+                        <p class="text-[var(--accent-color)] font-extrabold text-lg">¡ENVÍO GRATIS!</p>
                     </div>
                 </div>
             </div>
             <!-- ======================================================= -->
-            <!-- === FIN DEL BANNER DE PROMOCIÓN DE ENVÍOS === -->
+            <!-- === FIN DEL BANNER DE PROMOCIÓN DE ENVÍOS MEJORADO === -->
             <!-- ======================================================= -->
 
             <div class="bg-white p-4 rounded-xl shadow-lg mb-8 fade-in-up" style="transition-delay: 150ms;">
@@ -237,7 +246,7 @@
                 <div class="fade-in-right" style="transition-delay: 450ms;"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">4.</div><h3 class="text-fixed-xl font-bold mb-2">Confirma y Recibe</h3><p class="text-fixed-base text-[var(--text-medium)]">Confirma tu pedido y te contactaremos por WhatsApp para coordinar la entrega.</p></div>
             </div>
             <!-- ======================================================= -->
-            <!-- === INICIO DEL BANNER DE PROMOCIÓN DE ENVÍOS (REESTRUCTURADO) === -->
+            <!-- === INICIO DEL BANNER DE PROMOCIÓN DE ENVÍOS (REESTRUCTURADO EN "CÓMO COMPRAR") === -->
             <!-- ======================================================= -->
             <div class="mt-12 max-w-4xl mx-auto p-6 rounded-xl fade-in-up">
                 <h3 class="text-fixed-xl font-bold text-[var(--text-dark)] mb-6 text-center">Nuestra Política de Envíos</h3>
@@ -278,7 +287,7 @@
                 </div>
             </div>
             <!-- ======================================================= -->
-            <!-- === FIN DEL BANNER DE PROMOCIÓN DE ENVÍOS (REESTRUCTURADO) === -->
+            <!-- === FIN DEL BANNER DE PROMOCIÓN DE ENVÍOS (REESTRUCTURADO EN "CÓMO COMPRAR") === -->
             <!-- ======================================================= -->
         </div>
     </section>
@@ -451,6 +460,9 @@
 <!-- === FIN DEL CHECKOUT MODAL === -->
 <!-- ======================================================= -->
 
+<!-- ======================================================= -->
+<!-- === INICIO DEL NUEVO MODAL DE CONFIRMACIÓN === -->
+<!-- ======================================================= -->
 <div id="confirmationModal" class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[1000]">
     <div class="modal-content bg-white rounded-lg shadow-xl w-11/12 max-w-md p-6 text-center">
         <h3 class="text-fixed-2xl font-bold text-[var(--text-dark)] mb-4">¡Pedido Confirmado!</h3>
@@ -458,6 +470,9 @@
         <button id="closeConfirmationModal" class="bg-[var(--primary-color)] text-white font-bold py-2 px-6 rounded-lg hover:bg-opacity-90 transition-colors duration-300 text-fixed-base">Cerrar</button>
     </div>
 </div>
+<!-- ======================================================= -->
+<!-- === FIN DEL NUEVO MODAL DE CONFIRMACIÓN === -->
+<!-- ======================================================= -->
 
 <!-- BOTÓN DEL CARRITO MODIFICADO -->
 <button id="floatingCartBtn" class="fixed bottom-6 right-6 bg-[var(--primary-color)] text-white px-5 py-3 rounded-full shadow-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 z-40 flex items-center gap-3">
@@ -489,7 +504,7 @@
         { id: 6, name: "Cerveza Presidente", price: 220, image: "https://i.postimg.cc/sXBWqMwz/cerveza-predidente-precio-220.png", description: "Lata de 355 ml.", category: "Líquidos", status: "available", hasBoxOption: true, boxPrice: 5280, boxQuantity: 24 },
         { id: 7, name: "Malta Guajira", price: 250, image: "https://i.postimg.cc/mD0wD6fZ/malta-guajira.jpg", description: "Lata de malta refrescante.", category: "Líquidos", status: "available", hasBoxOption: false },
         { id: 8, name: "Leche Condensada", price: 520, image: "https://i.postimg.cc/fRbxMK43/leche-condensada.jpg", description: "Lata de leche condensada.", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 9, name: "Jabón de Baño", price: 160, image: "https://i.postimg.cc/7LDd9DVz/Jab-n-Ridel-100g-r.png", description: "Pastilla de jabón de baño.", category: "Aseo Personal", status: "available", hasBoxOption: false },
+        { id: 9, name: "Jabón de Baño Ridel", price: 160, image: "https://i.postimg.cc/7LDd9DVz/Jab-n-Ridel-100g-r.png", description: "Pastilla de jabón de baño Ridel de 100g.", category: "Aseo Personal", status: "available", hasBoxOption: false },
         { id: 10, name: "Refresco Instantáneo", price: 40, image: "https://i.postimg.cc/MTzsbBM1/refresco-1.png", description: "Sobre de refresco en polvo. Varios sabores.", category: "Líquidos", status: "available", hasBoxOption: false },
         { id: 11, name: "Hígado de Pollo", price: 850, image: "https://i.postimg.cc/52k8yC1s/hiogado_de_pollo.jpg", description: "Paquete de 1 kg.", category: "Cárnicos", status: "available", hasBoxOption: false },
         { id: 12, name: "Whisky Jolly", price: 400, image: "https://i.postimg.cc/8zBPM9Yn/grok_image_xotf0za.jpg", description: "Botella de 200 ml.", category: "Líquidos", status: "available", hasBoxOption: false },
@@ -547,7 +562,8 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         setupStoreSection('mercado', products);
-        updateCartUI();
+        updateCartUI(); 
+        updateDeliveryPromoBanner(); // Añadir esta línea
         setupGeneralEventListeners();
         setupScrollAnimations();
         setupScrollHeader();
@@ -637,16 +653,19 @@
                     const onClickHandler = isUnavailable ? '' : `onclick="showProductDetailsModal(${product.id})"`;
                     const cursorStyle = isUnavailable ? 'cursor-not-allowed' : 'cursor-pointer';
 
-                    // Determinar el padding para la imagen, específicamente para SaltiBloks
-                    const imageWrapperPadding = (product.id === 14) ? 'p-2' : 'p-4'; 
+                    // Determinar el padding para la imagen, específicamente para SaltiBloks (ID 14)
+                    // También aumento la altura de los contenedores para todas las imágenes.
+                    const imageWrapperClasses = (product.id === 14) 
+                        ? 'w-full h-64 md:h-72 overflow-hidden bg-transparent flex items-center justify-center p-2' 
+                        : 'w-full h-64 md:h-72 overflow-hidden bg-transparent flex items-center justify-center p-4'; 
 
                     return '<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ' + cursorStyle + ' flex flex-col ' + (isUnavailable ? 'unavailable-product-card' : '') + ' fade-in-up" style="transition-delay: ' + (index * 50) + 'ms" ' + onClickHandler + '>' +
-                               '<div class="w-full h-56 md:h-64 overflow-hidden bg-transparent flex items-center justify-center ' + imageWrapperPadding + '">' + /* Aplicamos el padding condicional aquí */
-                                 '<img src="' + product.image + '" alt="' + product.name + '" class="w-full h-full object-contain transition-all duration-300">' +
+                               '<div class="' + imageWrapperClasses + '">' + /* Aplicamos las clases de padding y altura aquí */
+                                 '<img src="' + product.image + '" alt="' + product.name + ' - El Resolvito" class="w-full h-full object-contain transition-all duration-300">' +
                                '</div>' +
                                '<div class="p-4 flex-grow flex flex-col">' +
                                '<h3 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-2 product-name">' + product.name + '</h3>' +
-                               '<p class="text-fixed-sm text-[var(--text-medium)] mb-2 flex-grow product-description">' + product.description + '</p>' +
+                               <p class="text-fixed-sm text-[var(--text-medium)] mb-2 flex-grow product-description">' + product.description + '</p>' +
                                '<p class="text-fixed-xl font-bold text-[var(--primary-color)] mb-4 product-price">$' + product.price.toLocaleString() + '</p>' +
                                (isUnavailable ? 
                                    '<div class="add-to-cart-btn mt-auto py-2 px-4 rounded-lg flex items-center justify-center bg-gray-400 text-white font-bold text-fixed-base cursor-not-allowed">' +
@@ -697,6 +716,7 @@
         }).join('');
         sendWhatsAppOrder.disabled=false;
         }
+        updateDeliveryPromoBanner(); // Llama al banner de promoción aquí
     }
 
     function updateCartQuantity(index,newQuantity){
@@ -915,6 +935,66 @@
         document.getElementById('checkoutTotal').textContent = '$' + total.toLocaleString();
     }
 
+    // New function for the interactive delivery promo banner at the top of Mercado section
+    function updateDeliveryPromoBanner() {
+        var subtotal = cart.reduce(function(sum, item) { return sum + (item.price * item.quantity); }, 0);
+        var progressBar = document.getElementById('promoProgressBar');
+        var progressTextSpan = document.getElementById('progressText');
+        var levelRegular = document.getElementById('promoLevelRegular');
+        var levelDiscount = document.getElementById('promoLevelDiscount');
+        var levelFree = document.getElementById('promoLevelFree');
+
+        // Resetear estilos
+        levelRegular.classList.remove('opacity-100', 'ring-[var(--accent-color)]');
+        levelDiscount.classList.remove('opacity-100', 'ring-[var(--accent-color)]');
+        levelFree.classList.remove('opacity-100', 'ring-[var(--accent-color)]');
+        levelRegular.classList.add('opacity-75');
+        levelDiscount.classList.add('opacity-75');
+        levelFree.classList.add('opacity-75');
+
+        var progressWidth = 0;
+        var message = '';
+
+        if (subtotal >= 3500) {
+            progressWidth = 100;
+            message = '¡Envío GRATIS alcanzado!';
+            levelFree.classList.add('opacity-100', 'ring-[var(--accent-color)]');
+            levelFree.classList.remove('opacity-75');
+            // Asegurar que los pasos previos también muestren que fueron pasados
+            levelDiscount.classList.add('opacity-100');
+            levelDiscount.classList.remove('opacity-75');
+        } else if (subtotal >= 1500) {
+            progressWidth = ((subtotal - 1500) / (3500 - 1500)) * 100 + 50; // Progreso entre 1500 y 3500, empezando en 50%
+            progressWidth = Math.min(Math.max(progressWidth, 50), 100); // Asegurar que esté entre 50 y 100
+            message = '¡Estás a solo $' + (3500 - subtotal).toLocaleString() + ' del Envío GRATIS!';
+            levelDiscount.classList.add('opacity-100', 'ring-[var(--accent-color)]');
+            levelDiscount.classList.remove('opacity-75');
+        } else if (subtotal > 0) {
+            progressWidth = (subtotal / 1500) * 50; // Progreso hasta 1500 (hasta 50%)
+            progressWidth = Math.min(Math.max(progressWidth, 0), 50); // Asegurar que esté entre 0 y 50
+            message = 'Añade $' + (1500 - subtotal).toLocaleString() + ' para pagar solo $50 de envío.';
+            levelRegular.classList.add('opacity-100'); // Resaltar el nivel actual
+            levelRegular.classList.remove('opacity-75');
+        } else {
+            progressWidth = 0;
+            message = 'Tu envío regular cuesta $150 CUP.';
+            levelRegular.classList.add('opacity-100'); // Resaltar el nivel actual
+            levelRegular.classList.remove('opacity-75');
+        }
+
+        progressBar.style.width = progressWidth + '%';
+        progressTextSpan.innerHTML = message; // Actualiza el texto de la barra de progreso
+        
+        // Ajustar el color del texto de la barra de progreso dinámicamente
+        if (progressWidth > 50) {
+            progressTextSpan.style.color = 'white';
+            progressTextSpan.style.textShadow = '0 0 3px rgba(0,0,0,0.5)';
+        } else {
+            progressTextSpan.style.color = 'var(--primary-color)';
+            progressTextSpan.style.textShadow = 'none';
+        }
+    }
+
     // Generic validation function for form fields
     function validateField(fieldId) {
         const element = document.getElementById(fieldId);
@@ -1108,7 +1188,7 @@
         // });
 
         // Asegúrate de reemplazar la URL de Google Apps Script con la tuya si la usas
-        // var googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycbwsAvaXpTuZrPM0xeJUEaOkHvxC70YJlr8YDRa4cks8hCr4yPETAqe8YiT2EoUjJuaB/exec';
+        // var googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycby9Sk3Fz2_WqRQsEXrezpwqKbpYhqW_-ialMJcYKPdvZkrBfNReWWFfQ-VnXTrkJY8W/exec';
         // var orderData = {
         //     idPedido: new Date().getTime(),
         //     customerName: customerName,
@@ -1162,6 +1242,7 @@
 
 </body>
 </html>
+
 
 
 
