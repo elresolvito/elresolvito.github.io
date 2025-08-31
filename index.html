@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -144,6 +145,75 @@
         .unavailable-product-card .product-description {
             color: var(--text-medium) !important; /* Menos prominente */
         }
+
+        /* Estilos para el Callout/Banner Flotante */
+        #floatingCallout {
+            position: fixed;
+            bottom: 100px; /* Un poco más arriba que el botón del carrito */
+            right: 24px;
+            max-width: 280px; /* Ancho máximo para no ser muy grande */
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 9990; /* Debajo del carrito flotante */
+            opacity: 0;
+            transform: translateX(100%); /* Empieza fuera de pantalla a la derecha */
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            display: none; /* Se oculta completamente por defecto */
+        }
+        #floatingCallout.show {
+            opacity: 1;
+            transform: translateX(0); /* Se desliza a la vista */
+            display: block;
+        }
+        #floatingCallout .close-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+        /* Media query para móviles, para que no colisione con el botón del carrito */
+        @media (max-width: 640px) {
+            #floatingCallout {
+                bottom: 120px; /* Ajustar posición en móviles si el botón del carrito es más grande */
+                right: 16px;
+                max-width: 90%; /* Ajuste para pantalla pequeña */
+            }
+        }
+
+        /* Estilos para la sección de testimonios (comentados para no renderizar si no se usa) */
+        /*
+        .testimonial-card {
+            background-color: var(--background-white);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: 0.5rem;
+        }
+        .testimonial-location {
+            font-size: 0.875rem;
+            color: var(--text-medium);
+        }
+        */
     </style>
 </head>
 <body class="text-gray-800">
@@ -160,6 +230,8 @@
         <nav class="hidden md:flex items-center gap-4 md:gap-6 text-white font-semibold">
             <a href="#mercado" class="text-fixed-lg hover:text-gray-300 transition-colors duration-300">Mercado</a>
             <a href="#como-comprar" class="text-fixed-lg hover:text-gray-300 transition-colors duration-300">¿Cómo Comprar?</a>
+            <a href="#nuestras-ventajas" class="text-fixed-lg hover:text-gray-300 transition-colors duration-300">Nuestras Ventajas</a>
+            <!-- <a href="#testimonios" class="text-fixed-lg hover:text-gray-300 transition-colors duration-300">Testimonios</a> -->
             <a href="#contacto" class="text-fixed-lg hover:text-gray-300 transition-colors duration-300">Contacto</a>
         </nav>
     </div>
@@ -177,6 +249,8 @@
         <nav class="flex flex-col space-y-4 text-fixed-lg font-semibold text-white">
             <a href="#mercado" class="hover:text-gray-300 transition-colors mobile-nav-link">Mercado</a>
             <a href="#como-comprar" class="hover:text-gray-300 transition-colors mobile-nav-link">¿Cómo Comprar?</a>
+            <a href="#nuestras-ventajas" class="hover:text-gray-300 transition-colors mobile-nav-link">Nuestras Ventajas</a>
+            <!-- <a href="#testimonios" class="hover:text-gray-300 transition-colors mobile-nav-link">Testimonios</a> -->
             <a href="#contacto" class="hover:text-gray-300 transition-colors mobile-nav-link">Contacto</a>
         </nav>
     </div>
@@ -188,50 +262,50 @@
         <div class="hero-overlay absolute inset-0 opacity-75"></div>
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center text-white">
             <h1 class="text-fixed-4xl md:text-fixed-6xl font-extrabold mb-4 drop-shadow-lg fade-in-up">EL RESOLVITO</h1>
-            <p class="text-fixed-lg md:text-fixed-xl max-w-2xl mx-auto mb-8 drop-shadow-md fade-in-up" style="transition-delay: 150ms;">Mercado y víveres... a un clic de distancia. **Tu solución para comprar sin complicaciones.**</p>
+            <p class="text-fixed-lg md:text-fixed-xl max-w-2xl mx-auto mb-8 drop-shadow-md fade-in-up" style="transition-delay: 150ms;">Mercado y víveres... a un clic de distancia. **Tu solución en La Habana Vieja para comprar sin complicaciones.**</p>
             <a href="#mercado" class="bg-[var(--accent-color)] text-white font-bold py-3 px-8 rounded-full text-fixed-lg hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg fade-in-up" style="transition-delay: 300ms;">Explorar Productos</a>
         </div>
     </section>
 
     <!-- ======================================================= -->
-    <!-- === NUEVA SECCIÓN: ¿POR QUÉ ELEGIR EL RESOLVITO? === -->
+    <!-- === SECCIÓN ACTUALIZADA: ¿POR QUÉ ELEGIR EL RESOLVITO? === -->
     <!-- ======================================================= -->
     <section id="nuestras-ventajas" class="py-16 lg:py-24 bg-white">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 fade-in-up">
                 <h2 class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--text-dark)]">¿Por Qué Elegir El Resolvito?</h2>
-                <p class="mt-4 text-fixed-lg text-[var(--text-medium)] max-w-3xl mx-auto">Enfocados en tu comodidad, ahorro y tranquilidad.</p>
+                <p class="mt-4 text-fixed-lg text-[var(--text-medium)] max-w-3xl mx-auto">Enfocados en tu comodidad, ahorro y tranquilidad, especialmente en el corazón de La Habana Vieja.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-                <!-- Ventaja 1: Ahorra Tiempo y Energía -->
+                <!-- Ventaja 1: Ahorra Tiempo -->
                 <div class="bg-gray-50 p-6 rounded-xl shadow-md text-center flex flex-col items-center fade-in-up">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[var(--primary-color)] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    <h3 class="text-fixed-xl font-bold text-[var(--text-dark)] mb-2">Ahorra Tiempo y Energía</h3>
-                    <p class="text-fixed-base text-[var(--text-medium)]">Olvida las colas interminables y el transporte agotador. Hacemos tus compras por ti, para que disfrutes más de tu día.</p>
+                    <h3 class="text-fixed-xl font-bold text-[var(--text-dark)] mb-2">Ahorra Tiempo</h3>
+                    <p class="text-fixed-base text-[var(--text-medium)]">Dedica tu tiempo a lo que realmente importa, nosotros nos ocupamos del resto.</p>
                 </div>
-                <!-- Ventaja 2: Productos Siempre a Mano -->
+                <!-- Ventaja 2: Compra Cómoda -->
                 <div class="bg-gray-50 p-6 rounded-xl shadow-md text-center flex flex-col items-center fade-in-up" style="transition-delay: 100ms;">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[var(--primary-color)] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    <h3 class="text-fixed-xl font-bold text-[var(--text-dark)] mb-2">Productos Siempre a Mano</h3>
-                    <p class="text-fixed-base text-[var(--text-medium)]">Accede a un catálogo confiable con disponibilidad clara. Evita la frustración de buscar y no encontrar lo que necesitas.</p>
+                    <h3 class="text-fixed-xl font-bold text-[var(--text-dark)] mb-2">Compra Cómoda</h3>
+                    <p class="text-fixed-base text-[var(--text-medium)]">Selecciona tus productos desde casa. Tu pedido llega directo a tu apto.</p>
                 </div>
-                <!-- Ventaja 3: Entrega Cómoda a Tu Puerta -->
+                <!-- Ventaja 3: Experiencia Confortable -->
                 <div class="bg-gray-50 p-6 rounded-xl shadow-md text-center flex flex-col items-center fade-in-up" style="transition-delay: 200ms;">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[var(--primary-color)] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7m0-4v8a2 2 0 01-2 2H5a2 2 0 01-2-2V4a2 2 0 012-2h10a2 2 0 012 2v4a2 2 0 002 2h2m-6 4h4" /></svg>
-                    <h3 class="text-fixed-xl font-bold text-[var(--text-dark)] mb-2">Entrega Cómoda a Tu Puerta</h3>
-                    <p class="text-fixed-base text-[var(--text-medium)]">Olvídate de cargar pesadas bolsas y los gastos extra de transporte. Llevamos tu pedido directamente a tu hogar.</p>
+                    <h3 class="text-fixed-xl font-bold text-[var(--text-dark)] mb-2">Experiencia Confortable</h3>
+                    <p class="text-fixed-base text-[var(--text-medium)]">Disfruta de un proceso de compra sin estrés, desde el catálogo hasta la entrega. Tu tranquilidad es nuestra prioridad.</p>
                 </div>
-                <!-- Ventaja 4: Compra Fácil y Segura -->
+                <!-- Ventaja 4: Seguridad -->
                 <div class="bg-gray-50 p-6 rounded-xl shadow-md text-center flex flex-col items-center fade-in-up" style="transition-delay: 300ms;">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[var(--primary-color)] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.007 12.007 0 002 12c0 2.755 1.056 5.409 2.944 7.318A11.955 11.955 0 0112 21.056c2.755 0 5.409-1.056 7.318-2.944A12.007 12.007 0 0022 12c0-2.755-1.056-5.409-2.944-7.318z" /></svg>
-                    <h3 class="text-fixed-xl font-bold text-[var(--text-dark)] mb-2">Compra Segura y Confiable</h3>
-                    <p class="text-fixed-base text-[var(--text-medium)]">Nuestro proceso es simple, con confirmación por WhatsApp y pago flexible, garantizando tu tranquilidad en cada pedido.</p>
+                    <h3 class="text-fixed-xl font-bold text-[var(--text-dark)] mb-2">Seguridad</h3>
+                    <p class="text-fixed-base text-[var(--text-medium)]">Tu pedido es confirmado personalmente por WhatsApp. Entrega confiable y métodos de pago flexibles para tu total tranquilidad.</p>
                 </div>
             </div>
         </div>
     </section>
     <!-- ======================================================= -->
-    <!-- === FIN DE LA NUEVA SECCIÓN === -->
+    <!-- === FIN DE LA SECCIÓN ACTUALIZADA === -->
     <!-- ======================================================= -->
 
     <section id="mercado" class="py-16 lg:py-24 bg-gray-50">
@@ -295,13 +369,13 @@
                 <p class="mt-4 text-fixed-lg text-[var(--text-medium)] max-w-3xl mx-auto">Hacer tu pedido es muy fácil. Sigue estos sencillos pasos para recibir tus productos sin complicaciones.</p>
             </div>
             <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
-                <div class="fade-in-left"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">1.</div><h3 class="text-fixed-xl font-bold mb-2">Elige Productos</h3><p class="text-fixed-base text-[var(--text-medium)]">Navega por nuestro catálogo, siempre actualizado, y encuentra lo que necesitas **sin buscar por toda la ciudad**.</p></div>
+                <div class="fade-in-left"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">1.</div><h3 class="text-fixed-xl font-bold mb-2">Elige Productos</h3><p class="text-fixed-base text-[var(--text-medium)]">Navega por nuestro catálogo, siempre actualizado, y encuentra lo que necesitas **sin perder tiempo buscando por la ciudad**.</p></div>
                 <div class="flex items-center justify-center text-gray-300 text-fixed-4xl font-light hidden md:flex">→</div>
                 <div class="fade-in-right" style="transition-delay: 150ms;"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">2.</div><h3 class="text-fixed-xl font-bold mb-2">Revisa tu Carrito</h3><p class="text-fixed-base text-[var(--text-medium)]">Abre tu carrito, revisa tu selección y las cantidades. Cuando estés listo, pulsa "Enviar Pedido" para **agilizar tu compra**.</p></div>
                 <div class="flex items-center justify-center text-gray-300 text-fixed-4xl font-light hidden md:flex">→</div>
                 <div class="fade-in-left" style="transition-delay: 300ms;"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">3.</div><h3 class="text-fixed-xl font-bold mb-2">Completa tus Datos</h3><p class="text-fixed-base text-[var(--text-medium)]">Llena el formulario con tu información, dirección y método de pago. **Guardamos tus datos para futuras compras** y mayor rapidez.</p></div>
                 <div class="flex items-center justify-center text-gray-300 text-fixed-4xl font-light hidden md:flex">→</div>
-                <div class="fade-in-right" style="transition-delay: 450ms;"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">4.</div><h3 class="text-fixed-xl font-bold mb-2">Confirma y Recibe</h3><p class="text-fixed-base text-[var(--text-medium)]">Confirma tu pedido y te contactaremos por WhatsApp para **coordinar la entrega directamente en tu hogar, sin complicaciones**.</p></div>
+                <div class="fade-in-right" style="transition-delay: 450ms;"><div class="text-fixed-4xl mb-4 text-[var(--primary-color)]">4.</div><h3 class="text-fixed-xl font-bold mb-2">Confirma y Recibe</h3><p class="text-fixed-base text-[var(--text-medium)]">Confirma tu pedido y te contactaremos por WhatsApp para **coordinar la entrega directamente en tu hogar, sin cargar ni subir escaleras**.</p></div>
             </div>
             <!-- ======================================================= -->
             <!-- === INICIO DEL BANNER DE PROMOCIÓN DE ENVÍOS (REESTRUCTURADO EN "CÓMO COMPRAR") === -->
@@ -349,6 +423,48 @@
             <!-- ======================================================= -->
         </div>
     </section>
+
+    <!-- Sección de Testimonios (Comentada temporalmente) -->
+    <!--
+    <section id="testimonios" class="py-16 lg:py-24 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in-up">
+                <h2 class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--text-dark)]">Lo Que Dicen Nuestros Clientes</h2>
+                <p class="mt-4 text-fixed-lg text-[var(--text-medium)] max-w-3xl mx-auto">La satisfacción de nuestros clientes es nuestra mejor recompensa.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="testimonial-card fade-in-up">
+                    <p class="testimonial-text">"¡El Resolvito me ha salvado la vida! Ya no tengo que pasar horas en la calle buscando los productos. La entrega es rápida y muy amable."</p>
+                    <div>
+                        <p class="testimonial-author">Ana M. L.</p>
+                        <p class="testimonial-location">Habana Vieja</p>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in-up" style="transition-delay: 100ms;">
+                    <p class="testimonial-text">"La variedad de productos es excelente y el precio es justo. Es un alivio poder hacer mi pedido desde casa y que todo llegue sin problemas. ¡Recomendado!"</p>
+                    <div>
+                        <p class="testimonial-author">Roberto P.</p>
+                        <p class="testimonial-location">Habana Vieja</p>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in-up" style="transition-delay: 200ms;">
+                    <p class="testimonial-text">"Me encanta que se comuniquen por WhatsApp para confirmar. Eso me da mucha seguridad. Sin duda, mi tienda favorita para el mercado."</p>
+                    <div>
+                        <p class="testimonial-author">Elena S.</p>
+                        <p class="testimonial-location">Centro Habana</p>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in-up" style="transition-delay: 300ms;">
+                    <p class="testimonial-text">"El envío gratis es una maravilla cuando hago compras grandes. Me ahorro un buen dinero y mucho esfuerzo. ¡Gracias, El Resolvito!"</p>
+                    <div>
+                        <p class="testimonial-author">Juan C.</p>
+                        <p class="testimonial-location">Habana Vieja</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    -->
 
     <section id="contacto" class="py-16 lg:py-24">
          <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -521,7 +637,7 @@
 <!-- ======================================================= -->
 <!-- === INICIO DEL NUEVO MODAL DE CONFIRMACIÓN === -->
 <!-- ======================================================= -->
-<div id="confirmationModal" class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[1000]">
+<div id="confirmationModal" class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4">
     <div class="modal-content bg-white rounded-lg shadow-xl w-11/12 max-w-md p-6 text-center">
         <h3 class="text-fixed-2xl font-bold text-[var(--text-dark)] mb-4">¡Pedido Confirmado!</h3>
         <p class="text-fixed-base text-[var(--text-medium)] mb-6">Tu pedido ha sido enviado. Te contactaremos pronto por WhatsApp para coordinar la entrega.</p>
@@ -547,6 +663,19 @@
 <div id="cartToast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none z-[9999]">
     <p id="cartToastMessage" class="text-fixed-sm"></p>
 </div>
+
+<!-- ======================================================= -->
+<!-- === NUEVO CALLOUT/BANNER FLOTANTE (DISCRETO) === -->
+<!-- ======================================================= -->
+<div id="floatingCallout" class="fixed bottom-24 right-6 bg-[var(--primary-color)] text-white p-4 rounded-lg shadow-xl text-fixed-base z-[9990] opacity-0 translate-x-full transition-all duration-500 ease-out">
+    <button class="close-btn" id="closeFloatingCallout">&times;</button>
+    <p class="font-bold mb-2">¡Comodidad en La Habana Vieja!</p>
+    <p>Olvida las colas y el esfuerzo. Recibe tus compras directo en tu apartamento.</p>
+    <a href="#nuestras-ventajas" class="mt-3 inline-block bg-[var(--accent-color)] text-white text-fixed-sm font-semibold py-2 px-4 rounded-full hover:bg-opacity-90 transition-colors">Ver Ventajas</a>
+</div>
+<!-- ======================================================= -->
+<!-- === FIN DEL CALLOUT/BANNER FLOTANTE === -->
+<!-- ======================================================= -->
 
 <script>
     // ===================================================================
@@ -615,6 +744,8 @@
     const closeProductDetailsModalBtn = document.getElementById('closeProductDetailsModalBtn');
     const closeCheckoutModalBtn = document.getElementById('closeCheckoutModal');
     const closeConfirmationModalBtn = document.getElementById('closeConfirmationModal');
+    const floatingCallout = document.getElementById('floatingCallout'); // Referencia al nuevo callout
+    const closeFloatingCalloutBtn = document.getElementById('closeFloatingCallout'); // Botón de cierre del callout
 
     document.addEventListener('DOMContentLoaded', function() {
         setupStoreSection('mercado', products);
@@ -623,6 +754,7 @@
         setupGeneralEventListeners();
         setupScrollAnimations();
         setupScrollHeader();
+        showFloatingCalloutAfterDelay(); // Iniciar la lógica del callout
     });
 
     function setupStoreSection(sectionPrefix, productsForSection) {
@@ -881,6 +1013,14 @@
                 if (e.target === confirmationModal) {
                     hideModal(confirmationModal);
                 }
+            });
+        }
+
+        // Eventos del nuevo Callout Flotante
+        if (closeFloatingCalloutBtn) {
+            closeFloatingCalloutBtn.addEventListener('click', () => {
+                hideFloatingCallout();
+                sessionStorage.setItem('floatingCalloutClosed', 'true'); // Recordar que se cerró
             });
         }
 
@@ -1281,6 +1421,24 @@
         showModal(confirmationModal);
     }
     
+    // Función para mostrar el callout flotante
+    function showFloatingCallout() {
+        // Solo mostrar si no se ha cerrado en esta sesión
+        if (sessionStorage.getItem('floatingCalloutClosed') !== 'true') {
+            floatingCallout.classList.add('show');
+        }
+    }
+
+    // Función para ocultar el callout flotante
+    function hideFloatingCallout() {
+        floatingCallout.classList.remove('show');
+    }
+
+    // Retraso para mostrar el callout flotante
+    function showFloatingCalloutAfterDelay() {
+        setTimeout(showFloatingCallout, 20000); // Aparece después de 20 segundos
+    }
+
     // =================================================================
     // === REGISTRO DEL SERVICE WORKER PARA PWA ===
     // =================================================================
@@ -1299,6 +1457,8 @@
 
 </body>
 </html>
+```
+
 
 
 
