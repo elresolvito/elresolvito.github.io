@@ -359,7 +359,7 @@
                         <li>Pedido Mínimo: <strong class="text-[var(--primary-color)]">$500 CUP</strong>. ¡Haz que cada entrega cuente!</li>
                         <li><strong class="text-[var(--primary-color)]">Tramo 1 ($500 - $3,000):</strong> Tarifa fija de <strong class="text-[var(--accent-color)]">$150 CUP</strong>.</li>
                         <li><strong class="text-green-700 font-extrabold">Tramo 2 (Compras > $3,000):</strong> Base de <strong class="text-green-600">$100 CUP</strong>.</li>
-                        <li><strong class="text-green-700 font-extrabold">Recargo por Peso (Tramo 2):</strong> <strong class="text-[var(--accent-color)]">$100 CUP</strong> por cada 10 kg o fracción.</li>
+                        <li><strong class="text-green-700 font-extrabold">Recargo por Peso (Tramo 2):</strong> <strong class="text-[var(--accent-color)]">$100 CUP</strong> por cada 10 kg **o fracción**.</li>
                     </ul>
                 </div>
 
@@ -400,10 +400,10 @@
                         <div class="bg-green-100 p-3 rounded-md border border-green-300 shadow-md flex flex-col justify-between transform scale-[1.03] relative">
                             <p class="text-base font-semibold text-green-800">Tramo 2: Compras > $3,000</p>
                             <p class="text-xl font-bold text-green-700 mt-1">Base $100 CUP + Recargo</p>
-                            <p class="text-xs text-gray-600 mt-1">(+ $100 CUP por cada 10kg)</p>
+                            <p class="text-xs text-gray-600 mt-1">(+ $100 CUP por cada 10kg o fracción)</p>
                         </div>
                     </div>
-                    <p class="text-xs text-gray-500 mt-4 text-center">Nota: Para pedidos excepcionalmente grandes o pesados en el Tramo 2 (>$3,000), el costo de envío final se calcula con la base más un recargo por peso. Se notificará por WhatsApp antes de procesar.</p>
+                    <p class="text-xs text-gray-500 mt-4 text-center">Nota: El costo de envío en el Tramo 2 se calcula con la base de $100 CUP MÁS $100 CUP por cada 10 kg o fracción. **El costo mínimo de envío para el Tramo 2 es de $200 CUP.** Se notificará por WhatsApp antes de procesar.</p>
                 </div>
 
                 <div class="bg-blue-50 p-4 rounded-lg shadow-inner mb-6">
@@ -562,7 +562,7 @@
                         <li><strong>Tramo 1 ($500 - $3,000):</strong> Tarifa fija de <strong>$150 CUP</strong>.</li>
                         <li><strong>Tramo 2 (Compras > $3,000):</strong> Base de <strong>$100 CUP</strong>.</li>
                         <li class="font-semibold text-green-600">Recargo por Peso (Tramo 2): $100 CUP por cada 10 kg o fracción.</li>
-                        <li class="text-xs text-gray-500 mt-1">Nota: El costo de envío se calcula al finalizar el pedido basándose en el valor y el peso total.</li>
+                        <li class="text-xs text-gray-500 mt-1">Nota: El costo de envío en el Tramo 2 se calcula con la base de $100 CUP MÁS $100 CUP por cada 10 kg o fracción. **El costo mínimo de envío para el Tramo 2 es de $200 CUP.**</li>
                     </ul>
                     <p><strong>Otros municipios:</strong></p>
                     <ul class="list-disc list-inside ml-4 space-y-1">
@@ -621,7 +621,7 @@
     const SERVICE_FEE = 50;
 
     // ===================================================================
-    // === INICIO DEL CATÁLOGO DE PRODUCTOS - "EL RESOLVITO" (CON PESO) ===
+    // === INICIO DEL CATÁLOGO DE PRODUCTOS - "EL RESOLVITO" (CON PESO CORREGIDO) ===
     // ===================================================================
     var products = [
         { id: 1, name: "Aceite", price: 970, image: "https://i.postimg.cc/bvfLRwLH/aceite.jpg", description: "Botella de aceite vegetal.", specificDetails: "1 Litro", category: "Mercado", status: "available", hasBoxOption: false, weight: 1.0 },
@@ -650,7 +650,7 @@
         { id: 24, name: "Pelly de Queso", price: 500, image: "https://i.postimg.cc/Zq1yQkGV/pelly.jpg", description: "Deliciosos Pellys con sabor a queso.", specificDetails: "Paquete de 115g", category: "Confituras", status: "available", hasBoxOption: false, weight: 0.12 },
         { id: 25, name: "Ron Capitán Cortez", price: 1500, image: "https://i.postimg.cc/xCzzpvCX/ron_capitan_cortez.jpg", description: "Ron brasileño.", specificDetails: "Botella de 965 ml", category: "Líquidos", status: "available", hasBoxOption: false, weight: 1.5 },
         { id: 26, name: "Sorbeto Renata", price: 300, image: "https://i.postimg.cc/Wb6CbTSq/sorbeto-renata.jpg", description: "Dulce sabor a frutas, 4 capas.", specificDetails: "Paquete de 115g", category: "Confituras", status: "available", hasBoxOption: false, weight: 0.15 },
-        { id: 29, name: "Mermelada de Fresa", price: 600, image: "https://i.postimg.cc/Kvd5ZYXS/mermelada.jpg", description: "Mermelada de fresa.", specificDetails: "Frasco de 200g", category: "Mercado", status: "available", hasBoxOption: false, weight: 0.3 }
+        { id: 29, name: "Mermelada de Fresa", price: 600, image: "https://i.postimg.cc/Kvd5ZYXS/mermelada.jpg", description: "Mermelada de fresa.", specificDetails: "Frasco de 200g", category: "Mercado", status: "available", hasBoxOption: false, weight: 0.2 } // CORREGIDO de 0.3 a 0.2
     ];
     
     // =================================================================
@@ -811,7 +811,26 @@
     function updateUnitTypeButtons(){var individualBtn=document.getElementById('unitTypeIndividual');var boxBtn=document.getElementById('unitTypeBox');if(currentUnitType==='individual'){individualBtn.classList.add('active');boxBtn.classList.remove('active');}else{boxBtn.classList.add('active');individualBtn.classList.remove('active');}}
     function updateModalPricing(){if(!currentProductForModal)return;var unitPrice,unitDescription;if(currentProductForModal.hasBoxOption&&currentUnitType==='box'){unitPrice=currentProductForModal.boxPrice;unitDescription='Caja ('+currentProductForModal.boxQuantity+' unidades)';}else{unitPrice=currentProductForModal.price;unitDescription='Unidad';}
     var totalPrice=unitPrice*currentProductForModal.quantity;document.getElementById('productDetailsPrice').textContent='$'+unitPrice.toLocaleString()+' / '+unitDescription;document.getElementById('modalTotalPrice').textContent='$'+totalPrice.toLocaleString();}
-    function addToCartFromModal(){if(!currentProductForModal)return;var cartItem={id:currentProductForModal.id+(currentUnitType==='box'?'_box':''),name:currentProductForModal.name,image:currentProductForModal.image,quantity:currentProductForModal.quantity,unitType:currentUnitType, weight: currentProductForModal.weight};if(currentProductForModal.hasBoxOption&&currentUnitType==='box'){cartItem.price=currentProductForModal.boxPrice;cartItem.name+=' (Caja x'+currentProductForModal.boxQuantity+')'; cartItem.weight = currentProductForModal.weight * currentProductForModal.boxQuantity;}else{cartItem.price=currentProductForModal.price;}
+    function addToCartFromModal(){if(!currentProductForModal)return;var cartItem={id:currentProductForModal.id+(currentUnitType==='box'?'_box':''),name:currentProductForModal.name,image:currentProductForModal.image,quantity:currentProductForModal.quantity,unitType:currentUnitType};
+    
+    // Buscar el peso del producto original
+    const productData = products.find(p => p.id === currentProductForModal.id);
+    if (productData && productData.weight !== undefined) {
+        cartItem.weight = productData.weight;
+        if (currentProductForModal.hasBoxOption && currentUnitType === 'box') {
+            // El peso individual es solo de referencia en este caso, el peso total de la caja se calcula al sumarse
+            cartItem.price = currentProductForModal.boxPrice;
+            cartItem.name += ' (Caja x' + currentProductForModal.boxQuantity + ')';
+            // Para el cálculo de peso total, se toma el peso unitario * cantidad de la caja * unidades añadidas
+            // La función calculateTotalWeight hará la multiplicación final. Aquí solo guardamos el peso unitario base
+        } else {
+            cartItem.price = currentProductForModal.price;
+        }
+    } else {
+        cartItem.price = currentProductForModal.price;
+        cartItem.weight = 0; // fallback si no tiene peso
+    }
+    
     var existingItemIndex=-1;for(var i=0;i<cart.length;i++){if(cart[i].id===cartItem.id){existingItemIndex=i;break;}}
     if(existingItemIndex!==-1){cart[existingItemIndex].quantity+=cartItem.quantity;}else{cart.push(cartItem);}
     updateCartUI();localStorage.setItem('cart',JSON.stringify(cart));hideModal(productDetailsModal);currentProductForModal=null;showCartAnimation(); showCartToast('Producto añadido al carrito');} 
@@ -964,13 +983,14 @@
             // Find the corresponding product object
             const product = products.find(p => p.id === (item.unitType === 'box' ? item.id.split('_')[0] * 1 : item.id * 1));
 
-            if (product && product.weight) {
+            if (product && product.weight !== undefined) {
                 let itemWeight = product.weight;
-                if (item.unitType === 'box' && product.hasBoxOption) {
-                    // Assuming box weight is individual weight * box quantity
+                if (item.unitType === 'box' && product.hasBoxOption && product.boxQuantity) {
+                    // Si es una opción de caja, multiplicamos el peso unitario por la cantidad de unidades en la caja
                     itemWeight = product.weight * product.boxQuantity;
                 }
-                totalWeight += itemWeight * item.quantity;
+                // Multiplicamos el peso del "paquete" (unidad o caja) por la cantidad de paquetes pedidos
+                totalWeight += itemWeight * item.quantity; 
             }
         }
         return totalWeight; // in kg
@@ -1005,12 +1025,13 @@
             } else if (subtotal > TRAMO_1_MAX) {
                 // TRAMO 2: > $3000 (Base + Recargo por Peso)
                 const totalWeight = calculateTotalWeight();
-                const weightSurcharge = Math.ceil(totalWeight / WEIGHT_THRESHOLD_KG) * WEIGHT_SURCHARGE_PER_10KG;
+                const weightCeiling = Math.ceil(totalWeight / WEIGHT_THRESHOLD_KG);
+                const weightSurcharge = weightCeiling * WEIGHT_SURCHARGE_PER_10KG;
                 shippingCost = SHIPPING_COST_TRAMO_2_BASE + weightSurcharge;
                 shippingText = `$${shippingCost.toLocaleString()} CUP`;
                 
-                const weightCeiling = Math.ceil(totalWeight / WEIGHT_THRESHOLD_KG);
-                upsellMessage = `¡Tu pedido de alto valor (${subtotal.toLocaleString()}) aplica al Tramo 2! Envío calculado con ${totalWeight.toFixed(2)}kg y recargo por ${weightCeiling} tramos de peso.`;
+                // Mensaje actualizado para ser más claro sobre el peso
+                upsellMessage = `¡Tramo 2 alcanzado! Envío calculado con ${totalWeight.toFixed(2)}kg (o ${weightCeiling} tramo de peso) por un total de $${shippingCost.toLocaleString()} CUP.`;
                 upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-green-100 text-green-800';
             } else {
                 // TRAMO 1: $500 - $3000 (Tarifa Fija)
@@ -1068,7 +1089,8 @@
         if (subtotal > TRAMO_1_MAX) { // TRAMO 2
             progressWidth = 100;
             totalWeight = calculateTotalWeight();
-            const weightSurcharge = Math.ceil(totalWeight / WEIGHT_THRESHOLD_KG) * WEIGHT_SURCHARGE_PER_10KG;
+            const weightCeiling = Math.ceil(totalWeight / WEIGHT_THRESHOLD_KG);
+            const weightSurcharge = weightCeiling * WEIGHT_SURCHARGE_PER_10KG;
             const totalShipping = SHIPPING_COST_TRAMO_2_BASE + weightSurcharge;
             message = `¡Tramo 2 alcanzado! Envío estimado: $${totalShipping.toLocaleString()} CUP (${totalWeight.toFixed(1)}kg).`;
             
@@ -1284,8 +1306,6 @@
 </body>
 </html>
 
-</body>
-</html>
 
 
 
