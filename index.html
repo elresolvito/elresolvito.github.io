@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -306,7 +305,7 @@
             </div>
             
             <div class="bg-white border-2 border-dashed border-green-200 p-4 rounded-xl shadow-md mb-8 text-center fade-in-up" id="deliveryPromoBanner">
-                <h3 class="text-fixed-xl md:text-fixed-2xl font-extrabold text-[var(--primary-color)] mb-4">¡Ahorra en tu Envío a La Habana Vieja!</h3>
+                <h3 class="text-fixed-xl md:text-fixed-2xl font-extrabold text-[var(--primary-color)] mb-4">¡Ahorra y Simplifica tu Envío en La Habana Vieja!</h3>
                 
                 <div class="w-full bg-gray-200 rounded-full h-3 mb-4 relative">
                     <div id="promoProgressBar" class="bg-[var(--accent-color)] h-3 rounded-full transition-all duration-500" style="width: 0%;"></div>
@@ -314,21 +313,18 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-fixed-sm md:text-fixed-base">
-                    <div id="promoLevelRegular" class="bg-gray-50 p-3 rounded-lg flex flex-col justify-center items-center opacity-75 transition-all duration-300">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-fixed-sm md:text-fixed-base max-w-xl mx-auto">
+                    <div id="promoLevelTramo1" class="bg-gray-50 p-3 rounded-lg flex flex-col justify-center items-center opacity-75 transition-all duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-                        <p class="font-semibold text-gray-800">Pedido Mínimo $500</p>
-                        <p class="text-gray-600 font-bold">$200 CUP de envío</p>
+                        <p class="font-semibold text-gray-800">Pedidos de $500 a $3,000</p>
+                        <p class="text-gray-600 font-bold">$150 CUP de envío fijo</p>
+                        <p class="text-xs text-gray-500">(Tarifa fija por valor)</p>
                     </div>
-                    <div id="promoLevelDiscount" class="bg-green-50 p-3 rounded-lg flex flex-col justify-center items-center ring-2 ring-transparent transition-all duration-300">
+                    <div id="promoLevelTramo2" class="bg-green-50 p-3 rounded-lg flex flex-col justify-center items-center ring-2 ring-transparent transition-all duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-700 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 14l6-6m-5.5.5h.01m4.99 4.99h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"/></svg>
-                        <p class="font-semibold text-gray-800">Compras de $3,000+</p>
-                        <p class="text-green-700 font-bold">$100 CUP de envío</p>
-                    </div>
-                    <div id="promoLevelFree" class="bg-green-100 p-3 rounded-lg flex flex-col justify-center items-center ring-2 ring-transparent transition-all duration-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[var(--accent-color)] mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
-                        <p class="font-semibold text-gray-800">Compras de $6,000+</p>
-                        <p class="text-[var(--accent-color)] font-extrabold text-lg">¡ENVÍO GRATIS!</p>
+                        <p class="font-semibold text-gray-800">Compras Superiores a $3,000</p>
+                        <p class="text-green-700 font-bold">Base $100 CUP + Recargo</p>
+                        <p class="text-xs text-gray-500">(+ $100 CUP por cada 10kg o fracción)</p>
                     </div>
                 </div>
             </div>
@@ -361,9 +357,9 @@
                     <h3 class="text-fixed-xl font-bold text-[var(--accent-color)] mb-3">Nuestra Nueva Política de Envíos en Habana Vieja:</h3>
                     <ul class="list-disc list-inside text-fixed-base text-[var(--text-medium)] text-left mx-auto max-w-sm lg:max-w-none space-y-2">
                         <li>Pedido Mínimo: <strong class="text-[var(--primary-color)]">$500 CUP</strong>. ¡Haz que cada entrega cuente!</li>
-                        <li>Envío Estándar: <strong class="text-[var(--primary-color)]">$200 CUP</strong>. Tu comodidad, entregada a tu puerta.</li>
-                        <li>Envío con Descuento: <strong class="text-green-600">$100 CUP</strong> en compras de <strong class="text-[var(--primary-color)]">$3,000 CUP</strong> o más.</li>
-                        <li><strong class="text-green-700 font-extrabold">¡ENVÍO GRATIS!</strong> en compras de <strong class="text-[var(--primary-color)]">$6,000 CUP</strong> o más. ¡Máximo ahorro y conveniencia!</li>
+                        <li><strong class="text-[var(--primary-color)]">Tramo 1 ($500 - $3,000):</strong> Tarifa fija de <strong class="text-[var(--accent-color)]">$150 CUP</strong>.</li>
+                        <li><strong class="text-green-700 font-extrabold">Tramo 2 (Compras > $3,000):</strong> Base de <strong class="text-green-600">$100 CUP</strong>.</li>
+                        <li><strong class="text-green-700 font-extrabold">Recargo por Peso (Tramo 2):</strong> <strong class="text-[var(--accent-color)]">$100 CUP</strong> por cada 10 kg o fracción.</li>
                     </ul>
                 </div>
 
@@ -396,23 +392,18 @@
                 <div class="bg-blue-50 p-4 rounded-lg shadow-inner mb-6">
                     <h4 class="font-bold text-fixed-lg text-[var(--primary-color)] mb-3 text-center">Envíos en Habana Vieja</h4>
                     <p class="text-center font-bold text-gray-700 mb-4 text-fixed-base">Pedido mínimo: $500 CUP</p>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-center">
                         <div class="bg-white p-3 rounded-md border border-gray-200 shadow-sm flex flex-col justify-between">
-                            <p class="text-base font-semibold text-gray-700">Tarifa Regular</p>
-                            <p class="text-xl font-bold text-[var(--accent-color)] mt-1">$200 CUP</p>
+                            <p class="text-base font-semibold text-gray-700">Tramo 1: $500 - $3,000</p>
+                            <p class="text-xl font-bold text-[var(--accent-color)] mt-1">Tarifa Fija $150 CUP</p>
                         </div>
-                        <div class="bg-green-100 p-3 rounded-md border border-green-300 shadow-md flex flex-col justify-between">
-                            <p class="text-base font-semibold text-green-800">Ahorra en envíos</p>
-                            <p class="text-xl font-bold text-green-700 mt-1">¡Solo $100 CUP!</p>
-                            <p class="text-xs text-gray-600 mt-1">(Compras de $3,000+)</p>
-                        </div>
-                        <div class="bg-green-600 text-white p-3 rounded-md border border-green-700 shadow-lg flex flex-col justify-between transform scale-[1.03] relative">
-                            <p class="text-base font-semibold">Máximo Ahorro</p>
-                            <p class="text-xl md:text-2xl font-extrabold mt-1">¡ENVÍO GRATIS!</p>
-                            <p class="text-xs text-green-100 mt-1">(Compras de $6,000+)</p>
+                        <div class="bg-green-100 p-3 rounded-md border border-green-300 shadow-md flex flex-col justify-between transform scale-[1.03] relative">
+                            <p class="text-base font-semibold text-green-800">Tramo 2: Compras > $3,000</p>
+                            <p class="text-xl font-bold text-green-700 mt-1">Base $100 CUP + Recargo</p>
+                            <p class="text-xs text-gray-600 mt-1">(+ $100 CUP por cada 10kg)</p>
                         </div>
                     </div>
-                    <p class="text-xs text-gray-500 mt-4 text-center">Nota: Para pedidos excepcionalmente grandes o pesados, podría aplicarse un cargo adicional de manipulación. Se notificará por WhatsApp antes de procesar.</p>
+                    <p class="text-xs text-gray-500 mt-4 text-center">Nota: Para pedidos excepcionalmente grandes o pesados en el Tramo 2 (>$3,000), el costo de envío final se calcula con la base más un recargo por peso. Se notificará por WhatsApp antes de procesar.</p>
                 </div>
 
                 <div class="bg-blue-50 p-4 rounded-lg shadow-inner mb-6">
@@ -568,10 +559,10 @@
                     <p><strong>Habana Vieja:</strong></p>
                     <ul class="list-disc list-inside ml-4 space-y-1">
                         <li><strong>Pedido mínimo de $500 CUP.</strong></li>
-                        <li>Tarifa de envío: <strong>$200 CUP</strong>.</li>
-                        <li>Costo de envío <strong>$100 CUP</strong> en compras de $3,000 CUP o más.</li>
-                        <li class="font-semibold text-green-600">¡Envío GRATIS en compras de $6,000 CUP o más!</li>
-                        <li class="text-xs text-gray-500 mt-1">Nota: Pedidos excepcionalmente pesados o voluminosos pueden tener un cargo adicional.</li>
+                        <li><strong>Tramo 1 ($500 - $3,000):</strong> Tarifa fija de <strong>$150 CUP</strong>.</li>
+                        <li><strong>Tramo 2 (Compras > $3,000):</strong> Base de <strong>$100 CUP</strong>.</li>
+                        <li class="font-semibold text-green-600">Recargo por Peso (Tramo 2): $100 CUP por cada 10 kg o fracción.</li>
+                        <li class="text-xs text-gray-500 mt-1">Nota: El costo de envío se calcula al finalizar el pedido basándose en el valor y el peso total.</li>
                     </ul>
                     <p><strong>Otros municipios:</strong></p>
                     <ul class="list-disc list-inside ml-4 space-y-1">
@@ -619,47 +610,47 @@
 
 <script>
     // ===================================================================
-    // === INICIO DE CONSTANTES Y CONFIGURACIÓN ===
+    // === INICIO DE CONSTANTES Y CONFIGURACIÓN (NUEVA POLÍTICA DE ENVÍOS) ===
     // ===================================================================
     const MIN_ORDER_THRESHOLD = 500;
-    const DISCOUNT_THRESHOLD = 3000;
-    const FREE_THRESHOLD = 6000;
-    const SHIPPING_COST_REGULAR = 200;
-    const SHIPPING_COST_DISCOUNT = 100;
-    const SHIPPING_COST_FREE = 0;
+    const TRAMO_1_MAX = 3000; 
+    const SHIPPING_COST_TRAMO_1 = 150; // Tarifa fija para $500 - $3,000
+    const SHIPPING_COST_TRAMO_2_BASE = 100; // Tarifa base para > $3,000
+    const WEIGHT_SURCHARGE_PER_10KG = 100; // Recargo por cada 10kg o fracción
+    const WEIGHT_THRESHOLD_KG = 10;
     const SERVICE_FEE = 50;
 
     // ===================================================================
-    // === INICIO DEL CATÁLOGO DE PRODUCTOS - "EL RESOLVITO" ===
+    // === INICIO DEL CATÁLOGO DE PRODUCTOS - "EL RESOLVITO" (CON PESO) ===
     // ===================================================================
     var products = [
-        { id: 1, name: "Aceite", price: 970, image: "https://i.postimg.cc/bvfLRwLH/aceite.jpg", description: "Botella de aceite vegetal.", specificDetails: "1 Litro", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 2, name: "Arroz", price: 650, image: "https://i.postimg.cc/ZRR352mX/arroz.jpg", description: "Arroz brasileño, precio de oferta.", specificDetails: "Paquete de 1 kg", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 3, name: "Spaghetti", price: 350, image: "https://i.postimg.cc/rpBWC2DW/spaguetis.png", description: "Pasta de trigo.", specificDetails: "Paquete de 500g", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 4, name: "Picadillo", price: 380, image: "https://i.postimg.cc/pdhzFLLR/picadillo-de-pollo.png", description: "Carne molida de ave.", specificDetails: "Paquete de 500g", category: "Cárnicos", status: "available", hasBoxOption: false },
-        { id: 5, name: "Salchichas (Perritos)", price: 400, image: "https://i.postimg.cc/R0mKFv73/salchichas-1-paquete.png", description: "Salchichas de ave.", specificDetails: "1 paquete (10 unidades)", category: "Cárnicos", status: "available", hasBoxOption: false },
-        { id: 6, name: "Cerveza Presidente", price: 220, image: "https://i.postimg.cc/sXBWqMwz/cerveza-predidente-precio-220.png", description: "Cerveza pilsener ligera.", specificDetails: "Lata de 355 ml", category: "Líquidos", status: "available", hasBoxOption: true, boxPrice: 5280, boxQuantity: 24 },
-        { id: 7, name: "Malta Guajira", price: 250, image: "https://i.postimg.cc/HWv2h2BL/malta_guajira.jpg", description: "Bebida de malta refrescante en botella.", specificDetails: "Botella de 355 ml", category: "Líquidos", status: "available", hasBoxOption: false },
-        { id: 8, name: "Leche Condensada", price: 520, image: "https://i.postimg.cc/fRbxMK43/leche-condensada.jpg", description: "Dulce y cremosa.", specificDetails: "Lata de 397g", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 9, name: "Jabón de Baño Ridel", price: 160, image: "https://i.postimg.cc/rm2qNxty/jabon-de-ba-o.jpg", description: "Suave para la piel.", specificDetails: "Pastilla de 100g", category: "Aseo Personal", status: "available", hasBoxOption: false },
-        { id: 10, name: "Refresco Instantáneo", price: 40, image: "https://i.postimg.cc/MTzsbBM1/refresco-1.png", description: "Sobre de refresco en polvo. Varios sabores.", specificDetails: "Sobre para 1.5 Litros", category: "Líquidos", status: "available", hasBoxOption: false },
-        { id: 11, name: "Hígado de Pollo", price: 850, image: "https://i.postimg.cc/Zn9vvrkb/higado.jpg", description: "Fresco y nutritivo.", specificDetails: "Paquete de 1 kg", category: "Cárnicos", status: "available", hasBoxOption: false },
-        { id: 12, name: "Whisky Jolly", price: 400, image: "https://i.postimg.cc/mD2Ydz9M/whisky.png", description: "Bebida espirituosa.", specificDetails: "Botella de 200 ml", category: "Líquidos", status: "available", hasBoxOption: false },
-        { id: 13, name: "Frijol Negro", price: 880, image: "https://i.postimg.cc/rFt14B4k/frijol_negro.jpg", description: "Legumbre esencial.", specificDetails: "Paquete de 1 kg", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 14, name: "Galletas SaltiBloks", price: 890, image: "https://i.postimg.cc/c4qpfNz7/Galletas-7-tacos.png", description: "Crujientes y saladas.", specificDetails: "1 paquete (7 tacos)", category: "Confituras", status: "available", hasBoxOption: false },
-        { id: 15, name: "Detergente Brillante", price: 350, image: "https://i.postimg.cc/sXwcy9zw/detergente.jpg", description: "Para una limpieza profunda.", specificDetails: "Bolsa de 400g", category: "Aseo Personal", status: "available", hasBoxOption: false },
-        { id: 16, name: "Cerveza Unlaguer", price: 250, image: "https://i.postimg.cc/HLv56w03/cerveza-ulaguer-precio-300.png", description: "Cerveza ligera y refrescante.", specificDetails: "Lata de 355 ml", category: "Líquidos", status: "available", hasBoxOption: true, boxPrice: 6000, boxQuantity: 24 },
-        { id: 17, name: "Cerveza Cristal", price: 280, image: "https://i.postimg.cc/MZ5gbYw8/cristal.png", description: "Clásica cerveza cubana.", specificDetails: "Lata de 355 ml", category: "Líquidos", status: "available", hasBoxOption: true, boxPrice: 6720, boxQuantity: 24 },
-        { id: 18, name: "Azúcar Blanca", price: 600, image: "https://i.postimg.cc/c40RbWXB/azucar_blanca.jpg", description: "Endulza tus momentos.", specificDetails: "Paquete de 1 kg", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 19, name: "Papel Sanitario", price: 530, image: "https://i.postimg.cc/K8BD4yFK/papel_sanitario.jpg", description: "Suave y resistente.", specificDetails: "Paquete de 4 rollos", category: "Aseo Personal", status: "available", hasBoxOption: false },
-        { id: 20, name: "Malta Morena", price: 210, image: "https://i.postimg.cc/7YCV82Wn/malta_morena.jpg", description: "Malta con sabor intenso.", specificDetails: "Lata de 8 oz", category: "Líquidos", status: "available", hasBoxOption: false },
-        { id: 21, name: "Fritos", price: 200, image: "https://i.postimg.cc/GhqTCs0B/fritos.jpg", description: "Crujientes frituras para picar.", specificDetails: "Paquete individual", category: "Confituras", status: "available", hasBoxOption: false },
-        { id: 22, name: "Jabón de Baño Pemila", price: 160, image: "https://i.postimg.cc/X7qNdKr0/jabon_de_baño_pemila_.png", description: "Aroma fresco.", specificDetails: "Pastilla de 100g", category: "Aseo Personal", status: "available", hasBoxOption: false },
-        { id: 23, name: "Pasta de Tomate", price: 120, image: "https://i.postimg.cc/k5CFbhXT/pasta_de_tomate.jpg", description: "Concentrado de tomate para tus comidas. En bolsa.", specificDetails: "Bolsa de 70g", category: "Mercado", status: "available", hasBoxOption: false },
-        { id: 24, name: "Pelly de Queso", price: 500, image: "https://i.postimg.cc/Zq1yQkGV/pelly.jpg", description: "Deliciosos Pellys con sabor a queso.", specificDetails: "Paquete de 115g", category: "Confituras", status: "available", hasBoxOption: false },
-        { id: 25, name: "Ron Capitán Cortez", price: 1500, image: "https://i.postimg.cc/xCzzpvCX/ron_capitan_cortez.jpg", description: "Ron brasileño.", specificDetails: "Botella de 965 ml", category: "Líquidos", status: "available", hasBoxOption: false },
-        { id: 26, name: "Sorbeto Renata", price: 300, image: "https://i.postimg.cc/Wb6CbTSq/sorbeto-renata.jpg", description: "Dulce sabor a frutas, 4 capas.", specificDetails: "Paquete de 115g", category: "Confituras", status: "available", hasBoxOption: false },
-        { id: 29, name: "Mermelada de Fresa", price: 600, image: "https://i.postimg.cc/Kvd5ZYXS/mermelada.jpg", description: "Mermelada de fresa.", specificDetails: "Frasco de 200g", category: "Mercado", status: "available", hasBoxOption: false }
+        { id: 1, name: "Aceite", price: 970, image: "https://i.postimg.cc/bvfLRwLH/aceite.jpg", description: "Botella de aceite vegetal.", specificDetails: "1 Litro", category: "Mercado", status: "available", hasBoxOption: false, weight: 1.0 },
+        { id: 2, name: "Arroz", price: 650, image: "https://i.postimg.cc/ZRR352mX/arroz.jpg", description: "Arroz brasileño, precio de oferta.", specificDetails: "Paquete de 1 kg", category: "Mercado", status: "available", hasBoxOption: false, weight: 1.0 },
+        { id: 3, name: "Spaghetti", price: 350, image: "https://i.postimg.cc/rpBWC2DW/spaguetis.png", description: "Pasta de trigo.", specificDetails: "Paquete de 500g", category: "Mercado", status: "available", hasBoxOption: false, weight: 0.5 },
+        { id: 4, name: "Picadillo", price: 380, image: "https://i.postimg.cc/pdhzFLLR/picadillo-de-pollo.png", description: "Carne molida de ave.", specificDetails: "Paquete de 500g", category: "Cárnicos", status: "available", hasBoxOption: false, weight: 0.5 },
+        { id: 5, name: "Salchichas (Perritos)", price: 400, image: "https://i.postimg.cc/R0mKFv73/salchichas-1-paquete.png", description: "Salchichas de ave.", specificDetails: "1 paquete (10 unidades)", category: "Cárnicos", status: "available", hasBoxOption: false, weight: 0.5 },
+        { id: 6, name: "Cerveza Presidente", price: 220, image: "https://i.postimg.cc/sXBWqMwz/cerveza-predidente-precio-220.png", description: "Cerveza pilsener ligera.", specificDetails: "Lata de 355 ml", category: "Líquidos", status: "available", hasBoxOption: true, boxPrice: 5280, boxQuantity: 24, weight: 0.38 },
+        { id: 7, name: "Malta Guajira", price: 250, image: "https://i.postimg.cc/HWv2h2BL/malta_guajira.jpg", description: "Bebida de malta refrescante en botella.", specificDetails: "Botella de 355 ml", category: "Líquidos", status: "available", hasBoxOption: false, weight: 0.38 },
+        { id: 8, name: "Leche Condensada", price: 520, image: "https://i.postimg.cc/fRbxMK43/leche-condensada.jpg", description: "Dulce y cremosa.", specificDetails: "Lata de 397g", category: "Mercado", status: "available", hasBoxOption: false, weight: 0.45 },
+        { id: 9, name: "Jabón de Baño Ridel", price: 160, image: "https://i.postimg.cc/rm2qNxty/jabon-de-ba-o.jpg", description: "Suave para la piel.", specificDetails: "Pastilla de 100g", category: "Aseo Personal", status: "available", hasBoxOption: false, weight: 0.1 },
+        { id: 10, name: "Refresco Instantáneo", price: 40, image: "https://i.postimg.cc/MTzsbBM1/refresco-1.png", description: "Sobre de refresco en polvo. Varios sabores.", specificDetails: "Sobre para 1.5 Litros", category: "Líquidos", status: "available", hasBoxOption: false, weight: 0.01 },
+        { id: 11, name: "Hígado de Pollo", price: 850, image: "https://i.postimg.cc/Zn9vvrkb/higado.jpg", description: "Fresco y nutritivo.", specificDetails: "Paquete de 1 kg", category: "Cárnicos", status: "available", hasBoxOption: false, weight: 1.0 },
+        { id: 12, name: "Whisky Jolly", price: 400, image: "https://i.postimg.cc/mD2Ydz9M/whisky.png", description: "Bebida espirituosa.", specificDetails: "Botella de 200 ml", category: "Líquidos", status: "available", hasBoxOption: false, weight: 0.25 },
+        { id: 13, name: "Frijol Negro", price: 880, image: "https://i.postimg.cc/rFt14B4k/frijol_negro.jpg", description: "Legumbre esencial.", specificDetails: "Paquete de 1 kg", category: "Mercado", status: "available", hasBoxOption: false, weight: 1.0 },
+        { id: 14, name: "Galletas SaltiBloks", price: 890, image: "https://i.postimg.cc/c4qpfNz7/Galletas-7-tacos.png", description: "Crujientes y saladas.", specificDetails: "1 paquete (7 tacos)", category: "Confituras", status: "available", hasBoxOption: false, weight: 0.3 },
+        { id: 15, name: "Detergente Brillante", price: 350, image: "https://i.postimg.cc/sXwcy9zw/detergente.jpg", description: "Para una limpieza profunda.", specificDetails: "Bolsa de 400g", category: "Aseo Personal", status: "available", hasBoxOption: false, weight: 0.4 },
+        { id: 16, name: "Cerveza Unlaguer", price: 250, image: "https://i.postimg.cc/HLv56w03/cerveza-ulaguer-precio-300.png", description: "Cerveza ligera y refrescante.", specificDetails: "Lata de 355 ml", category: "Líquidos", status: "available", hasBoxOption: true, boxPrice: 6000, boxQuantity: 24, weight: 0.38 },
+        { id: 17, name: "Cerveza Cristal", price: 280, image: "https://i.postimg.cc/MZ5gbYw8/cristal.png", description: "Clásica cerveza cubana.", specificDetails: "Lata de 355 ml", category: "Líquidos", status: "available", hasBoxOption: true, boxPrice: 6720, boxQuantity: 24, weight: 0.38 },
+        { id: 18, name: "Azúcar Blanca", price: 600, image: "https://i.postimg.cc/c40RbWXB/azucar_blanca.jpg", description: "Endulza tus momentos.", specificDetails: "Paquete de 1 kg", category: "Mercado", status: "available", hasBoxOption: false, weight: 1.0 },
+        { id: 19, name: "Papel Sanitario", price: 530, image: "https://i.postimg.cc/K8BD4yFK/papel_sanitario.jpg", description: "Suave y resistente.", specificDetails: "Paquete de 4 rollos", category: "Aseo Personal", status: "available", hasBoxOption: false, weight: 0.5 },
+        { id: 20, name: "Malta Morena", price: 210, image: "https://i.postimg.cc/7YCV82Wn/malta_morena.jpg", description: "Malta con sabor intenso.", specificDetails: "Lata de 8 oz", category: "Líquidos", status: "available", hasBoxOption: false, weight: 0.25 },
+        { id: 21, name: "Fritos", price: 200, image: "https://i.postimg.cc/GhqTCs0B/fritos.jpg", description: "Crujientes frituras para picar.", specificDetails: "Paquete individual", category: "Confituras", status: "available", hasBoxOption: false, weight: 0.05 },
+        { id: 22, name: "Jabón de Baño Pemila", price: 160, image: "https://i.postimg.cc/X7qNdKr0/jabon_de_baño_pemila_.png", description: "Aroma fresco.", specificDetails: "Pastilla de 100g", category: "Aseo Personal", status: "available", hasBoxOption: false, weight: 0.1 },
+        { id: 23, name: "Pasta de Tomate", price: 120, image: "https://i.postimg.cc/k5CFbhXT/pasta_de_tomate.jpg", description: "Concentrado de tomate para tus comidas. En bolsa.", specificDetails: "Bolsa de 70g", category: "Mercado", status: "available", hasBoxOption: false, weight: 0.07 },
+        { id: 24, name: "Pelly de Queso", price: 500, image: "https://i.postimg.cc/Zq1yQkGV/pelly.jpg", description: "Deliciosos Pellys con sabor a queso.", specificDetails: "Paquete de 115g", category: "Confituras", status: "available", hasBoxOption: false, weight: 0.12 },
+        { id: 25, name: "Ron Capitán Cortez", price: 1500, image: "https://i.postimg.cc/xCzzpvCX/ron_capitan_cortez.jpg", description: "Ron brasileño.", specificDetails: "Botella de 965 ml", category: "Líquidos", status: "available", hasBoxOption: false, weight: 1.5 },
+        { id: 26, name: "Sorbeto Renata", price: 300, image: "https://i.postimg.cc/Wb6CbTSq/sorbeto-renata.jpg", description: "Dulce sabor a frutas, 4 capas.", specificDetails: "Paquete de 115g", category: "Confituras", status: "available", hasBoxOption: false, weight: 0.15 },
+        { id: 29, name: "Mermelada de Fresa", price: 600, image: "https://i.postimg.cc/Kvd5ZYXS/mermelada.jpg", description: "Mermelada de fresa.", specificDetails: "Frasco de 200g", category: "Mercado", status: "available", hasBoxOption: false, weight: 0.3 }
     ];
     
     // =================================================================
@@ -820,7 +811,7 @@
     function updateUnitTypeButtons(){var individualBtn=document.getElementById('unitTypeIndividual');var boxBtn=document.getElementById('unitTypeBox');if(currentUnitType==='individual'){individualBtn.classList.add('active');boxBtn.classList.remove('active');}else{boxBtn.classList.add('active');individualBtn.classList.remove('active');}}
     function updateModalPricing(){if(!currentProductForModal)return;var unitPrice,unitDescription;if(currentProductForModal.hasBoxOption&&currentUnitType==='box'){unitPrice=currentProductForModal.boxPrice;unitDescription='Caja ('+currentProductForModal.boxQuantity+' unidades)';}else{unitPrice=currentProductForModal.price;unitDescription='Unidad';}
     var totalPrice=unitPrice*currentProductForModal.quantity;document.getElementById('productDetailsPrice').textContent='$'+unitPrice.toLocaleString()+' / '+unitDescription;document.getElementById('modalTotalPrice').textContent='$'+totalPrice.toLocaleString();}
-    function addToCartFromModal(){if(!currentProductForModal)return;var cartItem={id:currentProductForModal.id+(currentUnitType==='box'?'_box':''),name:currentProductForModal.name,image:currentProductForModal.image,quantity:currentProductForModal.quantity,unitType:currentUnitType};if(currentProductForModal.hasBoxOption&&currentUnitType==='box'){cartItem.price=currentProductForModal.boxPrice;cartItem.name+=' (Caja x'+currentProductForModal.boxQuantity+')';}else{cartItem.price=currentProductForModal.price;}
+    function addToCartFromModal(){if(!currentProductForModal)return;var cartItem={id:currentProductForModal.id+(currentUnitType==='box'?'_box':''),name:currentProductForModal.name,image:currentProductForModal.image,quantity:currentProductForModal.quantity,unitType:currentUnitType, weight: currentProductForModal.weight};if(currentProductForModal.hasBoxOption&&currentUnitType==='box'){cartItem.price=currentProductForModal.boxPrice;cartItem.name+=' (Caja x'+currentProductForModal.boxQuantity+')'; cartItem.weight = currentProductForModal.weight * currentProductForModal.boxQuantity;}else{cartItem.price=currentProductForModal.price;}
     var existingItemIndex=-1;for(var i=0;i<cart.length;i++){if(cart[i].id===cartItem.id){existingItemIndex=i;break;}}
     if(existingItemIndex!==-1){cart[existingItemIndex].quantity+=cartItem.quantity;}else{cart.push(cartItem);}
     updateCartUI();localStorage.setItem('cart',JSON.stringify(cart));hideModal(productDetailsModal);currentProductForModal=null;showCartAnimation(); showCartToast('Producto añadido al carrito');} 
@@ -965,6 +956,25 @@
         document.getElementById('checkoutSubtotal').textContent='$'+subtotal.toLocaleString();
         updateShippingAndTotal();
     }
+    
+    function calculateTotalWeight() {
+        let totalWeight = 0;
+        for (let i = 0; i < cart.length; i++) {
+            const item = cart[i];
+            // Find the corresponding product object
+            const product = products.find(p => p.id === (item.unitType === 'box' ? item.id.split('_')[0] * 1 : item.id * 1));
+
+            if (product && product.weight) {
+                let itemWeight = product.weight;
+                if (item.unitType === 'box' && product.hasBoxOption) {
+                    // Assuming box weight is individual weight * box quantity
+                    itemWeight = product.weight * product.boxQuantity;
+                }
+                totalWeight += itemWeight * item.quantity;
+            }
+        }
+        return totalWeight; // in kg
+    }
 
     function updateShippingAndTotal() {
         const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -984,29 +994,31 @@
 
         if (deliveryLocation === 'habana-vieja') {
             if (subtotal < MIN_ORDER_THRESHOLD) {
-                shippingCost = SHIPPING_COST_REGULAR;
-                shippingText = '$' + SHIPPING_COST_REGULAR + ' CUP';
+                // No permitir el pedido, tarifa provisional para el total.
+                shippingCost = SHIPPING_COST_TRAMO_1; 
+                shippingText = `$${SHIPPING_COST_TRAMO_1} CUP (Provisional)`;
                 const neededForMinimum = MIN_ORDER_THRESHOLD - subtotal;
                 upsellMessage = `Te faltan $${neededForMinimum.toLocaleString()} para alcanzar el pedido mínimo de $${MIN_ORDER_THRESHOLD}.`;
                 upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-red-100 text-red-800';
                 confirmOrderBtn.disabled = true;
                 confirmOrderBtn.textContent = `Faltan $${neededForMinimum.toLocaleString()} para el mínimo`;
-            } else if (subtotal >= FREE_THRESHOLD) {
-                shippingCost = SHIPPING_COST_FREE;
-                shippingText = 'GRATIS';
-                upsellMessage = `¡Felicidades! Has desbloqueado el Envío GRATIS en Habana Vieja. Ahorras $${SHIPPING_COST_REGULAR}.`;
+            } else if (subtotal > TRAMO_1_MAX) {
+                // TRAMO 2: > $3000 (Base + Recargo por Peso)
+                const totalWeight = calculateTotalWeight();
+                const weightSurcharge = Math.ceil(totalWeight / WEIGHT_THRESHOLD_KG) * WEIGHT_SURCHARGE_PER_10KG;
+                shippingCost = SHIPPING_COST_TRAMO_2_BASE + weightSurcharge;
+                shippingText = `$${shippingCost.toLocaleString()} CUP`;
+                
+                const weightCeiling = Math.ceil(totalWeight / WEIGHT_THRESHOLD_KG);
+                upsellMessage = `¡Tu pedido de alto valor (${subtotal.toLocaleString()}) aplica al Tramo 2! Envío calculado con ${totalWeight.toFixed(2)}kg y recargo por ${weightCeiling} tramos de peso.`;
                 upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-green-100 text-green-800';
-            } else if (subtotal >= DISCOUNT_THRESHOLD) {
-                shippingCost = SHIPPING_COST_DISCOUNT;
-                shippingText = '$' + SHIPPING_COST_DISCOUNT + ' CUP';
-                const neededForFree = FREE_THRESHOLD - subtotal;
-                upsellMessage = `¡Estás a solo $${neededForFree.toLocaleString()} de conseguir el Envío GRATIS! Ahorrarías $${SHIPPING_COST_DISCOUNT} adicionales.`;
-                upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-blue-100 text-blue-800';
             } else {
-                shippingCost = SHIPPING_COST_REGULAR;
-                shippingText = '$' + SHIPPING_COST_REGULAR + ' CUP';
-                const neededForDiscount = DISCOUNT_THRESHOLD - subtotal;
-                upsellMessage = `¡Añade $${neededForDiscount.toLocaleString()} más y paga solo $${SHIPPING_COST_DISCOUNT} de envío! Ahorrarías $${SHIPPING_COST_REGULAR - SHIPPING_COST_DISCOUNT}.`;
+                // TRAMO 1: $500 - $3000 (Tarifa Fija)
+                shippingCost = SHIPPING_COST_TRAMO_1;
+                shippingText = `$${SHIPPING_COST_TRAMO_1} CUP`;
+                
+                const neededForTramo2 = TRAMO_1_MAX - subtotal + 1;
+                upsellMessage = `¡Añade $${neededForTramo2.toLocaleString()} más para pasar al Tramo 2 y pagar una tarifa base de solo $${SHIPPING_COST_TRAMO_2_BASE} + recargo por peso!`;
                 upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-yellow-100 text-yellow-800';
             }
         } else if (deliveryLocation === 'otros') {
@@ -1040,40 +1052,41 @@
         const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         const progressBar = document.getElementById('promoProgressBar');
         const progressTextSpan = document.getElementById('progressText');
-        const [levelRegular, levelDiscount, levelFree] = [document.getElementById('promoLevelRegular'), document.getElementById('promoLevelDiscount'), document.getElementById('promoLevelFree')];
+        const [levelTramo1, levelTramo2] = [document.getElementById('promoLevelTramo1'), document.getElementById('promoLevelTramo2')];
+        
+        if (!levelTramo1 || !levelTramo2) return;
 
-        [levelRegular, levelDiscount, levelFree].forEach(level => {
+        [levelTramo1, levelTramo2].forEach(level => {
             level.classList.remove('opacity-100', 'ring-[var(--accent-color)]');
             level.classList.add('opacity-75');
         });
 
         let progressWidth = 0;
         let message = `Pedido mínimo de $${MIN_ORDER_THRESHOLD}.`;
+        let totalWeight = 0;
 
-        if (subtotal >= FREE_THRESHOLD) {
+        if (subtotal > TRAMO_1_MAX) { // TRAMO 2
             progressWidth = 100;
-            message = '¡Envío GRATIS alcanzado!';
-            [levelRegular, levelDiscount, levelFree].forEach(l => l.classList.remove('opacity-75', 'ring-[var(--accent-color)]'));
-            levelFree.classList.add('opacity-100', 'ring-[var(--accent-color)]');
-            levelDiscount.classList.add('opacity-100');
-            levelRegular.classList.add('opacity-100');
-        } else if (subtotal >= DISCOUNT_THRESHOLD) {
-            progressWidth = ((subtotal - DISCOUNT_THRESHOLD) / (FREE_THRESHOLD - DISCOUNT_THRESHOLD)) * 50 + 50;
-            message = `¡Estás a solo $${(FREE_THRESHOLD - subtotal).toLocaleString()} del Envío GRATIS!`;
-            levelDiscount.classList.add('opacity-100', 'ring-[var(--accent-color)]');
-            levelRegular.classList.add('opacity-100');
-            levelDiscount.classList.remove('opacity-75');
-            levelRegular.classList.remove('opacity-75');
-        } else if (subtotal >= MIN_ORDER_THRESHOLD) {
-            progressWidth = (subtotal / DISCOUNT_THRESHOLD) * 50;
-            message = `Añade $${(DISCOUNT_THRESHOLD - subtotal).toLocaleString()} para pagar solo $${SHIPPING_COST_DISCOUNT} de envío.`;
-            levelRegular.classList.add('opacity-100', 'ring-[var(--accent-color)]');
-            levelRegular.classList.remove('opacity-75');
+            totalWeight = calculateTotalWeight();
+            const weightSurcharge = Math.ceil(totalWeight / WEIGHT_THRESHOLD_KG) * WEIGHT_SURCHARGE_PER_10KG;
+            const totalShipping = SHIPPING_COST_TRAMO_2_BASE + weightSurcharge;
+            message = `¡Tramo 2 alcanzado! Envío estimado: $${totalShipping.toLocaleString()} CUP (${totalWeight.toFixed(1)}kg).`;
+            
+            levelTramo2.classList.add('opacity-100', 'ring-[var(--accent-color)]');
+            levelTramo1.classList.add('opacity-100');
+            levelTramo2.classList.remove('opacity-75');
+            levelTramo1.classList.remove('opacity-75');
+        } else if (subtotal >= MIN_ORDER_THRESHOLD) { // TRAMO 1
+            progressWidth = (subtotal / TRAMO_1_MAX) * 100;
+            const neededForTramo2 = TRAMO_1_MAX - subtotal + 1;
+            message = `Añade $${neededForTramo2.toLocaleString()} más para pasar al Tramo 2 (Base $${SHIPPING_COST_TRAMO_2_BASE}).`;
+            
+            levelTramo1.classList.add('opacity-100', 'ring-[var(--accent-color)]');
+            levelTramo1.classList.remove('opacity-75');
         } else if (subtotal > 0) {
             progressWidth = (subtotal / MIN_ORDER_THRESHOLD) * 15;
-            message = `Te faltan $${(MIN_ORDER_THRESHOLD - subtotal).toLocaleString()} para el pedido mínimo.`;
-            levelRegular.classList.add('opacity-100');
-            levelRegular.classList.remove('opacity-75');
+            const neededForMinimum = MIN_ORDER_THRESHOLD - subtotal;
+            message = `Te faltan $${neededForMinimum.toLocaleString()} para el pedido mínimo de $${MIN_ORDER_THRESHOLD}.`;
         }
 
         progressBar.style.width = Math.min(progressWidth, 100) + '%';
@@ -1082,6 +1095,7 @@
         progressTextSpan.style.color = (progressWidth > 50) ? 'white' : 'var(--primary-color)';
         progressTextSpan.style.textShadow = (progressWidth > 50) ? '0 0 3px rgba(0,0,0,0.5)' : 'none';
     }
+
 
     function validateField(fieldId) {
         const element = document.getElementById(fieldId);
@@ -1193,25 +1207,27 @@
         }
 
         const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const serviceFee = SERVICE_FEE;
         let shippingCost = 0;
         let shippingText = '';
+        let totalWeight = 0;
 
         if (deliveryLocation === 'habana-vieja') {
-            if (subtotal >= FREE_THRESHOLD) {
-                shippingCost = SHIPPING_COST_FREE;
-                shippingText = `GRATIS (Pedido > $${FREE_THRESHOLD})`;
-            } else if (subtotal >= DISCOUNT_THRESHOLD) {
-                shippingCost = SHIPPING_COST_DISCOUNT;
-                shippingText = `Envío con Descuento: $${SHIPPING_COST_DISCOUNT} CUP`;
+            if (subtotal > TRAMO_1_MAX) {
+                totalWeight = calculateTotalWeight();
+                const weightCeiling = Math.ceil(totalWeight / WEIGHT_THRESHOLD_KG);
+                const weightSurcharge = weightCeiling * WEIGHT_SURCHARGE_PER_10KG;
+                shippingCost = SHIPPING_COST_TRAMO_2_BASE + weightSurcharge;
+                shippingText = `$${shippingCost.toLocaleString()} CUP (Base $${SHIPPING_COST_TRAMO_2_BASE} + Recargo ${weightCeiling}x10kg. Peso: ${totalWeight.toFixed(2)}kg)`;
             } else {
-                shippingCost = SHIPPING_COST_REGULAR;
-                shippingText = `$${SHIPPING_COST_REGULAR} CUP`;
+                shippingCost = SHIPPING_COST_TRAMO_1;
+                shippingText = `$${SHIPPING_COST_TRAMO_1} CUP (Tarifa fija Tramo 1)`;
             }
         } else {
             shippingText = 'A confirmar por agencia';
         }
 
-        const total = subtotal + SERVICE_FEE + shippingCost;
+        const total = subtotal + serviceFee + shippingCost;
         const orderItems = cart.map(item => `• ${item.name} x${item.quantity} - $${(item.price * item.quantity).toLocaleString()}`).join('\n');
         
         const locationText = deliveryLocation === 'habana-vieja' ? 'Habana Vieja' : 'Otros municipios';
@@ -1220,7 +1236,7 @@
         const finalMessage = `*🛒 NUEVO PEDIDO - EL RESOLVITO*\n\n` +
             `*👤 DATOS DEL CLIENTE:*\n` + `• Nombre: ${customerName}\n` + `• Teléfono: ${customerPhone}\n` + `• Dirección: ${customerAddress}\n` + `• Referencias: ${customerReferences || 'N/A'}\n` + `• Ubicación: ${locationText}\n\n` +
             `*📦 PRODUCTOS:*\n${orderItems}\n\n` +
-            `*💰 RESUMEN DE PAGO:*\n` + `• Subtotal: $${subtotal.toLocaleString()}\n` + `• Servicio/Empaque: $${SERVICE_FEE}\n` + `• Envío: ${shippingText}\n` + `• TOTAL: $${total.toLocaleString()}\n\n` +
+            `*💰 RESUMEN DE PAGO:*\n` + `• Subtotal: $${subtotal.toLocaleString()}\n` + `• Servicio/Empaque: $${SERVICE_FEE}\n` + `• Envío: ${shippingText}\n` + `• Peso Total: ${totalWeight.toFixed(2)} kg\n` + `• TOTAL: $${total.toLocaleString()}\n\n` +
             `*💳 MÉTODO DE PAGO:*\n${paymentText}\n\n` + `_¡Gracias por su pedido!_ 🙏`;
 
         const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycby9Sk3Fz2_WqRQsEXrezpwqKbpYhqW_-ialMJcYKPdvZkrBfNReWWFfQ-VnXTrkJY8W/exec';
@@ -1267,5 +1283,9 @@
 
 </body>
 </html>
+
+</body>
+</html>
+
 
 
