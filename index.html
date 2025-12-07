@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -771,37 +772,41 @@
         for (var i = 0; i < sortedCategories.length; i++) {
             var category = sortedCategories[i];
             if (groupedProducts.hasOwnProperty(category)) {
-                html += '<div class="col-span-full fade-in-up"><h3 class="text-2xl font-bold text-center text-[var(--primary-color)] my-8 border-b-2 border-gray-200 pb-2">— ' + category + ' —</h3></div>';
+                html += '<div class="fade-in-up w-full"><h3 class="text-2xl font-bold text-center text-[var(--primary-color)] my-8 border-b-2 border-gray-200 pb-2">— ' + category + ' —</h3></div>';
                 html += groupedProducts[category].map(function(product, index) {
                     const isUnavailable = product.status === 'unavailable';
                     const onClickHandler = isUnavailable ? '' : `onclick="showProductDetailsModal(${product.id})"`;
                     const cursorStyle = isUnavailable ? 'cursor-not-allowed' : 'cursor-pointer';
 
-                    const imageWrapperClasses = (product.id === 14) 
-                        ? 'w-full h-80 md:h-96 overflow-hidden bg-transparent flex items-center justify-center p-2' 
-                        : 'w-full h-80 md:h-96 overflow-hidden bg-transparent flex items-center justify-center p-3'; 
-
-                    return '<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ' + cursorStyle + ' flex flex-col ' + (isUnavailable ? 'unavailable-product-card' : '') + ' fade-in-up" style="transition-delay: ' + (index * 50) + 'ms" ' + onClickHandler + '>' +
-                               '<div class="' + imageWrapperClasses + '">' + 
-                                 '<img src="' + product.image + '" alt="' + product.name + ' - El Resolvito" class="w-full h-full object-contain transition-all duration-300">' +
+                    return '<div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 ' + cursorStyle + ' flex flex-row ' + (isUnavailable ? 'unavailable-product-card' : '') + ' fade-in-up w-full border border-gray-100" style="transition-delay: ' + (index * 50) + 'ms" ' + onClickHandler + '>' +
+                               // Columna 1: Imagen (Ancho fijo)
+                               '<div class="w-28 h-28 sm:w-32 sm:h-32 flex-shrink-0 p-2 flex items-center justify-center bg-gray-50">' + 
+                                 '<img src="' + product.image + '" alt="' + product.name + '" class="w-full h-full object-contain">' +
                                '</div>' +
-                               '<div class="p-4 flex-grow flex flex-col">' +
-                               '<h3 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-1 product-name">' + product.name + '</h3>' +
-                               '<span class="text-fixed-sm font-semibold ' + (isUnavailable ? 'text-red-600' : 'text-green-600') + ' mb-2">' + (isUnavailable ? 'No Disponible' : 'Disponible') + '</span>' +
-                               (product.specificDetails ? '<p class="text-fixed-sm text-gray-500 mb-1 product-details-text">' + product.specificDetails + '</p>' : '') +
-                               '<p class="text-fixed-sm text-[var(--text-medium)] mb-2 flex-grow product-description">' + product.description + '</p>' +
-                               '<p class="text-fixed-xl font-bold text-[var(--primary-color)] mb-4 product-price">$' + product.price.toLocaleString() + '</p>' +
-                               (isUnavailable ? 
-                                   '<div class="add-to-cart-btn mt-auto py-2 px-4 rounded-lg flex items-center justify-center bg-gray-400 text-white font-bold text-fixed-base cursor-not-allowed">' +
-                                       '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-7-8a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" /></svg>' +
-                                       'No Disponible' +
-                                   '</div>' : 
-                                   '<button class="add-to-cart-btn mt-auto w-full bg-[var(--primary-color)] text-white font-bold py-2 px-4 rounded-lg text-fixed-base hover:bg-opacity-90 transition-colors duration-300">Ver Detalles</button>') +
-                               '</div></div>';
+                               // Columna 2: Info (Flexible)
+                               '<div class="p-3 sm:p-4 flex-grow flex flex-col justify-center">' +
+                                   '<div class="flex justify-between items-start">' +
+                                       '<div>' +
+                                           '<h3 class="text-fixed-lg font-bold text-[var(--text-dark)] leading-tight">' + product.name + '</h3>' +
+                                           (product.specificDetails ? '<p class="text-xs text-gray-500">' + product.specificDetails + '</p>' : '') +
+                                       '</div>' +
+                                       '<div class="text-right">' +
+                                            '<p class="text-fixed-xl font-bold text-[var(--primary-color)]">$' + product.price.toLocaleString() + '</p>' +
+                                       '</div>' +
+                                   '</div>' +
+                                   
+                                   '<div class="mt-2 flex justify-between items-end">' +
+                                       '<p class="text-sm text-[var(--text-medium)] line-clamp-2 pr-2 hidden sm:block">' + product.description + '</p>' +
+                                       (isUnavailable ? 
+                                           '<span class="px-3 py-1 bg-gray-200 text-gray-600 text-xs font-bold rounded-full">Agotado</span>' : 
+                                           '<span class="text-sm font-bold text-[var(--accent-color)] flex items-center gap-1">Agregar <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg></span>') +
+                                   '</div>' +
+                               '</div>' +
+                           '</div>';
                 }).join('');
             }
         }
-        productGrid.innerHTML = '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">' + html + '</div>';
+        productGrid.innerHTML = '<div class="flex flex-col gap-4 w-full max-w-4xl mx-auto">' + html + '</div>';
         setupScrollAnimations();
     }
     
