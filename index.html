@@ -140,7 +140,7 @@
             <!-- Texto -->
             <div class="w-full md:w-1/2 text-center md:text-left z-10 fade-in-up">
                 <span class="inline-block py-1 px-3 rounded-full bg-blue-50 text-[var(--primary-color)] text-xs font-bold tracking-wide mb-4 border border-blue-100">ENVIOS A LA HABANA</span>
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[var(--text-dark)] leading-tight mb-4">Tus compras <br><span class="font-script text-[var(--accent-color)] text-5xl md:text-6xl lg:text-7xl block mt-2 transform -rotate-2">a un solo clic</span></h1>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[var(--text-dark)] leading-tight mb-4">Tu Mercado Cubano <br><span class="font-script text-[var(--accent-color)] text-5xl md:text-6xl lg:text-7xl block mt-2 transform -rotate-2">a un solo clic</span></h1>
                 <p class="text-gray-500 text-lg md:text-xl mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed">Olvídate de las colas. Selecciona tus productos desde el móvil y recíbelos en la puerta de tu casa en La Habana Vieja.</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                     <a href="#mercado" class="px-8 py-4 bg-[var(--primary-color)] text-white font-bold rounded-full shadow-lg hover:bg-[#0a2e28] transition-all transform hover:scale-105 flex items-center justify-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg> Comprar Ahora</a>
@@ -211,7 +211,7 @@
         </div>
     </section>
 
-    <!-- SECCIÓN MERCADO CON SISTEMA DE PESTAÑAS MEJORADO (GRID AJUSTADA) -->
+    <!-- SECCIÓN MERCADO CON SISTEMA DE PESTAÑAS MEJORADO -->
     <section id="mercado" class="py-16 lg:py-24 bg-gray-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             
@@ -221,8 +221,8 @@
                 <p class="mt-4 text-fixed-lg text-[var(--text-medium)] max-w-3xl mx-auto">Selecciona una categoría para ver los productos.</p>
             </div>
 
-            <!-- SISTEMA DE PESTAÑAS (TABS) - GRID ESTRICTA SIN SCROLL -->
-            <div class="sticky top-[70px] z-30 bg-gray-50 py-3 shadow-sm rounded-b-xl mb-6">
+            <!-- SISTEMA DE PESTAÑAS (TABS) - GRID RESPONSIVE -->
+            <div id="tabsContainer" class="sticky top-[70px] z-30 bg-gray-50 py-3 shadow-sm rounded-b-xl mb-6">
                 <div class="container mx-auto px-2">
                     <div class="grid grid-cols-2 md:flex md:justify-center gap-2">
                         <!-- Mercado -->
@@ -237,7 +237,7 @@
                             👕 Ropa y Calzado
                         </button>
                         
-                        <!-- Electro (Ocupa 2 columnas en móvil para caber) -->
+                        <!-- Electro (Ocupa 2 columnas en móvil) -->
                         <button onclick="switchDepartment('electro')" id="tab-electro" 
                             class="department-tab col-span-2 md:col-span-1 flex items-center justify-center gap-1 w-full px-2 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all shadow-sm border border-gray-200 bg-white text-gray-600 hover:bg-gray-100 hover:scale-105 transform">
                             ⚡ Electrodomésticos
@@ -271,7 +271,8 @@
             </div>
             
             <div id="mercadoCategoryFilters" class="flex flex-wrap justify-center gap-2 mb-8 fade-in-up"></div>
-            <div id="mercadoProductGrid"></div>
+            <!-- Contenedor con altura mínima para evitar saltos al cambiar categorías con pocos productos -->
+            <div id="mercadoProductGrid" class="min-h-[60vh]"></div>
             <p id="mercadoNoResultsMessage" class="hidden text-center text-fixed-lg text-[var(--text-medium)] mt-8">No se encontraron productos en esta sección.</p>
         </div>
     </section>
@@ -574,6 +575,19 @@
         const titles = { 'mercado': 'Mercado y Víveres', 'ropa': 'Moda y Estilo', 'electro': 'Hogar y Electro' };
         document.getElementById('sectionTitle').textContent = titles[dept];
         setupStoreSection('mercado', products); 
+
+        // Auto-Scroll inteligente: Si el usuario está muy abajo, lo subimos suavemente al inicio de la lista
+        const tabsContainer = document.getElementById('tabsContainer');
+        const headerOffset = 80; 
+        const elementPosition = tabsContainer.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        if (window.scrollY > offsetPosition) {
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        }
     }
 
     function setupStoreSection(sectionPrefix, allProducts) {
