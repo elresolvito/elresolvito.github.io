@@ -139,8 +139,8 @@
         <div class="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12">
             <!-- Texto -->
             <div class="w-full md:w-1/2 text-center md:text-left z-10 fade-in-up">
-                <span class="inline-block py-1 px-3 rounded-full bg-blue-50 text-[var(--primary-color)] text-xs font-bold tracking-wide mb-4 border border-blue-100">ENVIOS EN LA HABANA</span>
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[var(--text-dark)] leading-tight mb-4">Tus compras <br><span class="font-script text-[var(--accent-color)] text-5xl md:text-6xl lg:text-7xl block mt-2 transform -rotate-2">a un solo clic</span></h1>
+                <span class="inline-block py-1 px-3 rounded-full bg-blue-50 text-[var(--primary-color)] text-xs font-bold tracking-wide mb-4 border border-blue-100">ENVIOS A LA HABANA</span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[var(--text-dark)] leading-tight mb-4">Tu Mercado Cubano <br><span class="font-script text-[var(--accent-color)] text-5xl md:text-6xl lg:text-7xl block mt-2 transform -rotate-2">a un solo clic</span></h1>
                 <p class="text-gray-500 text-lg md:text-xl mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed">Olvídate de las colas. Selecciona tus productos desde el móvil y recíbelos en la puerta de tu casa en La Habana Vieja.</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                     <a href="#mercado" class="px-8 py-4 bg-[var(--primary-color)] text-white font-bold rounded-full shadow-lg hover:bg-[#0a2e28] transition-all transform hover:scale-105 flex items-center justify-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg> Comprar Ahora</a>
@@ -198,7 +198,7 @@
                     <p class="hidden md:block text-xs md:text-sm text-[var(--text-medium)] mt-1">Selecciona desde casa.</p>
                 </div>
                 <div class="flex flex-col items-center text-center p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 md:h-10 md:w-10 text-[var(--primary-color)] mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7m0-4v8a2 2 0 01-2 2H5a2 2 0 01-2-2V4a2 2 0 012-2h10a2 2 0 012 2v4a2 2 0 002 2h2m-6 4h4" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 md:h-10 md:w-10 text-[var(--primary-color)] mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7m0-4v8a2 2 0 01-2 2H5a2 2 0 01-2-2V4a2 2 0 012-2h10a2 2 0 012 2v4a2 2 0 002 2h2" /></svg>
                     <h3 class="text-sm md:text-lg font-bold text-[var(--text-dark)] leading-tight">Sin Estrés</h3>
                     <p class="hidden md:block text-xs md:text-sm text-[var(--text-medium)] mt-1">Proceso tranquilo y organizado.</p>
                 </div>
@@ -482,7 +482,11 @@
     <button class="close-btn" id="closeFloatingCallout">&times;</button><p class="font-bold mb-2">¡Comodidad en La Habana!</p><a href="#nuestras-ventajas" class="mt-3 inline-block bg-[var(--accent-color)] text-white text-fixed-sm font-semibold py-2 px-4 rounded-full">Ver Ventajas</a>
 </div>
 
+<!-- Incluir el catálogo externo -->
+<script src="catalogo.js"></script>
+
 <script>
+    // Constantes de negocio
     const MIN_ORDER_THRESHOLD = 500;
     const TRAMO_1_MAX = 3000; 
     const SHIPPING_COST_TRAMO_1 = 150; 
@@ -491,48 +495,8 @@
     const WEIGHT_THRESHOLD_KG = 10;
     const SERVICE_FEE = 50;
 
-    // === CATÁLOGO CON DEPARTAMENTOS ===
-    var products = [
-        // --- MERCADO ---
-        { id: 1, name: "Aceite", price: 970, image: "https://i.postimg.cc/bvfLRwLH/aceite.jpg", description: "Botella de aceite vegetal.", specificDetails: "1 Litro", category: "Mercado", department: "mercado", status: "available", hasBoxOption: false, weight: 1.0 },
-        { id: 2, name: "Arroz", price: 650, image: "https://i.postimg.cc/ZRR352mX/arroz.jpg", description: "Arroz brasileño, precio de oferta.", specificDetails: "Paquete de 1 kg", category: "Mercado", department: "mercado", status: "available", hasBoxOption: false, weight: 1.0 },
-        { id: 3, name: "Spaghetti", price: 350, image: "https://i.postimg.cc/rpBWC2DW/spaguetis.png", description: "Pasta de trigo.", specificDetails: "Paquete de 500g", category: "Mercado", department: "mercado", status: "available", hasBoxOption: false, weight: 0.5 },
-        { id: 4, name: "Picadillo", price: 380, image: "https://i.postimg.cc/pdhzFLLR/picadillo-de-pollo.png", description: "Carne molida de ave.", specificDetails: "Paquete de 500g", category: "Cárnicos", department: "mercado", status: "available", hasBoxOption: false, weight: 0.5 },
-        { id: 5, name: "Salchichas", price: 400, image: "https://i.postimg.cc/R0mKFv73/salchichas-1-paquete.png", description: "Salchichas de ave.", specificDetails: "1 paquete (10 unid)", category: "Cárnicos", department: "mercado", status: "available", hasBoxOption: false, weight: 0.5 },
-        { id: 6, name: "Cerveza Presidente", price: 220, image: "https://i.postimg.cc/sXBWqMwz/cerveza-predidente-precio-220.png", description: "Cerveza pilsener ligera.", specificDetails: "Lata de 355 ml", category: "Líquidos", department: "mercado", status: "available", hasBoxOption: true, boxPrice: 5280, boxQuantity: 24, weight: 0.38 },
-        { id: 7, name: "Malta Guajira", price: 250, image: "https://i.postimg.cc/HWv2h2BL/malta_guajira.jpg", description: "Bebida de malta refrescante.", specificDetails: "Botella de 355 ml", category: "Líquidos", department: "mercado", status: "available", hasBoxOption: false, weight: 0.38 },
-        { id: 8, name: "Leche Condensada", price: 520, image: "https://i.postimg.cc/fRbxMK43/leche-condensada.jpg", description: "Dulce y cremosa.", specificDetails: "Lata de 397g", category: "Mercado", department: "mercado", status: "available", hasBoxOption: false, weight: 0.45 },
-        { id: 9, name: "Jabón Ridel", price: 160, image: "https://i.postimg.cc/rm2qNxty/jabon-de-ba-o.jpg", description: "Suave para la piel.", specificDetails: "Pastilla de 100g", category: "Aseo Personal", department: "mercado", status: "available", hasBoxOption: false, weight: 0.1 },
-        { id: 10, name: "Refresco Instant.", price: 40, image: "https://i.postimg.cc/MTzsbBM1/refresco-1.png", description: "Sobre de refresco en polvo.", specificDetails: "Para 1.5 Litros", category: "Líquidos", department: "mercado", status: "available", hasBoxOption: false, weight: 0.01 },
-        { id: 11, name: "Hígado de Pollo", price: 850, image: "https://i.postimg.cc/Zn9vvrkb/higado.jpg", description: "Fresco y nutritivo.", specificDetails: "Paquete de 1 kg", category: "Cárnicos", department: "mercado", status: "available", hasBoxOption: false, weight: 1.0 },
-        { id: 12, name: "Whisky Jolly", price: 400, image: "https://i.postimg.cc/mD2Ydz9M/whisky.png", description: "Bebida espirituosa.", specificDetails: "Botella de 200 ml", category: "Líquidos", department: "mercado", status: "available", hasBoxOption: false, weight: 0.25 },
-        { id: 13, name: "Frijol Negro", price: 880, image: "https://i.postimg.cc/rFt14B4k/frijol_negro.jpg", description: "Legumbre esencial.", specificDetails: "Paquete de 1 kg", category: "Mercado", department: "mercado", status: "available", hasBoxOption: false, weight: 1.0 },
-        { id: 14, name: "Galletas SaltiBloks", price: 890, image: "https://i.postimg.cc/c4qpfNz7/Galletas-7-tacos.png", description: "Crujientes y saladas.", specificDetails: "1 paquete (7 tacos)", category: "Confituras", department: "mercado", status: "available", hasBoxOption: false, weight: 0.3 },
-        { id: 15, name: "Detergente Brillante", price: 350, image: "https://i.postimg.cc/sXwcy9zw/detergente.jpg", description: "Limpieza profunda.", specificDetails: "Bolsa de 400g", category: "Aseo Personal", department: "mercado", status: "available", hasBoxOption: false, weight: 0.4 },
-        { id: 16, name: "Cerveza Unlaguer", price: 250, image: "https://i.postimg.cc/HLv56w03/cerveza-ulaguer-precio-300.png", description: "Ligera y refrescante.", specificDetails: "Lata de 355 ml", category: "Líquidos", department: "mercado", status: "available", hasBoxOption: true, boxPrice: 6000, boxQuantity: 24, weight: 0.38 },
-        { id: 17, name: "Cerveza Cristal", price: 280, image: "https://i.postimg.cc/MZ5gbYw8/cristal.png", description: "Clásica cubana.", specificDetails: "Lata de 355 ml", category: "Líquidos", department: "mercado", status: "available", hasBoxOption: true, boxPrice: 6720, boxQuantity: 24, weight: 0.38 },
-        { id: 18, name: "Azúcar Blanca", price: 600, image: "https://i.postimg.cc/c40RbWXB/azucar_blanca.jpg", description: "Endulza tus momentos.", specificDetails: "Paquete de 1 kg", category: "Mercado", department: "mercado", status: "available", hasBoxOption: false, weight: 1.0 },
-        { id: 19, name: "Papel Sanitario", price: 530, image: "https://i.postimg.cc/K8BD4yFK/papel_sanitario.jpg", description: "Suave y resistente.", specificDetails: "Paquete de 4 rollos", category: "Aseo Personal", department: "mercado", status: "available", hasBoxOption: false, weight: 0.5 },
-        { id: 20, name: "Malta Morena", price: 210, image: "https://i.postimg.cc/7YCV82Wn/malta_morena.jpg", description: "Sabor intenso.", specificDetails: "Lata de 8 oz", category: "Líquidos", department: "mercado", status: "available", hasBoxOption: false, weight: 0.25 },
-        { id: 21, name: "Fritos", price: 200, image: "https://i.postimg.cc/GhqTCs0B/fritos.jpg", description: "Crujientes frituras.", specificDetails: "Paquete individual", category: "Confituras", department: "mercado", status: "available", hasBoxOption: false, weight: 0.05 },
-        { id: 22, name: "Jabón Pemila", price: 160, image: "https://i.postimg.cc/X7qNdKr0/jabon_de_baño_pemila_.png", description: "Aroma fresco.", specificDetails: "Pastilla de 100g", category: "Aseo Personal", department: "mercado", status: "available", hasBoxOption: false, weight: 0.1 },
-        { id: 23, name: "Pasta de Tomate", price: 120, image: "https://i.postimg.cc/k5CFbhXT/pasta_de_tomate.jpg", description: "Concentrado de tomate.", specificDetails: "Bolsa de 70g", category: "Mercado", department: "mercado", status: "available", hasBoxOption: false, weight: 0.07 },
-        { id: 24, name: "Pelly de Queso", price: 500, image: "https://i.postimg.cc/Zq1yQkGV/pelly.jpg", description: "Sabor a queso.", specificDetails: "Paquete de 115g", category: "Confituras", department: "mercado", status: "available", hasBoxOption: false, weight: 0.12 },
-        { id: 25, name: "Ron Capitán Cortez", price: 1500, image: "https://i.postimg.cc/xCzzpvCX/ron_capitan_cortez.jpg", description: "Ron brasileño.", specificDetails: "Botella de 965 ml", category: "Líquidos", department: "mercado", status: "available", hasBoxOption: false, weight: 1.5 },
-        { id: 26, name: "Sorbeto Renata", price: 300, image: "https://i.postimg.cc/Wb6CbTSq/sorbeto-renata.jpg", description: "Dulce sabor a frutas.", specificDetails: "Paquete de 115g", category: "Confituras", department: "mercado", status: "available", hasBoxOption: false, weight: 0.15 },
-        { id: 29, name: "Mermelada Fresa", price: 600, image: "https://i.postimg.cc/Kvd5ZYXS/mermelada.jpg", description: "Mermelada de fresa.", specificDetails: "Frasco de 200g", category: "Mercado", department: "mercado", status: "available", hasBoxOption: false, weight: 0.2 },
-
-        // --- ROPA ---
-        { id: 101, name: "Pullover Nike Dry", price: 2500, image: "https://via.placeholder.com/300x300?text=Pullover", description: "Algodón transpirable.", specificDetails: "Tallas S, M, L", category: "Hombre", department: "ropa", status: "available", hasBoxOption: false, weight: 0.2 },
-        { id: 102, name: "Sandalias de Verano", price: 1800, image: "https://via.placeholder.com/300x300?text=Sandalias", description: "Cómodas y resistentes.", specificDetails: "Tallas 36-40", category: "Mujer", department: "ropa", status: "available", hasBoxOption: false, weight: 0.4 },
-
-        // --- ELECTRO ---
-        { id: 201, name: "Olla Reina", price: 25000, image: "https://via.placeholder.com/300x300?text=Olla+Reina", description: "Olla de presión eléctrica.", specificDetails: "5 Litros", category: "Cocina", department: "electro", status: "available", hasBoxOption: false, weight: 3.5 },
-        { id: 202, name: "Batidora de Mano", price: 4500, image: "https://via.placeholder.com/300x300?text=Batidora", description: "Ideal para jugos.", specificDetails: "3 velocidades", category: "Cocina", department: "electro", status: "available", hasBoxOption: false, weight: 1.2 }
-    ];
-    
-    products.sort((a, b) => (a.category < b.category ? -1 : (a.category > b.category ? 1 : (a.name < b.name ? -1 : 1))));
-    
+    // Variables globales
+    let products = []; // Se llenará con datos del catálogo externo
     var cart = JSON.parse(localStorage.getItem('cart')) || [];
     var whatsappGroupLink = 'https://chat.whatsapp.com/H19dIofkINdHrVApA4jbvW?mode=ac_t'; 
     var currentProductForModal = null;
@@ -555,7 +519,14 @@
     const floatingCallout = document.getElementById('floatingCallout'); 
     const closeFloatingCalloutBtn = document.getElementById('closeFloatingCallout'); 
 
+    // Cuando el DOM esté listo, carga los productos
     document.addEventListener('DOMContentLoaded', function() {
+        // Inicializar con los productos del catálogo externo
+        products = catalogo.productos;
+        
+        // Ordenar productos
+        products.sort((a, b) => (a.category < b.category ? -1 : (a.category > b.category ? 1 : (a.name < b.name ? -1 : 1))));
+        
         setupStoreSection('mercado', products);
         updateCartUI(); 
         updateDeliveryPromoBanner();
@@ -715,56 +686,173 @@
         setupScrollAnimations();
     }
     
-    function showProductDetailsModal(productId){var product=null;for(var i=0;i<products.length;i++){if(products[i].id===productId){product=products[i];break;}}
-    if(!product||product.status==='unavailable')return;currentProductForModal=JSON.parse(JSON.stringify(product));currentProductForModal.quantity=1;currentUnitType='individual';document.getElementById('productDetailsTitle').textContent=product.name;document.getElementById('productDetailsImage').src=product.image;document.getElementById('productDetailsDescription').textContent=product.description;document.getElementById('productQuantityDisplay').textContent='1';var unitTypeSection=document.getElementById('unitTypeSection');if(product.hasBoxOption){unitTypeSection.classList.remove('hidden');updateUnitTypeButtons();}else{unitTypeSection.classList.add('hidden');}
-    updateModalPricing();showModal(productDetailsModal);} 
-    function updateUnitTypeButtons(){var individualBtn=document.getElementById('unitTypeIndividual');var boxBtn=document.getElementById('unitTypeBox');if(currentUnitType==='individual'){individualBtn.classList.add('active');boxBtn.classList.remove('active');}else{boxBtn.classList.add('active');individualBtn.classList.remove('active');}}
-    function updateModalPricing(){if(!currentProductForModal)return;var unitPrice,unitDescription;if(currentProductForModal.hasBoxOption&&currentUnitType==='box'){unitPrice=currentProductForModal.boxPrice;unitDescription='Caja ('+currentProductForModal.boxQuantity+' unidades)';}else{unitPrice=currentProductForModal.price;unitDescription='Unidad';}
-    var totalPrice=unitPrice*currentProductForModal.quantity;document.getElementById('productDetailsPrice').textContent='$'+unitPrice.toLocaleString()+' / '+unitDescription;document.getElementById('modalTotalPrice').textContent='$'+totalPrice.toLocaleString();}
-    function addToCartFromModal(){if(!currentProductForModal)return;var cartItem={id:currentProductForModal.id+(currentUnitType==='box'?'_box':''),name:currentProductForModal.name,image:currentProductForModal.image,quantity:currentProductForModal.quantity,unitType:currentUnitType};
-    const productData = products.find(p => p.id === currentProductForModal.id);
-    if (productData && productData.weight !== undefined) {
-        cartItem.weight = productData.weight;
-        if (currentProductForModal.hasBoxOption && currentUnitType === 'box') {
-            cartItem.price = currentProductForModal.boxPrice;
-            cartItem.name += ' (Caja x' + currentProductForModal.boxQuantity + ')';
-        } else { cartItem.price = currentProductForModal.price; }
-    } else { cartItem.price = currentProductForModal.price; cartItem.weight = 0; }
-    var existingItemIndex=-1;for(var i=0;i<cart.length;i++){if(cart[i].id===cartItem.id){existingItemIndex=i;break;}}
-    if(existingItemIndex!==-1){cart[existingItemIndex].quantity+=cartItem.quantity;}else{cart.push(cartItem);}
-    updateCartUI();localStorage.setItem('cart',JSON.stringify(cart));hideModal(productDetailsModal);currentProductForModal=null;showCartAnimation(); showCartToast('Producto añadido al carrito');} 
+    function showProductDetailsModal(productId){
+        var product = catalogo.obtenerPorId(productId);
+        if(!product || product.status==='unavailable') return;
+        currentProductForModal = JSON.parse(JSON.stringify(product));
+        currentProductForModal.quantity = 1;
+        currentUnitType = 'individual';
+        document.getElementById('productDetailsTitle').textContent = product.name;
+        document.getElementById('productDetailsImage').src = product.image;
+        document.getElementById('productDetailsDescription').textContent = product.description;
+        document.getElementById('productQuantityDisplay').textContent = '1';
+        var unitTypeSection = document.getElementById('unitTypeSection');
+        if(product.hasBoxOption){
+            unitTypeSection.classList.remove('hidden');
+            updateUnitTypeButtons();
+        } else {
+            unitTypeSection.classList.add('hidden');
+        }
+        updateModalPricing();
+        showModal(productDetailsModal);
+    } 
+
+    function updateUnitTypeButtons(){
+        var individualBtn = document.getElementById('unitTypeIndividual');
+        var boxBtn = document.getElementById('unitTypeBox');
+        if(currentUnitType==='individual'){
+            individualBtn.classList.add('active');
+            boxBtn.classList.remove('active');
+        } else {
+            boxBtn.classList.add('active');
+            individualBtn.classList.remove('active');
+        }
+    }
+
+    function updateModalPricing(){
+        if(!currentProductForModal) return;
+        var unitPrice, unitDescription;
+        if(currentProductForModal.hasBoxOption && currentUnitType==='box'){
+            unitPrice = currentProductForModal.boxPrice;
+            unitDescription = 'Caja (' + currentProductForModal.boxQuantity + ' unidades)';
+        } else {
+            unitPrice = currentProductForModal.price;
+            unitDescription = 'Unidad';
+        }
+        var totalPrice = unitPrice * currentProductForModal.quantity;
+        document.getElementById('productDetailsPrice').textContent = '$' + unitPrice.toLocaleString() + ' / ' + unitDescription;
+        document.getElementById('modalTotalPrice').textContent = '$' + totalPrice.toLocaleString();
+    }
+
+    function addToCartFromModal(){
+        if(!currentProductForModal) return;
+        var cartItem = {
+            id: currentProductForModal.id + (currentUnitType==='box' ? '_box' : ''),
+            name: currentProductForModal.name,
+            image: currentProductForModal.image,
+            quantity: currentProductForModal.quantity,
+            unitType: currentUnitType
+        };
+        
+        const productData = catalogo.obtenerPorId(currentProductForModal.id);
+        if (productData && productData.weight !== undefined) {
+            cartItem.weight = productData.weight;
+            if (currentProductForModal.hasBoxOption && currentUnitType === 'box') {
+                cartItem.price = currentProductForModal.boxPrice;
+                cartItem.name += ' (Caja x' + currentProductForModal.boxQuantity + ')';
+            } else { 
+                cartItem.price = currentProductForModal.price; 
+            }
+        } else { 
+            cartItem.price = currentProductForModal.price; 
+            cartItem.weight = 0; 
+        }
+        
+        var existingItemIndex = -1;
+        for(var i = 0; i < cart.length; i++){
+            if(cart[i].id === cartItem.id){
+                existingItemIndex = i;
+                break;
+            }
+        }
+        
+        if(existingItemIndex !== -1){
+            cart[existingItemIndex].quantity += cartItem.quantity;
+        } else {
+            cart.push(cartItem);
+        }
+        
+        updateCartUI();
+        localStorage.setItem('cart', JSON.stringify(cart));
+        hideModal(productDetailsModal);
+        currentProductForModal = null;
+        showCartAnimation(); 
+        showCartToast('Producto añadido al carrito');
+    } 
     
     function updateCartUI(){
-        var totalItems=cart.reduce(function(sum,item){return sum+item.quantity;},0);
-        var totalPrice=cart.reduce(function(sum,item){return sum+(item.price*item.quantity);},0);
-        document.getElementById('cartCount').textContent=totalItems;
-        document.getElementById('cartTotal').textContent='$'+totalPrice.toLocaleString();
+        var totalItems = cart.reduce(function(sum, item){
+            return sum + item.quantity;
+        }, 0);
+        var totalPrice = cart.reduce(function(sum, item){
+            return sum + (item.price * item.quantity);
+        }, 0);
+        document.getElementById('cartCount').textContent = totalItems;
+        document.getElementById('cartTotal').textContent = '$' + totalPrice.toLocaleString();
         document.getElementById('floatingCartTotal').textContent = '$' + totalPrice.toLocaleString();
-        var cartItems=document.getElementById('cartItems');
-        var sendWhatsAppOrder=document.getElementById('sendWhatsAppOrder');
-        if(cart.length===0){
-            cartItems.innerHTML='<p class="text-center text-[var(--text-medium)] text-fixed-base">Tu carrito está vacío</p>';
-            sendWhatsAppOrder.disabled=true;
-        }else{
-            cartItems.innerHTML=cart.map(function(item,index){return('<div class="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0"><div class="flex-1"><h5 class="text-fixed-base font-semibold text-[var(--text-dark)]">'+item.name+'</h5><p class="text-fixed-sm text-[var(--text-medium)]">$'+item.price.toLocaleString()+' c/u × '+item.quantity+'</p></div><div class="flex items-center gap-2"><button onclick="updateCartQuantity('+index+', '+(item.quantity-1)+')" class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-fixed-sm font-bold hover:bg-gray-300 transition-colors">-</button><span class="text-fixed-base font-semibold w-8 text-center">'+item.quantity+'</span><button onclick="updateCartQuantity('+index+', '+(item.quantity+1)+')" class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-fixed-sm font-bold hover:bg-gray-300 transition-colors">+</button><button onclick="removeFromCart('+index+')" class="ml-2 text-red-500 hover:text-red-700 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button></div></div>');}).join('');
-            sendWhatsAppOrder.disabled=false;
+        var cartItems = document.getElementById('cartItems');
+        var sendWhatsAppOrder = document.getElementById('sendWhatsAppOrder');
+        if(cart.length === 0){
+            cartItems.innerHTML = '<p class="text-center text-[var(--text-medium)] text-fixed-base">Tu carrito está vacío</p>';
+            sendWhatsAppOrder.disabled = true;
+        } else {
+            cartItems.innerHTML = cart.map(function(item, index){
+                return('<div class="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0"><div class="flex-1"><h5 class="text-fixed-base font-semibold text-[var(--text-dark)]">'+item.name+'</h5><p class="text-fixed-sm text-[var(--text-medium)]">$'+item.price.toLocaleString()+' c/u × '+item.quantity+'</p></div><div class="flex items-center gap-2"><button onclick="updateCartQuantity('+index+', '+(item.quantity-1)+')" class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-fixed-sm font-bold hover:bg-gray-300 transition-colors">-</button><span class="text-fixed-base font-semibold w-8 text-center">'+item.quantity+'</span><button onclick="updateCartQuantity('+index+', '+(item.quantity+1)+')" class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-fixed-sm font-bold hover:bg-gray-300 transition-colors">+</button><button onclick="removeFromCart('+index+')" class="ml-2 text-red-500 hover:text-red-700 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button></div></div>');
+            }).join('');
+            sendWhatsAppOrder.disabled = false;
         }
         updateDeliveryPromoBanner();
     }
 
-    function updateCartQuantity(index,newQuantity){
-        if(newQuantity<=0){ removeFromCart(index); showCartToast('Producto eliminado del carrito'); return; } 
-        cart[index].quantity=newQuantity; updateCartUI(); localStorage.setItem('cart',JSON.stringify(cart)); showCartToast('Carrito actualizado');
+    function updateCartQuantity(index, newQuantity){
+        if(newQuantity <= 0){ 
+            removeFromCart(index); 
+            showCartToast('Producto eliminado del carrito'); 
+            return; 
+        } 
+        cart[index].quantity = newQuantity; 
+        updateCartUI(); 
+        localStorage.setItem('cart', JSON.stringify(cart)); 
+        showCartToast('Carrito actualizado');
     }
-    function removeFromCart(index){ cart.splice(index,1); updateCartUI(); localStorage.setItem('cart',JSON.stringify(cart)); showCartToast('Producto eliminado del carrito'); }
-    function showCartAnimation(){var floatingCartBtn=document.getElementById('floatingCartBtn');floatingCartBtn.classList.add('shake');setTimeout(function(){floatingCartBtn.classList.remove('shake');},600);}
+
+    function removeFromCart(index){ 
+        cart.splice(index,1); 
+        updateCartUI(); 
+        localStorage.setItem('cart', JSON.stringify(cart)); 
+        showCartToast('Producto eliminado del carrito'); 
+    }
+
+    function showCartAnimation(){
+        var floatingCartBtn = document.getElementById('floatingCartBtn');
+        floatingCartBtn.classList.add('shake');
+        setTimeout(function(){
+            floatingCartBtn.classList.remove('shake');
+        },600);
+    }
+
     function showCartToast(message) {
-        const toast = document.getElementById('cartToast'); const toastMessage = document.getElementById('cartToastMessage');
-        clearTimeout(toastTimeout); toastMessage.textContent = message; toast.classList.add('show');
-        toastTimeout = setTimeout(() => { toast.classList.remove('show'); }, 3000);
+        const toast = document.getElementById('cartToast'); 
+        const toastMessage = document.getElementById('cartToastMessage');
+        clearTimeout(toastTimeout); 
+        toastMessage.textContent = message; 
+        toast.classList.add('show');
+        toastTimeout = setTimeout(() => { 
+            toast.classList.remove('show'); 
+        }, 3000);
     }
-    function showModal(modalElement) { if (!modalElement) return; modalElement.classList.add('show'); document.body.style.overflow = 'hidden'; }
-    function hideModal(modalElement) { if (!modalElement) return; modalElement.classList.remove('show'); document.body.style.overflow = ''; }
+
+    function showModal(modalElement) { 
+        if (!modalElement) return; 
+        modalElement.classList.add('show'); 
+        document.body.style.overflow = 'hidden'; 
+    }
+
+    function hideModal(modalElement) { 
+        if (!modalElement) return; 
+        modalElement.classList.remove('show'); 
+        document.body.style.overflow = ''; 
+    }
 
     function setupGeneralEventListeners(){
         floatingCartBtn.addEventListener('click', () => showModal(cartModal));
@@ -798,96 +886,393 @@
         setupCheckoutEventListeners();
     }
     
-    function closeMobileMenu(){document.getElementById('mobile-menu').classList.remove('open');document.getElementById('mobile-backdrop').classList.remove('open');}
-    function setupScrollAnimations(){if('IntersectionObserver' in window){var observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');}});},{threshold:0.1});document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right').forEach(el=>{observer.observe(el);});}else{document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right').forEach(el=>{el.classList.add('is-visible');});}}
-    function setupScrollHeader(){var header=document.getElementById('mainHeader');window.addEventListener('scroll',function(){if(window.scrollY>100){header.classList.add('scrolled');}else{header.classList.remove('scrolled');}});}
-    function showCheckoutModal(){if(cart.length===0){alert('Tu carrito está vacío');return;} var savedData=JSON.parse(localStorage.getItem('customerData'));if(savedData){document.getElementById('customerName').value=savedData.name||'';document.getElementById('customerAddress').value=savedData.address||'';document.getElementById('customerReferences').value=savedData.references||'';document.getElementById('customerPhone').value=savedData.phone||'';document.getElementById('deliveryLocation').value=savedData.location||'';} updateCheckoutSummary();showModal(checkoutModal);} 
-    function updateCheckoutSummary(){var checkoutOrderSummary=document.getElementById('checkoutOrderSummary');var subtotal=cart.reduce(function(sum,item){return sum+(item.price*item.quantity);},0);checkoutOrderSummary.innerHTML=cart.map(function(item){return('<div class="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0"><div class="flex-1"><h5 class="text-fixed-base font-semibold text-[var(--text-dark)]">'+item.name+'</h5><p class="text-fixed-sm text-[var(--text-medium)]">$'+item.price.toLocaleString()+' c/u × '+item.quantity+'</p></div><div class="text-fixed-base font-semibold">$'+(item.price*item.quantity).toLocaleString()+'</div></div>');}).join('');document.getElementById('checkoutSubtotal').textContent='$'+subtotal.toLocaleString();updateShippingAndTotal();}
-    function calculateTotalWeight() { let totalWeight = 0; for (let i = 0; i < cart.length; i++) { const item = cart[i]; const product = products.find(p => p.id === (item.unitType === 'box' ? item.id.split('_')[0] * 1 : item.id * 1)); if (product && product.weight !== undefined) { let itemWeight = product.weight; if (item.unitType === 'box' && product.hasBoxOption && product.boxQuantity) { itemWeight = product.weight * product.boxQuantity; } totalWeight += itemWeight * item.quantity; } } return totalWeight; }
+    function closeMobileMenu(){
+        document.getElementById('mobile-menu').classList.remove('open');
+        document.getElementById('mobile-backdrop').classList.remove('open');
+    }
+
+    function setupScrollAnimations(){
+        if('IntersectionObserver' in window){
+            var observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting){
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {threshold: 0.1});
+            document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right').forEach(el => {
+                observer.observe(el);
+            });
+        } else {
+            document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right').forEach(el => {
+                el.classList.add('is-visible');
+            });
+        }
+    }
+
+    function setupScrollHeader(){
+        var header = document.getElementById('mainHeader');
+        window.addEventListener('scroll', function(){
+            if(window.scrollY > 100){
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    }
+
+    function showCheckoutModal(){
+        if(cart.length === 0){
+            alert('Tu carrito está vacío');
+            return;
+        } 
+        var savedData = JSON.parse(localStorage.getItem('customerData'));
+        if(savedData){
+            document.getElementById('customerName').value = savedData.name || '';
+            document.getElementById('customerAddress').value = savedData.address || '';
+            document.getElementById('customerReferences').value = savedData.references || '';
+            document.getElementById('customerPhone').value = savedData.phone || '';
+            document.getElementById('deliveryLocation').value = savedData.location || '';
+        } 
+        updateCheckoutSummary();
+        showModal(checkoutModal);
+    } 
+
+    function updateCheckoutSummary(){
+        var checkoutOrderSummary = document.getElementById('checkoutOrderSummary');
+        var subtotal = cart.reduce(function(sum, item){
+            return sum + (item.price * item.quantity);
+        }, 0);
+        checkoutOrderSummary.innerHTML = cart.map(function(item){
+            return('<div class="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0"><div class="flex-1"><h5 class="text-fixed-base font-semibold text-[var(--text-dark)]">'+item.name+'</h5><p class="text-fixed-sm text-[var(--text-medium)]">$'+item.price.toLocaleString()+' c/u × '+item.quantity+'</p></div><div class="text-fixed-base font-semibold">$'+(item.price*item.quantity).toLocaleString()+'</div></div>');
+        }).join('');
+        document.getElementById('checkoutSubtotal').textContent = '$' + subtotal.toLocaleString();
+        updateShippingAndTotal();
+    }
+
+    function calculateTotalWeight() { 
+        let totalWeight = 0; 
+        for (let i = 0; i < cart.length; i++) { 
+            const item = cart[i]; 
+            const productId = item.unitType === 'box' ? parseInt(item.id.split('_')[0]) : item.id;
+            const product = catalogo.obtenerPorId(productId);
+            if (product && product.weight !== undefined) { 
+                let itemWeight = product.weight; 
+                if (item.unitType === 'box' && product.hasBoxOption && product.boxQuantity) { 
+                    itemWeight = product.weight * product.boxQuantity; 
+                } 
+                totalWeight += itemWeight * item.quantity; 
+            } 
+        } 
+        return totalWeight; 
+    }
+
     function updateShippingAndTotal() {
         const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         document.getElementById('checkoutServiceFee').textContent = '$' + SERVICE_FEE;
         const deliveryLocation = document.getElementById('deliveryLocation').value;
         const confirmOrderBtn = document.getElementById('confirmOrderBtn');
-        let shippingCost = 0; let shippingText = '$0'; let showNote = false; let noteText = ''; let upsellMessage = ''; const upsellElement = document.getElementById('upsellMessage');
-        confirmOrderBtn.disabled = false; confirmOrderBtn.textContent = 'Confirmar Pedido';
+        let shippingCost = 0; 
+        let shippingText = '$0'; 
+        let showNote = false; 
+        let noteText = ''; 
+        let upsellMessage = ''; 
+        const upsellElement = document.getElementById('upsellMessage');
+        confirmOrderBtn.disabled = false; 
+        confirmOrderBtn.textContent = 'Confirmar Pedido';
+        
         if (deliveryLocation === 'habana-vieja') {
             if (subtotal < MIN_ORDER_THRESHOLD) {
-                shippingCost = SHIPPING_COST_TRAMO_1; shippingText = `$${SHIPPING_COST_TRAMO_1} CUP (Provisional)`;
+                shippingCost = SHIPPING_COST_TRAMO_1; 
+                shippingText = `$${SHIPPING_COST_TRAMO_1} CUP (Provisional)`;
                 upsellMessage = `Te faltan $${(MIN_ORDER_THRESHOLD - subtotal).toLocaleString()} para el mínimo.`;
                 upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-red-100 text-red-800';
-                confirmOrderBtn.disabled = true; confirmOrderBtn.textContent = `Faltan $${(MIN_ORDER_THRESHOLD - subtotal).toLocaleString()}`;
+                confirmOrderBtn.disabled = true; 
+                confirmOrderBtn.textContent = `Faltan $${(MIN_ORDER_THRESHOLD - subtotal).toLocaleString()}`;
             } else if (subtotal > TRAMO_1_MAX) {
-                const totalWeight = calculateTotalWeight(); const weightCeiling = Math.ceil(totalWeight / WEIGHT_THRESHOLD_KG);
-                const weightSurcharge = weightCeiling * WEIGHT_SURCHARGE_PER_10KG; shippingCost = SHIPPING_COST_TRAMO_2_BASE + weightSurcharge;
+                const totalWeight = calculateTotalWeight(); 
+                const weightCeiling = Math.ceil(totalWeight / WEIGHT_THRESHOLD_KG);
+                const weightSurcharge = weightCeiling * WEIGHT_SURCHARGE_PER_10KG; 
+                shippingCost = SHIPPING_COST_TRAMO_2_BASE + weightSurcharge;
                 shippingText = `$${shippingCost.toLocaleString()} CUP`;
                 upsellMessage = `¡Tramo 2! Envío calculado con ${totalWeight.toFixed(2)}kg.`;
                 upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-green-100 text-green-800';
             } else {
-                shippingCost = SHIPPING_COST_TRAMO_1; shippingText = `$${SHIPPING_COST_TRAMO_1} CUP`;
+                shippingCost = SHIPPING_COST_TRAMO_1; 
+                shippingText = `$${SHIPPING_COST_TRAMO_1} CUP`;
                 upsellMessage = `Añade $${(TRAMO_1_MAX - subtotal + 1).toLocaleString()} para tarifa base menor (Tramo 2).`;
                 upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-yellow-100 text-yellow-800';
             }
-        } else if (deliveryLocation === 'otros') { shippingCost = 0; shippingText = 'A confirmar'; showNote = true; noteText = 'Costo por agencia externa.'; upsellMessage = ''; } 
-        else { shippingCost = 0; shippingText = '$0'; upsellMessage = 'Selecciona ubicación.'; upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-gray-100 text-gray-800'; confirmOrderBtn.disabled = true; }
-        if (upsellElement) { upsellElement.textContent = upsellMessage; upsellElement.classList.toggle('hidden', upsellMessage === ''); }
-        document.getElementById('checkoutShipping').textContent = shippingText; document.getElementById('shippingNote').classList.toggle('hidden', !showNote); if(showNote) document.getElementById('shippingNote').textContent = noteText;
+        } else if (deliveryLocation === 'otros') { 
+            shippingCost = 0; 
+            shippingText = 'A confirmar'; 
+            showNote = true; 
+            noteText = 'Costo por agencia externa.'; 
+            upsellMessage = ''; 
+        } else { 
+            shippingCost = 0; 
+            shippingText = '$0'; 
+            upsellMessage = 'Selecciona ubicación.'; 
+            upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-gray-100 text-gray-800'; 
+            confirmOrderBtn.disabled = true; 
+        }
+        
+        if (upsellElement) { 
+            upsellElement.textContent = upsellMessage; 
+            upsellElement.classList.toggle('hidden', upsellMessage === ''); 
+        }
+        document.getElementById('checkoutShipping').textContent = shippingText; 
+        document.getElementById('shippingNote').classList.toggle('hidden', !showNote); 
+        if(showNote) document.getElementById('shippingNote').textContent = noteText;
         document.getElementById('checkoutTotal').textContent = '$' + (subtotal + SERVICE_FEE + shippingCost).toLocaleString();
     }
+
     function updateDeliveryPromoBanner() {
         const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        const progressBar = document.getElementById('promoProgressBar'); const progressTextSpan = document.getElementById('progressText');
+        const progressBar = document.getElementById('promoProgressBar'); 
+        const progressTextSpan = document.getElementById('progressText');
         const [l1, l2] = [document.getElementById('promoLevelTramo1'), document.getElementById('promoLevelTramo2')];
         if (!l1 || !l2) return;
-        [l1, l2].forEach(l => { l.classList.remove('opacity-100', 'ring-[var(--accent-color)]'); l.classList.add('opacity-75'); });
-        let progressWidth = 0; let message = `Mínimo $${MIN_ORDER_THRESHOLD}.`;
-        if (subtotal > TRAMO_1_MAX) { progressWidth = 100; message = `¡Tramo 2 alcanzado!`; l2.classList.add('opacity-100', 'ring-[var(--accent-color)]'); l1.classList.add('opacity-100'); l2.classList.remove('opacity-75'); l1.classList.remove('opacity-75'); } 
-        else if (subtotal >= MIN_ORDER_THRESHOLD) { progressWidth = (subtotal / TRAMO_1_MAX) * 100; message = `Faltan $${(TRAMO_1_MAX - subtotal + 1).toLocaleString()} para Tramo 2.`; l1.classList.add('opacity-100', 'ring-[var(--accent-color)]'); l1.classList.remove('opacity-75'); } 
-        else if (subtotal > 0) { progressWidth = (subtotal / MIN_ORDER_THRESHOLD) * 15; message = `Faltan $${(MIN_ORDER_THRESHOLD - subtotal).toLocaleString()} para mínimo.`; }
-        progressBar.style.width = Math.min(progressWidth, 100) + '%'; progressTextSpan.innerHTML = message;
-        progressTextSpan.style.color = (progressWidth > 50) ? 'white' : 'var(--primary-color)'; progressTextSpan.style.textShadow = (progressWidth > 50) ? '0 0 3px rgba(0,0,0,0.5)' : 'none';
+        [l1, l2].forEach(l => { 
+            l.classList.remove('opacity-100', 'ring-[var(--accent-color)]'); 
+            l.classList.add('opacity-75'); 
+        });
+        let progressWidth = 0; 
+        let message = `Mínimo $${MIN_ORDER_THRESHOLD}.`;
+        
+        if (subtotal > TRAMO_1_MAX) { 
+            progressWidth = 100; 
+            message = `¡Tramo 2 alcanzado!`; 
+            l2.classList.add('opacity-100', 'ring-[var(--accent-color)]'); 
+            l1.classList.add('opacity-100'); 
+            l2.classList.remove('opacity-75'); 
+            l1.classList.remove('opacity-75'); 
+        } else if (subtotal >= MIN_ORDER_THRESHOLD) { 
+            progressWidth = (subtotal / TRAMO_1_MAX) * 100; 
+            message = `Faltan $${(TRAMO_1_MAX - subtotal + 1).toLocaleString()} para Tramo 2.`; 
+            l1.classList.add('opacity-100', 'ring-[var(--accent-color)]'); 
+            l1.classList.remove('opacity-75'); 
+        } else if (subtotal > 0) { 
+            progressWidth = (subtotal / MIN_ORDER_THRESHOLD) * 15; 
+            message = `Faltan $${(MIN_ORDER_THRESHOLD - subtotal).toLocaleString()} para mínimo.`; 
+        }
+        progressBar.style.width = Math.min(progressWidth, 100) + '%'; 
+        progressTextSpan.innerHTML = message;
+        progressTextSpan.style.color = (progressWidth > 50) ? 'white' : 'var(--primary-color)'; 
+        progressTextSpan.style.textShadow = (progressWidth > 50) ? '0 0 3px rgba(0,0,0,0.5)' : 'none';
     }
-    function validateField(fieldId) { const element = document.getElementById(fieldId); if (element && element.required) { const isValid = element.value.trim() !== ''; element.classList.toggle('border-red-500', !isValid); return isValid; } return true; }
+
+    function validateField(fieldId) { 
+        const element = document.getElementById(fieldId); 
+        if (element && element.required) { 
+            const isValid = element.value.trim() !== ''; 
+            element.classList.toggle('border-red-500', !isValid); 
+            return isValid; 
+        } 
+        return true; 
+    }
+
     function setupCheckoutEventListeners(){
         closeCheckoutModalBtn.addEventListener('click', () => hideModal(checkoutModal));
         checkoutModal.addEventListener('click', (e) => { if(e.target === checkoutModal) hideModal(checkoutModal); });
-        ['customerName', 'customerAddress', 'customerPhone'].forEach(id => { const inputElement = document.getElementById(id); if (inputElement) { inputElement.addEventListener('input', () => validateField(id)); } });
-        const deliveryLocationSelect = document.getElementById('deliveryLocation'); if (deliveryLocationSelect) { deliveryLocationSelect.addEventListener('change', () => { validateField('deliveryLocation'); updateShippingAndTotal(); }); }
-        document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => { radio.addEventListener('change', function() { const cashField = document.getElementById('cashPaymentField'); cashField.classList.toggle('hidden', this.value !== 'efectivo'); if (this.value !== 'efectivo') { selectedCashAmount = ''; document.querySelectorAll('.cash-btn').forEach(btn => btn.classList.remove('active')); document.getElementById('otherCashAmount').classList.add('hidden'); document.getElementById('otherCashAmount').value = ''; } }); });
-        document.querySelectorAll('.cash-btn').forEach(button => { button.addEventListener('click', function() { document.querySelectorAll('.cash-btn').forEach(btn => btn.classList.remove('active')); this.classList.add('active'); selectedCashAmount = this.getAttribute('data-amount'); const otherInput = document.getElementById('otherCashAmount'); otherInput.classList.toggle('hidden', selectedCashAmount !== 'otro'); if (selectedCashAmount === 'otro') otherInput.focus(); else otherInput.value = ''; }); });
+        ['customerName', 'customerAddress', 'customerPhone'].forEach(id => { 
+            const inputElement = document.getElementById(id); 
+            if (inputElement) { 
+                inputElement.addEventListener('input', () => validateField(id)); 
+            } 
+        });
+        const deliveryLocationSelect = document.getElementById('deliveryLocation'); 
+        if (deliveryLocationSelect) { 
+            deliveryLocationSelect.addEventListener('change', () => { 
+                validateField('deliveryLocation'); 
+                updateShippingAndTotal(); 
+            }); 
+        }
+        document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => { 
+            radio.addEventListener('change', function() { 
+                const cashField = document.getElementById('cashPaymentField'); 
+                cashField.classList.toggle('hidden', this.value !== 'efectivo'); 
+                if (this.value !== 'efectivo') { 
+                    selectedCashAmount = ''; 
+                    document.querySelectorAll('.cash-btn').forEach(btn => btn.classList.remove('active')); 
+                    document.getElementById('otherCashAmount').classList.add('hidden'); 
+                    document.getElementById('otherCashAmount').value = ''; 
+                } 
+            }); 
+        });
+        document.querySelectorAll('.cash-btn').forEach(button => { 
+            button.addEventListener('click', function() { 
+                document.querySelectorAll('.cash-btn').forEach(btn => btn.classList.remove('active')); 
+                this.classList.add('active'); 
+                selectedCashAmount = this.getAttribute('data-amount'); 
+                const otherInput = document.getElementById('otherCashAmount'); 
+                otherInput.classList.toggle('hidden', selectedCashAmount !== 'otro'); 
+                if (selectedCashAmount === 'otro') otherInput.focus(); 
+                else otherInput.value = ''; 
+            }); 
+        });
         document.getElementById('confirmOrderBtn').addEventListener('click', confirmOrder);
     }
+
     function validateCheckoutForm(){
-        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0); const deliveryLocation = document.getElementById('deliveryLocation').value;
-        if (deliveryLocation === 'habana-vieja' && subtotal < MIN_ORDER_THRESHOLD) { alert(`Mínimo de compra $${MIN_ORDER_THRESHOLD} CUP.`); return false; }
-        const requiredFieldIds = ['customerName', 'customerAddress', 'customerPhone', 'deliveryLocation']; let errors = [];
-        requiredFieldIds.forEach(id => { if (!validateField(id)) { errors.push(id); } });
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0); 
+        const deliveryLocation = document.getElementById('deliveryLocation').value;
+        if (deliveryLocation === 'habana-vieja' && subtotal < MIN_ORDER_THRESHOLD) { 
+            alert(`Mínimo de compra $${MIN_ORDER_THRESHOLD} CUP.`); 
+            return false; 
+        }
+        const requiredFieldIds = ['customerName', 'customerAddress', 'customerPhone', 'deliveryLocation']; 
+        let errors = [];
+        requiredFieldIds.forEach(id => { 
+            if (!validateField(id)) { 
+                errors.push(id); 
+            } 
+        });
         const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
-        if (!paymentMethod) { errors.push('Método de pago'); } else if (paymentMethod.value === 'efectivo') { const otherCash = document.getElementById('otherCashAmount'); if (!selectedCashAmount || (selectedCashAmount === 'otro' && !otherCash.value.trim())) { errors.push('Monto efectivo'); if (selectedCashAmount === 'otro') otherCash.classList.add('border-red-500'); } else { if (selectedCashAmount === 'otro') otherCash.classList.remove('border-red-500'); } }
-        if (errors.length > 0) { alert('Por favor completa todos los campos obligatorios.'); return false; } return true;
+        if (!paymentMethod) { 
+            errors.push('Método de pago'); 
+        } else if (paymentMethod.value === 'efectivo') { 
+            const otherCash = document.getElementById('otherCashAmount'); 
+            if (!selectedCashAmount || (selectedCashAmount === 'otro' && !otherCash.value.trim())) { 
+                errors.push('Monto efectivo'); 
+                if (selectedCashAmount === 'otro') otherCash.classList.add('border-red-500'); 
+            } else { 
+                if (selectedCashAmount === 'otro') otherCash.classList.remove('border-red-500'); 
+            } 
+        }
+        if (errors.length > 0) { 
+            alert('Por favor completa todos los campos obligatorios.'); 
+            return false; 
+        } 
+        return true;
     }
+
     function confirmOrder() {
         if (!validateCheckoutForm()) return;
-        const customerName = document.getElementById('customerName').value.trim(); const customerAddress = document.getElementById('customerAddress').value.trim(); const customerReferences = document.getElementById('customerReferences').value.trim(); const customerPhone = document.getElementById('customerPhone').value.trim(); const deliveryLocation = document.getElementById('deliveryLocation').value; const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value; let cashAmount = ''; if (paymentMethod === 'efectivo') { cashAmount = selectedCashAmount === 'otro' ? document.getElementById('otherCashAmount').value.trim() : selectedCashAmount; if (!cashAmount) cashAmount = 'Sin especificar'; }
-        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0); let shippingCost = 0; let shippingText = ''; let totalWeight = 0;
-        if (deliveryLocation === 'habana-vieja') { if (subtotal > TRAMO_1_MAX) { totalWeight = calculateTotalWeight(); const weightCeiling = Math.ceil(totalWeight / WEIGHT_THRESHOLD_KG); const weightSurcharge = weightCeiling * WEIGHT_SURCHARGE_PER_10KG; shippingCost = SHIPPING_COST_TRAMO_2_BASE + weightSurcharge; shippingText = `$${shippingCost.toLocaleString()} CUP (Base+Peso)`; } else { shippingCost = SHIPPING_COST_TRAMO_1; shippingText = `$${SHIPPING_COST_TRAMO_1} CUP`; } } else { shippingText = 'A confirmar'; }
-        const total = subtotal + SERVICE_FEE + shippingCost; const orderItems = cart.map(item => `• ${item.name} x${item.quantity} - $${(item.price * item.quantity).toLocaleString()}`).join('\n');
-        const locationText = deliveryLocation === 'habana-vieja' ? 'Habana Vieja' : 'Otros municipios'; const paymentText = paymentMethod === 'efectivo' ? `Efectivo (pagaré con ${cashAmount})` : 'Transferencia';
-        const finalMessage = `*🛒 PEDIDO - EL RESOLVITO*\n\n` + `*👤 DATOS:*\n` + `• Nombre: ${customerName}\n` + `• Tel: ${customerPhone}\n` + `• Dir: ${customerAddress}\n` + `• Ref: ${customerReferences || 'N/A'}\n` + `• Ubicación: ${locationText}\n\n` + `*📦 PRODUCTOS:*\n${orderItems}\n\n` + `*💰 PAGO:*\n` + `• Subtotal: $${subtotal.toLocaleString()}\n` + `• Servicio: $${SERVICE_FEE}\n` + `• Envío: ${shippingText}\n` + `• Peso: ${totalWeight.toFixed(2)} kg\n` + `• TOTAL: $${total.toLocaleString()}\n\n` + `*💳 MÉTODO:* ${paymentText}`;
-        const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycby9Sk3Fz2_WqRQsEXrezpwqKbpYhqW_-ialMJcYKPdvZkrBfNReWWFfQ-VnXTrkJY8W/exec'; const formData = new FormData(); const orderData = { idPedido: new Date().getTime(), customerName, customerPhone, customerAddress: `${customerAddress} (${customerReferences})`, total, paymentMethod, shippingText, orderItems, cashAmount, location: locationText }; for (const key in orderData) { formData.append(key, orderData[key]); }
-        fetch(googleAppsScriptUrl, { method: 'POST', body: formData, mode: 'no-cors' }).catch(err => console.error('Error Google Sheets:', err));
+        const customerName = document.getElementById('customerName').value.trim(); 
+        const customerAddress = document.getElementById('customerAddress').value.trim(); 
+        const customerReferences = document.getElementById('customerReferences').value.trim(); 
+        const customerPhone = document.getElementById('customerPhone').value.trim(); 
+        const deliveryLocation = document.getElementById('deliveryLocation').value; 
+        const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value; 
+        let cashAmount = ''; 
+        if (paymentMethod === 'efectivo') { 
+            cashAmount = selectedCashAmount === 'otro' ? document.getElementById('otherCashAmount').value.trim() : selectedCashAmount; 
+            if (!cashAmount) cashAmount = 'Sin especificar'; 
+        }
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0); 
+        let shippingCost = 0; 
+        let shippingText = ''; 
+        let totalWeight = 0;
+        
+        if (deliveryLocation === 'habana-vieja') { 
+            if (subtotal > TRAMO_1_MAX) { 
+                totalWeight = calculateTotalWeight(); 
+                const weightCeiling = Math.ceil(totalWeight / WEIGHT_THRESHOLD_KG); 
+                const weightSurcharge = weightCeiling * WEIGHT_SURCHARGE_PER_10KG; 
+                shippingCost = SHIPPING_COST_TRAMO_2_BASE + weightSurcharge; 
+                shippingText = `$${shippingCost.toLocaleString()} CUP (Base+Peso)`; 
+            } else { 
+                shippingCost = SHIPPING_COST_TRAMO_1; 
+                shippingText = `$${SHIPPING_COST_TRAMO_1} CUP`; 
+            } 
+        } else { 
+            shippingText = 'A confirmar'; 
+        }
+        
+        const total = subtotal + SERVICE_FEE + shippingCost; 
+        const orderItems = cart.map(item => `• ${item.name} x${item.quantity} - $${(item.price * item.quantity).toLocaleString()}`).join('\n');
+        const locationText = deliveryLocation === 'habana-vieja' ? 'Habana Vieja' : 'Otros municipios'; 
+        const paymentText = paymentMethod === 'efectivo' ? `Efectivo (pagaré con ${cashAmount})` : 'Transferencia';
+        
+        const finalMessage = `*🛒 PEDIDO - EL RESOLVITO*\n\n` + 
+            `*👤 DATOS:*\n` + 
+            `• Nombre: ${customerName}\n` + 
+            `• Tel: ${customerPhone}\n` + 
+            `• Dir: ${customerAddress}\n` + 
+            `• Ref: ${customerReferences || 'N/A'}\n` + 
+            `• Ubicación: ${locationText}\n\n` + 
+            `*📦 PRODUCTOS:*\n${orderItems}\n\n` + 
+            `*💰 PAGO:*\n` + 
+            `• Subtotal: $${subtotal.toLocaleString()}\n` + 
+            `• Servicio: $${SERVICE_FEE}\n` + 
+            `• Envío: ${shippingText}\n` + 
+            `• Peso: ${totalWeight.toFixed(2)} kg\n` + 
+            `• TOTAL: $${total.toLocaleString()}\n\n` + 
+            `*💳 MÉTODO:* ${paymentText}`;
+        
+        const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycby9Sk3Fz2_WqRQsEXrezpwqKbpYhqW_-ialMJcYKPdvZkrBfNReWWFfQ-VnXTrkJY8W/exec'; 
+        const formData = new FormData(); 
+        const orderData = { 
+            idPedido: new Date().getTime(), 
+            customerName, 
+            customerPhone, 
+            customerAddress: `${customerAddress} (${customerReferences})`, 
+            total, 
+            paymentMethod, 
+            shippingText, 
+            orderItems, 
+            cashAmount, 
+            location: locationText 
+        }; 
+        
+        for (const key in orderData) { 
+            formData.append(key, orderData[key]); 
+        }
+        
+        fetch(googleAppsScriptUrl, { 
+            method: 'POST', 
+            body: formData, 
+            mode: 'no-cors' 
+        }).catch(err => console.error('Error Google Sheets:', err));
+        
         window.open(`https://wa.me/5356382909?text=${encodeURIComponent(finalMessage.replace(/\*/g, '').replace(/_/g, ''))}`, '_blank');
-        hideModal(checkoutModal); cart = []; updateCartUI(); localStorage.setItem('cart', JSON.stringify(cart)); const customerData = { name: customerName, address: customerAddress, references: customerReferences, phone: customerPhone, location: deliveryLocation }; localStorage.setItem('customerData', JSON.stringify(customerData)); showModal(confirmationModal);
+        hideModal(checkoutModal); 
+        cart = []; 
+        updateCartUI(); 
+        localStorage.setItem('cart', JSON.stringify(cart)); 
+        const customerData = { 
+            name: customerName, 
+            address: customerAddress, 
+            references: customerReferences, 
+            phone: customerPhone, 
+            location: deliveryLocation 
+        }; 
+        localStorage.setItem('customerData', JSON.stringify(customerData)); 
+        showModal(confirmationModal);
     }
     
-    function showFloatingCallout() { if (sessionStorage.getItem('floatingCalloutClosed') !== 'true') { floatingCallout.classList.add('show'); } }
-    function hideFloatingCallout() { floatingCallout.classList.remove('show'); }
-    function showFloatingCalloutAfterDelay() { setTimeout(showFloatingCallout, 20000); }
-    function toggleAccordion(id) {
-        const content = document.getElementById('content-' + id); const icon = document.getElementById('icon-' + id);
-        if (content.classList.contains('hidden')) { content.classList.remove('hidden'); icon.classList.add('rotate-180'); } else { content.classList.add('hidden'); icon.classList.remove('rotate-180'); }
+    function showFloatingCallout() { 
+        if (sessionStorage.getItem('floatingCalloutClosed') !== 'true') { 
+            floatingCallout.classList.add('show'); 
+        } 
     }
-    if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js').then(reg => console.log('SW ok')).catch(err => console.log('SW fail', err)); }); }
+    
+    function hideFloatingCallout() { 
+        floatingCallout.classList.remove('show'); 
+    }
+    
+    function showFloatingCalloutAfterDelay() { 
+        setTimeout(showFloatingCallout, 20000); 
+    }
+    
+    function toggleAccordion(id) {
+        const content = document.getElementById('content-' + id); 
+        const icon = document.getElementById('icon-' + id);
+        if (content.classList.contains('hidden')) { 
+            content.classList.remove('hidden'); 
+            icon.classList.add('rotate-180'); 
+        } else { 
+            content.classList.add('hidden'); 
+            icon.classList.remove('rotate-180'); 
+        }
+    }
+    
+    if ('serviceWorker' in navigator) { 
+        window.addEventListener('load', () => { 
+            navigator.serviceWorker.register('/sw.js').then(reg => console.log('SW ok')).catch(err => console.log('SW fail', err)); 
+        }); 
+    }
 </script>
 
 </body>
