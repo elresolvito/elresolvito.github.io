@@ -119,7 +119,12 @@
                 <span class="text-white text-xl font-bold hidden sm:block">El Resolvito</span>
             </a>
         </div>
-
+        <div class="hidden lg:flex flex-1 mx-8 max-w-lg">
+            <div class="relative w-full">
+                <input type="text" placeholder="¿Qué necesitas hoy?" class="w-full pl-4 pr-10 py-2 rounded-full border-none focus:ring-2 focus:ring-[var(--accent-color)] text-gray-800">
+                <button class="absolute right-0 top-0 h-full px-4 text-gray-500 hover:text-[var(--primary-color)]"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg></button>
+            </div>
+        </div>
         <nav class="hidden md:flex items-center gap-4 md:gap-6 text-white font-semibold text-sm">
             <a href="#mercado" class="hover:text-[var(--accent-color)] transition-colors duration-300">Mercado</a>
             <a href="#como-comprar" class="hover:text-[var(--accent-color)] transition-colors duration-300">Ayuda</a>
@@ -260,10 +265,9 @@
 </div>
 
                 <!-- Buscador y Filtros -->
-               <div class="container mx-auto px-2 mt-4">
-  <input id="globalSearchInput" type="text" placeholder="Buscar producto..."
-         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)]">
-         </div>
+                <div class="bg-white p-4 rounded-xl shadow-lg mb-8 fade-in-up">
+                    <input type="text" id="mercadoSearchInput" placeholder="Buscar producto..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base">
+                </div>
                 
                 <div id="mercadoCategoryFilters" class="flex flex-wrap justify-center gap-2 mb-8 fade-in-up"></div>
                 <div id="mercadoProductGrid"></div>
@@ -548,59 +552,61 @@
         setupCategoryFiltersAndSearch(allProducts, filtersId, searchId, gridId, noResultsId);
     }
     
-    function setupCategoryFiltersAndSearch(allProducts, filtersId, gridId, noResultsId) {
-    const productsForSection = allProducts.filter(p => p.department === currentDepartment);
-    const categories = ['all', ...new Set(productsForSection.map(p => p.category))];
-    const filtersContainer = document.getElementById(filtersId);
+    function setupCategoryFiltersAndSearch(allProducts, filtersId, searchId, gridId, noResultsId) {
+        var productsForSection = allProducts.filter(p => p.department === currentDepartment);
+        var uniqueCategories = [];
+        for (var i = 0; i < productsForSection.length; i++) {
+            if (uniqueCategories.indexOf(productsForSection[i].category) === -1) {
+                uniqueCategories.push(productsForSection[i].category);
+            }
+        }
 
-    // 1. Pintar botones de categoría
-    filtersContainer.innerHTML = categories.map(cat =>
-        `<button class="category-btn ${cat === 'all' ? 'active' : ''}" data-category="${cat}">
-            ${cat === 'all' ? 'Todos' : cat}
-        </button>`).join('');
+        var categories = ['all'].concat(uniqueCategories);
+        var filtersContainer = document.getElementById(filtersId);
+        
+        if (filtersContainer) {
+            var buttonsHtml = categories.map(function(category) {
+                return '<button class="category-btn ' + (category === 'all' ? 'active' : '') + '" data-category="' + category + '">' + (category === 'all' ? 'Todos' : category) + '</button>';
+            }).join('');
+            filtersContainer.innerHTML = buttonsHtml;
+        }
 
-    let currentCategory = 'all';
-    let currentSearch = '';
+        var currentCategory = 'all';
+        var searchInput = document.getElementById(searchId);
+        searchInput.value = ''; 
 
-    // 2. Listener de categorías
-    filtersContainer.querySelectorAll('.category-btn').forEach(btn =>
-        btn.addEventListener('click', e => {
-            filtersContainer.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-            e.target.classList.add('active');
-            currentCategory = e.target.dataset.category;
-            filterAndRender();
-        })
-    );
+        function filterAndRender() {
+            var searchTerm = searchInput.value.toLowerCase();
+            var filteredProducts = [];
+            for (var i = 0; i < productsForSection.length; i++) {
+                var product = productsForSection[i];
+                var categoryMatch = (currentCategory === 'all' || product.category === currentCategory);
+                var searchMatch = (!searchTerm || product.name.toLowerCase().indexOf(searchTerm) > -1 || product.description.toLowerCase().indexOf(searchTerm) > -1);
+                if (categoryMatch && searchMatch) {
+                    filteredProducts.push(product);
+                }
+            }
+            renderProducts(filteredProducts, gridId, noResultsId);
+        }
 
-    // 3. Listener ÚNICO del buscador global (sin clonar)
-    const searchInput = document.getElementById('globalSearchInput');
-    searchInput.value = currentSearch;
-    searchInput.addEventListener('input', e => {
-        currentSearch = e.target.value;
+        if (filtersContainer) {
+            var categoryButtons = filtersContainer.querySelectorAll('.category-btn');
+            for (var j = 0; j < categoryButtons.length; j++) {
+                categoryButtons[j].addEventListener('click', function() {
+                    for (var k = 0; k < categoryButtons.length; k++) { categoryButtons[k].classList.remove('active'); }
+                    this.classList.add('active');
+                    currentCategory = this.getAttribute('data-category');
+                    filterAndRender();
+                });
+            }
+        }
+        
+        var newSearchInput = searchInput.cloneNode(true);
+        searchInput.parentNode.replaceChild(newSearchInput, searchInput);
+        searchInput = newSearchInput; // IMPORTANTE: Actualizar referencia
+        searchInput.addEventListener('input', filterAndRender);
+        
         filterAndRender();
-    });
-
-    // 4. Función de filtrado con normalización
-    function removeAccents(str) {
-        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-    }
-
-    function filterAndRender() {
-        const needle = removeAccents(currentSearch);
-        const filtered = productsForSection.filter(p => {
-            const catMatch = currentCategory === 'all' || p.category === currentCategory;
-            const textMatch = !needle ||
-                removeAccents(p.name).includes(needle) ||
-                removeAccents(p.description).includes(needle) ||
-                removeAccents(p.specificDetails || '').includes(needle) ||
-                removeAccents(p.category).includes(needle);
-            return catMatch && textMatch;
-        });
-        renderProducts(filtered, gridId, noResultsId);
-    }
-
-    filterAndRender();
-}
     }
 
     function renderProducts(productsToRender, gridId, noResultsId) {
