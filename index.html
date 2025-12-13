@@ -276,16 +276,19 @@
                         </svg>
                     </button>
                     <div id="content-faq-2" class="hidden px-6 py-4 bg-white border-t border-gray-100">
-                        <div class="mb-3 p-3 bg-blue-50 rounded-lg border border-blue-100">
-                            <p class="font-bold text-[var(--primary-color)] mb-1">📍 Habana Vieja</p>
-                            <p class="text-sm mb-1"><strong>Envío fijo: $400 CUP</strong></p>
-                            <p class="font-bold text-[var(--primary-color)] mb-1 mt-3">📍 Otros municipios</p>
-                            <p class="text-sm">El costo se acordará con el cliente antes de confirmar el pedido.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        <div class="bg-white border-2 border-dashed border-green-200 p-4 rounded-xl shadow-md mb-8 text-center fade-in-up" id="deliveryPromoBanner">
+  <h3 class="text-fixed-xl md:text-fixed-2xl font-extrabold text-[var(--primary-color)] mb-4">Envío rápido y sin sorpresas</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-fixed-sm md:text-fixed-base max-w-xl mx-auto">
+    <div class="bg-green-50 p-3 rounded-lg flex flex-col justify-center items-center">
+      <p class="font-semibold text-gray-800">HABANA VIEJA</p>
+      <p class="text-green-700 font-bold">Envío fijo $400 CUP</p>
+    </div>
+    <div class="bg-yellow-50 p-3 rounded-lg flex flex-col justify-center items-center">
+      <p class="font-semibold text-gray-800">OTROS MUNICIPIOS</p>
+      <p class="text-yellow-700 font-bold">Tarifa a convenir</p>
+    </div>
+  </div>
+</div>
     </section>
 
     <section id="contacto" class="py-16 lg:py-24">
@@ -876,25 +879,24 @@
     }
 
     function updateShippingAndTotal() {
-        const deliveryLocation = document.getElementById('deliveryLocation').value;
-        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        let shippingCost = 0;
-        let shippingText = '$0';
+    const deliveryLocation = document.getElementById('deliveryLocation').value;
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    let shippingCost = 0;
+    let shippingText = '$0';
 
-        if (deliveryLocation === 'habana-vieja') {
-            shippingCost = SHIPPING_COST_HABANA_VIEJA;
-            shippingText = `$${SHIPPING_COST_HABANA_VIEJA} CUP`;
-        } else if (deliveryLocation === 'otros') {
-            shippingText = SHIPPING_TEXT_OTROS;
-        } else {
-            shippingText = 'Selecciona ubicación';
-        }
-
-        document.getElementById('checkoutShipping').textContent = shippingText;
-        const total = subtotal + shippingCost;
-        document.getElementById('checkoutTotal').textContent = '$' + total.toLocaleString();
+    if (deliveryLocation === 'habana-vieja') {
+        shippingCost = 400;
+        shippingText = '$400 CUP';
+    } else if (deliveryLocation === 'otros') {
+        shippingText = 'A convenir';
+    } else {
+        shippingText = 'Selecciona ubicación';
     }
 
+    document.getElementById('checkoutShipping').textContent = shippingText;
+    const total = subtotal + shippingCost;
+    document.getElementById('checkoutTotal').textContent = '$' + total.toLocaleString();
+}
     function updateDeliveryPromoBanner() {
         const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         const progressBar = document.getElementById('promoProgressBar');
@@ -1052,21 +1054,24 @@
         const locationText = deliveryLocation === 'habana-vieja' ? 'Habana Vieja' : 'Otros municipios';
         const paymentText = paymentMethod === 'efectivo' ? `Efectivo (pagaré con ${cashAmount})` : 'Transferencia';
 
-        const finalMessage = `*🛒 PEDIDO - EL RESOLVITO*\n\n` +
-            `*👤 DATOS:*\n` +
-            `• Nombre: ${customerName}\n` +
-            `• Tel: ${customerPhone}\n` +
-            `• Dir: ${customerAddress}\n` +
-            `• Ref: ${customerReferences || 'N/A'}\n` +
-            `• Ubicación: ${locationText}\n\n` +
-            `*📦 PRODUCTOS:*\n${orderItems}\n\n` +
-            `*💰 PAGO:*\n` +
-            `• Subtotal: $${subtotal.toLocaleString()}\n` +
-            `• Servicio: $${SERVICE_FEE}\n` +
-            `• Envío: ${shippingText}\n` +
-            `• Peso: ${totalWeight.toFixed(2)} kg\n` +
-            `• TOTAL: $${total.toLocaleString()}\n\n` +
-            `*💳 MÉTODO:* ${paymentText}`;
+       const finalMessage = `*🛒 PEDIDO - EL RESOLVITO*
+
+*👤 DATOS:*
+• Nombre: ${customerName}
+• Tel: ${customerPhone}
+• Dir: ${customerAddress}
+• Ref: ${customerReferences || 'N/A'}
+• Ubicación: ${locationText}
+
+*📦 PRODUCTOS:*
+${orderItems}
+
+*💰 RESUMEN:*
+• Subtotal: $${subtotal.toLocaleString()}
+• Envío: ${shippingText}
+• TOTAL: $${total.toLocaleString()}
+
+*💳 MÉTODO:* ${paymentText}`;
 
         const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycby9Sk3Fz2_WqRQsEXrezpwqKbpYhqW_-ialMJcYKPdvZkrBfNReWWFfQ-VnXTrkJY8W/exec';
         const formData = new FormData();
@@ -1130,5 +1135,7 @@
 
 </body>
 </html>
+
+
 
 
