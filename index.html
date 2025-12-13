@@ -252,18 +252,14 @@
               <!-- ✅ Banner interno simplificado -->
 <div class="bg-white border-2 border-dashed border-green-200 p-4 rounded-xl shadow-md mb-8 text-center fade-in-up" id="deliveryPromoBanner">
   <h3 class="text-fixed-xl md:text-fixed-2xl font-extrabold text-[var(--primary-color)] mb-4">Envío rápido y sin sorpresas</h3>
-  <div class="w-full bg-gray-200 rounded-full h-3 mb-4 relative">
-    <div id="promoProgressBar" class="bg-[var(--accent-color)] h-3 rounded-full transition-all duration-500" style="width: 0%;"></div>
-    <div id="progressText" class="absolute top-0 left-0 w-full h-full flex items-center justify-center px-2 text-xs font-bold text-[var(--primary-color)]"></div>
-  </div>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-fixed-sm md:text-fixed-base max-w-xl mx-auto">
-    <div id="promoLevelTramo1" class="bg-gray-50 p-3 rounded-lg flex flex-col justify-center items-center opacity-75 transition-all duration-300">
-      <p class="font-semibold text-gray-800">Pedidos de $500 a $3,000</p>
-      <p class="text-gray-600 font-bold">$150 CUP de envío fijo</p>
+    <div class="bg-green-50 p-3 rounded-lg flex flex-col justify-center items-center ring-2 ring-transparent transition-all duration-300">
+      <p class="font-semibold text-gray-800">HABANA VIEJA</p>
+      <p class="text-green-700 font-bold">Envío fijo $400 CUP</p>
     </div>
-    <div id="promoLevelTramo2" class="bg-green-50 p-3 rounded-lg flex flex-col justify-center items-center ring-2 ring-transparent transition-all duration-300">
-      <p class="font-semibold text-gray-800">Compras Superiores a $3,000</p>
-      <p class="text-green-700 font-bold">Envío $150 CUP</p>
+    <div class="bg-yellow-50 p-3 rounded-lg flex flex-col justify-center items-center ring-2 ring-transparent transition-all duration-300">
+      <p class="font-semibold text-gray-800">OTROS MUNICIPIOS</p>
+      <p class="text-yellow-700 font-bold">Tarifa a convenir</p>
     </div>
   </div>
 </div>
@@ -292,8 +288,7 @@
       <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 mb-8">
         <h3 class="text-fixed-xl font-bold text-[var(--accent-color)] mb-3">Envío a La Habana Vieja</h3>
         <ul class="list-disc list-inside text-fixed-base text-[var(--text-medium)] text-left mx-auto max-w-sm lg:max-w-none space-y-2">
-          <li>Pedido mínimo: <strong class="text-[var(--primary-color)]">$500 CUP</strong></li>
-          <li>Envío fijo: <strong class="text-[var(--accent-color)]">$150 CUP</strong></li>
+          <li>Envío fijo: <strong class="text-[var(--accent-color)]">$400 CUP</strong></li>
           <li>Sin recargos por peso</li>
         </ul>
       </div>
@@ -310,50 +305,29 @@
                 <p class="mt-2 text-fixed-base text-[var(--text-medium)]">Todo lo que necesitas saber, en un solo lugar.</p>
             </div>
             <div class="max-w-3xl mx-auto space-y-4 fade-in-up">
-                <!-- FAQ 1 -->
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
-                    <button class="w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 flex justify-between items-center transition-colors focus:outline-none" onclick="toggleAccordion('faq-1')">
-                        <span class="text-fixed-lg font-bold text-[var(--primary-color)] flex items-center gap-3"><span class="bg-[var(--primary-color)] text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">1</span> ¿Cómo hago un pedido?</span>
-                        <svg id="icon-faq-1" class="w-5 h-5 text-gray-500 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-                    </button>
-                    <div id="content-faq-1" class="hidden px-6 py-4 bg-white border-t border-gray-100">
-                        <ul class="space-y-3 text-fixed-base text-[var(--text-medium)]">
-                            <li class="flex gap-3"><span class="font-bold text-[var(--accent-color)]">1.</span> Agrega tus productos al carrito.</li>
-                            <li class="flex gap-3"><span class="font-bold text-[var(--accent-color)]">2.</span> Ve al carrito y pulsa "Enviar Pedido".</li>
-                            <li class="flex gap-3"><span class="font-bold text-[var(--accent-color)]">3.</span> Completa tus datos de entrega.</li>
-                            <li class="flex gap-3"><span class="font-bold text-[var(--accent-color)]">4.</span> El pedido se envía a nuestro WhatsApp automáticamente.</li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- FAQ 2 -->
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
-                    <button class="w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 flex justify-between items-center transition-colors focus:outline-none" onclick="toggleAccordion('faq-2')">
-                        <span class="text-fixed-lg font-bold text-[var(--primary-color)] flex items-center gap-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" /></svg> ¿Cuánto cuesta el envío?</span>
-                        <svg id="icon-faq-2" class="w-5 h-5 text-gray-500 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-                    </button>
-                    <div id="content-faq-2" class="hidden px-6 py-4 bg-white border-t border-gray-100">
-                        <div class="mb-3 p-3 bg-blue-50 rounded-lg border border-blue-100">
-                            <p class="font-bold text-[var(--primary-color)] mb-1">📍 Habana Vieja</p>
-                            <p class="text-sm mb-1"><strong>Pedido mínimo:</strong> $500 CUP</p>
-                            <ul class="list-disc list-inside text-sm space-y-1 text-gray-700">
-                                <li><strong>$500 - $3,000:</strong> Fijo $150 CUP.</li>
-                                <li><strong>Más de $3,000:</strong> Base $100 + $100/10kg extra.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- FAQ 3 -->
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
-                    <button class="w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 flex justify-between items-center transition-colors focus:outline-none" onclick="toggleAccordion('faq-3')">
-                        <span class="text-fixed-lg font-bold text-[var(--primary-color)] flex items-center gap-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> ¿Cuándo llega mi pedido?</span>
-                        <svg id="icon-faq-3" class="w-5 h-5 text-gray-500 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-                    </button>
-                    <div id="content-faq-3" class="hidden px-6 py-4 bg-white border-t border-gray-100 text-fixed-base text-[var(--text-medium)]">
-                        <p class="mb-2"><strong>Horario general:</strong> 9:00 AM - 8:00 PM</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+               <!-- FAQ 2 -->
+<div class="border border-gray-200 rounded-lg overflow-hidden">
+  <button class="w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 flex justify-between items-center transition-colors focus:outline-none" onclick="toggleAccordion('faq-2')">
+    <span class="text-fixed-lg font-bold text-[var(--primary-color)] flex items-center gap-3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
+      </svg>
+      ¿Cuánto cuesta el envío?
+    </span>
+    <svg id="icon-faq-2" class="w-5 h-5 text-gray-500 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+  <div id="content-faq-2" class="hidden px-6 py-4 bg-white border-t border-gray-100">
+   <div class="mb-3 p-3 bg-blue-50 rounded-lg border border-blue-100">
+  <p class="font-bold text-[var(--primary-color)] mb-1">📍 Habana Vieja</p>
+  <p class="text-sm mb-1"><strong>Envío fijo: $400 CUP</strong></p>
+  <p class="font-bold text-[var(--primary-color)] mb-1 mt-3">📍 Otros municipios</p>
+  <p class="text-sm">El costo se acordará con el cliente antes de confirmar el pedido.</p>
+</div>
+  </div>
+</div>
     </section>
 
     <!-- CONTACTO -->
@@ -486,15 +460,15 @@
     <button class="close-btn" id="closeFloatingCallout">&times;</button><p class="font-bold mb-2">¡Comodidad en La Habana!</p><a href="#nuestras-ventajas" class="mt-3 inline-block bg-[var(--accent-color)] text-white text-fixed-sm font-semibold py-2 px-4 rounded-full">Ver Ventajas</a>
 </div>
 
-<!-- Incluir el catálogo externo -->
+<!-- Incluir el catálogo externo primero -->
 <script src="catalogo.js"></script>
 
 <script>
     // Constantes de negocio
     const MIN_ORDER_THRESHOLD = 500;
     const TRAMO_1_MAX = 3000; 
-    const SHIPPING_COST_TRAMO_1 = 150; 
-    const SHIPPING_COST_TRAMO_2_BASE = 100; 
+    const SHIPPING_COST_HABANA_VIEJA = 400;
+    const SHIPPING_TEXT_OTROS = 'A convenir';
     const WEIGHT_SURCHARGE_PER_10KG = 100; 
     const WEIGHT_THRESHOLD_KG = 10;
     const SERVICE_FEE = 50;
@@ -971,15 +945,25 @@
         return totalWeight; 
     }
 
-   function updateShippingAndTotal() {
-  const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const deliveryLocation = document.getElementById('deliveryLocation').value;
-  const btn = document.getElementById('confirmOrderBtn');
-  const shipping = 150; // fijo
-  document.getElementById('checkoutShipping').textContent = '$150';
-  document.getElementById('checkoutSubtotal').textContent = '$' + subtotal.toLocaleString();
-  document.getElementById('checkoutTotal').textContent = '$' + (subtotal + shipping).toLocaleString();
-  btn.disabled = subtotal < 500 || !deliveryLocation;
+  function updateShippingAndTotal() {
+    const deliveryLocation = document.getElementById('deliveryLocation').value;
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    let shippingCost = 0;
+    let shippingText = '$0';
+
+    if (deliveryLocation === 'habana-vieja') {
+        shippingCost = SHIPPING_COST_HABANA_VIEJA;
+        shippingText = `$${SHIPPING_COST_HABANA_VIEJA} CUP`;
+    } else if (deliveryLocation === 'otros') {
+        shippingCost = 0;
+        shippingText = SHIPPING_TEXT_OTROS;
+    } else {
+        shippingText = 'Selecciona ubicación';
+    }
+
+    document.getElementById('checkoutShipping').textContent = shippingText;
+    const total = subtotal + shippingCost;
+    document.getElementById('checkoutTotal').textContent = '$' + total.toLocaleString();
 }
 
     function updateDeliveryPromoBanner() {
@@ -1232,9 +1216,6 @@
 
 </body>
 </html>
-
-
-
 
 
 
