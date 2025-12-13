@@ -139,8 +139,8 @@
         <div class="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12">
             <!-- Texto -->
             <div class="w-full md:w-1/2 text-center md:text-left z-10 fade-in-up">
-                <span class="inline-block py-1 px-3 rounded-full bg-blue-50 text-[var(--primary-color)] text-xs font-bold tracking-wide mb-4 border border-blue-100">ENVIOS EN LA HABANA</span>
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[var(--text-dark)] leading-tight mb-4">Tus compras <br><span class="font-script text-[var(--accent-color)] text-5xl md:text-6xl lg:text-7xl block mt-2 transform -rotate-2">a un solo clic</span></h1>
+                <span class="inline-block py-1 px-3 rounded-full bg-blue-50 text-[var(--primary-color)] text-xs font-bold tracking-wide mb-4 border border-blue-100">ENVIOS A LA HABANA</span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[var(--text-dark)] leading-tight mb-4">Tu Mercado Cubano <br><span class="font-script text-[var(--accent-color)] text-5xl md:text-6xl lg:text-7xl block mt-2 transform -rotate-2">a un solo clic</span></h1>
                 <p class="text-gray-500 text-lg md:text-xl mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed">Olvídate de las colas. Selecciona tus productos desde el móvil y recíbelos en la puerta de tu casa en La Habana Vieja.</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                     <a href="#mercado" class="px-8 py-4 bg-[var(--primary-color)] text-white font-bold rounded-full shadow-lg hover:bg-[#0a2e28] transition-all transform hover:scale-105 flex items-center justify-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg> Comprar Ahora</a>
@@ -249,24 +249,24 @@
             <!-- CONTENEDOR CON ALTURA MÍNIMA PARA EVITAR SALTOS DE SCROLL -->
             <div class="min-h-screen flex flex-col">
                 
-                <!-- Banner de envíos -->
-                <div class="bg-white border-2 border-dashed border-green-200 p-4 rounded-xl shadow-md mb-8 text-center fade-in-up" id="deliveryPromoBanner">
-                    <h3 class="text-fixed-xl md:text-fixed-2xl font-extrabold text-[var(--primary-color)] mb-4">¡Ahorra y Simplifica tu Envío en La Habana Vieja!</h3>
-                    <div class="w-full bg-gray-200 rounded-full h-3 mb-4 relative">
-                        <div id="promoProgressBar" class="bg-[var(--accent-color)] h-3 rounded-full transition-all duration-500" style="width: 0%;"></div>
-                        <div id="progressText" class="absolute top-0 left-0 w-full h-full flex items-center justify-center px-2 text-xs font-bold text-[var(--primary-color)]"></div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-fixed-sm md:text-fixed-base max-w-xl mx-auto">
-                        <div id="promoLevelTramo1" class="bg-gray-50 p-3 rounded-lg flex flex-col justify-center items-center opacity-75 transition-all duration-300">
-                            <p class="font-semibold text-gray-800">Pedidos de $500 a $3,000</p>
-                            <p class="text-gray-600 font-bold">$150 CUP de envío fijo</p>
-                        </div>
-                        <div id="promoLevelTramo2" class="bg-green-50 p-3 rounded-lg flex flex-col justify-center items-center ring-2 ring-transparent transition-all duration-300">
-                            <p class="font-semibold text-gray-800">Compras Superiores a $3,000</p>
-                            <p class="text-green-700 font-bold">Base $100 CUP + Recargo</p>
-                        </div>
-                    </div>
-                </div>
+              <!-- ✅ Banner interno simplificado -->
+<div class="bg-white border-2 border-dashed border-green-200 p-4 rounded-xl shadow-md mb-8 text-center fade-in-up" id="deliveryPromoBanner">
+  <h3 class="text-fixed-xl md:text-fixed-2xl font-extrabold text-[var(--primary-color)] mb-4">Envío rápido y sin sorpresas</h3>
+  <div class="w-full bg-gray-200 rounded-full h-3 mb-4 relative">
+    <div id="promoProgressBar" class="bg-[var(--accent-color)] h-3 rounded-full transition-all duration-500" style="width: 0%;"></div>
+    <div id="progressText" class="absolute top-0 left-0 w-full h-full flex items-center justify-center px-2 text-xs font-bold text-[var(--primary-color)]"></div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-fixed-sm md:text-fixed-base max-w-xl mx-auto">
+    <div id="promoLevelTramo1" class="bg-gray-50 p-3 rounded-lg flex flex-col justify-center items-center opacity-75 transition-all duration-300">
+      <p class="font-semibold text-gray-800">Pedidos de $500 a $3,000</p>
+      <p class="text-gray-600 font-bold">$150 CUP de envío fijo</p>
+    </div>
+    <div id="promoLevelTramo2" class="bg-green-50 p-3 rounded-lg flex flex-col justify-center items-center ring-2 ring-transparent transition-all duration-300">
+      <p class="font-semibold text-gray-800">Compras Superiores a $3,000</p>
+      <p class="text-green-700 font-bold">Envío $150 CUP</p>
+    </div>
+  </div>
+</div>
 
                 <!-- Buscador y Filtros -->
                 <div class="bg-white p-4 rounded-xl shadow-lg mb-8 fade-in-up">
@@ -280,28 +280,27 @@
         </div>
     </section>
     
-    <!-- BANNER DE PROMOCION DE ENVIO -->
-    <section id="promo-entrega" class="py-16 lg:py-24 bg-blue-50">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-8">
-            <div class="lg:w-1/2 flex justify-center fade-in-left">
-                <img src="https://i.postimg.cc/rsCKV7LZ/1755367982611.jpg" alt="Mensajero de El Resolvito entregando pedido" class="rounded-xl shadow-2xl object-cover max-h-[500px] w-full lg:w-auto">
-            </div>
-            <div class="lg:w-1/2 text-center lg:text-left fade-in-right">
-                <h2 class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--primary-color)] mb-4">¡Tu Mercado en La Habana Vieja, Así de Fácil!</h2>
-                <p class="text-fixed-lg text-[var(--text-dark)] mb-6 max-w-xl mx-auto lg:mx-0">¿Cansado de las colas, el sol y cargar con el peso? En El Resolvito, **te llevamos tu compra directo a casa y con una sonrisa.** ¡Tu tiempo vale oro!</p>
-                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 mb-8">
-                    <h3 class="text-fixed-xl font-bold text-[var(--accent-color)] mb-3">Nuestra Nueva Política de Envíos en Habana Vieja:</h3>
-                    <ul class="list-disc list-inside text-fixed-base text-[var(--text-medium)] text-left mx-auto max-w-sm lg:max-w-none space-y-2">
-                        <li>Pedido Mínimo: <strong class="text-[var(--primary-color)]">$500 CUP</strong>. ¡Haz que cada entrega cuente!</li>
-                        <li><strong class="text-[var(--primary-color)]">Tramo 1 ($500 - $3,000):</strong> Tarifa fija de <strong class="text-[var(--accent-color)]">$150 CUP</strong>.</li>
-                        <li><strong class="text-green-700 font-extrabold">Tramo 2 (Compras > $3,000):</strong> Base de <strong class="text-green-600">$100 CUP</strong>.</li>
-                        <li><strong class="text-green-700 font-extrabold">Recargo por Peso (Tramo 2):</strong> <strong class="text-[var(--accent-color)]">$100 CUP</strong> por cada 10 kg **o fracción**.</li>
-                    </ul>
-                </div>
-                <a href="#mercado" class="inline-block bg-[var(--primary-color)] text-white font-bold py-3 px-8 rounded-full text-fixed-lg hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg">¡Empieza a Resolver Aquí!</a>
-            </div>
-        </div>
-    </section>
+    <!-- ✅ BANNER DE PROMOCIÓN SIMPLIFICADA -->
+<section id="promo-entrega" class="py-16 lg:py-24 bg-blue-50">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-8">
+    <div class="lg:w-1/2 flex justify-center fade-in-left">
+      <img src="https://i.postimg.cc/rsCKV7LZ/1755367982611.jpg" alt="Mensajero de El Resolvito entregando pedido" class="rounded-xl shadow-2xl object-cover max-h-[500px] w-full lg:w-auto">
+    </div>
+    <div class="lg:w-1/2 text-center lg:text-left fade-in-right">
+      <h2 class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--primary-color)] mb-4">¡Tu Mercado en La Habana Vieja, Así de Fácil!</h2>
+      <p class="text-fixed-lg text-[var(--text-dark)] mb-6 max-w-xl mx-auto lg:mx-0">¿Cansado de las colas, el sol y cargar con el peso? En El Resolvito, **te llevamos tu compra directo a casa y con una sonrisa.** ¡Tu tiempo vale oro!</p>
+      <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 mb-8">
+        <h3 class="text-fixed-xl font-bold text-[var(--accent-color)] mb-3">Envío a La Habana Vieja</h3>
+        <ul class="list-disc list-inside text-fixed-base text-[var(--text-medium)] text-left mx-auto max-w-sm lg:max-w-none space-y-2">
+          <li>Pedido mínimo: <strong class="text-[var(--primary-color)]">$500 CUP</strong></li>
+          <li>Envío fijo: <strong class="text-[var(--accent-color)]">$150 CUP</strong></li>
+          <li>Sin recargos por peso</li>
+        </ul>
+      </div>
+      <a href="#mercado" class="inline-block bg-[var(--primary-color)] text-white font-bold py-3 px-8 rounded-full text-fixed-lg hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg">¡Empieza a Resolver Aquí!</a>
+    </div>
+  </div>
+</section>
 
     <!-- DUDAS Y GUIA DE COMPRA (ACORDEÓN) -->
     <section id="como-comprar" class="py-12 bg-white">
@@ -421,13 +420,18 @@
 <div id="checkoutModal" class="modal-overlay fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4">
     <div class="modal-content bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden">
         <div class="p-6 border-b"><div class="flex justify-between items-center"><h3 class="text-fixed-2xl font-bold text-[var(--text-dark)]">Finalizar Pedido</h3><button id="closeCheckoutModal" class="text-gray-500 hover:text-gray-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button></div></div>
-        <div class="flex-1 overflow-y-auto">
-            <div class="p-6 border-b">
-                <h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">1. Resumen de tu Pedido</h4>
-                <div id="checkoutOrderSummary" class="space-y-3 mb-4"></div>
-                <div id="upsellMessage" class="my-4 p-3 rounded-lg text-center font-semibold text-sm transition-all duration-300"></div>
-                <div class="bg-gray-50 p-4 rounded-lg space-y-2"><div class="flex justify-between text-fixed-base"><span>Subtotal:</span><span id="checkoutSubtotal" class="font-semibold">$0</span></div><div class="flex justify-between text-fixed-base text-gray-600"><span>Servicio:</span><span id="checkoutServiceFee" class="font-semibold">$50</span></div><div class="flex justify-between text-fixed-base"><span>Envío:</span><span id="checkoutShipping" class="font-semibold">$0</span></div><div id="shippingNote" class="text-fixed-sm text-gray-600 hidden"></div><hr class="my-2"><div class="flex justify-between text-fixed-lg font-bold text-[var(--primary-color)]"><span>Total:</span><span id="checkoutTotal">$0</span></div></div>
-            </div>
+       <!-- ✅ Checkout: solo subtotal + envío $150 -->
+<div class="flex-1 overflow-y-auto">
+  <div class="p-6 border-b">
+    <h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">Resumen de tu pedido</h4>
+    <div id="checkoutOrderSummary" class="space-y-3 mb-4"></div>
+    <div class="bg-gray-50 p-4 rounded-lg space-y-2">
+      <div class="flex justify-between text-fixed-base"><span>Subtotal:</span><span id="checkoutSubtotal" class="font-semibold">$0</span></div>
+      <div class="flex justify-between text-fixed-base"><span>Envío:</span><span id="checkoutShipping" class="font-semibold">$150</span></div>
+      <hr class="my-2">
+      <div class="flex justify-between text-fixed-lg font-bold text-[var(--primary-color)]"><span>Total:</span><span id="checkoutTotal">$0</span></div>
+    </div>
+  </div>
             <div class="p-6 border-b">
                 <h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">2. Datos</h4>
                 <div class="space-y-4">
@@ -967,65 +971,16 @@
         return totalWeight; 
     }
 
-    function updateShippingAndTotal() {
-        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        document.getElementById('checkoutServiceFee').textContent = '$' + SERVICE_FEE;
-        const deliveryLocation = document.getElementById('deliveryLocation').value;
-        const confirmOrderBtn = document.getElementById('confirmOrderBtn');
-        let shippingCost = 0; 
-        let shippingText = '$0'; 
-        let showNote = false; 
-        let noteText = ''; 
-        let upsellMessage = ''; 
-        const upsellElement = document.getElementById('upsellMessage');
-        confirmOrderBtn.disabled = false; 
-        confirmOrderBtn.textContent = 'Confirmar Pedido';
-        
-        if (deliveryLocation === 'habana-vieja') {
-            if (subtotal < MIN_ORDER_THRESHOLD) {
-                shippingCost = SHIPPING_COST_TRAMO_1; 
-                shippingText = `$${SHIPPING_COST_TRAMO_1} CUP (Provisional)`;
-                upsellMessage = `Te faltan $${(MIN_ORDER_THRESHOLD - subtotal).toLocaleString()} para el mínimo.`;
-                upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-red-100 text-red-800';
-                confirmOrderBtn.disabled = true; 
-                confirmOrderBtn.textContent = `Faltan $${(MIN_ORDER_THRESHOLD - subtotal).toLocaleString()}`;
-            } else if (subtotal > TRAMO_1_MAX) {
-                const totalWeight = calculateTotalWeight(); 
-                const weightCeiling = Math.ceil(totalWeight / WEIGHT_THRESHOLD_KG);
-                const weightSurcharge = weightCeiling * WEIGHT_SURCHARGE_PER_10KG; 
-                shippingCost = SHIPPING_COST_TRAMO_2_BASE + weightSurcharge;
-                shippingText = `$${shippingCost.toLocaleString()} CUP`;
-                upsellMessage = `¡Tramo 2! Envío calculado con ${totalWeight.toFixed(2)}kg.`;
-                upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-green-100 text-green-800';
-            } else {
-                shippingCost = SHIPPING_COST_TRAMO_1; 
-                shippingText = `$${SHIPPING_COST_TRAMO_1} CUP`;
-                upsellMessage = `Añade $${(TRAMO_1_MAX - subtotal + 1).toLocaleString()} para tarifa base menor (Tramo 2).`;
-                upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-yellow-100 text-yellow-800';
-            }
-        } else if (deliveryLocation === 'otros') { 
-            shippingCost = 0; 
-            shippingText = 'A confirmar'; 
-            showNote = true; 
-            noteText = 'Costo por agencia externa.'; 
-            upsellMessage = ''; 
-        } else { 
-            shippingCost = 0; 
-            shippingText = '$0'; 
-            upsellMessage = 'Selecciona ubicación.'; 
-            upsellElement.className = 'my-4 p-3 rounded-lg text-center font-semibold text-sm bg-gray-100 text-gray-800'; 
-            confirmOrderBtn.disabled = true; 
-        }
-        
-        if (upsellElement) { 
-            upsellElement.textContent = upsellMessage; 
-            upsellElement.classList.toggle('hidden', upsellMessage === ''); 
-        }
-        document.getElementById('checkoutShipping').textContent = shippingText; 
-        document.getElementById('shippingNote').classList.toggle('hidden', !showNote); 
-        if(showNote) document.getElementById('shippingNote').textContent = noteText;
-        document.getElementById('checkoutTotal').textContent = '$' + (subtotal + SERVICE_FEE + shippingCost).toLocaleString();
-    }
+   function updateShippingAndTotal() {
+  const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const deliveryLocation = document.getElementById('deliveryLocation').value;
+  const btn = document.getElementById('confirmOrderBtn');
+  const shipping = 150; // fijo
+  document.getElementById('checkoutShipping').textContent = '$150';
+  document.getElementById('checkoutSubtotal').textContent = '$' + subtotal.toLocaleString();
+  document.getElementById('checkoutTotal').textContent = '$' + (subtotal + shipping).toLocaleString();
+  btn.disabled = subtotal < 500 || !deliveryLocation;
+}
 
     function updateDeliveryPromoBanner() {
         const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
