@@ -10,8 +10,8 @@ const catalogo = {
     { id: 5, name: 'Café Dufiltro 250 g', price: 1450, image: "https://i.postimg.cc/hG26fv31/cafe_Dufiltro_250_g_precio_1450.png", description: 'Café extra fuerte para amantes del sabor intenso.', specificDetails: 'Paquete 250 g', category: 'Alimentos y conservas', department: 'mercado', status: 'available' },
     { id: 6, name: 'Café Enepa', price: 450, image: "https://i.postimg.cc/nhY6f04N/cafe_enepa_precio_450.png", description: 'Café molido de sabor intenso y duradero.', specificDetails: 'Paquete', category: 'Alimentos y conservas', department: 'mercado', status: 'available' },
     { id: 7, name: 'Cartón de huevo 30 u', price: 3000, image: "https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3000.png", description: 'Huevos frescos en cartón de 30 unidades.', specificDetails: 'Cartón', category: 'Alimentos y conservas', department: 'mercado', status: 'available' },
-    { id: 8, name: 'Leche condensada', price: 950, image: "https://i.postimg.cc/tT2XwjtT/leche_condensada.png", description: 'Leche condensada cremosa, perfecta para postres.', specificDetails: 'Lata 397 g', category: 'Alimentos y conservas', department: 'mercado', status: 'available' },
-    { id: 9, name: 'Harina blanca 1 Kg', price: 600, image: "https://i.postimg.cc/3xc2NHFB/harina_blanca1_kg.png", description: 'Harina refinada ideal para repostería y panadería.', specificDetails: 'Paquete 1 Kg', category: 'Alimentos y conservas', department: 'mercado', status: 'available' },
+    { id: 8, name: 'Leche condensada', price: 500, image: "https://i.postimg.cc/tT2XwjtT/leche_condensada.png", description: 'Leche condensada cremosa, perfecta para postres.', specificDetails: 'Lata 397 g', category: 'Alimentos y conservas', department: 'mercado', status: 'available' },
+    { id: 9, name: 'Harina blanca 1 Kg', price: 550, image: "https://i.postimg.cc/3xc2NHFB/harina_blanca1_kg.png", description: 'Harina refinada ideal para repostería y panadería.', specificDetails: 'Paquete 1 Kg', category: 'Alimentos y conservas', department: 'mercado', status: 'available' },
 
     // --- SNACKS Y GOLOSINAS ---
     { id: 10, name: 'Chicoticos Pelly 90 g', price: 400, image: "https://i.postimg.cc/1zv2fXjZ/chicoticos_pelly_90_g_precio_400.png", description: 'Snacks crujientes sabor ajo.', specificDetails: 'Paquete 90 g', category: 'Snacks y golosinas', department: 'mercado', status: 'available' },
@@ -65,3 +65,4 @@ const catalogo = {
 
 // ✅ Hacer disponible globalmente para el HTML
 window.catalogo = catalogo;
+
