@@ -126,20 +126,21 @@
                     <img src="https://i.postimg.cc/rsCKV7LZ/1755367982611.jpg" alt="Repartidor de El Resolvito" class="hero-image-mask w-full h-full object-cover object-center">
                 </div>
                 <div class="absolute bottom-10 -left-4 md:left-0 bg-white p-4 rounded-xl shadow-xl z-20 flex items-center gap-3 animate-bounce" style="animation-duration: 3s;">
-                <div class="absolute top-10 right-4 md:right-0 bg-white p-3 rounded-xl shadow-xl z-20 flex items-center gap-3">
-    <div class="bg-purple-100 p-2 rounded-full text-purple-600">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-        </svg>
-    </div>
-    <div>
-        <p class="text-xs text-gray-500 font-semibold">Visitando ahora</p>
-        <p class="text-sm font-bold text-[var(--text-dark)]" id="heroCounter">0</p>
-    </div>
-</div>
                     <div class="bg-green-100 p-2 rounded-full text-green-600"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg></div>
                     <div><p class="text-xs text-gray-500 font-semibold">Entregas hoy</p><p class="text-sm font-bold text-[var(--text-dark)]">Habana Vieja</p></div>
+                </div>
+                <!-- CONTADOR EN HERO -->
+                <div class="absolute top-10 right-4 md:right-0 bg-white p-3 rounded-xl shadow-xl z-20 flex items-center gap-3">
+                    <div class="bg-purple-100 p-2 rounded-full text-purple-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 font-semibold">Visitando ahora</p>
+                        <p class="text-sm font-bold text-[var(--text-dark)]" id="heroCounter">0</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -312,21 +313,16 @@
                 <p class="mt-4 text-fixed-lg text-[var(--text-medium)] max-w-3xl mx-auto">Sé el primero en enterarte de nuevos productos y promociones exclusivas.</p>
             </div>
             <div class="max-w-lg mx-auto bg-white p-8 rounded-xl shadow-lg text-center fade-in-up" style="transition-delay: 150ms;">
-<div class="absolute top-10 right-4 md:right-0 bg-white p-3 rounded-xl shadow-xl z-20 flex items-center gap-3">
-    <div class="bg-purple-100 p-2 rounded-full text-purple-600">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-        </svg>
-    </div>
-    <div>
-        <p class="text-xs text-gray-500 font-semibold">Visitando ahora</p>
-        <p class="text-sm font-bold text-[var(--text-dark)]" id="heroCounter">0</p>
-    </div>
-</div>
                 <div class="space-y-4">
                     <p class="text-fixed-lg"><strong>Canal de anuncios:</strong> Solo administradores</p>
                     <p class="text-fixed-lg"><strong>Cero spam,</strong> solo información útil.</p>
+                    
+                    <!-- CONTADOR EN SECCIÓN CONTACTO -->
+                    <div class="bg-gradient-to-r from-blue-50 to-green-50 p-4 rounded-lg mt-6">
+                        <p class="text-sm text-gray-600 mb-1">Comunidad activa</p>
+                        <p class="text-3xl font-bold text-[var(--primary-color)]" id="communityCounter">0</p>
+                        <p class="text-xs text-gray-500 mt-1">personas ya confían en El Resolvito</p>
+                    </div>
                 </div>
                 <a href="#" id="contactWhatsappBtn" class="mt-8 inline-block bg-green-500 text-white font-bold py-3 px-8 rounded-full text-fixed-lg hover:bg-green-600 transform hover:scale-105 transition-all duration-300 shadow-lg">Unirse al Grupo de WhatsApp</a>
             </div>
@@ -339,7 +335,28 @@
         <div class="flex justify-center items-center gap-6 mb-6">
             <a href="https://wa.me/5356382909" target="_blank" class="text-gray-400 hover:text-white transition-transform hover:scale-110"><svg class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C7.38 2 3.51 5.87 3.51 10.53C3.51 12.02 3.9 13.43 4.6 14.65L3.32 20.02L8.76 18.73C9.9 19.37 11.19 19.72 12.51 19.72H12.53C17.19 19.72 21.06 15.85 21.06 11.19C21.06 6.53 17.19 2.66 12.53 2.66H12.51Z"/></svg></a>
         </div>
-        <p class="text-fixed-sm">&copy; 2024 El Resolvito. Todos los derechos reservados.</p>
+        
+        <!-- CONTADOR EN FOOTER -->
+        <div class="mb-6">
+            <div class="inline-flex items-center gap-2 bg-gray-800 px-4 py-2 rounded-full">
+                <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-sm text-gray-300">
+                    <span id="footerCounter">0</span> visitas esta semana
+                </span>
+            </div>
+        </div>
+        
+        <div class="flex flex-col items-center gap-2">
+            <p class="text-fixed-sm">&copy; 2024 El Resolvito. Todos los derechos reservados.</p>
+            <div class="flex items-center gap-1 text-xs text-gray-500">
+                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                </svg>
+                <span id="simpleCounter">0</span> visitas hoy
+            </div>
+        </div>
     </div>
 </footer>
 
@@ -575,6 +592,56 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
 *Todos los precios incluyen la entrega a domicilio.*`;
     }
 
+    // ============================================
+    // CONTADOR DE VISITAS CON COUNTAPI
+    // ============================================
+    async function updateAllCounters() {
+        try {
+            // 1. Obtener contador actual
+            const getResponse = await fetch('https://api.countapi.xyz/get/el-resolvito-cuba/visits');
+            const getData = await getResponse.json();
+            
+            let currentCount = getData.value || 0;
+            
+            // 2. Incrementar solo en primera visita del día
+            const lastIncrement = localStorage.getItem('lastCounterIncrement');
+            const today = new Date().toDateString();
+            
+            if (!lastIncrement || lastIncrement !== today) {
+                const hitResponse = await fetch('https://api.countapi.xyz/hit/el-resolvito-cuba/visits');
+                const hitData = await hitResponse.json();
+                currentCount = hitData.value;
+                localStorage.setItem('lastCounterIncrement', today);
+            }
+            
+            // 3. Mostrar en todos los contadores
+            document.querySelectorAll('#heroCounter, #communityCounter, #footerCounter, #simpleCounter').forEach(el => {
+                if (el) {
+                    // Formatear número (ej: 1,234)
+                    el.textContent = currentCount.toLocaleString();
+                    
+                    // Animación sutil
+                    el.classList.add('scale-110');
+                    setTimeout(() => {
+                        el.classList.remove('scale-110');
+                    }, 200);
+                }
+            });
+            
+        } catch (error) {
+            console.log("Usando contador local como respaldo");
+            
+            // Fallback a localStorage
+            let localCount = localStorage.getItem('elResolvitoVisits') || 150;
+            localCount = parseInt(localCount) + 1;
+            localStorage.setItem('elResolvitoVisits', localCount);
+            
+            document.querySelectorAll('#heroCounter, #communityCounter, #footerCounter, #simpleCounter').forEach(el => {
+                if (el) el.textContent = localCount.toLocaleString();
+            });
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         products = catalogo.productos;
         products.sort((a, b) => (a.category < b.category ? -1 : (a.category > b.category ? 1 : (a.name < b.name ? -1 : 1))));
@@ -585,6 +652,12 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
         setupScrollAnimations();
         setupScrollHeader();
         showFloatingCalloutAfterDelay();
+        
+        // Inicializar contadores
+        setTimeout(updateAllCounters, 1000);
+        
+        // Actualizar contadores cada hora (opcional)
+        setInterval(updateAllCounters, 3600000);
     });
 
     function switchDepartment(dept) {
@@ -1265,6 +1338,10 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
         }
     }
 
+    // ============================================
+    // FIN DEL CONTADOR DE VISITAS
+    // ============================================
+
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('/sw.js').then(reg => console.log('SW ok')).catch(err => console.log('SW fail', err));
@@ -1273,5 +1350,4 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
 </script>
 
 </body>
-            </html>
-
+</html>
