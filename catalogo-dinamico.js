@@ -1,17 +1,17 @@
 // catalogo-dinamico.js - Versión optimizada para GitHub CSV
 // Carga MUCHO más rápido desde GitHub Pages que desde Google Sheets
+// CON DETECCIÓN DE CAMBIOS AUTOMÁTICA
 
 const CatalogoDinamico = {
-  // 🔗 URL de tu CSV en GitHub - CAMBIA ESTO POR TU URL
-  // Sube tu archivo CSV a GitHub y pon aquí la URL
+  // 🔗 URL de tu CSV en GitHub - CORREGIDA
   csvURL: 'https://raw.githubusercontent.com/elresolvito/elresolvito.github.io/main/Productos.csv',
   
-  // ⚙️ Configuración
+  // ⚙️ Configuración MEJORADA
   config: {
-    cacheHoras: 24,           // Cache válido por 24 horas
-    timeout: 8000,            // 8 segundos máximo de espera
-    autoRefresh: 30,          // Actualizar cada 30 minutos
-    version: '2.0'
+    cacheHoras: 1,           // ⬅️ REDUCIDO A 1 HORA (antes 24)
+    timeout: 8000,           // 8 segundos máximo de espera
+    autoRefresh: 30,         // Actualizar cada 30 minutos
+    version: '2.1'           // Incrementada por cambios
   },
   
   // 📦 Datos en memoria
@@ -19,6 +19,7 @@ const CatalogoDinamico = {
   categorias: [],
   cargado: false,
   fuente: 'none',            // 'github', 'cache', 'local', 'emergencia'
+  ultimaVersionCSV: null,    // Para detectar cambios
   
   // ==================== INICIALIZACIÓN PRINCIPAL ====================
   inicializar: function() {
@@ -30,7 +31,13 @@ const CatalogoDinamico = {
       console.log('💾 Catálogo cargado desde caché (', this.productos.length, 'productos)');
       this.fuente = 'cache';
       this.finalizarCarga();
-      this.iniciarAutoRefresco(); // Actualizar en segundo plano
+      
+      // Actualizar en segundo plano SIN interrumpir
+      setTimeout(() => {
+        this.verificarActualizaciones();
+      }, 3000);
+      
+      this.iniciarAutoRefresco();
       return;
     }
     
@@ -53,42 +60,147 @@ const CatalogoDinamico = {
   // ==================== CARGAR DESDE GITHUB CSV ====================
   cargarDesdeGitHub: function() {
     return new Promise((resolve, reject) => {
-      // Agregar timestamp para evitar caché del navegador
-      const urlConTimestamp = this.csvURL + '?t=' + Date.now();
-      
-      // Configurar timeout
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => {
-        controller.abort();
-        reject(new Error('Timeout: El servidor tardó demasiado'));
-      }, this.config.timeout);
-      
-      fetch(urlConTimestamp, { signal: controller.signal })
-        .then(response => {
-          clearTimeout(timeoutId);
+      // 1. Primero obtener la última versión del CSV
+      this.obtenerUltimaVersionCSV()
+        .then(versionHash => {
+          console.log('🔄 Última versión CSV:', versionHash.substring(0, 8));
           
-          if (!response.ok) {
-            throw new Error('Error HTTP ' + response.status + ': ' + response.statusText);
-          }
+          // Agregar hash de versión para evitar caché del navegador
+          const urlConVersion = this.csvURL + '?v=' + versionHash;
           
-          return response.text();
-        })
-        .then(csvText => {
-          // Verificar que no esté vacío
-          if (!csvText || csvText.trim().length === 0) {
-            throw new Error('CSV vacío recibido');
-          }
+          // Configurar timeout
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => {
+            controller.abort();
+            reject(new Error('Timeout: El servidor tardó demasiado'));
+          }, this.config.timeout);
           
-          console.log('📄 CSV recibido (' + csvText.length + ' caracteres)');
-          this.procesarCSV(csvText);
-          resolve();
+          fetch(urlConVersion, { signal: controller.signal })
+            .then(response => {
+              clearTimeout(timeoutId);
+              
+              if (!response.ok) {
+                throw new Error('Error HTTP ' + response.status + ': ' + response.statusText);
+              }
+              
+              return response.text();
+            })
+            .then(csvText => {
+              // Verificar que no esté vacío
+              if (!csvText || csvText.trim().length === 0) {
+                throw new Error('CSV vacío recibido');
+              }
+              
+              console.log('📄 CSV recibido (' + csvText.length + ' caracteres)');
+              this.procesarCSV(csvText);
+              this.ultimaVersionCSV = versionHash;
+              resolve();
+            })
+            .catch(error => {
+              clearTimeout(timeoutId);
+              console.error('❌ Fetch error:', error);
+              reject(error);
+            });
         })
         .catch(error => {
-          clearTimeout(timeoutId);
-          console.error('❌ Fetch error:', error);
+          console.warn('⚠️ No se pudo obtener versión, usando timestamp:', error.message);
+          // Fallback a timestamp normal
+          const urlConTimestamp = this.csvURL + '?t=' + Date.now();
+          
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => {
+            controller.abort();
+            reject(new Error('Timeout: El servidor tardó demasiado'));
+          }, this.config.timeout);
+          
+          fetch(urlConTimestamp, { signal: controller.signal })
+            .then(response => {
+              clearTimeout(timeoutId);
+              if (!response.ok) throw new Error('Error HTTP ' + response.status);
+              return response.text();
+            })
+            .then(csvText => {
+              if (!csvText) throw new Error('CSV vacío');
+              this.procesarCSV(csvText);
+              resolve();
+            })
+            .catch(err => {
+              clearTimeout(timeoutId);
+              reject(err);
+            });
+        });
+    });
+  },
+  
+  // ==================== OBTENER ÚLTIMA VERSIÓN CSV ====================
+  obtenerUltimaVersionCSV: function() {
+    return new Promise((resolve, reject) => {
+      // API de GitHub para obtener último commit del archivo
+      const apiURL = 'https://api.github.com/repos/elresolvito/elresolvito.github.io/commits?path=Productos.csv&per_page=1';
+      
+      fetch(apiURL)
+        .then(response => {
+          if (!response.ok) {
+            reject(new Error('No se pudo obtener versión de GitHub'));
+            return;
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (data && data[0] && data[0].sha) {
+            resolve(data[0].sha);
+          } else {
+            reject(new Error('No se encontró información de versión'));
+          }
+        })
+        .catch(error => {
           reject(error);
         });
     });
+  },
+  
+  // ==================== VERIFICAR ACTUALIZACIONES EN SEGUNDO PLANO ====================
+  verificarActualizaciones: function() {
+    console.log('🔍 Verificando actualizaciones en segundo plano...');
+    
+    this.obtenerUltimaVersionCSV()
+      .then(nuevaVersion => {
+        // Comparar con la versión actual
+        const versionActual = this.ultimaVersionCSV || localStorage.getItem('csvVersionHash');
+        
+        if (versionActual && versionActual !== nuevaVersion) {
+          console.log('🔄 ¡Hay una nueva versión del CSV! Actualizando...');
+          
+          // Recargar desde GitHub
+          this.cargarDesdeGitHub()
+            .then(() => {
+              this.guardarEnCache();
+              this.generarCategorias();
+              
+              // Notificar a la página
+              window.dispatchEvent(new CustomEvent('catalogoActualizado', {
+                detail: {
+                  productos: this.productos,
+                  categorias: this.categorias,
+                  fuente: 'github',
+                  timestamp: Date.now(),
+                  nuevaVersion: true
+                }
+              }));
+              
+              console.log('✅ Catálogo actualizado a nueva versión');
+              showCartToast('¡Catálogo actualizado!');
+            })
+            .catch(err => {
+              console.log('⚠️ No se pudo actualizar:', err.message);
+            });
+        } else {
+          console.log('📊 CSV ya está actualizado');
+        }
+      })
+      .catch(error => {
+        console.log('ℹ️ No se pudo verificar actualizaciones:', error.message);
+      });
   },
   
   // ==================== PROCESAR CSV ====================
@@ -325,11 +437,13 @@ const CatalogoDinamico = {
     return true;
   },
   
-  // ==================== SISTEMA DE CACHÉ ====================
+  // ==================== SISTEMA DE CACHÉ MEJORADO ====================
   cargarDesdeCache: function() {
     try {
       const cacheKey = 'catalogoCache_ElResolvito';
+      const versionKey = 'csvVersionHash';
       const cache = localStorage.getItem(cacheKey);
+      const versionCache = localStorage.getItem(versionKey);
       
       if (!cache) {
         console.log('💭 No hay caché previo');
@@ -338,14 +452,15 @@ const CatalogoDinamico = {
       
       const data = JSON.parse(cache);
       
-      // Verificar versión
+      // Verificar versión del código
       if (data.version !== this.config.version) {
-        console.log('🔄 Versión de caché diferente, ignorando');
+        console.log('🔄 Versión de código diferente, ignorando caché');
         localStorage.removeItem(cacheKey);
+        localStorage.removeItem(versionKey);
         return false;
       }
       
-      // Cache válido por X horas
+      // Cache válido por X horas (ahora 1 hora)
       const horasCache = this.config.cacheHoras;
       const msCache = horasCache * 60 * 60 * 1000;
       const cacheValido = Date.now() - data.timestamp < msCache;
@@ -354,15 +469,18 @@ const CatalogoDinamico = {
         this.productos = data.productos;
         this.categorias = data.categorias || [];
         this.fuente = 'cache';
+        this.ultimaVersionCSV = versionCache;
         return true;
       } else {
         console.log('⏰ Caché expirado o inválido');
         localStorage.removeItem(cacheKey);
+        localStorage.removeItem(versionKey);
       }
     } catch (e) {
       console.warn('⚠️ Error leyendo caché:', e.message);
       try {
         localStorage.removeItem('catalogoCache_ElResolvito');
+        localStorage.removeItem('csvVersionHash');
       } catch (e2) {
         // Ignorar
       }
@@ -381,6 +499,12 @@ const CatalogoDinamico = {
       };
       
       localStorage.setItem('catalogoCache_ElResolvito', JSON.stringify(cacheData));
+      
+      // Guardar también la versión del CSV si está disponible
+      if (this.ultimaVersionCSV) {
+        localStorage.setItem('csvVersionHash', this.ultimaVersionCSV);
+      }
+      
       console.log('💾 Catálogo guardado en caché (válido por ' + this.config.cacheHoras + ' horas)');
     } catch (e) {
       console.warn('No se pudo guardar en caché (localStorage puede estar lleno)');
@@ -483,11 +607,8 @@ const CatalogoDinamico = {
     console.log('🏷️ Categorías generadas:', this.categorias.length);
   },
   
-  // ==================== AUTO-REFRESCO ====================
+  // ==================== AUTO-REFRESCO MEJORADO ====================
   iniciarAutoRefresco: function() {
-    // Solo refrescar si viene de GitHub
-    if (this.fuente !== 'github') return;
-    
     // Refrescar cada X minutos (config.autoRefresh)
     const minutos = this.config.autoRefresh;
     const msRefresh = minutos * 60 * 1000;
@@ -497,26 +618,7 @@ const CatalogoDinamico = {
     setInterval(() => {
       if (document.visibilityState === 'visible') {
         console.log('🔄 Actualizando catálogo en segundo plano...');
-        this.cargarDesdeGitHub()
-          .then(() => {
-            this.guardarEnCache();
-            this.generarCategorias();
-            
-            // Notificar a la página que hay nuevos datos
-            window.dispatchEvent(new CustomEvent('catalogoActualizado', {
-              detail: {
-                productos: this.productos,
-                categorias: this.categorias,
-                fuente: this.fuente,
-                timestamp: Date.now()
-              }
-            }));
-            
-            console.log('✅ Catálogo actualizado desde GitHub (segundo plano)');
-          })
-          .catch(err => {
-            console.log('⚠️ No se pudo actualizar en segundo plano:', err.message);
-          });
+        this.verificarActualizaciones();
       }
     }, msRefresh);
   },
@@ -529,7 +631,8 @@ const CatalogoDinamico = {
         categorias: this.categorias,
         fuente: this.fuente,
         timestamp: Date.now(),
-        totalProductos: this.productos.length
+        totalProductos: this.productos.length,
+        versionCSV: this.ultimaVersionCSV
       }
     });
     window.dispatchEvent(event);
@@ -572,7 +675,8 @@ const CatalogoDinamico = {
       totalProductos: this.productos.length,
       totalCategorias: this.categorias.length,
       urlCSV: this.csvURL,
-      cacheHoras: this.config.cacheHoras
+      cacheHoras: this.config.cacheHoras,
+      ultimaVersionCSV: this.ultimaVersionCSV
     };
   },
   
@@ -586,6 +690,7 @@ const CatalogoDinamico = {
     // Limpiar caché
     try {
       localStorage.removeItem('catalogoCache_ElResolvito');
+      localStorage.removeItem('csvVersionHash');
     } catch (e) {
       // Ignorar
     }
@@ -593,6 +698,22 @@ const CatalogoDinamico = {
     // Recargar
     this.inicializar();
     return true;
+  },
+  
+  // ==================== ACTUALIZACIÓN MANUAL ====================
+  actualizarAhora: function() {
+    console.log('⚡ Actualización manual solicitada...');
+    return this.cargarDesdeGitHub()
+      .then(() => {
+        this.guardarEnCache();
+        this.finalizarCarga();
+        console.log('✅ Catálogo actualizado manualmente');
+        return true;
+      })
+      .catch(error => {
+        console.error('❌ Error en actualización manual:', error);
+        return false;
+      });
   }
 };
 
@@ -615,6 +736,12 @@ const CatalogoDinamico = {
     console.log('🔄 Iniciando catálogo manualmente...');
     CatalogoDinamico.inicializar();
   };
+  
+  // Método para forzar actualización
+  window.actualizarCatalogo = function() {
+    console.log('🔄 Actualizando catálogo manualmente...');
+    return CatalogoDinamico.actualizarAhora();
+  };
 })();
 
 // ==================== HACER DISPONIBLE GLOBALMENTE ====================
@@ -633,4 +760,4 @@ setTimeout(function() {
   }
 }, 10000);
 
-console.log('✅ catalogo-dinamico.js cargado y listo');
+console.log('✅ catalogo-dinamico.js v2.1 cargado y listo');
