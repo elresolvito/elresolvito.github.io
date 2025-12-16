@@ -282,3 +282,4 @@ const CatalogoDinamico = {
 })();
 
 window.CatalogoDinamico = CatalogoDinamico;
+
