@@ -1,0 +1,37 @@
+id,nombre,categoria,precio,imagen,descripcion,stock,activo,orden
+1,Atún en lata,Alimentos y conservas,500,https://i.postimg.cc/76xHK6zt/atun_precio_500.png,Lata estándar 200g,10,TRUE,1
+2,Pasta de tomate,Alimentos y conservas,350,https://i.postimg.cc/gjjYPTNv/pasta_tomate_precio_350.png,Paquete,10,TRUE,2
+3,Pimiento fresco,Alimentos y conservas,750,https://i.postimg.cc/4yyJTSBj/pimiento_presio_750.png,Unidad,10,TRUE,3
+4,Café Dualis 250 g,Alimentos y conservas,1450,https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png,Paquete 250 g,10,TRUE,4
+5,Café Dufiltro 250 g,Alimentos y conservas,1450,https://i.postimg.cc/hG26fv31/cafe_Dufiltro_250_g_precio_1450.png,Paquete 250 g,10,TRUE,5
+6,Café Enepa,Alimentos y conservas,450,https://i.postimg.cc/nhY6f04N/cafe_enepa_precio_450.png,Paquete,10,TRUE,6
+7,Cartón de huevo 30 u,Alimentos y conservas,3000,https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3000.png,Cartón,10,TRUE,7
+8,Leche condensada,Alimentos y conservas,950,https://i.postimg.cc/tT2XwjtT/leche_condensada.png,Lata 397 g,10,TRUE,8
+9,Harina blanca 1 Kg,Alimentos y conservas,600,https://i.postimg.cc/3xc2NHFB/harina_blanca1_kg.png,Paquete 1 Kg,10,TRUE,9
+10,Chicoticos Pelly 90 g,Snacks y golosinas,400,https://i.postimg.cc/1zv2fXjZ/chicoticos_pelly_90_g_precio_400.png,Paquete 90 g,10,TRUE,10
+11,Papitas Campesinas,Snacks y golosinas,690,https://i.postimg.cc/cLgrDtf9/papitas_campesinas_precio_690.png,Paquete,10,TRUE,11
+12,Pelly Jamón,Snacks y golosinas,580,https://i.postimg.cc/pdQV7frX/pelly_jamon_precio_580.png,Paquete,10,TRUE,12
+13,Mayonesa Mediana,Salsas,850,https://i.postimg.cc/KzJZw2rR/mayonesa_precio_850.png,Frasco mediano,10,TRUE,13
+14,Mayonesa Grande,Salsas,1100,https://i.postimg.cc/Px2t9jzz/mayonesa_precio1100.png,Frasco grande,10,TRUE,14
+15,Cuchilla de Afeitar,Higiene personal,100,https://i.postimg.cc/8CdkdW7x/cuchilla_de_afeitar_precio_100.png,Unidad,10,TRUE,15
+16,Jabón Marwa,Higiene personal,150,https://i.postimg.cc/3RK8tRpR/jabon_marwa_precio_150.png,Pastilla,10,TRUE,16
+17,Papel Sanitario,Higiene personal,490,https://i.postimg.cc/bwW289qD/papel_sanitario_precio_490i.png,Paquete,10,TRUE,17
+18,Toallas Sanitarias,Higiene personal,450,https://i.postimg.cc/KjjZyH0b/toallas_sanitarias_precio_450.png,Paquete,10,TRUE,18
+19,Toallas Húmedas,Higiene personal,690,https://i.postimg.cc/W4ZSP3cw/toallas_humedas_precio_690.png,Paquete,10,TRUE,19
+20,Jabón de Lavar,Aseo del hogar,250,https://i.postimg.cc/V6YfK6Mz/jabon_de_lavar_precio_250.png,Pastilla,10,TRUE,20
+21,Perfume Candy,Perfumes y desodorantes,3100,https://i.postimg.cc/vTgJRyhp/perfume_candy_precio_3100.png,Frasco 50 ml,10,TRUE,21
+22,Perfume genérico,Perfumes y desodorantes,3100,https://i.postimg.cc/ZKrT0PPG/perfume_precio_3100.png,Frasco 50 ml,10,TRUE,22
+23,Perfume Q,Perfumes y desodorantes,3100,https://i.postimg.cc/CL03P3Dn/perfume_q_precio_3100.png,Frasco 50 ml,10,TRUE,23
+24,Desodorante Obao,Perfumes y desodorantes,1100,https://i.postimg.cc/PxtXSxD2/desodorante_obao_precio_1100.png,Spray/Roll-on,10,TRUE,24
+25,Desodorante Rush Blanco,Perfumes y desodorantes,1000,https://i.postimg.cc/FR9rTRS8/desodorante_rush_blanco_precio_1000.png,Roll-on,10,TRUE,25
+26,Desodorante Rush,Perfumes y desodorantes,1000,https://i.postimg.cc/sXVjTXSF/desodorante_rush_precio_1000.png,Spray,10,TRUE,26
+27,Colonia Niña,Perfumes y desodorantes,1100,https://i.postimg.cc/G3v04rsM/colonia_nina.png,Botella 100 ml,10,TRUE,27
+28,Macarrones,Pastas y fideos,300,https://i.postimg.cc/Hsmz1H69/macarrones_precio_300.png,Paquete estándar,10,TRUE,28
+29,Sopas instantáneas,Pastas y fideos,160,https://i.postimg.cc/FzNTpQqK/sopas_instantaneas_precio_160.png,Paquete,10,TRUE,29
+30,Licor de fresa,Bebidas alcohólicas y malta,2500,https://i.postimg.cc/59YT2x5p/licor_de_fresa_precio_2500.png,Botella,10,TRUE,30
+31,Licor Cocobay,Bebidas alcohólicas y malta,2500,https://i.postimg.cc/7ZDW90Fz/locor_cocobay_precio_2500.png,Botella,10,TRUE,31
+32,Whisky Spirit 200 ml,Bebidas alcohólicas y malta,320,https://i.postimg.cc/4N8W6q1t/tea_precio_320.png,Botella 200 ml,10,TRUE,32
+33,Whisky 1L,Bebidas alcohólicas y malta,1350,https://i.postimg.cc/cLyrb4T0/whisky_1L_precio_1350.png,Botella 1 L,10,TRUE,33
+34,Whisky Sir Albin,Bebidas alcohólicas y malta,550,https://i.postimg.cc/y84kbYnC/whisky_sir_albin_precio_550.png,Botella pequeña,10,TRUE,34
+35,Vino Pluvium,Bebidas alcohólicas y malta,1200,https://i.postimg.cc/XNLLWmmx/vino_pluvium_precio_1200.png,Botella,10,TRUE,35
+36,Baterías Triple A,Electrónicos y accesorios,300,https://i.postimg.cc/DZ2vxZsT/Gemini_Generated_Image_824rio824rio824r.png,Pack de 4 unidades,10,TRUE,36
