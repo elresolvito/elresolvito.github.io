@@ -1,11 +1,11 @@
 id,nombre,categoria,precio,imagen,descripcion,stock,activo,orden
 1,Atún en lata,Alimentos y conservas,540,https://i.postimg.cc/76xHK6zt/atun_precio_500.png,Lata estándar 200g,10,TRUE,1
-2,Pasta de tomate,Alimentos y conservas,350,https://i.postimg.cc/gjjYPTNv/pasta_tomate_precio_350.png,Paquete,10,TRUE,2
+2,Pasta de tomate,Alimentos y conservas,380,https://i.postimg.cc/gjjYPTNv/pasta_tomate_precio_350.png,Paquete,10,TRUE,2
 3,Pimiento fresco,Alimentos y conservas,750,https://i.postimg.cc/4yyJTSBj/pimiento_presio_750.png,Unidad,10,TRUE,3
 4,Café Dualis 250 g,Alimentos y conservas,1450,https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png,Paquete 250 g,10,TRUE,4
 5,Café Dufiltro 250 g,Alimentos y conservas,1450,https://i.postimg.cc/hG26fv31/cafe_Dufiltro_250_g_precio_1450.png,Paquete 250 g,10,TRUE,5
 6,Café Enepa,Alimentos y conservas,450,https://i.postimg.cc/nhY6f04N/cafe_enepa_precio_450.png,Paquete,10,TRUE,6
-7,Cartón de huevo 30 u,Alimentos y conservas,3000,https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3000.png,Cartón,10,TRUE,7
+7,Cartón de huevo,Alimentos y conservas,3000,https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3100.png,Cartón,10,TRUE,7
 8,Leche condensada,Alimentos y conservas,950,https://i.postimg.cc/tT2XwjtT/leche_condensada.png,Lata 397 g,10,TRUE,8
 9,Harina blanca 1 Kg,Alimentos y conservas,600,https://i.postimg.cc/3xc2NHFB/harina_blanca1_kg.png,Paquete 1 Kg,10,TRUE,9
 10,Chicoticos Pelly 90 g,Snacks y golosinas,400,https://i.postimg.cc/1zv2fXjZ/chicoticos_pelly_90_g_precio_400.png,Paquete 90 g,10,TRUE,10
