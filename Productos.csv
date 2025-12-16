@@ -1,5 +1,5 @@
 id,nombre,categoria,precio,imagen,descripcion,stock,activo,orden
-1,Atún en lata,Alimentos y conservas,500,https://i.postimg.cc/76xHK6zt/atun_precio_500.png,Lata estándar 200g,10,TRUE,1
+1,Atún en lata,Alimentos y conservas,540,https://i.postimg.cc/76xHK6zt/atun_precio_500.png,Lata estándar 200g,10,TRUE,1
 2,Pasta de tomate,Alimentos y conservas,350,https://i.postimg.cc/gjjYPTNv/pasta_tomate_precio_350.png,Paquete,10,TRUE,2
 3,Pimiento fresco,Alimentos y conservas,750,https://i.postimg.cc/4yyJTSBj/pimiento_presio_750.png,Unidad,10,TRUE,3
 4,Café Dualis 250 g,Alimentos y conservas,1450,https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png,Paquete 250 g,10,TRUE,4
@@ -34,4 +34,5 @@ id,nombre,categoria,precio,imagen,descripcion,stock,activo,orden
 33,Whisky 1L,Bebidas alcohólicas y malta,1350,https://i.postimg.cc/cLyrb4T0/whisky_1L_precio_1350.png,Botella 1 L,10,TRUE,33
 34,Whisky Sir Albin,Bebidas alcohólicas y malta,550,https://i.postimg.cc/y84kbYnC/whisky_sir_albin_precio_550.png,Botella pequeña,10,TRUE,34
 35,Vino Pluvium,Bebidas alcohólicas y malta,1200,https://i.postimg.cc/XNLLWmmx/vino_pluvium_precio_1200.png,Botella,10,TRUE,35
+
 36,Baterías Triple A,Electrónicos y accesorios,300,https://i.postimg.cc/DZ2vxZsT/Gemini_Generated_Image_824rio824rio824r.png,Pack de 4 unidades,10,TRUE,36
