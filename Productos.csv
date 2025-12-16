@@ -30,8 +30,8 @@ id,nombre,categoria,precio,imagen,descripcion,stock,activo,orden
 29,Sopas instantáneas,Pastas y fideos,160,https://i.postimg.cc/FzNTpQqK/sopas_instantaneas_precio_160.png,Paquete,10,TRUE,29
 30,Licor de fresa,Bebidas ,2500,https://i.postimg.cc/59YT2x5p/licor_de_fresa_precio_2500.png,Botella,10,TRUE,30
 31,Licor Cocobay,Bebidas ,2500,https://i.postimg.cc/7ZDW90Fz/locor_cocobay_precio_2500.png,Botella,10,TRUE,31
-32,Whisky Spirit 200 ml,Bebidas ,320,https://i.postimg.cc/4N8W6q1t/tea_precio_320.png,Botella 200 ml,10,TRUE,32
-33,Whisky 1L,Bebidas ,1350,https://i.postimg.cc/cLyrb4T0/whisky_1L_precio_1350.png,Botella 1 L,10,TRUE,33
+32,Whisky Spirit 200 ml,Bebidas ,320,https://i.postimg.cc/4N8W6q1t/tea_precio_320.png, 200 ml,10,TRUE,32
+33,Whisky Sir Albin,Bebidas ,1350,https://i.postimg.cc/cLyrb4T0/whisky_1L_precio_1350.png,Botella 1 L,10,TRUE,33
 34,Whisky Sir Albin,Bebidas,550,https://i.postimg.cc/y84kbYnC/whisky_sir_albin_precio_550.png,Botella pequeña,10,TRUE,34
 35,Vino Pluvium,Bebidas ,1200,https://i.postimg.cc/XNLLWmmx/vino_pluvium_precio_1200.png,Botella,10,TRUE,35
 
