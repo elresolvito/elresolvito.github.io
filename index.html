@@ -91,7 +91,7 @@
 <body class="text-gray-800">
 
 <header id="mainHeader" class="fixed top-0 left-0 right-0 z-50 bg-[#0d3b33] shadow-md transition-all duration-300">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-3">
+    <div class="container mx-auto px-4 sm:px6 lg:px-8 flex items-center justify-between py-3">
         <div class="flex items-center gap-4">
             <button id="mobile-menu-button" class="md:hidden text-white"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg></button>
             <a href="#" class="flex items-center gap-3 flex-shrink-0">
@@ -462,7 +462,10 @@
     <button class="close-btn" id="closeFloatingCallout">&times;</button><p class="font-bold mb-2">¡Comodidad en La Habana!</p><a href="#nuestras-ventajas" class="mt-3 inline-block bg-[var(--accent-color)] text-white text-fixed-sm font-semibold py-2 px-4 rounded-full">Ver Ventajas</a>
 </div>
 
-<!-- ✅ Catálogo externo -->
+<!-- 🔥 CATÁLOGO DINÁMICO (carga desde Google Sheets) -->
+<script src="catalogo-dinamico.js"></script>
+
+<!-- 🔄 CATÁLOGO LOCAL (respaldo - mantén tu archivo actual) -->
 <script src="catalogo.js"></script>
 
 <script>
@@ -483,7 +486,7 @@
     const WEIGHT_THRESHOLD_KG = 10;
     const SERVICE_FEE = 50;
 
-    let products = [];
+    let products = []; // Esta variable ahora se llenará desde catalogo-dinamico.js
     var cart = JSON.parse(localStorage.getItem('cart')) || [];
     var whatsappGroupLink = 'https://chat.whatsapp.com/H19dIofkINdHrVApA4jbvW?mode=ac_t';
     var currentProductForModal = null;
@@ -503,6 +506,39 @@
     const closeConfirmationModalBtn = document.getElementById('closeConfirmationModal');
     const floatingCallout = document.getElementById('floatingCallout');
     const closeFloatingCalloutBtn = document.getElementById('closeFloatingCallout');
+
+    // 🔄 REEMPLAZO DE LA CARGA INICIAL
+    // En lugar de cargar desde catalogo.js, esperamos que cargue desde Google Sheets
+    document.addEventListener('DOMContentLoaded', function() {
+        // 1. Actualizar contadores
+        updateAllCounters();
+        setInterval(updateAllCounters, 3600000);
+        
+        // 2. Configurar UI básica
+        updateCartUI();
+        updateDeliveryPromoBanner();
+        setupGeneralEventListeners();
+        setupScrollAnimations();
+        setupScrollHeader();
+        showFloatingCalloutAfterDelay();
+    });
+
+    // 🎯 ESCUCHAR CUANDO EL CATÁLOGO DINÁMICO ESTÉ LISTO
+    window.addEventListener('catalogoCargado', function(evento) {
+        console.log('📦 Catálogo cargado desde:', evento.detail.fuente);
+        
+        // 1. Obtener productos del catálogo dinámico
+        products = evento.detail.productos || catalogo.productos || [];
+        
+        // 2. Ordenar productos (mantén tu lógica original)
+        products.sort((a, b) => (a.category < b.category ? -1 : (a.category > b.category ? 1 : (a.name < b.name ? -1 : 1))));
+        
+        // 3. Configurar la tienda con los nuevos productos
+        setupStoreSection('mercado', products);
+        
+        // 4. Actualizar UI del carrito (por si hay cambios en precios)
+        updateCartUI();
+    });
 
     // FUNCIÓN PARA DETERMINAR TARIFA DE ENVÍO SEGÚN RANGO
     function calculateShippingFee(subtotal) {
@@ -641,24 +677,6 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
             });
         }
     }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        products = catalogo.productos;
-        products.sort((a, b) => (a.category < b.category ? -1 : (a.category > b.category ? 1 : (a.name < b.name ? -1 : 1))));
-        setupStoreSection('mercado', products);
-        updateCartUI();
-        updateDeliveryPromoBanner();
-        setupGeneralEventListeners();
-        setupScrollAnimations();
-        setupScrollHeader();
-        showFloatingCalloutAfterDelay();
-        
-        // Inicializar contadores
-        setTimeout(updateAllCounters, 1000);
-        
-        // Actualizar contadores cada hora (opcional)
-        setInterval(updateAllCounters, 3600000);
-    });
 
     function switchDepartment(dept) {
         currentDepartment = dept;
@@ -799,9 +817,21 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
         setupScrollAnimations();
     }
 
+    // 🔄 MODIFICACIÓN: Esta función ahora usa el catálogo dinámico
     function showProductDetailsModal(productId) {
-        const product = catalogo.obtenerPorId(productId);
+        // Buscar producto en el catálogo dinámico primero
+        let product = null;
+        if (window.CatalogoDinamico && window.CatalogoDinamico.obtenerPorId) {
+            product = window.CatalogoDinamico.obtenerPorId(productId);
+        }
+        
+        // Si no lo encuentra, buscar en el catálogo local como respaldo
+        if (!product && window.catalogo && window.catalogo.obtenerPorId) {
+            product = window.catalogo.obtenerPorId(productId);
+        }
+        
         if (!product || product.status === 'unavailable') return;
+        
         currentProductForModal = JSON.parse(JSON.stringify(product));
         currentProductForModal.quantity = 1;
         currentUnitType = 'individual';
@@ -857,9 +887,21 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
             unitType: currentUnitType
         };
 
-        const productData = catalogo.obtenerPorId(currentProductForModal.id);
-        if (productData && productData.weight !== undefined) {
-            cartItem.weight = productData.weight;
+        // Buscar producto para obtener precio actual
+        let productData = null;
+        if (window.CatalogoDinamico && window.CatalogoDinamico.obtenerPorId) {
+            productData = window.CatalogoDinamico.obtenerPorId(currentProductForModal.id);
+        }
+        
+        if (!productData && window.catalogo && window.catalogo.obtenerPorId) {
+            productData = window.catalogo.obtenerPorId(currentProductForModal.id);
+        }
+
+        if (productData) {
+            if (productData.weight !== undefined) {
+                cartItem.weight = productData.weight;
+            }
+            
             if (currentProductForModal.hasBoxOption && currentUnitType === 'box') {
                 cartItem.price = currentProductForModal.boxPrice;
                 cartItem.name += ' (Caja x' + currentProductForModal.boxQuantity + ')';
@@ -867,6 +909,7 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
                 cartItem.price = currentProductForModal.price;
             }
         } else {
+            // Fallback en caso extremo
             cartItem.price = currentProductForModal.price;
             cartItem.weight = 0;
         }
@@ -1083,7 +1126,18 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
         for (let i = 0; i < cart.length; i++) {
             const item = cart[i];
             const productId = item.unitType === 'box' ? parseInt(item.id.split('_')[0]) : item.id;
-            const product = catalogo.obtenerPorId(productId);
+            
+            // Buscar producto en catálogo dinámico primero
+            let product = null;
+            if (window.CatalogoDinamico && window.CatalogoDinamico.obtenerPorId) {
+                product = window.CatalogoDinamico.obtenerPorId(productId);
+            }
+            
+            // Si no lo encuentra, buscar en catálogo local
+            if (!product && window.catalogo && window.catalogo.obtenerPorId) {
+                product = window.catalogo.obtenerPorId(productId);
+            }
+            
             if (product && product.weight !== undefined) {
                 let itemWeight = product.weight;
                 if (item.unitType === 'box' && product.hasBoxOption && product.boxQuantity) {
