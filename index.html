@@ -650,7 +650,7 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
             const today = new Date().toDateString();
             
             if (!lastIncrement || lastIncrement !== today) {
-                const hitResponse = await fetch('https://api.countapi.xyz/hit/el-resolvito-cuba/visits');
+                const hitResponse = await fetch('https://api.countapi.xyz/get/elresolvito-cuba/visits');
                 const hitData = await hitResponse.json();
                 currentCount = hitData.value;
                 localStorage.setItem('lastCounterIncrement', today);
@@ -1507,5 +1507,6 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
 
 </body>
 </html>
+
 
 
