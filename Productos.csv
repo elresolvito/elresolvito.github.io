@@ -1,7 +1,7 @@
 id,nombre,categoria,precio,imagen,descripcion,stock,activo,orden
 1,Atún ,Alimentos y conservas,540,https://i.postimg.cc/76xHK6zt/atun_precio_500.png,Lata estándar 200g,10,TRUE,1
 2,Pasta de tomate,Alimentos y conservas,380,https://i.postimg.cc/gjjYPTNv/pasta_tomate_precio_350.png,Paquete,10,TRUE,2
-3,Aceitunas Verdes en Rodajas con Pimiento Fragata,Alimentos y conservas,750,https://i.postimg.cc/4yyJTSBj/pimiento_presio_750.png,Unidad,10,TRUE,3
+3,Aceitunas Verdes en Rodajas con Pimiento Fragata,Alimentos y conservas,750,https://i.postimg.cc/4yyJTSBj/pimiento_presio_750.png,142 g,10,TRUE,3
 4,Café Dualis ,Alimentos y conservas,1450,https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png,Paquete 250 g,10,TRUE,4
 5,Café Dufiltro ,Alimentos y conservas,1450,https://i.postimg.cc/hG26fv31/cafe_Dufiltro_250_g_precio_1450.png,Paquete 250 g,10,TRUE,5
 6,Café Enepa,Alimentos y conservas,450,https://i.postimg.cc/nhY6f04N/cafe_enepa_precio_450.png,Paquete,10,TRUE,6
