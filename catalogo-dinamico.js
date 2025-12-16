@@ -1,7 +1,7 @@
-// catálogo-dinamico.js - VERSIÓN CON URL CORRECTA
+// catálogo-dinamico.js - VERSIÓN FINAL FUNCIONAL
 const CatalogoDinamico = {
-  // ✅ USA ESTA URL EXACTA (la que me compartiste)
-  sheetURL: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT2RBATNCTKwgP7EYeiG0Od16zAgR0mrnsxKBITDvaX62a47l0AyGF-isufaRs6Ayk5hXWI3j_jAHeu/pub?gid=0&single=true&output=csv',
+  // ✅ TU URL CORRECTA (ya está publicada)
+  sheetURL: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT2RBATNCTKwgP7EYeiG0Od16zAgR0mrnsxKBITDvaX62a47l0AyGF-isufaRs6Ayk5hXWI3j_jAHeu/pub?output=csv',
   
   productos: [],
   categorias: [],
@@ -10,52 +10,94 @@ const CatalogoDinamico = {
   inicializar: function() {
     console.log('🔄 Inicializando catálogo dinámico...');
     
-    // Primero intentar desde caché
-    if (this.cargarDesdeCache()) {
-      console.log('✅ Catálogo desde caché:', this.productos.length, 'productos');
-      this.cargado = true;
-      this.despacharEventoCarga();
-      this.iniciarAutoRefresco();
-      return;
-    }
-    
-    // Luego cargar desde Sheets
-    this.cargarDesdeSheets()
-      .then(() => {
-        console.log('✅ Catálogo desde Google Sheets:', this.productos.length, 'productos');
-        this.guardarEnCache();
-        this.cargado = true;
-        this.generarCategorias();
-        this.despacharEventoCarga();
-        this.iniciarAutoRefresco();
+    // 1. Primero intentar con CORS proxy
+    this.intentarConProxy()
+      .then(success => {
+        if (success) {
+          console.log('✅ Catálogo cargado vía proxy');
+          return;
+        }
+        
+        // 2. Si falla, intentar directo (para desarrollo local)
+        console.log('🔄 Intentando carga directa...');
+        return this.cargarDesdeSheetsDirecto();
       })
-      .catch((error) => {
-        console.warn('⚠️ Error cargando desde Sheets. Usando respaldo local...', error);
+      .then(success => {
+        if (success) {
+          console.log('✅ Catálogo cargado directamente');
+          return;
+        }
+        
+        // 3. Si todo falla, usar local
+        console.log('⚠️ Usando catálogo local como respaldo');
+        this.usarRespaldoLocal();
+      })
+      .catch(error => {
+        console.error('❌ Error general:', error);
         this.usarRespaldoLocal();
       });
   },
   
-  cargarDesdeSheets: function() {
-    return new Promise((resolve, reject) => {
-      // Agregar timestamp para evitar caché
-      const urlConTimestamp = this.sheetURL + '&t=' + Date.now();
-      console.log('📡 Cargando desde:', urlConTimestamp);
+  intentarConProxy: function() {
+    return new Promise((resolve) => {
+      const proxyURL = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(this.sheetURL + '&t=' + Date.now());
       
-      fetch(urlConTimestamp)
+      console.log('📡 Usando proxy CORS:', proxyURL);
+      
+      fetch(proxyURL, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'text/plain',
+        }
+      })
+      .then(response => {
+        if (!response.ok) throw new Error('Proxy error: ' + response.status);
+        return response.text();
+      })
+      .then(csvText => {
+        if (csvText && csvText.trim() !== '') {
+          this.procesarCSV(csvText);
+          this.guardarEnCache();
+          this.cargado = true;
+          this.generarCategorias();
+          this.despacharEventoCarga();
+          this.iniciarAutoRefresco();
+          resolve(true);
+        } else {
+          console.warn('⚠️ Proxy devolvió datos vacíos');
+          resolve(false);
+        }
+      })
+      .catch(error => {
+        console.warn('⚠️ Error con proxy:', error.message);
+        resolve(false);
+      });
+    });
+  },
+  
+  cargarDesdeSheetsDirecto: function() {
+    return new Promise((resolve) => {
+      const urlDirecto = this.sheetURL + '&t=' + Date.now();
+      console.log('📡 Intentando carga directa:', urlDirecto);
+      
+      fetch(urlDirecto)
         .then(response => {
-          if (!response.ok) {
-            throw new Error(`Error HTTP ${response.status}: ${response.statusText}`);
-          }
+          if (!response.ok) throw new Error('Direct error: ' + response.status);
           return response.text();
         })
         .then(csvText => {
-          console.log('📄 CSV recibido, procesando...');
           this.procesarCSV(csvText);
-          resolve();
+          this.guardarEnCache();
+          this.cargado = true;
+          this.generarCategorias();
+          this.despacharEventoCarga();
+          this.iniciarAutoRefresco();
+          resolve(true);
         })
         .catch(error => {
-          console.error('❌ Error en fetch:', error);
-          reject(error);
+          console.warn('⚠️ Error carga directa:', error.message);
+          resolve(false);
         });
     });
   },
@@ -63,156 +105,73 @@ const CatalogoDinamico = {
   procesarCSV: function(csvText) {
     this.productos = [];
     
-    // Limpiar y dividir líneas
+    // Limpiar CSV
     const lineas = csvText.split('\n')
       .map(linea => linea.trim())
       .filter(linea => linea !== '');
     
-    console.log(`📊 Total de líneas en CSV: ${lineas.length}`);
+    console.log(`📊 Líneas en CSV: ${lineas.length}`);
     
     if (lineas.length < 2) {
-      console.warn('⚠️ CSV vacío o sin datos');
-      return;
+      throw new Error('CSV vacío');
     }
     
-    // Obtener encabezados
-    const encabezados = this.parsearLineaCSV(lineas[0]);
-    console.log('📋 Encabezados:', encabezados);
+    // Encabezados (primer línea)
+    const encabezados = lineas[0].split(',').map(h => h.trim().toLowerCase());
+    console.log('📋 Encabezados detectados:', encabezados);
     
-    // Mapear índices de columnas
-    const idxNombre = encabezados.findIndex(h => 
-      h.toLowerCase().includes('nombre') || h.toLowerCase().includes('name')
-    );
-    const idxPrecio = encabezados.findIndex(h => 
-      h.toLowerCase().includes('precio') || h.toLowerCase().includes('price')
-    );
-    const idxImagen = encabezados.findIndex(h => 
-      h.toLowerCase().includes('imagen') || h.toLowerCase().includes('image')
-    );
-    const idxDescripcion = encabezados.findIndex(h => 
-      h.toLowerCase().includes('descripcion') || 
-      h.toLowerCase().includes('description') ||
-      h.toLowerCase().includes('descriptor')
-    );
-    const idxCategoria = encabezados.findIndex(h => 
-      h.toLowerCase().includes('categoria') || 
-      h.toLowerCase().includes('category')
-    );
-    const idxStock = encabezados.findIndex(h => 
-      h.toLowerCase().includes('stock')
-    );
-    const idxActivo = encabezados.findIndex(h => 
-      h.toLowerCase().includes('activo') || h.toLowerCase().includes('active')
-    );
-    const idxOrden = encabezados.findIndex(h => 
-      h.toLowerCase().includes('orden') || h.toLowerCase().includes('order')
-    );
+    // Índices de columnas
+    const idx = {
+      nombre: encabezados.findIndex(h => h.includes('nombre')),
+      precio: encabezados.findIndex(h => h.includes('precio')),
+      imagen: encabezados.findIndex(h => h.includes('imagen')),
+      descripcion: encabezados.findIndex(h => h.includes('descripcion') || h.includes('descriptor')),
+      categoria: encabezados.findIndex(h => h.includes('categoria') || h.includes('category')),
+      stock: encabezados.findIndex(h => h.includes('stock')),
+      activo: encabezados.findIndex(h => h.includes('activo'))
+    };
     
-    console.log('🔍 Índices encontrados:');
-    console.log('- Nombre:', idxNombre);
-    console.log('- Precio:', idxPrecio);
-    console.log('- Imagen:', idxImagen);
-    console.log('- Descripción:', idxDescripcion);
-    console.log('- Categoría:', idxCategoria);
-    
-    // Procesar cada producto
+    // Procesar productos
     for (let i = 1; i < lineas.length; i++) {
-      try {
-        const valores = this.parsearLineaCSV(lineas[i]);
-        
-        // Validar que tenga los datos mínimos
-        if (valores.length < 3 || idxNombre === -1 || idxPrecio === -1) {
-          continue;
-        }
-        
-        const nombre = valores[idxNombre] || '';
-        const precio = parseInt(valores[idxPrecio]) || 0;
-        
-        if (!nombre || precio <= 0) {
-          continue;
-        }
-        
-        const producto = {
-          id: i, // ID secuencial
-          name: nombre,
-          price: precio,
-          image: idxImagen >= 0 && valores[idxImagen] ? 
-                 valores[idxImagen] : 'https://via.placeholder.com/300',
-          description: idxDescripcion >= 0 && valores[idxDescripcion] ? 
-                      valores[idxDescripcion] : 'Descripción no disponible',
-          specificDetails: idxDescripcion >= 0 && valores[idxDescripcion] ? 
-                          valores[idxDescripcion] : 'Detalles no disponibles',
-          category: idxCategoria >= 0 && valores[idxCategoria] ? 
-                   valores[idxCategoria] : 'Sin categoría',
-          department: 'mercado',
-          status: 'available'
-        };
-        
-        // Verificar stock y activo si existen
-        if (idxStock >= 0 && idxActivo >= 0) {
-          const stock = parseInt(valores[idxStock]) || 0;
-          const activo = valores[idxActivo].toString().toUpperCase() === 'TRUE';
-          producto.status = (activo && stock > 0) ? 'available' : 'unavailable';
-        }
-        
-        // Agregar orden si existe
-        if (idxOrden >= 0) {
-          producto.orden = parseInt(valores[idxOrden]) || 0;
-        }
-        
-        this.productos.push(producto);
-        
-      } catch (error) {
-        console.warn(`⚠️ Error procesando línea ${i + 1}:`, error);
-      }
-    }
-    
-    // Ordenar productos
-    this.ordenarProductos();
-    
-    console.log(`✅ Procesados ${this.productos.length} productos válidos`);
-  },
-  
-  ordenarProductos: function() {
-    // Ordenar por "orden" si existe, sino por categoría y nombre
-    if (this.productos.length > 0 && this.productos[0].orden !== undefined) {
-      this.productos.sort((a, b) => {
-        if (a.orden !== b.orden) return a.orden - b.orden;
-        if (a.category !== b.category) return a.category.localeCompare(b.category);
-        return a.name.localeCompare(b.name);
-      });
-    } else {
-      this.productos.sort((a, b) => {
-        if (a.category !== b.category) return a.category.localeCompare(b.category);
-        return a.name.localeCompare(b.name);
-      });
-    }
-  },
-  
-  parsearLineaCSV: function(linea) {
-    // Método robusto para parsear CSV
-    const valores = [];
-    let dentroDeComillas = false;
-    let valorActual = '';
-    
-    for (let i = 0; i < linea.length; i++) {
-      const char = linea[i];
+      const valores = lineas[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
       
-      if (char === '"') {
-        dentroDeComillas = !dentroDeComillas;
-      } else if (char === ',' && !dentroDeComillas) {
-        valores.push(valorActual.trim());
-        valorActual = '';
-      } else {
-        valorActual += char;
+      // Validar datos mínimos
+      if (valores.length < 3) continue;
+      
+      const nombre = idx.nombre >= 0 ? valores[idx.nombre] : valores[0];
+      const precio = idx.precio >= 0 ? parseInt(valores[idx.precio]) : parseInt(valores[1]) || 0;
+      
+      if (!nombre || nombre === '' || precio <= 0) continue;
+      
+      const producto = {
+        id: i,
+        name: nombre,
+        price: precio,
+        image: idx.imagen >= 0 && valores[idx.imagen] ? valores[idx.imagen] : 'https://via.placeholder.com/300',
+        description: idx.descripcion >= 0 && valores[idx.descripcion] ? valores[idx.descripcion] : 'Sin descripción',
+        specificDetails: idx.descripcion >= 0 && valores[idx.descripcion] ? valores[idx.descripcion] : 'Sin detalles',
+        category: idx.categoria >= 0 && valores[idx.categoria] ? valores[idx.categoria] : 'Sin categoría',
+        department: 'mercado',
+        status: 'available'
+      };
+      
+      // Verificar stock y activo
+      if (idx.stock >= 0 && idx.activo >= 0) {
+        const stock = parseInt(valores[idx.stock]) || 0;
+        const activo = valores[idx.activo].toUpperCase() === 'TRUE';
+        producto.status = (activo && stock > 0) ? 'available' : 'unavailable';
       }
+      
+      this.productos.push(producto);
     }
     
-    // Último valor
-    valores.push(valorActual.trim());
+    // Ordenar por categoría y nombre
+    this.productos.sort((a, b) => {
+      if (a.category !== b.category) return a.category.localeCompare(b.category);
+      return a.name.localeCompare(b.name);
+    });
     
-    // Limpiar comillas dobles
-    return valores.map(v => v.replace(/^"|"$/g, ''));
+    console.log(`✅ ${this.productos.length} productos procesados`);
   },
   
   guardarEnCache: function() {
@@ -220,52 +179,38 @@ const CatalogoDinamico = {
       const cacheData = {
         productos: this.productos,
         categorias: this.categorias,
-        timestamp: Date.now(),
-        version: '1.2'
+        timestamp: Date.now()
       };
-      localStorage.setItem('catalogoCache_ElResolvito', JSON.stringify(cacheData));
-      console.log('💾 Catálogo guardado en caché');
+      localStorage.setItem('catalogoCache', JSON.stringify(cacheData));
     } catch (e) {
-      console.warn('No se pudo guardar en caché:', e);
+      console.warn('No se pudo guardar caché');
     }
   },
   
   cargarDesdeCache: function() {
     try {
-      const cache = localStorage.getItem('catalogoCache_ElResolvito');
+      const cache = localStorage.getItem('catalogoCache');
       if (!cache) return false;
       
       const data = JSON.parse(cache);
-      
-      // Caché válido por 1 hora (3600000 ms)
-      if (Date.now() - data.timestamp < 3600000) {
+      if (Date.now() - data.timestamp < 3600000) { // 1 hora
         this.productos = data.productos || [];
         this.categorias = data.categorias || [];
-        console.log('💿 Catálogo desde caché:', this.productos.length, 'productos');
         return true;
-      } else {
-        console.log('⏰ Caché expirado');
-        localStorage.removeItem('catalogoCache_ElResolvito');
       }
-    } catch (e) {
-      console.warn('Caché corrupto:', e);
-      localStorage.removeItem('catalogoCache_ElResolvito');
-    }
+    } catch (e) {}
     return false;
   },
   
   usarRespaldoLocal: function() {
-    console.log('🔄 Intentando usar respaldo local...');
-    
-    if (window.catalogo && window.catalogo.productos && window.catalogo.productos.length > 0) {
+    if (window.catalogo && window.catalogo.productos) {
       this.productos = window.catalogo.productos;
       this.cargado = true;
       this.generarCategorias();
       this.despacharEventoCarga();
-      console.log('✅ Usando catálogo local:', this.productos.length, 'productos');
+      console.log('✅ Catálogo local cargado:', this.productos.length, 'productos');
     } else {
-      console.error('❌ No hay catálogo local disponible');
-      // Crear array vacío para evitar errores
+      console.error('❌ No hay catálogo local');
       this.productos = [];
       this.cargado = true;
       this.despacharEventoCarga();
@@ -280,40 +225,28 @@ const CatalogoDinamico = {
       }
     });
     this.categorias = Array.from(cats).sort();
-    console.log('🏷️ Categorías generadas:', this.categorias.length);
-  },
-  
-  iniciarAutoRefresco: function() {
-    // Refrescar cada 5 minutos (300000 ms)
-    setInterval(() => {
-      if (document.visibilityState === 'visible') {
-        console.log('🔄 Actualizando catálogo automáticamente...');
-        this.cargarDesdeSheets()
-          .then(() => {
-            this.guardarEnCache();
-            this.generarCategorias();
-            window.dispatchEvent(new CustomEvent('catalogoActualizado', {
-              detail: { productos: this.productos, categorias: this.categorias }
-            }));
-            console.log('✅ Catálogo actualizado');
-          })
-          .catch(err => console.log('No se pudo actualizar:', err));
-      }
-    }, 300000);
   },
   
   despacharEventoCarga: function() {
     const event = new CustomEvent('catalogoCargado', {
       detail: { 
         productos: this.productos,
-        categorias: this.categorias,
-        timestamp: Date.now()
+        categorias: this.categorias
       }
     });
     window.dispatchEvent(event);
-    console.log('📢 Evento de catálogo cargado despachado');
   },
   
+  iniciarAutoRefresco: function() {
+    // Refrescar cada 10 minutos
+    setInterval(() => {
+      if (document.visibilityState === 'visible') {
+        this.intentarConProxy().catch(() => {});
+      }
+    }, 600000);
+  },
+  
+  // Métodos de consulta
   obtenerPorId: function(id) {
     return this.productos.find(p => p.id === id);
   },
@@ -328,19 +261,10 @@ const CatalogoDinamico = {
   
   obtenerCategorias: function() {
     return this.categorias;
-  },
-  
-  buscarProductos: function(termino) {
-    const busqueda = termino.toLowerCase();
-    return this.productos.filter(p => 
-      p.name.toLowerCase().includes(busqueda) || 
-      p.description.toLowerCase().includes(busqueda) ||
-      p.category.toLowerCase().includes(busqueda)
-    );
   }
 };
 
-// Inicializar automáticamente cuando se carga la página
+// Inicializar
 (function() {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
@@ -351,6 +275,4 @@ const CatalogoDinamico = {
   }
 })();
 
-// Hacer disponible globalmente
 window.CatalogoDinamico = CatalogoDinamico;
-
