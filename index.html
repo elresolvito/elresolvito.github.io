@@ -640,7 +640,7 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
     async function updateAllCounters() {
         try {
             // 1. Obtener contador actual
-            const getResponse = await fetch('https://api.countapi.xyz/get/el-resolvito-cuba/visits');
+            const getResponse = await fetch('https://api.countapi.xyz/get/elresolvito-cuba/visits');
             const getData = await getResponse.json();
             
             let currentCount = getData.value || 0;
@@ -1507,4 +1507,5 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
 
 </body>
 </html>
+
 
