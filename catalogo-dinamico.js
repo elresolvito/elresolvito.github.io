@@ -4,7 +4,7 @@
 const CatalogoDinamico = {
   // 🔗 URL de tu CSV en GitHub - CAMBIA ESTO POR TU URL
   // Sube tu archivo CSV a GitHub y pon aquí la URL
-  csvURL: 'https://elresolving.github.io/productos.csv',
+  csvURL: 'https://raw.githubusercontent.com/elresolving/elresolving.github.io/main/Productos.csv',
   
   // ⚙️ Configuración
   config: {
@@ -634,3 +634,4 @@ setTimeout(function() {
 }, 10000);
 
 console.log('✅ catalogo-dinamico.js cargado y listo');
+
