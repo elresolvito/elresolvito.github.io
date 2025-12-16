@@ -14,6 +14,10 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 
+    <!-- PRECONEXIÓN PARA CSV DE GITHUB -->
+    <link rel="preconnect" href="https://elresolving.github.io">
+    <link rel="dns-prefetch" href="https://elresolving.github.io">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -462,11 +466,14 @@
     <button class="close-btn" id="closeFloatingCallout">&times;</button><p class="font-bold mb-2">¡Comodidad en La Habana!</p><a href="#nuestras-ventajas" class="mt-3 inline-block bg-[var(--accent-color)] text-white text-fixed-sm font-semibold py-2 px-4 rounded-full">Ver Ventajas</a>
 </div>
 
-<!-- 🔥 CATÁLOGO DINÁMICO (carga desde Google Sheets) -->
-<script src="catalogo-dinamico.js"></script>
+<!-- ============================================
+SCRIPTS EN ORDEN CORRECTO
+============================================ -->
+<!-- 🔄 CATÁLOGO LOCAL (respaldo - se carga primero) -->
+<script src="catalogo.js" defer></script>
 
-<!-- 🔄 CATÁLOGO LOCAL (respaldo - mantén tu archivo actual) -->
-<script src="catalogo.js"></script>
+<!-- 🔥 CATÁLOGO DINÁMICO (carga desde GitHub CSV) -->
+<script src="catalogo-dinamico.js" defer></script>
 
 <script>
     // CONSTANTES DE LA NUEVA POLÍTICA DE ENVÍOS POR RANGOS
@@ -486,7 +493,10 @@
     const WEIGHT_THRESHOLD_KG = 10;
     const SERVICE_FEE = 50;
 
-    let products = []; // Esta variable ahora se llenará desde catalogo-dinamico.js
+    // ============================================
+    // VARIABLES GLOBALES - INICIALIZACIÓN SEGURA
+    // ============================================
+    let products = []; // Se llenará desde catalogo-dinamico.js
     var cart = JSON.parse(localStorage.getItem('cart')) || [];
     var whatsappGroupLink = 'https://chat.whatsapp.com/H19dIofkINdHrVApA4jbvW?mode=ac_t';
     var currentProductForModal = null;
@@ -495,6 +505,7 @@
     var toastTimeout;
     var currentDepartment = 'mercado';
 
+    // Referencias a modales
     const cartModal = document.getElementById('cartModal');
     const productDetailsModal = document.getElementById('productDetailsModal');
     const checkoutModal = document.getElementById('checkoutModal');
@@ -507,38 +518,33 @@
     const floatingCallout = document.getElementById('floatingCallout');
     const closeFloatingCalloutBtn = document.getElementById('closeFloatingCallout');
 
-    // 🔄 REEMPLAZO DE LA CARGA INICIAL
-    // En lugar de cargar desde catalogo.js, esperamos que cargue desde Google Sheets
-    document.addEventListener('DOMContentLoaded', function() {
-        // 1. Actualizar contadores
-        updateAllCounters();
-        setInterval(updateAllCounters, 3600000);
-        
-        // 2. Configurar UI básica
-        updateCartUI();
-        updateDeliveryPromoBanner();
-        setupGeneralEventListeners();
-        setupScrollAnimations();
-        setupScrollHeader();
-        showFloatingCalloutAfterDelay();
-    });
+    // ============================================
+    // FUNCIONES DE CARGA DE PRODUCTOS
+    // ============================================
 
-    // 🎯 ESCUCHAR CUANDO EL CATÁLOGO DINÁMICO ESTÉ LISTO
-    window.addEventListener('catalogoCargado', function(evento) {
-        console.log('📦 Catálogo cargado desde:', evento.detail.fuente);
+    // FUNCIÓN PARA CARGAR PRODUCTOS DEL CATÁLOGO DINÁMICO
+    function loadProductsFromDynamicCatalog() {
+        console.log('🔄 Cargando productos desde catálogo dinámico...');
         
-        // 1. Obtener productos del catálogo dinámico
-        products = evento.detail.productos || catalogo.productos || [];
+        // 1. Intentar desde CatalogoDinamico (GitHub CSV)
+        if (window.CatalogoDinamico && window.CatalogoDinamico.obtenerTodos) {
+            const dynamicProducts = window.CatalogoDinamico.obtenerTodos();
+            if (dynamicProducts && dynamicProducts.length > 0) {
+                console.log('✅ Productos cargados desde catálogo dinámico:', dynamicProducts.length);
+                return dynamicProducts;
+            }
+        }
         
-        // 2. Ordenar productos (mantén tu lógica original)
-        products.sort((a, b) => (a.category < b.category ? -1 : (a.category > b.category ? 1 : (a.name < b.name ? -1 : 1))));
+        // 2. Si falla, intentar desde catalogo.js (respaldo local)
+        if (window.catalogo && window.catalogo.productos) {
+            console.log('🔄 Usando catálogo local como respaldo');
+            return window.catalogo.productos;
+        }
         
-        // 3. Configurar la tienda con los nuevos productos
-        setupStoreSection('mercado', products);
-        
-        // 4. Actualizar UI del carrito (por si hay cambios en precios)
-        updateCartUI();
-    });
+        // 3. Si todo falla, array vacío
+        console.warn('⚠️ No se encontraron productos');
+        return [];
+    }
 
     // FUNCIÓN PARA DETERMINAR TARIFA DE ENVÍO SEGÚN RANGO
     function calculateShippingFee(subtotal) {
@@ -555,13 +561,13 @@
                 };
             }
         }
-        // Por defecto (no debería llegar aquí)
+        // Por defecto
         return { fee: 200, discount: "0%", rangeText: "Hasta $2,000" };
     }
 
     // FUNCIÓN PARA CALCULAR PRECIO FINAL SEGÚN NUEVA POLÍTICA
     function calculateFinalPrice(cartItems) {
-        // 1. Calcular subtotal de productos (YA INCLUYE 8%)
+        // 1. Calcular subtotal de productos
         const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         
         // 2. Determinar tarifa de envío según rango
@@ -677,6 +683,10 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
             });
         }
     }
+
+    // ============================================
+    // FUNCIONES DE LA TIENDA
+    // ============================================
 
     function switchDepartment(dept) {
         currentDepartment = dept;
@@ -817,28 +827,50 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
         setupScrollAnimations();
     }
 
-    // 🔄 MODIFICACIÓN: Esta función ahora usa el catálogo dinámico
     function showProductDetailsModal(productId) {
-        // Buscar producto en el catálogo dinámico primero
+        console.log('🔍 Buscando producto ID:', productId);
+        
+        // Buscar producto en múltiples fuentes
         let product = null;
-        if (window.CatalogoDinamico && window.CatalogoDinamico.obtenerPorId) {
-            product = window.CatalogoDinamico.obtenerPorId(productId);
+        
+        // 1. Intentar desde el array products (ya cargado)
+        if (products && products.length > 0) {
+            product = products.find(p => p.id === productId);
+            console.log('📦 Encontrado en array local:', product ? 'Sí' : 'No');
         }
         
-        // Si no lo encuentra, buscar en el catálogo local como respaldo
+        // 2. Si no lo encuentra, buscar en CatalogoDinamico
+        if (!product && window.CatalogoDinamico && window.CatalogoDinamico.obtenerPorId) {
+            product = window.CatalogoDinamico.obtenerPorId(productId);
+            console.log('🔍 Buscando en catálogo dinámico:', product ? 'Sí' : 'No');
+        }
+        
+        // 3. Si aún no, buscar en catalogo.js como último recurso
         if (!product && window.catalogo && window.catalogo.obtenerPorId) {
             product = window.catalogo.obtenerPorId(productId);
+            console.log('🔄 Buscando en catalogo.js:', product ? 'Sí' : 'No');
         }
         
-        if (!product || product.status === 'unavailable') return;
+        if (!product) {
+            console.error('❌ Producto no encontrado con ID:', productId);
+            showCartToast('Producto no disponible');
+            return;
+        }
+        
+        if (product.status === 'unavailable') {
+            showCartToast('Producto agotado');
+            return;
+        }
         
         currentProductForModal = JSON.parse(JSON.stringify(product));
         currentProductForModal.quantity = 1;
         currentUnitType = 'individual';
+        
         document.getElementById('productDetailsTitle').textContent = product.name;
         document.getElementById('productDetailsImage').src = product.image;
         document.getElementById('productDetailsDescription').textContent = product.description;
         document.getElementById('productQuantityDisplay').textContent = '1';
+        
         const unitTypeSection = document.getElementById('unitTypeSection');
         if (product.hasBoxOption) {
             unitTypeSection.classList.remove('hidden');
@@ -846,8 +878,10 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
         } else {
             unitTypeSection.classList.add('hidden');
         }
+        
         updateModalPricing();
         showModal(productDetailsModal);
+        console.log('✅ Modal mostrado para:', product.name);
     }
 
     function updateUnitTypeButtons() {
@@ -889,10 +923,18 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
 
         // Buscar producto para obtener precio actual
         let productData = null;
-        if (window.CatalogoDinamico && window.CatalogoDinamico.obtenerPorId) {
+        
+        // 1. Buscar en array products
+        if (products && products.length > 0) {
+            productData = products.find(p => p.id === currentProductForModal.id);
+        }
+        
+        // 2. Si no, buscar en CatalogoDinamico
+        if (!productData && window.CatalogoDinamico && window.CatalogoDinamico.obtenerPorId) {
             productData = window.CatalogoDinamico.obtenerPorId(currentProductForModal.id);
         }
         
+        // 3. Si no, buscar en catalogo.js
         if (!productData && window.catalogo && window.catalogo.obtenerPorId) {
             productData = window.catalogo.obtenerPorId(currentProductForModal.id);
         }
@@ -1127,17 +1169,24 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
             const item = cart[i];
             const productId = item.unitType === 'box' ? parseInt(item.id.split('_')[0]) : item.id;
             
-            // Buscar producto en catálogo dinámico primero
+            // Buscar producto en múltiples fuentes
             let product = null;
-            if (window.CatalogoDinamico && window.CatalogoDinamico.obtenerPorId) {
+            
+            // 1. Buscar en array products
+            if (products && products.length > 0) {
+                product = products.find(p => p.id === productId);
+            }
+            
+            // 2. Si no, buscar en CatalogoDinamico
+            if (!product && window.CatalogoDinamico && window.CatalogoDinamico.obtenerPorId) {
                 product = window.CatalogoDinamico.obtenerPorId(productId);
             }
             
-            // Si no lo encuentra, buscar en catálogo local
+            // 3. Si no, buscar en catalogo.js
             if (!product && window.catalogo && window.catalogo.obtenerPorId) {
                 product = window.catalogo.obtenerPorId(productId);
             }
-            
+
             if (product && product.weight !== undefined) {
                 let itemWeight = product.weight;
                 if (item.unitType === 'box' && product.hasBoxOption && product.boxQuantity) {
@@ -1152,27 +1201,6 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
     function updateDeliveryPromoBanner() {
         const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         const shippingInfo = calculateShippingFee(subtotal);
-        
-        // Actualizar el banner existente con la nueva información
-        const banner = document.getElementById('deliveryPromoBanner');
-        if (banner) {
-            // Puedes actualizar el contenido del banner aquí si lo deseas
-            // Por ejemplo, mostrar el rango actual y el próximo descuento
-            let nextDiscount = "";
-            if (subtotal <= 2000) {
-                nextDiscount = `Llévate $${(2001 - subtotal).toLocaleString()} más y paga solo $150 de envío (25% off)`;
-            } else if (subtotal <= 5000) {
-                nextDiscount = `Llévate $${(5001 - subtotal).toLocaleString()} más y paga solo $100 de envío (50% off)`;
-            } else {
-                nextDiscount = "¡Ya tienes el máximo descuento en envío!";
-            }
-            
-            // Actualizar algún elemento dentro del banner si existe
-            const progressText = banner.querySelector('#progressText');
-            if (progressText) {
-                progressText.innerHTML = `Envío actual: $${shippingInfo.fee} (${shippingInfo.discount} descuento)`;
-            }
-        }
         
         // Mantener la funcionalidad original del progreso si existe
         const progressBar = document.getElementById('promoProgressBar');
@@ -1393,9 +1421,83 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
     }
 
     // ============================================
+    // ESCUCHAR CUANDO EL CATÁLOGO DINÁMICO ESTÉ LISTO
+    // ============================================
+    window.addEventListener('catalogoCargado', function(evento) {
+        console.log('🎉 Catálogo cargado desde:', evento.detail.fuente);
+        
+        // 1. Obtener productos del evento
+        products = evento.detail.productos || [];
+        
+        // 2. Si está vacío, intentar cargar de otra fuente
+        if (products.length === 0) {
+            products = loadProductsFromDynamicCatalog();
+        }
+        
+        // 3. Ordenar productos
+        products.sort((a, b) => (a.category < b.category ? -1 : (a.category > b.category ? 1 : (a.name < b.name ? -1 : 1))));
+        
+        // 4. Configurar la tienda
+        setupStoreSection('mercado', products);
+        
+        // 5. Actualizar UI
+        updateCartUI();
+        console.log('🏪 Tienda lista con', products.length, 'productos');
+    });
+
+    // ============================================
+    // INICIALIZACIÓN SEGURA (cuando DOM esté listo)
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('📄 DOM listo - Iniciando aplicación...');
+        
+        // 1. Inicializar contadores
+        updateAllCounters();
+        setInterval(updateAllCounters, 3600000);
+        
+        // 2. Configurar UI básica
+        updateCartUI();
+        updateDeliveryPromoBanner();
+        setupGeneralEventListeners();
+        setupScrollAnimations();
+        setupScrollHeader();
+        showFloatingCalloutAfterDelay();
+        
+        // 3. Verificar si ya hay productos cargados (por si el evento no se disparó)
+        setTimeout(function() {
+            // Si después de 3 segundos no se cargaron productos, forzar carga
+            if (products.length === 0) {
+                console.log('⏱️  Timeout: Cargando productos manualmente...');
+                products = loadProductsFromDynamicCatalog();
+                
+                if (products.length > 0) {
+                    products.sort((a, b) => (a.category < b.category ? -1 : (a.category > b.category ? 1 : (a.name < b.name ? -1 : 1))));
+                    setupStoreSection('mercado', products);
+                    console.log('✅ Productos cargados manualmente:', products.length);
+                } else {
+                    // Mostrar mensaje de error
+                    const grid = document.getElementById('mercadoProductGrid');
+                    if (grid) {
+                        grid.innerHTML = `
+                            <div class="text-center p-8 bg-yellow-50 rounded-xl">
+                                <h3 class="text-xl font-bold text-yellow-800 mb-2">⚠️ Catálogo no disponible</h3>
+                                <p class="text-gray-600">Intenta recargar la página o contacta al soporte.</p>
+                                <button onclick="location.reload()" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg">
+                                    Recargar página
+                                </button>
+                            </div>
+                        `;
+                    }
+                }
+            }
+        }, 3000);
+    });
+
+    // ============================================
     // FIN DEL CONTADOR DE VISITAS
     // ============================================
 
+    // Service Worker
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('/sw.js').then(reg => console.log('SW ok')).catch(err => console.log('SW fail', err));
@@ -1405,3 +1507,4 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
 
 </body>
 </html>
+
