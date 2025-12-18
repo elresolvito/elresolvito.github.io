@@ -36,7 +36,7 @@ id,nombre,categoria,precio,marca,imagen,descripcion,stock,activo,orden
 35,Vino Pluvium,Bebidas,1200,Pluvium,https://i.postimg.cc/XNLLWmmx/vino_pluvium_precio_1200.png,Botella vino tinto,10,TRUE,35
 36,Baterías Triple A,Electrónicos y accesorios,300,N/A,https://i.postimg.cc/DZ2vxZsT/Gemini_Generated_Image_824rio824rio824r.png,Pack 4 unidades,10,TRUE,36
 37,Cerveza Cristal,Bebidas,300,Cristal,https://i.postimg.cc/d1JxDCW3/cervaza-cristal-1.jpg,Lata 355ml,12,TRUE,37
-38,Cerveza Holland Import,Bebidas,230,Holland,sin_url,Lata cerveza importada,10,TRUE,38
+38,Cerveza Holland Import,Bebidas,230,Holland,https://i.postimg.cc/nLn8gryr/cerveza-holland-(1).png,Lata cerveza importada,10,TRUE,38
 39,Malta / Pepsi,Bebidas,260,Varios,https://i.postimg.cc/ZKQPnr9K/malta.png,Lata refresco,15,TRUE,39
 40,Jugo YES 1L,Bebidas,620,YES,https://i.postimg.cc/fy2cxdBH/jugo_j.png,Tetrapack mango/manzana,8,TRUE,40
 41,Agua Embotellada,Bebidas,650,N/A,https://i.postimg.cc/m2gVtL8J/agua.png,Botella 1.5L,10,TRUE,41
@@ -60,6 +60,7 @@ id,nombre,categoria,precio,marca,imagen,descripcion,stock,activo,orden
 59,Cerveza Parranda,Bebidas,250,Parranda,https://i.postimg.cc/d31dt1w9/parranda.webp,Cerveza clara,10,TRUE,59
 60,Lomo de Res,Congelados,800,N/A,https://i.postimg.cc/nh7mLNbw/res.webp,Corte de res fresco 250g,10,TRUE,60
 61,Vinagreta,Salsas,350,N/A,https://i.postimg.cc/g0WZL4m5/vinagret.webp,Salsa para ensaladas,10,TRUE,61
+
 
 
 
