@@ -50,7 +50,7 @@ id,nombre,categoria,precio,marca,imagen,descripcion,stock,activo,orden
 49,Papas Fritas ,Snacks y golosinas,0,Acho,sin_url,Sabor natural/campesina,8,TRUE,49
 50,Croquetas sabor Jamón,Congelados,450,N/A,https://i.postimg.cc/br4XGJSy/cdroquetas_sabor_jamon.png,Bolsa de croquetas,10,TRUE,50
 51,Detergente Tid,Aseo del hogar,630,Tid,https://i.postimg.cc/3RhF7YkZ/detergente.png,Bolsa detergente polvo,6,TRUE,51
-52,Esponjas Pack,Aseo del hogar,250,N/A,sin_url,Pack multiuso,10,TRUE,52
+52,Esponjas Pack,Aseo del hogar,0,N/A,sin_url,Pack multiuso,10,TRUE,52
 53,Fósforos,Varios,30,N/A,sin_url,Caja de cerillos,50,TRUE,53
 54,Aceite,Alimentos y conservas,990,N/A,https://i.postimg.cc/hPZsmk5N/aceite.png,Botella de aceite vegetal,10,TRUE,54
 55,Bocaditos de Pollo,Congelados,550,N/A,https://i.postimg.cc/GpGxZHmd/bocadito_de_pollo.png,Bocaditos crujientes,10,TRUE,55
@@ -60,6 +60,7 @@ id,nombre,categoria,precio,marca,imagen,descripcion,stock,activo,orden
 59,Cerveza Parranda,Bebidas,250,Parranda,https://i.postimg.cc/d31dt1w9/parranda.webp,Cerveza clara,10,TRUE,59
 60,Lomo de Res,Congelados,800,N/A,https://i.postimg.cc/nh7mLNbw/res.webp,Corte de res fresco 250g,10,TRUE,60
 61,Vinagreta,Salsas,350,N/A,https://i.postimg.cc/g0WZL4m5/vinagret.webp,Salsa para ensaladas,10,TRUE,61
+
 
 
 
