@@ -1,42 +1,54 @@
 id,nombre,categoria,precio,marca,imagen,descripcion,stock,activo,orden
-1,Ron Albin 1L,Bebidas,2500,Albin,img_01.jpg,Ron blanco botella grande,5,1,10
-2,Vino Tinto Pluvium,Bebidas,1200,Pluvium,img_02.jpg,Vino de mesa importado,3,1,20
-3,Ron Albin 500ml,Bebidas,550,Albin,img_03.jpg,Ron blanco botella pequeña,4,1,30
-4,Ron Parranda,Bebidas,180,Parranda,img_04.jpg,Ron en botella plastica,8,1,40
-5,Cerveza Cristal,Bebidas,300,Cristal,img_05.jpg,Cerveza clara en lata,12,1,50
-6,Cerveza Holland Import,Bebidas,230,Holland,img_06.jpg,Cerveza importada lata,10,1,60
-7,Malta / Pepsi,Bebidas,260,Varios,img_07.jpg,Refresco o malta en lata,15,1,70
-8,Jugo YES 1L,Bebidas,620,YES,img_08.jpg,Jugo de mango o manzana,10,1,80
-9,Agua Embotellada,Bebidas,650,N/A,img_09.jpg,Agua natural botella grande,6,1,90
-10,Cafe Tostado,Alimentos,1450,Dulfiltro,img_10.jpg,Cafe molido paquete 1lb,4,1,100
-11,Frijoles Negros,Alimentos,820,Da Vicio,img_11.jpg,Granos secos seleccionados,6,1,110
-12,Avena en Hojuelas,Alimentos,600,El Puritano,img_12.jpg,Avena integral paquete,5,1,120
-13,Salsa de Tomate,Alimentos,650,N/A,img_13.jpg,Ketchup pomo rojo,9,1,130
-14,Mayonesa / Mostaza,Alimentos,450,N/A,img_14.jpg,Aderezo frasco plastico,8,1,140
-15,Atole Sobre,Alimentos,400,N/A,img_15.jpg,Mezcla para bebida en polvo,10,1,150
-16,Pasta Macarrones,Alimentos,290,Ada,img_16.jpg,Pasta de semola corta,15,1,160
-17,Espaguetis,Alimentos,270,Topside,img_17.jpg,Pasta larga paquete fino,12,1,170
-18,Arroz Paquete,Alimentos,160,N/A,img_18.jpg,Arroz blanco seleccionado,20,1,180
-19,Aceite Vegetal 1L,Alimentos,990,Ada,img_19.jpg,Aceite de girasol/soya,12,1,190
-20,Vinagre Blanco,Alimentos,300,N/A,img_20.jpg,Botella de plastico 500ml,10,1,200
-21,Patatas Fritas 1kg,Congelados,1200,Vima Foods,img_21.jpg,Corte regular bolsa 1kg,4,1,210
-22,Nuggets de Pollo,Congelados,950,La Perla,img_22.jpg,Empanados paquete 300g,6,1,220
-23,Bocaditos de Pollo,Congelados,850,La Perla,img_23.jpg,Pollo empanado 300g,5,1,230
-24,Lomo Vetado,Congelados,2100,N/A,img_24.jpg,Carne vacuna 350g,3,1,240
-25,Sazon Sobre,Alimentos,60,Sazon,img_25.jpg,Condimento para cocinar,30,1,250
-26,Cubitos de Caldo,Alimentos,15,N/A,img_26.jpg,Unidad de caldo concentrado,40,1,260
-27,Caramelos Surtidos,Snacks,35,Bel,img_27.jpg,Caramelo unidad masticable,50,1,270
-28,Papas Fritas Acho,Snacks,400,Acho,img_28.jpg,Papas sabor campesinas,10,1,280
-29,Galletas Chocolate,Snacks,150,Efsane,img_29.jpg,Barrita rellena individual,15,1,290
-30,Rosquitas de Maiz,Snacks,580,Pelly,img_30.jpg,Snack horneado grande,8,1,300
-31,Chupa Chups,Snacks,150,Richy,img_31.jpg,Paletas de caramelo,12,1,310
-32,Refresco Tuti Tuti,Bebidas,30,Tuti Tuti,img_32.jpg,Refresco instantaneo sobre,25,1,320
-33,Papel Higienico,Higiene,490,La Excelencia,img_33.jpg,Rollo de papel suave,20,1,330
-34,Desodorante Spray,Higiene,1100,Varios,img_34.jpg,Aerosol fragancia hombre,8,1,340
-35,Desodorante Roll-on,Higiene,650,Rexona,img_35.jpg,Proteccion 48h rollon,10,1,350
-36,Almohadillas Kotex,Higiene,450,Kotex,img_36.jpg,Proteccion femenina pack,15,1,360
-37,Jabon de Tocador,Higiene,130,N/A,img_37.jpg,Jabon de barra unidad,20,1,370
-38,Detergente Tid,Limpieza,630,Tid,img_38.jpg,Detergente en polvo bolsa,7,1,380
-39,Esponjas Pack,Limpieza,250,N/A,img_39.jpg,Pack esponjas de fregar,10,1,390
-40,Fosforos,Varios,30,N/A,img_40.jpg,Caja de cerillos,50,1,400
-
+1,Atún,Alimentos y conservas,540,N/A,https://i.postimg.cc/76xHK6zt/atun_precio_500.png,Lata estándar 200g,10,TRUE,1
+2,Pasta de tomate,Alimentos y conservas,380,N/A,https://i.postimg.cc/gjjYPTNv/pasta_tomate_precio_350.png,400 g,10,TRUE,2
+3,Aceitunas Verdes,Alimentos y conservas,750,Fragata,https://i.postimg.cc/4yyJTSBj/pimiento_presio_750.png,Rodajas con Pimiento,10,TRUE,3
+4,Café Dualis,Alimentos y conservas,1450,Dualis,https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png,Paquete 250 g,10,TRUE,4
+5,Café Dufiltro,Alimentos y conservas,1450,Dufiltro,https://i.postimg.cc/hG26fv31/cafe_Dufiltro_250_g_precio_1450.png,Paquete 250 g,10,TRUE,5
+6,Pan rallado Enepa,Alimentos y conservas,450,Enepa,https://i.postimg.cc/qvQwHpNJ/pan-rallado.webp,Paquete para empanar,10,TRUE,6
+7,Cartón de huevo,Alimentos y conservas,3000,N/A,https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3100.png,30 unidades,10,TRUE,7
+8,Leche condensada,Alimentos y conservas,520,N/A,https://i.postimg.cc/tT2XwjtT/leche_condensada.png,397 g,10,TRUE,8
+9,Harina blanca,Alimentos y conservas,600,N/A,https://i.postimg.cc/3xc2NHFB/harina_blanca1_kg.png,Paquete 1 Kg,10,TRUE,9
+10,Chicoticos Pelly,Snacks y golosinas,400,Pelly,https://i.postimg.cc/1zv2fXjZ/chicoticos_pelly_90_g_precio_400.png,Paquete 90 g,10,TRUE,10
+11,Papitas Campesinas,Snacks y golosinas,690,Acho,https://i.postimg.cc/cLgrDtf9/papitas_campesinas_precio_690.png,Paquete papas fritas,10,TRUE,11
+12,Pelly de Jamón,Snacks y golosinas,580,Pelly,https://i.postimg.cc/pdQV7frX/pelly_jamon_precio_580.png,Snack de maíz,10,TRUE,12
+13,Mayonesa Mediana,Salsas,850,N/A,https://i.postimg.cc/KzJZw2rR/mayonesa_precio_850.png,Frasco mediano,10,TRUE,13
+14,Mayonesa Grande,Salsas,1100,N/A,https://i.postimg.cc/Px2t9jzz/mayonesa_precio1100.png,Frasco grande,10,TRUE,14
+15,Cuchilla de Afeitar,Higiene personal,100,N/A,https://i.postimg.cc/8CdkdW7x/cuchilla_de_afeitar_precio_100.png,Unidad desechable,10,TRUE,15
+16,Jabón Marwa,Higiene personal,150,Marwa,https://i.postimg.cc/3RK8tRpR/jabon_marwa_precio_150.png,Pastilla de tocador,10,TRUE,16
+17,Papel Sanitario,Higiene personal,490,La Excelencia,https://i.postimg.cc/bwW289qD/papel_sanitario_precio_490i.png,Paquete suave,10,TRUE,17
+18,Toallas Sanitarias,Higiene personal,450,Kotex,https://i.postimg.cc/KjjZyH0b/toallas_sanitarias_precio_450.png,Paquete con alas,10,TRUE,18
+19,Toallas Húmedas,Higiene personal,690,N/A,https://i.postimg.cc/W4ZSP3cw/toallas_humedas_precio_690.png,Paquete limpieza,10,TRUE,19
+20,Jabón de Lavar,Aseo del hogar,250,N/A,https://i.postimg.cc/V6YfK6Mz/jabon_de_lavar_precio_250.png,Pastilla de lavar,10,TRUE,20
+21,Perfume Candy,Perfumes y desodorantes,3100,Candy,https://i.postimg.cc/vTgJRyhp/perfume_candy_precio_3100.png,Frasco 50 ml,10,TRUE,21
+22,Perfume Genérico,Perfumes y desodorantes,3100,N/A,https://i.postimg.cc/ZKrT0PPG/perfume_precio_3100.png,50 ml surtido,10,TRUE,22
+23,Perfume Q,Perfumes y desodorantes,3100,Q,https://i.postimg.cc/CL03P3Dn/perfume_q_precio_3100.png,Frasco 50 ml,10,TRUE,23
+24,Desodorante Obao,Perfumes y desodorantes,1100,Obao,https://i.postimg.cc/PxtXSxD2/desodorante_obao_precio_1100.png,Roll-on,10,TRUE,24
+25,Desodorante Rush Blanco,Perfumes y desodorantes,1000,Rush,https://i.postimg.cc/FR9rTRS8/desodorante_rush_blanco_precio_1000.png,Roll-on,10,TRUE,25
+26,Desodorante Rush,Perfumes y desodorantes,1000,Rush,https://i.postimg.cc/sXVjTXSF/desodorante_rush_precio_1000.png,Roll-on surtido,10,TRUE,26
+27,Colonia Niña,Perfumes y desodorantes,1100,N/A,https://i.postimg.cc/G3v04rsM/colonia_nina.png,100 ml infantil,10,TRUE,27
+28,Macarrones,Pastas y fideos,300,Ada,https://i.postimg.cc/Hsmz1H69/macarrones_precio_300.png,Bolsa 460 g,10,TRUE,28
+29,Sopas instantáneas,Pastas y fideos,160,Varios,https://i.postimg.cc/FzNTpQqK/sopas_instantaneas_precio_160.png,Paquete individual,10,TRUE,29
+30,Licor de fresa,Bebidas,2500,Albín,https://i.postimg.cc/59YT2x5p/licor_de_fresa_precio_2500.png,Botella crema fresa,10,TRUE,30
+31,Licor Cocobay,Bebidas,2500,Cocobay,https://i.postimg.cc/7ZDW90Fz/locor_cocobay_precio_2500.png,Botella licor coco,10,TRUE,31
+32,Whisky Spirit 200 ml,Bebidas,320,Spirit,https://i.postimg.cc/4N8W6q1t/tea_precio_320.png,Botella pequeña,10,TRUE,32
+33,Whisky Sir Albin 1L,Bebidas,1350,Albín,https://i.postimg.cc/cLyrb4T0/whisky_1L_precio_1350.png,Botella grande,10,TRUE,33
+34,Whisky Sir Albin 500ml,Bebidas,550,Albín,https://i.postimg.cc/y84kbYnC/whisky_sir_albin_precio_550.png,Botella mediana,10,TRUE,34
+35,Vino Pluvium,Bebidas,1200,Pluvium,https://i.postimg.cc/XNLLWmmx/vino_pluvium_precio_1200.png,Botella vino tinto,10,TRUE,35
+36,Baterías Triple A,Electrónicos y accesorios,300,N/A,https://i.postimg.cc/DZ2vxZsT/Gemini_Generated_Image_824rio824rio824r.png,Pack 4 unidades,10,TRUE,36
+37,Cerveza Cristal,Bebidas,300,Cristal,sin_url,Lata 355ml,12,TRUE,37
+38,Cerveza Holland Import,Bebidas,230,Holland,sin_url,Lata cerveza importada,10,TRUE,38
+39,Malta / Pepsi,Bebidas,260,Varios,sin_url,Lata refresco,15,TRUE,39
+40,Jugo YES 1L,Bebidas,620,YES,sin_url,Tetrapack mango/manzana,8,TRUE,40
+41,Agua Embotellada,Bebidas,650,N/A,sin_url,Botella 1.5L,10,TRUE,41
+42,Frijoles Negros,Alimentos y conservas,820,Da Vicio,sin_url,Paquete granos,5,TRUE,42
+43,Avena en Hojuelas,Alimentos y conservas,600,El Puritano,sin_url,Paquete avena integral,6,TRUE,43
+44,Espaguetis,Pastas y fideos,270,Topside,sin_url,Paquete pasta larga,15,TRUE,44
+45,Arroz Seleccionado,Alimentos y conservas,160,N/A,sin_url,Paquete 1lb,20,TRUE,45
+46,Patatas Fritas 1kg,Alimentos y conservas,1200,Vima,sin_url,Bolsa congelada,4,TRUE,46
+47,Nuggets de Pollo,Alimentos y conservas,950,La Perla,sin_url,Paquete empanado,5,TRUE,47
+48,Atole Sobre,Alimentos y conservas,400,N/A,sin_url,Mezcla en polvo,10,TRUE,48
+49,Papas Fritas Acho,Snacks y golosinas,400,Acho,sin_url,Sabor natural/campesina,8,TRUE,49
+50,Rosquitas de Maíz,Snacks y golosinas,580,Pelly,sin_url,Snack horneado,10,TRUE,50
+51,Detergente Tid,Aseo del hogar,630,Tid,sin_url,Bolsa detergente polvo,6,TRUE,51
+52,Esponjas Pack,Aseo del hogar,250,N/A,sin_url,Pack multiuso,10,TRUE,52
+53,Fósforos,Varios,30,N/A,sin_url,Caja de cerillos,50,TRUE,53
