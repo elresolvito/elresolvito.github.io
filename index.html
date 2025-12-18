@@ -8,7 +8,7 @@
     <meta name="keywords" content="tienda online habana, mercado habana, entrega a domicilio cuba, mandados habana, el resolvito">
     <meta name="author" content="El Resolvito">
 
-    <link rel="manifest" href="/manifest.json?v=5">
+    <link rel="manifest" href="/manifest.json?v=6">
     <meta name="theme-color" content="#0d3b33">
     <link rel="apple-touch-icon" href="/android-chrome-512x512.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -495,9 +495,27 @@
     </div>
 </div>
 
+<!-- Botones flotantes -->
 <button id="floatingCartBtn" class="fixed bottom-6 right-6 bg-[var(--primary-color)] text-white px-5 py-3 rounded-full shadow-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 z-40 flex items-center gap-3">
     <div class="relative"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.402H3.62a.5.5 0 0 1-.49-.598l-1-5A.5.5 0 0 1 2 1H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2.5h7.45l.5-2.5H3.14zM5 12a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/></svg><span id="cartCount" class="absolute -top-1 -right-1 bg-[var(--accent-color)] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">0</span></div>
     <span id="floatingCartTotal" class="text-fixed-lg font-bold">$0</span>
+</button>
+
+<!-- Botón de notificaciones -->
+<button id="notificaciones-btn" class="fixed bottom-24 left-6 bg-blue-500 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-600 transition-all duration-300 z-40 flex items-center gap-2 hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+    </svg>
+    Activar notificaciones
+</button>
+
+<!-- Botón para probar notificaciones (desarrollo) -->
+<button id="test-notification-btn" 
+        class="fixed bottom-40 left-6 bg-purple-500 text-white px-4 py-2 rounded-full shadow-lg hover:bg-purple-600 transition-all duration-300 z-40 flex items-center gap-2 hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+    </svg>
+    Probar notificación
 </button>
 
 <div id="cartToast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none z-[9999]"><p id="cartToastMessage" class="text-fixed-sm"></p></div>
@@ -864,6 +882,253 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
                     console.log('🔄 Service Worker actualizado forzadamente');
                 }
             });
+        }
+    }
+
+    // ============================================
+    // FUNCIONES DE NOTIFICACIONES PUSH
+    // ============================================
+
+    // Verificar y solicitar permiso para notificaciones
+    async function inicializarNotificaciones() {
+        // Verificar si el navegador soporta notificaciones
+        if (!('Notification' in window)) {
+            console.log('Este navegador no soporta notificaciones');
+            return false;
+        }
+        
+        // Verificar si ya tenemos permiso
+        if (Notification.permission === 'granted') {
+            console.log('Ya tienes permiso para notificaciones');
+            mostrarBotonNotificaciones(true);
+            
+            // Mostrar botón de prueba en desarrollo
+            const testBtn = document.getElementById('test-notification-btn');
+            if (testBtn) testBtn.classList.remove('hidden');
+            
+            return true;
+        }
+        
+        // Verificar si el permiso fue denegado
+        if (Notification.permission === 'denied') {
+            console.log('Permiso para notificaciones denegado');
+            mostrarBotonNotificaciones(false);
+            return false;
+        }
+        
+        // Si no se ha pedido permiso, mostrar botón para solicitarlo
+        mostrarBotonSolicitudPermiso();
+        return false;
+    }
+
+    // Mostrar botón para solicitar permiso
+    function mostrarBotonSolicitudPermiso() {
+        const notifBtn = document.getElementById('notificaciones-btn');
+        if (notifBtn) {
+            notifBtn.classList.remove('hidden');
+            notifBtn.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
+                Activar notificaciones
+            `;
+            notifBtn.className = 'fixed bottom-24 left-6 bg-blue-500 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-600 transition-all duration-300 z-40 flex items-center gap-2';
+            notifBtn.onclick = solicitarPermisoNotificaciones;
+        }
+    }
+
+    // Solicitar permiso para notificaciones
+    async function solicitarPermisoNotificaciones() {
+        try {
+            const permission = await Notification.requestPermission();
+            
+            if (permission === 'granted') {
+                console.log('Permiso concedido para notificaciones');
+                mostrarBotonNotificaciones(true);
+                
+                // Registrar Service Worker para notificaciones push
+                await registrarServiceWorkerParaPush();
+                
+                // Mostrar confirmación
+                showCartToast('Notificaciones activadas ✅');
+                
+                // Mostrar botón de prueba
+                const testBtn = document.getElementById('test-notification-btn');
+                if (testBtn) testBtn.classList.remove('hidden');
+                
+                // Enviar notificación de bienvenida
+                setTimeout(() => enviarNotificacionBienvenida(), 1000);
+                
+                return true;
+            } else {
+                console.log('Permiso denegado para notificaciones');
+                mostrarBotonNotificaciones(false);
+                showCartToast('No recibirás notificaciones');
+                return false;
+            }
+        } catch (error) {
+            console.error('Error solicitando permiso:', error);
+            return false;
+        }
+    }
+
+    // Mostrar estado del botón de notificaciones
+    function mostrarBotonNotificaciones(activado) {
+        let notifBtn = document.getElementById('notificaciones-btn');
+        if (!notifBtn) return;
+        
+        if (activado) {
+            notifBtn.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                Notificaciones activas
+            `;
+            notifBtn.className = 'fixed bottom-24 left-6 bg-green-500 text-white px-4 py-2 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 z-40 flex items-center gap-2';
+        } else {
+            notifBtn.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Notificaciones desactivadas
+            `;
+            notifBtn.className = 'fixed bottom-24 left-6 bg-gray-500 text-white px-4 py-2 rounded-full shadow-lg hover:bg-gray-600 transition-all duration-300 z-40 flex items-center gap-2';
+        }
+    }
+
+    // Registrar Service Worker específico para push
+    async function registrarServiceWorkerParaPush() {
+        if (!('serviceWorker' in navigator)) {
+            console.log('Service Worker no soportado');
+            return null;
+        }
+        
+        try {
+            const registration = await navigator.serviceWorker.register('/sw.js');
+            console.log('Service Worker registrado para push:', registration);
+            
+            // Solicitar suscripción para notificaciones push
+            await suscribirAPush(registration);
+            
+            return registration;
+        } catch (error) {
+            console.error('Error registrando Service Worker:', error);
+            return null;
+        }
+    }
+
+    // Suscribir a notificaciones push
+    async function suscribirAPush(registration) {
+        if (!('PushManager' in window)) {
+            console.log('Push no soportado');
+            return null;
+        }
+        
+        try {
+            // Obtener clave pública VAPID (esta es una clave de ejemplo)
+            const vapidPublicKey = 'BEl62iUYgUivxIkv69yViEuiBIa-Ib9-SkvMeAtA3LFgDzkrxZJjSgSnfckjBJuBkr3qBUYIHBQFLXYp5Nksh8U';
+            
+            const subscription = await registration.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
+            });
+            
+            console.log('Suscripción push exitosa:', subscription);
+            
+            // Enviar suscripción al servidor (en tu caso, podrías guardarlo)
+            await enviarSuscripcionAlServidor(subscription);
+            
+            return subscription;
+        } catch (error) {
+            console.error('Error suscribiéndose a push:', error);
+            return null;
+        }
+    }
+
+    // Convertir clave VAPID
+    function urlBase64ToUint8Array(base64String) {
+        const padding = '='.repeat((4 - base64String.length % 4) % 4);
+        const base64 = (base64String + padding)
+            .replace(/\-/g, '+')
+            .replace(/_/g, '/');
+        
+        const rawData = window.atob(base64);
+        const outputArray = new Uint8Array(rawData.length);
+        
+        for (let i = 0; i < rawData.length; ++i) {
+            outputArray[i] = rawData.charCodeAt(i);
+        }
+        return outputArray;
+    }
+
+    // Enviar suscripción al servidor (para implementar más adelante)
+    async function enviarSuscripcionAlServidor(subscription) {
+        // Aquí enviarías la suscripción a tu servidor
+        // Por ahora, solo guardamos en localStorage
+        localStorage.setItem('pushSubscription', JSON.stringify(subscription));
+        console.log('Suscripción guardada localmente');
+        return true;
+    }
+
+    // Función para enviar notificaciones manualmente (para pruebas)
+    function enviarNotificacionManual(titulo, mensaje, datos = {}) {
+        if (!('Notification' in window) || Notification.permission !== 'granted') {
+            console.log('No se puede enviar notificación: sin permiso');
+            showCartToast('Primero activa las notificaciones');
+            return;
+        }
+        
+        const opciones = {
+            body: mensaje,
+            icon: '/android-chrome-192x192.png',
+            badge: '/favicon-32x32.png',
+            vibrate: [200, 100, 200],
+            data: datos,
+            actions: [
+                {
+                    action: 'open',
+                    title: 'Ver oferta'
+                }
+            ]
+        };
+        
+        // Mostrar notificación inmediata
+        const notificacion = new Notification(titulo, opciones);
+        
+        // Manejar clic en la notificación
+        notificacion.onclick = function(event) {
+            event.preventDefault();
+            window.focus();
+            if (datos.url) {
+                window.open(datos.url, '_blank');
+            }
+        };
+        
+        return notificacion;
+    }
+
+    // Enviar notificación de bienvenida
+    function enviarNotificacionBienvenida() {
+        if (Notification.permission === 'granted') {
+            enviarNotificacionManual(
+                '¡Bienvenido a El Resolvito! 🛒',
+                'Ahora recibirás ofertas exclusivas y novedades.',
+                { url: window.location.href }
+            );
+        }
+    }
+
+    // Enviar notificación de oferta especial
+    function enviarNotificacionOferta(producto) {
+        if (Notification.permission === 'granted') {
+            enviarNotificacionManual(
+                `¡Oferta especial! ${producto.nombre}`,
+                `Precio especial: $${producto.precio}`,
+                { 
+                    url: window.location.href + '#mercado',
+                    productoId: producto.id 
+                }
+            );
         }
     }
 
@@ -1261,6 +1526,16 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
                 }
             });
         });
+        
+        // Evento para botón de prueba de notificaciones
+        document.getElementById('test-notification-btn').addEventListener('click', () => {
+            enviarNotificacionManual(
+                '🎉 ¡Prueba exitosa!',
+                'Las notificaciones están funcionando correctamente',
+                { url: window.location.href }
+            );
+        });
+        
         setupCheckoutEventListeners();
         
         // Eventos de conexión
@@ -1653,10 +1928,13 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
         // 3. Registrar Service Worker
         registrarServiceWorker();
         
-        // 4. Verificar conexión
+        // 4. Inicializar notificaciones push
+        inicializarNotificaciones();
+        
+        // 5. Verificar conexión
         verificarConexion();
         
-        // 5. Verificar si ya hay productos cargados (por si el evento no se disparó)
+        // 6. Verificar si ya hay productos cargados (por si el evento no se disparó)
         setTimeout(function() {
             // Si después de 3 segundos no se cargaron productos, forzar carga
             if (products.length === 0) {
@@ -1706,5 +1984,4 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
 
 </body>
 </html>
-
 
