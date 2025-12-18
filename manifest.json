@@ -1,51 +1,5 @@
 {
   "name": "El Resolvito",
-  "short_name": "El Resolvito",
-  "description": "Tu tienda a domicilio en La Habana",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#0d3b33",
-  "theme_color": "#0d3b33",
-  "orientation": "portrait",
-  "icons": [
-    {
-      "src": "/android-chrome-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/android-chrome-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ],
-  "categories": ["shopping", "business"],
-  "shortcuts": [
-    {
-      "name": "Ver productos",
-      "short_name": "Productos",
-      "description": "Ver todos los productos disponibles",
-      "url": "/#mercado"
-    },
-    {
-      "name": "Mi carrito",
-      "short_name": "Carrito",
-      "description": "Ver mi carrito de compras",
-      "url": "/#cart"
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "https://i.postimg.cc/rsCKV7LZ/1755367982611.jpg",
-      "sizes": "1280x720",
-      "type": "image/jpeg",
-      "form_factor": "wide"
-    }
-  ],
-  "prefer_related_applications": false
-}
-{
-  "name": "El Resolvito",
   "short_name": "Resolvito",
   "description": "Tu tienda a domicilio en La Habana",
   "start_url": "/",
@@ -63,8 +17,5 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "gcm_sender_id": "103953800507",  // Para compatibilidad antigua
-  "gcm_user_visible_only": true
+  ]
 }
-
