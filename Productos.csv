@@ -1,12 +1,42 @@
 id,nombre,categoria,precio,marca,imagen,descripcion,stock,activo,orden
 1,Ron Albin 1L,Bebidas,2500,Albin,img_01.jpg,Ron blanco botella grande,5,1,10
 2,Vino Tinto Pluvium,Bebidas,1200,Pluvium,img_02.jpg,Vino de mesa importado,3,1,20
-3,Ron Parranda,Bebidas,180,Parranda,img_03.jpg,Ron en botella plastica,8,1,30
-4,Cerveza Cristal,Bebidas,300,Cristal,img_04.jpg,Cerveza clara en lata,12,1,40
-5,Jugo de Frutas 1L,Bebidas,620,YES,img_05.jpg,Jugo de mango o manzana,10,1,50
-6,Cafe Tostado,Alimentos,1450,Dulfiltro,img_06.jpg,Cafe molido paquete 1lb,4,1,60
-7,Frijoles Negros,Alimentos,820,Da'Vicio,img_07.jpg,Granos secos seleccionados,6,1,70
-8,Pasta Macarrones,Alimentos,290,Ada,img_08.jpg,Pasta de semola corta,15,1,80
-9,Espaguetis,Alimentos,270,Topside,img_09.jpg,Pasta larga paquete fino,12,1,90
-10,Papel Higienico,Higiene,490,La Excelencia,img_10.jpg,Rollo de papel suave,20,1,100
+3,Ron Albin 500ml,Bebidas,550,Albin,img_03.jpg,Ron blanco botella pequeña,4,1,30
+4,Ron Parranda,Bebidas,180,Parranda,img_04.jpg,Ron en botella plastica,8,1,40
+5,Cerveza Cristal,Bebidas,300,Cristal,img_05.jpg,Cerveza clara en lata,12,1,50
+6,Cerveza Holland Import,Bebidas,230,Holland,img_06.jpg,Cerveza importada lata,10,1,60
+7,Malta / Pepsi,Bebidas,260,Varios,img_07.jpg,Refresco o malta en lata,15,1,70
+8,Jugo YES 1L,Bebidas,620,YES,img_08.jpg,Jugo de mango o manzana,10,1,80
+9,Agua Embotellada,Bebidas,650,N/A,img_09.jpg,Agua natural botella grande,6,1,90
+10,Cafe Tostado,Alimentos,1450,Dulfiltro,img_10.jpg,Cafe molido paquete 1lb,4,1,100
+11,Frijoles Negros,Alimentos,820,Da Vicio,img_11.jpg,Granos secos seleccionados,6,1,110
+12,Avena en Hojuelas,Alimentos,600,El Puritano,img_12.jpg,Avena integral paquete,5,1,120
+13,Salsa de Tomate,Alimentos,650,N/A,img_13.jpg,Ketchup pomo rojo,9,1,130
+14,Mayonesa / Mostaza,Alimentos,450,N/A,img_14.jpg,Aderezo frasco plastico,8,1,140
+15,Atole Sobre,Alimentos,400,N/A,img_15.jpg,Mezcla para bebida en polvo,10,1,150
+16,Pasta Macarrones,Alimentos,290,Ada,img_16.jpg,Pasta de semola corta,15,1,160
+17,Espaguetis,Alimentos,270,Topside,img_17.jpg,Pasta larga paquete fino,12,1,170
+18,Arroz Paquete,Alimentos,160,N/A,img_18.jpg,Arroz blanco seleccionado,20,1,180
+19,Aceite Vegetal 1L,Alimentos,990,Ada,img_19.jpg,Aceite de girasol/soya,12,1,190
+20,Vinagre Blanco,Alimentos,300,N/A,img_20.jpg,Botella de plastico 500ml,10,1,200
+21,Patatas Fritas 1kg,Congelados,1200,Vima Foods,img_21.jpg,Corte regular bolsa 1kg,4,1,210
+22,Nuggets de Pollo,Congelados,950,La Perla,img_22.jpg,Empanados paquete 300g,6,1,220
+23,Bocaditos de Pollo,Congelados,850,La Perla,img_23.jpg,Pollo empanado 300g,5,1,230
+24,Lomo Vetado,Congelados,2100,N/A,img_24.jpg,Carne vacuna 350g,3,1,240
+25,Sazon Sobre,Alimentos,60,Sazon,img_25.jpg,Condimento para cocinar,30,1,250
+26,Cubitos de Caldo,Alimentos,15,N/A,img_26.jpg,Unidad de caldo concentrado,40,1,260
+27,Caramelos Surtidos,Snacks,35,Bel,img_27.jpg,Caramelo unidad masticable,50,1,270
+28,Papas Fritas Acho,Snacks,400,Acho,img_28.jpg,Papas sabor campesinas,10,1,280
+29,Galletas Chocolate,Snacks,150,Efsane,img_29.jpg,Barrita rellena individual,15,1,290
+30,Rosquitas de Maiz,Snacks,580,Pelly,img_30.jpg,Snack horneado grande,8,1,300
+31,Chupa Chups,Snacks,150,Richy,img_31.jpg,Paletas de caramelo,12,1,310
+32,Refresco Tuti Tuti,Bebidas,30,Tuti Tuti,img_32.jpg,Refresco instantaneo sobre,25,1,320
+33,Papel Higienico,Higiene,490,La Excelencia,img_33.jpg,Rollo de papel suave,20,1,330
+34,Desodorante Spray,Higiene,1100,Varios,img_34.jpg,Aerosol fragancia hombre,8,1,340
+35,Desodorante Roll-on,Higiene,650,Rexona,img_35.jpg,Proteccion 48h rollon,10,1,350
+36,Almohadillas Kotex,Higiene,450,Kotex,img_36.jpg,Proteccion femenina pack,15,1,360
+37,Jabon de Tocador,Higiene,130,N/A,img_37.jpg,Jabon de barra unidad,20,1,370
+38,Detergente Tid,Limpieza,630,Tid,img_38.jpg,Detergente en polvo bolsa,7,1,380
+39,Esponjas Pack,Limpieza,250,N/A,img_39.jpg,Pack esponjas de fregar,10,1,390
+40,Fosforos,Varios,30,N/A,img_40.jpg,Caja de cerillos,50,1,400
 
