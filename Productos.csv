@@ -1,38 +1,12 @@
-id,nombre,categoria,precio,imagen,descripcion,stock,activo,orden
-1,Atún ,Alimentos y conservas,540,https://i.postimg.cc/76xHK6zt/atun_precio_500.png,Lata estándar 200g,10,TRUE,1
-2,Pasta de tomate,Alimentos y conservas,380,https://i.postimg.cc/gjjYPTNv/pasta_tomate_precio_350.png,400 g,10,TRUE,2
-3,Aceitunas Verdes en Rodajas con Pimiento Fragata,Alimentos y conservas,750,https://i.postimg.cc/4yyJTSBj/pimiento_presio_750.png,142 g,10,TRUE,3
-4,Café Dualis ,Alimentos y conservas,1450,https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png,Paquete 250 g,10,TRUE,4
-5,Café Dufiltro ,Alimentos y conservas,1450,https://i.postimg.cc/hG26fv31/cafe_Dufiltro_250_g_precio_1450.png,Paquete 250 g,10,TRUE,5
-6,pan rallado Enepa,Alimentos y conservas,450,https://i.postimg.cc/qvQwHpNJ/pan-rallado.webp,Paquete,10,TRUE,6
-7,Cartón de huevo,Alimentos y conservas,3000,https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3100.png,Cartón,10,TRUE,7
-8,Leche condensada,Alimentos y conservas,520,https://i.postimg.cc/tT2XwjtT/leche_condensada.png, 397 g,10,TRUE,8
-9,Harina blanca,Alimentos y conservas,600,https://i.postimg.cc/3xc2NHFB/harina_blanca1_kg.png,Paquete 1 Kg,10,TRUE,9
-10,Chicoticos Pelly ,Snacks y golosinas,400,https://i.postimg.cc/1zv2fXjZ/chicoticos_pelly_90_g_precio_400.png,Paquete 90 g,10,TRUE,10
-11,Papitas Campesinas,Snacks y golosinas,690,https://i.postimg.cc/cLgrDtf9/papitas_campesinas_precio_690.png,Paquete,10,TRUE,11
-12,Pelly de Jamón,Snacks y golosinas,580,https://i.postimg.cc/pdQV7frX/pelly_jamon_precio_580.png,Paquete,10,TRUE,12
-13,Mayonesa Mediana,Salsas,850,https://i.postimg.cc/KzJZw2rR/mayonesa_precio_850.png,Frasco mediano,10,TRUE,13
-14,Mayonesa Grande,Salsas,1100,https://i.postimg.cc/Px2t9jzz/mayonesa_precio1100.png,Frasco grande,10,TRUE,14
-15,Cuchilla de Afeitar,Higiene personal,100,https://i.postimg.cc/8CdkdW7x/cuchilla_de_afeitar_precio_100.png,Unidad,10,TRUE,15
-16,Jabón Marwa,Higiene personal,150,https://i.postimg.cc/3RK8tRpR/jabon_marwa_precio_150.png,Pastilla,10,TRUE,16
-17,Papel Sanitario,Higiene personal,490,https://i.postimg.cc/bwW289qD/papel_sanitario_precio_490i.png,Paquete,10,TRUE,17
-18,Toallas Sanitarias,Higiene personal,450,https://i.postimg.cc/KjjZyH0b/toallas_sanitarias_precio_450.png,Paquete,10,TRUE,18
-19,Toallas Húmedas,Higiene personal,690,https://i.postimg.cc/W4ZSP3cw/toallas_humedas_precio_690.png,Paquete,10,TRUE,19
-20,Jabón de Lavar,Aseo del hogar,250,https://i.postimg.cc/V6YfK6Mz/jabon_de_lavar_precio_250.png,Pastilla,10,TRUE,20
-21,Perfume Candy,Perfumes y desodorantes,3100,https://i.postimg.cc/vTgJRyhp/perfume_candy_precio_3100.png,Frasco 50 ml,10,TRUE,21
-22,Perfume genérico,Perfumes y desodorantes,3100,https://i.postimg.cc/ZKrT0PPG/perfume_precio_3100.png, 50 ml,10,TRUE,22
-23,Perfume Q,Perfumes y desodorantes,3100,https://i.postimg.cc/CL03P3Dn/perfume_q_precio_3100.png, 50 ml,10,TRUE,23
-24,Desodorante Obao,Perfumes y desodorantes,1100,https://i.postimg.cc/PxtXSxD2/desodorante_obao_precio_1100.png,Roll-on,10,TRUE,24
-25,Desodorante Rush Blanco,Perfumes y desodorantes,1000,https://i.postimg.cc/FR9rTRS8/desodorante_rush_blanco_precio_1000.png,Roll-on,10,TRUE,25
-26,Desodorante Rush,Perfumes y desodorantes,1000,https://i.postimg.cc/sXVjTXSF/desodorante_rush_precio_1000.png,Roll_on,10,TRUE,26
-27,Colonia Niña,Perfumes y desodorantes,1100,https://i.postimg.cc/G3v04rsM/colonia_nina.png, 100 ml,10,TRUE,27
-28,Macarrones,Pastas y fideos,300,https://i.postimg.cc/Hsmz1H69/macarrones_precio_300.png,460 g,10,TRUE,28
-29,Sopas instantáneas,Pastas y fideos,160,https://i.postimg.cc/FzNTpQqK/sopas_instantaneas_precio_160.png,Paquete,10,TRUE,29
-30,Licor de fresa,Bebidas ,2500,https://i.postimg.cc/59YT2x5p/licor_de_fresa_precio_2500.png,Botella,10,TRUE,30
-31,Licor Cocobay,Bebidas ,2500,https://i.postimg.cc/7ZDW90Fz/locor_cocobay_precio_2500.png,Botella,10,TRUE,31
-32,Whisky Spirit 200 ml,Bebidas ,320,https://i.postimg.cc/4N8W6q1t/tea_precio_320.png, 200 ml,10,TRUE,32
-33,Whisky Sir Albin,Bebidas ,1350,https://i.postimg.cc/cLyrb4T0/whisky_1L_precio_1350.png,Botella 1 L,10,TRUE,33
-34,Whisky Sir Albin,Bebidas,550,https://i.postimg.cc/y84kbYnC/whisky_sir_albin_precio_550.png,Botella pequeña,10,TRUE,34
-35,Vino Pluvium,Bebidas ,1200,https://i.postimg.cc/XNLLWmmx/vino_pluvium_precio_1200.png,Botella,10,TRUE,35
+id,nombre,categoria,precio,marca,imagen,descripcion,stock,activo,orden
+1,Ron Albin 1L,Bebidas,2500,Albin,img_01.jpg,Ron blanco botella grande,5,1,10
+2,Vino Tinto Pluvium,Bebidas,1200,Pluvium,img_02.jpg,Vino de mesa importado,3,1,20
+3,Ron Parranda,Bebidas,180,Parranda,img_03.jpg,Ron en botella plastica,8,1,30
+4,Cerveza Cristal,Bebidas,300,Cristal,img_04.jpg,Cerveza clara en lata,12,1,40
+5,Jugo de Frutas 1L,Bebidas,620,YES,img_05.jpg,Jugo de mango o manzana,10,1,50
+6,Cafe Tostado,Alimentos,1450,Dulfiltro,img_06.jpg,Cafe molido paquete 1lb,4,1,60
+7,Frijoles Negros,Alimentos,820,Da'Vicio,img_07.jpg,Granos secos seleccionados,6,1,70
+8,Pasta Macarrones,Alimentos,290,Ada,img_08.jpg,Pasta de semola corta,15,1,80
+9,Espaguetis,Alimentos,270,Topside,img_09.jpg,Pasta larga paquete fino,12,1,90
+10,Papel Higienico,Higiene,490,La Excelencia,img_10.jpg,Rollo de papel suave,20,1,100
 
-36,Baterías Triple A,Electrónicos y accesorios,300,https://i.postimg.cc/DZ2vxZsT/Gemini_Generated_Image_824rio824rio824r.png,Pack de 4 unidades,10,TRUE,36
