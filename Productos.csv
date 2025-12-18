@@ -35,20 +35,28 @@ id,nombre,categoria,precio,marca,imagen,descripcion,stock,activo,orden
 34,Whisky Sir Albin 500ml,Bebidas,550,Albín,https://i.postimg.cc/y84kbYnC/whisky_sir_albin_precio_550.png,Botella mediana,10,TRUE,34
 35,Vino Pluvium,Bebidas,1200,Pluvium,https://i.postimg.cc/XNLLWmmx/vino_pluvium_precio_1200.png,Botella vino tinto,10,TRUE,35
 36,Baterías Triple A,Electrónicos y accesorios,300,N/A,https://i.postimg.cc/DZ2vxZsT/Gemini_Generated_Image_824rio824rio824r.png,Pack 4 unidades,10,TRUE,36
-37,Cerveza Cristal,Bebidas,300,Cristal,sin_url,Lata 355ml,12,TRUE,37
+37,Cerveza Cristal,Bebidas,300,Cristal,https://i.postimg.cc/d1JxDCW3/cervaza-cristal-1.jpg,Lata 355ml,12,TRUE,37
 38,Cerveza Holland Import,Bebidas,230,Holland,sin_url,Lata cerveza importada,10,TRUE,38
-39,Malta / Pepsi,Bebidas,260,Varios,sin_url,Lata refresco,15,TRUE,39
-40,Jugo YES 1L,Bebidas,620,YES,sin_url,Tetrapack mango/manzana,8,TRUE,40
-41,Agua Embotellada,Bebidas,650,N/A,sin_url,Botella 1.5L,10,TRUE,41
-42,Frijoles Negros,Alimentos y conservas,820,Da Vicio,sin_url,Paquete granos,5,TRUE,42
-43,Avena en Hojuelas,Alimentos y conservas,600,El Puritano,sin_url,Paquete avena integral,6,TRUE,43
+39,Malta / Pepsi,Bebidas,260,Varios,https://i.postimg.cc/ZKQPnr9K/malta.png,Lata refresco,15,TRUE,39
+40,Jugo YES 1L,Bebidas,620,YES,https://i.postimg.cc/fy2cxdBH/jugo_j.png,Tetrapack mango/manzana,8,TRUE,40
+41,Agua Embotellada,Bebidas,650,N/A,https://i.postimg.cc/m2gVtL8J/agua.png,Botella 1.5L,10,TRUE,41
+42,Frijoles Negros,Alimentos y conservas,820,Da Vicio,https://i.postimg.cc/wvkcjZNf/frijol_negro.png,Paquete granos,5,TRUE,42
+43,Avena en Hojuelas,Alimentos y conservas,600,El Puritano,https://i.postimg.cc/sDHmWkNL/avena.png,Paquete avena integral,6,TRUE,43
 44,Espaguetis,Pastas y fideos,270,Topside,sin_url,Paquete pasta larga,15,TRUE,44
-45,Arroz Seleccionado,Alimentos y conservas,160,N/A,sin_url,Paquete 1lb,20,TRUE,45
+45,Arroz Seleccionado,Alimentos y conservas,160,N/A,sin_url,Paquete 1lb,0,FALSE,45
 46,Patatas Fritas 1kg,Alimentos y conservas,1200,Vima,sin_url,Bolsa congelada,4,TRUE,46
-47,Nuggets de Pollo,Alimentos y conservas,950,La Perla,sin_url,Paquete empanado,5,TRUE,47
-48,Atole Sobre,Alimentos y conservas,400,N/A,sin_url,Mezcla en polvo,10,TRUE,48
+47,Nuggets de Pollo,Alimentos y conservas,950,La Perla,https://i.postimg.cc/KYSnrxDm/nuggets_de_pollo.webp,Paquete empanado,5,TRUE,47
+48,Atole Sobre,Alimentos y conservas,400,N/A,https://i.postimg.cc/fTqCdGPh/atole.png,Mezcla en polvo,10,TRUE,48
 49,Papas Fritas Acho,Snacks y golosinas,400,Acho,sin_url,Sabor natural/campesina,8,TRUE,49
 50,Rosquitas de Maíz,Snacks y golosinas,580,Pelly,sin_url,Snack horneado,10,TRUE,50
-51,Detergente Tid,Aseo del hogar,630,Tid,sin_url,Bolsa detergente polvo,6,TRUE,51
+51,Detergente Tid,Aseo del hogar,630,Tid,https://i.postimg.cc/3RhF7YkZ/detergente.png,Bolsa detergente polvo,6,TRUE,51
 52,Esponjas Pack,Aseo del hogar,250,N/A,sin_url,Pack multiuso,10,TRUE,52
 53,Fósforos,Varios,30,N/A,sin_url,Caja de cerillos,50,TRUE,53
+54,Aceite,Alimentos y conservas,970,N/A,https://i.postimg.cc/hPZsmk5N/aceite.png,Botella de aceite vegetal,10,TRUE,54
+55,Bocaditos de Pollo,Snacks y golosinas,500,N/A,https://i.postimg.cc/GpGxZHmd/bocadito_de_pollo.png,Bocaditos crujientes,10,TRUE,55
+56,Jabón de Carbón,Higiene personal,200,N/A,https://i.postimg.cc/Y9xfCZgB/jabon_carbon.png,Jabón artesanal,10,TRUE,56
+57,Ketchup,Salsas,450,N/A,https://i.postimg.cc/15XcyWzm/ketchup.png,Salsa de tomate,10,TRUE,57
+58,Mostaza,Salsas,450,N/A,https://i.postimg.cc/L6Wk5zqs/mostaza.png,Salsa de mostaza,10,TRUE,58
+59,Cerveza Parranda,Bebidas,250,Parranda,https://i.postimg.cc/d31dt1w9/parranda.webp,Cerveza clara,10,TRUE,59
+60,Carne de Res,Alimentos y conservas,1500,N/A,https://i.postimg.cc/nh7mLNbw/res.webp,Corte de res fresco,10,TRUE,60
+61,Vinagreta,Salsas,350,N/A,https://i.postimg.cc/g0WZL4m5/vinagret.webp,Salsa para ensaladas,10,TRUE,61
