@@ -8,7 +8,7 @@
     <meta name="keywords" content="tienda online habana, mercado habana, entrega a domicilio cuba, mandados habana, el resolvito">
     <meta name="author" content="El Resolvito">
 
-    <link rel="manifest" href="/manifest.json?v=4">
+    <link rel="manifest" href="/manifest.json?v=5">
     <meta name="theme-color" content="#0d3b33">
     <link rel="apple-touch-icon" href="/android-chrome-512x512.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -90,6 +90,39 @@
         .hero-image-mask:hover { border-radius: 50%; box-shadow: 20px 20px 0px rgba(13, 59, 51, 0.1); }
 
         #mainHeader { background-color: var(--primary-color); box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        
+        /* Estilos para modo offline */
+        #offline-banner {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #ffc107;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        #offline-banner button {
+            background: none;
+            border: none;
+            color: #333;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0 5px;
+            margin-left: 10px;
+        }
+        
+        #offline-banner button:hover {
+            color: #000;
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -109,6 +142,12 @@
             <a href="#como-comprar" class="hover:text-[var(--accent-color)] transition-colors duration-300">Ayuda</a>
             <a href="#contacto" class="hover:text-[var(--accent-color)] transition-colors duration-300">Contacto</a>
         </nav>
+        
+        <!-- Indicador de conexión -->
+        <div id="estado-conexion" class="hidden md:flex items-center gap-2 text-xs px-2 py-1 rounded-full bg-opacity-20">
+            <span class="inline-block w-2 h-2 rounded-full bg-green-500"></span>
+            <span class="text-white">Online</span>
+        </div>
     </div>
 </header>
 
@@ -640,7 +679,7 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
     async function updateAllCounters() {
         try {
             // 1. Obtener contador actual
-            const getResponse = await fetch('https://api.countapi.xyz/get/elresolvito-cuba/visits');
+            const getResponse = await fetch('https://api.countapi.xyz/get/el-resolvito-cuba/visits');
             const getData = await getResponse.json();
             
             let currentCount = getData.value || 0;
@@ -650,7 +689,7 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
             const today = new Date().toDateString();
             
             if (!lastIncrement || lastIncrement !== today) {
-                const hitResponse = await fetch('https://api.countapi.xyz/get/elresolvito-cuba/visits');
+                const hitResponse = await fetch('https://api.countapi.xyz/hit/el-resolvito-cuba/visits');
                 const hitData = await hitResponse.json();
                 currentCount = hitData.value;
                 localStorage.setItem('lastCounterIncrement', today);
@@ -680,6 +719,150 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
             
             document.querySelectorAll('#heroCounter, #communityCounter, #footerCounter, #simpleCounter').forEach(el => {
                 if (el) el.textContent = localCount.toLocaleString();
+            });
+        }
+    }
+
+    // ============================================
+    // FUNCIONES DE DETECCIÓN DE CONEXIÓN
+    // ============================================
+    function verificarConexion() {
+        const estado = document.getElementById('estado-conexion');
+        if (!navigator.onLine) {
+            console.log('📶 Estás offline');
+            if (estado) {
+                estado.innerHTML = '<span class="inline-block w-2 h-2 rounded-full bg-red-500"></span><span class="text-white ml-1">Offline</span>';
+            }
+            // Verificar si tenemos datos en caché
+            verificarDatosOffline();
+            mostrarBannerOffline();
+        } else {
+            console.log('📶 Estás online');
+            if (estado) {
+                estado.innerHTML = '<span class="inline-block w-2 h-2 rounded-full bg-green-500"></span><span class="text-white ml-1">Online</span>';
+            }
+            ocultarBannerOffline();
+        }
+    }
+
+    function verificarDatosOffline() {
+        const catalogo = localStorage.getItem('catalogo_productos');
+        if (catalogo) {
+            try {
+                const datos = JSON.parse(catalogo);
+                const productos = datos.productos || [];
+                console.log(`📦 Tienes ${productos.length} productos disponibles offline`);
+                
+                if (productos.length > 0) {
+                    mostrarNotificacionOffline(productos.length);
+                }
+            } catch(e) {
+                console.log('Error al leer datos offline:', e);
+            }
+        } else {
+            console.log('⚠️ No hay datos offline disponibles');
+        }
+    }
+
+    function mostrarBannerOffline() {
+        // Eliminar banner anterior si existe
+        const bannerAnterior = document.getElementById('offline-banner');
+        if (bannerAnterior) {
+            bannerAnterior.remove();
+        }
+        
+        // Crear nuevo banner
+        const banner = document.createElement('div');
+        banner.id = 'offline-banner';
+        banner.innerHTML = `
+            <strong>🔌 Modo Offline</strong><br>
+            <span id="offline-product-count">0</span> productos disponibles
+            <button onclick="this.parentElement.remove()" style="margin-left:10px;">×</button>
+        `;
+        document.body.appendChild(banner);
+        
+        // Actualizar contador de productos
+        setTimeout(() => {
+            const catalogo = localStorage.getItem('catalogo_productos');
+            if (catalogo) {
+                try {
+                    const datos = JSON.parse(catalogo);
+                    const productos = datos.productos || [];
+                    const countElement = document.getElementById('offline-product-count');
+                    if (countElement) {
+                        countElement.textContent = productos.length;
+                    }
+                } catch(e) {
+                    console.log('Error actualizando contador offline:', e);
+                }
+            }
+        }, 500);
+        
+        // Auto-ocultar después de 10 segundos
+        setTimeout(() => {
+            if (banner.parentElement) {
+                banner.remove();
+            }
+        }, 10000);
+    }
+
+    function ocultarBannerOffline() {
+        const banner = document.getElementById('offline-banner');
+        if (banner) {
+            banner.remove();
+        }
+    }
+
+    function mostrarNotificacionOffline(cantidad) {
+        console.log(`📱 ${cantidad} productos disponibles offline`);
+        // Esta función podría mostrar una notificación push si se implementa
+    }
+
+    // ============================================
+    // FUNCIONES DE SERVICE WORKER
+    // ============================================
+    function registrarServiceWorker() {
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('✅ Service Worker registrado correctamente:', registration.scope);
+                        
+                        // Verificar si hay actualizaciones
+                        registration.addEventListener('updatefound', () => {
+                            console.log('🔄 Nueva versión de Service Worker encontrada');
+                            const newWorker = registration.installing;
+                            
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    console.log('📦 Nueva versión lista. Recarga para actualizar.');
+                                    // Aquí podrías mostrar un botón para recargar la página
+                                }
+                            });
+                        });
+                        
+                        // Manejar mensajes del Service Worker
+                        navigator.serviceWorker.addEventListener('message', event => {
+                            if (event.data && event.data.type === 'catalogoActualizado') {
+                                console.log('🔄 Catálogo actualizado desde segundo plano');
+                                // Podrías mostrar una notificación al usuario
+                            }
+                        });
+                    })
+                    .catch(function(error) {
+                        console.log('❌ Error al registrar Service Worker:', error);
+                    });
+            });
+        }
+    }
+
+    function forzarActualizacionSW() {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistration().then(reg => {
+                if (reg) {
+                    reg.update();
+                    console.log('🔄 Service Worker actualizado forzadamente');
+                }
             });
         }
     }
@@ -1079,6 +1262,10 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
             });
         });
         setupCheckoutEventListeners();
+        
+        // Eventos de conexión
+        window.addEventListener('online', verificarConexion);
+        window.addEventListener('offline', verificarConexion);
     }
 
     function closeMobileMenu() {
@@ -1463,7 +1650,13 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
         setupScrollHeader();
         showFloatingCalloutAfterDelay();
         
-        // 3. Verificar si ya hay productos cargados (por si el evento no se disparó)
+        // 3. Registrar Service Worker
+        registrarServiceWorker();
+        
+        // 4. Verificar conexión
+        verificarConexion();
+        
+        // 5. Verificar si ya hay productos cargados (por si el evento no se disparó)
         setTimeout(function() {
             // Si después de 3 segundos no se cargaron productos, forzar carga
             if (products.length === 0) {
@@ -1474,6 +1667,19 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
                     products.sort((a, b) => (a.category < b.category ? -1 : (a.category > b.category ? 1 : (a.name < b.name ? -1 : 1))));
                     setupStoreSection('mercado', products);
                     console.log('✅ Productos cargados manualmente:', products.length);
+                    
+                    // Guardar en localStorage para offline
+                    try {
+                        const datos = {
+                            productos: products,
+                            timestamp: Date.now(),
+                            version: '2.0'
+                        };
+                        localStorage.setItem('catalogo_productos', JSON.stringify(datos));
+                        console.log('💾 Catálogo guardado en localStorage para offline');
+                    } catch(e) {
+                        console.error('Error guardando catálogo offline:', e);
+                    }
                 } else {
                     // Mostrar mensaje de error
                     const grid = document.getElementById('mercadoProductGrid');
@@ -1494,23 +1700,11 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
     });
 
     // ============================================
-    // FIN DEL CONTADOR DE VISITAS
+    // FIN DEL SCRIPT
     // ============================================
-
-   // Service Worker - DESHABILITADO TEMPORALMENTE
-/*
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').then(reg => console.log('SW ok')).catch(err => console.log('SW fail', err));
-    });
-}
-*/
-console.log('Service Worker deshabilitado temporalmente');
 </script>
 
 </body>
 </html>
-
-
 
 
