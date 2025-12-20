@@ -8,20 +8,23 @@
     <meta name="keywords" content="tienda online habana, mercado habana, entrega a domicilio cuba, mandados habana, el resolvito">
     <meta name="author" content="El Resolvito">
 
-    <link rel="manifest" href="/manifest.json?v=7">
+    <link rel="manifest" href="/manifest.json?v=5">
     <meta name="theme-color" content="#0d3b33">
     <link rel="apple-touch-icon" href="/android-chrome-512x512.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 
+    <!-- ONESIGNAL META TAGS -->
+    <meta name="onesignal" content="wordpress-plugin"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="El Resolvito">
+
     <!-- PRECONEXIÓN PARA CSV DE GITHUB -->
     <link rel="preconnect" href="https://elresolving.github.io">
     <link rel="dns-prefetch" href="https://elresolving.github.io">
 
-    <!-- Tailwind CSS CORREGIDO -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    
-    <!-- Fuentes de Google -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -126,6 +129,88 @@
         #offline-banner button:hover {
             color: #000;
         }
+        
+        /* Estilos para el botón de notificaciones */
+        #notification-subscribe-btn {
+            position: fixed;
+            bottom: 32px;
+            right: 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 9995;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        #notification-subscribe-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(102, 126, 234, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0); }
+        }
+        
+        #notification-subscribe-btn.hidden {
+            display: none;
+        }
+        
+        /* Estilos para notificaciones locales */
+        .local-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 350px;
+            z-index: 10000;
+            transform: translateX(120%);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .local-notification.show {
+            transform: translateX(0);
+        }
+        
+        .local-notification .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .local-notification .notification-icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+        
+        .local-notification.success .notification-icon {
+            color: #10b981;
+        }
+        
+        .local-notification.info .notification-icon {
+            color: #3b82f6;
+        }
+        
+        .local-notification.warning .notification-icon {
+            color: #f59e0b;
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -200,7 +285,7 @@
                 <img src="https://i.postimg.cc/s2FHrX2Y/logo_el_resolvito.jpg" alt="El Resolvito Logo" class="h-12 w-12 rounded-full object-cover">
                 <span class="text-white text-fixed-lg font-bold">El Resolvito</span>
             </a>
-            <button id="close-mobile-menu" class="text-white"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
+            <button id="close-mobile-menu" class="text-white"><svg xmlns="http://www.w3.org2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
         </div>
         <nav class="flex flex-col space-y-4 text-fixed-lg font-semibold text-white">
             <a href="#mercado" class="hover:text-gray-300 transition-colors mobile-nav-link">Mercado</a>
@@ -498,15 +583,34 @@
     </div>
 </div>
 
-<!-- Botones flotantes -->
+<!-- Botón flotante del carrito -->
 <button id="floatingCartBtn" class="fixed bottom-6 right-6 bg-[var(--primary-color)] text-white px-5 py-3 rounded-full shadow-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 z-40 flex items-center gap-3">
     <div class="relative"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.402H3.62a.5.5 0 0 1-.49-.598l-1-5A.5.5 0 0 1 2 1H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2.5h7.45l.5-2.5H3.14zM5 12a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/></svg><span id="cartCount" class="absolute -top-1 -right-1 bg-[var(--accent-color)] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">0</span></div>
     <span id="floatingCartTotal" class="text-fixed-lg font-bold">$0</span>
 </button>
 
+<!-- Botón flotante de notificaciones -->
+<div id="notification-subscribe-btn" class="hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+    </svg>
+</div>
+
+<!-- Toast para notificaciones -->
 <div id="cartToast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none z-[9999]"><p id="cartToastMessage" class="text-fixed-sm"></p></div>
+
+<!-- Callout flotante -->
 <div id="floatingCallout" class="fixed bottom-24 right-6 bg-[var(--primary-color)] text-white p-4 rounded-lg shadow-xl text-fixed-base z-[9990] opacity-0 translate-x-full transition-all duration-500 ease-out">
     <button class="close-btn" id="closeFloatingCallout">&times;</button><p class="font-bold mb-2">¡Comodidad en La Habana!</p><a href="#nuestras-ventajas" class="mt-3 inline-block bg-[var(--accent-color)] text-white text-fixed-sm font-semibold py-2 px-4 rounded-full">Ver Ventajas</a>
+</div>
+
+<!-- Notificación local temporal -->
+<div id="localNotification" class="local-notification hidden">
+    <button class="close-btn" id="closeLocalNotification">&times;</button>
+    <div class="notification-icon">🔔</div>
+    <h4 class="font-bold text-lg mb-2" id="notificationTitle"></h4>
+    <p class="text-gray-600 mb-4" id="notificationMessage"></p>
+    <button id="notificationActionBtn" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors"></button>
 </div>
 
 <!-- ============================================
@@ -518,109 +622,31 @@ SCRIPTS EN ORDEN CORRECTO
 <!-- 🔥 CATÁLOGO DINÁMICO (carga desde GitHub CSV) -->
 <script src="catalogo-dinamico.js" defer></script>
 
+<!-- 📱 ONESIGNAL NOTIFICACIONES PUSH -->
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+
 <script>
-    // ============================================
-    // CONSTANTES
-    // ============================================
+    // CONSTANTES DE LA NUEVA POLÍTICA DE ENVÍOS POR RANGOS
     const SHIPPING_RANGES = [
-        { max: 2000, fee: 200, discount: "0%" },
-        { max: 5000, fee: 150, discount: "25%" },
-        { max: Infinity, fee: 100, discount: "50%" }
+        { max: 2000, fee: 200, discount: "0%" },        // Hasta $2,000
+        { max: 5000, fee: 150, discount: "25%" },       // $2,001 - $5,000
+        { max: Infinity, fee: 100, discount: "50%" }    // Más de $5,000
     ];
-    const SERVICE_FEE_PERCENTAGE = 0.08;
-    const MINIMUM_PROFIT = 300;
+
+    const SERVICE_FEE_PERCENTAGE = 0.08; // 8% de comisión
+    const MINIMUM_PROFIT = 300; // Utilidad mínima garantizada por pedido
+
+    // Constantes antiguas (mantenidas para compatibilidad)
     const MIN_ORDER_THRESHOLD = 500;
     const TRAMO_1_MAX = 3000;
+    const WEIGHT_SURCHARGE_PER_10KG = 100;
+    const WEIGHT_THRESHOLD_KG = 10;
+    const SERVICE_FEE = 50;
 
     // ============================================
-    // FUNCIÓN DE NOTIFICACIONES (CORREGIDA)
+    // VARIABLES GLOBALES - INICIALIZACIÓN SEGURA
     // ============================================
-    
-    function enviarNotificacionManual(titulo, mensaje, datos = {}) {
-        console.log('🔔 Enviando notificación:', titulo);
-        
-        // Verificar si el navegador soporta notificaciones
-        if (!('Notification' in window)) {
-            console.log('❌ Este navegador no soporta notificaciones');
-            alert('Tu navegador no soporta notificaciones. Prueba con Chrome, Firefox o Edge.');
-            return null;
-        }
-        
-        // Verificar permisos
-        console.log('📋 Estado de permisos:', Notification.permission);
-        
-        if (Notification.permission === 'denied') {
-            console.log('❌ Permiso denegado por el usuario');
-            showCartToast('Permiso de notificaciones denegado');
-            return null;
-        }
-        
-        if (Notification.permission === 'default') {
-            console.log('⚠️ Solicitando permiso...');
-            
-            Notification.requestPermission().then(permission => {
-                console.log('📋 Respuesta del usuario:', permission);
-                
-                if (permission === 'granted') {
-                    console.log('✅ Permiso concedido, enviando notificación...');
-                    // Reintentar después de conceder permiso
-                    setTimeout(() => enviarNotificacionManual(titulo, mensaje, datos), 500);
-                } else {
-                    console.log('❌ Usuario rechazó los permisos');
-                    showCartToast('Permiso de notificaciones rechazado');
-                }
-            });
-            
-            return null;
-        }
-        
-        // Permiso concedido, crear notificación
-        try {
-            console.log('🎯 Creando notificación con permisos concedidos');
-            
-            const opciones = {
-                body: mensaje,
-                icon: 'https://i.postimg.cc/s2FHrX2Y/logo_el_resolvito.jpg',
-                badge: 'https://i.postimg.cc/s2FHrX2Y/logo_el_resolvito.jpg',
-                vibrate: [100, 50, 100],
-                data: {
-                    url: window.location.href,
-                    timestamp: Date.now(),
-                    ...datos
-                }
-            };
-            
-            const notificacion = new Notification(titulo, opciones);
-            console.log('✅ Notificación creada:', notificacion);
-            
-            // Manejar clic en la notificación
-            notificacion.onclick = function(event) {
-                event.preventDefault();
-                window.focus();
-                if (opciones.data.url) {
-                    window.open(opciones.data.url, '_self');
-                }
-            };
-            
-            // Auto-cerrar después de 8 segundos
-            setTimeout(() => {
-                notificacion.close();
-            }, 8000);
-            
-            showCartToast('Notificación enviada ✓');
-            return notificacion;
-            
-        } catch (error) {
-            console.error('❌ Error creando notificación:', error);
-            showCartToast('Error: ' + error.message);
-            return null;
-        }
-    }
-    
-    // ============================================
-    // VARIABLES GLOBALES
-    // ============================================
-    let products = [];
+    let products = []; // Se llenará desde catalogo-dinamico.js
     var cart = JSON.parse(localStorage.getItem('cart')) || [];
     var whatsappGroupLink = 'https://chat.whatsapp.com/H19dIofkINdHrVApA4jbvW?mode=ac_t';
     var currentProductForModal = null;
@@ -628,12 +654,249 @@ SCRIPTS EN ORDEN CORRECTO
     var selectedCashAmount = '';
     var toastTimeout;
     var currentDepartment = 'mercado';
+    
+    // Variables para OneSignal
+    var isOneSignalInitialized = false;
+    var userSubscriptionId = null;
+
+    // Referencias a modales
+    const cartModal = document.getElementById('cartModal');
+    const productDetailsModal = document.getElementById('productDetailsModal');
+    const checkoutModal = document.getElementById('checkoutModal');
+    const confirmationModal = document.getElementById('confirmationModal');
+    const floatingCartBtn = document.getElementById('floatingCartBtn');
+    const closeCartModalBtn = document.getElementById('closeCartModal');
+    const closeProductDetailsModalBtn = document.getElementById('closeProductDetailsModalBtn');
+    const closeCheckoutModalBtn = document.getElementById('closeCheckoutModal');
+    const closeConfirmationModalBtn = document.getElementById('closeConfirmationModal');
+    const floatingCallout = document.getElementById('floatingCallout');
+    const closeFloatingCalloutBtn = document.getElementById('closeFloatingCallout');
+    const notificationSubscribeBtn = document.getElementById('notification-subscribe-btn');
+    const localNotification = document.getElementById('localNotification');
+    const closeLocalNotificationBtn = document.getElementById('closeLocalNotification');
+    const notificationActionBtn = document.getElementById('notificationActionBtn');
 
     // ============================================
-    // FUNCIONES DE LA TIENDA (EXISTENTES)
+    // FUNCIONES DE ONESIGNAL
     // ============================================
-    
-    // Función para calcular tarifa de envío
+
+    // INICIALIZAR ONESIGNAL
+    function initializeOneSignal() {
+        console.log('🔄 Inicializando OneSignal...');
+        
+        // Verificar si OneSignal está disponible
+        if (typeof OneSignal === 'undefined') {
+            console.log('⚠️ OneSignal no está disponible');
+            return;
+        }
+        
+        // Configuración de OneSignal
+        // 🔴 IMPORTANTE: REEMPLAZA ESTOS VALORES CON TUS PROPIOS DATOS DE ONESIGNAL
+        const oneSignalAppId = "TU-APP-ID-AQUI"; // Reemplaza con tu App ID
+        const oneSignalSafariId = "TU-SAFARI-WEB-ID-AQUI"; // Reemplaza con tu Safari Web ID (opcional)
+        
+        window.OneSignal = window.OneSignal || [];
+        
+        OneSignal.push(function() {
+            OneSignal.init({
+                appId: oneSignalAppId,
+                safari_web_id: oneSignalSafariId,
+                notifyButton: {
+                    enable: false, // Desactivamos el botón por defecto, usaremos el nuestro
+                },
+                allowLocalhostAsSecureOrigin: true, // Útil para desarrollo
+                autoRegister: false, // No registrar automáticamente
+                autoResubscribe: true, // Re-suscribir automáticamente
+                persistNotification: false,
+                welcomeNotification: {
+                    title: "¡Bienvenido a El Resolvito!",
+                    message: "Recibirás notificaciones de ofertas y nuevos productos.",
+                }
+            });
+            
+            // Verificar estado de suscripción
+            OneSignal.getUserId(function(userId) {
+                if (userId) {
+                    console.log('✅ Usuario ya suscrito a notificaciones:', userId);
+                    userSubscriptionId = userId;
+                    hideNotificationButton();
+                } else {
+                    console.log('ℹ️ Usuario no suscrito a notificaciones');
+                    showNotificationButton();
+                }
+            });
+            
+            // Escuchar cambios en la suscripción
+            OneSignal.on('subscriptionChange', function(isSubscribed) {
+                console.log('🔄 Cambio en suscripción:', isSubscribed ? 'SUSCRITO' : 'NO SUSCRITO');
+                
+                if (isSubscribed) {
+                    OneSignal.getUserId(function(userId) {
+                        userSubscriptionId = userId;
+                        console.log('🎉 Usuario suscrito con ID:', userId);
+                        hideNotificationButton();
+                        showLocalNotification(
+                            '¡Notificaciones activadas!',
+                            'Ahora recibirás nuestras mejores ofertas.',
+                            'Ver Ofertas',
+                            '#mercado'
+                        );
+                    });
+                } else {
+                    userSubscriptionId = null;
+                    showNotificationButton();
+                }
+            });
+            
+            isOneSignalInitialized = true;
+            console.log('✅ OneSignal inicializado correctamente');
+        });
+    }
+
+    // MOSTRAR BOTÓN DE NOTIFICACIONES
+    function showNotificationButton() {
+        if (notificationSubscribeBtn) {
+            notificationSubscribeBtn.classList.remove('hidden');
+            console.log('🔔 Mostrando botón de notificaciones');
+            
+            // Configurar evento click
+            notificationSubscribeBtn.addEventListener('click', function() {
+                requestNotificationPermission();
+            });
+        }
+    }
+
+    // OCULTAR BOTÓN DE NOTIFICACIONES
+    function hideNotificationButton() {
+        if (notificationSubscribeBtn) {
+            notificationSubscribeBtn.classList.add('hidden');
+            console.log('🔕 Ocultando botón de notificaciones');
+        }
+    }
+
+    // SOLICITAR PERMISO DE NOTIFICACIONES
+    function requestNotificationPermission() {
+        if (!isOneSignalInitialized) {
+            console.log('⚠️ OneSignal no está inicializado');
+            return;
+        }
+        
+        console.log('🔔 Solicitando permiso de notificaciones...');
+        
+        OneSignal.showNativePrompt().then(function() {
+            console.log('✅ Prompt de notificaciones mostrado');
+        }).catch(function(error) {
+            console.error('❌ Error mostrando prompt:', error);
+            // Fallback a notificaciones nativas
+            if ('Notification' in window) {
+                Notification.requestPermission().then(function(permission) {
+                    if (permission === 'granted') {
+                        console.log('✅ Permiso concedido para notificaciones nativas');
+                        showLocalNotification(
+                            'Permiso concedido',
+                            'Ahora podrás recibir notificaciones de El Resolvito.',
+                            'Ver Tienda',
+                            '#mercado'
+                        );
+                    }
+                });
+            }
+        });
+    }
+
+    // ENVIAR NOTIFICACIÓN LOCAL (para pruebas)
+    function showLocalNotification(title, message, actionText, actionUrl) {
+        if (!localNotification) return;
+        
+        document.getElementById('notificationTitle').textContent = title;
+        document.getElementById('notificationMessage').textContent = message;
+        document.getElementById('notificationActionBtn').textContent = actionText;
+        
+        // Configurar acción del botón
+        notificationActionBtn.onclick = function() {
+            if (actionUrl) {
+                window.location.href = actionUrl;
+            }
+            hideLocalNotification();
+        };
+        
+        // Configurar botón de cerrar
+        closeLocalNotificationBtn.onclick = hideLocalNotification;
+        
+        // Mostrar notificación
+        localNotification.classList.remove('hidden');
+        setTimeout(() => {
+            localNotification.classList.add('show');
+        }, 100);
+        
+        // Auto-ocultar después de 10 segundos
+        setTimeout(hideLocalNotification, 10000);
+    }
+
+    function hideLocalNotification() {
+        if (localNotification) {
+            localNotification.classList.remove('show');
+            setTimeout(() => {
+                localNotification.classList.add('hidden');
+            }, 500);
+        }
+    }
+
+    // FUNCIÓN PARA ENVIAR NOTIFICACIONES PUSH DESDE EL CLIENTE
+    // Nota: Normalmente esto se hace desde el dashboard de OneSignal
+    function sendTestNotification() {
+        if (!userSubscriptionId) {
+            console.log('❌ No hay usuario suscrito para enviar notificación');
+            showLocalNotification(
+                'No estás suscrito',
+                'Activa las notificaciones para recibir nuestras ofertas.',
+                'Activar Notificaciones',
+                '#'
+            );
+            return;
+        }
+        
+        console.log('📤 Enviando notificación de prueba a:', userSubscriptionId);
+        
+        // En una implementación real, esto se haría desde el backend
+        // Esta es solo una demostración del flujo
+        showLocalNotification(
+            '¡Prueba exitosa!',
+            'Las notificaciones push están configuradas correctamente.',
+            'Ver Productos',
+            '#mercado'
+        );
+    }
+
+    // ============================================
+    // FUNCIONES DE CARGA DE PRODUCTOS
+    // ============================================
+
+    // FUNCIÓN PARA CARGAR PRODUCTOS DEL CATÁLOGO DINÁMICO
+    function loadProductsFromDynamicCatalog() {
+        console.log('🔄 Cargando productos desde catálogo dinámico...');
+        
+        // 1. Intentar desde CatalogoDinamico (GitHub CSV)
+        if (window.CatalogoDinamico && window.CatalogoDinamico.obtenerTodos) {
+            const dynamicProducts = window.CatalogoDinamico.obtenerTodos();
+            if (dynamicProducts && dynamicProducts.length > 0) {
+                console.log('✅ Productos cargados desde catálogo dinámico:', dynamicProducts.length);
+                return dynamicProducts;
+            }
+        }
+        
+        // 2. Si falla, intentar desde catalogo.js (respaldo local)
+        if (window.catalogo && window.catalogo.productos) {
+            console.log('🔄 Usando catálogo local como respaldo');
+            return window.catalogo.productos;
+        }
+        
+        // 3. Si todo falla, array vacío
+        console.warn('⚠️ No se encontraron productos');
+        return [];
+    }
+
+    // FUNCIÓN PARA DETERMINAR TARIFA DE ENVÍO SEGÚN RANGO
     function calculateShippingFee(subtotal) {
         for (const range of SHIPPING_RANGES) {
             if (subtotal <= range.max) {
@@ -648,22 +911,30 @@ SCRIPTS EN ORDEN CORRECTO
                 };
             }
         }
+        // Por defecto
         return { fee: 200, discount: "0%", rangeText: "Hasta $2,000" };
     }
 
-    // Función para calcular precio final
+    // FUNCIÓN PARA CALCULAR PRECIO FINAL SEGÚN NUEVA POLÍTICA
     function calculateFinalPrice(cartItems) {
+        // 1. Calcular subtotal de productos
         const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        
+        // 2. Determinar tarifa de envío según rango
         const shippingInfo = calculateShippingFee(subtotal);
         const shippingFee = shippingInfo.fee;
-        const serviceFee = subtotal * SERVICE_FEE_PERCENTAGE;
-        let adjustment = 0;
         
+        // 3. Calcular comisión del 8%
+        const serviceFee = subtotal * SERVICE_FEE_PERCENTAGE;
+        
+        // 4. Aplicar regla del piso ($300 utilidad mínima)
         const currentProfit = serviceFee + shippingFee;
+        let adjustment = 0;
         if (currentProfit < MINIMUM_PROFIT) {
             adjustment = MINIMUM_PROFIT - currentProfit;
         }
         
+        // 5. Calcular total final
         const finalPrice = subtotal + shippingFee + adjustment;
         
         return {
@@ -678,12 +949,13 @@ SCRIPTS EN ORDEN CORRECTO
         };
     }
 
-    // Función para generar mensaje de WhatsApp
+    // FUNCIÓN PARA GENERAR MENSAJE DE WHATSAPP CON NUEVA POLÍTICA
     function generateWhatsAppMessage(cart, customerData, priceDetails) {
         const itemsText = cart.map(item => 
             `• ${item.name} x${item.quantity} - $${(item.price * item.quantity).toLocaleString()}`
         ).join('\n');
         
+        // Mensaje según el rango de descuento
         let shippingMessage = "";
         if (priceDetails.shippingDiscount === "25%") {
             shippingMessage = `⭐ *¡APROVECHASTE DESCUENTO EN ENVÍO!* 
@@ -713,42 +985,34 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
     }
 
     // ============================================
-    // CONTADOR DE VISITAS MEJORADO
+    // CONTADOR DE VISITAS CON COUNTAPI
     // ============================================
     async function updateAllCounters() {
         try {
-            // Usar un timeout para evitar bloqueos
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 2000);
-            
-            const getResponse = await fetch('https://api.countapi.xyz/get/el-resolvito-cuba/visits', {
-                signal: controller.signal
-            });
-            clearTimeout(timeoutId);
-            
+            // 1. Obtener contador actual
+            const getResponse = await fetch('https://api.countapi.xyz/get/el-resolvito-cuba/visits');
             const getData = await getResponse.json();
+            
             let currentCount = getData.value || 0;
             
+            // 2. Incrementar solo en primera visita del día
             const lastIncrement = localStorage.getItem('lastCounterIncrement');
             const today = new Date().toDateString();
             
             if (!lastIncrement || lastIncrement !== today) {
-                try {
-                    const hitResponse = await fetch('https://api.countapi.xyz/hit/el-resolvito-cuba/visits', {
-                        signal: AbortSignal.timeout(2000)
-                    });
-                    const hitData = await hitResponse.json();
-                    currentCount = hitData.value;
-                    localStorage.setItem('lastCounterIncrement', today);
-                } catch (hitError) {
-                    console.log("Solo lectura del contador");
-                }
+                const hitResponse = await fetch('https://api.countapi.xyz/hit/el-resolvito-cuba/visits');
+                const hitData = await hitResponse.json();
+                currentCount = hitData.value;
+                localStorage.setItem('lastCounterIncrement', today);
             }
             
-            // Actualizar todos los contadores
+            // 3. Mostrar en todos los contadores
             document.querySelectorAll('#heroCounter, #communityCounter, #footerCounter, #simpleCounter').forEach(el => {
                 if (el) {
+                    // Formatear número (ej: 1,234)
                     el.textContent = currentCount.toLocaleString();
+                    
+                    // Animación sutil
                     el.classList.add('scale-110');
                     setTimeout(() => {
                         el.classList.remove('scale-110');
@@ -757,26 +1021,12 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
             });
             
         } catch (error) {
-            console.log("Usando contador local mejorado");
+            console.log("Usando contador local como respaldo");
             
             // Fallback a localStorage
-            let localCount = localStorage.getItem('elResolvitoVisits');
-            if (!localCount) {
-                const baseCount = 150;
-                const dayOffset = Math.floor(Date.now() / (1000 * 60 * 60 * 24));
-                localCount = baseCount + dayOffset;
-            } else {
-                localCount = parseInt(localCount);
-            }
-            
-            const today = new Date().toDateString();
-            const lastIncrement = localStorage.getItem('lastCounterIncrement');
-            
-            if (!lastIncrement || lastIncrement !== today) {
-                localCount += 1;
-                localStorage.setItem('elResolvitoVisits', localCount);
-                localStorage.setItem('lastCounterIncrement', today);
-            }
+            let localCount = localStorage.getItem('elResolvitoVisits') || 150;
+            localCount = parseInt(localCount) + 1;
+            localStorage.setItem('elResolvitoVisits', localCount);
             
             document.querySelectorAll('#heroCounter, #communityCounter, #footerCounter, #simpleCounter').forEach(el => {
                 if (el) el.textContent = localCount.toLocaleString();
@@ -785,7 +1035,7 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
     }
 
     // ============================================
-    // FUNCIONES DE CONEXIÓN
+    // FUNCIONES DE DETECCIÓN DE CONEXIÓN
     // ============================================
     function verificarConexion() {
         const estado = document.getElementById('estado-conexion');
@@ -794,6 +1044,8 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
             if (estado) {
                 estado.innerHTML = '<span class="inline-block w-2 h-2 rounded-full bg-red-500"></span><span class="text-white ml-1">Offline</span>';
             }
+            // Verificar si tenemos datos en caché
+            verificarDatosOffline();
             mostrarBannerOffline();
         } else {
             console.log('📶 Estás online');
@@ -804,10 +1056,33 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
         }
     }
 
+    function verificarDatosOffline() {
+        const catalogo = localStorage.getItem('catalogo_productos');
+        if (catalogo) {
+            try {
+                const datos = JSON.parse(catalogo);
+                const productos = datos.productos || [];
+                console.log(`📦 Tienes ${productos.length} productos disponibles offline`);
+                
+                if (productos.length > 0) {
+                    mostrarNotificacionOffline(productos.length);
+                }
+            } catch(e) {
+                console.log('Error al leer datos offline:', e);
+            }
+        } else {
+            console.log('⚠️ No hay datos offline disponibles');
+        }
+    }
+
     function mostrarBannerOffline() {
+        // Eliminar banner anterior si existe
         const bannerAnterior = document.getElementById('offline-banner');
-        if (bannerAnterior) bannerAnterior.remove();
+        if (bannerAnterior) {
+            bannerAnterior.remove();
+        }
         
+        // Crear nuevo banner
         const banner = document.createElement('div');
         banner.id = 'offline-banner';
         banner.innerHTML = `
@@ -817,6 +1092,7 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
         `;
         document.body.appendChild(banner);
         
+        // Actualizar contador de productos
         setTimeout(() => {
             const catalogo = localStorage.getItem('catalogo_productos');
             if (catalogo) {
@@ -824,19 +1100,33 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
                     const datos = JSON.parse(catalogo);
                     const productos = datos.productos || [];
                     const countElement = document.getElementById('offline-product-count');
-                    if (countElement) countElement.textContent = productos.length;
-                } catch(e) {}
+                    if (countElement) {
+                        countElement.textContent = productos.length;
+                    }
+                } catch(e) {
+                    console.log('Error actualizando contador offline:', e);
+                }
             }
         }, 500);
         
+        // Auto-ocultar después de 10 segundos
         setTimeout(() => {
-            if (banner.parentElement) banner.remove();
+            if (banner.parentElement) {
+                banner.remove();
+            }
         }, 10000);
     }
 
     function ocultarBannerOffline() {
         const banner = document.getElementById('offline-banner');
-        if (banner) banner.remove();
+        if (banner) {
+            banner.remove();
+        }
+    }
+
+    function mostrarNotificacionOffline(cantidad) {
+        console.log(`📱 ${cantidad} productos disponibles offline`);
+        // Esta función podría mostrar una notificación push si se implementa
     }
 
     // ============================================
@@ -847,7 +1137,28 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('/sw.js')
                     .then(function(registration) {
-                        console.log('✅ Service Worker registrado:', registration.scope);
+                        console.log('✅ Service Worker registrado correctamente:', registration.scope);
+                        
+                        // Verificar si hay actualizaciones
+                        registration.addEventListener('updatefound', () => {
+                            console.log('🔄 Nueva versión de Service Worker encontrada');
+                            const newWorker = registration.installing;
+                            
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    console.log('📦 Nueva versión lista. Recarga para actualizar.');
+                                    // Aquí podrías mostrar un botón para recargar la página
+                                }
+                            });
+                        });
+                        
+                        // Manejar mensajes del Service Worker
+                        navigator.serviceWorker.addEventListener('message', event => {
+                            if (event.data && event.data.type === 'catalogoActualizado') {
+                                console.log('🔄 Catálogo actualizado desde segundo plano');
+                                // Podrías mostrar una notificación al usuario
+                            }
+                        });
                     })
                     .catch(function(error) {
                         console.log('❌ Error al registrar Service Worker:', error);
@@ -856,10 +1167,21 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
         }
     }
 
+    function forzarActualizacionSW() {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistration().then(reg => {
+                if (reg) {
+                    reg.update();
+                    console.log('🔄 Service Worker actualizado forzadamente');
+                }
+            });
+        }
+    }
+
     // ============================================
-    // FUNCIONES DE LA TIENDA (CONTINUACIÓN)
+    // FUNCIONES DE LA TIENDA
     // ============================================
-    
+
     function switchDepartment(dept) {
         currentDepartment = dept;
         document.querySelectorAll('.department-tab').forEach(btn => {
@@ -1002,22 +1324,29 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
     function showProductDetailsModal(productId) {
         console.log('🔍 Buscando producto ID:', productId);
         
+        // Buscar producto en múltiples fuentes
         let product = null;
         
+        // 1. Intentar desde el array products (ya cargado)
         if (products && products.length > 0) {
             product = products.find(p => p.id === productId);
+            console.log('📦 Encontrado en array local:', product ? 'Sí' : 'No');
         }
         
+        // 2. Si no lo encuentra, buscar en CatalogoDinamico
         if (!product && window.CatalogoDinamico && window.CatalogoDinamico.obtenerPorId) {
             product = window.CatalogoDinamico.obtenerPorId(productId);
+            console.log('🔍 Buscando en catálogo dinámico:', product ? 'Sí' : 'No');
         }
         
+        // 3. Si aún no, buscar en catalogo.js como último recurso
         if (!product && window.catalogo && window.catalogo.obtenerPorId) {
             product = window.catalogo.obtenerPorId(productId);
+            console.log('🔄 Buscando en catalogo.js:', product ? 'Sí' : 'No');
         }
         
         if (!product) {
-            console.error('❌ Producto no encontrado');
+            console.error('❌ Producto no encontrado con ID:', productId);
             showCartToast('Producto no disponible');
             return;
         }
@@ -1086,16 +1415,20 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
             unitType: currentUnitType
         };
 
+        // Buscar producto para obtener precio actual
         let productData = null;
         
+        // 1. Buscar en array products
         if (products && products.length > 0) {
             productData = products.find(p => p.id === currentProductForModal.id);
         }
         
+        // 2. Si no, buscar en CatalogoDinamico
         if (!productData && window.CatalogoDinamico && window.CatalogoDinamico.obtenerPorId) {
             productData = window.CatalogoDinamico.obtenerPorId(currentProductForModal.id);
         }
         
+        // 3. Si no, buscar en catalogo.js
         if (!productData && window.catalogo && window.catalogo.obtenerPorId) {
             productData = window.catalogo.obtenerPorId(currentProductForModal.id);
         }
@@ -1112,6 +1445,7 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
                 cartItem.price = currentProductForModal.price;
             }
         } else {
+            // Fallback en caso extremo
             cartItem.price = currentProductForModal.price;
             cartItem.weight = 0;
         }
@@ -1129,15 +1463,6 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
         currentProductForModal = null;
         showCartAnimation();
         showCartToast('Producto añadido al carrito');
-        
-        // ENVIAR NOTIFICACIÓN CUANDO SE AGREGA AL CARRITO
-        setTimeout(() => {
-            enviarNotificacionManual(
-                '🛍️ Agregado al carrito',
-                cartItem.name,
-                { url: '#cartModal' }
-            );
-        }, 500);
     }
 
     function updateCartUI() {
@@ -1218,47 +1543,66 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
         document.body.style.overflow = '';
     }
 
-    function updateDeliveryPromoBanner() {
-        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        const shippingInfo = calculateShippingFee(subtotal);
-        
-        const progressBar = document.getElementById('promoProgressBar');
-        const progressTextSpan = document.getElementById('progressText');
-        const [l1, l2] = [document.getElementById('promoLevelTramo1'), document.getElementById('promoLevelTramo2')];
-        
-        if (!progressBar || !l1 || !l2) return;
-        
-        [l1, l2].forEach(l => {
-            l.classList.remove('opacity-100', 'ring-[var(--accent-color)]');
-            l.classList.add('opacity-75');
+    function setupGeneralEventListeners() {
+        floatingCartBtn.addEventListener('click', () => showModal(cartModal));
+        document.getElementById('closeCartModal').addEventListener('click', () => hideModal(cartModal));
+        cartModal.addEventListener('click', e => { if (e.target === cartModal) hideModal(cartModal); });
+        document.getElementById('closeProductDetailsModalBtn').addEventListener('click', () => { hideModal(productDetailsModal); currentProductForModal = null; });
+        productDetailsModal.addEventListener('click', e => { if (e.target === productDetailsModal) { hideModal(productDetailsModal); currentProductForModal = null; }});
+        document.getElementById('unitTypeIndividual').addEventListener('click', () => { currentUnitType = 'individual'; updateUnitTypeButtons(); updateModalPricing(); });
+        document.getElementById('unitTypeBox').addEventListener('click', () => { currentUnitType = 'box'; updateUnitTypeButtons(); updateModalPricing(); });
+        document.getElementById('decreaseQuantityBtn').addEventListener('click', () => { if (currentProductForModal && currentProductForModal.quantity > 1) { currentProductForModal.quantity--; document.getElementById('productQuantityDisplay').textContent = currentProductForModal.quantity; updateModalPricing(); }});
+        document.getElementById('increaseQuantityBtn').addEventListener('click', () => { if (currentProductForModal) { currentProductForModal.quantity++; document.getElementById('productQuantityDisplay').textContent = currentProductForModal.quantity; updateModalPricing(); }});
+        document.getElementById('addProductToCartModalBtn').addEventListener('click', addToCartFromModal);
+        document.getElementById('sendWhatsAppOrder').addEventListener('click', () => { hideModal(cartModal); showCheckoutModal(); });
+        document.getElementById('contactWhatsappBtn').addEventListener('click', e => { e.preventDefault(); window.open(whatsappGroupLink, '_blank'); });
+        document.getElementById('mobile-menu-button').addEventListener('click', () => { document.getElementById('mobile-menu').classList.add('open'); document.getElementById('mobile-backdrop').classList.add('open'); });
+        document.getElementById('close-mobile-menu').addEventListener('click', closeMobileMenu);
+        document.getElementById('mobile-backdrop').addEventListener('click', closeMobileMenu);
+        document.getElementById('closeConfirmationModal').addEventListener('click', () => hideModal(confirmationModal));
+        confirmationModal.addEventListener('click', e => { if (e.target === confirmationModal) hideModal(confirmationModal); });
+        if (closeFloatingCalloutBtn) { closeFloatingCalloutBtn.addEventListener('click', () => { hideFloatingCallout(); sessionStorage.setItem('floatingCalloutClosed', 'true'); }); }
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    if (this.classList.contains('mobile-nav-link')) closeMobileMenu();
+                    setTimeout(() => { window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' }); }, 100);
+                }
+            });
         });
+        setupCheckoutEventListeners();
         
-        let progressWidth = 0;
-        let message = `Mínimo $${MIN_ORDER_THRESHOLD}.`;
+        // Eventos de conexión
+        window.addEventListener('online', verificarConexion);
+        window.addEventListener('offline', verificarConexion);
+    }
 
-        if (subtotal > TRAMO_1_MAX) {
-            progressWidth = 100;
-            message = `¡Tramo 2 alcanzado!`;
-            l2.classList.add('opacity-100', 'ring-[var(--accent-color)]');
-            l1.classList.add('opacity-100');
-            l2.classList.remove('opacity-75');
-            l1.classList.remove('opacity-75');
-        } else if (subtotal >= MIN_ORDER_THRESHOLD) {
-            progressWidth = (subtotal / TRAMO_1_MAX) * 100;
-            message = `Faltan $${(TRAMO_1_MAX - subtotal + 1).toLocaleString()} para Tramo 2.`;
-            l1.classList.add('opacity-100', 'ring-[var(--accent-color)]');
-            l1.classList.remove('opacity-75');
-        } else if (subtotal > 0) {
-            progressWidth = (subtotal / MIN_ORDER_THRESHOLD) * 15;
-            message = `Faltan $${(MIN_ORDER_THRESHOLD - subtotal).toLocaleString()} para mínimo.`;
+    function closeMobileMenu() {
+        document.getElementById('mobile-menu').classList.remove('open');
+        document.getElementById('mobile-backdrop').classList.remove('open');
+    }
+
+    function setupScrollAnimations() {
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right').forEach(el => observer.observe(el));
+        } else {
+            document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right').forEach(el => el.classList.add('is-visible'));
         }
-        
-        progressBar.style.width = Math.min(progressWidth, 100) + '%';
-        if (progressTextSpan) {
-            progressTextSpan.innerHTML = message;
-            progressTextSpan.style.color = (progressWidth > 50) ? 'white' : 'var(--primary-color)';
-            progressTextSpan.style.textShadow = (progressWidth > 50) ? '0 0 3px rgba(0,0,0,0.5)' : 'none';
-        }
+    }
+
+    function setupScrollHeader() {
+        const header = document.getElementById('mainHeader');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
     }
 
     function showCheckoutModal() {
@@ -1304,6 +1648,7 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
             if (cart.length === 0) {
                 shippingText = 'Agrega productos';
             } else {
+                // Usar la nueva función de cálculo
                 const priceDetails = calculateFinalPrice(cart);
                 shippingText = `Envío: $${priceDetails.shippingFee.toLocaleString()} (${priceDetails.shippingRange})`;
                 finalPrice = priceDetails.finalPrice;
@@ -1316,7 +1661,170 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
         document.getElementById('checkoutTotal').textContent = '$' + finalPrice.toLocaleString();
     }
 
+    function calculateTotalWeight() {
+        let totalWeight = 0;
+        for (let i = 0; i < cart.length; i++) {
+            const item = cart[i];
+            const productId = item.unitType === 'box' ? parseInt(item.id.split('_')[0]) : item.id;
+            
+            // Buscar producto en múltiples fuentes
+            let product = null;
+            
+            // 1. Buscar en array products
+            if (products && products.length > 0) {
+                product = products.find(p => p.id === productId);
+            }
+            
+            // 2. Si no, buscar en CatalogoDinamico
+            if (!product && window.CatalogoDinamico && window.CatalogoDinamico.obtenerPorId) {
+                product = window.CatalogoDinamico.obtenerPorId(productId);
+            }
+            
+            // 3. Si no, buscar en catalogo.js
+            if (!product && window.catalogo && window.catalogo.obtenerPorId) {
+                product = window.catalogo.obtenerPorId(productId);
+            }
+
+            if (product && product.weight !== undefined) {
+                let itemWeight = product.weight;
+                if (item.unitType === 'box' && product.hasBoxOption && product.boxQuantity) {
+                    itemWeight = product.weight * product.boxQuantity;
+                }
+                totalWeight += itemWeight * item.quantity;
+            }
+        }
+        return totalWeight;
+    }
+
+    function updateDeliveryPromoBanner() {
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const shippingInfo = calculateShippingFee(subtotal);
+        
+        // Mantener la funcionalidad original del progreso si existe
+        const progressBar = document.getElementById('promoProgressBar');
+        const progressTextSpan = document.getElementById('progressText');
+        const [l1, l2] = [document.getElementById('promoLevelTramo1'), document.getElementById('promoLevelTramo2')];
+        
+        if (!progressBar || !l1 || !l2) return;
+        
+        [l1, l2].forEach(l => {
+            l.classList.remove('opacity-100', 'ring-[var(--accent-color)]');
+            l.classList.add('opacity-75');
+        });
+        
+        let progressWidth = 0;
+        let message = `Mínimo $${MIN_ORDER_THRESHOLD}.`;
+
+        if (subtotal > TRAMO_1_MAX) {
+            progressWidth = 100;
+            message = `¡Tramo 2 alcanzado!`;
+            l2.classList.add('opacity-100', 'ring-[var(--accent-color)]');
+            l1.classList.add('opacity-100');
+            l2.classList.remove('opacity-75');
+            l1.classList.remove('opacity-75');
+        } else if (subtotal >= MIN_ORDER_THRESHOLD) {
+            progressWidth = (subtotal / TRAMO_1_MAX) * 100;
+            message = `Faltan $${(TRAMO_1_MAX - subtotal + 1).toLocaleString()} para Tramo 2.`;
+            l1.classList.add('opacity-100', 'ring-[var(--accent-color)]');
+            l1.classList.remove('opacity-75');
+        } else if (subtotal > 0) {
+            progressWidth = (subtotal / MIN_ORDER_THRESHOLD) * 15;
+            message = `Faltan $${(MIN_ORDER_THRESHOLD - subtotal).toLocaleString()} para mínimo.`;
+        }
+        
+        progressBar.style.width = Math.min(progressWidth, 100) + '%';
+        if (progressTextSpan) {
+            progressTextSpan.innerHTML = message;
+            progressTextSpan.style.color = (progressWidth > 50) ? 'white' : 'var(--primary-color)';
+            progressTextSpan.style.textShadow = (progressWidth > 50) ? '0 0 3px rgba(0,0,0,0.5)' : 'none';
+        }
+    }
+
+    function validateField(fieldId) {
+        const element = document.getElementById(fieldId);
+        if (element && element.required) {
+            const isValid = element.value.trim() !== '';
+            element.classList.toggle('border-red-500', !isValid);
+            return isValid;
+        }
+        return true;
+    }
+
+    function setupCheckoutEventListeners() {
+        document.getElementById('closeCheckoutModal').addEventListener('click', () => hideModal(checkoutModal));
+        checkoutModal.addEventListener('click', e => { if (e.target === checkoutModal) hideModal(checkoutModal); });
+        ['customerName', 'customerAddress', 'customerPhone'].forEach(id => {
+            const input = document.getElementById(id);
+            if (input) input.addEventListener('input', () => validateField(id));
+        });
+        const deliverySelect = document.getElementById('deliveryLocation');
+        if (deliverySelect) {
+            deliverySelect.addEventListener('change', () => {
+                validateField('deliveryLocation');
+                updateShippingAndTotal();
+            });
+        }
+        document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
+            radio.addEventListener('change', function () {
+                const cashField = document.getElementById('cashPaymentField');
+                cashField.classList.toggle('hidden', this.value !== 'efectivo');
+                if (this.value !== 'efectivo') {
+                    selectedCashAmount = '';
+                    document.querySelectorAll('.cash-btn').forEach(btn => btn.classList.remove('active'));
+                    const other = document.getElementById('otherCashAmount');
+                    other.classList.add('hidden');
+                    other.value = '';
+                }
+            });
+        });
+        document.querySelectorAll('.cash-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                document.querySelectorAll('.cash-btn').forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                selectedCashAmount = this.getAttribute('data-amount');
+                const otherInput = document.getElementById('otherCashAmount');
+                otherInput.classList.toggle('hidden', selectedCashAmount !== 'otro');
+                if (selectedCashAmount === 'otro') otherInput.focus();
+                else otherInput.value = '';
+            });
+        });
+        document.getElementById('confirmOrderBtn').addEventListener('click', confirmOrder);
+    }
+
+    function validateCheckoutForm() {
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const deliveryLocation = document.getElementById('deliveryLocation').value;
+        if (deliveryLocation === 'habana-vieja' && subtotal < MIN_ORDER_THRESHOLD) {
+            alert(`Mínimo de compra $${MIN_ORDER_THRESHOLD} CUP.`);
+            return false;
+        }
+        const requiredFieldIds = ['customerName', 'customerAddress', 'customerPhone', 'deliveryLocation'];
+        let errors = [];
+        requiredFieldIds.forEach(id => {
+            if (!validateField(id)) errors.push(id);
+        });
+        const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+        if (!paymentMethod) {
+            errors.push('Método de pago');
+        } else if (paymentMethod.value === 'efectivo') {
+            const otherCash = document.getElementById('otherCashAmount');
+            if (!selectedCashAmount || (selectedCashAmount === 'otro' && !otherCash.value.trim())) {
+                errors.push('Monto efectivo');
+                if (selectedCashAmount === 'otro') otherCash.classList.add('border-red-500');
+            } else {
+                if (selectedCashAmount === 'otro') otherCash.classList.remove('border-red-500');
+            }
+        }
+        if (errors.length > 0) {
+            alert('Por favor completa todos los campos obligatorios.');
+            return false;
+        }
+        return true;
+    }
+
     function confirmOrder() {
+        if (!validateCheckoutForm()) return;
+        
         const customerName = document.getElementById('customerName').value.trim();
         const customerAddress = document.getElementById('customerAddress').value.trim();
         const customerReferences = document.getElementById('customerReferences').value.trim();
@@ -1330,10 +1838,12 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
             if (!cashAmount) cashAmount = 'Sin especificar';
         }
         
+        // Calcular con nueva política
         const priceDetails = calculateFinalPrice(cart);
         const locationText = deliveryLocation === 'habana-vieja' ? 'Habana Vieja' : 'Otros municipios';
         const paymentText = paymentMethod === 'efectivo' ? `Efectivo (pagaré con ${cashAmount})` : 'Transferencia';
 
+        // Datos del cliente para el mensaje
         const customerData = {
             name: customerName,
             phone: customerPhone,
@@ -1342,8 +1852,10 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
             location: locationText
         };
 
+        // Generar mensaje con nueva política
         const finalMessage = generateWhatsAppMessage(cart, customerData, priceDetails);
 
+        // Resto del código permanece igual...
         const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycby9Sk3Fz2_WqRQsEXrezpwqKbpYhqW_-ialMJcYKPdvZkrBfNReWWFfQ-VnXTrkJY8W/exec';
         const formData = new FormData();
         const orderData = {
@@ -1379,113 +1891,23 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
         localStorage.setItem('customerData', JSON.stringify(savedCustomerData));
         showModal(confirmationModal);
         
-        // ENVIAR NOTIFICACIÓN DE CONFIRMACIÓN DE PEDIDO
-        setTimeout(() => {
-            enviarNotificacionManual(
-                '✅ Pedido confirmado #' + orderData.idPedido,
-                `Gracias ${customerName}. Total: $${priceDetails.finalPrice}`,
-                { pedidoId: orderData.idPedido }
-            );
-        }, 1000);
-    }
-
-    // ============================================
-    // EVENT LISTENERS
-    // ============================================
-    
-    function setupGeneralEventListeners() {
-        // Carrito flotante
-        document.getElementById('floatingCartBtn').addEventListener('click', () => showModal(document.getElementById('cartModal')));
-        document.getElementById('closeCartModal').addEventListener('click', () => hideModal(document.getElementById('cartModal')));
-        document.getElementById('cartModal').addEventListener('click', e => { if (e.target === document.getElementById('cartModal')) hideModal(document.getElementById('cartModal')); });
-        
-        // Modal detalles producto
-        document.getElementById('closeProductDetailsModalBtn').addEventListener('click', () => { hideModal(document.getElementById('productDetailsModal')); currentProductForModal = null; });
-        document.getElementById('productDetailsModal').addEventListener('click', e => { if (e.target === document.getElementById('productDetailsModal')) { hideModal(document.getElementById('productDetailsModal')); currentProductForModal = null; }});
-        
-        // Botones de unidad
-        document.getElementById('unitTypeIndividual').addEventListener('click', () => { currentUnitType = 'individual'; updateUnitTypeButtons(); updateModalPricing(); });
-        document.getElementById('unitTypeBox').addEventListener('click', () => { currentUnitType = 'box'; updateUnitTypeButtons(); updateModalPricing(); });
-        
-        // Cantidad
-        document.getElementById('decreaseQuantityBtn').addEventListener('click', () => { if (currentProductForModal && currentProductForModal.quantity > 1) { currentProductForModal.quantity--; document.getElementById('productQuantityDisplay').textContent = currentProductForModal.quantity; updateModalPricing(); }});
-        document.getElementById('increaseQuantityBtn').addEventListener('click', () => { if (currentProductForModal) { currentProductForModal.quantity++; document.getElementById('productQuantityDisplay').textContent = currentProductForModal.quantity; updateModalPricing(); }});
-        
-        // Agregar al carrito
-        document.getElementById('addProductToCartModalBtn').addEventListener('click', addToCartFromModal);
-        
-        // WhatsApp
-        document.getElementById('sendWhatsAppOrder').addEventListener('click', () => { hideModal(document.getElementById('cartModal')); showCheckoutModal(); });
-        document.getElementById('contactWhatsappBtn').addEventListener('click', e => { e.preventDefault(); window.open(whatsappGroupLink, '_blank'); });
-        
-        // Menú móvil
-        document.getElementById('mobile-menu-button').addEventListener('click', () => { document.getElementById('mobile-menu').classList.add('open'); document.getElementById('mobile-backdrop').classList.add('open'); });
-        document.getElementById('close-mobile-menu').addEventListener('click', closeMobileMenu);
-        document.getElementById('mobile-backdrop').addEventListener('click', closeMobileMenu);
-        
-        // Modal confirmación
-        document.getElementById('closeConfirmationModal').addEventListener('click', () => hideModal(document.getElementById('confirmationModal')));
-        document.getElementById('confirmationModal').addEventListener('click', e => { if (e.target === document.getElementById('confirmationModal')) hideModal(document.getElementById('confirmationModal')); });
-        
-        // Floating callout
-        if (document.getElementById('closeFloatingCallout')) { 
-            document.getElementById('closeFloatingCallout').addEventListener('click', () => { 
-                document.getElementById('floatingCallout').classList.remove('show'); 
-                sessionStorage.setItem('floatingCalloutClosed', 'true'); 
-            }); 
-        }
-        
-        // Enlaces de anclaje
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    if (this.classList.contains('mobile-nav-link')) closeMobileMenu();
-                    setTimeout(() => { window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' }); }, 100);
-                }
-            });
-        });
-        
-        // Eventos de conexión
-        window.addEventListener('online', verificarConexion);
-        window.addEventListener('offline', verificarConexion);
-    }
-
-    function closeMobileMenu() {
-        document.getElementById('mobile-menu').classList.remove('open');
-        document.getElementById('mobile-backdrop').classList.remove('open');
-    }
-
-    function setupScrollAnimations() {
-        if ('IntersectionObserver' in window) {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
-                });
-            }, { threshold: 0.1 });
-            document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right').forEach(el => observer.observe(el));
-        } else {
-            document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right').forEach(el => el.classList.add('is-visible'));
-        }
-    }
-
-    function setupScrollHeader() {
-        const header = document.getElementById('mainHeader');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) header.classList.add('scrolled');
-            else header.classList.remove('scrolled');
-        });
+        // Mostrar notificación local de pedido confirmado
+        showLocalNotification(
+            '¡Pedido Confirmado!',
+            'Tu pedido ha sido enviado por WhatsApp. Te contactaremos pronto.',
+            'Seguir Comprando',
+            '#mercado'
+        );
     }
 
     function showFloatingCallout() {
         if (sessionStorage.getItem('floatingCalloutClosed') !== 'true') {
-            document.getElementById('floatingCallout').classList.add('show');
+            floatingCallout.classList.add('show');
         }
     }
 
     function hideFloatingCallout() {
-        document.getElementById('floatingCallout').classList.remove('show');
+        floatingCallout.classList.remove('show');
     }
 
     function showFloatingCalloutAfterDelay() {
@@ -1505,48 +1927,33 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
     }
 
     // ============================================
-    // INICIALIZACIÓN
+    // ESCUCHAR CUANDO EL CATÁLOGO DINÁMICO ESTÉ LISTO
     // ============================================
-    
-    function loadProductsFromDynamicCatalog() {
-        console.log('🔄 Cargando productos...');
-        
-        if (window.CatalogoDinamico && window.CatalogoDinamico.obtenerTodos) {
-            const dynamicProducts = window.CatalogoDinamico.obtenerTodos();
-            if (dynamicProducts && dynamicProducts.length > 0) {
-                console.log('✅ Productos cargados:', dynamicProducts.length);
-                return dynamicProducts;
-            }
-        }
-        
-        if (window.catalogo && window.catalogo.productos) {
-            console.log('🔄 Usando catálogo local');
-            return window.catalogo.productos;
-        }
-        
-        console.warn('⚠️ No se encontraron productos');
-        return [];
-    }
-
-    // Escuchar cuando el catálogo esté listo
     window.addEventListener('catalogoCargado', function(evento) {
         console.log('🎉 Catálogo cargado desde:', evento.detail.fuente);
         
+        // 1. Obtener productos del evento
         products = evento.detail.productos || [];
         
+        // 2. Si está vacío, intentar cargar de otra fuente
         if (products.length === 0) {
             products = loadProductsFromDynamicCatalog();
         }
         
+        // 3. Ordenar productos
         products.sort((a, b) => (a.category < b.category ? -1 : (a.category > b.category ? 1 : (a.name < b.name ? -1 : 1))));
         
+        // 4. Configurar la tienda
         setupStoreSection('mercado', products);
         
+        // 5. Actualizar UI
         updateCartUI();
         console.log('🏪 Tienda lista con', products.length, 'productos');
     });
 
-    // Inicialización cuando el DOM está listo
+    // ============================================
+    // INICIALIZACIÓN SEGURA (cuando DOM esté listo)
+    // ============================================
     document.addEventListener('DOMContentLoaded', function() {
         console.log('📄 DOM listo - Iniciando aplicación...');
         
@@ -1562,16 +1969,20 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
         setupScrollHeader();
         showFloatingCalloutAfterDelay();
         
-        // 3. Registrar Service Worker
+        // 3. Inicializar OneSignal (notificaciones push)
+        initializeOneSignal();
+        
+        // 4. Registrar Service Worker
         registrarServiceWorker();
         
-        // 4. Verificar conexión
+        // 5. Verificar conexión
         verificarConexion();
         
-        // 5. Verificar si ya hay productos cargados
+        // 6. Verificar si ya hay productos cargados (por si el evento no se disparó)
         setTimeout(function() {
+            // Si después de 3 segundos no se cargaron productos, forzar carga
             if (products.length === 0) {
-                console.log('⏱️  Cargando productos manualmente...');
+                console.log('⏱️  Timeout: Cargando productos manualmente...');
                 products = loadProductsFromDynamicCatalog();
                 
                 if (products.length > 0) {
@@ -1579,18 +1990,20 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
                     setupStoreSection('mercado', products);
                     console.log('✅ Productos cargados manualmente:', products.length);
                     
+                    // Guardar en localStorage para offline
                     try {
                         const datos = {
                             productos: products,
                             timestamp: Date.now(),
-                            version: '2.0'
+                            version: '3.0'
                         };
                         localStorage.setItem('catalogo_productos', JSON.stringify(datos));
-                        console.log('💾 Catálogo guardado en localStorage');
+                        console.log('💾 Catálogo guardado en localStorage para offline');
                     } catch(e) {
-                        console.error('Error guardando catálogo:', e);
+                        console.error('Error guardando catálogo offline:', e);
                     }
                 } else {
+                    // Mostrar mensaje de error
                     const grid = document.getElementById('mercadoProductGrid');
                     if (grid) {
                         grid.innerHTML = `
@@ -1606,61 +2019,22 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
                 }
             }
         }, 3000);
-        
-        // 6. Crear botón de prueba de notificaciones
-        setTimeout(() => {
-            const testBtn = document.createElement('button');
-            testBtn.id = 'test-notif-btn';
-            testBtn.innerHTML = '🔔 Probar Notificación';
-            testBtn.style.cssText = `
-                position: fixed;
-                bottom: 180px;
-                right: 20px;
-                background: #0d3b33;
-                color: white;
-                border: none;
-                padding: 10px 15px;
-                border-radius: 25px;
-                cursor: pointer;
-                z-index: 10000;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-                font-size: 14px;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-            `;
-            
-            testBtn.onclick = function() {
-                enviarNotificacionManual(
-                    '🎉 ¡Prueba exitosa!',
-                    'Las notificaciones están funcionando correctamente en El Resolvito'
-                );
-            };
-            
-            document.body.appendChild(testBtn);
-            
-            console.log('✅ Botón de prueba de notificaciones agregado');
-            console.log('📢 Para probar notificaciones, escribe en consola:');
-            console.log('   enviarNotificacionManual("Título", "Mensaje")');
-            
-        }, 2000);
     });
 
     // ============================================
-    // FUNCIONES GLOBALES PARA CONSOLA
+    // FUNCIONES GLOBALES PARA USO DESDE HTML
     // ============================================
-    window.enviarNotificacionManual = enviarNotificacionManual;
-    window.mostrarBannerOffline = mostrarBannerOffline;
-    window.ocultarBannerOffline = ocultarBannerOffline;
-    window.verificarConexion = verificarConexion;
-    window.switchDepartment = switchDepartment;
     window.showProductDetailsModal = showProductDetailsModal;
     window.updateCartQuantity = updateCartQuantity;
     window.removeFromCart = removeFromCart;
     window.toggleAccordion = toggleAccordion;
+    window.switchDepartment = switchDepartment;
+    window.sendTestNotification = sendTestNotification;
 
+    // ============================================
+    // FIN DEL SCRIPT
+    // ============================================
 </script>
 
 </body>
 </html>
-
