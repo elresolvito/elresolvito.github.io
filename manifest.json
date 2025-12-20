@@ -1,12 +1,22 @@
 {
   "name": "El Resolvito",
-  "short_name": "Resolvito",
-  "description": "Tu tienda a domicilio en La Habana",
+  "short_name": "ElResolvito",
+  "description": "Tu Tienda a Domicilio en La Habana",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0d3b33",
   "theme_color": "#0d3b33",
   "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
     {
       "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
@@ -17,5 +27,7 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ]
+  ],
+  "gcm_sender_id": "482941778795",
+  "gcm_user_visible_only": true
 }
