@@ -2514,8 +2514,658 @@ SCRIPTS
         if (banner) {
             banner.remove();
         }
+    } <script>
+    // ============================================
+    // VARIABLES GLOBALES
+    // ============================================
+    let products = [];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let currentDepartment = 'mercado';
+    let currentProductForModal = null;
+    let currentUnitType = 'individual';
+    
+    // ============================================
+    // FUNCIONES DE INICIALIZACIÓN
+    // ============================================
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('📄 DOM listo - Iniciando Mercado Bayona 59...');
+        
+        // 1. Configurar UI básica
+        updateCartUI();
+        setupGeneralEventListeners();
+        
+        // 2. Manejo del menú móvil
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.remove('transform', '-translate-x-full');
+            document.getElementById('mobile-backdrop').classList.remove('opacity-0', 'invisible');
+        });
+        
+        document.getElementById('close-mobile-menu').addEventListener('click', closeMobileMenu);
+        document.getElementById('mobile-backdrop').addEventListener('click', closeMobileMenu);
+        
+        // 3. Navegación suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const target = document.querySelector(targetId);
+                if (target) {
+                    if (this.classList.contains('mobile-nav-link')) closeMobileMenu();
+                    
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 4. Formulario de contacto
+        document.getElementById('contactForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('contactName').value;
+            const phone = document.getElementById('contactPhone').value;
+            const message = document.getElementById('contactMessage').value;
+            const email = document.getElementById('contactEmail').value;
+            
+            const whatsappMessage = `Hola Mercado Bayona 59,\n\nMe llamo ${name}.\nTeléfono: ${phone}${email ? `\nEmail: ${email}` : ''}\n\nMensaje:\n${message}`;
+            
+            window.open(`https://wa.me/5356382909?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
+            
+            this.reset();
+            showToast('Mensaje listo para enviar por WhatsApp');
+        });
+        
+        // 5. Esperar a que el catálogo dinámico se cargue
+        if (window.CatalogoDinamico && window.CatalogoDinamico.cargado) {
+            console.log('✅ Catálogo ya cargado');
+            initializeStore();
+        } else {
+            console.log('⏳ Esperando catálogo...');
+            window.addEventListener('catalogoCargado', initializeStore);
+        }
+        
+        // 6. Verificar conexión
+        verificarConexion();
+        window.addEventListener('online', verificarConexion);
+        window.addEventListener('offline', verificarConexion);
+        
+        // 7. Mostrar carrito flotante si hay productos
+        if (cart.length > 0) {
+            document.getElementById('floatingCartBtn').classList.remove('hidden');
+        }
+    });
+    
+    function initializeStore() {
+        console.log('🏪 Inicializando tienda...');
+        
+        // Cargar productos desde múltiples fuentes
+        loadProducts();
+        
+        // Configurar sección de mercado
+        setupStoreSection('mercado', products);
+        
+        console.log('✅ Tienda inicializada con', products.length, 'productos');
     }
+    
+    function loadProducts() {
+        // 1. Intentar desde CatalogoDinamico
+        if (window.CatalogoDinamico && window.CatalogoDinamico.obtenerTodos) {
+            const dynamicProducts = window.CatalogoDinamico.obtenerTodos();
+            if (dynamicProducts && dynamicProducts.length > 0) {
+                products = dynamicProducts;
+                console.log('✅ Productos cargados desde catálogo dinámico:', products.length);
+                return;
+            }
+        }
+        
+        // 2. Si falla, intentar desde catalogo.js (respaldo local)
+        if (window.catalogo && window.catalogo.productos) {
+            products = window.catalogo.productos;
+            console.log('🔄 Usando catálogo local como respaldo:', products.length);
+            return;
+        }
+        
+        // 3. Si todo falla, array vacío
+        console.warn('⚠️ No se encontraron productos');
+        products = [];
+    }
+    
+    function setupStoreSection(sectionPrefix, allProducts) {
+        console.log('🛒 Configurando sección de productos...');
+        
+        const productsForSection = allProducts.filter(p => p.department === 'mercado');
+        const categories = ['all', ...new Set(productsForSection.map(p => p.category))];
+        const filtersContainer = document.getElementById('mercadoCategoryFilters');
+        const searchInput = document.getElementById('globalSearchInput');
+        
+        if (!filtersContainer || !searchInput) {
+            console.error('❌ No se encontraron elementos para filtros');
+            return;
+        }
+        
+        // Crear botones de categoría
+        filtersContainer.innerHTML = categories.map(cat =>
+            `<button class="category-btn ${cat === 'all' ? 'active' : ''}" data-category="${cat}">
+                ${cat === 'all' ? 'Todos' : cat}
+            </button>`).join('');
+        
+        let currentCategory = 'all';
+        let currentSearch = '';
+        
+        // Event listeners para filtros
+        filtersContainer.querySelectorAll('.category-btn').forEach(btn =>
+            btn.addEventListener('click', e => {
+                filtersContainer.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentCategory = e.target.dataset.category;
+                filterAndRender(productsForSection, currentCategory, currentSearch);
+            })
+        );
+        
+        // Event listener para buscador
+        searchInput.addEventListener('input', e => {
+            currentSearch = e.target.value;
+            filterAndRender(productsForSection, currentCategory, currentSearch);
+        });
+        
+        // Renderizar productos iniciales
+        filterAndRender(productsForSection, currentCategory, currentSearch);
+    }
+    
+    function filterAndRender(productsForSection, category, searchTerm) {
+        const needle = removeAccents(searchTerm.toLowerCase());
+        
+        const filtered = productsForSection.filter(p => {
+            const catMatch = category === 'all' || p.category === category;
+            const textMatch = !needle ||
+                removeAccents(p.name.toLowerCase()).includes(needle) ||
+                removeAccents(p.description.toLowerCase()).includes(needle) ||
+                removeAccents((p.specificDetails || '').toLowerCase()).includes(needle) ||
+                removeAccents(p.category.toLowerCase()).includes(needle);
+            return catMatch && textMatch;
+        });
+        
+        renderProducts(filtered, 'mercadoProductGrid', 'mercadoNoResultsMessage');
+    }
+    
+    function removeAccents(str) {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+    
+    function renderProducts(productsToRender, gridId, noResultsId) {
+        const productGrid = document.getElementById(gridId);
+        const noResultsMessage = document.getElementById(noResultsId);
+        
+        if (!productGrid || !noResultsMessage) {
+            console.error('❌ Elementos del grid no encontrados');
+            return;
+        }
+        
+        if (productsToRender.length === 0) {
+            productGrid.innerHTML = '';
+            noResultsMessage.classList.remove('hidden');
+            return;
+        }
+        
+        noResultsMessage.classList.add('hidden');
+        
+        // Agrupar por categoría
+        const groupedProducts = productsToRender.reduce(function(acc, product) {
+            (acc[product.category] = acc[product.category] || []).push(product);
+            return acc;
+        }, {});
+        
+        const sortedCategories = Object.keys(groupedProducts).sort();
+        let html = '';
+        
+        for (let i = 0; i < sortedCategories.length; i++) {
+            const category = sortedCategories[i];
+            if (groupedProducts.hasOwnProperty(category)) {
+                html += `<div class="col-span-full fade-in-up">
+                           <h3 class="text-2xl font-bold text-[var(--text-dark)] my-8 pb-3 border-b border-gray-200">${category}</h3>
+                         </div>`;
+                
+                html += groupedProducts[category].map(function(product, index) {
+                    const isUnavailable = product.status === 'unavailable';
+                    const onClickHandler = isUnavailable ? '' : `onclick="showProductDetailsModal(${product.id})"`;
+                    const cursorStyle = isUnavailable ? 'cursor-not-allowed' : 'cursor-pointer';
+                    
+                    return `<div class="product-card card ${cursorStyle} ${isUnavailable ? 'opacity-70' : ''}" 
+                                 style="animation-delay: ${index * 50}ms" ${onClickHandler}>
+                                ${isUnavailable ? '<div class="promo-badge">Agotado</div>' : ''}
+                                <div class="product-image">
+                                    <img src="${product.image}" alt="${product.name}" 
+                                         class="w-full h-full object-contain">
+                                </div>
+                                <div class="p-5">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="font-bold text-[var(--text-dark)] line-clamp-1">${product.name}</h4>
+                                        <span class="text-[var(--primary-color)] font-bold">$${product.price.toLocaleString()}</span>
+                                    </div>
+                                    <p class="text-sm text-[var(--text-light)] mb-3 line-clamp-2">${product.description}</p>
+                                    ${product.specificDetails ? 
+                                        `<p class="text-xs text-gray-500 mb-3">${product.specificDetails}</p>` : ''}
+                                    <button class="btn-primary w-full py-2 ${isUnavailable ? 'opacity-50 cursor-not-allowed' : ''}"
+                                            ${isUnavailable ? 'disabled' : ''}>
+                                        ${isUnavailable ? 'Agotado' : 'Agregar al carrito'}
+                                    </button>
+                                </div>
+                            </div>`;
+                }).join('');
+            }
+        }
+        
+        productGrid.innerHTML = html;
+        
+        // Agregar event listeners a los botones de producto
+        productGrid.querySelectorAll('.product-card button:not([disabled])').forEach((button, index) => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const productIndex = Math.floor(index / 3) * 3 + (index % 3);
+                const product = productsToRender[productIndex];
+                if (product) {
+                    showProductDetailsModal(product.id);
+                }
+            });
+        });
+    }
+    
+    // ============================================
+    // FUNCIONES DEL CARRITO (simplificadas)
+    // ============================================
+    
+    function updateCartUI() {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        
+        document.getElementById('cartCount').textContent = totalItems;
+        document.getElementById('cartTotal').textContent = '$' + totalPrice.toLocaleString();
+        document.getElementById('floatingCartTotal').textContent = '$' + totalPrice.toLocaleString();
+        
+        const cartItems = document.getElementById('cartItems');
+        const sendWhatsAppOrder = document.getElementById('sendWhatsAppOrder');
+        
+        if (cart.length === 0) {
+            cartItems.innerHTML = '<p class="text-center text-[var(--text-medium)]">Tu carrito está vacío</p>';
+            sendWhatsAppOrder.disabled = true;
+            document.getElementById('floatingCartBtn').classList.add('hidden');
+        } else {
+            cartItems.innerHTML = cart.map((item, index) => `
+                <div class="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0">
+                    <div class="flex-1">
+                        <h5 class="font-semibold text-[var(--text-dark)]">${item.name}</h5>
+                        <p class="text-sm text-[var(--text-medium)]">$${item.price.toLocaleString()} c/u × ${item.quantity}</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="updateCartQuantity(${index}, ${item.quantity - 1})" 
+                                class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center font-bold hover:bg-gray-300">-</button>
+                        <span class="font-semibold w-8 text-center">${item.quantity}</span>
+                        <button onclick="updateCartQuantity(${index}, ${item.quantity + 1})" 
+                                class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center font-bold hover:bg-gray-300">+</button>
+                        <button onclick="removeFromCart(${index})" class="ml-2 text-red-500 hover:text-red-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>`).join('');
+            sendWhatsAppOrder.disabled = false;
+            document.getElementById('floatingCartBtn').classList.remove('hidden');
+        }
+    }
+    
+    function showProductDetailsModal(productId) {
+        console.log('🔍 Buscando producto ID:', productId);
+        
+        let product = products.find(p => p.id === productId);
+        
+        if (!product) {
+            // Intentar desde CatalogoDinamico
+            if (window.CatalogoDinamico && window.CatalogoDinamico.obtenerPorId) {
+                product = window.CatalogoDinamico.obtenerPorId(productId);
+            }
+            // Si aún no, buscar en catalogo.js
+            if (!product && window.catalogo && window.catalogo.obtenerPorId) {
+                product = window.catalogo.obtenerPorId(productId);
+            }
+        }
+        
+        if (!product) {
+            showToast('Producto no disponible');
+            return;
+        }
+        
+        if (product.status === 'unavailable') {
+            showToast('Producto agotado');
+            return;
+        }
+        
+        currentProductForModal = JSON.parse(JSON.stringify(product));
+        currentProductForModal.quantity = 1;
+        currentUnitType = 'individual';
+        
+        document.getElementById('productDetailsTitle').textContent = product.name;
+        document.getElementById('productDetailsImage').src = product.image;
+        document.getElementById('productDetailsDescription').textContent = product.description;
+        document.getElementById('productQuantityDisplay').textContent = '1';
+        
+        const unitTypeSection = document.getElementById('unitTypeSection');
+        if (product.hasBoxOption) {
+            unitTypeSection.classList.remove('hidden');
+            updateUnitTypeButtons();
+        } else {
+            unitTypeSection.classList.add('hidden');
+        }
+        
+        updateModalPricing();
+        showModal(document.getElementById('productDetailsModal'));
+    }
+    
+    function updateUnitTypeButtons() {
+        const individualBtn = document.getElementById('unitTypeIndividual');
+        const boxBtn = document.getElementById('unitTypeBox');
+        if (currentUnitType === 'individual') {
+            individualBtn.classList.add('active');
+            boxBtn.classList.remove('active');
+        } else {
+            boxBtn.classList.add('active');
+            individualBtn.classList.remove('active');
+        }
+    }
+    
+    function updateModalPricing() {
+        if (!currentProductForModal) return;
+        
+        let unitPrice, unitDescription;
+        if (currentProductForModal.hasBoxOption && currentUnitType === 'box') {
+            unitPrice = currentProductForModal.boxPrice;
+            unitDescription = 'Caja (' + currentProductForModal.boxQuantity + ' unidades)';
+        } else {
+            unitPrice = currentProductForModal.price;
+            unitDescription = 'Unidad';
+        }
+        
+        const totalPrice = unitPrice * currentProductForModal.quantity;
+        document.getElementById('productDetailsPrice').textContent = '$' + unitPrice.toLocaleString() + ' / ' + unitDescription;
+        document.getElementById('modalTotalPrice').textContent = '$' + totalPrice.toLocaleString();
+    }
+    
+    function addToCartFromModal() {
+        if (!currentProductForModal) return;
+        
+        const cartItem = {
+            id: currentProductForModal.id + (currentUnitType === 'box' ? '_box' : ''),
+            name: currentProductForModal.name,
+            image: currentProductForModal.image,
+            quantity: currentProductForModal.quantity,
+            unitType: currentUnitType
+        };
+        
+        let productData = products.find(p => p.id === currentProductForModal.id);
+        
+        if (!productData && window.CatalogoDinamico && window.CatalogoDinamico.obtenerPorId) {
+            productData = window.CatalogoDinamico.obtenerPorId(currentProductForModal.id);
+        }
+        
+        if (!productData && window.catalogo && window.catalogo.obtenerPorId) {
+            productData = window.catalogo.obtenerPorId(currentProductForModal.id);
+        }
+
+        if (productData) {
+            if (productData.weight !== undefined) {
+                cartItem.weight = productData.weight;
+            }
+            
+            if (currentProductForModal.hasBoxOption && currentUnitType === 'box') {
+                cartItem.price = currentProductForModal.boxPrice;
+                cartItem.name += ' (Caja x' + currentProductForModal.boxQuantity + ')';
+            } else {
+                cartItem.price = currentProductForModal.price;
+            }
+        } else {
+            cartItem.price = currentProductForModal.price;
+            cartItem.weight = 0;
+        }
+
+        const existingItemIndex = cart.findIndex(item => item.id === cartItem.id);
+        if (existingItemIndex !== -1) {
+            cart[existingItemIndex].quantity += cartItem.quantity;
+        } else {
+            cart.push(cartItem);
+        }
+
+        updateCartUI();
+        localStorage.setItem('cart', JSON.stringify(cart));
+        hideModal(document.getElementById('productDetailsModal'));
+        currentProductForModal = null;
+        showToast('Producto añadido al carrito');
+    }
+    
+    function updateCartQuantity(index, newQuantity) {
+        if (newQuantity <= 0) {
+            removeFromCart(index);
+            showToast('Producto eliminado del carrito');
+            return;
+        }
+        cart[index].quantity = newQuantity;
+        updateCartUI();
+        localStorage.setItem('cart', JSON.stringify(cart));
+        showToast('Carrito actualizado');
+    }
+    
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        updateCartUI();
+        localStorage.setItem('cart', JSON.stringify(cart));
+        showToast('Producto eliminado del carrito');
+    }
+    
+    // ============================================
+    // FUNCIONES AUXILIARES
+    // ============================================
+    
+    function closeMobileMenu() {
+        document.getElementById('mobile-menu').classList.add('transform', '-translate-x-full');
+        document.getElementById('mobile-backdrop').classList.add('opacity-0', 'invisible');
+    }
+    
+    function setupGeneralEventListeners() {
+        // Carrito flotante
+        document.getElementById('floatingCartBtn').addEventListener('click', () => {
+            showModal(document.getElementById('cartModal'));
+        });
+        
+        // Cerrar modales
+        document.getElementById('closeCartModal').addEventListener('click', () => {
+            hideModal(document.getElementById('cartModal'));
+        });
+        
+        document.getElementById('closeProductDetailsModalBtn').addEventListener('click', () => { 
+            hideModal(document.getElementById('productDetailsModal')); 
+            currentProductForModal = null; 
+        });
+        
+        // Modal de detalles del producto
+        document.getElementById('productDetailsModal').addEventListener('click', e => { 
+            if (e.target === document.getElementById('productDetailsModal')) { 
+                hideModal(document.getElementById('productDetailsModal')); 
+                currentProductForModal = null; 
+            }
+        });
+        
+        // Botones del modal de detalles
+        document.getElementById('unitTypeIndividual').addEventListener('click', () => { 
+            currentUnitType = 'individual'; 
+            updateUnitTypeButtons(); 
+            updateModalPricing(); 
+        });
+        
+        document.getElementById('unitTypeBox').addEventListener('click', () => { 
+            currentUnitType = 'box'; 
+            updateUnitTypeButtons(); 
+            updateModalPricing(); 
+        });
+        
+        document.getElementById('decreaseQuantityBtn').addEventListener('click', () => { 
+            if (currentProductForModal && currentProductForModal.quantity > 1) { 
+                currentProductForModal.quantity--; 
+                document.getElementById('productQuantityDisplay').textContent = currentProductForModal.quantity; 
+                updateModalPricing(); 
+            }
+        });
+        
+        document.getElementById('increaseQuantityBtn').addEventListener('click', () => { 
+            if (currentProductForModal) { 
+                currentProductForModal.quantity++; 
+                document.getElementById('productQuantityDisplay').textContent = currentProductForModal.quantity; 
+                updateModalPricing(); 
+            }
+        });
+        
+        document.getElementById('addProductToCartModalBtn').addEventListener('click', addToCartFromModal);
+        
+        // Enviar pedido por WhatsApp
+        document.getElementById('sendWhatsAppOrder').addEventListener('click', () => {
+            hideModal(document.getElementById('cartModal'));
+            showCheckoutModal();
+        });
+    }
+    
+    function showModal(modalElement) {
+        if (!modalElement) return;
+        modalElement.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function hideModal(modalElement) {
+        if (!modalElement) return;
+        modalElement.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+    
+    function showToast(message) {
+        const toast = document.getElementById('cartToast');
+        const msg = document.getElementById('cartToastMessage');
+        
+        if (!toast || !msg) return;
+        
+        clearTimeout(window.toastTimeout);
+        msg.textContent = message;
+        toast.classList.add('show');
+        
+        window.toastTimeout = setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+    
+    function showCheckoutModal() {
+        // Función simplificada - puedes expandirla según necesites
+        if (cart.length === 0) {
+            showToast('Tu carrito está vacío');
+            return;
+        }
+        
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const message = `*Pedido de Mercado Bayona 59*\n\n` +
+                       cart.map(item => `• ${item.name} x${item.quantity} - $${(item.price * item.quantity).toLocaleString()}`).join('\n') +
+                       `\n\n*Total: $${subtotal.toLocaleString()}*\n\n` +
+                       `Nombre: \nDirección: \nTeléfono: `;
+        
+        window.open(`https://wa.me/5356382909?text=${encodeURIComponent(message)}`, '_blank');
+        
+        // Limpiar carrito después de enviar
+        cart = [];
+        updateCartUI();
+        localStorage.setItem('cart', JSON.stringify(cart));
+        showToast('Pedido enviado por WhatsApp');
+    }
+    
+    // Funciones de conexión
+    function verificarConexion() {
+        const estado = document.getElementById('estado-conexion');
+        if (!navigator.onLine) {
+            console.log('📶 Estás offline');
+            if (estado) {
+                estado.innerHTML = '<span class="inline-block w-2 h-2 rounded-full bg-red-500"></span><span class="text-[var(--text-light)] ml-1">Offline</span>';
+            }
+            mostrarBannerOffline();
+        } else {
+            console.log('📶 Estás online');
+            if (estado) {
+                estado.innerHTML = '<span class="inline-block w-2 h-2 rounded-full bg-green-500"></span><span class="text-[var(--text-light)] ml-1">Online</span>';
+            }
+            ocultarBannerOffline();
+        }
+    }
+    
+    function mostrarBannerOffline() {
+        const bannerAnterior = document.getElementById('offline-banner');
+        if (bannerAnterior) {
+            bannerAnterior.remove();
+        }
+        
+        const banner = document.createElement('div');
+        banner.id = 'offline-banner';
+        banner.innerHTML = `
+            <strong>🔌 Modo Offline</strong><br>
+            <span>Contenido cargado desde caché</span>
+            <button onclick="this.parentElement.remove()" style="margin-left:10px;">×</button>
+        `;
+        document.body.appendChild(banner);
+        
+        setTimeout(() => {
+            if (banner.parentElement) {
+                banner.remove();
+            }
+        }, 10000);
+    }
+    
+    function ocultarBannerOffline() {
+        const banner = document.getElementById('offline-banner');
+        if (banner) {
+            banner.remove();
+        }
+    } <!-- ... Footer al final ... -->
+
+<!-- Modal del Carrito -->
+<div id="cartModal" class="modal-overlay">
+    <div class="modal-content">
+        <!-- Contenido del modal del carrito -->
+    </div>
+</div>
+
+<!-- Modal de Detalles del Producto -->
+<div id="productDetailsModal" class="modal-overlay">
+    <div class="modal-content">
+        <!-- Contenido del modal de detalles -->
+    </div>
+</div>
+
+<!-- Carrito flotante -->
+<button id="floatingCartBtn" class="hidden">
+    <!-- Icono del carrito -->
+</button>
+
+<!-- Toast para notificaciones -->
+<div id="cartToast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-3 rounded-lg shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none z-[9999]">
+    <p id="cartToastMessage" class="text-sm"></p>
+</div>
+
+<!-- Banner offline -->
+<div id="offline-banner" class="hidden"></div>
+
+<!-- ====== AQUÍ VA EL JAVASCRIPT LARGO ====== -->
+<script>
+    // Código JavaScript aquí
 </script>
 
 </body>
 </html>
+
+
