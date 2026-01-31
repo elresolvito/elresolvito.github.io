@@ -3,22 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mercado Bayona  | Tu Tienda a Domicilio en La Habana</title>
-    <meta name="description" content="Encuentra víveres y más en El Resolvito. Haz tu pedido online y recíbelo en La Habana. Compra fácil y rápido por WhatsApp.">
-    <meta name="keywords" content="tienda online habana, mercado habana, entrega a domicilio cuba, mandados habana, el resolvito">
-    <meta name="author" content="El Resolvito">
+    <title>Mercado Bayona | Tu Tienda a Domicilio en La Habana</title>
+    <meta name="description" content="Encuentra víveres y más en Mercado Bayona. Haz tu pedido online y recíbelo en La Habana. Compra fácil y rápido por WhatsApp.">
+    <meta name="keywords" content="tienda online habana, mercado habana, entrega a domicilio cuba, mandados habana, mercado bayona">
+    <meta name="author" content="Mercado Bayona">
 
     <link rel="manifest" href="/manifest.json?v=5">
-    <meta name="theme-color" content="#0d3b33">
+    <meta name="theme-color" content="#28a745">
     <link rel="apple-touch-icon" href="/android-chrome-512x512.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-
-    <!-- ONESIGNAL META TAGS -->
-    <meta name="onesignal" content="wordpress-plugin"/>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="El Resolvito">
 
     <!-- PRECONEXIÓN PARA CSV DE GITHUB -->
     <link rel="preconnect" href="https://elresolving.github.io">
@@ -32,7 +26,7 @@
 
     <style>
         :root {
-            --primary-color: #0d3b33;
+            --primary-color: #28a745;
             --accent-color: #c94a37;
             --background-white: #ffffff;
             --light-background-gray: #f9fafb;
@@ -93,7 +87,7 @@
         .font-script { font-family: 'Kaushan Script', cursive; }
 
         .hero-image-mask { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; overflow: hidden; box-shadow: 20px 20px 0px rgba(201, 74, 55, 0.1); transition: all 0.5s ease; }
-        .hero-image-mask:hover { border-radius: 50%; box-shadow: 20px 20px 0px rgba(13, 59, 51, 0.1); }
+        .hero-image-mask:hover { border-radius: 50%; box-shadow: 20px 20px 0px rgba(40, 167, 69, 0.1); }
 
         #mainHeader { background-color: var(--primary-color); box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         
@@ -129,99 +123,17 @@
         #offline-banner button:hover {
             color: #000;
         }
-        
-        /* Estilos para el botón de notificaciones */
-        #notification-subscribe-btn {
-            position: fixed;
-            bottom: 32px;
-            right: 24px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            z-index: 9995;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            animation: pulse 2s infinite;
-        }
-        
-        #notification-subscribe-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(102, 126, 234, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0); }
-        }
-        
-        #notification-subscribe-btn.hidden {
-            display: none;
-        }
-        
-        /* Estilos para notificaciones locales */
-        .local-notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            max-width: 350px;
-            z-index: 10000;
-            transform: translateX(120%);
-            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-        
-        .local-notification.show {
-            transform: translateX(0);
-        }
-        
-        .local-notification .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            color: #666;
-        }
-        
-        .local-notification .notification-icon {
-            font-size: 30px;
-            margin-bottom: 10px;
-        }
-        
-        .local-notification.success .notification-icon {
-            color: #10b981;
-        }
-        
-        .local-notification.info .notification-icon {
-            color: #3b82f6;
-        }
-        
-        .local-notification.warning .notification-icon {
-            color: #f59e0b;
-        }
     </style>
 </head>
 <body class="text-gray-800">
 
-<header id="mainHeader" class="fixed top-0 left-0 right-0 z-50 bg-[#0d3b33] shadow-md transition-all duration-300">
+<header id="mainHeader" class="fixed top-0 left-0 right-0 z-50 bg-[#28a745] shadow-md transition-all duration-300">
     <div class="container mx-auto px-4 sm:px6 lg:px-8 flex items-center justify-between py-3">
         <div class="flex items-center gap-4">
             <button id="mobile-menu-button" class="md:hidden text-white"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg></button>
             <a href="#" class="flex items-center gap-3 flex-shrink-0">
-                <img src="https://i.postimg.cc/s2FHrX2Y/logo_el_resolvito.jpg" alt="Logo El Resolvito" class="h-10 w-10 md:h-12 md:w-12 rounded-full shadow-md object-cover border-2 border-white">
-                <span class="text-white text-xl font-bold hidden sm:block">El Resolvito</span>
+                <img src="/imagenes/logo.png" alt="Logo Mercado Bayona" class="h-10 w-10 md:h-12 md:w-12 rounded-full shadow-md object-cover border-2 border-white">
+                <span class="text-white text-xl font-bold hidden sm:block">Mercado Bayona</span>
             </a>
         </div>
 
@@ -244,17 +156,185 @@
         <div class="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12">
             <div class="w-full md:w-1/2 text-center md:text-left z-10 fade-in-up">
                 <span class="inline-block py-1 px-3 rounded-full bg-blue-50 text-[var(--primary-color)] text-xs font-bold tracking-wide mb-4 border border-blue-100">ENVIOS EN LA HABANA VIEJA</span>
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[var(--text-dark)] leading-tight mb-4">Tus compras <br><span class="font-script text-[var(--accent-color)] text-5xl md:text-6xl lg:text-7xl block mt-2 transform -rotate-2">a un solo clic</span></h1>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[var(--text-dark)] leading-tight mb-4">MERCADO BAYONA<br><span class="font-script text-[var(--accent-color)] text-3xl md:text-4xl lg:text-5xl block mt-2">Productos a domicilio en La Habana Vieja</span></h1>
                 <p class="text-gray-500 text-lg md:text-xl mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed">Olvídate de las colas. Selecciona tus productos desde el móvil y recíbelos en la puerta de tu casa en La Habana Vieja.</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                    <a href="#mercado" class="px-8 py-4 bg-[var(--primary-color)] text-white font-bold rounded-full shadow-lg hover:bg-[#0a2e28] transition-all transform hover:scale-105 flex items-center justify-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg> Comprar Ahora</a>
+                    <a href="#mercado" class="px-8 py-4 bg-[var(--primary-color)] text-white font-bold rounded-full shadow-lg hover:bg-[#218838] transition-all transform hover:scale-105 flex items-center justify-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg> Comprar Ahora</a>
                     <a href="#nuestras-ventajas" class="px-8 py-4 bg-white text-[var(--primary-color)] font-bold rounded-full border-2 border-gray-100 hover:border-[var(--primary-color)] transition-all flex items-center justify-center">Ver Ofertas</a>
                 </div>
             </div>
             <div class="w-full md:w-1/2 relative flex justify-center fade-in-right">
                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-50 rounded-full opacity-50 z-0"></div>
                 <div class="relative z-10 w-full max-w-[400px] md:max-w-[500px] aspect-square">
-                    <img src="https://i.postimg.cc/rsCKV7LZ/1755367982611.jpg" alt="Repartidor de El Resolvito" class="hero-image-mask w-full h-full object-cover object-center">
+                    <img src="<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado Bayona | Tu Tienda a Domicilio en La Habana</title>
+    <meta name="description" content="Encuentra víveres y más en Mercado Bayona. Haz tu pedido online y recíbelo en La Habana. Compra fácil y rápido por WhatsApp.">
+    <meta name="keywords" content="tienda online habana, mercado habana, entrega a domicilio cuba, mandados habana, mercado bayona">
+    <meta name="author" content="Mercado Bayona">
+
+    <link rel="manifest" href="/manifest.json?v=5">
+    <meta name="theme-color" content="#28a745">
+    <link rel="apple-touch-icon" href="/android-chrome-512x512.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+    <!-- PRECONEXIÓN PARA CSV DE GITHUB -->
+    <link rel="preconnect" href="https://elresolving.github.io">
+    <link rel="dns-prefetch" href="https://elresolving.github.io">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #28a745;
+            --accent-color: #c94a37;
+            --background-white: #ffffff;
+            --light-background-gray: #f9fafb;
+            --text-dark: #1f2937;
+            --text-medium: #4b5563;
+            --dark-overlay: rgba(0, 0, 0, 0.6);
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--light-background-gray); }
+
+        .text-fixed-sm { font-size: 0.75rem; } @media (min-width: 768px) { .text-fixed-sm { font-size: 0.875rem; } }
+        .text-fixed-base { font-size: 0.875rem; } @media (min-width: 768px) { .text-fixed-base { font-size: 1rem; } }
+        .text-fixed-lg { font-size: 1rem; } @media (min-width: 768px) { .text-fixed-lg { font-size: 1.125rem; } }
+        .text-fixed-xl { font-size: 1.125rem; } @media (min-width: 768px) { .text-fixed-xl { font-size: 1.25rem; } }
+        .text-fixed-2xl { font-size: 1.25rem; } @media (min-width: 768px) { .text-fixed-2xl { font-size: 1.5rem; } }
+        .text-fixed-3xl { font-size: 1.5rem; } @media (min-width: 768px) { .text-fixed-3xl { font-size: 1.875rem; } }
+
+        .modal-overlay { opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+        .modal-overlay.show { opacity: 1; visibility: visible; }
+        .modal-content { transform: translateY(-20px); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease; }
+        .modal-overlay.show .modal-content { transform: translateY(0); opacity: 1; }
+
+        #mobile-menu { transform: translateX(-100%); transition: transform 0.3s ease-in-out; }
+        #mobile-menu.open { transform: translateX(0); }
+        #mobile-backdrop { opacity: 0; visibility: hidden; transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; }
+        #mobile-backdrop.open { opacity: 1; visibility: visible; }
+
+        .unit-type-btn.active { background-color: var(--primary-color); color: white; }
+        .shake { animation: shake-animation 0.6s ease-in-out; }
+        @keyframes shake-animation { 0% { transform: translateX(0); } 15% { transform: translateX(-8px) rotate(-5deg); } 30% { transform: translateX(8px) rotate(5deg); } 45% { transform: translateX(-8px) rotate(-5deg); } 60% { transform: translateX(8px) rotate(5deg); } 75% { transform: translateX(-5px) rotate(-2deg); } 90% { transform: translateX(5px) rotate(2deg); } 100% { transform: translateX(0); } }
+
+        .cash-btn { border: 1px solid #d1d5db; padding: 8px 12px; border-radius: 8px; font-size: 0.875rem; transition: all 0.2s; }
+        .cash-btn.active { background-color: var(--primary-color); color: white; border-color: var(--primary-color); }
+
+        .fade-in-up, .fade-in-left, .fade-in-right { opacity: 0; transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in-up { transform: translateY(30px); }
+        .fade-in-left { transform: translateX(-30px); }
+        .fade-in-right { transform: translateX(30px); }
+        .is-visible { opacity: 1; transform: none; }
+
+        .category-btn { background-color: #f3f4f6; color: var(--text-medium); padding: 8px 16px; border-radius: 9999px; font-weight: 600; transition: all 0.2s; border: 1px solid transparent; }
+        .category-btn:hover { background-color: #e5e7eb; }
+        .category-btn.active { background-color: var(--primary-color); color: white; border-color: var(--primary-color); }
+
+        #cartToast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background-color: var(--text-dark); color: var(--background-white); padding: 12px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); opacity: 0; transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; pointer-events: none; z-index: 9999; font-size: 0.875rem; min-width: 200px; text-align: center; }
+        #cartToast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        .unavailable-product-card { background-color: #f8f8f8; cursor: not-allowed !important; filter: grayscale(80%); }
+        .unavailable-product-card .add-to-cart-btn { background-color: #ef4444 !important; color: white !important; cursor: not-allowed !important; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .unavailable-product-card .add-to-cart-btn:hover { background-color: #dc2626 !important; transform: none !important; }
+        .unavailable-product-card .product-name, .unavailable-product-card .product-description { color: var(--text-medium) !important; }
+
+        #floatingCallout { position: fixed; bottom: 100px; right: 24px; max-width: 280px; background-color: var(--primary-color); color: white; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); z-index: 9990; opacity: 0; transform: translateX(100%); transition: opacity 0.5s ease-out, transform 0.5s ease-out; display: none; }
+        #floatingCallout.show { opacity: 1; transform: translateX(0); display: block; }
+        #floatingCallout .close-btn { position: absolute; top: 8px; right: 8px; background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer; line-height: 1; }
+        @media (max-width: 640px) { #floatingCallout { bottom: 120px; right: 16px; max-width: 90%; } }
+
+        .font-script { font-family: 'Kaushan Script', cursive; }
+
+        .hero-image-mask { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; overflow: hidden; box-shadow: 20px 20px 0px rgba(201, 74, 55, 0.1); transition: all 0.5s ease; }
+        .hero-image-mask:hover { border-radius: 50%; box-shadow: 20px 20px 0px rgba(40, 167, 69, 0.1); }
+
+        #mainHeader { background-color: var(--primary-color); box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        
+        /* Estilos para modo offline */
+        #offline-banner {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #ffc107;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        #offline-banner button {
+            background: none;
+            border: none;
+            color: #333;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0 5px;
+            margin-left: 10px;
+        }
+        
+        #offline-banner button:hover {
+            color: #000;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+<header id="mainHeader" class="fixed top-0 left-0 right-0 z-50 bg-[#28a745] shadow-md transition-all duration-300">
+    <div class="container mx-auto px-4 sm:px6 lg:px-8 flex items-center justify-between py-3">
+        <div class="flex items-center gap-4">
+            <button id="mobile-menu-button" class="md:hidden text-white"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg></button>
+            <a href="#" class="flex items-center gap-3 flex-shrink-0">
+                <img src="/imagenes/logo.png" alt="Logo Mercado Bayona" class="h-10 w-10 md:h-12 md:w-12 rounded-full shadow-md object-cover border-2 border-white">
+                <span class="text-white text-xl font-bold hidden sm:block">Mercado Bayona</span>
+            </a>
+        </div>
+
+        <nav class="hidden md:flex items-center gap-4 md:gap-6 text-white font-semibold text-sm">
+            <a href="#mercado" class="hover:text-[var(--accent-color)] transition-colors duration-300">Mercado</a>
+            <a href="#como-comprar" class="hover:text-[var(--accent-color)] transition-colors duration-300">Ayuda</a>
+            <a href="#contacto" class="hover:text-[var(--accent-color)] transition-colors duration-300">Contacto</a>
+        </nav>
+        
+        <!-- Indicador de conexión -->
+        <div id="estado-conexion" class="hidden md:flex items-center gap-2 text-xs px-2 py-1 rounded-full bg-opacity-20">
+            <span class="inline-block w-2 h-2 rounded-full bg-green-500"></span>
+            <span class="text-white">Online</span>
+        </div>
+    </div>
+</header>
+
+<section class="relative pt-28 pb-12 md:pt-36 md:pb-20 bg-white overflow-hidden">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12">
+            <div class="w-full md:w-1/2 text-center md:text-left z-10 fade-in-up">
+                <span class="inline-block py-1 px-3 rounded-full bg-blue-50 text-[var(--primary-color)] text-xs font-bold tracking-wide mb-4 border border-blue-100">ENVIOS EN LA HABANA VIEJA</span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[var(--text-dark)] leading-tight mb-4">MERCADO BAYONA<br><span class="font-script text-[var(--accent-color)] text-3xl md:text-4xl lg:text-5xl block mt-2">Productos a domicilio en La Habana Vieja</span></h1>
+                <p class="text-gray-500 text-lg md:text-xl mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed">Olvídate de las colas. Selecciona tus productos desde el móvil y recíbelos en la puerta de tu casa en La Habana Vieja.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#mercado" class="px-8 py-4 bg-[var(--primary-color)] text-white font-bold rounded-full shadow-lg hover:bg-[#218838] transition-all transform hover:scale-105 flex items-center justify-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg> Comprar Ahora</a>
+                    <a href="#nuestras-ventajas" class="px-8 py-4 bg-white text-[var(--primary-color)] font-bold rounded-full border-2 border-gray-100 hover:border-[var(--primary-color)] transition-all flex items-center justify-center">Ver Ofertas</a>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 relative flex justify-center fade-in-right">
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-50 rounded-full opacity-50 z-0"></div>
+                <div class="relative z-10 w-full max-w-[400px] md:max-w-[500px] aspect-square">
+                    <img src="/imagenes/banner-hero.jpg" alt="Repartidor de Mercado Bayona" class="hero-image-mask w-full h-full object-cover object-center">
                 </div>
                 <div class="absolute bottom-10 -left-4 md:left-0 bg-white p-4 rounded-xl shadow-xl z-20 flex items-center gap-3 animate-bounce" style="animation-duration: 3s;">
                     <div class="bg-green-100 p-2 rounded-full text-green-600"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg></div>
@@ -282,10 +362,10 @@
     <div class="p-6">
         <div class="flex justify-between items-center mb-8">
             <a href="#" class="flex items-center gap-2">
-                <img src="https://i.postimg.cc/s2FHrX2Y/logo_el_resolvito.jpg" alt="El Resolvito Logo" class="h-12 w-12 rounded-full object-cover">
-                <span class="text-white text-fixed-lg font-bold">El Resolvito</span>
+                <img src="/imagenes/logo.png" alt="Mercado Bayona Logo" class="h-12 w-12 rounded-full object-cover">
+                <span class="text-white text-fixed-lg font-bold">Mercado Bayona</span>
             </a>
-            <button id="close-mobile-menu" class="text-white"><svg xmlns="http://www.w3.org2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
+            <button id="close-mobile-menu" class="text-white"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
         </div>
         <nav class="flex flex-col space-y-4 text-fixed-lg font-semibold text-white">
             <a href="#mercado" class="hover:text-gray-300 transition-colors mobile-nav-link">Mercado</a>
@@ -383,11 +463,11 @@
     <section id="promo-entrega" class="py-16 lg:py-24 bg-blue-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-8">
             <div class="lg:w-1/2 flex justify-center fade-in-left">
-                <img src="https://i.postimg.cc/rsCKV7LZ/1755367982611.jpg" alt="Mensajero de El Resolvito entregando pedido" class="rounded-xl shadow-2xl object-cover max-h-[500px] w-full lg:w-auto">
+                <img src="https://i.postimg.cc/rsCKV7LZ/1755367982611.jpg" alt="Mensajero de Mercado Bayona entregando pedido" class="rounded-xl shadow-2xl object-cover max-h-[500px] w-full lg:w-auto">
             </div>
             <div class="lg:w-1/2 text-center lg:text-left fade-in-right">
                 <h2 class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--primary-color)] mb-4">¡Tu Mercado en La Habana Vieja, Así de Fácil!</h2>
-                <p class="text-fixed-lg text-[var(--text-dark)] mb-6 max-w-xl mx-auto lg:mx-0">¿Cansado de las colas, el sol y cargar con el peso? En El Resolvito, **te llevamos tu compra directo a casa y con una sonrisa.** ¡Tu tiempo vale oro!</p>
+                <p class="text-fixed-lg text-[var(--text-dark)] mb-6 max-w-xl mx-auto lg:mx-0">¿Cansado de las colas, el sol y cargar con el peso? En Mercado Bayona, **te llevamos tu compra directo a casa y con una sonrisa.** ¡Tu tiempo vale oro!</p>
                 <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 mb-8">
                     <h3 class="text-fixed-xl font-bold text-[var(--accent-color)] mb-3">Envío a La Habana Vieja</h3>
                     <ul class="list-disc list-inside text-fixed-base text-[var(--text-medium)] text-left mx-auto max-w-sm lg:max-w-none space-y-2">
@@ -395,7 +475,7 @@
                         <li>Incluye manejo especial para productos frágiles</li>
                     </ul>
                 </div>
-                <a href="#mercado" class="inline-block bg-[var(--primary-color)] text-white font-bold py-3 px-8 rounded-full text-fixed-lg hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg">¡Empieza a Resolver Aquí!</a>
+                <a href="#mercado" class="inline-block bg-[var(--primary-color)] text-white font-bold py-3 px-8 rounded-full text-fixed-lg hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg">¡Empieza a Comprar Aquí!</a>
             </div>
         </div>
     </section>
@@ -452,7 +532,7 @@
                     <div class="bg-gradient-to-r from-blue-50 to-green-50 p-4 rounded-lg mt-6">
                         <p class="text-sm text-gray-600 mb-1">Comunidad activa</p>
                         <p class="text-3xl font-bold text-[var(--primary-color)]" id="communityCounter">0</p>
-                        <p class="text-xs text-gray-500 mt-1">personas ya confían en El Resolvito</p>
+                        <p class="text-xs text-gray-500 mt-1">personas ya confían en Mercado Bayona</p>
                     </div>
                 </div>
                 <a href="#" id="contactWhatsappBtn" class="mt-8 inline-block bg-green-500 text-white font-bold py-3 px-8 rounded-full text-fixed-lg hover:bg-green-600 transform hover:scale-105 transition-all duration-300 shadow-lg">Unirse al Grupo de WhatsApp</a>
@@ -480,7 +560,7 @@
         </div>
         
         <div class="flex flex-col items-center gap-2">
-            <p class="text-fixed-sm">&copy; 2024 El Resolvito. Todos los derechos reservados.</p>
+            <p class="text-fixed-sm">&copy; 2024 Mercado Bayona. Todos los derechos reservados.</p>
             <div class="flex items-center gap-1 text-xs text-gray-500">
                 <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
@@ -583,34 +663,14 @@
     </div>
 </div>
 
-<!-- Botón flotante del carrito -->
 <button id="floatingCartBtn" class="fixed bottom-6 right-6 bg-[var(--primary-color)] text-white px-5 py-3 rounded-full shadow-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 z-40 flex items-center gap-3">
     <div class="relative"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.402H3.62a.5.5 0 0 1-.49-.598l-1-5A.5.5 0 0 1 2 1H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2.5h7.45l.5-2.5H3.14zM5 12a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/></svg><span id="cartCount" class="absolute -top-1 -right-1 bg-[var(--accent-color)] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">0</span></div>
     <span id="floatingCartTotal" class="text-fixed-lg font-bold">$0</span>
 </button>
 
-<!-- Botón flotante de notificaciones -->
-<div id="notification-subscribe-btn" class="hidden">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-    </svg>
-</div>
-
-<!-- Toast para notificaciones -->
 <div id="cartToast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none z-[9999]"><p id="cartToastMessage" class="text-fixed-sm"></p></div>
-
-<!-- Callout flotante -->
 <div id="floatingCallout" class="fixed bottom-24 right-6 bg-[var(--primary-color)] text-white p-4 rounded-lg shadow-xl text-fixed-base z-[9990] opacity-0 translate-x-full transition-all duration-500 ease-out">
     <button class="close-btn" id="closeFloatingCallout">&times;</button><p class="font-bold mb-2">¡Comodidad en La Habana!</p><a href="#nuestras-ventajas" class="mt-3 inline-block bg-[var(--accent-color)] text-white text-fixed-sm font-semibold py-2 px-4 rounded-full">Ver Ventajas</a>
-</div>
-
-<!-- Notificación local temporal -->
-<div id="localNotification" class="local-notification hidden">
-    <button class="close-btn" id="closeLocalNotification">&times;</button>
-    <div class="notification-icon">🔔</div>
-    <h4 class="font-bold text-lg mb-2" id="notificationTitle"></h4>
-    <p class="text-gray-600 mb-4" id="notificationMessage"></p>
-    <button id="notificationActionBtn" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors"></button>
 </div>
 
 <!-- ============================================
@@ -621,9 +681,6 @@ SCRIPTS EN ORDEN CORRECTO
 
 <!-- 🔥 CATÁLOGO DINÁMICO (carga desde GitHub CSV) -->
 <script src="catalogo-dinamico.js" defer></script>
-
-<!-- 📱 ONESIGNAL NOTIFICACIONES PUSH -->
-<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
 
 <script>
     // CONSTANTES DE LA NUEVA POLÍTICA DE ENVÍOS POR RANGOS
@@ -654,10 +711,6 @@ SCRIPTS EN ORDEN CORRECTO
     var selectedCashAmount = '';
     var toastTimeout;
     var currentDepartment = 'mercado';
-    
-    // Variables para OneSignal
-    var isOneSignalInitialized = false;
-    var userSubscriptionId = null;
 
     // Referencias a modales
     const cartModal = document.getElementById('cartModal');
@@ -671,202 +724,6 @@ SCRIPTS EN ORDEN CORRECTO
     const closeConfirmationModalBtn = document.getElementById('closeConfirmationModal');
     const floatingCallout = document.getElementById('floatingCallout');
     const closeFloatingCalloutBtn = document.getElementById('closeFloatingCallout');
-    const notificationSubscribeBtn = document.getElementById('notification-subscribe-btn');
-    const localNotification = document.getElementById('localNotification');
-    const closeLocalNotificationBtn = document.getElementById('closeLocalNotification');
-    const notificationActionBtn = document.getElementById('notificationActionBtn');
-
-    // ============================================
-    // FUNCIONES DE ONESIGNAL
-    // ============================================
-
-    // INICIALIZAR ONESIGNAL
-    function initializeOneSignal() {
-        console.log('🔄 Inicializando OneSignal...');
-        
-        // Verificar si OneSignal está disponible
-        if (typeof OneSignal === 'undefined') {
-            console.log('⚠️ OneSignal no está disponible');
-            return;
-        }
-        
-        // Configuración de OneSignal
-        // 🔴 IMPORTANTE: REEMPLAZA ESTOS VALORES CON TUS PROPIOS DATOS DE ONESIGNAL
-        const oneSignalAppId = "1c761702-8750-4994-97eb-06e700a50236"; // Reemplaza con tu App ID
-        const oneSignalSafariId = "TU-SAFARI-WEB-ID-AQUI"; // Reemplaza con tu Safari Web ID (opcional)
-        
-        window.OneSignal = window.OneSignal || [];
-        
-        OneSignal.push(function() {
-            OneSignal.init({
-                appId: oneSignalAppId,
-                safari_web_id: oneSignalSafariId,
-                notifyButton: {
-                    enable: false, // Desactivamos el botón por defecto, usaremos el nuestro
-                },
-                allowLocalhostAsSecureOrigin: true, // Útil para desarrollo
-                autoRegister: false, // No registrar automáticamente
-                autoResubscribe: true, // Re-suscribir automáticamente
-                persistNotification: false,
-                welcomeNotification: {
-                    title: "¡Bienvenido a El Resolvito!",
-                    message: "Recibirás notificaciones de ofertas y nuevos productos.",
-                }
-            });
-            
-            // Verificar estado de suscripción
-            OneSignal.getUserId(function(userId) {
-                if (userId) {
-                    console.log('✅ Usuario ya suscrito a notificaciones:', userId);
-                    userSubscriptionId = userId;
-                    hideNotificationButton();
-                } else {
-                    console.log('ℹ️ Usuario no suscrito a notificaciones');
-                    showNotificationButton();
-                }
-            });
-            
-            // Escuchar cambios en la suscripción
-            OneSignal.on('subscriptionChange', function(isSubscribed) {
-                console.log('🔄 Cambio en suscripción:', isSubscribed ? 'SUSCRITO' : 'NO SUSCRITO');
-                
-                if (isSubscribed) {
-                    OneSignal.getUserId(function(userId) {
-                        userSubscriptionId = userId;
-                        console.log('🎉 Usuario suscrito con ID:', userId);
-                        hideNotificationButton();
-                        showLocalNotification(
-                            '¡Notificaciones activadas!',
-                            'Ahora recibirás nuestras mejores ofertas.',
-                            'Ver Ofertas',
-                            '#mercado'
-                        );
-                    });
-                } else {
-                    userSubscriptionId = null;
-                    showNotificationButton();
-                }
-            });
-            
-            isOneSignalInitialized = true;
-            console.log('✅ OneSignal inicializado correctamente');
-        });
-    }
-
-    // MOSTRAR BOTÓN DE NOTIFICACIONES
-    function showNotificationButton() {
-        if (notificationSubscribeBtn) {
-            notificationSubscribeBtn.classList.remove('hidden');
-            console.log('🔔 Mostrando botón de notificaciones');
-            
-            // Configurar evento click
-            notificationSubscribeBtn.addEventListener('click', function() {
-                requestNotificationPermission();
-            });
-        }
-    }
-
-    // OCULTAR BOTÓN DE NOTIFICACIONES
-    function hideNotificationButton() {
-        if (notificationSubscribeBtn) {
-            notificationSubscribeBtn.classList.add('hidden');
-            console.log('🔕 Ocultando botón de notificaciones');
-        }
-    }
-
-    // SOLICITAR PERMISO DE NOTIFICACIONES
-    function requestNotificationPermission() {
-        if (!isOneSignalInitialized) {
-            console.log('⚠️ OneSignal no está inicializado');
-            return;
-        }
-        
-        console.log('🔔 Solicitando permiso de notificaciones...');
-        
-        OneSignal.showNativePrompt().then(function() {
-            console.log('✅ Prompt de notificaciones mostrado');
-        }).catch(function(error) {
-            console.error('❌ Error mostrando prompt:', error);
-            // Fallback a notificaciones nativas
-            if ('Notification' in window) {
-                Notification.requestPermission().then(function(permission) {
-                    if (permission === 'granted') {
-                        console.log('✅ Permiso concedido para notificaciones nativas');
-                        showLocalNotification(
-                            'Permiso concedido',
-                            'Ahora podrás recibir notificaciones de El Resolvito.',
-                            'Ver Tienda',
-                            '#mercado'
-                        );
-                    }
-                });
-            }
-        });
-    }
-
-    // ENVIAR NOTIFICACIÓN LOCAL (para pruebas)
-    function showLocalNotification(title, message, actionText, actionUrl) {
-        if (!localNotification) return;
-        
-        document.getElementById('notificationTitle').textContent = title;
-        document.getElementById('notificationMessage').textContent = message;
-        document.getElementById('notificationActionBtn').textContent = actionText;
-        
-        // Configurar acción del botón
-        notificationActionBtn.onclick = function() {
-            if (actionUrl) {
-                window.location.href = actionUrl;
-            }
-            hideLocalNotification();
-        };
-        
-        // Configurar botón de cerrar
-        closeLocalNotificationBtn.onclick = hideLocalNotification;
-        
-        // Mostrar notificación
-        localNotification.classList.remove('hidden');
-        setTimeout(() => {
-            localNotification.classList.add('show');
-        }, 100);
-        
-        // Auto-ocultar después de 10 segundos
-        setTimeout(hideLocalNotification, 10000);
-    }
-
-    function hideLocalNotification() {
-        if (localNotification) {
-            localNotification.classList.remove('show');
-            setTimeout(() => {
-                localNotification.classList.add('hidden');
-            }, 500);
-        }
-    }
-
-    // FUNCIÓN PARA ENVIAR NOTIFICACIONES PUSH DESDE EL CLIENTE
-    // Nota: Normalmente esto se hace desde el dashboard de OneSignal
-    function sendTestNotification() {
-        if (!userSubscriptionId) {
-            console.log('❌ No hay usuario suscrito para enviar notificación');
-            showLocalNotification(
-                'No estás suscrito',
-                'Activa las notificaciones para recibir nuestras ofertas.',
-                'Activar Notificaciones',
-                '#'
-            );
-            return;
-        }
-        
-        console.log('📤 Enviando notificación de prueba a:', userSubscriptionId);
-        
-        // En una implementación real, esto se haría desde el backend
-        // Esta es solo una demostración del flujo
-        showLocalNotification(
-            '¡Prueba exitosa!',
-            'Las notificaciones push están configuradas correctamente.',
-            'Ver Productos',
-            '#mercado'
-        );
-    }
 
     // ============================================
     // FUNCIONES DE CARGA DE PRODUCTOS
@@ -967,7 +824,7 @@ Por tu compra mayor a $5,000, el envío es de solo $${priceDetails.shippingFee.t
             shippingMessage = `🚚 Envío estándar: $${priceDetails.shippingFee.toLocaleString()}`;
         }
         
-        return `✅ *PEDIDO CONFIRMADO - EL RESOLVITO*
+        return `✅ *PEDIDO CONFIRMADO - MERCADO BAYONA*
 
 🛒 *TU COMPRA:*
 ${itemsText}
@@ -990,7 +847,7 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
     async function updateAllCounters() {
         try {
             // 1. Obtener contador actual
-            const getResponse = await fetch('https://api.countapi.xyz/get/el-resolvito-cuba/visits');
+            const getResponse = await fetch('https://api.countapi.xyz/get/mercado-bayona-cuba/visits');
             const getData = await getResponse.json();
             
             let currentCount = getData.value || 0;
@@ -1000,7 +857,7 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
             const today = new Date().toDateString();
             
             if (!lastIncrement || lastIncrement !== today) {
-                const hitResponse = await fetch('https://api.countapi.xyz/hit/el-resolvito-cuba/visits');
+                const hitResponse = await fetch('https://api.countapi.xyz/hit/mercado-bayona-cuba/visits');
                 const hitData = await hitResponse.json();
                 currentCount = hitData.value;
                 localStorage.setItem('lastCounterIncrement', today);
@@ -1024,9 +881,9 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
             console.log("Usando contador local como respaldo");
             
             // Fallback a localStorage
-            let localCount = localStorage.getItem('elResolvitoVisits') || 150;
+            let localCount = localStorage.getItem('mercadoBayonaVisits') || 150;
             localCount = parseInt(localCount) + 1;
-            localStorage.setItem('elResolvitoVisits', localCount);
+            localStorage.setItem('mercadoBayonaVisits', localCount);
             
             document.querySelectorAll('#heroCounter, #communityCounter, #footerCounter, #simpleCounter').forEach(el => {
                 if (el) el.textContent = localCount.toLocaleString();
@@ -1890,14 +1747,6 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
         };
         localStorage.setItem('customerData', JSON.stringify(savedCustomerData));
         showModal(confirmationModal);
-        
-        // Mostrar notificación local de pedido confirmado
-        showLocalNotification(
-            '¡Pedido Confirmado!',
-            'Tu pedido ha sido enviado por WhatsApp. Te contactaremos pronto.',
-            'Seguir Comprando',
-            '#mercado'
-        );
     }
 
     function showFloatingCallout() {
@@ -1969,16 +1818,13 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
         setupScrollHeader();
         showFloatingCalloutAfterDelay();
         
-        // 3. Inicializar OneSignal (notificaciones push)
-        initializeOneSignal();
-        
-        // 4. Registrar Service Worker
+        // 3. Registrar Service Worker
         registrarServiceWorker();
         
-        // 5. Verificar conexión
+        // 4. Verificar conexión
         verificarConexion();
         
-        // 6. Verificar si ya hay productos cargados (por si el evento no se disparó)
+        // 5. Verificar si ya hay productos cargados (por si el evento no se disparó)
         setTimeout(function() {
             // Si después de 3 segundos no se cargaron productos, forzar carga
             if (products.length === 0) {
@@ -1995,7 +1841,7 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
                         const datos = {
                             productos: products,
                             timestamp: Date.now(),
-                            version: '3.0'
+                            version: '2.0'
                         };
                         localStorage.setItem('catalogo_productos', JSON.stringify(datos));
                         console.log('💾 Catálogo guardado en localStorage para offline');
@@ -2022,14 +1868,1543 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
     });
 
     // ============================================
-    // FUNCIONES GLOBALES PARA USO DESDE HTML
+    // FIN DEL SCRIPT
     // ============================================
-    window.showProductDetailsModal = showProductDetailsModal;
-    window.updateCartQuantity = updateCartQuantity;
-    window.removeFromCart = removeFromCart;
-    window.toggleAccordion = toggleAccordion;
-    window.switchDepartment = switchDepartment;
-    window.sendTestNotification = sendTestNotification;
+</script>
+
+</body>
+</html>" alt="Repartidor de Mercado Bayona" class="hero-image-mask w-full h-full object-cover object-center">
+                </div>
+                <div class="absolute bottom-10 -left-4 md:left-0 bg-white p-4 rounded-xl shadow-xl z-20 flex items-center gap-3 animate-bounce" style="animation-duration: 3s;">
+                    <div class="bg-green-100 p-2 rounded-full text-green-600"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg></div>
+                    <div><p class="text-xs text-gray-500 font-semibold">Entregas hoy</p><p class="text-sm font-bold text-[var(--text-dark)]">Habana Vieja</p></div>
+                </div>
+                <!-- CONTADOR EN HERO -->
+                <div class="absolute top-10 right-4 md:right-0 bg-white p-3 rounded-xl shadow-xl z-20 flex items-center gap-3">
+                    <div class="bg-purple-100 p-2 rounded-full text-purple-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 font-semibold">Visitando ahora</p>
+                        <p class="text-sm font-bold text-[var(--text-dark)]" id="heroCounter">0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="mobile-menu" class="fixed top-0 left-0 h-full w-64 bg-[var(--primary-color)] z-50 shadow-xl md:hidden">
+    <div class="p-6">
+        <div class="flex justify-between items-center mb-8">
+            <a href="#" class="flex items-center gap-2">
+                <img src="/imagenes/logo.png" alt="Mercado Bayona Logo" class="h-12 w-12 rounded-full object-cover">
+                <span class="text-white text-fixed-lg font-bold">Mercado Bayona</span>
+            </a>
+            <button id="close-mobile-menu" class="text-white"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
+        </div>
+        <nav class="flex flex-col space-y-4 text-fixed-lg font-semibold text-white">
+            <a href="#mercado" class="hover:text-gray-300 transition-colors mobile-nav-link">Mercado</a>
+            <a href="#como-comprar" class="hover:text-gray-300 transition-colors mobile-nav-link">¿Cómo Comprar?</a>
+            <a href="#nuestras-ventajas" class="hover:text-gray-300 transition-colors mobile-nav-link">Nuestras Ventajas</a>
+            <a href="#contacto" class="hover:text-gray-300 transition-colors mobile-nav-link">Contacto</a>
+        </nav>
+    </div>
+</div>
+<div id="mobile-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"></div>
+
+<main>
+    <section id="nuestras-ventajas" class="py-6 md:py-10 bg-white border-b border-gray-100">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
+                <div class="flex flex-col items-center text-center p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 md:h-10 md:w-10 text-[var(--primary-color)] mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <h3 class="text-sm md:text-lg font-bold text-[var(--text-dark)] leading-tight">Ahorra Tiempo</h3>
+                    <p class="hidden md:block text-xs md:text-sm text-[var(--text-medium)] mt-1">Dedica tu tiempo a lo que importa.</p>
+                </div>
+                <div class="flex flex-col items-center text-center p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 md:h-10 md:w-10 text-[var(--primary-color)] mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <h3 class="text-sm md:text-lg font-bold text-[var(--text-dark)] leading-tight">Compra Cómoda</h3>
+                    <p class="hidden md:block text-xs md:text-sm text-[var(--text-medium)] mt-1">Selecciona desde casa.</p>
+                </div>
+                <div class="flex flex-col items-center text-center p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 md:h-10 md:w-10 text-[var(--primary-color)] mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7m0-4v8a2 2 0 01-2 2H5a2 2 0 01-2-2V4a2 2 0 012-2h10a2 2 0 012 2v4a2 2 0 002 2h2" /></svg>
+                    <h3 class="text-sm md:text-lg font-bold text-[var(--text-dark)] leading-tight">Sin Estrés</h3>
+                    <p class="hidden md:block text-xs md:text-sm text-[var(--text-medium)] mt-1">Proceso tranquilo y organizado.</p>
+                </div>
+                <div class="flex flex-col items-center text-center p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 md:h-10 md:w-10 text-[var(--primary-color)] mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.007 12.007 0 002 12c0 2.755 1.056 5.409 2.944 7.318A11.955 11.955 0 0112 21.056c2.755 0 5.409-1.056 7.318-2.944A12.007 12.007 0 0022 12c0-2.755-1.056-5.409-2.944-7.318z" /></svg>
+                    <h3 class="text-sm md:text-lg font-bold text-[var(--text-dark)] leading-tight">Seguridad</h3>
+                    <p class="hidden md:block text-xs md:text-sm text-[var(--text-medium)] mt-1">Confirmación por WhatsApp.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="mercado" class="py-16 lg:py-24 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8 fade-in-up">
+                <h2 id="sectionTitle" class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--text-dark)]">Mercado y Víveres</h2>
+                <p class="mt-4 text-fixed-lg text-[var(--text-medium)] max-w-3xl mx-auto">Selecciona una categoría para ver los productos.</p>
+            </div>
+
+            <div id="tabsContainer" class="sticky top-[70px] z-30 bg-gray-50 py-3 shadow-sm rounded-b-xl mb-6">
+                <div class="container mx-auto px-2">
+                    <div class="grid grid-cols-2 md:flex md:justify-center gap-2">
+                        <button onclick="switchDepartment('mercado')" id="tab-mercado"
+                            class="department-tab active flex items-center justify-center gap-1 w-full px-2 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all shadow-sm border border-transparent bg-[var(--primary-color)] text-white hover:scale-105 transform">
+                            🛒 Mercado
+                        </button>
+                        <button onclick="switchDepartment('ropa')" id="tab-ropa"
+                            class="department-tab flex items-center justify-center gap-1 w-full px-2 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all shadow-sm border border-gray-200 bg-white text-gray-600 hover:bg-gray-100 hover:scale-105 transform">
+                            👕 Ropa y Calzado
+                        </button>
+                        <button onclick="switchDepartment('electro')" id="tab-electro"
+                            class="department-tab col-span-2 md:col-span-1 flex items-center justify-center gap-1 w-full px-2 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all shadow-sm border border-gray-200 bg-white text-gray-600 hover:bg-gray-100 hover:scale-105 transform">
+                            ⚡ Electrodomésticos
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ✅ Buscador global único -->
+            <div class="container mx-auto px-2 mt-4">
+                <input id="globalSearchInput" type="text" placeholder="Buscar producto..."
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition text-fixed-base">
+            </div>
+
+            <div class="min-h-screen flex flex-col">
+                <div class="bg-white border-2 border-dashed border-green-200 p-4 rounded-xl shadow-md mb-8 text-center fade-in-up" id="deliveryPromoBanner">
+                    <h3 class="text-fixed-xl md:text-fixed-2xl font-extrabold text-[var(--primary-color)] mb-4">Envío rápido y sin sorpresas</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-fixed-sm md:text-fixed-base max-w-xl mx-auto">
+                        <div class="bg-green-50 p-3 rounded-lg flex flex-col justify-center items-center ring-2 ring-transparent transition-all duration-300">
+                            <p class="font-semibold text-gray-800">HABANA VIEJA</p>
+                            <p class="text-green-700 font-bold">Precio con entrega incluida</p>
+                            <p class="text-xs text-gray-600 mt-1">Incluye manejo especial</p>
+                        </div>
+                        <div class="bg-yellow-50 p-3 rounded-lg flex flex-col justify-center items-center ring-2 ring-transparent transition-all duration-300">
+                            <p class="font-semibold text-gray-800">OTROS MUNICIPIOS</p>
+                            <p class="text-yellow-700 font-bold">Tarifa a convenir</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="mercadoCategoryFilters" class="flex flex-wrap justify-center gap-2 mb-8 fade-in-up"></div>
+                <div id="mercadoProductGrid"></div>
+                <p id="mercadoNoResultsMessage" class="hidden text-center text-fixed-lg text-[var(--text-medium)] mt-8">No se encontraron productos en esta sección.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="promo-entrega" class="py-16 lg:py-24 bg-blue-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-8">
+            <div class="lg:w-1/2 flex justify-center fade-in-left">
+                <img src="https://i.postimg.cc/rsCKV7LZ/1755367982611.jpg" alt="Mensajero de Mercado Bayona entregando pedido" class="rounded-xl shadow-2xl object-cover max-h-[500px] w-full lg:w-auto">
+            </div>
+            <div class="lg:w-1/2 text-center lg:text-left fade-in-right">
+                <h2 class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--primary-color)] mb-4">¡Tu Mercado en La Habana Vieja, Así de Fácil!</h2>
+                <p class="text-fixed-lg text-[var(--text-dark)] mb-6 max-w-xl mx-auto lg:mx-0">¿Cansado de las colas, el sol y cargar con el peso? En Mercado Bayona, **te llevamos tu compra directo a casa y con una sonrisa.** ¡Tu tiempo vale oro!</p>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 mb-8">
+                    <h3 class="text-fixed-xl font-bold text-[var(--accent-color)] mb-3">Envío a La Habana Vieja</h3>
+                    <ul class="list-disc list-inside text-fixed-base text-[var(--text-medium)] text-left mx-auto max-w-sm lg:max-w-none space-y-2">
+                        <li>Precio con entrega incluida</li>
+                        <li>Incluye manejo especial para productos frágiles</li>
+                    </ul>
+                </div>
+                <a href="#mercado" class="inline-block bg-[var(--primary-color)] text-white font-bold py-3 px-8 rounded-full text-fixed-lg hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 shadow-lg">¡Empieza a Comprar Aquí!</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="como-comprar" class="py-12 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8 fade-in-up">
+                <h2 class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--text-dark)]">Dudas y Guía de Compra</h2>
+                <p class="mt-2 text-fixed-base text-[var(--text-medium)]">Todo lo que necesitas saber, en un solo lugar.</p>
+            </div>
+            <div class="max-w-3xl mx-auto space-y-4 fade-in-up">
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 flex justify-between items-center transition-colors focus:outline-none" onclick="toggleAccordion('faq-2')">
+                        <span class="text-fixed-lg font-bold text-[var(--primary-color)] flex items-center gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
+                            </svg>
+                            ¿Cuánto cuesta el envío?
+                        </span>
+                        <svg id="icon-faq-2" class="w-5 h-5 text-gray-500 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div id="content-faq-2" class="hidden px-6 py-4 bg-white border-t border-gray-100">
+                        <div class="bg-white border-2 border-dashed border-green-200 p-4 rounded-xl shadow-md mb-8 text-center fade-in-up" id="deliveryPromoBanner">
+  <h3 class="text-fixed-xl md:text-fixed-2xl font-extrabold text-[var(--primary-color)] mb-4">Envío rápido y sin sorpresas</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-fixed-sm md:text-fixed-base max-w-xl mx-auto">
+    <div class="bg-green-50 p-3 rounded-lg flex flex-col justify-center items-center">
+      <p class="font-semibold text-gray-800">HABANA VIEJA</p>
+      <p class="text-green-700 font-bold">Precio final con entrega</p>
+      <p class="text-xs text-gray-600">Todo incluido, sin sorpresas</p>
+    </div>
+    <div class="bg-yellow-50 p-3 rounded-lg flex flex-col justify-center items-center">
+      <p class="font-semibold text-gray-800">OTROS MUNICIPIOS</p>
+      <p class="text-yellow-700 font-bold">Tarifa a convenir</p>
+    </div>
+  </div>
+</div>
+    </section>
+
+    <section id="contacto" class="py-16 lg:py-24">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in-up">
+                <h2 class="text-fixed-3xl md:text-fixed-4xl font-bold text-[var(--text-dark)]">Únete a Nuestro canal de whatsapp</h2>
+                <p class="mt-4 text-fixed-lg text-[var(--text-medium)] max-w-3xl mx-auto">Sé el primero en enterarte de nuevos productos y promociones exclusivas.</p>
+            </div>
+            <div class="max-w-lg mx-auto bg-white p-8 rounded-xl shadow-lg text-center fade-in-up" style="transition-delay: 150ms;">
+                <div class="space-y-4">
+                    <p class="text-fixed-lg"><strong>Canal de anuncios:</strong> Solo administradores</p>
+                    <p class="text-fixed-lg"><strong>Cero spam,</strong> solo información útil.</p>
+                    
+                    <!-- CONTADOR EN SECCIÓN CONTACTO -->
+                    <div class="bg-gradient-to-r from-blue-50 to-green-50 p-4 rounded-lg mt-6">
+                        <p class="text-sm text-gray-600 mb-1">Comunidad activa</p>
+                        <p class="text-3xl font-bold text-[var(--primary-color)]" id="communityCounter">0</p>
+                        <p class="text-xs text-gray-500 mt-1">personas ya confían en Mercado Bayona</p>
+                    </div>
+                </div>
+                <a href="#" id="contactWhatsappBtn" class="mt-8 inline-block bg-green-500 text-white font-bold py-3 px-8 rounded-full text-fixed-lg hover:bg-green-600 transform hover:scale-105 transition-all duration-300 shadow-lg">Unirse al Grupo de WhatsApp</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="bg-[var(--text-dark)] text-white py-8">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+        <div class="flex justify-center items-center gap-6 mb-6">
+            <a href="https://wa.me/5356382909" target="_blank" class="text-gray-400 hover:text-white transition-transform hover:scale-110"><svg class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C7.38 2 3.51 5.87 3.51 10.53C3.51 12.02 3.9 13.43 4.6 14.65L3.32 20.02L8.76 18.73C9.9 19.37 11.19 19.72 12.51 19.72H12.53C17.19 19.72 21.06 15.85 21.06 11.19C21.06 6.53 17.19 2.66 12.53 2.66H12.51Z"/></svg></a>
+        </div>
+        
+        <!-- CONTADOR EN FOOTER -->
+        <div class="mb-6">
+            <div class="inline-flex items-center gap-2 bg-gray-800 px-4 py-2 rounded-full">
+                <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-sm text-gray-300">
+                    <span id="footerCounter">0</span> visitas esta semana
+                </span>
+            </div>
+        </div>
+        
+        <div class="flex flex-col items-center gap-2">
+            <p class="text-fixed-sm">&copy; 2024 Mercado Bayona. Todos los derechos reservados.</p>
+            <div class="flex items-center gap-1 text-xs text-gray-500">
+                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                </svg>
+                <span id="simpleCounter">0</span> visitas hoy
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Modals (Carrito, Detalles, Checkout, Confirmación) -->
+<div id="cartModal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div class="modal-content bg-white rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] flex flex-col">
+        <div class="p-6 border-b"><div class="flex justify-between items-center"><h3 class="text-fixed-xl font-bold text-[var(--text-dark)]">Tu Carrito</h3><button id="closeCartModal" class="text-gray-500 hover:text-gray-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button></div></div>
+        <div id="cartItems" class="p-6 overflow-y-auto"><p class="text-center text-[var(--text-medium)] text-fixed-base">Tu carrito está vacío</p></div>
+        <div class="p-6 border-t"><div class="flex justify-between items-center mb-4"><span class="text-fixed-lg font-bold">Total:</span><span id="cartTotal" class="text-fixed-lg font-bold text-[var(--primary-color)]">$0</span></div><button id="sendWhatsAppOrder" class="w-full bg-green-500 text-white font-bold py-3 px-6 rounded-lg text-fixed-base hover:bg-green-600 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed" disabled>Enviar Pedido por WhatsApp</button></div>
+    </div>
+</div>
+
+<div id="productDetailsModal" class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[1000]">
+    <div class="modal-content bg-white rounded-lg shadow-xl w-11/12 max-w-md max-h-[90vh] flex flex-col">
+        <div class="flex justify-between items-center p-4 border-b"><h2 id="productDetailsTitle" class="text-fixed-2xl font-bold"></h2><button id="closeProductDetailsModalBtn" class="text-gray-500 hover:text-gray-800 text-fixed-3xl">&times;</button></div>
+        <div class="p-6 overflow-y-auto">
+            <img id="productDetailsImage" src="" alt="Imagen del Producto" class="w-full h-64 object-contain rounded-lg mb-4">
+            <p id="productDetailsDescription" class="text-fixed-base text-[var(--text-medium)] mb-4"></p>
+            <div id="unitTypeSection" class="mb-4 hidden">
+                <label class="block text-fixed-base font-semibold text-gray-700 mb-2">Tipo de compra:</label>
+                <div class="flex gap-2">
+                    <button id="unitTypeIndividual" class="unit-type-btn flex-1 py-2 px-4 border border-gray-300 rounded-lg text-fixed-sm font-medium transition-colors active">Individual</button>
+                    <button id="unitTypeBox" class="unit-type-btn flex-1 py-2 px-4 border border-gray-300 rounded-lg text-fixed-sm font-medium transition-colors">Por Caja (24 unidades)</button>
+                </div>
+            </div>
+            <p id="productDetailsPrice" class="text-fixed-3xl font-bold text-[var(--primary-color)] mb-6 text-center"></p>
+            <div class="flex items-center justify-center space-x-4 mb-4">
+                <button id="decreaseQuantityBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold w-10 h-10 rounded-full text-fixed-xl">-</button>
+                <span id="productQuantityDisplay" class="text-fixed-2xl font-bold w-12 text-center">1</span>
+                <button id="increaseQuantityBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold w-10 h-10 rounded-full text-fixed-xl">+</button>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-lg mb-4"><div class="flex justify-between items-center"><span class="text-fixed-lg font-semibold">Total:</span><span id="modalTotalPrice" class="text-fixed-2xl font-bold text-[var(--accent-color)]">$0</span></div></div>
+            <button id="addProductToCartModalBtn" class="w-full bg-[var(--accent-color)] text-white font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition-all duration-300 text-fixed-lg">Añadir al Carrito</button>
+        </div>
+    </div>
+</div>
+
+<div id="checkoutModal" class="modal-overlay fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4">
+    <div class="modal-content bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden">
+        <div class="p-6 border-b"><div class="flex justify-between items-center"><h3 class="text-fixed-2xl font-bold text-[var(--text-dark)]">Finalizar Pedido</h3><button id="closeCheckoutModal" class="text-gray-500 hover:text-gray-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button></div></div>
+        <div class="flex-1 overflow-y-auto">
+            <div class="p-6 border-b">
+                <h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">Resumen de tu pedido</h4>
+                <div id="checkoutOrderSummary" class="space-y-3 mb-4"></div>
+                <div class="bg-gray-50 p-4 rounded-lg space-y-2">
+                    <div class="flex justify-between text-fixed-base"><span>Subtotal:</span><span id="checkoutSubtotal" class="font-semibold">$0</span></div>
+                    <div class="flex justify-between text-fixed-base"><span>Envío:</span><span id="checkoutShipping" class="font-semibold">Selecciona ubicación</span></div>
+                    <hr class="my-2">
+                    <div class="flex justify-between text-fixed-lg font-bold text-[var(--primary-color)]"><span>Total:</span><span id="checkoutTotal">$0</span></div>
+                </div>
+            </div>
+            <div class="p-6 border-b">
+                <h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">2. Datos</h4>
+                <div class="space-y-4">
+                    <div><label class="block text-fixed-base font-semibold text-gray-700 mb-2">Nombre *</label><input type="text" id="customerName" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm" required></div>
+                    <div><label class="block text-fixed-base font-semibold text-gray-700 mb-2">Dirección *</label><input type="text" id="customerAddress" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm" required></div>
+                    <div><label class="block text-fixed-base font-semibold text-gray-700 mb-2">Referencias</label><input type="text" id="customerReferences" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm"></div>
+                    <div><label class="block text-fixed-base font-semibold text-gray-700 mb-2">Teléfono *</label><input type="tel" id="customerPhone" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm" required></div>
+                    <div>
+                        <label class="block text-fixed-base font-semibold text-gray-700 mb-2">Ubicación *</label>
+                        <select id="deliveryLocation" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm" required>
+                            <option value="">Selecciona...</option><option value="habana-vieja">Habana Vieja</option><option value="otros">Otros</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="p-6">
+                <h4 class="text-fixed-lg font-bold text-[var(--text-dark)] mb-4">3. Pago</h4>
+                <div class="space-y-4">
+                    <div class="space-y-2">
+                        <label class="flex items-center"><input type="radio" name="paymentMethod" value="efectivo" class="mr-3 text-[var(--primary-color)]"> Efectivo</label>
+                        <label class="flex items-center"><input type="radio" name="paymentMethod" value="transferencia" class="mr-3 text-[var(--primary-color)]"> Transferencia</label>
+                    </div>
+                    <div id="cashPaymentField" class="hidden">
+                        <label class="block text-fixed-base font-semibold text-gray-700 mb-2">Pagaré con...</label>
+                        <div class="flex flex-wrap gap-2">
+                            <button type="button" class="cash-btn" data-amount="20">$20</button><button type="button" class="cash-btn" data-amount="50">$50</button><button type="button" class="cash-btn" data-amount="100">$100</button><button type="button" class="cash-btn" data-amount="200">$200</button><button type="button" class="cash-btn" data-amount="500">$500</button><button type="button" class="cash-btn" data-amount="1000">$1000</button><button type="button" class="cash-btn" data-amount="otro">Otro</button>
+                        </div>
+                        <input type="text" id="otherCashAmount" placeholder="Monto" class="hidden w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-6 border-t bg-gray-50"><button id="confirmOrderBtn" class="w-full bg-green-500 text-white font-bold py-4 px-4 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]">Confirmar Pedido</button></div>
+    </div>
+</div>
+
+<div id="confirmationModal" class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4">
+    <div class="modal-content bg-white rounded-lg shadow-xl w-11/12 max-w-md p-6 text-center">
+        <h3 class="text-fixed-2xl font-bold text-[var(--text-dark)] mb-4">¡Pedido Confirmado!</h3>
+        <p class="text-fixed-base text-[var(--text-medium)] mb-6">Tu pedido ha sido enviado. Te contactaremos pronto.</p>
+        <button id="closeConfirmationModal" class="bg-[var(--primary-color)] text-white font-bold py-2 px-6 rounded-lg">Cerrar</button>
+    </div>
+</div>
+
+<button id="floatingCartBtn" class="fixed bottom-6 right-6 bg-[var(--primary-color)] text-white px-5 py-3 rounded-full shadow-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 z-40 flex items-center gap-3">
+    <div class="relative"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.402H3.62a.5.5 0 0 1-.49-.598l-1-5A.5.5 0 0 1 2 1H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2.5h7.45l.5-2.5H3.14zM5 12a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/></svg><span id="cartCount" class="absolute -top-1 -right-1 bg-[var(--accent-color)] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">0</span></div>
+    <span id="floatingCartTotal" class="text-fixed-lg font-bold">$0</span>
+</button>
+
+<div id="cartToast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none z-[9999]"><p id="cartToastMessage" class="text-fixed-sm"></p></div>
+<div id="floatingCallout" class="fixed bottom-24 right-6 bg-[var(--primary-color)] text-white p-4 rounded-lg shadow-xl text-fixed-base z-[9990] opacity-0 translate-x-full transition-all duration-500 ease-out">
+    <button class="close-btn" id="closeFloatingCallout">&times;</button><p class="font-bold mb-2">¡Comodidad en La Habana!</p><a href="#nuestras-ventajas" class="mt-3 inline-block bg-[var(--accent-color)] text-white text-fixed-sm font-semibold py-2 px-4 rounded-full">Ver Ventajas</a>
+</div>
+
+<!-- ============================================
+SCRIPTS EN ORDEN CORRECTO
+============================================ -->
+<!-- 🔄 CATÁLOGO LOCAL (respaldo - se carga primero) -->
+<script src="catalogo.js" defer></script>
+
+<!-- 🔥 CATÁLOGO DINÁMICO (carga desde GitHub CSV) -->
+<script src="catalogo-dinamico.js" defer></script>
+
+<script>
+    // CONSTANTES DE LA NUEVA POLÍTICA DE ENVÍOS POR RANGOS
+    const SHIPPING_RANGES = [
+        { max: 2000, fee: 200, discount: "0%" },        // Hasta $2,000
+        { max: 5000, fee: 150, discount: "25%" },       // $2,001 - $5,000
+        { max: Infinity, fee: 100, discount: "50%" }    // Más de $5,000
+    ];
+
+    const SERVICE_FEE_PERCENTAGE = 0.08; // 8% de comisión
+    const MINIMUM_PROFIT = 300; // Utilidad mínima garantizada por pedido
+
+    // Constantes antiguas (mantenidas para compatibilidad)
+    const MIN_ORDER_THRESHOLD = 500;
+    const TRAMO_1_MAX = 3000;
+    const WEIGHT_SURCHARGE_PER_10KG = 100;
+    const WEIGHT_THRESHOLD_KG = 10;
+    const SERVICE_FEE = 50;
+
+    // ============================================
+    // VARIABLES GLOBALES - INICIALIZACIÓN SEGURA
+    // ============================================
+    let products = []; // Se llenará desde catalogo-dinamico.js
+    var cart = JSON.parse(localStorage.getItem('cart')) || [];
+    var whatsappGroupLink = 'https://chat.whatsapp.com/H19dIofkINdHrVApA4jbvW?mode=ac_t';
+    var currentProductForModal = null;
+    var currentUnitType = 'individual';
+    var selectedCashAmount = '';
+    var toastTimeout;
+    var currentDepartment = 'mercado';
+
+    // Referencias a modales
+    const cartModal = document.getElementById('cartModal');
+    const productDetailsModal = document.getElementById('productDetailsModal');
+    const checkoutModal = document.getElementById('checkoutModal');
+    const confirmationModal = document.getElementById('confirmationModal');
+    const floatingCartBtn = document.getElementById('floatingCartBtn');
+    const closeCartModalBtn = document.getElementById('closeCartModal');
+    const closeProductDetailsModalBtn = document.getElementById('closeProductDetailsModalBtn');
+    const closeCheckoutModalBtn = document.getElementById('closeCheckoutModal');
+    const closeConfirmationModalBtn = document.getElementById('closeConfirmationModal');
+    const floatingCallout = document.getElementById('floatingCallout');
+    const closeFloatingCalloutBtn = document.getElementById('closeFloatingCallout');
+
+    // ============================================
+    // FUNCIONES DE CARGA DE PRODUCTOS
+    // ============================================
+
+    // FUNCIÓN PARA CARGAR PRODUCTOS DEL CATÁLOGO DINÁMICO
+    function loadProductsFromDynamicCatalog() {
+        console.log('🔄 Cargando productos desde catálogo dinámico...');
+        
+        // 1. Intentar desde CatalogoDinamico (GitHub CSV)
+        if (window.CatalogoDinamico && window.CatalogoDinamico.obtenerTodos) {
+            const dynamicProducts = window.CatalogoDinamico.obtenerTodos();
+            if (dynamicProducts && dynamicProducts.length > 0) {
+                console.log('✅ Productos cargados desde catálogo dinámico:', dynamicProducts.length);
+                return dynamicProducts;
+            }
+        }
+        
+        // 2. Si falla, intentar desde catalogo.js (respaldo local)
+        if (window.catalogo && window.catalogo.productos) {
+            console.log('🔄 Usando catálogo local como respaldo');
+            return window.catalogo.productos;
+        }
+        
+        // 3. Si todo falla, array vacío
+        console.warn('⚠️ No se encontraron productos');
+        return [];
+    }
+
+    // FUNCIÓN PARA DETERMINAR TARIFA DE ENVÍO SEGÚN RANGO
+    function calculateShippingFee(subtotal) {
+        for (const range of SHIPPING_RANGES) {
+            if (subtotal <= range.max) {
+                return {
+                    fee: range.fee,
+                    discount: range.discount,
+                    rangeText: range.max === Infinity ? 
+                        `Más de $5,000` : 
+                        subtotal <= 2000 ? 
+                            `Hasta $2,000` : 
+                            `$${SHIPPING_RANGES[0].max + 1} - $${range.max}`
+                };
+            }
+        }
+        // Por defecto
+        return { fee: 200, discount: "0%", rangeText: "Hasta $2,000" };
+    }
+
+    // FUNCIÓN PARA CALCULAR PRECIO FINAL SEGÚN NUEVA POLÍTICA
+    function calculateFinalPrice(cartItems) {
+        // 1. Calcular subtotal de productos
+        const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        
+        // 2. Determinar tarifa de envío según rango
+        const shippingInfo = calculateShippingFee(subtotal);
+        const shippingFee = shippingInfo.fee;
+        
+        // 3. Calcular comisión del 8%
+        const serviceFee = subtotal * SERVICE_FEE_PERCENTAGE;
+        
+        // 4. Aplicar regla del piso ($300 utilidad mínima)
+        const currentProfit = serviceFee + shippingFee;
+        let adjustment = 0;
+        if (currentProfit < MINIMUM_PROFIT) {
+            adjustment = MINIMUM_PROFIT - currentProfit;
+        }
+        
+        // 5. Calcular total final
+        const finalPrice = subtotal + shippingFee + adjustment;
+        
+        return {
+            subtotal: subtotal,
+            serviceFee: serviceFee,
+            shippingFee: shippingFee,
+            shippingDiscount: shippingInfo.discount,
+            shippingRange: shippingInfo.rangeText,
+            adjustment: adjustment,
+            finalPrice: finalPrice,
+            yourProfit: currentProfit + adjustment
+        };
+    }
+
+    // FUNCIÓN PARA GENERAR MENSAJE DE WHATSAPP CON NUEVA POLÍTICA
+    function generateWhatsAppMessage(cart, customerData, priceDetails) {
+        const itemsText = cart.map(item => 
+            `• ${item.name} x${item.quantity} - $${(item.price * item.quantity).toLocaleString()}`
+        ).join('\n');
+        
+        // Mensaje según el rango de descuento
+        let shippingMessage = "";
+        if (priceDetails.shippingDiscount === "25%") {
+            shippingMessage = `⭐ *¡APROVECHASTE DESCUENTO EN ENVÍO!* 
+Por compra mediana, solo $${priceDetails.shippingFee.toLocaleString()} (ahorras $50 vs. envío normal)`;
+        } else if (priceDetails.shippingDiscount === "50%") {
+            shippingMessage = `🎯 *¡ENVÍO A MEDIO PRECIO!*
+Por tu compra mayor a $5,000, el envío es de solo $${priceDetails.shippingFee.toLocaleString()} (50% de descuento)`;
+        } else {
+            shippingMessage = `🚚 Envío estándar: $${priceDetails.shippingFee.toLocaleString()}`;
+        }
+        
+        return `✅ *PEDIDO CONFIRMADO - MERCADO BAYONA*
+
+🛒 *TU COMPRA:*
+${itemsText}
+
+💰 *DESGLOSE:*
+- Productos: $${priceDetails.subtotal.toLocaleString()} 
+- ${shippingMessage}
+${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.toLocaleString()}` : ''}
+- *TOTAL A PAGAR: $${priceDetails.finalPrice.toLocaleString()}*
+
+📍 *ENTREGA:* ${customerData.location === 'habana-vieja' ? 'Habana Vieja' : customerData.location}
+📞 *CONTACTO:* ${customerData.phone}
+
+*Todos los precios incluyen la entrega a domicilio.*`;
+    }
+
+    // ============================================
+    // CONTADOR DE VISITAS CON COUNTAPI
+    // ============================================
+    async function updateAllCounters() {
+        try {
+            // 1. Obtener contador actual
+            const getResponse = await fetch('https://api.countapi.xyz/get/mercado-bayona-cuba/visits');
+            const getData = await getResponse.json();
+            
+            let currentCount = getData.value || 0;
+            
+            // 2. Incrementar solo en primera visita del día
+            const lastIncrement = localStorage.getItem('lastCounterIncrement');
+            const today = new Date().toDateString();
+            
+            if (!lastIncrement || lastIncrement !== today) {
+                const hitResponse = await fetch('https://api.countapi.xyz/hit/mercado-bayona-cuba/visits');
+                const hitData = await hitResponse.json();
+                currentCount = hitData.value;
+                localStorage.setItem('lastCounterIncrement', today);
+            }
+            
+            // 3. Mostrar en todos los contadores
+            document.querySelectorAll('#heroCounter, #communityCounter, #footerCounter, #simpleCounter').forEach(el => {
+                if (el) {
+                    // Formatear número (ej: 1,234)
+                    el.textContent = currentCount.toLocaleString();
+                    
+                    // Animación sutil
+                    el.classList.add('scale-110');
+                    setTimeout(() => {
+                        el.classList.remove('scale-110');
+                    }, 200);
+                }
+            });
+            
+        } catch (error) {
+            console.log("Usando contador local como respaldo");
+            
+            // Fallback a localStorage
+            let localCount = localStorage.getItem('mercadoBayonaVisits') || 150;
+            localCount = parseInt(localCount) + 1;
+            localStorage.setItem('mercadoBayonaVisits', localCount);
+            
+            document.querySelectorAll('#heroCounter, #communityCounter, #footerCounter, #simpleCounter').forEach(el => {
+                if (el) el.textContent = localCount.toLocaleString();
+            });
+        }
+    }
+
+    // ============================================
+    // FUNCIONES DE DETECCIÓN DE CONEXIÓN
+    // ============================================
+    function verificarConexion() {
+        const estado = document.getElementById('estado-conexion');
+        if (!navigator.onLine) {
+            console.log('📶 Estás offline');
+            if (estado) {
+                estado.innerHTML = '<span class="inline-block w-2 h-2 rounded-full bg-red-500"></span><span class="text-white ml-1">Offline</span>';
+            }
+            // Verificar si tenemos datos en caché
+            verificarDatosOffline();
+            mostrarBannerOffline();
+        } else {
+            console.log('📶 Estás online');
+            if (estado) {
+                estado.innerHTML = '<span class="inline-block w-2 h-2 rounded-full bg-green-500"></span><span class="text-white ml-1">Online</span>';
+            }
+            ocultarBannerOffline();
+        }
+    }
+
+    function verificarDatosOffline() {
+        const catalogo = localStorage.getItem('catalogo_productos');
+        if (catalogo) {
+            try {
+                const datos = JSON.parse(catalogo);
+                const productos = datos.productos || [];
+                console.log(`📦 Tienes ${productos.length} productos disponibles offline`);
+                
+                if (productos.length > 0) {
+                    mostrarNotificacionOffline(productos.length);
+                }
+            } catch(e) {
+                console.log('Error al leer datos offline:', e);
+            }
+        } else {
+            console.log('⚠️ No hay datos offline disponibles');
+        }
+    }
+
+    function mostrarBannerOffline() {
+        // Eliminar banner anterior si existe
+        const bannerAnterior = document.getElementById('offline-banner');
+        if (bannerAnterior) {
+            bannerAnterior.remove();
+        }
+        
+        // Crear nuevo banner
+        const banner = document.createElement('div');
+        banner.id = 'offline-banner';
+        banner.innerHTML = `
+            <strong>🔌 Modo Offline</strong><br>
+            <span id="offline-product-count">0</span> productos disponibles
+            <button onclick="this.parentElement.remove()" style="margin-left:10px;">×</button>
+        `;
+        document.body.appendChild(banner);
+        
+        // Actualizar contador de productos
+        setTimeout(() => {
+            const catalogo = localStorage.getItem('catalogo_productos');
+            if (catalogo) {
+                try {
+                    const datos = JSON.parse(catalogo);
+                    const productos = datos.productos || [];
+                    const countElement = document.getElementById('offline-product-count');
+                    if (countElement) {
+                        countElement.textContent = productos.length;
+                    }
+                } catch(e) {
+                    console.log('Error actualizando contador offline:', e);
+                }
+            }
+        }, 500);
+        
+        // Auto-ocultar después de 10 segundos
+        setTimeout(() => {
+            if (banner.parentElement) {
+                banner.remove();
+            }
+        }, 10000);
+    }
+
+    function ocultarBannerOffline() {
+        const banner = document.getElementById('offline-banner');
+        if (banner) {
+            banner.remove();
+        }
+    }
+
+    function mostrarNotificacionOffline(cantidad) {
+        console.log(`📱 ${cantidad} productos disponibles offline`);
+        // Esta función podría mostrar una notificación push si se implementa
+    }
+
+    // ============================================
+    // FUNCIONES DE SERVICE WORKER
+    // ============================================
+    function registrarServiceWorker() {
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('✅ Service Worker registrado correctamente:', registration.scope);
+                        
+                        // Verificar si hay actualizaciones
+                        registration.addEventListener('updatefound', () => {
+                            console.log('🔄 Nueva versión de Service Worker encontrada');
+                            const newWorker = registration.installing;
+                            
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    console.log('📦 Nueva versión lista. Recarga para actualizar.');
+                                    // Aquí podrías mostrar un botón para recargar la página
+                                }
+                            });
+                        });
+                        
+                        // Manejar mensajes del Service Worker
+                        navigator.serviceWorker.addEventListener('message', event => {
+                            if (event.data && event.data.type === 'catalogoActualizado') {
+                                console.log('🔄 Catálogo actualizado desde segundo plano');
+                                // Podrías mostrar una notificación al usuario
+                            }
+                        });
+                    })
+                    .catch(function(error) {
+                        console.log('❌ Error al registrar Service Worker:', error);
+                    });
+            });
+        }
+    }
+
+    function forzarActualizacionSW() {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistration().then(reg => {
+                if (reg) {
+                    reg.update();
+                    console.log('🔄 Service Worker actualizado forzadamente');
+                }
+            });
+        }
+    }
+
+    // ============================================
+    // FUNCIONES DE LA TIENDA
+    // ============================================
+
+    function switchDepartment(dept) {
+        currentDepartment = dept;
+        document.querySelectorAll('.department-tab').forEach(btn => {
+            btn.classList.remove('bg-[var(--primary-color)]', 'text-white');
+            btn.classList.add('bg-white', 'text-gray-600', 'border-gray-200');
+        });
+        const activeBtn = document.getElementById('tab-' + dept);
+        activeBtn.classList.remove('bg-white', 'text-gray-600', 'border-gray-200');
+        activeBtn.classList.add('bg-[var(--primary-color)]', 'text-white');
+
+        const titles = { 'mercado': 'Mercado y Víveres', 'ropa': 'Moda y Estilo', 'electro': 'Hogar y Electro' };
+        document.getElementById('sectionTitle').textContent = titles[dept];
+        setupStoreSection('mercado', products);
+
+        const tabsContainer = document.getElementById('tabsContainer');
+        const headerOffset = 80;
+        const elementPosition = tabsContainer.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        if (window.scrollY > offsetPosition) {
+            window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+        }
+    }
+
+    function setupStoreSection(sectionPrefix, allProducts) {
+        var filtersId = sectionPrefix + 'CategoryFilters';
+        var searchId = 'globalSearchInput';
+        var gridId = sectionPrefix + 'ProductGrid';
+        var noResultsId = sectionPrefix + 'NoResultsMessage';
+        setupCategoryFiltersAndSearch(allProducts, filtersId, searchId, gridId, noResultsId);
+    }
+
+    function setupCategoryFiltersAndSearch(allProducts, filtersId, searchId, gridId, noResultsId) {
+        const productsForSection = allProducts.filter(p => p.department === currentDepartment);
+        const categories = ['all', ...new Set(productsForSection.map(p => p.category))];
+        const filtersContainer = document.getElementById(filtersId);
+        const searchInput = document.getElementById(searchId);
+
+        filtersContainer.innerHTML = categories.map(cat =>
+            `<button class="category-btn ${cat === 'all' ? 'active' : ''}" data-category="${cat}">
+                ${cat === 'all' ? 'Todos' : cat}
+            </button>`).join('');
+
+        let currentCategory = 'all';
+        let currentSearch = '';
+
+        filtersContainer.querySelectorAll('.category-btn').forEach(btn =>
+            btn.addEventListener('click', e => {
+                filtersContainer.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentCategory = e.target.dataset.category;
+                filterAndRender();
+            })
+        );
+
+        searchInput.value = currentSearch;
+        searchInput.addEventListener('input', e => {
+            currentSearch = e.target.value;
+            filterAndRender();
+        });
+
+        function removeAccents(str) {
+            return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        }
+
+        function filterAndRender() {
+            const needle = removeAccents(currentSearch);
+            const filtered = productsForSection.filter(p => {
+                const catMatch = currentCategory === 'all' || p.category === currentCategory;
+                const textMatch = !needle ||
+                    removeAccents(p.name).includes(needle) ||
+                    removeAccents(p.description).includes(needle) ||
+                    removeAccents((p.specificDetails || '')).includes(needle) ||
+                    removeAccents(p.category).includes(needle);
+                return catMatch && textMatch;
+            });
+            renderProducts(filtered, gridId, noResultsId);
+        }
+
+        filterAndRender();
+    }
+
+    function renderProducts(productsToRender, gridId, noResultsId) {
+        const productGrid = document.getElementById(gridId);
+        const noResultsMessage = document.getElementById(noResultsId);
+        if (!productGrid || !noResultsMessage) return;
+        if (productsToRender.length === 0) {
+            productGrid.innerHTML = '';
+            noResultsMessage.classList.remove('hidden');
+            return;
+        }
+        noResultsMessage.classList.add('hidden');
+
+        const groupedProducts = productsToRender.reduce(function(acc, product) {
+            (acc[product.category] = acc[product.category] || []).push(product);
+            return acc;
+        }, {});
+
+        const sortedCategories = Object.keys(groupedProducts).sort();
+        let html = '';
+
+        for (let i = 0; i < sortedCategories.length; i++) {
+            const category = sortedCategories[i];
+            if (groupedProducts.hasOwnProperty(category)) {
+                html += '<div class="fade-in-up w-full"><h3 class="text-2xl font-bold text-center text-[var(--primary-color)] my-8 border-b-2 border-gray-200 pb-2">— ' + category + ' —</h3></div>';
+                html += groupedProducts[category].map(function(product, index) {
+                    const isUnavailable = product.status === 'unavailable';
+                    const onClickHandler = isUnavailable ? '' : `onclick="showProductDetailsModal(${product.id})"`;
+                    const cursorStyle = isUnavailable ? 'cursor-not-allowed' : 'cursor-pointer';
+
+                    return `<div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 ${cursorStyle} flex flex-row ${isUnavailable ? 'unavailable-product-card' : ''} fade-in-up w-full border border-gray-100" style="transition-delay: ${index * 50}ms" ${onClickHandler}>
+                               <div class="w-28 h-28 sm:w-32 sm:h-32 flex-shrink-0 p-2 flex items-center justify-center bg-gray-50">
+                                 <img src="${product.image}" alt="${product.name}" class="w-full h-full object-contain">
+                               </div>
+                               <div class="p-3 sm:p-4 flex-grow flex flex-col justify-center">
+                                   <div class="flex justify-between items-start">
+                                       <div>
+                                           <h3 class="text-fixed-lg font-bold text-[var(--text-dark)] leading-tight">${product.name}</h3>
+                                           ${product.specificDetails ? `<p class="text-xs text-gray-500">${product.specificDetails}</p>` : ''}
+                                       </div>
+                                       <div class="text-right">
+                                            <p class="text-fixed-xl font-bold text-[var(--primary-color)]">$${product.price.toLocaleString()}</p>
+                                       </div>
+                                   </div>
+                                   <div class="mt-2 flex justify-between items-end">
+                                       <p class="text-sm text-[var(--text-medium)] line-clamp-2 pr-2 hidden sm:block">${product.description}</p>
+                                       ${isUnavailable ?
+                                           '<span class="px-3 py-1 bg-gray-200 text-gray-600 text-xs font-bold rounded-full">Agotado</span>' :
+                                           '<span class="text-sm font-bold text-[var(--accent-color)] flex items-center gap-1">Agregar <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg></span>'}
+                                   </div>
+                               </div>
+                           </div>`;
+                }).join('');
+            }
+        }
+        productGrid.innerHTML = '<div class="flex flex-col gap-4 w-full max-w-4xl mx-auto">' + html + '</div>';
+        setupScrollAnimations();
+    }
+
+    function showProductDetailsModal(productId) {
+        console.log('🔍 Buscando producto ID:', productId);
+        
+        // Buscar producto en múltiples fuentes
+        let product = null;
+        
+        // 1. Intentar desde el array products (ya cargado)
+        if (products && products.length > 0) {
+            product = products.find(p => p.id === productId);
+            console.log('📦 Encontrado en array local:', product ? 'Sí' : 'No');
+        }
+        
+        // 2. Si no lo encuentra, buscar en CatalogoDinamico
+        if (!product && window.CatalogoDinamico && window.CatalogoDinamico.obtenerPorId) {
+            product = window.CatalogoDinamico.obtenerPorId(productId);
+            console.log('🔍 Buscando en catálogo dinámico:', product ? 'Sí' : 'No');
+        }
+        
+        // 3. Si aún no, buscar en catalogo.js como último recurso
+        if (!product && window.catalogo && window.catalogo.obtenerPorId) {
+            product = window.catalogo.obtenerPorId(productId);
+            console.log('🔄 Buscando en catalogo.js:', product ? 'Sí' : 'No');
+        }
+        
+        if (!product) {
+            console.error('❌ Producto no encontrado con ID:', productId);
+            showCartToast('Producto no disponible');
+            return;
+        }
+        
+        if (product.status === 'unavailable') {
+            showCartToast('Producto agotado');
+            return;
+        }
+        
+        currentProductForModal = JSON.parse(JSON.stringify(product));
+        currentProductForModal.quantity = 1;
+        currentUnitType = 'individual';
+        
+        document.getElementById('productDetailsTitle').textContent = product.name;
+        document.getElementById('productDetailsImage').src = product.image;
+        document.getElementById('productDetailsDescription').textContent = product.description;
+        document.getElementById('productQuantityDisplay').textContent = '1';
+        
+        const unitTypeSection = document.getElementById('unitTypeSection');
+        if (product.hasBoxOption) {
+            unitTypeSection.classList.remove('hidden');
+            updateUnitTypeButtons();
+        } else {
+            unitTypeSection.classList.add('hidden');
+        }
+        
+        updateModalPricing();
+        showModal(productDetailsModal);
+        console.log('✅ Modal mostrado para:', product.name);
+    }
+
+    function updateUnitTypeButtons() {
+        const individualBtn = document.getElementById('unitTypeIndividual');
+        const boxBtn = document.getElementById('unitTypeBox');
+        if (currentUnitType === 'individual') {
+            individualBtn.classList.add('active');
+            boxBtn.classList.remove('active');
+        } else {
+            boxBtn.classList.add('active');
+            individualBtn.classList.remove('active');
+        }
+    }
+
+    function updateModalPricing() {
+        if (!currentProductForModal) return;
+        let unitPrice, unitDescription;
+        if (currentProductForModal.hasBoxOption && currentUnitType === 'box') {
+            unitPrice = currentProductForModal.boxPrice;
+            unitDescription = 'Caja (' + currentProductForModal.boxQuantity + ' unidades)';
+        } else {
+            unitPrice = currentProductForModal.price;
+            unitDescription = 'Unidad';
+        }
+        const totalPrice = unitPrice * currentProductForModal.quantity;
+        document.getElementById('productDetailsPrice').textContent = '$' + unitPrice.toLocaleString() + ' / ' + unitDescription;
+        document.getElementById('modalTotalPrice').textContent = '$' + totalPrice.toLocaleString();
+    }
+
+    function addToCartFromModal() {
+        if (!currentProductForModal) return;
+        const cartItem = {
+            id: currentProductForModal.id + (currentUnitType === 'box' ? '_box' : ''),
+            name: currentProductForModal.name,
+            image: currentProductForModal.image,
+            quantity: currentProductForModal.quantity,
+            unitType: currentUnitType
+        };
+
+        // Buscar producto para obtener precio actual
+        let productData = null;
+        
+        // 1. Buscar en array products
+        if (products && products.length > 0) {
+            productData = products.find(p => p.id === currentProductForModal.id);
+        }
+        
+        // 2. Si no, buscar en CatalogoDinamico
+        if (!productData && window.CatalogoDinamico && window.CatalogoDinamico.obtenerPorId) {
+            productData = window.CatalogoDinamico.obtenerPorId(currentProductForModal.id);
+        }
+        
+        // 3. Si no, buscar en catalogo.js
+        if (!productData && window.catalogo && window.catalogo.obtenerPorId) {
+            productData = window.catalogo.obtenerPorId(currentProductForModal.id);
+        }
+
+        if (productData) {
+            if (productData.weight !== undefined) {
+                cartItem.weight = productData.weight;
+            }
+            
+            if (currentProductForModal.hasBoxOption && currentUnitType === 'box') {
+                cartItem.price = currentProductForModal.boxPrice;
+                cartItem.name += ' (Caja x' + currentProductForModal.boxQuantity + ')';
+            } else {
+                cartItem.price = currentProductForModal.price;
+            }
+        } else {
+            // Fallback en caso extremo
+            cartItem.price = currentProductForModal.price;
+            cartItem.weight = 0;
+        }
+
+        const existingItemIndex = cart.findIndex(item => item.id === cartItem.id);
+        if (existingItemIndex !== -1) {
+            cart[existingItemIndex].quantity += cartItem.quantity;
+        } else {
+            cart.push(cartItem);
+        }
+
+        updateCartUI();
+        localStorage.setItem('cart', JSON.stringify(cart));
+        hideModal(productDetailsModal);
+        currentProductForModal = null;
+        showCartAnimation();
+        showCartToast('Producto añadido al carrito');
+    }
+
+    function updateCartUI() {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        document.getElementById('cartCount').textContent = totalItems;
+        document.getElementById('cartTotal').textContent = '$' + totalPrice.toLocaleString();
+        document.getElementById('floatingCartTotal').textContent = '$' + totalPrice.toLocaleString();
+        const cartItems = document.getElementById('cartItems');
+        const sendWhatsAppOrder = document.getElementById('sendWhatsAppOrder');
+        if (cart.length === 0) {
+            cartItems.innerHTML = '<p class="text-center text-[var(--text-medium)] text-fixed-base">Tu carrito está vacío</p>';
+            sendWhatsAppOrder.disabled = true;
+        } else {
+            cartItems.innerHTML = cart.map((item, index) => `
+                <div class="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0">
+                    <div class="flex-1">
+                        <h5 class="text-fixed-base font-semibold text-[var(--text-dark)]">${item.name}</h5>
+                        <p class="text-fixed-sm text-[var(--text-medium)]">$${item.price.toLocaleString()} c/u × ${item.quantity}</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="updateCartQuantity(${index}, ${item.quantity - 1})" class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-fixed-sm font-bold hover:bg-gray-300 transition-colors">-</button>
+                        <span class="text-fixed-base font-semibold w-8 text-center">${item.quantity}</span>
+                        <button onclick="updateCartQuantity(${index}, ${item.quantity + 1})" class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-fixed-sm font-bold hover:bg-gray-300 transition-colors">+</button>
+                        <button onclick="removeFromCart(${index})" class="ml-2 text-red-500 hover:text-red-700 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                        </button>
+                    </div>
+                </div>`).join('');
+            sendWhatsAppOrder.disabled = false;
+        }
+        updateDeliveryPromoBanner();
+    }
+
+    function updateCartQuantity(index, newQuantity) {
+        if (newQuantity <= 0) {
+            removeFromCart(index);
+            showCartToast('Producto eliminado del carrito');
+            return;
+        }
+        cart[index].quantity = newQuantity;
+        updateCartUI();
+        localStorage.setItem('cart', JSON.stringify(cart));
+        showCartToast('Carrito actualizado');
+    }
+
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        updateCartUI();
+        localStorage.setItem('cart', JSON.stringify(cart));
+        showCartToast('Producto eliminado del carrito');
+    }
+
+    function showCartAnimation() {
+        const btn = document.getElementById('floatingCartBtn');
+        btn.classList.add('shake');
+        setTimeout(() => btn.classList.remove('shake'), 600);
+    }
+
+    function showCartToast(message) {
+        const toast = document.getElementById('cartToast');
+        const msg = document.getElementById('cartToastMessage');
+        clearTimeout(toastTimeout);
+        msg.textContent = message;
+        toast.classList.add('show');
+        toastTimeout = setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    function showModal(modalElement) {
+        if (!modalElement) return;
+        modalElement.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function hideModal(modalElement) {
+        if (!modalElement) return;
+        modalElement.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
+    function setupGeneralEventListeners() {
+        floatingCartBtn.addEventListener('click', () => showModal(cartModal));
+        document.getElementById('closeCartModal').addEventListener('click', () => hideModal(cartModal));
+        cartModal.addEventListener('click', e => { if (e.target === cartModal) hideModal(cartModal); });
+        document.getElementById('closeProductDetailsModalBtn').addEventListener('click', () => { hideModal(productDetailsModal); currentProductForModal = null; });
+        productDetailsModal.addEventListener('click', e => { if (e.target === productDetailsModal) { hideModal(productDetailsModal); currentProductForModal = null; }});
+        document.getElementById('unitTypeIndividual').addEventListener('click', () => { currentUnitType = 'individual'; updateUnitTypeButtons(); updateModalPricing(); });
+        document.getElementById('unitTypeBox').addEventListener('click', () => { currentUnitType = 'box'; updateUnitTypeButtons(); updateModalPricing(); });
+        document.getElementById('decreaseQuantityBtn').addEventListener('click', () => { if (currentProductForModal && currentProductForModal.quantity > 1) { currentProductForModal.quantity--; document.getElementById('productQuantityDisplay').textContent = currentProductForModal.quantity; updateModalPricing(); }});
+        document.getElementById('increaseQuantityBtn').addEventListener('click', () => { if (currentProductForModal) { currentProductForModal.quantity++; document.getElementById('productQuantityDisplay').textContent = currentProductForModal.quantity; updateModalPricing(); }});
+        document.getElementById('addProductToCartModalBtn').addEventListener('click', addToCartFromModal);
+        document.getElementById('sendWhatsAppOrder').addEventListener('click', () => { hideModal(cartModal); showCheckoutModal(); });
+        document.getElementById('contactWhatsappBtn').addEventListener('click', e => { e.preventDefault(); window.open(whatsappGroupLink, '_blank'); });
+        document.getElementById('mobile-menu-button').addEventListener('click', () => { document.getElementById('mobile-menu').classList.add('open'); document.getElementById('mobile-backdrop').classList.add('open'); });
+        document.getElementById('close-mobile-menu').addEventListener('click', closeMobileMenu);
+        document.getElementById('mobile-backdrop').addEventListener('click', closeMobileMenu);
+        document.getElementById('closeConfirmationModal').addEventListener('click', () => hideModal(confirmationModal));
+        confirmationModal.addEventListener('click', e => { if (e.target === confirmationModal) hideModal(confirmationModal); });
+        if (closeFloatingCalloutBtn) { closeFloatingCalloutBtn.addEventListener('click', () => { hideFloatingCallout(); sessionStorage.setItem('floatingCalloutClosed', 'true'); }); }
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    if (this.classList.contains('mobile-nav-link')) closeMobileMenu();
+                    setTimeout(() => { window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' }); }, 100);
+                }
+            });
+        });
+        setupCheckoutEventListeners();
+        
+        // Eventos de conexión
+        window.addEventListener('online', verificarConexion);
+        window.addEventListener('offline', verificarConexion);
+    }
+
+    function closeMobileMenu() {
+        document.getElementById('mobile-menu').classList.remove('open');
+        document.getElementById('mobile-backdrop').classList.remove('open');
+    }
+
+    function setupScrollAnimations() {
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right').forEach(el => observer.observe(el));
+        } else {
+            document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right').forEach(el => el.classList.add('is-visible'));
+        }
+    }
+
+    function setupScrollHeader() {
+        const header = document.getElementById('mainHeader');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
+    }
+
+    function showCheckoutModal() {
+        if (cart.length === 0) {
+            alert('Tu carrito está vacío');
+            return;
+        }
+        const savedData = JSON.parse(localStorage.getItem('customerData'));
+        if (savedData) {
+            document.getElementById('customerName').value = savedData.name || '';
+            document.getElementById('customerAddress').value = savedData.address || '';
+            document.getElementById('customerReferences').value = savedData.references || '';
+            document.getElementById('customerPhone').value = savedData.phone || '';
+            document.getElementById('deliveryLocation').value = savedData.location || '';
+        }
+        updateCheckoutSummary();
+        showModal(checkoutModal);
+    }
+
+    function updateCheckoutSummary() {
+        const checkoutOrderSummary = document.getElementById('checkoutOrderSummary');
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        checkoutOrderSummary.innerHTML = cart.map(item => `
+            <div class="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
+                <div class="flex-1">
+                    <h5 class="text-fixed-base font-semibold text-[var(--text-dark)]">${item.name}</h5>
+                    <p class="text-fixed-sm text-[var(--text-medium)]">$${item.price.toLocaleString()} c/u × ${item.quantity}</p>
+                </div>
+                <div class="text-fixed-base font-semibold">$${(item.price * item.quantity).toLocaleString()}</div>
+            </div>`).join('');
+        document.getElementById('checkoutSubtotal').textContent = '$' + subtotal.toLocaleString();
+        updateShippingAndTotal();
+    }
+
+    function updateShippingAndTotal() {
+        const deliveryLocation = document.getElementById('deliveryLocation').value;
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        
+        let shippingText = 'Selecciona ubicación';
+        let finalPrice = subtotal;
+        
+        if (deliveryLocation === 'habana-vieja') {
+            if (cart.length === 0) {
+                shippingText = 'Agrega productos';
+            } else {
+                // Usar la nueva función de cálculo
+                const priceDetails = calculateFinalPrice(cart);
+                shippingText = `Envío: $${priceDetails.shippingFee.toLocaleString()} (${priceDetails.shippingRange})`;
+                finalPrice = priceDetails.finalPrice;
+            }
+        } else if (deliveryLocation === 'otros') {
+            shippingText = 'A convenir (WhatsApp)';
+        }
+        
+        document.getElementById('checkoutShipping').textContent = shippingText;
+        document.getElementById('checkoutTotal').textContent = '$' + finalPrice.toLocaleString();
+    }
+
+    function calculateTotalWeight() {
+        let totalWeight = 0;
+        for (let i = 0; i < cart.length; i++) {
+            const item = cart[i];
+            const productId = item.unitType === 'box' ? parseInt(item.id.split('_')[0]) : item.id;
+            
+            // Buscar producto en múltiples fuentes
+            let product = null;
+            
+            // 1. Buscar en array products
+            if (products && products.length > 0) {
+                product = products.find(p => p.id === productId);
+            }
+            
+            // 2. Si no, buscar en CatalogoDinamico
+            if (!product && window.CatalogoDinamico && window.CatalogoDinamico.obtenerPorId) {
+                product = window.CatalogoDinamico.obtenerPorId(productId);
+            }
+            
+            // 3. Si no, buscar en catalogo.js
+            if (!product && window.catalogo && window.catalogo.obtenerPorId) {
+                product = window.catalogo.obtenerPorId(productId);
+            }
+
+            if (product && product.weight !== undefined) {
+                let itemWeight = product.weight;
+                if (item.unitType === 'box' && product.hasBoxOption && product.boxQuantity) {
+                    itemWeight = product.weight * product.boxQuantity;
+                }
+                totalWeight += itemWeight * item.quantity;
+            }
+        }
+        return totalWeight;
+    }
+
+    function updateDeliveryPromoBanner() {
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const shippingInfo = calculateShippingFee(subtotal);
+        
+        // Mantener la funcionalidad original del progreso si existe
+        const progressBar = document.getElementById('promoProgressBar');
+        const progressTextSpan = document.getElementById('progressText');
+        const [l1, l2] = [document.getElementById('promoLevelTramo1'), document.getElementById('promoLevelTramo2')];
+        
+        if (!progressBar || !l1 || !l2) return;
+        
+        [l1, l2].forEach(l => {
+            l.classList.remove('opacity-100', 'ring-[var(--accent-color)]');
+            l.classList.add('opacity-75');
+        });
+        
+        let progressWidth = 0;
+        let message = `Mínimo $${MIN_ORDER_THRESHOLD}.`;
+
+        if (subtotal > TRAMO_1_MAX) {
+            progressWidth = 100;
+            message = `¡Tramo 2 alcanzado!`;
+            l2.classList.add('opacity-100', 'ring-[var(--accent-color)]');
+            l1.classList.add('opacity-100');
+            l2.classList.remove('opacity-75');
+            l1.classList.remove('opacity-75');
+        } else if (subtotal >= MIN_ORDER_THRESHOLD) {
+            progressWidth = (subtotal / TRAMO_1_MAX) * 100;
+            message = `Faltan $${(TRAMO_1_MAX - subtotal + 1).toLocaleString()} para Tramo 2.`;
+            l1.classList.add('opacity-100', 'ring-[var(--accent-color)]');
+            l1.classList.remove('opacity-75');
+        } else if (subtotal > 0) {
+            progressWidth = (subtotal / MIN_ORDER_THRESHOLD) * 15;
+            message = `Faltan $${(MIN_ORDER_THRESHOLD - subtotal).toLocaleString()} para mínimo.`;
+        }
+        
+        progressBar.style.width = Math.min(progressWidth, 100) + '%';
+        if (progressTextSpan) {
+            progressTextSpan.innerHTML = message;
+            progressTextSpan.style.color = (progressWidth > 50) ? 'white' : 'var(--primary-color)';
+            progressTextSpan.style.textShadow = (progressWidth > 50) ? '0 0 3px rgba(0,0,0,0.5)' : 'none';
+        }
+    }
+
+    function validateField(fieldId) {
+        const element = document.getElementById(fieldId);
+        if (element && element.required) {
+            const isValid = element.value.trim() !== '';
+            element.classList.toggle('border-red-500', !isValid);
+            return isValid;
+        }
+        return true;
+    }
+
+    function setupCheckoutEventListeners() {
+        document.getElementById('closeCheckoutModal').addEventListener('click', () => hideModal(checkoutModal));
+        checkoutModal.addEventListener('click', e => { if (e.target === checkoutModal) hideModal(checkoutModal); });
+        ['customerName', 'customerAddress', 'customerPhone'].forEach(id => {
+            const input = document.getElementById(id);
+            if (input) input.addEventListener('input', () => validateField(id));
+        });
+        const deliverySelect = document.getElementById('deliveryLocation');
+        if (deliverySelect) {
+            deliverySelect.addEventListener('change', () => {
+                validateField('deliveryLocation');
+                updateShippingAndTotal();
+            });
+        }
+        document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
+            radio.addEventListener('change', function () {
+                const cashField = document.getElementById('cashPaymentField');
+                cashField.classList.toggle('hidden', this.value !== 'efectivo');
+                if (this.value !== 'efectivo') {
+                    selectedCashAmount = '';
+                    document.querySelectorAll('.cash-btn').forEach(btn => btn.classList.remove('active'));
+                    const other = document.getElementById('otherCashAmount');
+                    other.classList.add('hidden');
+                    other.value = '';
+                }
+            });
+        });
+        document.querySelectorAll('.cash-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                document.querySelectorAll('.cash-btn').forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                selectedCashAmount = this.getAttribute('data-amount');
+                const otherInput = document.getElementById('otherCashAmount');
+                otherInput.classList.toggle('hidden', selectedCashAmount !== 'otro');
+                if (selectedCashAmount === 'otro') otherInput.focus();
+                else otherInput.value = '';
+            });
+        });
+        document.getElementById('confirmOrderBtn').addEventListener('click', confirmOrder);
+    }
+
+    function validateCheckoutForm() {
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const deliveryLocation = document.getElementById('deliveryLocation').value;
+        if (deliveryLocation === 'habana-vieja' && subtotal < MIN_ORDER_THRESHOLD) {
+            alert(`Mínimo de compra $${MIN_ORDER_THRESHOLD} CUP.`);
+            return false;
+        }
+        const requiredFieldIds = ['customerName', 'customerAddress', 'customerPhone', 'deliveryLocation'];
+        let errors = [];
+        requiredFieldIds.forEach(id => {
+            if (!validateField(id)) errors.push(id);
+        });
+        const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+        if (!paymentMethod) {
+            errors.push('Método de pago');
+        } else if (paymentMethod.value === 'efectivo') {
+            const otherCash = document.getElementById('otherCashAmount');
+            if (!selectedCashAmount || (selectedCashAmount === 'otro' && !otherCash.value.trim())) {
+                errors.push('Monto efectivo');
+                if (selectedCashAmount === 'otro') otherCash.classList.add('border-red-500');
+            } else {
+                if (selectedCashAmount === 'otro') otherCash.classList.remove('border-red-500');
+            }
+        }
+        if (errors.length > 0) {
+            alert('Por favor completa todos los campos obligatorios.');
+            return false;
+        }
+        return true;
+    }
+
+    function confirmOrder() {
+        if (!validateCheckoutForm()) return;
+        
+        const customerName = document.getElementById('customerName').value.trim();
+        const customerAddress = document.getElementById('customerAddress').value.trim();
+        const customerReferences = document.getElementById('customerReferences').value.trim();
+        const customerPhone = document.getElementById('customerPhone').value.trim();
+        const deliveryLocation = document.getElementById('deliveryLocation').value;
+        const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+        
+        let cashAmount = '';
+        if (paymentMethod === 'efectivo') {
+            cashAmount = selectedCashAmount === 'otro' ? document.getElementById('otherCashAmount').value.trim() : selectedCashAmount;
+            if (!cashAmount) cashAmount = 'Sin especificar';
+        }
+        
+        // Calcular con nueva política
+        const priceDetails = calculateFinalPrice(cart);
+        const locationText = deliveryLocation === 'habana-vieja' ? 'Habana Vieja' : 'Otros municipios';
+        const paymentText = paymentMethod === 'efectivo' ? `Efectivo (pagaré con ${cashAmount})` : 'Transferencia';
+
+        // Datos del cliente para el mensaje
+        const customerData = {
+            name: customerName,
+            phone: customerPhone,
+            address: customerAddress,
+            references: customerReferences,
+            location: locationText
+        };
+
+        // Generar mensaje con nueva política
+        const finalMessage = generateWhatsAppMessage(cart, customerData, priceDetails);
+
+        // Resto del código permanece igual...
+        const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycby9Sk3Fz2_WqRQsEXrezpwqKbpYhqW_-ialMJcYKPdvZkrBfNReWWFfQ-VnXTrkJY8W/exec';
+        const formData = new FormData();
+        const orderData = {
+            idPedido: new Date().getTime(),
+            customerName,
+            customerPhone,
+            customerAddress: `${customerAddress} (${customerReferences})`,
+            total: priceDetails.finalPrice,
+            paymentMethod,
+            shippingText: `Nueva política: $${priceDetails.shippingFee} (${priceDetails.shippingRange})`,
+            orderItems: cart.map(item => `${item.name} x${item.quantity}`).join(', '),
+            cashAmount,
+            location: locationText
+        };
+        
+        for (const key in orderData) formData.append(key, orderData[key]);
+        fetch(googleAppsScriptUrl, { method: 'POST', body: formData, mode: 'no-cors' }).catch(err => console.error('Error Google Sheets:', err));
+
+        window.open(`https://wa.me/5356382909?text=${encodeURIComponent(finalMessage.replace(/\*/g, '').replace(/_/g, ''))}`, '_blank');
+        
+        hideModal(checkoutModal);
+        cart = [];
+        updateCartUI();
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        const savedCustomerData = { 
+            name: customerName, 
+            address: customerAddress, 
+            references: customerReferences, 
+            phone: customerPhone, 
+            location: deliveryLocation 
+        };
+        localStorage.setItem('customerData', JSON.stringify(savedCustomerData));
+        showModal(confirmationModal);
+    }
+
+    function showFloatingCallout() {
+        if (sessionStorage.getItem('floatingCalloutClosed') !== 'true') {
+            floatingCallout.classList.add('show');
+        }
+    }
+
+    function hideFloatingCallout() {
+        floatingCallout.classList.remove('show');
+    }
+
+    function showFloatingCalloutAfterDelay() {
+        setTimeout(showFloatingCallout, 20000);
+    }
+
+    function toggleAccordion(id) {
+        const content = document.getElementById('content-' + id);
+        const icon = document.getElementById('icon-' + id);
+        if (content.classList.contains('hidden')) {
+            content.classList.remove('hidden');
+            icon.classList.add('rotate-180');
+        } else {
+            content.classList.add('hidden');
+            icon.classList.remove('rotate-180');
+        }
+    }
+
+    // ============================================
+    // ESCUCHAR CUANDO EL CATÁLOGO DINÁMICO ESTÉ LISTO
+    // ============================================
+    window.addEventListener('catalogoCargado', function(evento) {
+        console.log('🎉 Catálogo cargado desde:', evento.detail.fuente);
+        
+        // 1. Obtener productos del evento
+        products = evento.detail.productos || [];
+        
+        // 2. Si está vacío, intentar cargar de otra fuente
+        if (products.length === 0) {
+            products = loadProductsFromDynamicCatalog();
+        }
+        
+        // 3. Ordenar productos
+        products.sort((a, b) => (a.category < b.category ? -1 : (a.category > b.category ? 1 : (a.name < b.name ? -1 : 1))));
+        
+        // 4. Configurar la tienda
+        setupStoreSection('mercado', products);
+        
+        // 5. Actualizar UI
+        updateCartUI();
+        console.log('🏪 Tienda lista con', products.length, 'productos');
+    });
+
+    // ============================================
+    // INICIALIZACIÓN SEGURA (cuando DOM esté listo)
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('📄 DOM listo - Iniciando aplicación...');
+        
+        // 1. Inicializar contadores
+        updateAllCounters();
+        setInterval(updateAllCounters, 3600000);
+        
+        // 2. Configurar UI básica
+        updateCartUI();
+        updateDeliveryPromoBanner();
+        setupGeneralEventListeners();
+        setupScrollAnimations();
+        setupScrollHeader();
+        showFloatingCalloutAfterDelay();
+        
+        // 3. Registrar Service Worker
+        registrarServiceWorker();
+        
+        // 4. Verificar conexión
+        verificarConexion();
+        
+        // 5. Verificar si ya hay productos cargados (por si el evento no se disparó)
+        setTimeout(function() {
+            // Si después de 3 segundos no se cargaron productos, forzar carga
+            if (products.length === 0) {
+                console.log('⏱️  Timeout: Cargando productos manualmente...');
+                products = loadProductsFromDynamicCatalog();
+                
+                if (products.length > 0) {
+                    products.sort((a, b) => (a.category < b.category ? -1 : (a.category > b.category ? 1 : (a.name < b.name ? -1 : 1))));
+                    setupStoreSection('mercado', products);
+                    console.log('✅ Productos cargados manualmente:', products.length);
+                    
+                    // Guardar en localStorage para offline
+                    try {
+                        const datos = {
+                            productos: products,
+                            timestamp: Date.now(),
+                            version: '2.0'
+                        };
+                        localStorage.setItem('catalogo_productos', JSON.stringify(datos));
+                        console.log('💾 Catálogo guardado en localStorage para offline');
+                    } catch(e) {
+                        console.error('Error guardando catálogo offline:', e);
+                    }
+                } else {
+                    // Mostrar mensaje de error
+                    const grid = document.getElementById('mercadoProductGrid');
+                    if (grid) {
+                        grid.innerHTML = `
+                            <div class="text-center p-8 bg-yellow-50 rounded-xl">
+                                <h3 class="text-xl font-bold text-yellow-800 mb-2">⚠️ Catálogo no disponible</h3>
+                                <p class="text-gray-600">Intenta recargar la página o contacta al soporte.</p>
+                                <button onclick="location.reload()" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg">
+                                    Recargar página
+                                </button>
+                            </div>
+                        `;
+                    }
+                }
+            }
+        }, 3000);
+    });
 
     // ============================================
     // FIN DEL SCRIPT
@@ -2038,5 +3413,3 @@ ${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.t
 
 </body>
 </html>
-
-
