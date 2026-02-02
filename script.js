@@ -1,98 +1,167 @@
-// Variables globales
-let carrito = [];
-let totalCarrito = 0;
-
-// Inicialización cuando el DOM está listo
+// Inicialización del slider
 document.addEventListener('DOMContentLoaded', function() {
-    inicializarEventListeners();
-    inicializarAnimacionesScroll();
-    actualizarContadorCarrito();
+    console.log('✅ Página cargada - Bodegón Bayona 59');
     
-    // Inicializar contadores animados
-    inicializarContadores();
-});
+    // Inicializar Swiper si existe
+    let swiper = null;
+    const swiperElement = document.querySelector('.swiper');
+    if (swiperElement) {
+        swiper = new Swiper('.swiper', {
+            direction: 'horizontal',
+            loop: true,
+            speed: 800,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            },
+        });
+    } else {
+        console.log('⚠️ Swiper no encontrado');
+    }
 
-// Configurar todos los event listeners
-function inicializarEventListeners() {
     // Menú móvil
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const navLinks = document.getElementById('navLinks');
+    const menuBtn = document.getElementById('menuBtn');
+    const header = document.querySelector('.header');
     
-    if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-            this.innerHTML = navLinks.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
+    if (menuBtn && header) {
+        menuBtn.addEventListener('click', function() {
+            header.classList.toggle('active');
+        });
+    }
+
+    // Carrito flotante
+    const cartBtn = document.getElementById('cartBtn');
+    const closeCart = document.getElementById('closeCart');
+    const cartSidebar = document.getElementById('cartSidebar');
+    
+    if (cartBtn && cartSidebar) {
+        cartBtn.addEventListener('click', function() {
+            cartSidebar.classList.add('active');
+            document.body.style.overflow = 'hidden';
         });
     }
     
-    // Cerrar menú al hacer clic en enlace
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', function() {
-            if (window.innerWidth <= 768) {
-                navLinks.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+    if (closeCart && cartSidebar) {
+        closeCart.addEventListener('click', function() {
+            cartSidebar.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+
+    // Cerrar carrito al hacer clic fuera
+    document.addEventListener('click', function(event) {
+        if (cartSidebar && cartBtn && 
+            !cartSidebar.contains(event.target) && 
+            !cartBtn.contains(event.target)) {
+            cartSidebar.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Filtros de categorías
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    if (categoryBtns.length > 0) {
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                console.log('Filtrando por:', this.textContent);
+            });
+        });
+    }
+
+    // Botones de agregar al carrito
+    const addButtons = document.querySelectorAll('.btn-combo, .btn-add, .btn-buy');
+    addButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Agregando producto al carrito');
+            createNotification('Producto agregado al carrito!', 'success');
+            updateCartCount(1);
+            
+            this.classList.add('added');
+            setTimeout(() => {
+                this.classList.remove('added');
+            }, 1000);
+        });
+    });
+
+    // Formulario de contacto
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('Enviando formulario de contacto');
+            
+            const inputs = this.querySelectorAll('input, textarea');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.style.borderColor = 'var(--secondary)';
+                    isValid = false;
+                } else {
+                    input.style.borderColor = '';
+                }
+            });
+            
+            if (isValid) {
+                const submitBtn = this.querySelector('.btn-submit');
+                if (submitBtn) {
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+                    submitBtn.disabled = true;
+                    
+                    setTimeout(() => {
+                        createNotification('Mensaje enviado con éxito! Te contactaremos pronto.', 'success');
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                        contactForm.reset();
+                    }, 1500);
+                }
+            } else {
+                createNotification('Por favor completa todos los campos', 'error');
+            }
+        });
+    }
+
+    // Scroll suave para enlaces
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+                
+                if (header) header.classList.remove('active');
             }
         });
     });
-    
-    // Botones de agregar al carrito
-    document.querySelectorAll('.btn-agregar').forEach(btn => {
-        btn.addEventListener('click', agregarAlCarrito);
-    });
-    
-    // Carrito flotante
-    const btnCarrito = document.querySelector('.btn-carrito');
-    const carritoFlotante = document.getElementById('carritoFlotante');
-    const cerrarCarrito = document.getElementById('cerrarCarrito');
-    
-    if (btnCarrito) {
-        btnCarrito.addEventListener('click', function(e) {
-            e.preventDefault();
-            carritoFlotante.classList.add('active');
-        });
-    }
-    
-    if (cerrarCarrito) {
-        cerrarCarrito.addEventListener('click', function() {
-            carritoFlotante.classList.remove('active');
-        });
-    }
-    
-    // Checkout
-    const checkoutBtn = document.getElementById('checkoutBtn');
-    if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', procesarCheckout);
-    }
-    
-    // Newsletter
-    const newsletterForm = document.getElementById('newsletterForm');
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', suscribirNewsletter);
-    }
-    
-    // Efecto hover en tarjetas de producto
-    const productoCards = document.querySelectorAll('.producto-card');
-    productoCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
-    });
-}
 
-// Animaciones al hacer scroll
-function inicializarAnimacionesScroll() {
-    const elementosAnimar = document.querySelectorAll('.animate-on-scroll');
-    
-    const observer = new IntersectionObserver((entries) => {
+    // Animación de elementos al hacer scroll
+    const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+                entry.target.classList.add('animate');
             }
         });
     }, {
@@ -100,240 +169,195 @@ function inicializarAnimacionesScroll() {
         rootMargin: '0px 0px -50px 0px'
     });
     
-    elementosAnimar.forEach(elemento => observer.observe(elemento));
-}
+    // Observar elementos para animación
+    document.querySelectorAll('.combo-card, .product-card, .price-card').forEach(el => {
+        observer.observe(el);
+    });
 
-// Funciones del carrito
-function agregarAlCarrito(e) {
-    const boton = e.currentTarget;
-    const producto = boton.getAttribute('data-producto');
-    const precio = parseFloat(boton.getAttribute('data-precio'));
-    const nombre = boton.closest('.producto-info').querySelector('h3').textContent;
-    
-    // Verificar si el producto ya está en el carrito
-    const productoExistente = carrito.find(item => item.producto === producto);
-    
-    if (productoExistente) {
-        productoExistente.cantidad++;
-    } else {
-        carrito.push({
-            producto: producto,
-            nombre: nombre,
-            precio: precio,
-            cantidad: 1
-        });
+    // Estilos para notificaciones
+    if (!document.querySelector('#notification-styles')) {
+        const style = document.createElement('style');
+        style.id = 'notification-styles';
+        style.textContent = `
+            .notification {
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: linear-gradient(135deg, #2E86AB 0%, #118AB2 100%);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                z-index: 9999;
+                transform: translateX(400px);
+                transition: transform 0.3s ease;
+                max-width: 400px;
+            }
+            
+            .notification.show {
+                transform: translateX(0);
+            }
+            
+            .notification.error {
+                background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
+            }
+            
+            .notification i {
+                font-size: 1.2rem;
+            }
+            
+            .notification-close {
+                background: none;
+                border: none;
+                color: white;
+                cursor: pointer;
+                margin-left: auto;
+            }
+            
+            .pulse {
+                animation: pulse 0.5s ease;
+            }
+            
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.3); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
     }
-    
-    // Actualizar interfaz
-    actualizarCarrito();
-    actualizarContadorCarrito();
-    
-    // Mostrar feedback visual
-    boton.innerHTML = '<i class="fas fa-check"></i> Añadido';
-    boton.style.backgroundColor = '#2d5a3b';
-    
-    setTimeout(() => {
-        boton.innerHTML = '<i class="fas fa-plus"></i> Añadir al carrito';
-        boton.style.backgroundColor = '';
-    }, 1000);
-    
-    // Abrir carrito en móvil
-    if (window.innerWidth <= 768) {
-        document.getElementById('carritoFlotante').classList.add('active');
-    }
-}
+});
 
-function actualizarCarrito() {
-    const carritoItems = document.getElementById('carritoItems');
-    const carritoTotal = document.getElementById('carritoTotal');
-    
-    // Limpiar contenido
-    carritoItems.innerHTML = '';
-    
-    if (carrito.length === 0) {
-        carritoItems.innerHTML = '<p class="carrito-vacio">Tu carrito está vacío</p>';
-        carritoTotal.textContent = '0.00';
-        return;
-    }
-    
-    // Calcular total
-    totalCarrito = 0;
-    
-    // Generar items del carrito
-    carrito.forEach(item => {
-        totalCarrito += item.precio * item.cantidad;
-        
-        const itemElement = document.createElement('div');
-        itemElement.className = 'carrito-item';
-        itemElement.innerHTML = `
-            <div class="carrito-item-info">
-                <h4>${item.nombre}</h4>
-                <p>$${item.precio.toFixed(2)} x ${item.cantidad}</p>
-            </div>
-            <div class="carrito-item-actions">
-                <button class="btn-cantidad menos" data-producto="${item.producto}">-</button>
-                <span>${item.cantidad}</span>
-                <button class="btn-cantidad mas" data-producto="${item.producto}">+</button>
-                <button class="btn-eliminar" data-producto="${item.producto}">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </div>
+// FUNCIONES AUXILIARES CORREGIDAS
+
+function createNotification(message, type) {
+    try {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+            <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+            <span>${message}</span>
+            <button class="notification-close"><i class="fas fa-times"></i></button>
         `;
         
-        carritoItems.appendChild(itemElement);
-    });
-    
-    // Actualizar total
-    carritoTotal.textContent = totalCarrito.toFixed(2);
-    
-    // Añadir event listeners a los botones del carrito
-    document.querySelectorAll('.btn-cantidad.menos').forEach(btn => {
-        btn.addEventListener('click', modificarCantidad);
-    });
-    
-    document.querySelectorAll('.btn-cantidad.mas').forEach(btn => {
-        btn.addEventListener('click', modificarCantidad);
-    });
-    
-    document.querySelectorAll('.btn-eliminar').forEach(btn => {
-        btn.addEventListener('click', eliminarDelCarrito);
-    });
-}
-
-function modificarCantidad(e) {
-    const boton = e.currentTarget;
-    const producto = boton.getAttribute('data-producto');
-    const item = carrito.find(item => item.producto === producto);
-    
-    if (boton.classList.contains('menos')) {
-        if (item.cantidad > 1) {
-            item.cantidad--;
-        } else {
-            // Eliminar si la cantidad llega a 0
-            carrito = carrito.filter(item => item.producto !== producto);
-        }
-    } else if (boton.classList.contains('mas')) {
-        item.cantidad++;
-    }
-    
-    actualizarCarrito();
-    actualizarContadorCarrito();
-}
-
-function eliminarDelCarrito(e) {
-    const boton = e.currentTarget;
-    const producto = boton.getAttribute('data-producto');
-    
-    carrito = carrito.filter(item => item.producto !== producto);
-    
-    actualizarCarrito();
-    actualizarContadorCarrito();
-}
-
-function actualizarContadorCarrito() {
-    const contador = document.querySelector('.carrito-count');
-    const totalItems = carrito.reduce((total, item) => total + item.cantidad, 0);
-    
-    contador.textContent = totalItems;
-    
-    // Agregar animación
-    if (totalItems > 0) {
-        contador.style.transform = 'scale(1.2)';
+        document.body.appendChild(notification);
+        
         setTimeout(() => {
-            contador.style.transform = 'scale(1)';
-        }, 300);
-    }
-}
-
-function procesarCheckout() {
-    if (carrito.length === 0) {
-        alert('Tu carrito está vacío. Añade productos antes de finalizar la compra.');
-        return;
-    }
-    
-    // En un entorno real, aquí se procesaría el pago
-    const mensaje = `¡Gracias por tu compra en Bodegón Bayona 59!\n\nResumen de tu pedido:\n${carrito.map(item => `- ${item.nombre}: ${item.cantidad} x $${item.precio.toFixed(2)}`).join('\n')}\n\nTotal: $${totalCarrito.toFixed(2)}\n\n¿Deseas proceder con el pago?`;
-    
-    if (confirm(mensaje)) {
-        // Redirigir a WhatsApp con el pedido (en La Habana es común)
-        const telefono = '5398765432';
-        const texto = `Hola, me gustaría hacer un pedido de:\n\n${carrito.map(item => `${item.cantidad} x ${item.nombre}`).join('\n')}\n\nTotal: $${totalCarrito.toFixed(2)}`;
-        const urlWhatsApp = `https://wa.me/${telefono}?text=${encodeURIComponent(texto)}`;
+            notification.classList.add('show');
+        }, 10);
         
-        window.open(urlWhatsApp, '_blank');
+        // Auto-eliminar después de 5 segundos
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 300);
+        }, 5000);
         
-        // Vaciar carrito después del pedido
-        carrito = [];
-        actualizarCarrito();
-        actualizarContadorCarrito();
-        
-        // Cerrar carrito
-        document.getElementById('carritoFlotante').classList.remove('active');
-    }
-}
-
-// Newsletter
-function suscribirNewsletter(e) {
-    e.preventDefault();
-    const email = e.target.querySelector('input[type="email"]').value;
-    
-    // Aquí normalmente se enviaría a un servidor
-    // Simulación de éxito
-    e.target.innerHTML = '<p style="color: #c5a572; font-weight: 600;">¡Gracias por suscribirte! Te hemos enviado un correo de confirmación.</p>';
-    
-    // Guardar en localStorage
-    localStorage.setItem('newsletterSubscribed', 'true');
-    
-    // Enviar evento a Google Analytics (simulado)
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'subscribe', {
-            'event_category': 'engagement',
-            'event_label': 'newsletter'
-        });
-    }
-}
-
-// Contadores animados
-function inicializarContadores() {
-    const contadores = document.querySelectorAll('.stat-num');
-    
-    if (!contadores.length) return;
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const contador = entry.target;
-                const valorFinal = parseInt(contador.getAttribute('data-count'));
-                animarContador(contador, valorFinal);
-                observer.unobserve(contador);
-            }
-        });
-    }, { threshold: 0.5 });
-    
-    contadores.forEach(contador => observer.observe(contador));
-}
-
-function animarContador(elemento, valorFinal) {
-    let valorActual = 0;
-    const incremento = valorFinal / 100;
-    const velocidad = valorFinal > 100 ? 20 : 30; // Más lento para números grandes
-    
-    const timer = setInterval(() => {
-        valorActual += incremento;
-        if (valorActual >= valorFinal) {
-            elemento.textContent = valorFinal;
-            clearInterval(timer);
-        } else {
-            elemento.textContent = Math.floor(valorActual);
+        // Botón para cerrar
+        const closeBtn = notification.querySelector('.notification-close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 300);
+            });
         }
-    }, velocidad);
+    } catch (error) {
+        console.error('Error creando notificación:', error);
+    }
 }
 
-// Optimización SEO - Cambiar título dinámico para pestañas inactivas
-document.addEventListener('visibilitychange', function() {
-    if (document.hidden) {
-        document.title = "¡Vuelve! - Bodegón Bayona 59";
-    } else {
-        document.title = "Bodegón Bayona 59 - Productos Gourmet | La Habana";
+function updateCartCount(increment) {
+    try {
+        const cartCount = document.querySelector('.cart-count');
+        if (cartCount) {
+            let currentCount = parseInt(cartCount.textContent) || 0;
+            currentCount += increment;
+            cartCount.textContent = currentCount;
+            
+            // Animación
+            cartCount.classList.add('pulse');
+            setTimeout(() => {
+                cartCount.classList.remove('pulse');
+            }, 500);
+        } else {
+            console.log('⚠️ Elemento .cart-count no encontrado');
+        }
+    } catch (error) {
+        console.error('Error actualizando carrito:', error);
     }
+}
+
+// Función para cargar más productos
+function loadMoreProducts() {
+    try {
+        const productsGrid = document.querySelector('.products-grid');
+        if (!productsGrid) {
+            console.log('⚠️ .products-grid no encontrado');
+            return;
+        }
+        
+        const products = [
+            { name: 'Arroz 1kg', desc: 'Tipo especial', price: '$2.50', icon: 'fas fa-utensils' },
+            { name: 'Frijoles 500g', desc: 'Negros premium', price: '$3.00', icon: 'fas fa-seedling' },
+            { name: 'Azúcar 1kg', desc: 'Blanca refinada', price: '$1.80', icon: 'fas fa-cube' },
+            { name: 'Café 250g', desc: 'Molido tradicional', price: '$5.00', icon: 'fas fa-coffee' }
+        ];
+        
+        products.forEach(product => {
+            const productCard = document.createElement('div');
+            productCard.className = 'product-card';
+            productCard.innerHTML = `
+                <div class="product-img">
+                    <i class="${product.icon}"></i>
+                </div>
+                <h3>${product.name}</h3>
+                <p class="product-desc">${product.desc}</p>
+                <div class="product-price">
+                    <span class="price">${product.price}</span>
+                    <button class="btn-add"><i class="fas fa-plus"></i></button>
+                </div>
+            `;
+            
+            const addBtn = productCard.querySelector('.btn-add');
+            if (addBtn) {
+                addBtn.addEventListener('click', function() {
+                    createNotification(`${product.name} agregado al carrito!`, 'success');
+                    updateCartCount(1);
+                });
+            }
+            
+            productsGrid.appendChild(productCard);
+        });
+    } catch (error) {
+        console.error('Error cargando productos:', error);
+    }
+}
+
+// Configurar botón "Ver todos"
+document.addEventListener('DOMContentLoaded', function() {
+    const viewAllBtn = document.querySelector('.btn-view-all');
+    if (viewAllBtn) {
+        viewAllBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            loadMoreProducts();
+            this.style.display = 'none';
+        });
+    }
+    
+    // Hacer funciones globales
+    window.createNotification = createNotification;
+    window.updateCartCount = updateCartCount;
+    window.loadMoreProducts = loadMoreProducts;
+    
+    console.log('✅ Todas las funciones JavaScript cargadas correctamente');
 });
