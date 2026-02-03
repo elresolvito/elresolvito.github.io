@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado Bayona - Sin conexión</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #F8F4E9 0%, #E8E4D9 100%);
+            color: #2C2416;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .logo {
+            margin-bottom: 30px;
+        }
+        
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: #1E6B52;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: #1E6B52;
+        }
+        
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            color: #5C574D;
+        }
+        
+        .offline-icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+            opacity: 0.8;
+        }
+        
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 32px;
+        }
+        
+        button {
+            background: #1E6B52;
+            color: white;
+            border: none;
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: #14503C;
+            transform: translateY(-2px);
+        }
+        
+        button.secondary {
+            background: transparent;
+            color: #1E6B52;
+            border: 2px solid #1E6B52;
+        }
+        
+        button.secondary:hover {
+            background: #1E6B52;
+            color: white;
+        }
+        
+        .status {
+            margin-top: 24px;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: none;
+        }
+        
+        .status.connected {
+            background: #D4EDDA;
+            color: #155724;
+            display: block;
+        }
+        
+        .status.disconnected {
+            background: #F8D7DA;
+            color: #721C24;
+            display: block;
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+            }
+            
+            p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <div class="logo-icon">MB</div>
+            <h1>Mercado Bayona</h1>
+        </div>
+        
+        <div class="offline-icon">📶</div>
+        
+        <h2>Parece que estás sin conexión</h2>
+        
+        <p>
+            No podemos cargar el contenido en este momento. 
+            Por favor, verifica tu conexión a internet e intenta nuevamente.
+        </p>
+        
+        <p>
+            <strong>Tip:</strong> Algunas funciones básicas están disponibles sin conexión.
+        </p>
+        
+        <div class="actions">
+            <button onclick="window.location.reload()" id="reloadBtn">
+                🔄 Reintentar conexión
+            </button>
+            
+            <button class="secondary" onclick="showOfflineContent()">
+                📱 Ver contenido disponible sin conexión
+            </button>
+        </div>
+        
+        <div id="connectionStatus" class="status disconnected">
+            Estado: Sin conexión a internet
+        </div>
+    </div>
+
+    <script>
+        // Verificar conexión periódicamente
+        function checkConnection() {
+            const statusElement = document.getElementById('connectionStatus');
+            const reloadBtn = document.getElementById('reloadBtn');
+            
+            if (navigator.onLine) {
+                statusElement.textContent = 'Estado: Conectado ✓';
+                statusElement.className = 'status connected';
+                reloadBtn.textContent = '🔄 Volver a la aplicación';
+                reloadBtn.onclick = () => window.location.href = '/';
+            } else {
+                statusElement.textContent = 'Estado: Sin conexión a internet';
+                statusElement.className = 'status disconnected';
+                reloadBtn.textContent = '🔄 Reintentar conexión';
+                reloadBtn.onclick = () => window.location.reload();
+            }
+        }
+        
+        // Verificar conexión cada 5 segundos
+        setInterval(checkConnection, 5000);
+        
+        // Escuchar eventos de conexión
+        window.addEventListener('online', checkConnection);
+        window.addEventListener('offline', checkConnection);
+        
+        // Verificar al cargar
+        checkConnection();
+        
+        // Mostrar contenido offline disponible
+        function showOfflineContent() {
+            alert('Contenido disponible sin conexión:\n\n• Productos previamente cargados\n• Carrito de compras\n• Información de contacto\n• Cómo comprar\n\nLa próxima vez que tengas conexión, podrás completar tu compra.');
+        }
+        
+        // Intentar reconexión automática después de 30 segundos
+        setTimeout(() => {
+            if (!navigator.onLine) {
+                window.location.reload();
+            }
+        }, 30000);
+    </script>
+</body>
+</html>
