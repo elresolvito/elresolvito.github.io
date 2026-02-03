@@ -1,28 +1,138 @@
 {
-  "name": "Bodegón Bayona 59",
-  "short_name": "Bayona59",
-  "description": "Tienda online de combos y productos en La Habana",
+  "name": "Mercado Bayona",
+  "short_name": "MercadoBayona",
+  "description": "Tu mercado familiar en La Habana. Productos de calidad, servicios confiables y entrega a domicilio.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FFF9F0",
-  "theme_color": "#1E90FF",
+  "background_color": "#F8F4E9",
+  "theme_color": "#1E6B52",
   "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "es",
+  "dir": "ltr",
+  
   "icons": [
     {
-      "src": "icon-192x192.png",
+      "src": "/assets/images/logos/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/images/logos/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/images/logos/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/images/logos/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/images/logos/icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/images/logos/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "icon-512x512.png",
+      "src": "/assets/images/logos/icon-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/images/logos/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     }
   ],
-  "categories": ["shopping", "food", "business"],
-  "lang": "es",
-  "dir": "ltr",
-  "prefer_related_applications": false
+  
+  "screenshots": [
+    {
+      "src": "/assets/images/screenshots/mobile-screenshot1.png",
+      "sizes": "375x667",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Página principal de Mercado Bayona"
+    },
+    {
+      "src": "/assets/images/screenshots/mobile-screenshot2.png",
+      "sizes": "375x667",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Catálogo de productos"
+    },
+    {
+      "src": "/assets/images/screenshots/desktop-screenshot.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Versión desktop de Mercado Bayona"
+    }
+  ],
+  
+  "shortcuts": [
+    {
+      "name": "Ver productos",
+      "short_name": "Productos",
+      "description": "Explora nuestro catálogo de productos",
+      "url": "/#mercado",
+      "icons": [
+        {
+          "src": "/assets/images/logos/shortcut-products.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Ver servicios",
+      "short_name": "Servicios",
+      "description": "Conoce nuestros servicios disponibles",
+      "url": "/#servicios",
+      "icons": [
+        {
+          "src": "/assets/images/logos/shortcut-services.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Cómo comprar",
+      "short_name": "Guía",
+      "description": "Aprende a comprar en Mercado Bayona",
+      "url": "/#como-comprar",
+      "icons": [
+        {
+          "src": "/assets/images/logos/shortcut-guide.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  
+  "categories": ["shopping", "business", "food"],
+  "iarc_rating_id": "e84b012d-6da1-4c8a-a4a8-af80a612a6b2",
+  
+  "related_applications": [],
+  "prefer_related_applications": false,
+  
+  "features": [
+    "web payments",
+    "payment"
+  ]
 }
