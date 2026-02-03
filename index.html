@@ -6,6 +6,12 @@
     <title>Bodegón Bayona 59 | Combos y Productos en La Habana</title>
     <meta name="description" content="Tienda online de combos de productos. Compra cavillas de acero, combos de alimentos y productos del mercado. Envíos en La Habana.">
     
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icon-192x192.png">
+    <link rel="apple-touch-icon" href="icon-192x192.png">
+    <meta name="theme-color" content="#1E90FF">
+    
     <!-- Estilos -->
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,7 +44,7 @@
                 <div class="header-actions">
                     <button class="btn-cart" id="cartBtn">
                         <i class="fas fa-shopping-basket"></i>
-                        <span class="cart-count">3</span>
+                        <span class="cart-count">0</span>
                     </button>
                     <button class="btn-menu" id="menuBtn">
                         <i class="fas fa-bars"></i>
@@ -318,7 +324,7 @@
         </div>
     </section>
 
-    <!-- Sección Mercado -->
+    <!-- Sección Mercado Dinámico -->
     <section class="market-section" id="mercado">
         <div class="container">
             <div class="section-header">
@@ -326,58 +332,95 @@
                 <p>Selección de los mejores productos para tu hogar</p>
             </div>
             
-            <div class="categories">
-                <button class="category-btn active">Todos</button>
-                <button class="category-btn">Lácteos</button>
-                <button class="category-btn">Carnes</button>
-                <button class="category-btn">Bebidas</button>
-                <button class="category-btn">Enlatados</button>
-                <button class="category-btn">Otros</button>
+            <div class="categories" id="categoriesContainer">
+                <button class="category-btn active" data-category="todos">Todos</button>
+                <!-- Las categorías se cargarán dinámicamente -->
             </div>
             
-            <div class="products-grid">
-                <!-- Productos se cargarán dinámicamente -->
-                <div class="product-card">
-                    <div class="product-img">
-                        <i class="fas fa-beer"></i>
-                    </div>
-                    <h3>Cerveza Nacional</h3>
-                    <p class="product-desc">355ml - Pack de 6</p>
-                    <div class="product-price">
-                        <span class="price">$12.00</span>
-                        <button class="btn-add"><i class="fas fa-plus"></i></button>
-                    </div>
+            <div class="products-grid" id="productsGrid">
+                <!-- Los productos se cargarán dinámicamente desde Google Sheets -->
+                <div class="loading-products">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Cargando productos...</p>
                 </div>
-                
-                <div class="product-card">
-                    <div class="product-img">
-                        <i class="fas fa-oil-can"></i>
-                    </div>
-                    <h3>Aceite Vegetal</h3>
-                    <p class="product-desc">1 Litro - Soja</p>
-                    <div class="product-price">
-                        <span class="price">$4.50</span>
-                        <button class="btn-add"><i class="fas fa-plus"></i></button>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-img">
-                        <i class="fas fa-wine-bottle"></i>
-                    </div>
-                    <h3>Refresco Cola</h3>
-                    <p class="product-desc">330ml - Pack de 12</p>
-                    <div class="product-price">
-                        <span class="price">$8.00</span>
-                        <button class="btn-add"><i class="fas fa-plus"></i></button>
-                    </div>
-                </div>
-                
-                <!-- Más productos... -->
             </div>
             
             <div class="section-footer">
-                <a href="#" class="btn-view-all">Ver Todos los Productos <i class="fas fa-arrow-right"></i></a>
+                <a href="#" class="btn-view-all" id="loadMoreBtn">Ver Más Productos <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Testimonios -->
+    <section class="testimonios-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Lo que dicen <span class="highlight">nuestros clientes</span></h2>
+                <p>Clientes satisfechos en toda La Habana</p>
+            </div>
+            
+            <div class="testimonios-grid">
+                <div class="testimonio-card">
+                    <div class="testimonio-text">
+                        "Excelente servicio y productos de calidad. Los combos son perfectos para la familia."
+                    </div>
+                    <div class="testimonio-author">
+                        <strong>María González</strong>
+                        <span>Vedado, La Habana</span>
+                    </div>
+                </div>
+                
+                <div class="testimonio-card">
+                    <div class="testimonio-text">
+                        "Las cavillas de acero son de primera calidad. Me salvaron mi proyecto de construcción."
+                    </div>
+                    <div class="testimonio-author">
+                        <strong>Carlos Rodríguez</strong>
+                        <span>Centro Habana</span>
+                    </div>
+                </div>
+                
+                <div class="testimonio-card">
+                    <div class="testimonio-text">
+                        "Rápida entrega y precios justos. Siempre compro aquí para mi negocio."
+                    </div>
+                    <div class="testimonio-author">
+                        <strong>Laura Martínez</strong>
+                        <span>Playa, La Habana</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección FAQ -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Preguntas <span class="highlight">Frecuentes</span></h2>
+                <p>Respuestas a tus dudas más comunes</p>
+            </div>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>¿Hacen envíos a domicilio?</h3>
+                    <p>Sí, realizamos envíos a toda La Habana. El costo depende de la zona y el tamaño del pedido.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>¿Qué métodos de pago aceptan?</h3>
+                    <p>Aceptamos efectivo, transferencia bancaria y pagos por WhatsApp.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>¿Puedo personalizar un combo?</h3>
+                    <p>¡Claro! Contacta con nosotros por WhatsApp y creamos un combo a tu medida.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>¿Cuánto tarda la entrega?</h3>
+                    <p>Normalmente 24-48 horas hábiles después de confirmado el pedido.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -459,7 +502,7 @@
             <div class="cart-empty">
                 <i class="fas fa-shopping-basket"></i>
                 <p>Tu carrito está vacío</p>
-                <a href="#combos" class="btn-shop">Ver Combos</a>
+                <a href="#mercado" class="btn-shop">Ver Productos</a>
             </div>
         </div>
         <div class="cart-footer">
@@ -537,83 +580,660 @@
         </div>
     </footer>
 
+    <!-- Overlay para menú móvil y carrito -->
+    <div class="overlay" id="overlay"></div>
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="script.js"></script>
-        <!-- Sección de Testimonios -->
-    <section class="testimonios-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Lo que dicen <span class="highlight">nuestros clientes</span></h2>
-                <p>Clientes satisfechos en toda La Habana</p>
-            </div>
+    
+    <!-- Catálogo local como respaldo -->
+    <script src="catalogo.js"></script>
+    
+    <!-- Sistema dinámico (Google Sheets primero, fallback local) -->
+    <script src="catalogo-dinamico.js"></script>
+    
+    <!-- Script principal integrado -->
+    <script>
+    // script.js - Script principal integrado
+        
+    // ================ INICIALIZACIÓN GLOBAL ================
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🚀 Inicializando Bodegón Bayona 59...');
+        
+        // Inicializar Swiper
+        initSwiper();
+        
+        // Inicializar sistema de catálogo dinámico (se auto-inicializa)
+        initCatalogSystem();
+        
+        // Inicializar navegación
+        initNavigation();
+        
+        // Inicializar carrito
+        initCart();
+        
+        // Inicializar formulario de contacto
+        initContactForm();
+        
+        // Inicializar PWA
+        initPWA();
+    });
+    
+    // ================ SWIPER ================
+    function initSwiper() {
+        const swiper = new Swiper('.swiper', {
+            direction: 'horizontal',
+            loop: true,
+            speed: 800,
+            effect: 'slide',
+            grabCursor: true,
+            centeredSlides: true,
+            spaceBetween: 0,
             
-            <div class="testimonios-grid">
-                <div class="testimonio-card">
-                    <div class="testimonio-text">
-                        "Excelente servicio y productos de calidad. Los combos son perfectos para la familia."
-                    </div>
-                    <div class="testimonio-author">
-                        <strong>María González</strong>
-                        <span>Vedado, La Habana</span>
-                    </div>
-                </div>
-                
-                <div class="testimonio-card">
-                    <div class="testimonio-text">
-                        "Las cavillas de acero son de primera calidad. Me salvaron mi proyecto de construcción."
-                    </div>
-                    <div class="testimonio-author">
-                        <strong>Carlos Rodríguez</strong>
-                        <span>Centro Habana</span>
-                    </div>
-                </div>
-                
-                <div class="testimonio-card">
-                    <div class="testimonio-text">
-                        "Rápida entrega y precios justos. Siempre compro aquí para mi negocio."
-                    </div>
-                    <div class="testimonio-author">
-                        <strong>Laura Martínez</strong>
-                        <span>Playa, La Habana</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección FAQ -->
-    <section class="faq-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Preguntas <span class="highlight">Frecuentes</span></h2>
-                <p>Respuestas a tus dudas más comunes</p>
-            </div>
+            // Paginación
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+                dynamicBullets: true
+            },
             
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <h3>¿Hacen envíos a domicilio?</h3>
-                    <p>Sí, realizamos envíos a toda La Habana. El costo depende de la zona y el tamaño del pedido.</p>
+            // Navegación
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev'
+            },
+            
+            // Autoplay
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true
+            },
+            
+            // Breakpoints
+            breakpoints: {
+                320: {
+                    slidesPerView: 1,
+                    spaceBetween: 0
+                },
+                768: {
+                    slidesPerView: 1,
+                    spaceBetween: 0
+                },
+                1024: {
+                    slidesPerView: 1,
+                    spaceBetween: 0
+                }
+            }
+        });
+        
+        console.log('✅ Swiper inicializado');
+    }
+    
+    // ================ SISTEMA DE CATÁLOGO DINÁMICO ================
+    function initCatalogSystem() {
+        // Esperar a que el catálogo se cargue
+        window.addEventListener('catalogoCargado', function(event) {
+            console.log('📦 Catálogo cargado desde:', event.detail.fuente);
+            renderizarProductos();
+            renderizarCategorias();
+        });
+        
+        // También escuchar actualizaciones en tiempo real
+        window.addEventListener('catalogoActualizado', function() {
+            console.log('🔄 Catálogo actualizado');
+            renderizarProductos();
+            renderizarCategorias();
+        });
+    }
+    
+    function renderizarProductos(categoria = 'todos') {
+        const grid = document.getElementById('productsGrid');
+        if (!grid) return;
+        
+        // Limpiar grid
+        grid.innerHTML = '';
+        
+        let productos;
+        
+        if (window.CatalogoDinamico && window.CatalogoDinamico.cargado) {
+            // Usar catálogo dinámico
+            if (categoria === 'todos') {
+                productos = window.CatalogoDinamico.obtenerTodos();
+            } else {
+                productos = window.CatalogoDinamico.obtenerPorCategoria(categoria);
+            }
+        } else {
+            // Usar catálogo local como respaldo
+            if (window.catalogo) {
+                productos = window.catalogo.productos.filter(p => 
+                    p.status === 'available' && 
+                    (categoria === 'todos' || p.category === categoria)
+                );
+            } else {
+                productos = [];
+            }
+        }
+        
+        if (productos.length === 0) {
+            grid.innerHTML = `
+                <div class="no-productos">
+                    <i class="fas fa-box-open"></i>
+                    <p>No hay productos disponibles en esta categoría</p>
                 </div>
+            `;
+            return;
+        }
+        
+        // Limitar a 12 productos inicialmente
+        const productosMostrar = productos.slice(0, 12);
+        
+        productosMostrar.forEach(producto => {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.innerHTML = `
+                <div class="product-img">
+                    <img src="${producto.image}" alt="${producto.name}" onerror="this.src='https://via.placeholder.com/300x200?text=Producto'">
+                </div>
+                <h3>${producto.name}</h3>
+                <p class="product-desc">${producto.description || producto.specificDetails || ''}</p>
+                <div class="product-price">
+                    <span class="price">$${producto.price.toLocaleString('es-CU')}</span>
+                    <button class="btn-add" data-id="${producto.id}">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            `;
+            
+            grid.appendChild(card);
+        });
+        
+        // Configurar evento para botones de agregar
+        document.querySelectorAll('.btn-add').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const productId = parseInt(this.getAttribute('data-id'));
+                agregarAlCarrito(productId);
+            });
+        });
+    }
+    
+    function renderizarCategorias() {
+        const container = document.getElementById('categoriesContainer');
+        if (!container) return;
+        
+        let categorias;
+        
+        if (window.CatalogoDinamico && window.CatalogoDinamico.cargado) {
+            categorias = window.CatalogoDinamico.obtenerCategorias();
+        } else if (window.catalogo) {
+            categorias = [...new Set(window.catalogo.productos.map(p => p.category))];
+        } else {
+            categorias = [];
+        }
+        
+        // Limpiar solo los botones de categoría (dejar el botón "Todos")
+        const botonTodos = container.querySelector('[data-category="todos"]');
+        container.innerHTML = '';
+        if (botonTodos) container.appendChild(botonTodos);
+        
+        // Agregar categorías únicas
+        categorias.forEach(categoria => {
+            if (categoria && categoria !== 'Próximamente') {
+                const btn = document.createElement('button');
+                btn.className = 'category-btn';
+                btn.textContent = categoria;
+                btn.setAttribute('data-category', categoria);
                 
-                <div class="faq-item">
-                    <h3>¿Qué métodos de pago aceptan?</h3>
-                    <p>Aceptamos efectivo, transferencia bancaria y pagos por WhatsApp.</p>
-                </div>
+                btn.addEventListener('click', function() {
+                    // Actualizar clase activa
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filtrar productos
+                    renderizarProductos(categoria);
+                });
                 
-                <div class="faq-item">
-                    <h3>¿Puedo personalizar un combo?</h3>
-                    <p>¡Claro! Contacta con nosotros por WhatsApp y creamos un combo a tu medida.</p>
+                container.appendChild(btn);
+            }
+        });
+        
+        // Evento para botón "Todos"
+        const btnTodos = container.querySelector('[data-category="todos"]');
+        if (btnTodos) {
+            btnTodos.addEventListener('click', function() {
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                renderizarProductos('todos');
+            });
+        }
+    }
+    
+    // ================ NAVEGACIÓN ================
+    function initNavigation() {
+        const menuBtn = document.getElementById('menuBtn');
+        const nav = document.querySelector('.nav');
+        const overlay = document.getElementById('overlay');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        if (menuBtn && nav) {
+            menuBtn.addEventListener('click', function() {
+                nav.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+            });
+        }
+        
+        if (overlay) {
+            overlay.addEventListener('click', function() {
+                nav.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+                closeCart(); // También cerrar carrito si está abierto
+            });
+        }
+        
+        // Navegación suave
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId.startsWith('#')) {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // Cerrar menú móvil si está abierto
+                        if (window.innerWidth <= 768) {
+                            nav.classList.remove('active');
+                            overlay.classList.remove('active');
+                            document.body.style.overflow = '';
+                        }
+                        
+                        // Scroll suave
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Actualizar enlace activo
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        this.classList.add('active');
+                    }
+                }
+            });
+        });
+        
+        // Actualizar enlace activo al hacer scroll
+        window.addEventListener('scroll', function() {
+            const scrollPos = window.scrollY + 100;
+            
+            navLinks.forEach(link => {
+                const targetId = link.getAttribute('href');
+                if (targetId.startsWith('#')) {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const targetTop = targetElement.offsetTop;
+                        const targetBottom = targetTop + targetElement.offsetHeight;
+                        
+                        if (scrollPos >= targetTop && scrollPos < targetBottom) {
+                            navLinks.forEach(l => l.classList.remove('active'));
+                            link.classList.add('active');
+                        }
+                    }
+                }
+            });
+        });
+    }
+    
+    // ================ CARRITO ================
+    let carrito = JSON.parse(localStorage.getItem('carrito_bayona59')) || [];
+    
+    function initCart() {
+        const cartBtn = document.getElementById('cartBtn');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const closeCartBtn = document.getElementById('closeCart');
+        const overlay = document.getElementById('overlay');
+        
+        if (cartBtn && cartSidebar) {
+            cartBtn.addEventListener('click', openCart);
+        }
+        
+        if (closeCartBtn) {
+            closeCartBtn.addEventListener('click', closeCart);
+        }
+        
+        if (overlay) {
+            overlay.addEventListener('click', closeCart);
+        }
+        
+        // Inicializar checkout
+        const checkoutBtn = document.querySelector('.btn-checkout');
+        if (checkoutBtn) {
+            checkoutBtn.addEventListener('click', procesarCheckout);
+        }
+        
+        // Actualizar contador del carrito
+        actualizarContadorCarrito();
+    }
+    
+    function openCart() {
+        const cartSidebar = document.getElementById('cartSidebar');
+        const overlay = document.getElementById('overlay');
+        
+        if (cartSidebar) {
+            cartSidebar.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            renderizarCarrito();
+        }
+    }
+    
+    function closeCart() {
+        const cartSidebar = document.getElementById('cartSidebar');
+        const overlay = document.getElementById('overlay');
+        const nav = document.querySelector('.nav');
+        
+        if (cartSidebar) cartSidebar.classList.remove('active');
+        if (overlay) overlay.classList.remove('active');
+        if (nav) nav.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    function agregarAlCarrito(productId) {
+        let producto;
+        
+        // Buscar producto en catálogo dinámico o local
+        if (window.CatalogoDinamico && window.CatalogoDinamico.cargado) {
+            producto = window.CatalogoDinamico.obtenerPorId(productId);
+        } else if (window.catalogo) {
+            producto = window.catalogo.obtenerPorId(productId);
+        }
+        
+        if (!producto) {
+            mostrarNotificacion('Producto no encontrado', 'error');
+            return;
+        }
+        
+        // Verificar si el producto ya está en el carrito
+        const itemIndex = carrito.findIndex(item => item.id === productId);
+        
+        if (itemIndex > -1) {
+            // Incrementar cantidad
+            carrito[itemIndex].cantidad += 1;
+        } else {
+            // Agregar nuevo producto
+            carrito.push({
+                id: producto.id,
+                name: producto.name,
+                price: producto.price,
+                image: producto.image,
+                cantidad: 1
+            });
+        }
+        
+        // Guardar en localStorage
+        localStorage.setItem('carrito_bayona59', JSON.stringify(carrito));
+        
+        // Actualizar interfaz
+        actualizarContadorCarrito();
+        
+        // Mostrar notificación
+        mostrarNotificacion(`¡${producto.name} agregado al carrito!`, 'exito');
+        
+        // Actualizar carrito si está abierto
+        if (document.getElementById('cartSidebar').classList.contains('active')) {
+            renderizarCarrito();
+        }
+    }
+    
+    function actualizarContadorCarrito() {
+        const countElement = document.querySelector('.cart-count');
+        if (countElement) {
+            const totalItems = carrito.reduce((total, item) => total + item.cantidad, 0);
+            countElement.textContent = totalItems;
+            
+            // Animación
+            if (totalItems > 0) {
+                countElement.style.display = 'flex';
+                countElement.classList.add('activo');
+                setTimeout(() => countElement.classList.remove('activo'), 500);
+            } else {
+                countElement.style.display = 'none';
+            }
+        }
+    }
+    
+    function renderizarCarrito() {
+        const cartItems = document.querySelector('.cart-items');
+        const cartTotal = document.querySelector('.total-amount');
+        
+        if (!cartItems) return;
+        
+        if (carrito.length === 0) {
+            cartItems.innerHTML = `
+                <div class="cart-empty">
+                    <i class="fas fa-shopping-basket"></i>
+                    <p>Tu carrito está vacío</p>
+                    <a href="#mercado" class="btn-shop">Ver Productos</a>
                 </div>
+            `;
+            
+            // Configurar evento para el botón
+            const shopBtn = cartItems.querySelector('.btn-shop');
+            if (shopBtn) {
+                shopBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    closeCart();
+                    
+                    // Navegar a mercado
+                    const mercadoSection = document.querySelector('#mercado');
+                    if (mercadoSection) {
+                        window.scrollTo({
+                            top: mercadoSection.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            }
+        } else {
+            let html = '';
+            let total = 0;
+            
+            carrito.forEach((item, index) => {
+                const subtotal = item.price * item.cantidad;
+                total += subtotal;
                 
-                <div class="faq-item">
-                    <h3>¿Cuánto tarda la entrega?</h3>
-                    <p>Normalmente 24-48 horas hábiles después de confirmado el pedido.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+                html += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <p>$${item.price.toLocaleString('es-CU')} x ${item.cantidad}</p>
+                        </div>
+                        <div class="cart-item-actions">
+                            <button class="btn-cantidad btn-decrease" data-index="${index}">-</button>
+                            <span class="item-quantity">${item.cantidad}</span>
+                            <button class="btn-cantidad btn-increase" data-index="${index}">+</button>
+                            <button class="btn-eliminar" data-index="${index}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartItems.innerHTML = html;
+            
+            // Actualizar total
+            if (cartTotal) {
+                cartTotal.textContent = `$${total.toLocaleString('es-CU')}`;
+            }
+            
+            // Configurar eventos de los botones
+            document.querySelectorAll('.btn-increase').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    carrito[index].cantidad += 1;
+                    guardarYActualizarCarrito();
+                });
+            });
+            
+            document.querySelectorAll('.btn-decrease').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    if (carrito[index].cantidad > 1) {
+                        carrito[index].cantidad -= 1;
+                        guardarYActualizarCarrito();
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.btn-eliminar').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    carrito.splice(index, 1);
+                    guardarYActualizarCarrito();
+                });
+            });
+        }
+    }
+    
+    function guardarYActualizarCarrito() {
+        localStorage.setItem('carrito_bayona59', JSON.stringify(carrito));
+        actualizarContadorCarrito();
+        renderizarCarrito();
+    }
+    
+    function procesarCheckout() {
+        if (carrito.length === 0) {
+            mostrarNotificacion('El carrito está vacío', 'error');
+            return;
+        }
+        
+        // Crear mensaje de WhatsApp
+        let mensaje = '¡Hola! Quiero hacer un pedido:\n\n';
+        let total = 0;
+        
+        carrito.forEach(item => {
+            const subtotal = item.price * item.cantidad;
+            total += subtotal;
+            mensaje += `• ${item.name} x${item.cantidad} - $${subtotal.toLocaleString('es-CU')}\n`;
+        });
+        
+        mensaje += `\n💰 *Total: $${total.toLocaleString('es-CU')}*\n\n`;
+        mensaje += '📋 *Mis datos:*\n';
+        mensaje += 'Nombre: [Tu nombre aquí]\n';
+        mensaje += 'Teléfono: [Tu teléfono aquí]\n';
+        mensaje += 'Dirección: [Tu dirección aquí]\n\n';
+        mensaje += '¿Podrían confirmar mi pedido? ¡Gracias!';
+        
+        // Codificar mensaje para URL
+        const mensajeCodificado = encodeURIComponent(mensaje);
+        
+        // Número de WhatsApp (reemplaza con el real)
+        const telefonoWhatsApp = '5398765432';
+        
+        // Abrir WhatsApp
+        window.open(`https://wa.me/${telefonoWhatsApp}?text=${mensajeCodificado}`, '_blank');
+        
+        // Cerrar carrito
+        closeCart();
+        
+        // Opcional: vaciar carrito después de enviar
+        // carrito = [];
+        // localStorage.removeItem('carrito_bayona59');
+        // actualizarContadorCarrito();
+    }
+    
+    // ================ FORMULARIO DE CONTACTO ================
+    function initContactForm() {
+        const contactForm = document.getElementById('contactForm');
+        if (!contactForm) return;
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nombre = this.querySelector('input[type="text"]').value.trim();
+            const telefono = this.querySelector('input[type="tel"]').value.trim();
+            const mensaje = this.querySelector('textarea').value.trim();
+            
+            if (!nombre || !telefono || !mensaje) {
+                mostrarNotificacion('Por favor, completa todos los campos', 'error');
+                return;
+            }
+            
+            // Crear mensaje para WhatsApp
+            const mensajeWhatsApp = `¡Hola Bodegón Bayona 59! 👋\n\n`
+                + `*Nuevo mensaje de contacto:*\n\n`
+                + `👤 *Nombre:* ${nombre}\n`
+                + `📞 *Teléfono:* ${telefono}\n`
+                + `💬 *Mensaje:* ${mensaje}\n\n`
+                + `_Este mensaje fue enviado desde el formulario de contacto de tu sitio web._`;
+            
+            const mensajeCodificado = encodeURIComponent(mensajeWhatsApp);
+            const telefonoWhatsApp = '5398765432';
+            
+            // Abrir WhatsApp
+            window.open(`https://wa.me/${telefonoWhatsApp}?text=${mensajeCodificado}`, '_blank');
+            
+            // Mostrar confirmación
+            mostrarNotificacion('Mensaje listo para enviar por WhatsApp', 'exito');
+            
+            // Limpiar formulario
+            this.reset();
+        });
+    }
+    
+    // ================ NOTIFICACIONES ================
+    function mostrarNotificacion(mensaje, tipo = 'exito') {
+        // Crear notificación
+        const notificacion = document.createElement('div');
+        notificacion.className = `notificacion ${tipo}`;
+        notificacion.innerHTML = `
+            <i class="fas fa-${tipo === 'exito' ? 'check-circle' : 'exclamation-circle'}"></i>
+            <span>${mensaje}</span>
+        `;
+        
+        // Agregar al body
+        document.body.appendChild(notificacion);
+        
+        // Mostrar con animación
+        setTimeout(() => notificacion.classList.add('mostrar'), 10);
+        
+        // Ocultar después de 3 segundos
+        setTimeout(() => {
+            notificacion.classList.remove('mostrar');
+            setTimeout(() => {
+                if (notificacion.parentNode) {
+                    notificacion.parentNode.removeChild(notificacion);
+                }
+            }, 300);
+        }, 3000);
+    }
+    
+    // ================ PWA ================
+    function initPWA() {
+        // Registrar Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('sw.js')
+                    .then(function(registration) {
+                        console.log('✅ Service Worker registrado con éxito:', registration.scope);
+                    })
+                    .catch(function(error) {
+                        console.log('❌ Error al registrar Service Worker:', error);
+                    });
+            });
+        }
+        
+        // Detectar si es PWA instalada
+        window.addEventListener('appinstalled', function() {
+            console.log('📱 PWA instalada con éxito');
+        });
+        
+        // Mostrar botón de instalación en iOS
+        if (window.navigator.standalone) {
+            console.log('📱 PWA ejecutándose en modo standalone');
+        }
+    }
+    </script>
 </body>
 </html>
-
 
