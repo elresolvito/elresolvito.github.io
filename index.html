@@ -1,1239 +1,472 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bodegón Bayona 59 | Combos y Productos en La Habana</title>
-    <meta name="description" content="Tienda online de combos de productos. Compra cavillas de acero, combos de alimentos y productos del mercado. Envíos en La Habana.">
+    <title>Mercado Bayona | Tu mercado familiar en La Habana</title>
+    
+    <!-- SEO y Meta Tags -->
+    <meta name="description" content="Mercado Bayona - Productos de calidad y servicios confiables en La Habana. Compra fácil, entrega a domicilio. Emprendimiento familiar.">
+    <meta name="keywords" content="mercado habana, compras online cuba, entrega domicilio, productos alimenticios, servicios habana">
+    <meta name="author" content="Mercado Bayona">
+    <meta name="theme-color" content="#1E6B52">
     
     <!-- PWA -->
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" href="icon-192x192.png">
-    <link rel="apple-touch-icon" href="icon-192x192.png">
-    <meta name="theme-color" content="#1E90FF">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/x-icon" href="./assets/images/logos/favicon.ico">
+    <link rel="apple-touch-icon" href="./assets/images/logos/icon-192.png">
     
-    <!-- Estilos -->
-    <link rel="stylesheet" href="styles.css">
+    <!-- Fuentes optimizadas -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Comfortaa:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (optimizado) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1E6B52',
+                        'primary-light': '#2D8A6A',
+                        'primary-dark': '#14503C',
+                        secondary: '#FF7A45',
+                        'secondary-light': '#FF976D',
+                        'secondary-dark': '#E55A2E',
+                        accent: '#3A8BB8',
+                        'accent-light': '#5CA3D4',
+                        'accent-dark': '#2A6C91',
+                        cream: '#F8F4E9',
+                        'text-dark': '#2C2416'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['Comfortaa', 'cursive', 'sans-serif']
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'pulse-gentle': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        slideUp: { '0%': { transform: 'translateY(10px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } }
+                    }
+                }
+            },
+            corePlugins: {
+                container: false
+            }
+        }
+    </script>
+    
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/animations.css">
+    
+    <!-- Preload crítico -->
+    <link rel="preload" href="./assets/js/app.js" as="script">
+    <link rel="preload" href="./assets/css/styles.css" as="style">
 </head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <a href="#" class="logo">
-                    <div class="logo-icon">🛒</div>
-                    <div class="logo-text">
-                        <span class="logo-main">BODEGÓN</span>
-                        <span class="logo-sub">BAYONA 59</span>
-                    </div>
-                </a>
+
+<body class="font-sans bg-cream text-text-dark min-h-screen">
+    
+    <!-- Header Fijo -->
+    <header id="mainHeader" class="fixed top-0 left-0 right-0 z-50 bg-primary text-white shadow-lg transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
                 
-                <nav class="nav">
-                    <a href="#inicio" class="nav-link active"><i class="fas fa-home"></i> Inicio</a>
-                    <a href="#combos" class="nav-link"><i class="fas fa-box"></i> Combos</a>
-                    <a href="#construccion" class="nav-link"><i class="fas fa-hammer"></i> Construcción</a>
-                    <a href="#mercado" class="nav-link"><i class="fas fa-store"></i> Mercado</a>
-                    <a href="#contacto" class="nav-link"><i class="fas fa-phone-alt"></i> Contacto</a>
+                <!-- Logo y Nombre -->
+                <div class="flex items-center space-x-3">
+                    <button id="mobileMenuBtn" class="lg:hidden p-2 rounded-lg hover:bg-primary-light transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                    
+                    <a href="#home" class="flex items-center space-x-3 group">
+                        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
+                            <span class="text-primary font-display font-bold text-lg">MB</span>
+                        </div>
+                        <div class="hidden sm:block">
+                            <h1 class="font-display font-bold text-xl">Mercado Bayona</h1>
+                            <p class="text-xs opacity-80">Emprendimiento familiar</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Navegación Desktop -->
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="#mercado" class="font-medium hover:text-secondary-light transition-colors py-2 border-b-2 border-transparent hover:border-secondary-light">Productos</a>
+                    <a href="#servicios" class="font-medium hover:text-secondary-light transition-colors py-2 border-b-2 border-transparent hover:border-secondary-light">Servicios</a>
+                    <a href="#como-comprar" class="font-medium hover:text-secondary-light transition-colors py-2 border-b-2 border-transparent hover:border-secondary-light">Cómo Comprar</a>
+                    <a href="#contacto" class="font-medium hover:text-secondary-light transition-colors py-2 border-b-2 border-transparent hover:border-secondary-light">Contacto</a>
                 </nav>
                 
-                <div class="header-actions">
-                    <button class="btn-cart" id="cartBtn">
-                        <i class="fas fa-shopping-basket"></i>
-                        <span class="cart-count">0</span>
+                <!-- Carrito y Acciones -->
+                <div class="flex items-center space-x-4">
+                    <!-- Modo Accesibilidad -->
+                    <button id="accessibilityBtn" class="hidden sm:block p-2 rounded-lg hover:bg-primary-light transition-colors" aria-label="Opciones de accesibilidad">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                        </svg>
                     </button>
-                    <button class="btn-menu" id="menuBtn">
-                        <i class="fas fa-bars"></i>
+                    
+                    <!-- Botón Carrito -->
+                    <button id="cartButton" class="relative p-2 rounded-lg hover:bg-primary-light transition-colors group" aria-label="Ver carrito de compras">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                        </svg>
+                        <span id="cartCount" class="absolute -top-1 -right-1 bg-secondary text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                        <div class="opacity-0 invisible group-hover:opacity-100 group-hover:visible absolute top-full right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-xl p-4 transition-all duration-200 z-50">
+                            <p class="font-semibold mb-2">Tu carrito</p>
+                            <p id="cartPreview" class="text-sm text-gray-600">Vacío</p>
+                            <div class="mt-2 pt-2 border-t">
+                                <p class="text-sm">Total: <span id="cartPreviewTotal" class="font-bold">$0</span></p>
+                            </div>
+                        </div>
                     </button>
+                    
+                    <!-- WhatsApp Fijo -->
+                    <a href="https://wa.me/5356382909" target="_blank" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors flex items-center space-x-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12.04 2C7.38 2 3.51 5.87 3.51 10.53C3.51 12.02 3.9 13.43 4.6 14.65L3.32 20.02L8.76 18.73C9.9 19.37 11.19 19.72 12.51 19.72H12.53C17.19 19.72 21.06 15.85 21.06 11.19C21.06 6.53 17.19 2.66 12.53 2.66H12.51Z"/>
+                        </svg>
+                        <span class="hidden sm:inline">Ayuda</span>
+                    </a>
                 </div>
             </div>
         </div>
     </header>
-
-    <!-- Hero Slider -->
-    <section class="hero-slider" id="inicio">
-        <div class="swiper">
-            <div class="swiper-wrapper">
-                <!-- Slide 1: Mercado Bayona 59 -->
-                <div class="swiper-slide slide-1">
-                    <div class="slide-content">
-                        <span class="slide-badge">¡Nuevo!</span>
-                        <h1 class="slide-title">Mercado <span class="highlight">Bayona 59</span></h1>
-                        <p class="slide-text">Tu tienda de confianza en La Habana. Productos frescos, calidad garantizada y los mejores precios.</p>
-                        <div class="slide-stats">
-                            <div class="stat">
-                                <i class="fas fa-users"></i>
-                                <span>+2000 clientes satisfechos</span>
-                            </div>
-                            <div class="stat">
-                                <i class="fas fa-box-open"></i>
-                                <span>+150 productos disponibles</span>
-                            </div>
-                        </div>
-                        <a href="#mercado" class="btn-slide">Ver Productos <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="slide-image">
-                        <div class="image-circle"></div>
-                    </div>
+    
+    <!-- Menú Móvil -->
+    <div id="mobileMenu" class="fixed inset-0 z-50 lg:hidden transform -translate-x-full transition-transform duration-300">
+        <div class="absolute inset-0 bg-black bg-opacity-50" id="mobileMenuBackdrop"></div>
+        <div class="absolute inset-y-0 left-0 w-64 bg-primary text-white shadow-xl">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="font-display text-2xl font-bold">Mercado Bayona</h2>
+                    <button id="closeMobileMenu" class="p-2 rounded-lg hover:bg-primary-light">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
                 </div>
-
-                <!-- Slide 2: Materiales de Construcción -->
-                <div class="swiper-slide slide-2">
-                    <div class="slide-content">
-                        <span class="slide-badge">¡Oferta Especial!</span>
-                        <h1 class="slide-title">Cavillas de <span class="highlight">Acero</span></h1>
-                        <p class="slide-text">Materiales de construcción de primera calidad. Perfectos para tus proyectos.</p>
-                        <div class="slide-features">
-                            <div class="feature">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Alta resistencia</span>
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Diferentes medidas</span>
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Precios por mayor y menor</span>
-                            </div>
-                        </div>
-                        <a href="#construccion" class="btn-slide">Ver Cavillas <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="slide-image">
-                        <div class="image-square"></div>
-                    </div>
-                </div>
-
-                <!-- Slide 3: Combo de Alimentos -->
-                <div class="swiper-slide slide-3">
-                    <div class="slide-content">
-                        <span class="slide-badge">Combo Exclusivo</span>
-                        <h1 class="slide-title">Super <span class="highlight">Combo Familiar</span></h1>
-                        <p class="slide-text">Todo lo necesario para tu hogar en un solo paquete. ¡Ahorra hasta un 25%!</p>
-                        <ul class="combo-list">
-                            <li><i class="fas fa-beer"></i> Cerveza</li>
-                            <li><i class="fas fa-oil-can"></i> Aceite</li>
-                            <li><i class="fas fa-wine-bottle"></i> Refresco</li>
-                            <li><i class="fas fa-cow"></i> Leche Condensada</li>
-                            <li><i class="fas fa-weight"></i> Leche en polvo 1kg</li>
-                            <li><i class="fas fa-drumstick-bite"></i> Salchichas</li>
-                            <li><i class="fas fa-bacon"></i> Jamón</li>
-                            <li><i class="fas fa-drumstick-bite"></i> Pollo 10lb</li>
-                        </ul>
-                        <div class="price-tag">
-                            <span class="old-price">$150.00</span>
-                            <span class="current-price">$112.50</span>
-                        </div>
-                        <a href="#combos" class="btn-slide">Comprar Ahora <i class="fas fa-shopping-cart"></i></a>
-                    </div>
-                    <div class="slide-image">
-                        <div class="image-combo"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Controles del slider -->
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
-        </div>
-    </section>
-
-    <!-- Sección Combos Destacados -->
-    <section class="combos-section" id="combos">
-        <div class="container">
-            <div class="section-header">
-                <h2>Nuestros <span class="highlight">Combos</span> Destacados</h2>
-                <p>Paquetes especiales con todo lo que necesitas y al mejor precio</p>
-            </div>
-            
-            <div class="combos-grid">
-                <!-- Combo 1 -->
-                <div class="combo-card featured">
-                    <div class="combo-badge">Más Vendido</div>
-                    <div class="combo-header">
-                        <h3>Combo Familiar Premium</h3>
-                        <p class="combo-desc">Perfecto para familias de 4-5 personas</p>
-                    </div>
-                    <div class="combo-content">
-                        <ul class="combo-items">
-                            <li><i class="fas fa-check"></i> 2x Cerveza 355ml</li>
-                            <li><i class="fas fa-check"></i> Aceite Vegetal 1L</li>
-                            <li><i class="fas fa-check"></i> 6x Refresco en lata</li>
-                            <li><i class="fas fa-check"></i> Leche Condensada 395g</li>
-                            <li><i class="fas fa-check"></i> Leche en polvo 1kg</li>
-                            <li><i class="fas fa-check"></i> Salchichas 400g</li>
-                            <li><i class="fas fa-check"></i> Jamón 250g</li>
-                            <li><i class="fas fa-check"></i> Pollo entero 10lb</li>
-                        </ul>
-                        <div class="combo-price">
-                            <div class="price-info">
-                                <span class="price-old">$150.00</span>
-                                <span class="price-current">$112.50</span>
-                                <span class="price-save">Ahorras $37.50</span>
-                            </div>
-                            <button class="btn-combo">
-                                <i class="fas fa-cart-plus"></i> Agregar al Carrito
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Combo 2 -->
-                <div class="combo-card">
-                    <div class="combo-badge">Nuevo</div>
-                    <div class="combo-header">
-                        <h3>Combo Básico Hogar</h3>
-                        <p class="combo-desc">Esenciales para el día a día</p>
-                    </div>
-                    <div class="combo-content">
-                        <ul class="combo-items">
-                            <li><i class="fas fa-check"></i> Aceite Vegetal 1L</li>
-                            <li><i class="fas fa-check"></i> 3x Refresco en lata</li>
-                            <li><i class="fas fa-check"></i> Leche Condensada 395g</li>
-                            <li><i class="fas fa-check"></i> Leche en polvo 500g</li>
-                            <li><i class="fas fa-check"></i> Salchichas 250g</li>
-                            <li><i class="fas fa-check"></i> Pollo 5lb</li>
-                        </ul>
-                        <div class="combo-price">
-                            <div class="price-info">
-                                <span class="price-old">$75.00</span>
-                                <span class="price-current">$56.25</span>
-                                <span class="price-save">Ahorras $18.75</span>
-                            </div>
-                            <button class="btn-combo">
-                                <i class="fas fa-cart-plus"></i> Agregar al Carrito
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Combo 3 -->
-                <div class="combo-card">
-                    <div class="combo-badge">Oferta</div>
-                    <div class="combo-header">
-                        <h3>Combo Carnes Selectas</h3>
-                        <p class="combo-desc">Para los amantes de la buena carne</p>
-                    </div>
-                    <div class="combo-content">
-                        <ul class="combo-items">
-                            <li><i class="fas fa-check"></i> Pollo entero 10lb</li>
-                            <li><i class="fas fa-check"></i> Carne de res 3lb</li>
-                            <li><i class="fas fa-check"></i> Cerdo 2lb</li>
-                            <li><i class="fas fa-check"></i> Salchichas 500g</li>
-                            <li><i class="fas fa-check"></i> Jamón 500g</li>
-                            <li><i class="fas fa-check"></i> Tocino 250g</li>
-                        </ul>
-                        <div class="combo-price">
-                            <div class="price-info">
-                                <span class="price-old">$120.00</span>
-                                <span class="price-current">$90.00</span>
-                                <span class="price-save">Ahorras $30.00</span>
-                            </div>
-                            <button class="btn-combo">
-                                <i class="fas fa-cart-plus"></i> Agregar al Carrito
-                            </button>
-                        </div>
-                    </div>
+                
+                <nav class="space-y-4">
+                    <a href="#home" class="block py-3 px-4 rounded-lg hover:bg-primary-light transition-colors font-medium">Inicio</a>
+                    <a href="#mercado" class="block py-3 px-4 rounded-lg hover:bg-primary-light transition-colors font-medium">Productos</a>
+                    <a href="#servicios" class="block py-3 px-4 rounded-lg hover:bg-primary-light transition-colors font-medium">Servicios</a>
+                    <a href="#como-comprar" class="block py-3 px-4 rounded-lg hover:bg-primary-light transition-colors font-medium">Cómo Comprar</a>
+                    <a href="#contacto" class="block py-3 px-4 rounded-lg hover:bg-primary-light transition-colors font-medium">Contacto</a>
+                </nav>
+                
+                <div class="mt-8 pt-8 border-t border-primary-light">
+                    <p class="text-sm opacity-80 mb-4">¿Necesitas ayuda?</p>
+                    <a href="https://wa.me/5356382909" target="_blank" class="flex items-center justify-center space-x-2 bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12.04 2C7.38 2 3.51 5.87 3.51 10.53C3.51 12.02 3.9 13.43 4.6 14.65L3.32 20.02L8.76 18.73C9.9 19.37 11.19 19.72 12.51 19.72H12.53C17.19 19.72 21.06 15.85 21.06 11.19C21.06 6.53 17.19 2.66 12.53 2.66H12.51Z"/>
+                        </svg>
+                        <span>Chatear por WhatsApp</span>
+                    </a>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Sección Construcción -->
-    <section class="construction-section" id="construccion">
-        <div class="container">
-            <div class="section-header">
-                <h2>Materiales de <span class="highlight">Construcción</span></h2>
-                <p>Calidad y resistencia para tus proyectos</p>
-            </div>
-            
-            <div class="construction-content">
-                <div class="construction-info">
-                    <h3>Cavillas de Acero</h3>
-                    <p class="construction-desc">
-                        Disponemos de cavillas de acero de alta resistencia en diferentes medidas. 
-                        Perfectas para trabajos de construcción, reparaciones y proyectos DIY.
-                    </p>
+    </div>
+    
+    <!-- Contenido Principal -->
+    <main class="pt-16">
+        
+        <!-- Sección Hero -->
+        <section id="home" class="relative overflow-hidden bg-gradient-to-br from-primary via-primary-light to-accent">
+            <div class="absolute inset-0 bg-black opacity-10"></div>
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-24">
+                <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-center">
                     
-                    <div class="specs-grid">
-                        <div class="spec">
-                            <i class="fas fa-ruler"></i>
-                            <div>
-                                <h4>Medidas Disponibles</h4>
-                                <p>1/4", 3/8", 1/2", 5/8", 3/4"</p>
-                            </div>
+                    <!-- Texto Hero -->
+                    <div class="text-center lg:text-left animate-fade-in">
+                        <span class="inline-block px-4 py-1 bg-white text-primary rounded-full font-semibold text-sm mb-6">Emprendimiento Familiar</span>
+                        <h1 class="text-4xl lg:text-6xl font-display font-bold text-white leading-tight mb-6">
+                            Tu mercado<br>
+                            <span class="text-secondary-light">en casa</span>
+                        </h1>
+                        <p class="text-xl text-white opacity-90 mb-8 max-w-lg mx-auto lg:mx-0">
+                            Productos de calidad, servicios confiables y entrega directo a tu puerta en La Habana.
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            <a href="#mercado" class="bg-white text-primary hover:bg-gray-100 font-bold py-4 px-8 rounded-full shadow-lg transition-all transform hover:scale-105 flex items-center justify-center space-x-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                                </svg>
+                                <span>Ver Productos</span>
+                            </a>
+                            <a href="#servicios" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary font-bold py-4 px-8 rounded-full transition-all transform hover:scale-105">
+                                Explorar Servicios
+                            </a>
                         </div>
-                        <div class="spec">
-                            <i class="fas fa-weight-hanging"></i>
-                            <div>
-                                <h4>Resistencia</h4>
-                                <p>Grado A36 (250 MPa)</p>
+                        
+                        <!-- Mini estadísticas -->
+                        <div class="mt-12 grid grid-cols-3 gap-4 max-w-md mx-auto lg:mx-0">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-white">100%</div>
+                                <div class="text-sm text-white opacity-80">Entregas completadas</div>
                             </div>
-                        </div>
-                        <div class="spec">
-                            <i class="fas fa-boxes"></i>
-                            <div>
-                                <h4>Presentación</h4>
-                                <p>Por unidad o en packs</p>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-white">24/7</div>
+                                <div class="text-sm text-white opacity-80">Soporte WhatsApp</div>
                             </div>
-                        </div>
-                        <div class="spec">
-                            <i class="fas fa-truck"></i>
-                            <div>
-                                <h4>Envío</h4>
-                                <p>Disponible en toda La Habana</p>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-white">50+</div>
+                                <div class="text-sm text-white opacity-80">Productos disponibles</div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="pricing-info">
-                        <div class="price-card">
-                            <h4>Pack Básico</h4>
-                            <p class="price">$25.00</p>
-                            <p>10 unidades de 1/2"</p>
-                            <button class="btn-buy">Comprar</button>
-                        </div>
-                        <div class="price-card featured">
-                            <h4>Pack Profesional</h4>
-                            <p class="price">$45.00</p>
-                            <p>25 unidades variadas</p>
-                            <button class="btn-buy">Comprar</button>
-                        </div>
-                        <div class="price-card">
-                            <h4>Pack Mayorista</h4>
-                            <p class="price">$80.00</p>
-                            <p>50 unidades + descuento</p>
-                            <button class="btn-buy">Comprar</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="construction-image">
-                    <div class="image-container">
-                        <div class="bolt-icon">🔩</div>
-                        <div class="bolt-icon">⚙️</div>
-                        <div class="bolt-icon">🛠️</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección Mercado Dinámico -->
-    <section class="market-section" id="mercado">
-        <div class="container">
-            <div class="section-header">
-                <h2>Productos del <span class="highlight">Mercado</span></h2>
-                <p>Selección de los mejores productos para tu hogar</p>
-            </div>
-            
-            <div class="categories" id="categoriesContainer">
-                <button class="category-btn active" data-category="todos">Todos</button>
-                <!-- Las categorías se cargarán dinámicamente -->
-            </div>
-            
-            <div class="products-grid" id="productsGrid">
-                <!-- Los productos se cargarán dinámicamente desde Google Sheets -->
-                <div class="loading-products">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <p>Cargando productos...</p>
-                </div>
-            </div>
-            
-            <div class="section-footer">
-                <a href="#" class="btn-view-all" id="loadMoreBtn">Ver Más Productos <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección de Testimonios -->
-    <section class="testimonios-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Lo que dicen <span class="highlight">nuestros clientes</span></h2>
-                <p>Clientes satisfechos en toda La Habana</p>
-            </div>
-            
-            <div class="testimonios-grid">
-                <div class="testimonio-card">
-                    <div class="testimonio-text">
-                        "Excelente servicio y productos de calidad. Los combos son perfectos para la familia."
-                    </div>
-                    <div class="testimonio-author">
-                        <strong>María González</strong>
-                        <span>Vedado, La Habana</span>
-                    </div>
-                </div>
-                
-                <div class="testimonio-card">
-                    <div class="testimonio-text">
-                        "Las cavillas de acero son de primera calidad. Me salvaron mi proyecto de construcción."
-                    </div>
-                    <div class="testimonio-author">
-                        <strong>Carlos Rodríguez</strong>
-                        <span>Centro Habana</span>
-                    </div>
-                </div>
-                
-                <div class="testimonio-card">
-                    <div class="testimonio-text">
-                        "Rápida entrega y precios justos. Siempre compro aquí para mi negocio."
-                    </div>
-                    <div class="testimonio-author">
-                        <strong>Laura Martínez</strong>
-                        <span>Playa, La Habana</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección FAQ -->
-    <section class="faq-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Preguntas <span class="highlight">Frecuentes</span></h2>
-                <p>Respuestas a tus dudas más comunes</p>
-            </div>
-            
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <h3>¿Hacen envíos a domicilio?</h3>
-                    <p>Sí, realizamos envíos a toda La Habana. El costo depende de la zona y el tamaño del pedido.</p>
-                </div>
-                
-                <div class="faq-item">
-                    <h3>¿Qué métodos de pago aceptan?</h3>
-                    <p>Aceptamos efectivo, transferencia bancaria y pagos por WhatsApp.</p>
-                </div>
-                
-                <div class="faq-item">
-                    <h3>¿Puedo personalizar un combo?</h3>
-                    <p>¡Claro! Contacta con nosotros por WhatsApp y creamos un combo a tu medida.</p>
-                </div>
-                
-                <div class="faq-item">
-                    <h3>¿Cuánto tarda la entrega?</h3>
-                    <p>Normalmente 24-48 horas hábiles después de confirmado el pedido.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección Contacto -->
-    <section class="contact-section" id="contacto">
-        <div class="container">
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h2>¿Necesitas Ayuda?</h2>
-                    <p class="contact-desc">Contáctanos para asesoría personalizada y pedidos especiales</p>
-                    
-                    <div class="contact-methods">
-                        <div class="method">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h4>Ubicación</h4>
-                                <p>Calle Bayona #59, La Habana, Cuba</p>
+                    <!-- Imagen Hero -->
+                    <div class="mt-12 lg:mt-0 relative">
+                        <div class="relative w-full max-w-lg mx-auto">
+                            <div class="absolute -inset-4 bg-white rounded-3xl transform rotate-3 opacity-20"></div>
+                            <div class="relative bg-white rounded-2xl shadow-2xl overflow-hidden">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                    alt="Mercado Bayona - Productos frescos"
+                                    class="w-full h-64 lg:h-96 object-cover"
+                                    loading="lazy"
+                                >
+                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6">
+                                    <p class="text-white text-lg font-semibold">Todo lo que necesitas, sin salir de casa</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="method">
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <h4>Teléfono</h4>
-                                <p>+53 123 456 78</p>
+                        
+                        <!-- Elementos flotantes -->
+                        <div class="absolute -top-4 -right-4 bg-secondary text-white p-4 rounded-2xl shadow-xl animate-bounce-slow hidden lg:block">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold">🔥</div>
+                                <div class="text-xs font-semibold">Ofertas hoy</div>
                             </div>
                         </div>
-                        <div class="method">
-                            <i class="fab fa-whatsapp"></i>
-                            <div>
-                                <h4>WhatsApp</h4>
-                                <p>+53 987 654 32</p>
-                            </div>
-                        </div>
-                        <div class="method">
-                            <i class="fas fa-clock"></i>
-                            <div>
-                                <h4>Horario</h4>
-                                <p>Lun-Vie: 9am-6pm<br>Sáb: 9am-2pm</p>
+                        
+                        <div class="absolute -bottom-4 -left-4 bg-accent text-white p-4 rounded-2xl shadow-xl animate-pulse-gentle hidden lg:block">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold">🚚</div>
+                                <div class="text-xs font-semibold">Envío rápido</div>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="whatsapp-cta">
-                        <a href="https://wa.me/5398765432" class="btn-whatsapp" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Pedir por WhatsApp
+                </div>
+            </div>
+            
+            <!-- Ola decorativa -->
+            <div class="absolute bottom-0 left-0 right-0">
+                <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="w-full h-12 lg:h-20">
+                    <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="#F8F4E9" opacity="1"/>
+                </svg>
+            </div>
+        </section>
+        
+        <!-- Sección Productos -->
+        <section id="mercado" class="py-12 lg:py-24 bg-cream">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Título y controles -->
+                <div class="text-center mb-12 animate-fade-in">
+                    <h2 class="text-3xl lg:text-5xl font-display font-bold text-primary mb-4">Nuestros Productos</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Selecciona entre nuestras categorías y encuentra lo que necesitas</p>
+                </div>
+                
+                <!-- Filtros de categorías -->
+                <div id="categoryFilters" class="flex flex-wrap justify-center gap-2 mb-8 animate-slide-up">
+                    <!-- Las categorías se cargan dinámicamente -->
+                </div>
+                
+                <!-- Buscador -->
+                <div class="max-w-md mx-auto mb-8 animate-slide-up" style="animation-delay: 100ms">
+                    <div class="relative">
+                        <input 
+                            type="text" 
+                            id="productSearch" 
+                            placeholder="Buscar productos..." 
+                            class="w-full px-6 py-4 bg-white border-2 border-gray-200 rounded-2xl shadow-sm focus:border-primary focus:ring-2 focus:ring-primary-light focus:outline-none transition-all text-lg"
+                        >
+                        <div class="absolute right-4 top-1/2 transform -translate-y-1/2">
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Grid de productos -->
+                <div id="productGrid" class="animate-slide-up" style="animation-delay: 200ms">
+                    <!-- Los productos se cargan dinámicamente -->
+                    <div class="text-center py-12">
+                        <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+                        <p class="mt-4 text-gray-500">Cargando productos...</p>
+                    </div>
+                </div>
+                
+                <!-- Mensaje sin resultados -->
+                <div id="noResults" class="hidden text-center py-12">
+                    <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">No encontramos productos</h3>
+                    <p class="text-gray-500">Intenta con otros términos o selecciona otra categoría</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sección Servicios -->
+        <section id="servicios" class="py-12 lg:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl lg:text-5xl font-display font-bold text-primary mb-4">Servicios de Calidad</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Conectamos con los mejores emprendedores de La Habana</p>
+                </div>
+                
+                <div id="servicesGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Los servicios se cargan dinámicamente -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Resto de las secciones (Cómo comprar, Contacto, etc.) -->
+        <!-- ... Continuará en el próximo mensaje ... -->
+        
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-primary-dark text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Logo y descripción -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                            <span class="text-primary font-display font-bold text-xl">MB</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold">Mercado Bayona</h3>
+                    </div>
+                    <p class="text-gray-300 mb-6">Tu mercado familiar confiable en La Habana. Calidad, confianza y servicio desde 2020.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://wa.me/5356382909" target="_blank" class="text-gray-300 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.04 2C7.38 2 3.51 5.87 3.51 10.53C3.51 12.02 3.9 13.43 4.6 14.65L3.32 20.02L8.76 18.73C9.9 19.37 11.19 19.72 12.51 19.72H12.53C17.19 19.72 21.06 15.85 21.06 11.19C21.06 6.53 17.19 2.66 12.53 2.66H12.51Z"/>
+                            </svg>
                         </a>
                     </div>
                 </div>
                 
-                <div class="contact-form">
-                    <h3>Envíanos un Mensaje</h3>
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <input type="text" placeholder="Tu Nombre" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" placeholder="Teléfono" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea placeholder="Tu Mensaje..." rows="4" required></textarea>
-                        </div>
-                        <button type="submit" class="btn-submit">
-                            <i class="fas fa-paper-plane"></i> Enviar Mensaje
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Carrito Flotante -->
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h3><i class="fas fa-shopping-basket"></i> Tu Carrito</h3>
-            <button class="btn-close" id="closeCart">&times;</button>
-        </div>
-        <div class="cart-items">
-            <div class="cart-empty">
-                <i class="fas fa-shopping-basket"></i>
-                <p>Tu carrito está vacío</p>
-                <a href="#mercado" class="btn-shop">Ver Productos</a>
-            </div>
-        </div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span>Total:</span>
-                <span class="total-amount">$0.00</span>
-            </div>
-            <button class="btn-checkout">Finalizar Compra</button>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <div class="logo">
-                        <div class="logo-icon">🛒</div>
-                        <div class="logo-text">
-                            <span class="logo-main">BODEGÓN</span>
-                            <span class="logo-sub">BAYONA 59</span>
-                        </div>
-                    </div>
-                    <p class="footer-desc">
-                        Tu tienda de confianza en La Habana. Combos especiales, materiales de construcción 
-                        y productos del mercado con la mejor calidad.
-                    </p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>Enlaces Rápidos</h4>
-                    <ul>
-                        <li><a href="#inicio">Inicio</a></li>
-                        <li><a href="#combos">Combos</a></li>
-                        <li><a href="#construccion">Construcción</a></li>
-                        <li><a href="#mercado">Mercado</a></li>
-                        <li><a href="#contacto">Contacto</a></li>
+                <!-- Enlaces rápidos -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Enlaces Rápidos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#mercado" class="text-gray-300 hover:text-white transition-colors">Productos</a></li>
+                        <li><a href="#servicios" class="text-gray-300 hover:text-white transition-colors">Servicios</a></li>
+                        <li><a href="#como-comprar" class="text-gray-300 hover:text-white transition-colors">Cómo Comprar</a></li>
+                        <li><a href="#contacto" class="text-gray-300 hover:text-white transition-colors">Contacto</a></li>
                     </ul>
                 </div>
                 
-                <div class="footer-col">
-                    <h4>Información</h4>
-                    <ul>
-                        <li><a href="#">Términos y condiciones</a></li>
-                        <li><a href="#">Política de privacidad</a></li>
-                        <li><a href="#">Envíos y entregas</a></li>
-                        <li><a href="#">Preguntas frecuentes</a></li>
+                <!-- Contacto -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Contacto</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center space-x-2">
+                            <svg class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                            </svg>
+                            <span class="text-gray-300">+53 5638 2909</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <svg class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            <span class="text-gray-300">La Habana, Cuba</span>
+                        </li>
                     </ul>
                 </div>
                 
-                <div class="footer-col">
-                    <h4>Contacto</h4>
-                    <div class="contact-info">
-                        <p><i class="fas fa-map-marker-alt"></i> Bayona #59, La Habana</p>
-                        <p><i class="fas fa-phone"></i> +53 123 456 78</p>
-                        <p><i class="fab fa-whatsapp"></i> +53 987 654 32</p>
-                        <p><i class="fas fa-envelope"></i> info@bayona59.cu</p>
+                <!-- Horario -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Horario de Atención</h4>
+                    <ul class="space-y-1 text-gray-300">
+                        <li>Lunes a Viernes: 8:00 - 20:00</li>
+                        <li>Sábados: 9:00 - 18:00</li>
+                        <li>Domingos: 10:00 - 16:00</li>
+                    </ul>
+                    <div class="mt-4 p-3 bg-primary rounded-lg">
+                        <p class="text-sm">📱 WhatsApp disponible 24/7 para consultas</p>
                     </div>
                 </div>
             </div>
             
-            <div class="footer-bottom">
-                <p>&copy; 2024 Bodegón Bayona 59. Todos los derechos reservados.</p>
-                <p class="seo-text">
-                    Tienda online La Habana | Venta de combos de alimentos | Cavillas de acero | Productos del mercado | 
-                    Envíos en La Habana | Calidad garantizada | Los mejores precios
-                </p>
+            <!-- Copyright -->
+            <div class="mt-12 pt-8 border-t border-gray-700 text-center text-gray-400">
+                <p>&copy; 2024 Mercado Bayona. Todos los derechos reservados.</p>
+                <p class="text-sm mt-2">Emprendimiento familiar registrado</p>
             </div>
         </div>
     </footer>
-
-    <!-- Overlay para menú móvil y carrito -->
-    <div class="overlay" id="overlay"></div>
-
+    
+    <!-- Botón flotante WhatsApp -->
+    <a href="https://wa.me/5356382909" target="_blank" class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-2xl z-40 transition-all transform hover:scale-110 group">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12.04 2C7.38 2 3.51 5.87 3.51 10.53C3.51 12.02 3.9 13.43 4.6 14.65L3.32 20.02L8.76 18.73C9.9 19.37 11.19 19.72 12.51 19.72H12.53C17.19 19.72 21.06 15.85 21.06 11.19C21.06 6.53 17.19 2.66 12.53 2.66H12.51Z"/>
+        </svg>
+        <div class="absolute right-full mr-4 top-1/2 transform -translate-y-1/2 bg-white text-black py-2 px-4 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all whitespace-nowrap">
+            <span class="font-semibold">¿Necesitas ayuda?</span>
+            <div class="absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2">
+                <div class="w-2 h-2 bg-white rotate-45"></div>
+            </div>
+        </div>
+    </a>
+    
+    <!-- Botón volver arriba -->
+    <button id="backToTop" class="fixed bottom-24 right-6 bg-primary hover:bg-primary-light text-white p-3 rounded-full shadow-2xl z-40 transition-all transform translate-y-10 opacity-0">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+        </svg>
+    </button>
+    
+    <!-- Modal de Producto -->
+    <div id="productModal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+        <div class="min-h-screen px-4 text-center">
+            <!-- Overlay -->
+            <div class="fixed inset-0 bg-black opacity-50"></div>
+            
+            <!-- Modal Content -->
+            <div class="inline-block w-full max-w-2xl my-8 text-left align-middle transition-all transform bg-white shadow-2xl rounded-2xl overflow-hidden relative">
+                <!-- Se llenará dinámicamente con JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal de Carrito -->
+    <div id="cartModal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+        <!-- Similar estructura al productModal -->
+    </div>
+    
+    <!-- Modal de Checkout -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+        <!-- Formulario de checkout -->
+    </div>
+    
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script type="module" src="./config/settings.js"></script>
+    <script type="module" src="./config/colors.js"></script>
+    <script type="module" src="./assets/js/catalog-manager.js"></script>
+    <script type="module" src="./assets/js/product-modal.js"></script>
+    <script type="module" src="./assets/js/cart-system.js"></script>
+    <script type="module" src="./assets/js/checkout-flow.js"></script>
+    <script type="module" src="./assets/js/app.js"></script>
     
-    <!-- Catálogo local como respaldo -->
-    <script src="catalogo.js"></script>
-    
-    <!-- Sistema dinámico (Google Sheets primero, fallback local) -->
-    <script src="catalogo-dinamico.js"></script>
-    
-    <!-- Script principal integrado -->
-    <script>
-    // script.js - Script principal integrado
-        
-    // ================ INICIALIZACIÓN GLOBAL ================
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('🚀 Inicializando Bodegón Bayona 59...');
-        
-        // Inicializar Swiper
-        initSwiper();
-        
-        // Inicializar sistema de catálogo dinámico (se auto-inicializa)
-        initCatalogSystem();
-        
-        // Inicializar navegación
-        initNavigation();
-        
-        // Inicializar carrito
-        initCart();
-        
-        // Inicializar formulario de contacto
-        initContactForm();
-        
-        // Inicializar PWA
-        initPWA();
-    });
-    
-    // ================ SWIPER ================
-    function initSwiper() {
-        const swiper = new Swiper('.swiper', {
-            direction: 'horizontal',
-            loop: true,
-            speed: 800,
-            effect: 'slide',
-            grabCursor: true,
-            centeredSlides: true,
-            spaceBetween: 0,
-            
-            // Paginación
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-                dynamicBullets: true
-            },
-            
-            // Navegación
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev'
-            },
-            
-            // Autoplay
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false,
-                pauseOnMouseEnter: true
-            },
-            
-            // Breakpoints
-            breakpoints: {
-                320: {
-                    slidesPerView: 1,
-                    spaceBetween: 0
-                },
-                768: {
-                    slidesPerView: 1,
-                    spaceBetween: 0
-                },
-                1024: {
-                    slidesPerView: 1,
-                    spaceBetween: 0
-                }
-            }
-        });
-        
-        console.log('✅ Swiper inicializado');
-    }
-    
-    // ================ SISTEMA DE CATÁLOGO DINÁMICO ================
-    function initCatalogSystem() {
-        // Esperar a que el catálogo se cargue
-        window.addEventListener('catalogoCargado', function(event) {
-            console.log('📦 Catálogo cargado desde:', event.detail.fuente);
-            renderizarProductos();
-            renderizarCategorias();
-        });
-        
-        // También escuchar actualizaciones en tiempo real
-        window.addEventListener('catalogoActualizado', function() {
-            console.log('🔄 Catálogo actualizado');
-            renderizarProductos();
-            renderizarCategorias();
-        });
-    }
-    
-    function renderizarProductos(categoria = 'todos') {
-        const grid = document.getElementById('productsGrid');
-        if (!grid) return;
-        
-        // Limpiar grid
-        grid.innerHTML = '';
-        
-        let productos;
-        
-        if (window.CatalogoDinamico && window.CatalogoDinamico.cargado) {
-            // Usar catálogo dinámico
-            if (categoria === 'todos') {
-                productos = window.CatalogoDinamico.obtenerTodos();
-            } else {
-                productos = window.CatalogoDinamico.obtenerPorCategoria(categoria);
-            }
-        } else {
-            // Usar catálogo local como respaldo
-            if (window.catalogo) {
-                productos = window.catalogo.productos.filter(p => 
-                    p.status === 'available' && 
-                    (categoria === 'todos' || p.category === categoria)
-                );
-            } else {
-                productos = [];
-            }
-        }
-        
-        if (productos.length === 0) {
-            grid.innerHTML = `
-                <div class="no-productos">
-                    <i class="fas fa-box-open"></i>
-                    <p>No hay productos disponibles en esta categoría</p>
-                </div>
-            `;
-            return;
-        }
-        
-        // Limitar a 12 productos inicialmente
-        const productosMostrar = productos.slice(0, 12);
-        
-        productosMostrar.forEach(producto => {
-            const card = document.createElement('div');
-            card.className = 'product-card';
-            card.innerHTML = `
-                <div class="product-img">
-                    <img src="${producto.image}" alt="${producto.name}" onerror="this.src='https://via.placeholder.com/300x200?text=Producto'">
-                </div>
-                <h3>${producto.name}</h3>
-                <p class="product-desc">${producto.description || producto.specificDetails || ''}</p>
-                <div class="product-price">
-                    <span class="price">$${producto.price.toLocaleString('es-CU')}</span>
-                    <button class="btn-add" data-id="${producto.id}">
-                        <i class="fas fa-plus"></i>
-                    </button>
-                </div>
-            `;
-            
-            grid.appendChild(card);
-        });
-        
-        // Configurar evento para botones de agregar
-        document.querySelectorAll('.btn-add').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const productId = parseInt(this.getAttribute('data-id'));
-                agregarAlCarrito(productId);
-            });
-        });
-    }
-    
-    function renderizarCategorias() {
-        const container = document.getElementById('categoriesContainer');
-        if (!container) return;
-        
-        let categorias;
-        
-        if (window.CatalogoDinamico && window.CatalogoDinamico.cargado) {
-            categorias = window.CatalogoDinamico.obtenerCategorias();
-        } else if (window.catalogo) {
-            categorias = [...new Set(window.catalogo.productos.map(p => p.category))];
-        } else {
-            categorias = [];
-        }
-        
-        // Limpiar solo los botones de categoría (dejar el botón "Todos")
-        const botonTodos = container.querySelector('[data-category="todos"]');
-        container.innerHTML = '';
-        if (botonTodos) container.appendChild(botonTodos);
-        
-        // Agregar categorías únicas
-        categorias.forEach(categoria => {
-            if (categoria && categoria !== 'Próximamente') {
-                const btn = document.createElement('button');
-                btn.className = 'category-btn';
-                btn.textContent = categoria;
-                btn.setAttribute('data-category', categoria);
-                
-                btn.addEventListener('click', function() {
-                    // Actualizar clase activa
-                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Filtrar productos
-                    renderizarProductos(categoria);
-                });
-                
-                container.appendChild(btn);
-            }
-        });
-        
-        // Evento para botón "Todos"
-        const btnTodos = container.querySelector('[data-category="todos"]');
-        if (btnTodos) {
-            btnTodos.addEventListener('click', function() {
-                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                renderizarProductos('todos');
-            });
-        }
-    }
-    
-    // ================ NAVEGACIÓN ================
-    function initNavigation() {
-        const menuBtn = document.getElementById('menuBtn');
-        const nav = document.querySelector('.nav');
-        const overlay = document.getElementById('overlay');
-        const navLinks = document.querySelectorAll('.nav-link');
-        
-        if (menuBtn && nav) {
-            menuBtn.addEventListener('click', function() {
-                nav.classList.toggle('active');
-                overlay.classList.toggle('active');
-                document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
-            });
-        }
-        
-        if (overlay) {
-            overlay.addEventListener('click', function() {
-                nav.classList.remove('active');
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
-                closeCart(); // También cerrar carrito si está abierto
-            });
-        }
-        
-        // Navegación suave
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId.startsWith('#')) {
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        // Cerrar menú móvil si está abierto
-                        if (window.innerWidth <= 768) {
-                            nav.classList.remove('active');
-                            overlay.classList.remove('active');
-                            document.body.style.overflow = '';
-                        }
-                        
-                        // Scroll suave
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                        
-                        // Actualizar enlace activo
-                        navLinks.forEach(l => l.classList.remove('active'));
-                        this.classList.add('active');
-                    }
-                }
-            });
-        });
-        
-        // Actualizar enlace activo al hacer scroll
-        window.addEventListener('scroll', function() {
-            const scrollPos = window.scrollY + 100;
-            
-            navLinks.forEach(link => {
-                const targetId = link.getAttribute('href');
-                if (targetId.startsWith('#')) {
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        const targetTop = targetElement.offsetTop;
-                        const targetBottom = targetTop + targetElement.offsetHeight;
-                        
-                        if (scrollPos >= targetTop && scrollPos < targetBottom) {
-                            navLinks.forEach(l => l.classList.remove('active'));
-                            link.classList.add('active');
-                        }
-                    }
-                }
-            });
-        });
-    }
-    
-    // ================ CARRITO ================
-    let carrito = JSON.parse(localStorage.getItem('carrito_bayona59')) || [];
-    
-    function initCart() {
-        const cartBtn = document.getElementById('cartBtn');
-        const cartSidebar = document.getElementById('cartSidebar');
-        const closeCartBtn = document.getElementById('closeCart');
-        const overlay = document.getElementById('overlay');
-        
-        if (cartBtn && cartSidebar) {
-            cartBtn.addEventListener('click', openCart);
-        }
-        
-        if (closeCartBtn) {
-            closeCartBtn.addEventListener('click', closeCart);
-        }
-        
-        if (overlay) {
-            overlay.addEventListener('click', closeCart);
-        }
-        
-        // Inicializar checkout
-        const checkoutBtn = document.querySelector('.btn-checkout');
-        if (checkoutBtn) {
-            checkoutBtn.addEventListener('click', procesarCheckout);
-        }
-        
-        // Actualizar contador del carrito
-        actualizarContadorCarrito();
-    }
-    
-    function openCart() {
-        const cartSidebar = document.getElementById('cartSidebar');
-        const overlay = document.getElementById('overlay');
-        
-        if (cartSidebar) {
-            cartSidebar.classList.add('active');
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            renderizarCarrito();
-        }
-    }
-    
-    function closeCart() {
-        const cartSidebar = document.getElementById('cartSidebar');
-        const overlay = document.getElementById('overlay');
-        const nav = document.querySelector('.nav');
-        
-        if (cartSidebar) cartSidebar.classList.remove('active');
-        if (overlay) overlay.classList.remove('active');
-        if (nav) nav.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-    
-    function agregarAlCarrito(productId) {
-        let producto;
-        
-        // Buscar producto en catálogo dinámico o local
-        if (window.CatalogoDinamico && window.CatalogoDinamico.cargado) {
-            producto = window.CatalogoDinamico.obtenerPorId(productId);
-        } else if (window.catalogo) {
-            producto = window.catalogo.obtenerPorId(productId);
-        }
-        
-        if (!producto) {
-            mostrarNotificacion('Producto no encontrado', 'error');
-            return;
-        }
-        
-        // Verificar si el producto ya está en el carrito
-        const itemIndex = carrito.findIndex(item => item.id === productId);
-        
-        if (itemIndex > -1) {
-            // Incrementar cantidad
-            carrito[itemIndex].cantidad += 1;
-        } else {
-            // Agregar nuevo producto
-            carrito.push({
-                id: producto.id,
-                name: producto.name,
-                price: producto.price,
-                image: producto.image,
-                cantidad: 1
-            });
-        }
-        
-        // Guardar en localStorage
-        localStorage.setItem('carrito_bayona59', JSON.stringify(carrito));
-        
-        // Actualizar interfaz
-        actualizarContadorCarrito();
-        
-        // Mostrar notificación
-        mostrarNotificacion(`¡${producto.name} agregado al carrito!`, 'exito');
-        
-        // Actualizar carrito si está abierto
-        if (document.getElementById('cartSidebar').classList.contains('active')) {
-            renderizarCarrito();
-        }
-    }
-    
-    function actualizarContadorCarrito() {
-        const countElement = document.querySelector('.cart-count');
-        if (countElement) {
-            const totalItems = carrito.reduce((total, item) => total + item.cantidad, 0);
-            countElement.textContent = totalItems;
-            
-            // Animación
-            if (totalItems > 0) {
-                countElement.style.display = 'flex';
-                countElement.classList.add('activo');
-                setTimeout(() => countElement.classList.remove('activo'), 500);
-            } else {
-                countElement.style.display = 'none';
-            }
-        }
-    }
-    
-    function renderizarCarrito() {
-        const cartItems = document.querySelector('.cart-items');
-        const cartTotal = document.querySelector('.total-amount');
-        
-        if (!cartItems) return;
-        
-        if (carrito.length === 0) {
-            cartItems.innerHTML = `
-                <div class="cart-empty">
-                    <i class="fas fa-shopping-basket"></i>
-                    <p>Tu carrito está vacío</p>
-                    <a href="#mercado" class="btn-shop">Ver Productos</a>
-                </div>
-            `;
-            
-            // Configurar evento para el botón
-            const shopBtn = cartItems.querySelector('.btn-shop');
-            if (shopBtn) {
-                shopBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    closeCart();
-                    
-                    // Navegar a mercado
-                    const mercadoSection = document.querySelector('#mercado');
-                    if (mercadoSection) {
-                        window.scrollTo({
-                            top: mercadoSection.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            }
-        } else {
-            let html = '';
-            let total = 0;
-            
-            carrito.forEach((item, index) => {
-                const subtotal = item.price * item.cantidad;
-                total += subtotal;
-                
-                html += `
-                    <div class="cart-item">
-                        <div class="cart-item-info">
-                            <h4>${item.name}</h4>
-                            <p>$${item.price.toLocaleString('es-CU')} x ${item.cantidad}</p>
-                        </div>
-                        <div class="cart-item-actions">
-                            <button class="btn-cantidad btn-decrease" data-index="${index}">-</button>
-                            <span class="item-quantity">${item.cantidad}</span>
-                            <button class="btn-cantidad btn-increase" data-index="${index}">+</button>
-                            <button class="btn-eliminar" data-index="${index}">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            cartItems.innerHTML = html;
-            
-            // Actualizar total
-            if (cartTotal) {
-                cartTotal.textContent = `$${total.toLocaleString('es-CU')}`;
-            }
-            
-            // Configurar eventos de los botones
-            document.querySelectorAll('.btn-increase').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const index = parseInt(this.getAttribute('data-index'));
-                    carrito[index].cantidad += 1;
-                    guardarYActualizarCarrito();
-                });
-            });
-            
-            document.querySelectorAll('.btn-decrease').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const index = parseInt(this.getAttribute('data-index'));
-                    if (carrito[index].cantidad > 1) {
-                        carrito[index].cantidad -= 1;
-                        guardarYActualizarCarrito();
-                    }
-                });
-            });
-            
-            document.querySelectorAll('.btn-eliminar').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const index = parseInt(this.getAttribute('data-index'));
-                    carrito.splice(index, 1);
-                    guardarYActualizarCarrito();
-                });
-            });
-        }
-    }
-    
-    function guardarYActualizarCarrito() {
-        localStorage.setItem('carrito_bayona59', JSON.stringify(carrito));
-        actualizarContadorCarrito();
-        renderizarCarrito();
-    }
-    
-    function procesarCheckout() {
-        if (carrito.length === 0) {
-            mostrarNotificacion('El carrito está vacío', 'error');
-            return;
-        }
-        
-        // Crear mensaje de WhatsApp
-        let mensaje = '¡Hola! Quiero hacer un pedido:\n\n';
-        let total = 0;
-        
-        carrito.forEach(item => {
-            const subtotal = item.price * item.cantidad;
-            total += subtotal;
-            mensaje += `• ${item.name} x${item.cantidad} - $${subtotal.toLocaleString('es-CU')}\n`;
-        });
-        
-        mensaje += `\n💰 *Total: $${total.toLocaleString('es-CU')}*\n\n`;
-        mensaje += '📋 *Mis datos:*\n';
-        mensaje += 'Nombre: [Tu nombre aquí]\n';
-        mensaje += 'Teléfono: [Tu teléfono aquí]\n';
-        mensaje += 'Dirección: [Tu dirección aquí]\n\n';
-        mensaje += '¿Podrían confirmar mi pedido? ¡Gracias!';
-        
-        // Codificar mensaje para URL
-        const mensajeCodificado = encodeURIComponent(mensaje);
-        
-        // Número de WhatsApp (reemplaza con el real)
-        const telefonoWhatsApp = '5398765432';
-        
-        // Abrir WhatsApp
-        window.open(`https://wa.me/${telefonoWhatsApp}?text=${mensajeCodificado}`, '_blank');
-        
-        // Cerrar carrito
-        closeCart();
-        
-        // Opcional: vaciar carrito después de enviar
-        // carrito = [];
-        // localStorage.removeItem('carrito_bayona59');
-        // actualizarContadorCarrito();
-    }
-    
-    // ================ FORMULARIO DE CONTACTO ================
-    function initContactForm() {
-        const contactForm = document.getElementById('contactForm');
-        if (!contactForm) return;
-        
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const nombre = this.querySelector('input[type="text"]').value.trim();
-            const telefono = this.querySelector('input[type="tel"]').value.trim();
-            const mensaje = this.querySelector('textarea').value.trim();
-            
-            if (!nombre || !telefono || !mensaje) {
-                mostrarNotificacion('Por favor, completa todos los campos', 'error');
-                return;
-            }
-            
-            // Crear mensaje para WhatsApp
-            const mensajeWhatsApp = `¡Hola Bodegón Bayona 59! 👋\n\n`
-                + `*Nuevo mensaje de contacto:*\n\n`
-                + `👤 *Nombre:* ${nombre}\n`
-                + `📞 *Teléfono:* ${telefono}\n`
-                + `💬 *Mensaje:* ${mensaje}\n\n`
-                + `_Este mensaje fue enviado desde el formulario de contacto de tu sitio web._`;
-            
-            const mensajeCodificado = encodeURIComponent(mensajeWhatsApp);
-            const telefonoWhatsApp = '5398765432';
-            
-            // Abrir WhatsApp
-            window.open(`https://wa.me/${telefonoWhatsApp}?text=${mensajeCodificado}`, '_blank');
-            
-            // Mostrar confirmación
-            mostrarNotificacion('Mensaje listo para enviar por WhatsApp', 'exito');
-            
-            // Limpiar formulario
-            this.reset();
-        });
-    }
-    
-    // ================ NOTIFICACIONES ================
-    function mostrarNotificacion(mensaje, tipo = 'exito') {
-        // Crear notificación
-        const notificacion = document.createElement('div');
-        notificacion.className = `notificacion ${tipo}`;
-        notificacion.innerHTML = `
-            <i class="fas fa-${tipo === 'exito' ? 'check-circle' : 'exclamation-circle'}"></i>
-            <span>${mensaje}</span>
-        `;
-        
-        // Agregar al body
-        document.body.appendChild(notificacion);
-        
-        // Mostrar con animación
-        setTimeout(() => notificacion.classList.add('mostrar'), 10);
-        
-        // Ocultar después de 3 segundos
-        setTimeout(() => {
-            notificacion.classList.remove('mostrar');
-            setTimeout(() => {
-                if (notificacion.parentNode) {
-                    notificacion.parentNode.removeChild(notificacion);
-                }
-            }, 300);
-        }, 3000);
-    }
-    
-    // ================ PWA ================
-    function initPWA() {
-        // Registrar Service Worker
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('sw.js')
-                    .then(function(registration) {
-                        console.log('✅ Service Worker registrado con éxito:', registration.scope);
-                    })
-                    .catch(function(error) {
-                        console.log('❌ Error al registrar Service Worker:', error);
-                    });
-            });
-        }
-        
-        // Detectar si es PWA instalada
-        window.addEventListener('appinstalled', function() {
-            console.log('📱 PWA instalada con éxito');
-        });
-        
-        // Mostrar botón de instalación en iOS
-        if (window.navigator.standalone) {
-            console.log('📱 PWA ejecutándose en modo standalone');
-        }
-    }
-    </script>
 </body>
 </html>
-
