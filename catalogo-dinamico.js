@@ -1,336 +1,163 @@
-// catalogo-dinamico.js - Versión optimizada para GitHub CSV
-// Carga MUCHO más rápido desde GitHub Pages que desde Google Sheets
-// CON DETECCIÓN DE CAMBIOS AUTOMÁTICA
-
+// catalogo-dinamico.js - Versión actualizada para tu CSV
 const CatalogoDinamico = {
-  // 🔗 URL de tu CSV en GitHub - CORREGIDA
-  csvURL: 'https://raw.githubusercontent.com/elresolvito/elresolvito.github.io/main/Productos.csv',
+  // 🔴 REEMPLAZA ESTE ENLACE POR EL TUYO DE GOOGLE SHEETS
+  sheetURL: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTU0rzVf0v0v0v0v0v0v0v0v0v0v0v0v0v0v0v0v0v0v0v0v0v0v0v0/pub?output=csv',
   
-  // ⚙️ Configuración MEJORADA
-  config: {
-    cacheHoras: 1,           // ⬅️ REDUCIDO A 1 HORA (antes 24)
-    timeout: 8000,           // 8 segundos máximo de espera
-    autoRefresh: 30,         // Actualizar cada 30 minutos
-    version: '2.1'           // Incrementada por cambios
-  },
+  // O usar datos CSV directos si no tienes Google Sheets
+  csvData: `id,nombre,categoria,precio,imagen,descripcion,stock,activo,orden
+1,Atún ,Alimentos y conservas,540,https://i.postimg.cc/76xHK6zt/atun_precio_500.png,Lata estándar 200g,10,TRUE,1
+2,Pasta de tomate,Alimentos y conservas,380,https://i.postimg.cc/gjjYPTNv/pasta_tomate_precio_350.png,400 g,10,TRUE,2
+3,Aceitunas Verdes en Rodajas con Pimiento Fragata,Alimentos y conservas,750,https://i.postimg.cc/4yyJTSBj/pimiento_presio_750.png,142 g,10,TRUE,3
+4,Café Dualis ,Alimentos y conservas,1450,https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png,Paquete 250 g,10,TRUE,4
+5,Café Dufiltro ,Alimentos y conservas,1450,https://i.postimg.cc/hG26fv31/cafe_Dufiltro_250_g_precio_1450.png,Paquete 250 g,10,TRUE,5
+6,pan rallado Enepa,Alimentos y conservas,450,https://i.postimg.cc/qvQwHpNJ/pan-rallado.webp,Paquete,10,TRUE,6
+7,Cartón de huevo,Alimentos y conservas,3000,https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3100.png,Cartón,10,TRUE,7
+8,Leche condensada,Alimentos y conservas,520,https://i.postimg.cc/tT2XwjtT/leche_condensada.png, 397 g,10,TRUE,8
+9,Harina blanca,Alimentos y conservas,600,https://i.postimg.cc/3xc2NHFB/harina_blanca1_kg.png,Paquete 1 Kg,10,TRUE,9
+10,Chicoticos Pelly ,Snacks y golosinas,400,https://i.postimg.cc/1zv2fXjZ/chicoticos_pelly_90_g_precio_400.png,Paquete 90 g,10,TRUE,10
+11,Papitas Campesinas,Snacks y golosinas,690,https://i.postimg.cc/cLgrDtf9/papitas_campesinas_precio_690.png,Paquete,10,TRUE,11
+12,Pelly de Jamón,Snacks y golosinas,580,https://i.postimg.cc/pdQV7frX/pelly_jamon_precio_580.png,Paquete,10,TRUE,12
+13,Mayonesa Mediana,Salsas,850,https://i.postimg.cc/KzJZw2rR/mayonesa_precio_850.png,Frasco mediano,10,TRUE,13
+14,Mayonesa Grande,Salsas,1100,https://i.postimg.cc/Px2t9jzz/mayonesa_precio1100.png,Frasco grande,10,TRUE,14
+15,Cuchilla de Afeitar,Higiene personal,100,https://i.postimg.cc/8CdkdW7x/cuchilla_de_afeitar_precio_100.png,Unidad,10,TRUE,15
+16,Jabón Marwa,Higiene personal,150,https://i.postimg.cc/3RK8tRpR/jabon_marwa_precio_150.png,Pastilla,10,TRUE,16
+17,Papel Sanitario,Higiene personal,490,https://i.postimg.cc/bwW289qD/papel_sanitario_precio_490i.png,Paquete,10,TRUE,17
+18,Toallas Sanitarias,Higiene personal,450,https://i.postimg.cc/KjjZyH0b/toallas_sanitarias_precio_450.png,Paquete,10,TRUE,18
+19,Toallas Húmedas,Higiene personal,690,https://i.postimg.cc/W4ZSP3cw/toallas_humedas_precio_690.png,Paquete,10,TRUE,19
+20,Jabón de Lavar,Aseo del hogar,250,https://i.postimg.cc/V6YfK6Mz/jabon_de_lavar_precio_250.png,Pastilla,10,TRUE,20
+21,Perfume Candy,Perfumes y desodorantes,3100,https://i.postimg.cc/vTgJRyhp/perfume_candy_precio_3100.png,Frasco 50 ml,10,TRUE,21
+22,Perfume genérico,Perfumes y desodorantes,3100,https://i.postimg.cc/ZKrT0PPG/perfume_precio_3100.png, 50 ml,10,TRUE,22
+23,Perfume Q,Perfumes y desodorantes,3100,https://i.postimg.cc/CL03P3Dn/perfume_q_precio_3100.png, 50 ml,10,TRUE,23
+24,Desodorante Obao,Perfumes y desodorantes,1100,https://i.postimg.cc/PxtXSxD2/desodorante_obao_precio_1100.png,Roll-on,10,TRUE,24
+25,Desodorante Rush Blanco,Perfumes y desodorantes,1000,https://i.postimg.cc/FR9rTRS8/desodorante_rush_blanco_precio_1000.png,Roll-on,10,TRUE,25
+26,Desodorante Rush,Perfumes y desodorantes,1000,https://i.postimg.cc/sXVjTXSF/desodorante_rush_precio_1000.png,Roll_on,10,TRUE,26
+27,Colonia Niña,Perfumes y desodorantes,1100,https://i.postimg.cc/G3v04rsM/colonia_nina.png, 100 ml,10,TRUE,27
+28,Macarrones,Pastas y fideos,300,https://i.postimg.cc/Hsmz1H69/macarrones_precio_300.png,460 g,10,TRUE,28
+29,Sopas instantáneas,Pastas y fideos,160,https://i.postimg.cc/FzNTpQqK/sopas_instantaneas_precio_160.png,Paquete,10,TRUE,29
+30,Licor de fresa,Bebidas ,2500,https://i.postimg.cc/59YT2x5p/licor_de_fresa_precio_2500.png,Botella,10,TRUE,30
+31,Licor Cocobay,Bebidas ,2500,https://i.postimg.cc/7ZDW90Fz/locor_cocobay_precio_2500.png,Botella,10,TRUE,31
+32,Whisky Spirit 200 ml,Bebidas ,320,https://i.postimg.cc/4N8W6q1t/tea_precio_320.png, 200 ml,10,TRUE,32
+33,Whisky Sir Albin,Bebidas ,1350,https://i.postimg.cc/cLyrb4T0/whisky_1L_precio_1350.png,Botella 1 L,10,TRUE,33
+34,Whisky Sir Albin,Bebidas,550,https://i.postimg.cc/y84kbYnC/whisky_sir_albin_precio_550.png,Botella pequeña,10,TRUE,34
+35,Vino Pluvium,Bebidas ,1200,https://i.postimg.cc/XNLLWmmx/vino_pluvium_precio_1200.png,Botella,10,TRUE,35
+36,Baterías Triple A,Electrónicos y accesorios,300,https://i.postimg.cc/DZ2vxZsT/Gemini_Generated_Image_824rio824rio824r.png,Pack de 4 unidades,10,TRUE,36`,
   
-  // 📦 Datos en memoria
+  // Catálogo en memoria
   productos: [],
   categorias: [],
   cargado: false,
-  fuente: 'none',            // 'github', 'cache', 'local', 'emergencia'
-  ultimaVersionCSV: null,    // Para detectar cambios
   
   // ==================== INICIALIZACIÓN PRINCIPAL ====================
   inicializar: function() {
-    console.log('⚡ Inicializando catálogo dinámico (GitHub CSV)...');
-    console.log('📡 URL configurada:', this.csvURL);
+    console.log('🔄 Inicializando catálogo dinámico...');
     
-    // 1. Intentar desde caché (rápido)
+    // 1. Primero intentar desde caché (si existe)
     if (this.cargarDesdeCache()) {
-      console.log('💾 Catálogo cargado desde caché (', this.productos.length, 'productos)');
-      this.fuente = 'cache';
-      this.finalizarCarga();
-      
-      // Actualizar en segundo plano SIN interrumpir
-      setTimeout(() => {
-        this.verificarActualizaciones();
-      }, 3000);
-      
+      console.log('✅ Catálogo cargado desde caché local');
+      this.cargado = true;
+      this.despacharEventoCarga();
       this.iniciarAutoRefresco();
       return;
     }
     
-    // 2. Cargar desde GitHub CSV (con timeout)
-    console.log('🌐 Intentando cargar desde GitHub CSV...');
-    this.cargarDesdeGitHub()
+    // 2. Intentar cargar desde Google Sheets
+    this.cargarDesdeSheets()
       .then(() => {
-        console.log('✅ CSV cargado desde GitHub:', this.productos.length, 'productos');
-        this.fuente = 'github';
-        this.guardarEnCache(); // Guardar para próxima vez
-        this.finalizarCarga();
+        console.log('✅ Catálogo cargado desde Google Sheets');
+        this.guardarEnCache();
+        this.cargado = true;
+        this.despacharEventoCarga();
         this.iniciarAutoRefresco();
       })
       .catch((error) => {
-        console.warn('⚠️ Error cargando desde GitHub:', error.message);
-        this.usarRespaldoLocal();
+        console.warn('⚠️ No se pudo cargar desde Sheets. Usando CSV local...', error);
+        this.usarCSVLocal();
       });
   },
   
-  // ==================== CARGAR DESDE GITHUB CSV ====================
-  cargarDesdeGitHub: function() {
+  // ==================== CARGAR DESDE GOOGLE SHEETS ====================
+  cargarDesdeSheets: function() {
     return new Promise((resolve, reject) => {
-      // 1. Primero obtener la última versión del CSV
-      this.obtenerUltimaVersionCSV()
-        .then(versionHash => {
-          console.log('🔄 Última versión CSV:', versionHash.substring(0, 8));
-          
-          // Agregar hash de versión para evitar caché del navegador
-          const urlConVersion = this.csvURL + '?v=' + versionHash;
-          
-          // Configurar timeout
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => {
-            controller.abort();
-            reject(new Error('Timeout: El servidor tardó demasiado'));
-          }, this.config.timeout);
-          
-          fetch(urlConVersion, { signal: controller.signal })
-            .then(response => {
-              clearTimeout(timeoutId);
-              
-              if (!response.ok) {
-                throw new Error('Error HTTP ' + response.status + ': ' + response.statusText);
-              }
-              
-              return response.text();
-            })
-            .then(csvText => {
-              // Verificar que no esté vacío
-              if (!csvText || csvText.trim().length === 0) {
-                throw new Error('CSV vacío recibido');
-              }
-              
-              console.log('📄 CSV recibido (' + csvText.length + ' caracteres)');
-              this.procesarCSV(csvText);
-              this.ultimaVersionCSV = versionHash;
-              resolve();
-            })
-            .catch(error => {
-              clearTimeout(timeoutId);
-              console.error('❌ Fetch error:', error);
-              reject(error);
-            });
-        })
-        .catch(error => {
-          console.warn('⚠️ No se pudo obtener versión, usando timestamp:', error.message);
-          // Fallback a timestamp normal
-          const urlConTimestamp = this.csvURL + '?t=' + Date.now();
-          
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => {
-            controller.abort();
-            reject(new Error('Timeout: El servidor tardó demasiado'));
-          }, this.config.timeout);
-          
-          fetch(urlConTimestamp, { signal: controller.signal })
-            .then(response => {
-              clearTimeout(timeoutId);
-              if (!response.ok) throw new Error('Error HTTP ' + response.status);
-              return response.text();
-            })
-            .then(csvText => {
-              if (!csvText) throw new Error('CSV vacío');
-              this.procesarCSV(csvText);
-              resolve();
-            })
-            .catch(err => {
-              clearTimeout(timeoutId);
-              reject(err);
-            });
-        });
-    });
-  },
-  
-  // ==================== OBTENER ÚLTIMA VERSIÓN CSV ====================
-  obtenerUltimaVersionCSV: function() {
-    return new Promise((resolve, reject) => {
-      // API de GitHub para obtener último commit del archivo
-      const apiURL = 'https://api.github.com/repos/elresolvito/elresolvito.github.io/commits?path=Productos.csv&per_page=1';
+      // Si no hay URL de Sheets, usar CSV local
+      if (!this.sheetURL || this.sheetURL.includes('REEMPLAZA')) {
+        reject(new Error('URL de Google Sheets no configurada'));
+        return;
+      }
       
-      fetch(apiURL)
+      const urlConTimestamp = this.sheetURL + '&t=' + Date.now();
+      
+      fetch(urlConTimestamp)
         .then(response => {
-          if (!response.ok) {
-            reject(new Error('No se pudo obtener versión de GitHub'));
-            return;
-          }
-          return response.json();
+          if (!response.ok) throw new Error('Error HTTP: ' + response.status);
+          return response.text();
         })
-        .then(data => {
-          if (data && data[0] && data[0].sha) {
-            resolve(data[0].sha);
-          } else {
-            reject(new Error('No se encontró información de versión'));
-          }
+        .then(csvText => {
+          this.procesarCSV(csvText);
+          resolve();
         })
         .catch(error => {
+          console.error('❌ Error cargando desde Sheets:', error);
           reject(error);
         });
     });
   },
   
-  // ==================== VERIFICAR ACTUALIZACIONES EN SEGUNDO PLANO ====================
-  verificarActualizaciones: function() {
-    console.log('🔍 Verificando actualizaciones en segundo plano...');
-    
-    this.obtenerUltimaVersionCSV()
-      .then(nuevaVersion => {
-        // Comparar con la versión actual
-        const versionActual = this.ultimaVersionCSV || localStorage.getItem('csvVersionHash');
-        
-        if (versionActual && versionActual !== nuevaVersion) {
-          console.log('🔄 ¡Hay una nueva versión del CSV! Actualizando...');
-          
-          // Recargar desde GitHub
-          this.cargarDesdeGitHub()
-            .then(() => {
-              this.guardarEnCache();
-              this.generarCategorias();
-              
-              // Notificar a la página
-              window.dispatchEvent(new CustomEvent('catalogoActualizado', {
-                detail: {
-                  productos: this.productos,
-                  categorias: this.categorias,
-                  fuente: 'github',
-                  timestamp: Date.now(),
-                  nuevaVersion: true
-                }
-              }));
-              
-              console.log('✅ Catálogo actualizado a nueva versión');
-              showCartToast('¡Catálogo actualizado!');
-            })
-            .catch(err => {
-              console.log('⚠️ No se pudo actualizar:', err.message);
-            });
-        } else {
-          console.log('📊 CSV ya está actualizado');
-        }
-      })
-      .catch(error => {
-        console.log('ℹ️ No se pudo verificar actualizaciones:', error.message);
-      });
+  // ==================== USAR CSV LOCAL ====================
+  usarCSVLocal: function() {
+    try {
+      this.procesarCSV(this.csvData);
+      this.cargado = true;
+      this.despacharEventoCarga();
+      console.log('📄 Usando CSV local como fuente de datos');
+    } catch (error) {
+      console.error('❌ Error procesando CSV local:', error);
+      this.usarRespaldoLocal();
+    }
   },
   
   // ==================== PROCESAR CSV ====================
   procesarCSV: function(csvText) {
-    // Limpiar arrays existentes
     this.productos = [];
     
-    // Mostrar preview del CSV (solo en desarrollo)
-    if (csvText.length > 0) {
-      const preview = csvText.substring(0, 200).replace(/\n/g, ' ');
-      console.log('👁️ Preview CSV:', preview + '...');
-    }
-    
-    // Dividir líneas y filtrar vacías
     const lineas = csvText.split('\n').filter(linea => linea.trim() !== '');
+    if (lineas.length < 2) throw new Error('CSV vacío o sin datos');
     
-    if (lineas.length < 2) {
-      console.error('❌ CSV tiene menos de 2 líneas');
-      throw new Error('CSV vacío o sin datos');
-    }
+    const encabezados = lineas[0].split(',').map(h => h.trim().toLowerCase());
     
-    console.log('📊 Líneas en CSV:', lineas.length);
-    
-    // Encabezados (primera línea)
-    const encabezados = lineas[0].split(',').map(h => {
-      // Limpiar y normalizar nombres de columnas
-      return h.trim()
-        .toLowerCase()
-        .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // Quitar acentos
-        .replace(/[^a-z0-9\s]/g, '') // Solo letras, números y espacios
-        .replace(/\s+/g, '_'); // Espacios a guiones bajos
-    });
-    
-    console.log('🏷️ Encabezados detectados:', encabezados);
-    
-    // Buscar índices de columnas (flexible)
-    const idxId = this.obtenerIndice(encabezados, ['id', 'codigo', 'numero']);
-    const idxNombre = this.obtenerIndice(encabezados, ['nombre', 'name', 'producto', 'descripcion']);
-    const idxCategoria = this.obtenerIndice(encabezados, ['categoria', 'category', 'tipo', 'grupo']);
-    const idxPrecio = this.obtenerIndice(encabezados, ['precio', 'price', 'costo', 'valor']);
-    const idxImagen = this.obtenerIndice(encabezados, ['imagen', 'image', 'foto', 'url', 'link']);
-    const idxDescripcion = this.obtenerIndice(encabezados, ['descripcion', 'description', 'detalles', 'info']);
-    const idxStock = this.obtenerIndice(encabezados, ['stock', 'cantidad', 'inventario', 'disponible']);
-    const idxActivo = this.obtenerIndice(encabezados, ['activo', 'active', 'disponible', 'habilitado']);
-    
-    console.log('📍 Índices encontrados:', {
-      id: idxId, nombre: idxNombre, categoria: idxCategoria,
-      precio: idxPrecio, imagen: idxImagen, descripcion: idxDescripcion,
-      stock: idxStock, activo: idxActivo
-    });
-    
-    // Procesar cada línea de producto
-    let productosProcesados = 0;
-    let productosError = 0;
-    let productosInactivos = 0;
+    const idxId = encabezados.indexOf('id');
+    const idxNombre = encabezados.indexOf('nombre');
+    const idxCategoria = encabezados.indexOf('categoria');
+    const idxPrecio = encabezados.indexOf('precio');
+    const idxImagen = encabezados.indexOf('imagen');
+    const idxDescripcion = encabezados.indexOf('descripcion');
+    const idxStock = encabezados.indexOf('stock');
+    const idxActivo = encabezados.indexOf('activo');
     
     for (let i = 1; i < lineas.length; i++) {
-      try {
-        const valores = this.parsearLineaCSV(lineas[i]);
-        
-        // Si no hay suficientes valores, saltar
-        const minColumnas = Math.max(idxId, idxNombre, idxPrecio, idxImagen, 0) + 1;
-        if (valores.length < minColumnas) {
-          console.warn(`⚠️ Línea ${i+1} ignorada - pocas columnas (${valores.length} < ${minColumnas})`);
-          productosError++;
-          continue;
-        }
-        
-        // Obtener valores (con defaults seguros)
-        const idVal = valores[idxId] || (i).toString();
-        const nombreVal = valores[idxNombre] || 'Producto ' + i;
-        const categoriaVal = valores[idxCategoria] || 'General';
-        const precioVal = valores[idxPrecio] || '0';
-        const imagenVal = valores[idxImagen] || 'https://via.placeholder.com/300x300/cccccc/969696?text=Producto';
-        const descripcionVal = valores[idxDescripcion] || '';
-        const stockVal = valores[idxStock] || '1';
-        const activoVal = valores[idxActivo] || 'true';
-        
-        // Limpiar y convertir valores
-        const id = parseInt(idVal) || i;
-        const nombre = this.limpiarTexto(nombreVal);
-        const categoria = this.limpiarTexto(categoriaVal);
-        const precio = parseInt(precioVal.replace(/\D/g, '')) || 0;
-        const imagen = this.limpiarURL(imagenVal);
-        const descripcion = this.limpiarTexto(descripcionVal);
-        const stock = parseInt(stockVal) || 0;
-        
-        // Determinar si está activo
-        const estaActivo = this.esActivo(activoVal);
-        const tieneStock = stock > 0;
-        const disponible = estaActivo && tieneStock;
-        
-        // Crear objeto producto
-        const producto = {
-          id: id,
-          name: nombre,
-          price: precio,
-          image: imagen,
-          description: descripcion,
-          specificDetails: descripcion,
-          category: categoria,
-          department: 'mercado',
-          stock: stock,
-          status: disponible ? 'available' : 'unavailable'
-        };
-        
-        // Solo agregar productos con nombre y precio válido
-        if (producto.name && producto.name !== 'Producto ' + i && producto.price > 0) {
-          this.productos.push(producto);
-          productosProcesados++;
-          
-          if (!disponible) {
-            productosInactivos++;
-          }
-        } else {
-          productosError++;
-        }
-        
-      } catch (error) {
-        console.error(`❌ Error procesando línea ${i+1}:`, error.message);
-        productosError++;
+      const valores = this.parsearLineaCSV(lineas[i]);
+      if (valores.length < 5) continue;
+      
+      const producto = {
+        id: parseInt(valores[idxId]) || i,
+        name: (valores[idxNombre] || 'Sin nombre').trim(),
+        price: parseInt(valores[idxPrecio]) || 0,
+        image: valores[idxImagen] || 'https://via.placeholder.com/300',
+        description: valores[idxDescripcion] || 'Descripción no disponible',
+        specificDetails: valores[idxDescripcion] || 'Detalles no disponibles',
+        category: valores[idxCategoria] || 'Sin categoría',
+        department: 'mercado',
+        status: (valores[idxActivo] === 'TRUE' && (parseInt(valores[idxStock]) > 0)) 
+                ? 'available' : 'unavailable'
+      };
+      
+      // Solo agregar productos activos
+      if (producto.status === 'available') {
+        this.productos.push(producto);
       }
     }
     
-    console.log(`📈 Resultado: ${productosProcesados} productos OK, ${productosError} errores, ${productosInactivos} inactivos`);
-    
-    // Si no se procesó nada, lanzar error
-    if (this.productos.length === 0) {
-      throw new Error('No se pudo procesar ningún producto del CSV');
-    }
+    this.generarCategorias();
+    console.log(`📊 Procesados ${this.productos.length} productos activos`);
   },
   
   // ==================== PARSER CSV AVANZADO ====================
@@ -352,247 +179,73 @@ const CatalogoDinamico = {
       }
     }
     
-    // Último valor
     valores.push(valorActual.trim());
     return valores;
   },
   
-  // ==================== FUNCIONES AUXILIARES ====================
-  obtenerIndice: function(encabezados, nombresPosibles) {
-    for (const nombre of nombresPosibles) {
-      const idx = encabezados.indexOf(nombre);
-      if (idx !== -1) return idx;
-    }
-    // Si no encuentra, buscar parcialmente
-    for (const nombre of nombresPosibles) {
-      for (let i = 0; i < encabezados.length; i++) {
-        if (encabezados[i].includes(nombre) || nombre.includes(encabezados[i])) {
-          return i;
-        }
-      }
-    }
-    return -1; // No encontrado
-  },
-  
-  limpiarTexto: function(texto) {
-    if (!texto || texto === 'null' || texto === 'undefined') return '';
-    
-    // Decodificar caracteres UTF-8 mal interpretados
-    let textoLimpio = texto.toString();
-    
-    // Reemplazar secuencias UTF-8 comunes mal interpretadas
-    const reemplazos = {
-      'Ã¡': 'á', 'Ã©': 'é', 'Ã­': 'í', 'Ã³': 'ó', 'Ãº': 'ú',
-      'Ã±': 'ñ', 'Ã¼': 'ü', 'Ã': 'Á', 'Ã‰': 'É', 'Ã': 'Í',
-      'Ã“': 'Ó', 'Ãš': 'Ú', 'Ã‘': 'Ñ', 'Ãœ': 'Ü',
-      'Â¿': '¿', 'Â¡': '¡', 'Âª': 'ª', 'Âº': 'º',
-      'Ã§': 'ç', 'Ã£': 'ã', 'Ãµ': 'õ'
-    };
-    
-    for (const [mal, bien] of Object.entries(reemplazos)) {
-      textoLimpio = textoLimpio.replace(new RegExp(mal, 'g'), bien);
-    }
-    
-    // También intentar decodificación URI
-    try {
-      textoLimpio = decodeURIComponent(escape(textoLimpio));
-    } catch (e) {
-      // Si falla, continuar con el texto limpio
-    }
-    
-    return textoLimpio.trim();
-  },
-  
-  limpiarURL: function(url) {
-    if (!url || url === 'null' || url === 'undefined') {
-      return 'https://via.placeholder.com/300x300/cccccc/969696?text=Imagen+no+disponible';
-    }
-    
-    let urlLimpia = url.toString().trim();
-    
-    // Asegurar que empiece con http/https
-    if (!urlLimpia.startsWith('http://') && !urlLimpia.startsWith('https://')) {
-      urlLimpia = 'https://' + urlLimpia;
-    }
-    
-    // Limpiar caracteres problemáticos
-    urlLimpia = urlLimpia
-      .replace(/Ã¡/g, 'á').replace(/Ã©/g, 'é').replace(/Ã­/g, 'í')
-      .replace(/Ã³/g, 'ó').replace(/Ãº/g, 'ú').replace(/Ã±/g, 'ñ');
-    
-    return urlLimpia;
-  },
-  
-  esActivo: function(valor) {
-    if (!valor) return true;
-    
-    const valorStr = valor.toString().toLowerCase().trim();
-    const activos = ['true', 't', 'yes', 'y', 'si', 'sí', '1', 'verdadero', 'activado', 'on'];
-    const inactivos = ['false', 'f', 'no', 'n', '0', 'falso', 'desactivado', 'off'];
-    
-    if (activos.includes(valorStr)) return true;
-    if (inactivos.includes(valorStr)) return false;
-    
-    // Por defecto, activo
-    return true;
-  },
-  
-  // ==================== SISTEMA DE CACHÉ MEJORADO ====================
-  cargarDesdeCache: function() {
-    try {
-      const cacheKey = 'catalogoCache_ElResolvito';
-      const versionKey = 'csvVersionHash';
-      const cache = localStorage.getItem(cacheKey);
-      const versionCache = localStorage.getItem(versionKey);
-      
-      if (!cache) {
-        console.log('💭 No hay caché previo');
-        return false;
-      }
-      
-      const data = JSON.parse(cache);
-      
-      // Verificar versión del código
-      if (data.version !== this.config.version) {
-        console.log('🔄 Versión de código diferente, ignorando caché');
-        localStorage.removeItem(cacheKey);
-        localStorage.removeItem(versionKey);
-        return false;
-      }
-      
-      // Cache válido por X horas (ahora 1 hora)
-      const horasCache = this.config.cacheHoras;
-      const msCache = horasCache * 60 * 60 * 1000;
-      const cacheValido = Date.now() - data.timestamp < msCache;
-      
-      if (cacheValido && data.productos && data.productos.length > 0) {
-        this.productos = data.productos;
-        this.categorias = data.categorias || [];
-        this.fuente = 'cache';
-        this.ultimaVersionCSV = versionCache;
-        return true;
-      } else {
-        console.log('⏰ Caché expirado o inválido');
-        localStorage.removeItem(cacheKey);
-        localStorage.removeItem(versionKey);
-      }
-    } catch (e) {
-      console.warn('⚠️ Error leyendo caché:', e.message);
-      try {
-        localStorage.removeItem('catalogoCache_ElResolvito');
-        localStorage.removeItem('csvVersionHash');
-      } catch (e2) {
-        // Ignorar
-      }
-    }
-    return false;
-  },
-  
+  // ==================== SISTEMA DE CACHÉ ====================
   guardarEnCache: function() {
     try {
       const cacheData = {
         productos: this.productos,
         categorias: this.categorias,
         timestamp: Date.now(),
-        version: this.config.version,
-        fuente: this.fuente
+        version: '1.0'
       };
-      
-      localStorage.setItem('catalogoCache_ElResolvito', JSON.stringify(cacheData));
-      
-      // Guardar también la versión del CSV si está disponible
-      if (this.ultimaVersionCSV) {
-        localStorage.setItem('csvVersionHash', this.ultimaVersionCSV);
-      }
-      
-      console.log('💾 Catálogo guardado en caché (válido por ' + this.config.cacheHoras + ' horas)');
+      localStorage.setItem('catalogoCache_Bayona59', JSON.stringify(cacheData));
+      console.log('💾 Catálogo guardado en caché local');
     } catch (e) {
-      console.warn('No se pudo guardar en caché (localStorage puede estar lleno)');
+      console.warn('No se pudo guardar en caché:', e);
     }
+  },
+  
+  cargarDesdeCache: function() {
+    try {
+      const cache = localStorage.getItem('catalogoCache_Bayona59');
+      if (!cache) return false;
+      
+      const data = JSON.parse(cache);
+      // Usar caché solo si tiene menos de 2 horas (7200000 ms)
+      if (Date.now() - data.timestamp < 7200000) {
+        this.productos = data.productos || [];
+        this.categorias = data.categorias || [];
+        console.log('💿 Catálogo recuperado desde caché');
+        return true;
+      } else {
+        console.log('⏰ Caché expirado, recargando...');
+        localStorage.removeItem('catalogoCache_Bayona59');
+      }
+    } catch (e) {
+      console.warn('Caché corrupto, eliminando...', e);
+      localStorage.removeItem('catalogoCache_Bayona59');
+    }
+    return false;
   },
   
   // ==================== RESPALDO LOCAL ====================
   usarRespaldoLocal: function() {
-    console.log('🔄 Intentando cargar respaldo local...');
-    
-    // Intentar desde catalogo.js (si existe)
-    if (typeof window.catalogo !== 'undefined' && window.catalogo.productos) {
-      this.productos = window.catalogo.productos;
-      this.fuente = 'local';
-      this.finalizarCarga();
-      console.log('🛡️ Catálogo cargado desde respaldo local');
-      return;
-    }
-    
-    // Si no hay respaldo, crear uno de emergencia
-    this.crearCatalogoEmergencia();
-  },
-  
-  crearCatalogoEmergencia: function() {
-    console.log('🚨 Creando catálogo de emergencia...');
-    
-    this.productos = [
-      {
+    if (window.catalogo && window.catalogo.productos) {
+      this.productos = window.catalogo.productos.filter(p => p.status === 'available');
+      this.cargado = true;
+      this.generarCategorias();
+      this.despacharEventoCarga();
+      console.log('🔄 Usando catálogo local como respaldo');
+    } else {
+      console.error('❌ No hay catálogo local disponible');
+      // Crear productos mínimos
+      this.productos = [{
         id: 1,
-        name: "Aceite Vegetal",
-        price: 500,
-        image: "https://i.postimg.cc/FFdbnBBS/aceite.jpg",
-        description: "Aceite para cocinar 1L",
-        specificDetails: "Aceite vegetal de calidad",
-        category: "Alimentos",
-        department: "mercado",
-        stock: 10,
-        status: "available"
-      },
-      {
-        id: 2,
-        name: "Arroz Blanco",
-        price: 350,
-        image: "https://i.postimg.cc/ZRR352mX/arroz.jpg",
-        description: "Arroz de grano largo 1Kg",
-        specificDetails: "Arroz premium",
-        category: "Alimentos",
-        department: "mercado",
-        stock: 15,
-        status: "available"
-      },
-      {
-        id: 3,
-        name: "Spaghetti",
-        price: 300,
-        image: "https://i.postimg.cc/rpBWC2DW/spaguetis.png",
-        description: "Pasta spaghetti 500g",
-        specificDetails: "Pasta de trigo",
-        category: "Alimentos",
-        department: "mercado",
-        stock: 20,
-        status: "available"
-      }
-    ];
-    
-    this.fuente = 'emergencia';
-    this.finalizarCarga();
-    console.log('🆘 Catálogo de emergencia creado (3 productos)');
-  },
-  
-  // ==================== FINALIZAR CARGA ====================
-  finalizarCarga: function() {
-    this.cargado = true;
-    this.generarCategorias();
-    this.despacharEventoCarga();
-    
-    console.log('🎉 Catálogo ' + this.fuente + ' listo:', this.productos.length, 'productos');
-    
-    // Mostrar fuente
-    const fuenteDisplay = {
-      'github': '🌐 GitHub CSV',
-      'cache': '💾 Caché Local',
-      'local': '🛡️ Respaldo Local',
-      'emergencia': '🚨 Emergencia',
-      'none': '❓ Desconocida'
-    };
-    
-    console.log('📊 Fuente:', fuenteDisplay[this.fuente] || this.fuente);
+        name: 'Producto de ejemplo',
+        price: 100,
+        image: 'https://via.placeholder.com/300',
+        description: 'Descripción de ejemplo',
+        category: 'Ejemplo',
+        department: 'mercado',
+        status: 'available'
+      }];
+      this.cargado = true;
+      this.despacharEventoCarga();
+    }
   },
   
   // ==================== CATEGORÍAS ====================
@@ -600,39 +253,39 @@ const CatalogoDinamico = {
     const cats = new Set();
     this.productos.forEach(p => {
       if (p.category && p.category.trim() !== '') {
-        cats.add(p.category);
+        cats.add(p.category.trim());
       }
     });
     this.categorias = Array.from(cats).sort();
-    console.log('🏷️ Categorías generadas:', this.categorias.length);
   },
   
-  // ==================== AUTO-REFRESCO MEJORADO ====================
+  // ==================== AUTO-REFRESCO ====================
   iniciarAutoRefresco: function() {
-    // Refrescar cada X minutos (config.autoRefresh)
-    const minutos = this.config.autoRefresh;
-    const msRefresh = minutos * 60 * 1000;
-    
-    console.log('🔄 Auto-refresco configurado cada ' + minutos + ' minutos');
-    
+    // Refrescar cada 10 minutos (600000 ms)
     setInterval(() => {
       if (document.visibilityState === 'visible') {
-        console.log('🔄 Actualizando catálogo en segundo plano...');
-        this.verificarActualizaciones();
+        console.log('🔄 Actualizando catálogo automáticamente...');
+        this.cargarDesdeSheets()
+          .then(() => {
+            this.guardarEnCache();
+            this.generarCategorias();
+            window.dispatchEvent(new CustomEvent('catalogoActualizado', {
+              detail: { productos: this.productos, categorias: this.categorias }
+            }));
+            console.log('✅ Catálogo actualizado desde Sheets');
+          })
+          .catch(err => console.log('No se pudo actualizar automáticamente:', err));
       }
-    }, msRefresh);
+    }, 600000);
   },
   
   // ==================== EVENTOS ====================
   despacharEventoCarga: function() {
     const event = new CustomEvent('catalogoCargado', {
-      detail: {
+      detail: { 
         productos: this.productos,
         categorias: this.categorias,
-        fuente: this.fuente,
-        timestamp: Date.now(),
-        totalProductos: this.productos.length,
-        versionCSV: this.ultimaVersionCSV
+        timestamp: Date.now()
       }
     });
     window.dispatchEvent(event);
@@ -644,6 +297,7 @@ const CatalogoDinamico = {
   },
   
   obtenerPorCategoria: function(categoria) {
+    if (categoria === 'todos') return this.productos;
     return this.productos.filter(p => p.category === categoria);
   },
   
@@ -656,108 +310,24 @@ const CatalogoDinamico = {
   },
   
   buscarProductos: function(termino) {
-    if (!termino || termino.trim() === '') return this.productos;
-    
-    const busqueda = this.limpiarTexto(termino).toLowerCase();
-    return this.productos.filter(p =>
-      this.limpiarTexto(p.name).toLowerCase().includes(busqueda) ||
-      this.limpiarTexto(p.description).toLowerCase().includes(busqueda) ||
-      this.limpiarTexto(p.category).toLowerCase().includes(busqueda)
+    const busqueda = termino.toLowerCase();
+    return this.productos.filter(p => 
+      p.name.toLowerCase().includes(busqueda) || 
+      (p.description && p.description.toLowerCase().includes(busqueda)) ||
+      p.category.toLowerCase().includes(busqueda)
     );
-  },
-  
-  // ==================== INFORMACIÓN DEL SISTEMA ====================
-  getInfo: function() {
-    return {
-      version: this.config.version,
-      cargado: this.cargado,
-      fuente: this.fuente,
-      totalProductos: this.productos.length,
-      totalCategorias: this.categorias.length,
-      urlCSV: this.csvURL,
-      cacheHoras: this.config.cacheHoras,
-      ultimaVersionCSV: this.ultimaVersionCSV
-    };
-  },
-  
-  // ==================== FORZAR RECARGA ====================
-  forzarRecarga: function() {
-    console.log('🔄 Forzando recarga del catálogo...');
-    this.cargado = false;
-    this.productos = [];
-    this.categorias = [];
-    
-    // Limpiar caché
-    try {
-      localStorage.removeItem('catalogoCache_ElResolvito');
-      localStorage.removeItem('csvVersionHash');
-    } catch (e) {
-      // Ignorar
-    }
-    
-    // Recargar
-    this.inicializar();
-    return true;
-  },
-  
-  // ==================== ACTUALIZACIÓN MANUAL ====================
-  actualizarAhora: function() {
-    console.log('⚡ Actualización manual solicitada...');
-    return this.cargarDesdeGitHub()
-      .then(() => {
-        this.guardarEnCache();
-        this.finalizarCarga();
-        console.log('✅ Catálogo actualizado manualmente');
-        return true;
-      })
-      .catch(error => {
-        console.error('❌ Error en actualización manual:', error);
-        return false;
-      });
   }
 };
 
-// ==================== INICIALIZACIÓN AUTOMÁTICA ====================
+// Inicializar automáticamente
 (function() {
-  // Esperar a que el DOM esté listo
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
-      console.log('📄 DOM listo - Iniciando catálogo...');
       CatalogoDinamico.inicializar();
     });
   } else {
-    // DOM ya está listo
-    console.log('📄 DOM ya listo - Iniciando catálogo...');
     CatalogoDinamico.inicializar();
   }
-  
-  // También exponer un método manual por si acaso
-  window.iniciarCatalogo = function() {
-    console.log('🔄 Iniciando catálogo manualmente...');
-    CatalogoDinamico.inicializar();
-  };
-  
-  // Método para forzar actualización
-  window.actualizarCatalogo = function() {
-    console.log('🔄 Actualizando catálogo manualmente...');
-    return CatalogoDinamico.actualizarAhora();
-  };
 })();
 
-// ==================== HACER DISPONIBLE GLOBALMENTE ====================
 window.CatalogoDinamico = CatalogoDinamico;
-
-// ==================== SISTEMA DE FALBACK ULTRA-RÁPIDO ====================
-// Si después de 10 segundos no cargó, mostrar algo
-setTimeout(function() {
-  if (!CatalogoDinamico.cargado || CatalogoDinamico.productos.length === 0) {
-    console.log('⏱️  Timeout: Catálogo no cargó en 10 segundos');
-    
-    // Crear productos mínimos si no hay nada
-    if (CatalogoDinamico.productos.length === 0) {
-      CatalogoDinamico.crearCatalogoEmergencia();
-    }
-  }
-}, 10000);
-
-console.log('✅ catalogo-dinamico.js v2.1 cargado y listo');
