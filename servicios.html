@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Servicios - El Resolvito</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'poppins': ['Poppins'], 'opensans': ['Open Sans'] },
+                    colors: {
+                        'cuban-green': '#2E7D32', 'cuban-dark': '#1B5E20',
+                        'cuban-yellow': '#FFB300', 'cuban-blue': '#0277BD'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { font-family: 'Open Sans', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+        .service-card { transition: all 0.3s ease; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px rgba(0,0,0,0.15); }
+        .btn-whatsapp { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); }
+        
+        body.night-mode { background-color: #0f0f1a; color: #e0e0e0; }
+        body.night-mode .bg-white { background-color: #16213e !important; color: #e0e0e0 !important; }
+        body.night-mode .bg-gray-50 { background-color: #1a1a2e !important; }
+        body.night-mode header { background-color: #16213e !important; }
+    </style>
+<base target="_blank">
+</head>
+<body class="bg-white text-gray-800 pb-20">
+
+    <!-- Botón WhatsApp -->
+    <a href="https://wa.me/5356382909" target="_blank" class="fixed bottom-4 right-4 z-40 btn-whatsapp text-white p-4 rounded-full shadow-lg hover:scale-110 transition">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-2">
+                    <div class="w-10 h-10 bg-cuban-green rounded-full flex items-center justify-center text-white font-bold text-xl">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-cuban-green leading-tight">El Resolvito</h1>
+                        <p class="text-xs text-gray-500">La Habana Vieja</p>
+                    </div>
+                </a>
+
+                <nav class="hidden lg:flex items-center gap-6">
+                    <a href="index.html" class="hover:text-cuban-green font-medium">Inicio</a>
+                    <a href="tienda.html" class="hover:text-cuban-green font-medium">Tienda</a>
+                    <a href="servicios.html" class="text-cuban-green font-medium border-b-2 border-cuban-green">Servicios</a>
+                    <a href="ofertas.html" class="hover:text-cuban-green font-medium">Ofertas</a>
+                    <a href="blog.html" class="hover:text-cuban-green font-medium">Blog</a>
+                    <a href="reservas.html" class="hover:text-cuban-green font-medium">Alojamientos</a>
+                </nav>
+
+                <button onclick="toggleMenu()" class="p-2 hover:bg-gray-100 rounded-lg lg:hidden">
+                    <i class="fas fa-bars text-2xl text-cuban-green"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menú móvil -->
+    <div id="mobileMenu" class="fixed inset-0 bg-black/50 z-50 hidden" onclick="toggleMenu()">
+        <div class="bg-white w-3/4 max-w-sm h-full p-6" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold text-cuban-green">Menú</h2>
+                <button onclick="toggleMenu()" class="p-2"><i class="fas fa-times text-2xl"></i></button>
+            </div>
+            <nav class="space-y-4">
+                <a href="index.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-home mr-3 text-cuban-green"></i>Inicio</a>
+                <a href="tienda.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-shopping-basket mr-3 text-cuban-green"></i>Tienda</a>
+                <a href="servicios.html" class="block p-3 rounded-lg bg-cuban-green text-white"><i class="fas fa-tools mr-3"></i>Servicios</a>
+                <a href="ofertas.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-percent mr-3 text-cuban-green"></i>Ofertas</a>
+                <a href="blog.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-newspaper mr-3 text-cuban-green"></i>Blog</a>
+                <a href="reservas.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-bed mr-3 text-cuban-green"></i>Alojamientos</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="bg-gradient-to-br from-cuban-green to-cuban-dark text-white py-16 px-4">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Nuestros Servicios</h2>
+            <p class="text-xl opacity-90">Profesionales de confianza para tu hogar</p>
+        </div>
+    </section>
+
+    <!-- Servicios -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- SERVICIO 1: Tapicería -->
+                <div class="service-card bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="h-48 bg-amber-100 flex items-center justify-center text-6xl">
+                        🛋️
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Tapicería de Muebles</h3>
+                        <p class="text-gray-600 mb-4">Restauración completa de sofás, sillas, butacas y más. Cambio de tela, reparación de estructuras y retapizado.</p>
+                        
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Cambio de tela o cuero
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Reparación de resortes
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Restauración de madera
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Limpieza profunda
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl font-bold text-cuban-green">Desde $1,500</span>
+                            <span class="text-sm text-gray-500">Presupuesto gratis</span>
+                        </div>
+
+                        <a href="https://wa.me/5356382909?text=Hola, solicito servicio de tapicería" target="_blank" class="block w-full btn-whatsapp text-white text-center py-3 rounded-xl font-bold hover:opacity-90 transition">
+                            <i class="fab fa-whatsapp mr-2"></i>Solicitar por WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- SERVICIO 2: Limpieza de Splits -->
+                <div class="service-card bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="h-48 bg-cyan-100 flex items-center justify-center text-6xl">
+                        ❄️
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Limpieza de Splits</h3>
+                        <p class="text-gray-600 mb-4">Mantenimiento profesional de aires acondicionados. Limpieza profunda, recarga de gas y reparación.</p>
+                        
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Limpieza de filtros y serpentín
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Desinfección antibacterial
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Revisión de gas refrigerante
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Mantenimiento preventivo
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl font-bold text-cuban-green">Desde $800</span>
+                            <span class="text-sm text-gray-500">Garantía 30 días</span>
+                        </div>
+
+                        <a href="https://wa.me/5356382909?text=Hola, solicito servicio de limpieza de splits" target="_blank" class="block w-full btn-whatsapp text-white text-center py-3 rounded-xl font-bold hover:opacity-90 transition">
+                            <i class="fab fa-whatsapp mr-2"></i>Solicitar por WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- SERVICIO 3: Carpintería -->
+                <div class="service-card bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="h-48 bg-amber-50 flex items-center justify-center text-6xl">
+                        🔨
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Carpintería a Medida</h3>
+                        <p class="text-gray-600 mb-4">Trabajos en madera personalizados. Muebles, reparaciones, instalaciones y acabados de calidad.</p>
+                        
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Muebles a medida
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Puertas y ventanas
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Cocinas empotradas
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Reparaciones en general
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl font-bold text-cuban-green">Desde $2,000</span>
+                            <span class="text-sm text-gray-500">Presupuesto gratis</span>
+                        </div>
+
+                        <a href="https://wa.me/5356382909?text=Hola, solicito servicio de carpintería" target="_blank" class="block w-full btn-whatsapp text-white text-center py-3 rounded-xl font-bold hover:opacity-90 transition">
+                            <i class="fab fa-whatsapp mr-2"></i>Solicitar por WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- SERVICIO 4: Electricidad -->
+                <div class="service-card bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="h-48 bg-yellow-100 flex items-center justify-center text-6xl">
+                        ⚡
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Electricidad</h3>
+                        <p class="text-gray-600 mb-4">Instalaciones eléctricas residenciales. Reparaciones, mantenimiento y urgentes 24 horas.</p>
+                        
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Instalaciones nuevas
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Reparación de cortocircuitos
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Cambio de breaker
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Servicio 24 horas
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl font-bold text-cuban-green">Desde $500</span>
+                            <span class="text-sm text-gray-500">Urgencias +$200</span>
+                        </div>
+
+                        <a href="https://wa.me/5356382909?text=Hola, solicito servicio eléctrico" target="_blank" class="block w-full btn-whatsapp text-white text-center py-3 rounded-xl font-bold hover:opacity-90 transition">
+                            <i class="fab fa-whatsapp mr-2"></i>Solicitar por WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- SERVICIO 5: Plomería -->
+                <div class="service-card bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="h-48 bg-blue-100 flex items-center justify-center text-6xl">
+                        🔧
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Plomería</h3>
+                        <p class="text-gray-600 mb-4">Destapes, fugas, instalación de sanitarios y calentadores. Servicio rápido y garantizado.</p>
+                        
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Destapes de todo tipo
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Reparación de fugas
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Instalación de sanitarios
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Mantenimiento de tanques
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl font-bold text-cuban-green">Desde $400</span>
+                            <span class="text-sm text-gray-500">Servicio rápido</span>
+                        </div>
+
+                        <a href="https://wa.me/5356382909?text=Hola, solicito servicio de plomería" target="_blank" class="block w-full btn-whatsapp text-white text-center py-3 rounded-xl font-bold hover:opacity-90 transition">
+                            <i class="fab fa-whatsapp mr-2"></i>Solicitar por WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- SERVICIO 6: Barbero -->
+                <div class="service-card bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="h-48 bg-gray-100 flex items-center justify-center text-6xl">
+                        💈
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Barbero a Domicilio</h3>
+                        <p class="text-gray-600 mb-4">Cortes modernos, barba y tratamientos capilares. Servicio profesional en la comodidad de tu hogar.</p>
+                        
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Corte de cabello
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Arreglo de barba
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Tratamientos capilares
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-cuban-green mr-2"></i>Afeitado tradicional
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl font-bold text-cuban-green">Desde $300</span>
+                            <span class="text-sm text-gray-500">Domicilio +$100</span>
+                        </div>
+
+                        <a href="https://wa.me/5356382909?text=Hola, solicito barbero a domicilio" target="_blank" class="block w-full btn-whatsapp text-white text-center py-3 rounded-xl font-bold hover:opacity-90 transition">
+                            <i class="fab fa-whatsapp mr-2"></i>Solicitar por WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-12 bg-cuban-green text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-2xl font-bold mb-4">¿Necesitas otro servicio?</h3>
+            <p class="mb-6">Contáctanos y te ayudamos a encontrar la solución</p>
+            <a href="https://wa.me/5356382909" target="_blank" class="inline-block bg-white text-cuban-green px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition">
+                <i class="fab fa-whatsapp mr-2"></i>Consultar por WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-cuban-dark text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 El Resolvito. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
