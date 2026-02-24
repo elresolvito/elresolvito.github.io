@@ -16,7 +16,8 @@
                     fontFamily: { 'poppins': ['Poppins'], 'opensans': ['Open Sans'] },
                     colors: {
                         'cuban-green': '#2E7D32', 'cuban-dark': '#1B5E20',
-                        'cuban-yellow': '#FFB300', 'cuban-blue': '#0277BD'
+                        'cuban-yellow': '#FFB300', 'cuban-blue': '#0277BD',
+                        'night-bg': '#1a1a2e', 'night-card': '#16213e'
                     }
                 }
             }
@@ -24,20 +25,42 @@
     </script>
     
     <style>
-        body { font-family: 'Open Sans', sans-serif; }
+        * { -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Open Sans', sans-serif; transition: background-color 0.5s, color 0.5s; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
         .service-card { transition: all 0.3s ease; }
         .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px rgba(0,0,0,0.15); }
         .btn-whatsapp { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); }
         
+        /* Modo Noche */
         body.night-mode { background-color: #0f0f1a; color: #e0e0e0; }
         body.night-mode .bg-white { background-color: #16213e !important; color: #e0e0e0 !important; }
         body.night-mode .bg-gray-50 { background-color: #1a1a2e !important; }
+        body.night-mode .bg-gray-100 { background-color: #252542 !important; }
+        body.night-mode .text-gray-800 { color: #e0e0e0 !important; }
+        body.night-mode .text-gray-700 { color: #b0b0b0 !important; }
+        body.night-mode .text-gray-600 { color: #909090 !important; }
         body.night-mode header { background-color: #16213e !important; }
+        body.night-mode .shadow-md { box-shadow: 0 4px 6px rgba(0,0,0,0.3) !important; }
+        
+        /* Indicador día/noche */
+        .day-night-indicator {
+            position: fixed; top: 20px; right: 20px; z-index: 60;
+            width: 50px; height: 50px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; cursor: pointer; transition: all 0.3s;
+            background: rgba(255,255,255,0.9); box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        body.night-mode .day-night-indicator { background: rgba(30,30,60,0.9); }
     </style>
 <base target="_blank">
 </head>
 <body class="bg-white text-gray-800 pb-20">
+
+    <!-- Indicador Día/Noche -->
+    <div class="day-night-indicator" onclick="toggleDayNight()" title="Cambiar modo">
+        <span id="dayNightIcon">☀️</span>
+    </div>
 
     <!-- Botón WhatsApp -->
     <a href="https://wa.me/5356382909" target="_blank" class="fixed bottom-4 right-4 z-40 btn-whatsapp text-white p-4 rounded-full shadow-lg hover:scale-110 transition">
@@ -45,9 +68,13 @@
     </a>
 
     <!-- Header -->
-    <header class="sticky top-0 z-50 bg-white shadow-md">
+    <header class="sticky top-0 z-50 bg-white shadow-md transition-colors duration-500">
         <div class="container mx-auto px-4 py-3">
             <div class="flex items-center justify-between">
+                <button onclick="toggleMenu()" class="p-2 hover:bg-gray-100 rounded-lg lg:hidden">
+                    <i class="fas fa-bars text-2xl text-cuban-green"></i>
+                </button>
+                
                 <a href="index.html" class="flex items-center gap-2">
                     <div class="w-10 h-10 bg-cuban-green rounded-full flex items-center justify-center text-white font-bold text-xl">
                         <i class="fas fa-store"></i>
@@ -67,9 +94,7 @@
                     <a href="reservas.html" class="hover:text-cuban-green font-medium">Alojamientos</a>
                 </nav>
 
-                <button onclick="toggleMenu()" class="p-2 hover:bg-gray-100 rounded-lg lg:hidden">
-                    <i class="fas fa-bars text-2xl text-cuban-green"></i>
-                </button>
+                <div class="w-10"></div> <!-- Espaciador para equilibrio -->
             </div>
         </div>
     </header>
@@ -330,17 +355,80 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-cuban-dark text-white py-8">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2024 El Resolvito. Todos los derechos reservados.</p>
+    <!-- Footer mejorado (igual que index) -->
+    <footer class="bg-cuban-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="font-bold text-xl mb-4">El Resolvito</h3>
+                    <p class="text-gray-300 text-sm">Tu solución integral en La Habana. Productos, servicios y alojamientos de calidad.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Enlaces</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="tienda.html" class="hover:text-white">Tienda</a></li>
+                        <li><a href="servicios.html" class="hover:text-white">Servicios</a></li>
+                        <li><a href="ofertas.html" class="hover:text-white">Ofertas</a></li>
+                        <li><a href="blog.html" class="hover:text-white">Blog</a></li>
+                        <li><a href="reservas.html" class="hover:text-white">Alojamientos</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contacto</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><i class="fab fa-whatsapp mr-2"></i>5356382909</li>
+                        <li><i class="fas fa-envelope mr-2"></i>elresolvito@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt mr-2"></i>La Habana Vieja</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Síguenos</h4>
+                    <div class="flex gap-4">
+                        <a href="https://instagram.com/elresolvito.habana" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/5356382909" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/20 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2024 El Resolvito. Todos los derechos reservados.</p>
+            </div>
         </div>
     </footer>
 
     <script>
+        // ============================================
+        // FUNCIONES DÍA/NOCHE
+        // ============================================
+        function initDayNight() {
+            const hour = new Date().getHours();
+            const isNight = hour < 6 || hour >= 18;
+            
+            if (isNight) {
+                document.body.classList.add('night-mode');
+                document.getElementById('dayNightIcon').textContent = '🌙';
+            } else {
+                document.getElementById('dayNightIcon').textContent = '☀️';
+            }
+        }
+
+        function toggleDayNight() {
+            document.body.classList.toggle('night-mode');
+            const isNight = document.body.classList.contains('night-mode');
+            document.getElementById('dayNightIcon').textContent = isNight ? '🌙' : '☀️';
+        }
+
         function toggleMenu() {
             document.getElementById('mobileMenu').classList.toggle('hidden');
         }
+
+        // Inicializar al cargar
+        document.addEventListener('DOMContentLoaded', function() {
+            initDayNight();
+        });
     </script>
 </body>
 </html>
