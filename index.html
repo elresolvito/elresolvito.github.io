@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>El Resolvito - Tu Solución en La Habana</title>
+    <meta name="description" content="Tienda online, servicios, alojamientos y más en La Habana Vieja.">
+    
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'poppins': ['Poppins'], 'opensans': ['Open Sans'] },
+                    colors: {
+                        'cuban-green': '#2E7D32', 'cuban-dark': '#1B5E20',
+                        'cuban-yellow': '#FFB300', 'cuban-blue': '#0277BD',
+                        'cuban-orange': '#FF6F00', 'night-bg': '#1a1a2e',
+                        'night-card': '#16213e'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        * { -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Open Sans', sans-serif; transition: background-color 0.5s, color 0.5s; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+        
+        /* Modo Noche */
+        body.night-mode { background-color: #0f0f1a; color: #e0e0e0; }
+        body.night-mode .bg-white { background-color: #16213e !important; color: #e0e0e0 !important; }
+        body.night-mode .bg-gray-50 { background-color: #1a1a2e !important; }
+        body.night-mode .bg-gray-100 { background-color: #252542 !important; }
+        body.night-mode .text-gray-800 { color: #e0e0e0 !important; }
+        body.night-mode .text-gray-700 { color: #b0b0b0 !important; }
+        body.night-mode .text-gray-600 { color: #909090 !important; }
+        body.night-mode header { background-color: #16213e !important; }
+        body.night-mode .shadow-md { box-shadow: 0 4px 6px rgba(0,0,0,0.3) !important; }
+        
+        /* Hero con overlay dinámico */
+        .hero-container { position: relative; overflow: hidden; }
+        .hero-bg { 
+            background-image: url('https://i.postimg.cc/7YfPJ9LD/banner_1l.jpg');
+            background-size: cover; background-position: center;
+            position: absolute; inset: 0;
+        }
+        .hero-overlay { 
+            position: absolute; inset: 0; 
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+            transition: opacity 0.5s;
+        }
+        
+        .product-card, .service-card { transition: all 0.3s ease; }
+        .product-card:hover, .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px rgba(0,0,0,0.2); }
+        
+        .cart-slide { transition: transform 0.3s ease-in-out; }
+        .cart-open { transform: translateY(0) !important; }
+        
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .btn-whatsapp { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); }
+        
+        /* Indicador día/noche */
+        .day-night-indicator {
+            position: fixed; top: 20px; right: 20px; z-index: 60;
+            width: 50px; height: 50px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; cursor: pointer; transition: all 0.3s;
+            background: rgba(255,255,255,0.9); box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        body.night-mode .day-night-indicator { background: rgba(30,30,60,0.9); }
+    </style>
+<base target="_blank">
+</head>
+<body class="bg-white text-gray-800 pb-20">
+
+    <!-- Indicador Día/Noche -->
+    <div class="day-night-indicator" onclick="toggleDayNight()" title="Cambiar modo">
+        <span id="dayNightIcon">☀️</span>
+    </div>
+
+    <!-- Botones flotantes -->
+    <a href="https://wa.me/5356382909" target="_blank" class="fixed bottom-20 right-4 z-40 btn-whatsapp text-white p-4 rounded-full shadow-lg hover:scale-110 transition">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+    <button onclick="toggleCart()" class="fixed bottom-4 right-4 z-40 bg-cuban-green text-white p-4 rounded-full shadow-lg hover:scale-110 transition">
+        <i class="fas fa-shopping-cart text-xl"></i>
+        <span id="cartCount" class="absolute -top-1 -right-1 bg-cuban-yellow text-cuban-dark text-sm font-bold rounded-full w-6 h-6 flex items-center justify-center hidden">0</span>
+    </button>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-md transition-colors duration-500">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <button onclick="toggleMenu()" class="p-2 hover:bg-gray-100 rounded-lg lg:hidden">
+                    <i class="fas fa-bars text-2xl text-cuban-green"></i>
+                </button>
+                
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 bg-cuban-green rounded-full flex items-center justify-center text-white font-bold text-xl">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-cuban-green leading-tight">El Resolvito</h1>
+                        <p class="text-xs text-gray-500">La Habana Vieja</p>
+                    </div>
+                </div>
+
+                <nav class="hidden lg:flex items-center gap-6">
+                    <a href="index.html" class="text-cuban-green font-medium border-b-2 border-cuban-green">Inicio</a>
+                    <a href="tienda.html" class="hover:text-cuban-green font-medium transition">Tienda</a>
+                    <a href="servicios.html" class="hover:text-cuban-green font-medium transition">Servicios</a>
+                    <a href="ofertas.html" class="hover:text-cuban-green font-medium transition">Ofertas</a>
+                    <a href="blog.html" class="hover:text-cuban-green font-medium transition">Blog</a>
+                    <a href="reservas.html" class="hover:text-cuban-green font-medium transition">Alojamientos</a>
+                </nav>
+
+                <button onclick="toggleCart()" class="p-2 hover:bg-gray-100 rounded-lg relative lg:hidden">
+                    <i class="fas fa-shopping-cart text-2xl text-cuban-green"></i>
+                    <span id="cartCountMobile" class="absolute top-0 right-0 bg-cuban-yellow text-cuban-dark text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menú móvil -->
+    <div id="mobileMenu" class="fixed inset-0 bg-black/50 z-50 hidden" onclick="toggleMenu()">
+        <div class="bg-white w-3/4 max-w-sm h-full p-6" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold text-cuban-green">Menú</h2>
+                <button onclick="toggleMenu()" class="p-2"><i class="fas fa-times text-2xl"></i></button>
+            </div>
+            <nav class="space-y-4">
+                <a href="index.html" class="block p-3 rounded-lg bg-cuban-green text-white"><i class="fas fa-home mr-3"></i>Inicio</a>
+                <a href="tienda.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-shopping-basket mr-3 text-cuban-green"></i>Tienda</a>
+                <a href="servicios.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-tools mr-3 text-cuban-green"></i>Servicios</a>
+                <a href="ofertas.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-percent mr-3 text-cuban-green"></i>Ofertas</a>
+                <a href="blog.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-newspaper mr-3 text-cuban-green"></i>Blog</a>
+                <a href="reservas.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-bed mr-3 text-cuban-green"></i>Alojamientos</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero Banner con efecto día/noche -->
+    <section class="hero-container h-[500px] relative">
+        <div class="hero-bg"></div>
+        <div id="heroOverlay" class="hero-overlay"></div>
+        <div class="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center text-white">
+            <span class="inline-block bg-cuban-yellow text-cuban-dark px-4 py-1 rounded-full text-sm font-bold mb-4 animate-pulse">
+                🎉 Envío solo $200 en La Habana Vieja
+            </span>
+            <h2 class="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg">El Resolvito</h2>
+            <p class="text-xl md:text-2xl mb-2 drop-shadow-md">Tu tienda, tus servicios, tu hogar</p>
+            <p class="text-lg opacity-90 mb-8 drop-shadow-md">Todo lo que necesitas en un solo lugar</p>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="tienda.html" class="bg-cuban-yellow text-cuban-dark px-8 py-3 rounded-full font-bold hover:bg-yellow-400 transition shadow-lg">
+                    <i class="fas fa-shopping-basket mr-2"></i>Ver Tienda
+                </a>
+                <a href="servicios.html" class="bg-white/20 backdrop-blur text-white border-2 border-white px-8 py-3 rounded-full font-bold hover:bg-white/30 transition">
+                    <i class="fas fa-tools mr-2"></i>Servicios
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Productos Destacados -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold"><i class="fas fa-fire mr-3 text-cuban-orange"></i>Destacados</h2>
+                <a href="tienda.html" class="text-cuban-green font-medium hover:underline">Ver todo →</a>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="featuredProducts">
+                <!-- Cargados dinámicamente -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios Preview -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold"><i class="fas fa-tools mr-3 text-cuban-blue"></i>Servicios</h2>
+                <a href="servicios.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="service-card bg-white rounded-xl p-6 shadow-md text-center">
+                    <div class="text-5xl mb-4">🛋️</div>
+                    <h3 class="font-bold text-xl mb-2">Tapicería</h3>
+                    <p class="text-gray-600 mb-4">Restauración y cambio de tela de muebles</p>
+                    <a href="servicios.html" class="text-cuban-green font-medium">Más info →</a>
+                </div>
+                <div class="service-card bg-white rounded-xl p-6 shadow-md text-center">
+                    <div class="text-5xl mb-4">❄️</div>
+                    <h3 class="font-bold text-xl mb-2">Limpieza de Splits</h3>
+                    <p class="text-gray-600 mb-4">Mantenimiento de aires acondicionados</p>
+                    <a href="servicios.html" class="text-cuban-green font-medium">Más info →</a>
+                </div>
+                <div class="service-card bg-white rounded-xl p-6 shadow-md text-center">
+                    <div class="text-5xl mb-4">🔨</div>
+                    <h3 class="font-bold text-xl mb-2">Carpintería</h3>
+                    <p class="text-gray-600 mb-4">Trabajos a medida en madera</p>
+                    <a href="servicios.html" class="text-cuban-green font-medium">Más info →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ofertas Mayor Preview -->
+    <section class="py-12 bg-cuban-dark text-white">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold"><i class="fas fa-boxes mr-3 text-cuban-yellow"></i>Venta por Mayor</h2>
+                <a href="ofertas.html" class="text-cuban-yellow font-medium hover:underline">Ver todo →</a>
+            </div>
+            <div class="grid md:grid-cols-4 gap-4" id="mayorProducts">
+                <!-- Cargados dinámicamente -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Preview -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold"><i class="fas fa-newspaper mr-3 text-cuban-blue"></i>Blog</h2>
+                <a href="blog.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog.html'">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <span class="text-xs text-cuban-green font-bold">RECETAS</span>
+                        <h3 class="font-bold text-lg mt-1">Tostadas de Atún en 5 minutos</h3>
+                        <p class="text-gray-600 text-sm mt-2">Una receta rápida usando productos de El Resolvito...</p>
+                    </div>
+                </article>
+                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog.html'">
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <span class="text-xs text-cuban-green font-bold">HOSPEDAJE</span>
+                        <h3 class="font-bold text-lg mt-1">Guía para alquilar en La Habana</h3>
+                        <p class="text-gray-600 text-sm mt-2">Todo lo que necesitas saber para encontrar el mejor alojamiento...</p>
+                    </div>
+                </article>
+                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog.html'">
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <span class="text-xs text-cuban-green font-bold">CONSEJOS</span>
+                        <h3 class="font-bold text-lg mt-1">¿Por qué comprar en El Resolvito?</h3>
+                        <p class="text-gray-600 text-sm mt-2">Descubre los beneficios de comprar en tu tienda de confianza...</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alojamientos Preview -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold"><i class="fas fa-bed mr-3 text-cuban-green"></i>Alojamientos</h2>
+                <a href="reservas.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
+            </div>
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden md:flex">
+                <div class="md:w-1/2">
+                    <img src="https://reservaterrazasdebayona59.com/images/property-1.jpg" 
+                         onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop&q=60'"
+                         class="w-full h-64 md:h-full object-cover">
+                </div>
+                <div class="md:w-1/2 p-8 flex flex-col justify-center">
+                    <span class="text-cuban-green font-bold text-sm">DESTACADO</span>
+                    <h3 class="text-2xl font-bold mt-2 mb-4">Terrazas de Bayona 59</h3>
+                    <p class="text-gray-600 mb-4">Hermoso apartamento en el corazón de La Habana Vieja. WiFi, aire acondicionado, terraza con vistas.</p>
+                    <div class="flex items-center gap-4 mb-6 text-sm text-gray-500">
+                        <span><i class="fas fa-user mr-1"></i>4 huéspedes</span>
+                        <span><i class="fas fa-wifi mr-1"></i>WiFi</span>
+                        <span><i class="fas fa-star mr-1 text-yellow-500"></i>5.0</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <a href="https://reservaterrazasdebayona59.com/" target="_blank" class="bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark transition text-center flex-1">
+                            <i class="fas fa-external-link-alt mr-2"></i>Reservar Ahora
+                        </a>
+                        <a href="reservas.html" class="border-2 border-cuban-green text-cuban-green px-6 py-3 rounded-lg font-bold hover:bg-cuban-green hover:text-white transition text-center">
+                            Ver más
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-cuban-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="font-bold text-xl mb-4">El Resolvito</h3>
+                    <p class="text-gray-300 text-sm">Tu solución integral en La Habana. Productos, servicios y alojamientos de calidad.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Enlaces</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="tienda.html" class="hover:text-white">Tienda</a></li>
+                        <li><a href="servicios.html" class="hover:text-white">Servicios</a></li>
+                        <li><a href="ofertas.html" class="hover:text-white">Ofertas</a></li>
+                        <li><a href="blog.html" class="hover:text-white">Blog</a></li>
+                        <li><a href="reservas.html" class="hover:text-white">Alojamientos</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contacto</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><i class="fab fa-whatsapp mr-2"></i>5356382909</li>
+                        <li><i class="fas fa-envelope mr-2"></i>elresolvito@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt mr-2"></i>La Habana Vieja</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Síguenos</h4>
+                    <div class="flex gap-4">
+                        <a href="https://instagram.com/elresolvito.habana" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/5356382909" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/20 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2024 El Resolvito. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Carrito Sidebar -->
+    <div id="cartOverlay" class="fixed inset-0 bg-black/50 z-50 hidden" onclick="toggleCart()"></div>
+    <div id="cartSidebar" class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl z-50 transform translate-y-full cart-slide max-h-[85vh] flex flex-col">
+        <div class="p-4 border-b flex justify-between items-center bg-cuban-green text-white rounded-t-3xl">
+            <h3 class="font-bold text-lg"><i class="fas fa-shopping-cart mr-2"></i>Tu Carrito</h3>
+            <button onclick="toggleCart()" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="cartItems" class="flex-1 overflow-y-auto p-4 space-y-4"></div>
+        <div class="border-t p-4 bg-gray-50">
+            <div class="space-y-2 mb-4">
+                <div class="flex justify-between text-sm">
+                    <span class="text-gray-600">Subtotal:</span>
+                    <span id="cartSubtotal" class="font-medium">$0</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                    <span class="text-gray-600">Envío:</span>
+                    <span id="cartShipping" class="font-medium text-cuban-green">$200</span>
+                </div>
+                <div class="border-t pt-2 flex justify-between text-lg font-bold">
+                    <span>Total:</span>
+                    <span id="cartTotal" class="text-cuban-green">$200</span>
+                </div>
+            </div>
+            <button onclick="checkout()" class="w-full btn-whatsapp text-white py-3 rounded-xl font-bold text-lg hover:opacity-90 transition flex items-center justify-center gap-2">
+                <i class="fab fa-whatsapp"></i>Hacer pedido
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // PRODUCTOS DESTACADOS (8 productos del CSV)
+        // ============================================
+        const featuredProducts = [
+            {id:4, nombre:"Café Dualis 250g", precio:1450, imagen:"https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png", categoria:"Alimentos"},
+            {id:7, nombre:"Cartón de huevo 30u", precio:3000, imagen:"https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3000.png", categoria:"Alimentos"},
+            {id:1, nombre:"Atún en lata", precio:540, imagen:"https://i.postimg.cc/76xHK6zt/atun_precio_500.png", categoria:"Alimentos"},
+            {id:13, nombre:"Mayonesa Mediana", precio:850, imagen:"https://i.postimg.cc/KzJZw2rR/mayonesa_precio_850.png", categoria:"Salsas"},
+            {id:21, nombre:"Perfume Candy", precio:3100, imagen:"https://i.postimg.cc/vTgJRyhp/perfume_candy_precio_3100.png", categoria:"Perfumes"},
+            {id:30, nombre:"Licor de fresa", precio:2500, imagen:"https://i.postimg.cc/59YT2x5p/licor_de_fresa_precio_2500.png", categoria:"Bebidas"},
+            {id:17, nombre:"Papel Sanitario", precio:490, imagen:"https://i.postimg.cc/bwW289qD/papel_sanitario_precio_490i.png", categoria:"Higiene"},
+            {id:9, nombre:"Harina blanca 1Kg", precio:600, imagen:"https://i.postimg.cc/3xc2NHFB/harina_blanca1_kg.png", categoria:"Alimentos"}
+        ];
+
+        // Productos mayor (4 del CSV)
+        const mayorProducts = [
+            {nombre:"Café Dualis Caja 10u", precio:13000, precioNormal:14500, imagen:"https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png", desc:"Ahorra $1,500"},
+            {nombre:"Huevos 3 cartones", precio:8400, precioNormal:9000, imagen:"https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3000.png", desc:"Ahorra $600"},
+            {nombre:"Atún Pack 12u", precio:6000, precioNormal:6480, imagen:"https://i.postimg.cc/76xHK6zt/atun_precio_500.png", desc:"Ahorra $480"},
+            {nombre:"Jabón Caja 24u", precio:5400, precioNormal:6000, imagen:"https://i.postimg.cc/V6YfK6Mz/jabon_de_lavar_precio_250.png", desc:"Ahorra $600"}
+        ];
+
+        // ============================================
+        // VARIABLES GLOBALES
+        // ============================================
+        let cart = [];
+
+        // ============================================
+        // INICIALIZACIÓN
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cargar carrito
+            const savedCart = localStorage.getItem('elResolvitoCart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+                updateCartUI();
+            }
+            
+            // Renderizar productos
+            renderFeaturedProducts();
+            renderMayorProducts();
+            
+            // Iniciar efecto día/noche
+            initDayNight();
+        });
+
+        // ============================================
+        // EFECTO DÍA/NOCHE
+        // ============================================
+        function initDayNight() {
+            const hour = new Date().getHours();
+            const isNight = hour < 6 || hour >= 18;
+            
+            if (isNight) {
+                document.body.classList.add('night-mode');
+                document.getElementById('dayNightIcon').textContent = '🌙';
+            } else {
+                document.getElementById('dayNightIcon').textContent = '☀️';
+            }
+            
+            // Ajustar overlay del hero según hora
+            updateHeroOverlay(hour);
+        }
+
+        function updateHeroOverlay(hour) {
+            let opacity = 0.3; // base
+            
+            if (hour >= 18 && hour <= 23) {
+                opacity = 0.3 + ((hour - 18) * 0.08); // 18h=0.3, 23h=0.7
+            } else if (hour >= 0 && hour < 6) {
+                opacity = 0.7 - (hour * 0.05); // 0h=0.7, 5h=0.45
+            } else if (hour >= 6 && hour < 18) {
+                opacity = 0.3; // día
+            }
+            
+            const overlay = document.getElementById('heroOverlay');
+            if (overlay) {
+                overlay.style.opacity = Math.min(opacity, 0.75);
+            }
+        }
+
+        function toggleDayNight() {
+            document.body.classList.toggle('night-mode');
+            const isNight = document.body.classList.contains('night-mode');
+            document.getElementById('dayNightIcon').textContent = isNight ? '🌙' : '☀️';
+        }
+
+        // ============================================
+        // RENDERIZAR PRODUCTOS
+        // ============================================
+        function renderFeaturedProducts() {
+            const container = document.getElementById('featuredProducts');
+            container.innerHTML = featuredProducts.map(p => `
+                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" onclick="addToCart(${p.id}, '${p.nombre}', ${p.precio}, '${p.imagen}')">
+                    <div class="h-40 overflow-hidden bg-gray-100">
+                        <img src="${p.imagen}" class="w-full h-full object-cover hover:scale-110 transition">
+                    </div>
+                    <div class="p-3">
+                        <p class="text-xs text-cuban-green font-medium">${p.categoria}</p>
+                        <h3 class="font-bold text-sm mb-1">${p.nombre}</h3>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg font-bold text-cuban-green">$${p.precio}</span>
+                            <button class="w-8 h-8 bg-cuban-green text-white rounded-full flex items-center justify-center hover:bg-cuban-dark">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderMayorProducts() {
+            const container = document.getElementById('mayorProducts');
+            container.innerHTML = mayorProducts.map(p => `
+                <div class="bg-white/10 backdrop-blur rounded-xl p-4 border border-white/20">
+                    <img src="${p.imagen}" class="w-full h-32 object-contain bg-white rounded-lg mb-3">
+                    <h3 class="font-bold text-sm mb-1">${p.nombre}</h3>
+                    <p class="text-cuban-yellow text-xs mb-2">${p.desc}</p>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-xl font-bold text-cuban-yellow">$${p.precio}</span>
+                            <span class="text-xs text-white/50 line-through ml-1">$${p.precioNormal}</span>
+                        </div>
+                        <button onclick="addToCart(0, '${p.nombre}', ${p.precio}, '${p.imagen}')" class="bg-cuban-yellow text-cuban-dark px-3 py-1 rounded font-bold text-sm hover:bg-yellow-400">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ============================================
+        // CARRITO
+        // ============================================
+        function addToCart(id, name, price, image) {
+            const existing = cart.find(item => item.name === name);
+            if (existing) {
+                existing.quantity++;
+            } else {
+                cart.push({id, name, price, image, quantity: 1});
+            }
+            saveCart();
+            updateCartUI();
+            showToast('Añadido', `${name} al carrito`);
+        }
+
+        function saveCart() {
+            localStorage.setItem('elResolvitoCart', JSON.stringify(cart));
+        }
+
+        function updateCartUI() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.querySelectorAll('#cartCount, #cartCountMobile').forEach(el => {
+                if (el) {
+                    el.textContent = count;
+                    el.classList.toggle('hidden', count === 0);
+                }
+            });
+
+            const container = document.getElementById('cartItems');
+            if (cart.length === 0) {
+                container.innerHTML = '<div class="text-center py-8 text-gray-500"><i class="fas fa-shopping-cart text-4xl mb-3 opacity-30"></i><p>Tu carrito está vacío</p></div>';
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="flex gap-3 bg-gray-50 p-3 rounded-lg">
+                        <img src="${item.image}" class="w-16 h-16 object-cover rounded-lg">
+                        <div class="flex-1">
+                            <h4 class="font-medium text-sm">${item.name}</h4>
+                            <p class="text-cuban-green font-bold">$${item.price}</p>
+                            <div class="flex items-center gap-2 mt-1">
+                                <button onclick="updateQty('${item.name}', -1)" class="w-6 h-6 bg-white rounded shadow text-xs">-</button>
+                                <span class="text-sm font-medium">${item.quantity}</span>
+                                <button onclick="updateQty('${item.name}', 1)" class="w-6 h-6 bg-white rounded shadow text-xs">+</button>
+                                <button onclick="removeItem('${item.name}')" class="ml-auto text-red-500"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = subtotal > 5000 ? 0 : 200;
+            document.getElementById('cartSubtotal').textContent = `$${subtotal}`;
+            document.getElementById('cartShipping').textContent = shipping === 0 ? 'Gratis' : `$${shipping}`;
+            document.getElementById('cartTotal').textContent = `$${subtotal + shipping}`;
+        }
+
+        function updateQty(name, delta) {
+            const item = cart.find(i => i.name === name);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) removeItem(name);
+                else { saveCart(); updateCartUI(); }
+            }
+        }
+
+        function removeItem(name) {
+            cart = cart.filter(i => i.name !== name);
+            saveCart(); updateCartUI();
+        }
+
+        function toggleCart() {
+            const sidebar = document.getElementById('cartSidebar');
+            const overlay = document.getElementById('cartOverlay');
+            const isOpen = sidebar.classList.contains('cart-open');
+            
+            if (isOpen) {
+                sidebar.classList.remove('cart-open');
+                overlay.classList.add('hidden');
+            } else {
+                sidebar.classList.add('cart-open');
+                overlay.classList.remove('hidden');
+            }
+        }
+
+        function checkout() {
+            if (cart.length === 0) return;
+            
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = subtotal > 5000 ? 0 : 200;
+            const total = subtotal + shipping;
+            
+            let message = `*Pedido El Resolvito*\n\n`;
+            cart.forEach(item => {
+                message += `• ${item.name} x${item.quantity} = $${item.price * item.quantity}\n`;
+            });
+            message += `\nSubtotal: $${subtotal}\nEnvío: ${shipping === 0 ? 'Gratis' : '$'+shipping}\n*Total: $${total}*`;
+            
+            window.open(`https://wa.me/5356382909?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // ============================================
+        // UTILIDADES
+        // ============================================
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        function showToast(title, msg) {
+            // Simple alert por ahora, puedes mejorar con un toast visual
+            console.log(`${title}: ${msg}`);
+        }
+    </script>
+</body>
+</html>
