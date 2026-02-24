@@ -43,22 +43,109 @@
         body.night-mode header { background-color: #16213e !important; }
         body.night-mode .shadow-md { box-shadow: 0 4px 6px rgba(0,0,0,0.3) !important; }
         
-        /* Hero con overlay dinámico */
+        /* Hero con overlay optimizado para visibilidad */
         .hero-container { position: relative; overflow: hidden; }
         .hero-bg { 
             background-image: url('https://i.postimg.cc/7YfPJ9LD/banner_1l.jpg');
             background-size: cover; background-position: center;
             position: absolute; inset: 0;
         }
+        
+        /* Overlay que mantiene legibilidad día y noche */
         .hero-overlay { 
             position: absolute; inset: 0; 
-            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+            background: linear-gradient(to bottom, 
+                rgba(0,0,0,0.2) 0%,
+                rgba(0,0,0,0.3) 50%,
+                rgba(0,0,0,0.4) 100%
+            );
             transition: opacity 0.5s;
         }
         
+        /* En modo noche, overlay un poco más oscuro pero manteniendo visibilidad */
+        body.night-mode .hero-overlay {
+            background: linear-gradient(to bottom, 
+                rgba(0,0,0,0.3) 0%,
+                rgba(0,0,0,0.45) 50%,
+                rgba(0,0,0,0.6) 100%
+            );
+        }
+        
+        /* Texto siempre legible */
+        .hero-text {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        body.night-mode .hero-text {
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+        }
+        
+        /* Botones siempre visibles */
+        .hero-button {
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        
+        body.night-mode .hero-button {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        
+        /* Estilo de productos */
         .product-card, .service-card { transition: all 0.3s ease; }
         .product-card:hover, .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px rgba(0,0,0,0.2); }
         
+        /* Contenedor de imágenes como en tienda */
+        .product-image-container {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+            height: 160px;
+        }
+        
+        .product-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            padding: 8px;
+            transition: transform 0.4s ease;
+        }
+        
+        .product-card:hover .product-image-container img {
+            transform: scale(1.08);
+        }
+        
+        body.night-mode .product-image-container {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        /* Banner de promociones */
+        .promo-banner {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .promo-banner:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+        }
+        
+        .promo-banner img {
+            transition: transform 0.5s ease;
+        }
+        
+        .promo-banner:hover img {
+            transform: scale(1.05);
+        }
+        
+        .promo-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+        }
+        
+        /* Carrito siempre visible */
         .cart-slide { transition: transform 0.3s ease-in-out; }
         .cart-open { transform: translateY(0) !important; }
         
@@ -76,21 +163,35 @@
             background: rgba(255,255,255,0.9); box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
         body.night-mode .day-night-indicator { background: rgba(30,30,60,0.9); }
+        
+        /* Botón carrito siempre visible */
+        .cart-button {
+            background-color: #2E7D32;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        body.night-mode .cart-button {
+            background-color: #2E7D32;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
     </style>
 <base target="_blank">
 </head>
 <body class="bg-white text-gray-800 pb-20">
+
+    <!-- Transición suave entre páginas -->
+    <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
 
     <!-- Indicador Día/Noche -->
     <div class="day-night-indicator" onclick="toggleDayNight()" title="Cambiar modo">
         <span id="dayNightIcon">☀️</span>
     </div>
 
-    <!-- Botones flotantes -->
+    <!-- Botones flotantes - SIEMPRE VISIBLES -->
     <a href="https://wa.me/5356382909" target="_blank" class="fixed bottom-20 right-4 z-40 btn-whatsapp text-white p-4 rounded-full shadow-lg hover:scale-110 transition">
         <i class="fab fa-whatsapp text-2xl"></i>
     </a>
-    <button onclick="toggleCart()" class="fixed bottom-4 right-4 z-40 bg-cuban-green text-white p-4 rounded-full shadow-lg hover:scale-110 transition">
+    <button onclick="toggleCart()" class="cart-button fixed bottom-4 right-4 z-40 text-white p-4 rounded-full shadow-lg hover:scale-110 transition">
         <i class="fas fa-shopping-cart text-xl"></i>
         <span id="cartCount" class="absolute -top-1 -right-1 bg-cuban-yellow text-cuban-dark text-sm font-bold rounded-full w-6 h-6 flex items-center justify-center hidden">0</span>
     </button>
@@ -148,23 +249,88 @@
         </div>
     </div>
 
-    <!-- Hero Banner con efecto día/noche -->
+    <!-- Hero Banner con overlay optimizado -->
     <section class="hero-container h-[500px] relative">
         <div class="hero-bg"></div>
         <div id="heroOverlay" class="hero-overlay"></div>
         <div class="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center text-white">
-            <span class="inline-block bg-cuban-yellow text-cuban-dark px-4 py-1 rounded-full text-sm font-bold mb-4 animate-pulse">
+            <span class="hero-text inline-block bg-cuban-yellow text-cuban-dark px-4 py-1 rounded-full text-sm font-bold mb-4 animate-pulse">
                 🎉 Envío solo $200 en La Habana Vieja
             </span>
-            <h2 class="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg">El Resolvito</h2>
-            <p class="text-xl md:text-2xl mb-2 drop-shadow-md">Tu tienda, tus servicios, tu hogar</p>
-            <p class="text-lg opacity-90 mb-8 drop-shadow-md">Todo lo que necesitas en un solo lugar</p>
+            <h2 class="hero-text text-4xl md:text-6xl font-bold mb-4">El Resolvito</h2>
+            <p class="hero-text text-xl md:text-2xl mb-2">Tu tienda, tus servicios, tu hogar</p>
+            <p class="hero-text text-lg opacity-90 mb-8">Todo lo que necesitas en un solo lugar</p>
             <div class="flex flex-col sm:flex-row gap-4">
-                <a href="tienda.html" class="bg-cuban-yellow text-cuban-dark px-8 py-3 rounded-full font-bold hover:bg-yellow-400 transition shadow-lg">
+                <a href="tienda.html" class="hero-button bg-cuban-yellow text-cuban-dark px-8 py-3 rounded-full font-bold hover:bg-yellow-400 transition shadow-lg">
                     <i class="fas fa-shopping-basket mr-2"></i>Ver Tienda
                 </a>
-                <a href="servicios.html" class="bg-white/20 backdrop-blur text-white border-2 border-white px-8 py-3 rounded-full font-bold hover:bg-white/30 transition">
+                <a href="servicios.html" class="hero-button bg-white/20 backdrop-blur text-white border-2 border-white px-8 py-3 rounded-full font-bold hover:bg-white/30 transition">
                     <i class="fas fa-tools mr-2"></i>Servicios
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Promociones Especiales -->
+    <section class="py-12 bg-gradient-to-b from-white to-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold mb-2">🔥 Promociones Especiales</h2>
+                <p class="text-gray-600">Ofertas imperdibles por tiempo limitado</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Banner 1: Combos Ahorro -->
+                <a href="tienda.html" class="promo-banner relative h-48 rounded-2xl overflow-hidden shadow-lg group">
+                    <img src="https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=600&auto=format&fit=crop" class="w-full h-full object-cover">
+                    <div class="promo-overlay"></div>
+                    <div class="absolute inset-0 flex flex-col justify-center p-6 text-white">
+                        <span class="bg-cuban-yellow text-cuban-dark text-xs font-bold px-3 py-1 rounded-full w-fit mb-2">-15%</span>
+                        <h3 class="text-2xl font-bold mb-1">Combos Ahorro</h3>
+                        <p class="text-sm opacity-90 mb-3">Lleva 3 productos y paga 2</p>
+                        <span class="text-cuban-yellow font-bold flex items-center group-hover:translate-x-2 transition">
+                            Ver combos <i class="fas fa-arrow-right ml-2"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Banner 2: Mayoristas -->
+                <a href="ofertas.html" class="promo-banner relative h-48 rounded-2xl overflow-hidden shadow-lg group">
+                    <img src="https://images.unsplash.com/photo-1588964895597-cfccd6e2dbf9?w=600&auto=format&fit=crop" class="w-full h-full object-cover">
+                    <div class="promo-overlay"></div>
+                    <div class="absolute inset-0 flex flex-col justify-center p-6 text-white">
+                        <span class="bg-cuban-green text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-2">MAYOR</span>
+                        <h3 class="text-2xl font-bold mb-1">Venta por Mayor</h3>
+                        <p class="text-sm opacity-90 mb-3">Precios especiales para negocio</p>
+                        <span class="text-cuban-yellow font-bold flex items-center group-hover:translate-x-2 transition">
+                            Comprar al mayor <i class="fas fa-arrow-right ml-2"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Banner 3: Envío Gratis -->
+                <a href="tienda.html" class="promo-banner relative h-48 rounded-2xl overflow-hidden shadow-lg group">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&auto=format&fit=crop" class="w-full h-full object-cover">
+                    <div class="promo-overlay"></div>
+                    <div class="absolute inset-0 flex flex-col justify-center p-6 text-white">
+                        <span class="bg-cuban-orange text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-2">GRATIS</span>
+                        <h3 class="text-2xl font-bold mb-1">Envío Gratis</h3>
+                        <p class="text-sm opacity-90 mb-3">en compras mayores a $5,000</p>
+                        <span class="text-cuban-yellow font-bold flex items-center group-hover:translate-x-2 transition">
+                            Comprar ahora <i class="fas fa-arrow-right ml-2"></i>
+                        </span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Banner destacado inferior -->
+            <div class="mt-6 bg-gradient-to-r from-cuban-green to-cuban-dark rounded-2xl p-6 text-white flex flex-col md:flex-row justify-between items-center">
+                <div>
+                    <h3 class="text-xl font-bold mb-2">📱 ¿Necesitas algo en específico?</h3>
+                    <p class="opacity-90">Pregunta por productos no listados, hacemos pedidos especiales</p>
+                </div>
+                <a href="https://wa.me/5356382909" target="_blank" class="mt-4 md:mt-0 bg-white text-cuban-green px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition flex items-center gap-2">
+                    <i class="fab fa-whatsapp"></i> Consultar ahora
                 </a>
             </div>
         </div>
@@ -372,6 +538,17 @@
         </div>
     </div>
 
+    <!-- Modal de imagen ampliada -->
+    <div id="imageModal" class="fixed inset-0 bg-black/95 z-[60] hidden flex items-center justify-center p-4" onclick="closeImageModal()">
+        <div class="relative max-w-3xl w-full" onclick="event.stopPropagation()">
+            <button onclick="closeImageModal()" class="absolute -top-12 right-0 text-white text-3xl hover:text-gray-300">
+                <i class="fas fa-times"></i>
+            </button>
+            <img id="modalImage" src="" alt="" class="w-full max-h-[80vh] object-contain rounded-lg">
+            <p id="modalImageName" class="text-white text-center mt-4 text-xl font-bold"></p>
+        </div>
+    </div>
+
     <script>
         // ============================================
         // PRODUCTOS DESTACADOS (8 productos del CSV)
@@ -417,10 +594,26 @@
             
             // Iniciar efecto día/noche
             initDayNight();
+            
+            // Transición suave
+            document.getElementById('pageFade').classList.add('opacity-0');
+        });
+
+        // Navegación suave
+        document.querySelectorAll('a[href]').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('mailto') && !href.startsWith('tel')) {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    localStorage.setItem('nightMode', document.body.classList.contains('night-mode') ? 'true' : 'false');
+                    document.getElementById('pageFade').classList.remove('opacity-0');
+                    setTimeout(() => location.href = href, 200);
+                });
+            }
         });
 
         // ============================================
-        // EFECTO DÍA/NOCHE
+        // EFECTO DÍA/NOCHE SIMPLIFICADO
         // ============================================
         function initDayNight() {
             const hour = new Date().getHours();
@@ -431,26 +624,6 @@
                 document.getElementById('dayNightIcon').textContent = '🌙';
             } else {
                 document.getElementById('dayNightIcon').textContent = '☀️';
-            }
-            
-            // Ajustar overlay del hero según hora
-            updateHeroOverlay(hour);
-        }
-
-        function updateHeroOverlay(hour) {
-            let opacity = 0.3; // base
-            
-            if (hour >= 18 && hour <= 23) {
-                opacity = 0.3 + ((hour - 18) * 0.08); // 18h=0.3, 23h=0.7
-            } else if (hour >= 0 && hour < 6) {
-                opacity = 0.7 - (hour * 0.05); // 0h=0.7, 5h=0.45
-            } else if (hour >= 6 && hour < 18) {
-                opacity = 0.3; // día
-            }
-            
-            const overlay = document.getElementById('heroOverlay');
-            if (overlay) {
-                overlay.style.opacity = Math.min(opacity, 0.75);
             }
         }
 
@@ -466,16 +639,16 @@
         function renderFeaturedProducts() {
             const container = document.getElementById('featuredProducts');
             container.innerHTML = featuredProducts.map(p => `
-                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" onclick="addToCart(${p.id}, '${p.nombre}', ${p.precio}, '${p.imagen}')">
-                    <div class="h-40 overflow-hidden bg-gray-100">
-                        <img src="${p.imagen}" class="w-full h-full object-cover hover:scale-110 transition">
+                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="product-image-container cursor-pointer" onclick="openImageModal('${p.imagen}', '${p.nombre}')">
+                        <img src="${p.imagen}" alt="${p.nombre}" loading="lazy">
                     </div>
                     <div class="p-3">
                         <p class="text-xs text-cuban-green font-medium">${p.categoria}</p>
                         <h3 class="font-bold text-sm mb-1">${p.nombre}</h3>
                         <div class="flex items-center justify-between">
                             <span class="text-lg font-bold text-cuban-green">$${p.precio}</span>
-                            <button class="w-8 h-8 bg-cuban-green text-white rounded-full flex items-center justify-center hover:bg-cuban-dark">
+                            <button onclick="addToCart(${p.id}, '${p.nombre}', ${p.precio}, '${p.imagen}')" class="w-8 h-8 bg-cuban-green text-white rounded-full flex items-center justify-center hover:bg-cuban-dark">
                                 <i class="fas fa-plus"></i>
                             </button>
                         </div>
@@ -488,7 +661,9 @@
             const container = document.getElementById('mayorProducts');
             container.innerHTML = mayorProducts.map(p => `
                 <div class="bg-white/10 backdrop-blur rounded-xl p-4 border border-white/20">
-                    <img src="${p.imagen}" class="w-full h-32 object-contain bg-white rounded-lg mb-3">
+                    <div class="product-image-container h-32 bg-white/10 rounded-lg mb-3 cursor-pointer" onclick="openImageModal('${p.imagen}', '${p.nombre}')">
+                        <img src="${p.imagen}" class="w-full h-full object-contain">
+                    </div>
                     <h3 class="font-bold text-sm mb-1">${p.nombre}</h3>
                     <p class="text-cuban-yellow text-xs mb-2">${p.desc}</p>
                     <div class="flex items-center justify-between">
@@ -503,6 +678,30 @@
                 </div>
             `).join('');
         }
+
+        // ============================================
+        // MODAL DE IMAGEN
+        // ============================================
+        function openImageModal(src, name) {
+            const modal = document.getElementById('imageModal');
+            const img = document.getElementById('modalImage');
+            const nameEl = document.getElementById('modalImageName');
+            
+            img.src = src;
+            nameEl.textContent = name;
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // Cerrar modal con ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeImageModal();
+        });
 
         // ============================================
         // CARRITO
@@ -612,7 +811,6 @@
         }
 
         function showToast(title, msg) {
-            // Simple alert por ahora, puedes mejorar con un toast visual
             console.log(`${title}: ${msg}`);
         }
     </script>
