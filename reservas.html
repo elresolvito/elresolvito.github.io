@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Alojamientos - El Resolvito</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'poppins': ['Poppins'], 'opensans': ['Open Sans'] },
+                    colors: {
+                        'cuban-green': '#2E7D32', 'cuban-dark': '#1B5E20',
+                        'cuban-yellow': '#FFB300', 'cuban-blue': '#0277BD'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { font-family: 'Open Sans', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+        .property-card { transition: all 0.3s ease; }
+        .property-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px rgba(0,0,0,0.15); }
+        .btn-whatsapp { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); }
+        
+        body.night-mode { background-color: #0f0f1a; color: #e0e0e0; }
+        body.night-mode .bg-white { background-color: #16213e !important; color: #e0e0e0 !important; }
+        body.night-mode .bg-gray-50 { background-color: #1a1a2e !important; }
+        body.night-mode header { background-color: #16213e !important; }
+    </style>
+</head>
+<body class="bg-white text-gray-800 pb-20">
+
+    <!-- Transición súper sutil -->
+    <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
+
+    <!-- Botón WhatsApp -->
+    <a href="https://wa.me/5356382909" target="_blank" class="fixed bottom-4 right-4 z-40 btn-whatsapp text-white p-4 rounded-full shadow-lg hover:scale-110 transition">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-2">
+                    <div class="w-10 h-10 bg-cuban-green rounded-full flex items-center justify-center text-white font-bold text-xl">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-cuban-green leading-tight">El Resolvito</h1>
+                        <p class="text-xs text-gray-500">La Habana Vieja</p>
+                    </div>
+                </a>
+
+                <nav class="hidden lg:flex items-center gap-6">
+                    <a href="index.html" class="hover:text-cuban-green font-medium">Inicio</a>
+                    <a href="tienda.html" class="hover:text-cuban-green font-medium">Tienda</a>
+                    <a href="servicios.html" class="hover:text-cuban-green font-medium">Servicios</a>
+                    <a href="ofertas.html" class="hover:text-cuban-green font-medium">Ofertas</a>
+                    <a href="blog.html" class="hover:text-cuban-green font-medium">Blog</a>
+                    <a href="reservas.html" class="text-cuban-green font-medium border-b-2 border-cuban-green">Alojamientos</a>
+                </nav>
+
+                <button onclick="toggleMenu()" class="p-2 hover:bg-gray-100 rounded-lg lg:hidden">
+                    <i class="fas fa-bars text-2xl text-cuban-green"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menú móvil -->
+    <div id="mobileMenu" class="fixed inset-0 bg-black/50 z-50 hidden" onclick="toggleMenu()">
+        <div class="bg-white w-3/4 max-w-sm h-full p-6" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold text-cuban-green">Menú</h2>
+                <button onclick="toggleMenu()" class="p-2"><i class="fas fa-times text-2xl"></i></button>
+            </div>
+            <nav class="space-y-4">
+                <a href="index.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-home mr-3 text-cuban-green"></i>Inicio</a>
+                <a href="tienda.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-shopping-basket mr-3 text-cuban-green"></i>Tienda</a>
+                <a href="servicios.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-tools mr-3 text-cuban-green"></i>Servicios</a>
+                <a href="ofertas.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-percent mr-3 text-cuban-green"></i>Ofertas</a>
+                <a href="blog.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-newspaper mr-3 text-cuban-green"></i>Blog</a>
+                <a href="reservas.html" class="block p-3 rounded-lg bg-cuban-green text-white"><i class="fas fa-bed mr-3"></i>Alojamientos</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="bg-gradient-to-br from-cuban-blue to-purple-600 text-white py-12 px-4">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Alojamientos</h2>
+            <p class="text-xl opacity-90">Tu hogar en el corazón de La Habana</p>
+        </div>
+    </section>
+
+    <!-- Propiedad Destacada -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <span class="bg-cuban-yellow text-cuban-dark text-sm font-bold px-3 py-1 rounded-full">⭐ RECOMENDADO</span>
+            
+            <div class="property-card bg-white rounded-2xl shadow-xl overflow-hidden mt-4">
+                <div class="md:flex">
+                    <div class="md:w-1/2">
+                        <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&auto=format&fit=crop&q=60" 
+                             alt="Terrazas de Bayona 59" 
+                             class="w-full h-64 md:h-full object-cover">
+                    </div>
+                    <div class="md:w-1/2 p-6 md:p-8 flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold mb-2">Terrazas de Bayona 59</h3>
+                        <p class="text-gray-500 mb-4"><i class="fas fa-map-marker-alt mr-2 text-cuban-green"></i>La Habana Vieja, Cuba</p>
+                        
+                        <div class="flex flex-wrap gap-4 mb-6">
+                            <span class="bg-gray-100 px-3 py-1 rounded-full text-sm"><i class="fas fa-wifi mr-1 text-cuban-green"></i>WiFi</span>
+                            <span class="bg-gray-100 px-3 py-1 rounded-full text-sm"><i class="fas fa-snowflake mr-1 text-cuban-green"></i>A/C</span>
+                            <span class="bg-gray-100 px-3 py-1 rounded-full text-sm"><i class="fas fa-utensils mr-1 text-cuban-green"></i>Cocina</span>
+                            <span class="bg-gray-100 px-3 py-1 rounded-full text-sm"><i class="fas fa-sun mr-1 text-cuban-green"></i>Terraza</span>
+                        </div>
+
+                        <p class="text-gray-600 mb-6">Hermoso apartamento independiente en edificio colonial restaurado. Capacidad para 4 personas, terraza con vistas a la ciudad, cocina equipada y baño privado. Ubicación privilegiada a pasos del Capitolio y el Malecón.</p>
+
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="text-3xl font-bold text-cuban-green">$2,500</div>
+                            <div class="text-gray-500">/ noche</div>
+                            <div class="ml-auto flex items-center text-yellow-500">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span class="text-gray-600 ml-1 text-sm">(5.0)</span>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3">
+                            <a href="https://reservaterrazasdebayona59.com/" target="_blank" class="flex-1 bg-cuban-green text-white text-center py-3 rounded-xl font-bold hover:bg-cuban-dark transition">
+                                <i class="fas fa-calendar-check mr-2"></i>Reservar Ahora
+                            </a>
+                            <a href="https://wa.me/5356382909?text=Hola, consulta sobre Terrazas de Bayona 59" target="_blank" class="px-4 py-3 border-2 border-cuban-green text-cuban-green rounded-xl font-bold hover:bg-cuban-green hover:text-white transition">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Más propiedades -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h3 class="text-2xl font-bold mb-8">Otros Alojamientos Disponibles</h3>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Propiedad 2 -->
+                <div class="property-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h4 class="font-bold text-lg mb-1">Casa Colonial Completa</h4>
+                        <p class="text-gray-500 text-sm mb-3"><i class="fas fa-map-marker-alt mr-1"></i>Centro Habana</p>
+                        <div class="flex gap-2 mb-3 text-sm text-gray-600">
+                            <span><i class="fas fa-user mr-1"></i>6</span>
+                            <span><i class="fas fa-wifi mr-1"></i>WiFi</span>
+                            <span><i class="fas fa-car mr-1"></i>Parqueo</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-bold text-cuban-green">$4,000<span class="text-sm text-gray-500 font-normal">/noche</span></span>
+                            <button onclick="contactProperty('Casa Colonial')" class="bg-cuban-green text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-cuban-dark">
+                                Consultar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Propiedad 3 -->
+                <div class="property-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h4 class="font-bold text-lg mb-1">Estudio Moderno</h4>
+                        <p class="text-gray-500 text-sm mb-3"><i class="fas fa-map-marker-alt mr-1"></i>Vedado</p>
+                        <div class="flex gap-2 mb-3 text-sm text-gray-600">
+                            <span><i class="fas fa-user mr-1"></i>2</span>
+                            <span><i class="fas fa-wifi mr-1"></i>WiFi</span>
+                            <span><i class="fas fa-snowflake mr-1"></i>A/C</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-bold text-cuban-green">$1,800<span class="text-sm text-gray-500 font-normal">/noche</span></span>
+                            <button onclick="contactProperty('Estudio Moderno')" class="bg-cuban-green text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-cuban-dark">
+                                Consultar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Propiedad 4 -->
+                <div class="property-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h4 class="font-bold text-lg mb-1">Apartamento Familiar</h4>
+                        <p class="text-gray-500 text-sm mb-3"><i class="fas fa-map-marker-alt mr-1"></i>Playa</p>
+                        <div class="flex gap-2 mb-3 text-sm text-gray-600">
+                            <span><i class="fas fa-user mr-1"></i>5</span>
+                            <span><i class="fas fa-wifi mr-1"></i>WiFi</span>
+                            <span><i class="fas fa-swimming-pool mr-1"></i>Piscina</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-bold text-cuban-green">$3,200<span class="text-sm text-gray-500 font-normal">/noche</span></span>
+                            <button onclick="contactProperty('Apartamento Familiar')" class="bg-cuban-green text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-cuban-dark">
+                                Consultar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-12 bg-cuban-green text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-2xl font-bold mb-4">¿Tienes una propiedad para alquilar?</h3>
+            <p class="mb-6 opacity-90">Publica tu alojamiento con nosotros y llega a más clientes</p>
+            <a href="https://wa.me/5356382909?text=Hola, quiero publicar mi propiedad" target="_blank" class="inline-block bg-white text-cuban-green px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition">
+                <i class="fab fa-whatsapp mr-2"></i>Publicar mi propiedad
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-cuban-dark text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 El Resolvito. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('pageFade').classList.add('opacity-0');
+            if (localStorage.getItem('nightMode') === 'true') document.body.classList.add('night-mode');
+        });
+
+        document.querySelectorAll('a[href]').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('mailto') && !href.startsWith('tel')) {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    localStorage.setItem('nightMode', document.body.classList.contains('night-mode') ? 'true' : 'false');
+                    document.getElementById('pageFade').classList.remove('opacity-0');
+                    setTimeout(() => location.href = href, 200);
+                });
+            }
+        });
+
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        function contactProperty(name) {
+            window.open(`https://wa.me/5356382909?text=Hola, consulta sobre ${name}`, '_blank');
+        }
+    </script>
+</body>
+</html>
