@@ -45,10 +45,23 @@
         
         /* Hero con overlay optimizado para visibilidad */
         .hero-container { position: relative; overflow: hidden; }
-        .hero-bg { 
-            background-image: url('https://i.postimg.cc/7YfPJ9LD/banner_1l.jpg');
+        .hero-bg-day, .hero-bg-night {
             background-size: cover; background-position: center;
             position: absolute; inset: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .hero-bg-day {
+            background-image: url('https://i.postimg.cc/7YfPJ9LD/banner_1l.jpg');
+        }
+        .hero-bg-night {
+            background-image: url('https://i.postimg.cc/MGfKwYjq/plaza_nocturna_(1).png');
+            opacity: 0;
+        }
+        body.night-mode .hero-bg-day {
+            opacity: 0;
+        }
+        body.night-mode .hero-bg-night {
+            opacity: 1;
         }
         
         /* Overlay que mantiene legibilidad día y noche */
@@ -251,7 +264,8 @@
 
     <!-- Hero Banner con overlay optimizado -->
     <section class="hero-container h-[500px] relative">
-        <div class="hero-bg"></div>
+        <div class="hero-bg-day"></div>
+        <div class="hero-bg-night"></div>
         <div id="heroOverlay" class="hero-overlay"></div>
         <div class="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center text-white">
             <span class="hero-text inline-block bg-cuban-yellow text-cuban-dark px-4 py-1 rounded-full text-sm font-bold mb-4 animate-pulse">
@@ -271,7 +285,7 @@
         </div>
     </section>
 
-    <!-- Sección de Promociones Especiales -->
+    <!-- Sección de Promociones EspecialES -->
     <section class="py-12 bg-gradient-to-b from-white to-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-8">
