@@ -187,6 +187,43 @@
             background-color: #2E7D32;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
+        
+        /* Estilos para la tarjeta de alojamiento */
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .amenity-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #4b5563;
+        }
+        
+        body.night-mode .amenity-item {
+            color: #d1d5db;
+        }
+        
+        .amenity-item i {
+            color: #2E7D32;
+            width: 20px;
+        }
+        
+        .experience-badge {
+            background: linear-gradient(135deg, #FFB300 0%, #FF6F00 100%);
+            color: #1B5E20;
+            font-weight: bold;
+            padding: 0.25rem 1rem;
+            border-radius: 9999px;
+            display: inline-block;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
     </style>
 <base target="_blank">
 </head>
@@ -451,20 +488,46 @@
             </div>
             <div class="bg-white rounded-2xl shadow-lg overflow-hidden md:flex">
                 <div class="md:w-1/2">
-                    <img src="<a href="https://postimg.cc/ppR09Zdf" target="_blank"><img src="https://i.postimg.cc/QxWvyYGy/acuarela_(1).jpg" alt="acuarela_(1)"></a>" 
-                         onerror="this.src='<a href="https://postimg.cc/ppR09Zdf" target="_blank"><img src="https://i.postimg.cc/QxWvyYGy/acuarela_(1).jpg" alt="acuarela_(1)"></a>'"
+                    <img src="https://i.postimg.cc/QxWvyYGy/acuarela-(1).jpg" 
+                         onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop&q=60'"
                          class="w-full h-64 md:h-full object-cover">
                 </div>
-                <div class="md:w-1/2 p-8 flex flex-col justify-center">
-                    <span class="text-cuban-green font-bold text-sm">DESTACADO</span>
-                    <h3 class="text-2xl font-bold mt-2 mb-4">Terrazas de Bayona 59</h3>
-                    <p class="text-gray-600 mb-4">Hermoso apartamento en el corazón de La Habana Vieja. WiFi, aire acondicionado, terraza con vistas.</p>
-                    <div class="flex items-center gap-4 mb-6 text-sm text-gray-500">
-                        <span><i class="fas fa-user mr-1"></i>4 huéspedes</span>
-                        <span><i class="fas fa-wifi mr-1"></i>WiFi</span>
-                        <span><i class="fas fa-star mr-1 text-yellow-500"></i>5.0</span>
+                <div class="md:w-1/2 p-8">
+                    <span class="text-cuban-green font-bold text-sm">🌟 ALOJAMIENTO DESTACADO</span>
+                    <h3 class="text-2xl font-bold mt-2 mb-2">Terrazas de Bayona 59</h3>
+                    <p class="text-gray-600 italic mb-4">Casa colonial en el corazón de La Habana Vieja</p>
+                    <p class="text-gray-700 mb-4">Ideal para grupos y familias que buscan comodidad y autenticidad.</p>
+                    
+                    <div class="mb-4">
+                        <span class="font-semibold text-cuban-green">Capacidad:</span>
+                        <p class="text-gray-700">Casa completa con 3 habitaciones privadas</p>
                     </div>
-                    <div class="flex gap-4">
+                    
+                    <div class="mb-4">
+                        <span class="font-semibold text-cuban-green mb-2 block">Comodidades Incluidas:</span>
+                        <div class="amenities-grid">
+                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Agua caliente 24/7</div>
+                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Aire acondicionado</div>
+                            <div class="amenity-item"><i class="fas fa-check-circle"></i> 2 terrazas privadas</div>
+                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Baño privado</div>
+                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Wi-Fi gratuito</div>
+                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Cocina compartida</div>
+                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Ropa de cama incluida</div>
+                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Toallas limpias</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <span class="font-semibold text-cuban-green mb-2 block">Lo que nos caracteriza:</span>
+                        <p class="text-gray-700 mb-2">Experiencia real y servicio personalizado que nuestros huéspedes valoran</p>
+                        <div>
+                            <span class="experience-badge"><i class="fas fa-star mr-1"></i> 16+ años de experiencia</span>
+                            <span class="experience-badge"><i class="fas fa-clock mr-1"></i> Disponibilidad 24/7</span>
+                            <span class="experience-badge"><i class="fas fa-heart mr-1"></i> 100% cubano auténtico</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-4 mt-6">
                         <a href="https://reservaterrazasdebayona59.com/" target="_blank" class="bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark transition text-center flex-1">
                             <i class="fas fa-external-link-alt mr-2"></i>Reservar Ahora
                         </a>
@@ -830,6 +893,4 @@
     </script>
 </body>
 </html>
-
-
 
