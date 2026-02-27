@@ -1,0 +1,481 @@
+/* ============================================ */
+/* VARIABLES Y CONFIGURACIÓN GLOBAL */
+/* ============================================ */
+:root {
+    --cuban-green: #2E7D32;
+    --cuban-dark: #1B5E20;
+    --cuban-yellow: #FFB300;
+    --cuban-blue: #0277BD;
+    --cuban-orange: #FF6F00;
+    --dulce-rosa: #FF69B4;
+    --dulce-morado: #9B59B6;
+    
+    --night-bg: #0f0f1a;
+    --night-card: #16213e;
+    --night-text: #e0e0e0;
+    --night-secondary: #1a1a2e;
+    
+    --whatsapp: #25D366;
+    --whatsapp-dark: #128C7E;
+    
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.2);
+    
+    --transition: all 0.3s ease;
+}
+
+/* ============================================ */
+/* ESTILOS BASE */
+/* ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: white;
+    color: #333;
+    transition: background-color 0.5s, color 0.5s;
+    padding-bottom: 80px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+/* ============================================ */
+/* UTILIDADES REUTILIZABLES */
+/* ============================================ */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background: var(--cuban-green);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--cuban-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-whatsapp {
+    background: linear-gradient(135deg, var(--whatsapp) 0%, var(--whatsapp-dark) 100%);
+    color: white;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid currentColor;
+}
+
+/* ============================================ */
+/* TARJETAS DE PRODUCTO */
+/* ============================================ */
+.product-card {
+    background: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.product-image-container {
+    height: 180px;
+    background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.product-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 1rem;
+    transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-image-container img {
+    transform: scale(1.08);
+}
+
+/* ============================================ */
+/* CARRITO DE COMPRAS */
+/* ============================================ */
+.cart-sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 1.5rem 1.5rem 0 0;
+    box-shadow: var(--shadow-lg);
+    z-index: 50;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-sidebar.open {
+    transform: translateY(0);
+}
+
+.cart-header {
+    background: var(--cuban-green);
+    color: white;
+    padding: 1rem;
+    border-radius: 1.5rem 1.5rem 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.cart-footer {
+    border-top: 1px solid #eee;
+    padding: 1rem;
+    background: #f9f9f9;
+}
+
+.cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 45;
+    display: none;
+}
+
+.cart-overlay.active {
+    display: block;
+}
+
+/* ============================================ */
+/* INDICADOR DÍA/NOCHE */
+/* ============================================ */
+.theme-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 60;
+    transition: var(--transition);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* ============================================ */
+/* BOTONES FLOTANTES */
+/* ============================================ */
+.floating-btn {
+    position: fixed;
+    right: 1rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: var(--shadow-lg);
+    transition: var(--transition);
+    z-index: 40;
+    cursor: pointer;
+    border: none;
+}
+
+.floating-btn:hover {
+    transform: scale(1.1);
+}
+
+.floating-btn.whatsapp {
+    bottom: 5rem;
+    background: linear-gradient(135deg, var(--whatsapp) 0%, var(--whatsapp-dark) 100%);
+}
+
+.floating-btn.cart {
+    bottom: 1rem;
+    background: var(--cuban-green);
+}
+
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--cuban-yellow);
+    color: var(--cuban-dark);
+    font-size: 0.75rem;
+    font-weight: bold;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ============================================ */
+/* MODAL DE IMAGEN */
+/* ============================================ */
+.image-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    z-index: 70;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.image-modal.active {
+    display: flex;
+}
+
+.image-modal-content {
+    position: relative;
+    max-width: 800px;
+    width: 100%;
+}
+
+.image-modal-close {
+    position: absolute;
+    top: -3rem;
+    right: 0;
+    color: white;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.image-modal-close:hover {
+    color: #ccc;
+    transform: scale(1.1);
+}
+
+.image-modal-img {
+    width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 0.5rem;
+}
+
+.image-modal-title {
+    color: white;
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+/* ============================================ */
+/* ANIMACIONES */
+/* ============================================ */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+}
+
+.animate-bounce-slow {
+    animation: bounce 2s infinite;
+}
+
+.animate-wiggle {
+    animation: wiggle 1s ease-in-out infinite;
+}
+
+/* ============================================ */
+/* MODO NOCTURNO */
+/* ============================================ */
+body.night-mode {
+    background: var(--night-bg);
+    color: var(--night-text);
+}
+
+body.night-mode .product-card,
+body.night-mode .cart-sidebar,
+body.night-mode header {
+    background: var(--night-card) !important;
+}
+
+body.night-mode .bg-gray-50,
+body.night-mode .bg-gray-100 {
+    background: var(--night-secondary) !important;
+}
+
+body.night-mode .text-gray-600,
+body.night-mode .text-gray-500 {
+    color: #9a9ab0 !important;
+}
+
+body.night-mode .product-image-container {
+    background: #ffffff;
+}
+
+body.night-mode .theme-toggle {
+    background: var(--night-card);
+    color: var(--night-text);
+}
+
+/* ============================================ */
+/* RESPONSIVE */
+/* ============================================ */
+@media (min-width: 768px) {
+    .cart-sidebar {
+        left: auto;
+        right: 1rem;
+        bottom: 1rem;
+        width: 380px;
+        border-radius: 1rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .floating-btn.whatsapp {
+        bottom: 5rem;
+    }
+    
+    .floating-btn.cart {
+        bottom: 1rem;
+    }
+}
+
+/* ============================================ */
+/* TRANSICIÓN ENTRE PÁGINAS */
+/* ============================================ */
+.page-transition {
+    position: fixed;
+    inset: 0;
+    background: white;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+.page-transition.active {
+    opacity: 1;
+}
+
+/* ============================================ */
+/* HERO BANNER */
+/* ============================================ */
+.hero-container {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+}
+
+.hero-bg-day,
+.hero-bg-night {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: opacity 0.5s;
+}
+
+.hero-bg-day {
+    background-image: url('https://i.postimg.cc/7YfPJ9LD/banner_1l.jpg');
+}
+
+.hero-bg-night {
+    background-image: url('https://i.postimg.cc/MGfKwYjq/plaza_nocturna_(1).png');
+    opacity: 0;
+}
+
+body.night-mode .hero-bg-day { opacity: 0; }
+body.night-mode .hero-bg-night { opacity: 1; }
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, 
+        rgba(0,0,0,0.2) 0%,
+        rgba(0,0,0,0.4) 100%
+    );
+}
+
+body.night-mode .hero-overlay {
+    background: linear-gradient(to bottom, 
+        rgba(0,0,0,0.4) 0%,
+        rgba(0,0,0,0.6) 100%
+    );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+@media (min-width: 768px) {
+    .hero-title {
+        font-size: 4rem;
+    }
+}
