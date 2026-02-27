@@ -41,7 +41,13 @@
     
     <style>
         * { -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Open Sans', sans-serif; transition: background-color 0.5s, color 0.5s; }
+        body { 
+            font-family: 'Open Sans', sans-serif; 
+            transition: background-color 0.5s, color 0.5s;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
         h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
         
         /* Modo Noche */
@@ -257,10 +263,18 @@
         body.night-mode .text-pink-600 {
             color: #b0b0d0 !important;
         }
+        
+        /* Footer pegado al fondo */
+        .main-content {
+            flex: 1 0 auto;
+        }
+        footer {
+            flex-shrink: 0;
+        }
     </style>
 <base target="_blank">
 </head>
-<body class="bg-white text-gray-800 pb-20">
+<body class="bg-white text-gray-800 min-h-screen flex flex-col">
 
     <!-- Transición suave entre páginas -->
     <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
@@ -279,392 +293,392 @@
         <span id="cartCount" class="absolute -top-1 -right-1 bg-cuban-yellow text-cuban-dark text-sm font-bold rounded-full w-6 h-6 flex items-center justify-center hidden">0</span>
     </button>
 
-    <!-- Header -->
-    <header class="sticky top-0 z-50 bg-white shadow-md transition-colors duration-500">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex items-center justify-between">
-                <button onclick="toggleMenu()" class="p-2 hover:bg-gray-100 rounded-lg lg:hidden">
-                    <i class="fas fa-bars text-2xl text-cuban-green"></i>
-                </button>
-                
-                <div class="flex items-center gap-2">
-                    <div class="w-10 h-10 bg-cuban-green rounded-full flex items-center justify-center text-white font-bold text-xl">
-                        <i class="fas fa-store"></i>
+    <!-- Contenido principal -->
+    <div class="main-content">
+        <!-- Header -->
+        <header class="sticky top-0 z-50 bg-white shadow-md transition-colors duration-500">
+            <div class="container mx-auto px-4 py-3">
+                <div class="flex items-center justify-between">
+                    <button onclick="toggleMenu()" class="p-2 hover:bg-gray-100 rounded-lg lg:hidden">
+                        <i class="fas fa-bars text-2xl text-cuban-green"></i>
+                    </button>
+                    
+                    <div class="flex items-center gap-2">
+                        <div class="w-10 h-10 bg-cuban-green rounded-full flex items-center justify-center text-white font-bold text-xl">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold text-cuban-green leading-tight">El Resolvito</h1>
+                            <p class="text-xs text-gray-500">La Habana Vieja</p>
+                        </div>
                     </div>
-                    <div>
-                        <h1 class="text-xl font-bold text-cuban-green leading-tight">El Resolvito</h1>
-                        <p class="text-xs text-gray-500">La Habana Vieja</p>
-                    </div>
-                </div>
 
-                <nav class="hidden lg:flex items-center gap-6">
-                    <a href="index.html" class="text-cuban-green font-medium border-b-2 border-cuban-green">Inicio</a>
-                    <a href="tienda.html" class="hover:text-cuban-green font-medium transition">Tienda</a>
-                    <a href="servicios.html" class="hover:text-cuban-green font-medium transition">Servicios</a>
-                    <a href="ofertas.html" class="hover:text-cuban-green font-medium transition">Ofertas</a>
-                    <a href="blog.html" class="hover:text-cuban-green font-medium transition">Blog</a>
-                    <a href="reservas.html" class="hover:text-cuban-green font-medium transition">Alojamientos</a>
+                    <nav class="hidden lg:flex items-center gap-6">
+                        <a href="index.html" class="text-cuban-green font-medium border-b-2 border-cuban-green">Inicio</a>
+                        <a href="tienda.html" class="hover:text-cuban-green font-medium transition">Tienda</a>
+                        <a href="servicios.html" class="hover:text-cuban-green font-medium transition">Servicios</a>
+                        <a href="ofertas.html" class="hover:text-cuban-green font-medium transition">Ofertas</a>
+                        <a href="blog.html" class="hover:text-cuban-green font-medium transition">Blog</a>
+                        <a href="reservas.html" class="hover:text-cuban-green font-medium transition">Alojamientos</a>
+                    </nav>
+
+                    <button onclick="toggleCart()" class="p-2 hover:bg-gray-100 rounded-lg relative lg:hidden">
+                        <i class="fas fa-shopping-cart text-2xl text-cuban-green"></i>
+                        <span id="cartCountMobile" class="absolute top-0 right-0 bg-cuban-yellow text-cuban-dark text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Menú móvil -->
+        <div id="mobileMenu" class="fixed inset-0 bg-black/50 z-50 hidden" onclick="toggleMenu()">
+            <div class="bg-white w-3/4 max-w-sm h-full p-6" onclick="event.stopPropagation()">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold text-cuban-green">Menú</h2>
+                    <button onclick="toggleMenu()" class="p-2"><i class="fas fa-times text-2xl"></i></button>
+                </div>
+                <nav class="space-y-4">
+                    <a href="index.html" class="block p-3 rounded-lg bg-cuban-green text-white"><i class="fas fa-home mr-3"></i>Inicio</a>
+                    <a href="tienda.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-shopping-basket mr-3 text-cuban-green"></i>Tienda</a>
+                    <a href="servicios.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-tools mr-3 text-cuban-green"></i>Servicios</a>
+                    <a href="ofertas.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-percent mr-3 text-cuban-green"></i>Ofertas</a>
+                    <a href="blog.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-newspaper mr-3 text-cuban-green"></i>Blog</a>
+                    <a href="reservas.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-bed mr-3 text-cuban-green"></i>Alojamientos</a>
                 </nav>
-
-                <button onclick="toggleCart()" class="p-2 hover:bg-gray-100 rounded-lg relative lg:hidden">
-                    <i class="fas fa-shopping-cart text-2xl text-cuban-green"></i>
-                    <span id="cartCountMobile" class="absolute top-0 right-0 bg-cuban-yellow text-cuban-dark text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
-                </button>
             </div>
         </div>
-    </header>
 
-    <!-- Menú móvil -->
-    <div id="mobileMenu" class="fixed inset-0 bg-black/50 z-50 hidden" onclick="toggleMenu()">
-        <div class="bg-white w-3/4 max-w-sm h-full p-6" onclick="event.stopPropagation()">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-bold text-cuban-green">Menú</h2>
-                <button onclick="toggleMenu()" class="p-2"><i class="fas fa-times text-2xl"></i></button>
-            </div>
-            <nav class="space-y-4">
-                <a href="index.html" class="block p-3 rounded-lg bg-cuban-green text-white"><i class="fas fa-home mr-3"></i>Inicio</a>
-                <a href="tienda.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-shopping-basket mr-3 text-cuban-green"></i>Tienda</a>
-                <a href="servicios.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-tools mr-3 text-cuban-green"></i>Servicios</a>
-                <a href="ofertas.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-percent mr-3 text-cuban-green"></i>Ofertas</a>
-                <a href="blog.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-newspaper mr-3 text-cuban-green"></i>Blog</a>
-                <a href="reservas.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-bed mr-3 text-cuban-green"></i>Alojamientos</a>
-            </nav>
-        </div>
-    </div>
-
-    <!-- Hero Banner con overlay optimizado -->
-    <section class="hero-container h-[500px] relative">
-        <div class="hero-bg-day"></div>
-        <div class="hero-bg-night"></div>
-        <div id="heroOverlay" class="hero-overlay"></div>
-        <div class="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center text-white">
-            <span class="hero-text inline-block bg-cuban-yellow text-cuban-dark px-4 py-1 rounded-full text-sm font-bold mb-4 animate-pulse">
-                🎉 Envío solo $200 en La Habana Vieja
-            </span>
-            <h2 class="hero-text text-4xl md:text-6xl font-bold mb-4">El Resolvito</h2>
-            <p class="hero-text text-xl md:text-2xl mb-2">Tu tienda, tus servicios, tu hogar</p>
-            <p class="hero-text text-lg opacity-90 mb-8">Todo lo que necesitas en un solo lugar</p>
-            <div class="flex flex-col sm:flex-row gap-4">
-                <a href="tienda.html" class="hero-button bg-cuban-yellow text-cuban-dark px-8 py-3 rounded-full font-bold hover:bg-yellow-400 transition shadow-lg">
-                    <i class="fas fa-shopping-basket mr-2"></i>Ver Tienda
-                </a>
-                <a href="servicios.html" class="hero-button bg-white/20 backdrop-blur text-white border-2 border-white px-8 py-3 rounded-full font-bold hover:bg-white/30 transition">
-                    <i class="fas fa-tools mr-2"></i>Servicios
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección de Promociones EspecialES -->
-    <section class="py-12 bg-gradient-to-b from-white to-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold mb-2">🔥 Promociones Especiales</h2>
-                <p class="text-gray-600">Ofertas imperdibles por tiempo limitado</p>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-6">
-                <!-- Banner 1: Combos Ahorro -->
-                <a href="tienda.html" class="promo-banner relative h-48 rounded-2xl overflow-hidden shadow-lg group">
-                    <img src="https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=600&auto=format&fit=crop" class="w-full h-full object-cover">
-                    <div class="promo-overlay"></div>
-                    <div class="absolute inset-0 flex flex-col justify-center p-6 text-white">
-                        <span class="bg-cuban-yellow text-cuban-dark text-xs font-bold px-3 py-1 rounded-full w-fit mb-2">-15%</span>
-                        <h3 class="text-2xl font-bold mb-1">Combos Ahorro</h3>
-                        <p class="text-sm opacity-90 mb-3">Lleva 3 productos y paga 2</p>
-                        <span class="text-cuban-yellow font-bold flex items-center group-hover:translate-x-2 transition">
-                            Ver combos <i class="fas fa-arrow-right ml-2"></i>
-                        </span>
-                    </div>
-                </a>
-
-                <!-- Banner 2: Mayoristas (ENLACE CORREGIDO a ofertas.html) -->
-                <a href="ofertas.html" class="promo-banner relative h-48 rounded-2xl overflow-hidden shadow-lg group">
-                    <img src="https://images.unsplash.com/photo-1588964895597-cfccd6e2dbf9?w=600&auto=format&fit=crop" class="w-full h-full object-cover">
-                    <div class="promo-overlay"></div>
-                    <div class="absolute inset-0 flex flex-col justify-center p-6 text-white">
-                        <span class="bg-cuban-green text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-2">MAYOR</span>
-                        <h3 class="text-2xl font-bold mb-1">Venta por Mayor</h3>
-                        <p class="text-sm opacity-90 mb-3">Precios especiales para negocio</p>
-                        <span class="text-cuban-yellow font-bold flex items-center group-hover:translate-x-2 transition">
-                            Comprar al mayor <i class="fas fa-arrow-right ml-2"></i>
-                        </span>
-                    </div>
-                </a>
-
-                <!-- Banner 3: Envío Gratis -->
-                <a href="tienda.html" class="promo-banner relative h-48 rounded-2xl overflow-hidden shadow-lg group">
-                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&auto=format&fit=crop" class="w-full h-full object-cover">
-                    <div class="promo-overlay"></div>
-                    <div class="absolute inset-0 flex flex-col justify-center p-6 text-white">
-                        <span class="bg-cuban-orange text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-2">GRATIS</span>
-                        <h3 class="text-2xl font-bold mb-1">Envío Gratis</h3>
-                        <p class="text-sm opacity-90 mb-3">en compras mayores a $5,000</p>
-                        <span class="text-cuban-yellow font-bold flex items-center group-hover:translate-x-2 transition">
-                            Comprar ahora <i class="fas fa-arrow-right ml-2"></i>
-                        </span>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Banner destacado inferior -->
-            <div class="mt-6 bg-gradient-to-r from-cuban-green to-cuban-dark rounded-2xl p-6 text-white flex flex-col md:flex-row justify-between items-center">
-                <div>
-                    <h3 class="text-xl font-bold mb-2">📱 ¿Necesitas algo en específico?</h3>
-                    <p class="opacity-90">Pregunta por productos no listados, hacemos pedidos especiales</p>
+        <!-- Hero Banner con overlay optimizado -->
+        <section class="hero-container h-[500px] relative">
+            <div class="hero-bg-day"></div>
+            <div class="hero-bg-night"></div>
+            <div id="heroOverlay" class="hero-overlay"></div>
+            <div class="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center text-white">
+                <span class="hero-text inline-block bg-cuban-yellow text-cuban-dark px-4 py-1 rounded-full text-sm font-bold mb-4 animate-pulse">
+                    🎉 Envío solo $200 en La Habana Vieja
+                </span>
+                <h2 class="hero-text text-4xl md:text-6xl font-bold mb-4">El Resolvito</h2>
+                <p class="hero-text text-xl md:text-2xl mb-2">Tu tienda, tus servicios, tu hogar</p>
+                <p class="hero-text text-lg opacity-90 mb-8">Todo lo que necesitas en un solo lugar</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="tienda.html" class="hero-button bg-cuban-yellow text-cuban-dark px-8 py-3 rounded-full font-bold hover:bg-yellow-400 transition shadow-lg">
+                        <i class="fas fa-shopping-basket mr-2"></i>Ver Tienda
+                    </a>
+                    <a href="servicios.html" class="hero-button bg-white/20 backdrop-blur text-white border-2 border-white px-8 py-3 rounded-full font-bold hover:bg-white/30 transition">
+                        <i class="fas fa-tools mr-2"></i>Servicios
+                    </a>
                 </div>
-                <a href="https://wa.me/5356382909" target="_blank" class="mt-4 md:mt-0 bg-white text-cuban-green px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition flex items-center gap-2">
-                    <i class="fab fa-whatsapp"></i> Consultar ahora
-                </a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Productos Destacados -->
-    <section class="py-12">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-3xl font-bold"><i class="fas fa-fire mr-3 text-cuban-orange"></i>Destacados</h2>
-                <a href="tienda.html" class="text-cuban-green font-medium hover:underline">Ver todo →</a>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="featuredProducts">
-                <!-- Cargados dinámicamente -->
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================ -->
-    <!-- SERVICIOS PREVIEW - AHORA CON DULCE CÉSAR    -->
-    <!-- ============================================ -->
-    <section class="py-12 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-3xl font-bold"><i class="fas fa-tools mr-3 text-cuban-blue"></i>Servicios Destacados</h2>
-                <a href="servicios.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
-            </div>
-            
-            <!-- Grid de servicios - Solo Dulce César por ahora -->
-            <div class="grid md:grid-cols-3 gap-6">
+        <!-- Sección de Promociones Especiales - AHORA CON 3 OPCIONES -->
+        <section class="py-12 bg-gradient-to-b from-white to-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold mb-2">🔥 Promociones Especiales</h2>
+                    <p class="text-gray-600">Lo mejor de El Resolvito para ti</p>
+                </div>
                 
-                <!-- Dulce César - Repostería -->
-                <div class="service-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
-                    <!-- Imagen -->
-                    <div class="h-48 overflow-hidden bg-gradient-to-r from-dulce-rosa to-dulce-morado">
-                        <img src="https://i.postimg.cc/Qxz4FMGg/IMG_20260226-WA0025.jpg" 
-                             alt="Dulce César" 
-                             class="w-full h-full object-contain bg-white">
+                <div class="grid md:grid-cols-3 gap-6">
+                    
+                    <!-- Banner 1: Alojamientos -->
+                    <a href="reservas.html" class="promo-banner relative h-48 rounded-2xl overflow-hidden shadow-lg group">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&auto=format&fit=crop" class="w-full h-full object-cover">
+                        <div class="promo-overlay"></div>
+                        <div class="absolute inset-0 flex flex-col justify-center p-6 text-white">
+                            <span class="bg-cuban-blue text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-2">🏠 ALOJAMIENTOS</span>
+                            <h3 class="text-2xl font-bold mb-1">Terrazas de Bayona 59</h3>
+                            <p class="text-sm opacity-90 mb-3">Casa colonial en el corazón de La Habana</p>
+                            <span class="text-cuban-yellow font-bold flex items-center group-hover:translate-x-2 transition">
+                                Ver alojamiento <i class="fas fa-arrow-right ml-2"></i>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Banner 2: Servicios (Dulce César) -->
+                    <a href="servicios.html" class="promo-banner relative h-48 rounded-2xl overflow-hidden shadow-lg group">
+                        <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=600&auto=format&fit=crop" class="w-full h-full object-cover">
+                        <div class="promo-overlay"></div>
+                        <div class="absolute inset-0 flex flex-col justify-center p-6 text-white">
+                            <span class="bg-dulce-rosa text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-2">🧁 SERVICIOS</span>
+                            <h3 class="text-2xl font-bold mb-1">Dulce César</h3>
+                            <p class="text-sm opacity-90 mb-3">Repostería artesanal para eventos</p>
+                            <span class="text-cuban-yellow font-bold flex items-center group-hover:translate-x-2 transition">
+                                Ver servicio <i class="fas fa-arrow-right ml-2"></i>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Banner 3: Venta por Mayor (Chanclas) -->
+                    <a href="ofertas.html" class="promo-banner relative h-48 rounded-2xl overflow-hidden shadow-lg group">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop" class="w-full h-full object-cover">
+                        <div class="promo-overlay"></div>
+                        <div class="absolute inset-0 flex flex-col justify-center p-6 text-white">
+                            <span class="bg-cuban-orange text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-2">💰 MAYOR</span>
+                            <h3 class="text-2xl font-bold mb-1">Chanclas al por Mayor</h3>
+                            <p class="text-sm opacity-90 mb-3">Precio especial: $3,500 c/u</p>
+                            <span class="text-cuban-yellow font-bold flex items-center group-hover:translate-x-2 transition">
+                                Ver oferta <i class="fas fa-arrow-right ml-2"></i>
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Banner destacado inferior -->
+                <div class="mt-6 bg-gradient-to-r from-cuban-green to-cuban-dark rounded-2xl p-6 text-white flex flex-col md:flex-row justify-between items-center">
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">📱 ¿Necesitas algo en específico?</h3>
+                        <p class="opacity-90">Pregunta por productos no listados, hacemos pedidos especiales</p>
+                    </div>
+                    <a href="https://wa.me/5356382909" target="_blank" class="mt-4 md:mt-0 bg-white text-cuban-green px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition flex items-center gap-2">
+                        <i class="fab fa-whatsapp"></i> Consultar ahora
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Productos Destacados -->
+        <section class="py-12">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold"><i class="fas fa-fire mr-3 text-cuban-orange"></i>Destacados</h2>
+                    <a href="tienda.html" class="text-cuban-green font-medium hover:underline">Ver todo →</a>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="featuredProducts">
+                    <!-- Cargados dinámicamente -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICIOS PREVIEW - Dulce César -->
+        <section class="py-12 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold"><i class="fas fa-tools mr-3 text-cuban-blue"></i>Servicios Destacados</h2>
+                    <a href="servicios.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
+                </div>
+                
+                <!-- Grid de servicios - Solo Dulce César por ahora -->
+                <div class="grid md:grid-cols-3 gap-6">
+                    
+                    <!-- Dulce César - Repostería -->
+                    <div class="service-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
+                        <!-- Imagen -->
+                        <div class="h-48 overflow-hidden bg-gradient-to-r from-dulce-rosa to-dulce-morado">
+                            <img src="https://i.postimg.cc/Qxz4FMGg/IMG_20260226-WA0025.jpg" 
+                                 alt="Dulce César" 
+                                 class="w-full h-full object-contain bg-white">
+                        </div>
+                        
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="bg-dulce-rosa text-white text-xs px-2 py-1 rounded-full font-bold">✨ NUEVO</span>
+                                <span class="text-sm text-gray-500">Desde $150</span>
+                            </div>
+                            
+                            <h3 class="font-bold text-xl mb-2 text-dulce-rosa">Dulce César</h3>
+                            <p class="text-gray-600 text-sm mb-3">Repostería artesanal para eventos, cafeterías y pedidos especiales.</p>
+                            
+                            <!-- Etiquetas rápidas -->
+                            <div class="flex flex-wrap gap-1 mb-4">
+                                <span class="bg-pink-100 text-pink-600 text-xs px-2 py-1 rounded-full">🎂 Tortas</span>
+                                <span class="bg-purple-100 text-purple-600 text-xs px-2 py-1 rounded-full">🧁 Cupcakes</span>
+                                <span class="bg-yellow-100 text-yellow-600 text-xs px-2 py-1 rounded-full">🍪 Galletas</span>
+                            </div>
+                            
+                            <!-- Botones -->
+                            <div class="flex gap-2">
+                                <a href="https://wa.me/5353342167?text=Hola%2C%20vi%20Dulce%20C%C3%A9sar%20en%20El%20Resolvito%20y%20quiero%20informaci%C3%B3n" 
+                                   target="_blank" 
+                                   class="flex-1 bg-dulce-rosa text-white text-center py-2 rounded-lg text-sm font-bold hover:opacity-90 transition">
+                                    <i class="fab fa-whatsapp mr-1"></i> Contactar
+                                </a>
+                                <a href="servicios.html" 
+                                   class="px-3 py-2 border border-dulce-rosa text-dulce-rosa rounded-lg text-sm font-bold hover:bg-dulce-rosa hover:text-white transition">
+                                    <i class="fas fa-info-circle"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="p-5">
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="bg-dulce-rosa text-white text-xs px-2 py-1 rounded-full font-bold">✨ NUEVO</span>
-                            <span class="text-sm text-gray-500">Desde $150</span>
+                    <!-- Espacio para futuros servicios (mensaje) -->
+                    <div class="service-card bg-white rounded-xl shadow-md p-6 flex flex-col items-center justify-center text-center col-span-2">
+                        <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center text-3xl mb-4">
+                            🧁
                         </div>
-                        
-                        <h3 class="font-bold text-xl mb-2 text-dulce-rosa">Dulce César</h3>
-                        <p class="text-gray-600 text-sm mb-3">Repostería artesanal para eventos, cafeterías y pedidos especiales.</p>
-                        
-                        <!-- Etiquetas rápidas -->
-                        <div class="flex flex-wrap gap-1 mb-4">
-                            <span class="bg-pink-100 text-pink-600 text-xs px-2 py-1 rounded-full">🎂 Tortas</span>
-                            <span class="bg-purple-100 text-purple-600 text-xs px-2 py-1 rounded-full">🧁 Cupcakes</span>
-                            <span class="bg-yellow-100 text-yellow-600 text-xs px-2 py-1 rounded-full">🍪 Galletas</span>
-                        </div>
-                        
-                        <!-- Botones -->
-                        <div class="flex gap-2">
-                            <a href="https://wa.me/5353342167?text=Hola%2C%20vi%20Dulce%20C%C3%A9sar%20en%20El%20Resolvito%20y%20quiero%20informaci%C3%B3n" 
-                               target="_blank" 
-                               class="flex-1 bg-dulce-rosa text-white text-center py-2 rounded-lg text-sm font-bold hover:opacity-90 transition">
-                                <i class="fab fa-whatsapp mr-1"></i> Contactar
-                            </a>
-                            <a href="servicios.html" 
-                               class="px-3 py-2 border border-dulce-rosa text-dulce-rosa rounded-lg text-sm font-bold hover:bg-dulce-rosa hover:text-white transition">
-                                <i class="fas fa-info-circle"></i>
-                            </a>
-                        </div>
+                        <h3 class="font-bold text-xl mb-2">Próximamente más servicios</h3>
+                        <p class="text-gray-600 mb-4">¿Tienes un emprendimiento? Contáctanos para aparecer aquí.</p>
+                        <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20ofrecer%20mis%20servicios%20en%20El%20Resolvito" 
+                           target="_blank"
+                           class="bg-cuban-green text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-cuban-dark transition">
+                            <i class="fab fa-whatsapp mr-1"></i> Publica tu servicio
+                        </a>
                     </div>
+                    
                 </div>
                 
-                <!-- Espacio para futuros servicios (mensaje) -->
-                <div class="service-card bg-white rounded-xl shadow-md p-6 flex flex-col items-center justify-center text-center col-span-2">
-                    <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center text-3xl mb-4">
-                        🧁
+                <!-- Mini promoción de Dulce César -->
+                <div class="mt-6 bg-gradient-to-r from-dulce-rosa to-dulce-morado rounded-xl p-4 text-white flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span class="text-3xl animate-bounce">🧁</span>
+                        <div>
+                            <p class="font-bold">Dulce César - Repostería artesanal</p>
+                            <p class="text-sm opacity-90">Pedidos con 48h • Entregas en La Habana</p>
+                        </div>
                     </div>
-                    <h3 class="font-bold text-xl mb-2">Próximamente más servicios</h3>
-                    <p class="text-gray-600 mb-4">¿Tienes un emprendimiento? Contáctanos para aparecer aquí.</p>
-                    <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20ofrecer%20mis%20servicios%20en%20El%20Resolvito" 
-                       target="_blank"
-                       class="bg-cuban-green text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-cuban-dark transition">
-                        <i class="fab fa-whatsapp mr-1"></i> Publica tu servicio
+                    <a href="https://wa.me/5353342167" target="_blank" class="bg-white text-dulce-rosa px-4 py-2 rounded-full text-sm font-bold hover:bg-gray-100 transition">
+                        <i class="fab fa-whatsapp mr-1"></i> Pedir
                     </a>
                 </div>
                 
             </div>
-            
-            <!-- Mini promoción de Dulce César -->
-            <div class="mt-6 bg-gradient-to-r from-dulce-rosa to-dulce-morado rounded-xl p-4 text-white flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <span class="text-3xl animate-bounce">🧁</span>
-                    <div>
-                        <p class="font-bold">Dulce César - Repostería artesanal</p>
-                        <p class="text-sm opacity-90">Pedidos con 48h • Entregas en La Habana</p>
-                    </div>
-                </div>
-                <a href="https://wa.me/5353342167" target="_blank" class="bg-white text-dulce-rosa px-4 py-2 rounded-full text-sm font-bold hover:bg-gray-100 transition">
-                    <i class="fab fa-whatsapp mr-1"></i> Pedir
-                </a>
-            </div>
-            
-        </div>
-    </section>
+        </section>
 
-    <!-- ============================================ -->
-    <!-- OFERTAS MAYOR PREVIEW - AHORA CON CHANCLAS   -->
-    <!-- ============================================ -->
-    <section class="py-12 bg-cuban-dark text-white">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-3xl font-bold"><i class="fas fa-boxes mr-3 text-cuban-yellow"></i>Venta por Mayor</h2>
-                <a href="ofertas.html" class="text-cuban-yellow font-medium hover:underline">Ver todo →</a>
-            </div>
-            
-            <!-- Preview de la oferta de chanclas -->
-            <div class="bg-gradient-to-r from-chancla-azul to-chancla-rosa rounded-2xl overflow-hidden shadow-xl">
-                <div class="md:flex items-center">
-                    <div class="md:w-1/3 p-6">
-                        <div class="bg-white/20 backdrop-blur rounded-2xl p-4 text-center">
-                            <span class="text-6xl block mb-2">🩴</span>
-                            <span class="text-3xl font-bold">$3,500</span>
-                            <p class="text-sm opacity-90">cada par</p>
+        <!-- OFERTAS MAYOR PREVIEW - Chanclas -->
+        <section class="py-12 bg-cuban-dark text-white">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold"><i class="fas fa-boxes mr-3 text-cuban-yellow"></i>Venta por Mayor</h2>
+                    <a href="ofertas.html" class="text-cuban-yellow font-medium hover:underline">Ver todo →</a>
+                </div>
+                
+                <!-- Preview de la oferta de chanclas -->
+                <div class="bg-gradient-to-r from-chancla-azul to-chancla-rosa rounded-2xl overflow-hidden shadow-xl">
+                    <div class="md:flex items-center">
+                        <div class="md:w-1/3 p-6">
+                            <div class="bg-white/20 backdrop-blur rounded-2xl p-4 text-center">
+                                <span class="text-6xl block mb-2">🩴</span>
+                                <span class="text-3xl font-bold">$3,500</span>
+                                <p class="text-sm opacity-90">cada par</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="md:w-2/3 p-6">
-                        <span class="bg-white/30 px-3 py-1 rounded-full text-sm font-bold mb-3 inline-block">🔥 OFERTA ESPECIAL</span>
-                        <h3 class="text-3xl font-bold mb-2">Chanclas al por Mayor</h3>
-                        <p class="text-white/90 mb-4">Diferentes colores y estilos disponibles. Ideal para revendedores y negocios.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Negras</span>
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Blancas</span>
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Beige</span>
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Rosadas</span>
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Azules</span>
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Rojas</span>
+                        <div class="md:w-2/3 p-6">
+                            <span class="bg-white/30 px-3 py-1 rounded-full text-sm font-bold mb-3 inline-block">🔥 OFERTA ESPECIAL</span>
+                            <h3 class="text-3xl font-bold mb-2">Chanclas al por Mayor</h3>
+                            <p class="text-white/90 mb-4">Diferentes colores y estilos disponibles. Ideal para revendedores y negocios.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Negras</span>
+                                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Blancas</span>
+                                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Beige</span>
+                                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Rosadas</span>
+                                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Azules</span>
+                                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Rojas</span>
+                            </div>
+                            <a href="ofertas.html" class="inline-block bg-white text-chancla-azul px-6 py-2 rounded-full font-bold hover:bg-gray-100 transition">
+                                <i class="fas fa-eye mr-2"></i>Ver colección completa
+                            </a>
                         </div>
-                        <a href="ofertas.html" class="inline-block bg-white text-chancla-azul px-6 py-2 rounded-full font-bold hover:bg-gray-100 transition">
-                            <i class="fas fa-eye mr-2"></i>Ver colección completa
-                        </a>
                     </div>
                 </div>
+                
+                <!-- Mensaje de más productos próximamente -->
+                <div class="mt-6 text-center text-white/70">
+                    <p><i class="fas fa-plus-circle mr-2 text-cuban-yellow"></i> Próximamente más productos al por mayor</p>
+                </div>
+                
             </div>
-            
-            <!-- Mensaje de más productos próximamente -->
-            <div class="mt-6 text-center text-white/70">
-                <p><i class="fas fa-plus-circle mr-2 text-cuban-yellow"></i> Próximamente más productos al por mayor</p>
-            </div>
-            
-        </div>
-    </section>
+        </section>
 
-    <!-- Blog Preview -->
-    <section class="py-12 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-3xl font-bold"><i class="fas fa-newspaper mr-3 text-cuban-blue"></i>Blog</h2>
-                <a href="blog.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
+        <!-- Blog Preview -->
+        <section class="py-12 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold"><i class="fas fa-newspaper mr-3 text-cuban-blue"></i>Blog</h2>
+                    <a href="blog.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog.html'">
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <span class="text-xs text-cuban-green font-bold">RECETAS</span>
+                            <h3 class="font-bold text-lg mt-1">Tostadas de Atún en 5 minutos</h3>
+                            <p class="text-gray-600 text-sm mt-2">Una receta rápida usando productos de El Resolvito...</p>
+                        </div>
+                    </article>
+                    <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog.html'">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <span class="text-xs text-cuban-green font-bold">HOSPEDAJE</span>
+                            <h3 class="font-bold text-lg mt-1">Guía para alquilar en La Habana</h3>
+                            <p class="text-gray-600 text-sm mt-2">Todo lo que necesitas saber para encontrar el mejor alojamiento...</p>
+                        </div>
+                    </article>
+                    <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog.html'">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <span class="text-xs text-cuban-green font-bold">CONSEJOS</span>
+                            <h3 class="font-bold text-lg mt-1">¿Por qué comprar en El Resolvito?</h3>
+                            <p class="text-gray-600 text-sm mt-2">Descubre los beneficios de comprar en tu tienda de confianza...</p>
+                        </div>
+                    </article>
+                </div>
             </div>
-            <div class="grid md:grid-cols-3 gap-6">
-                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog.html'">
-                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <span class="text-xs text-cuban-green font-bold">RECETAS</span>
-                        <h3 class="font-bold text-lg mt-1">Tostadas de Atún en 5 minutos</h3>
-                        <p class="text-gray-600 text-sm mt-2">Una receta rápida usando productos de El Resolvito...</p>
-                    </div>
-                </article>
-                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog.html'">
-                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <span class="text-xs text-cuban-green font-bold">HOSPEDAJE</span>
-                        <h3 class="font-bold text-lg mt-1">Guía para alquilar en La Habana</h3>
-                        <p class="text-gray-600 text-sm mt-2">Todo lo que necesitas saber para encontrar el mejor alojamiento...</p>
-                    </div>
-                </article>
-                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog.html'">
-                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <span class="text-xs text-cuban-green font-bold">CONSEJOS</span>
-                        <h3 class="font-bold text-lg mt-1">¿Por qué comprar en El Resolvito?</h3>
-                        <p class="text-gray-600 text-sm mt-2">Descubre los beneficios de comprar en tu tienda de confianza...</p>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Alojamientos Preview -->
-    <section class="py-12">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-3xl font-bold"><i class="fas fa-bed mr-3 text-cuban-green"></i>Alojamientos</h2>
-                <a href="reservas.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
-            </div>
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden md:flex">
-                <div class="md:w-1/2">
-                    <img src="https://i.postimg.cc/QxWvyYGy/acuarela-(1).jpg" 
-                         onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop&q=60'"
-                         class="w-full h-64 md:h-full object-cover">
+        <!-- Alojamientos Preview -->
+        <section class="py-12">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold"><i class="fas fa-bed mr-3 text-cuban-green"></i>Alojamientos</h2>
+                    <a href="reservas.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
                 </div>
-                <div class="md:w-1/2 p-8">
-                    <span class="text-cuban-green font-bold text-sm">🌟 ALOJAMIENTO DESTACADO</span>
-                    <h3 class="text-2xl font-bold mt-2 mb-2">Terrazas de Bayona 59</h3>
-                    <p class="text-gray-600 italic mb-4">Casa colonial en el corazón de La Habana Vieja</p>
-                    <p class="text-gray-700 mb-4">Ideal para grupos y familias que buscan comodidad y autenticidad.</p>
-                    
-                    <div class="mb-4">
-                        <span class="font-semibold text-cuban-green">Capacidad:</span>
-                        <p class="text-gray-700">Casa completa con 3 habitaciones privadas</p>
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden md:flex">
+                    <div class="md:w-1/2">
+                        <img src="https://i.postimg.cc/QxWvyYGy/acuarela-(1).jpg" 
+                             onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop&q=60'"
+                             class="w-full h-64 md:h-full object-cover">
                     </div>
-                    
-                    <div class="mb-4">
-                        <span class="font-semibold text-cuban-green mb-2 block">Comodidades Incluidas:</span>
-                        <div class="amenities-grid">
-                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Agua caliente 24/7</div>
-                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Aire acondicionado</div>
-                            <div class="amenity-item"><i class="fas fa-check-circle"></i> 2 terrazas privadas</div>
-                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Baño privado</div>
-                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Wi-Fi gratuito</div>
-                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Cocina compartida</div>
-                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Ropa de cama incluida</div>
-                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Toallas limpias</div>
+                    <div class="md:w-1/2 p-8">
+                        <span class="text-cuban-green font-bold text-sm">🌟 ALOJAMIENTO DESTACADO</span>
+                        <h3 class="text-2xl font-bold mt-2 mb-2">Terrazas de Bayona 59</h3>
+                        <p class="text-gray-600 italic mb-4">Casa colonial en el corazón de La Habana Vieja</p>
+                        <p class="text-gray-700 mb-4">Ideal para grupos y familias que buscan comodidad y autenticidad.</p>
+                        
+                        <div class="mb-4">
+                            <span class="font-semibold text-cuban-green">Capacidad:</span>
+                            <p class="text-gray-700">Casa completa con 3 habitaciones privadas</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <span class="font-semibold text-cuban-green mb-2 block">Comodidades Incluidas:</span>
+                            <div class="amenities-grid">
+                                <div class="amenity-item"><i class="fas fa-check-circle"></i> Agua caliente 24/7</div>
+                                <div class="amenity-item"><i class="fas fa-check-circle"></i> Aire acondicionado</div>
+                                <div class="amenity-item"><i class="fas fa-check-circle"></i> 2 terrazas privadas</div>
+                                <div class="amenity-item"><i class="fas fa-check-circle"></i> Baño privado</div>
+                                <div class="amenity-item"><i class="fas fa-check-circle"></i> Wi-Fi gratuito</div>
+                                <div class="amenity-item"><i class="fas fa-check-circle"></i> Cocina compartida</div>
+                                <div class="amenity-item"><i class="fas fa-check-circle"></i> Ropa de cama incluida</div>
+                                <div class="amenity-item"><i class="fas fa-check-circle"></i> Toallas limpias</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <span class="font-semibold text-cuban-green mb-2 block">Lo que nos caracteriza:</span>
+                            <p class="text-gray-700 mb-2">Experiencia real y servicio personalizado que nuestros huéspedes valoran</p>
+                            <div>
+                                <span class="experience-badge"><i class="fas fa-star mr-1"></i> 16+ años de experiencia</span>
+                                <span class="experience-badge"><i class="fas fa-clock mr-1"></i> Disponibilidad 24/7</span>
+                                <span class="experience-badge"><i class="fas fa-heart mr-1"></i> 100% cubano auténtico</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4 mt-6">
+                            <a href="https://reservaterrazasdebayona59.com/" target="_blank" class="bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark transition text-center flex-1">
+                                <i class="fas fa-external-link-alt mr-2"></i>Reservar Ahora
+                            </a>
+                            <a href="reservas.html" class="border-2 border-cuban-green text-cuban-green px-6 py-3 rounded-lg font-bold hover:bg-cuban-green hover:text-white transition text-center">
+                                Ver más
+                            </a>
                         </div>
                     </div>
-                    
-                    <div class="mb-4">
-                        <span class="font-semibold text-cuban-green mb-2 block">Lo que nos caracteriza:</span>
-                        <p class="text-gray-700 mb-2">Experiencia real y servicio personalizado que nuestros huéspedes valoran</p>
-                        <div>
-                            <span class="experience-badge"><i class="fas fa-star mr-1"></i> 16+ años de experiencia</span>
-                            <span class="experience-badge"><i class="fas fa-clock mr-1"></i> Disponibilidad 24/7</span>
-                            <span class="experience-badge"><i class="fas fa-heart mr-1"></i> 100% cubano auténtico</span>
-                        </div>
-                    </div>
-                    
-                    <div class="flex gap-4 mt-6">
-                        <a href="https://reservaterrazasdebayona59.com/" target="_blank" class="bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark transition text-center flex-1">
-                            <i class="fas fa-external-link-alt mr-2"></i>Reservar Ahora
-                        </a>
-                        <a href="reservas.html" class="border-2 border-cuban-green text-cuban-green px-6 py-3 rounded-lg font-bold hover:bg-cuban-green hover:text-white transition text-center">
-                            Ver más
-                        </a>
-                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div> <!-- Fin main-content -->
 
     <!-- Footer -->
-    <footer class="bg-cuban-dark text-white py-12">
+    <footer class="bg-cuban-dark text-white py-12 w-full">
         <div class="container mx-auto px-4">
             <div class="grid md:grid-cols-4 gap-8 mb-8">
                 <div>
