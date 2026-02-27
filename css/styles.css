@@ -1,32 +1,52 @@
 /* ============================================ */
-/* VARIABLES Y CONFIGURACIÓN GLOBAL */
+/* PALETA DE COLORES - NEUROMARKETING OPTIMIZADA */
 /* ============================================ */
 :root {
-    --cuban-green: #2E7D32;
-    --cuban-dark: #1B5E20;
-    --cuban-yellow: #FFB300;
-    --cuban-blue: #0277BD;
-    --cuban-orange: #FF6F00;
-    --dulce-rosa: #FF69B4;
-    --dulce-morado: #9B59B6;
+    /* MODO CLARO - Colores Principales */
+    --primary-green: #2E7D32;      /* Confianza, crecimiento, frescura */
+    --primary-green-dark: #1B5E20;  /* Estabilidad, seguridad */
+    --primary-gold: #FFB300;         /* Optimismo, atención, ofertas */
+    --primary-blue: #0277BD;         /* Profesionalismo, servicios contables */
+    --primary-pink: #FF69B4;         /* Dulzura, repostería */
+    --primary-orange: #FF6F00;       /* Urgencia, acción */
     
-    --night-bg: #0f0f1a;
-    --night-card: #16213e;
-    --night-text: #e0e0e0;
-    --night-secondary: #1a1a2e;
+    /* MODO CLARO - Neutros */
+    --bg-light: #FFFFFF;              /* Fondo principal */
+    --bg-light-secondary: #F9FAFB;    /* Fondo secundario suave */
+    --text-primary: #1F2937;          /* Texto principal casi negro */
+    --text-secondary: #4B5563;        /* Texto secundario */
+    --text-tertiary: #9CA3AF;         /* Texto terciario */
+    --border-light: #E5E7EB;          /* Bordes suaves */
     
+    /* MODO OSCURO */
+    --bg-dark: #0F0F1A;               /* Fondo principal noche */
+    --bg-dark-card: #16213E;           /* Fondo tarjetas noche */
+    --bg-dark-secondary: #1A1A2E;      /* Fondo secundario noche */
+    --text-dark-primary: #E0E0E0;      /* Texto principal noche */
+    --text-dark-secondary: #9A9AB0;     /* Texto secundario noche */
+    --border-dark: #2A2A3A;            /* Bordes noche */
+    
+    /* Funcionales */
     --whatsapp: #25D366;
     --whatsapp-dark: #128C7E;
+    --success: #10B981;
+    --error: #EF4444;
+    --warning: #F59E0B;
     
-    --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);
-    --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
-    --shadow-lg: 0 8px 24px rgba(0,0,0,0.2);
+    /* Sombras */
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+    --shadow-xl: 0 20px 32px rgba(0,0,0,0.15);
     
-    --transition: all 0.3s ease;
+    /* Transiciones */
+    --transition-fast: 0.2s ease;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.5s ease;
 }
 
 /* ============================================ */
-/* ESTILOS BASE */
+/* ESTILOS BASE OPTIMIZADOS */
 /* ============================================ */
 * {
     margin: 0;
@@ -37,94 +57,224 @@
 
 body {
     font-family: 'Open Sans', sans-serif;
-    background: white;
-    color: #333;
-    transition: background-color 0.5s, color 0.5s;
-    padding-bottom: 80px;
+    background: var(--bg-light);
+    color: var(--text-primary);
+    line-height: 1.6;
+    transition: background-color var(--transition-slow), color var(--transition-slow);
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
+    line-height: 1.3;
 }
 
 /* ============================================ */
-/* UTILIDADES REUTILIZABLES */
+/* MODO OSCURO - Aplicación automática */
 /* ============================================ */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
+body.night-mode {
+    background: var(--bg-dark);
+    color: var(--text-dark-primary);
 }
 
+body.night-mode .bg-white {
+    background: var(--bg-dark-card) !important;
+}
+
+body.night-mode .bg-gray-50 {
+    background: var(--bg-dark-secondary) !important;
+}
+
+body.night-mode .text-gray-600,
+body.night-mode .text-gray-500,
+body.night-mode .text-gray-700 {
+    color: var(--text-dark-secondary) !important;
+}
+
+body.night-mode .border {
+    border-color: var(--border-dark) !important;
+}
+
+/* ============================================ */
+/* COMPONENTES REUTILIZABLES */
+/* ============================================ */
+
+/* Botones principales */
 .btn {
     display: inline-block;
     padding: 0.75rem 1.5rem;
     border-radius: 9999px;
     font-weight: 600;
     text-decoration: none;
-    transition: var(--transition);
+    transition: all var(--transition-base);
     cursor: pointer;
     border: none;
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-primary {
-    background: var(--cuban-green);
+    background: var(--primary-green);
     color: white;
 }
 
 .btn-primary:hover {
-    background: var(--cuban-dark);
+    background: var(--primary-green-dark);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
 }
 
 .btn-whatsapp {
-    background: linear-gradient(135deg, var(--whatsapp) 0%, var(--whatsapp-dark) 100%);
+    background: linear-gradient(135deg, var(--whatsapp), var(--whatsapp-dark));
     color: white;
 }
 
-.btn-outline {
-    background: transparent;
-    border: 2px solid currentColor;
+.btn-whatsapp:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
 }
 
-/* ============================================ */
-/* TARJETAS DE PRODUCTO */
-/* ============================================ */
+.btn-contador {
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-green-dark));
+    color: white;
+}
+
+.btn-dulce {
+    background: linear-gradient(135deg, var(--primary-pink), #9B59B6);
+    color: white;
+}
+
+/* Tarjetas de producto */
 .product-card {
     background: white;
     border-radius: 1rem;
     overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-base);
     cursor: pointer;
+    border: 1px solid var(--border-light);
 }
 
 .product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-xl);
 }
 
-.product-image-container {
-    height: 180px;
-    background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+body.night-mode .product-card {
+    background: var(--bg-dark-card);
+    border-color: var(--border-dark);
+}
+
+/* Badges y etiquetas */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-new {
+    background: var(--primary-green);
+    color: white;
+}
+
+.badge-offer {
+    background: var(--primary-gold);
+    color: var(--text-primary);
+}
+
+.badge-service {
+    background: var(--primary-blue);
+    color: white;
+}
+
+/* ============================================ */
+/* SECCIONES ESPECIALES POR SERVICIO */
+/* ============================================ */
+
+/* Sección Contador - Transmite profesionalismo */
+.service-contador {
+    border-left: 4px solid var(--primary-blue);
+}
+
+.service-contador h3 {
+    color: var(--primary-blue);
+}
+
+/* Sección Dulce César - Transmite dulzura */
+.service-dulce {
+    border-left: 4px solid var(--primary-pink);
+}
+
+.service-dulce h3 {
+    color: var(--primary-pink);
+}
+
+/* Sección Ofertas - Urgencia */
+.section-offers {
+    background: linear-gradient(135deg, var(--primary-orange), var(--primary-gold));
+}
+
+/* ============================================ */
+/* HERO BANNER - Optimizado para ambos modos */
+/* ============================================ */
+.hero-container {
+    position: relative;
+    height: 500px;
     overflow: hidden;
 }
 
-.product-image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    padding: 1rem;
-    transition: transform 0.4s ease;
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.2) 0%,
+        rgba(0,0,0,0.4) 50%,
+        rgba(0,0,0,0.6) 100%
+    );
 }
 
-.product-card:hover .product-image-container img {
-    transform: scale(1.08);
+body.night-mode .hero-overlay {
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.4) 0%,
+        rgba(0,0,0,0.6) 50%,
+        rgba(0,0,0,0.8) 100%
+    );
+}
+
+.hero-title {
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    font-size: clamp(2rem, 8vw, 4rem);
+    line-height: 1.2;
+}
+
+/* ============================================ */
+/* PROMOCIONES BANNERS */
+/* ============================================ */
+.promo-banner {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: all var(--transition-base);
+}
+
+.promo-banner:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-xl);
+}
+
+.promo-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(0,0,0,0.8) 0%,
+        rgba(0,0,0,0.4) 100%
+    );
 }
 
 /* ============================================ */
@@ -133,84 +283,79 @@ h1, h2, h3, h4, h5, h6 {
 .cart-sidebar {
     position: fixed;
     bottom: 0;
-    left: 0;
     right: 0;
+    width: 100%;
+    max-width: 400px;
     background: white;
     border-radius: 1.5rem 1.5rem 0 0;
-    box-shadow: var(--shadow-lg);
-    z-index: 50;
+    box-shadow: var(--shadow-xl);
+    z-index: 1000;
     transform: translateY(100%);
-    transition: transform 0.3s ease-in-out;
-    max-height: 85vh;
+    transition: transform var(--transition-base);
+    max-height: 90vh;
     display: flex;
     flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    .cart-sidebar {
+        bottom: 1rem;
+        right: 1rem;
+        border-radius: 1rem;
+        transform: translateX(100%);
+    }
 }
 
 .cart-sidebar.open {
     transform: translateY(0);
 }
 
-.cart-header {
-    background: var(--cuban-green);
-    color: white;
-    padding: 1rem;
-    border-radius: 1.5rem 1.5rem 0 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+@media (min-width: 768px) {
+    .cart-sidebar.open {
+        transform: translateX(0);
+    }
 }
 
-.cart-items {
-    flex: 1;
-    overflow-y: auto;
-    padding: 1rem;
-}
-
-.cart-footer {
-    border-top: 1px solid #eee;
-    padding: 1rem;
-    background: #f9f9f9;
-}
-
-.cart-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 45;
-    display: none;
-}
-
-.cart-overlay.active {
-    display: block;
+body.night-mode .cart-sidebar {
+    background: var(--bg-dark-card);
+    border: 1px solid var(--border-dark);
 }
 
 /* ============================================ */
-/* INDICADOR DÍA/NOCHE */
+/* INDICADOR DÍA/NOCHE MEJORADO */
 /* ============================================ */
 .theme-toggle {
     position: fixed;
     top: 1rem;
     right: 1rem;
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.9);
-    box-shadow: var(--shadow-md);
+    background: white;
+    box-shadow: var(--shadow-lg);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
     cursor: pointer;
-    z-index: 60;
-    transition: var(--transition);
+    z-index: 100;
+    transition: all var(--transition-base);
+    border: 2px solid transparent;
 }
 
 .theme-toggle:hover {
-    transform: scale(1.1);
+    transform: scale(1.1) rotate(15deg);
+    border-color: var(--primary-gold);
+}
+
+body.night-mode .theme-toggle {
+    background: var(--bg-dark-card);
+    color: var(--text-dark-primary);
+    border-color: var(--primary-gold);
 }
 
 /* ============================================ */
-/* BOTONES FLOTANTES */
+/* BOTONES FLOTANTES OPTIMIZADOS */
 /* ============================================ */
 .floating-btn {
     position: fixed;
@@ -223,259 +368,61 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     color: white;
     box-shadow: var(--shadow-lg);
-    transition: var(--transition);
-    z-index: 40;
+    transition: all var(--transition-base);
+    z-index: 90;
     cursor: pointer;
     border: none;
 }
 
 .floating-btn:hover {
-    transform: scale(1.1);
+    transform: scale(1.1) translateY(-4px);
+    box-shadow: var(--shadow-xl);
 }
 
 .floating-btn.whatsapp {
     bottom: 5rem;
-    background: linear-gradient(135deg, var(--whatsapp) 0%, var(--whatsapp-dark) 100%);
+    background: linear-gradient(135deg, var(--whatsapp), var(--whatsapp-dark));
 }
 
 .floating-btn.cart {
     bottom: 1rem;
-    background: var(--cuban-green);
-}
-
-.cart-badge {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background: var(--cuban-yellow);
-    color: var(--cuban-dark);
-    font-size: 0.75rem;
-    font-weight: bold;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: var(--primary-green);
 }
 
 /* ============================================ */
-/* MODAL DE IMAGEN */
+/* ANIMACIONES SUAVES */
 /* ============================================ */
-.image-modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.95);
-    z-index: 70;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.image-modal.active {
-    display: flex;
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
 }
 
-.image-modal-content {
-    position: relative;
-    max-width: 800px;
-    width: 100%;
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
-.image-modal-close {
-    position: absolute;
-    top: -3rem;
-    right: 0;
-    color: white;
-    font-size: 2rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.image-modal-close:hover {
-    color: #ccc;
-    transform: scale(1.1);
-}
-
-.image-modal-img {
-    width: 100%;
-    max-height: 80vh;
-    object-fit: contain;
-    border-radius: 0.5rem;
-}
-
-.image-modal-title {
-    color: white;
-    text-align: center;
-    margin-top: 1rem;
-    font-size: 1.25rem;
-    font-weight: bold;
+.pulse-slow {
+    animation: pulse 2s infinite;
 }
 
 /* ============================================ */
-/* ANIMACIONES */
+/* ACCESIBILIDAD */
 /* ============================================ */
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+:focus-visible {
+    outline: 3px solid var(--primary-gold);
+    outline-offset: 2px;
 }
 
-@keyframes wiggle {
-    0%, 100% { transform: rotate(-3deg); }
-    50% { transform: rotate(3deg); }
-}
-
-.animate-bounce-slow {
-    animation: bounce 2s infinite;
-}
-
-.animate-wiggle {
-    animation: wiggle 1s ease-in-out infinite;
-}
-
-/* ============================================ */
-/* MODO NOCTURNO */
-/* ============================================ */
-body.night-mode {
-    background: var(--night-bg);
-    color: var(--night-text);
-}
-
-body.night-mode .product-card,
-body.night-mode .cart-sidebar,
-body.night-mode header {
-    background: var(--night-card) !important;
-}
-
-body.night-mode .bg-gray-50,
-body.night-mode .bg-gray-100 {
-    background: var(--night-secondary) !important;
-}
-
-body.night-mode .text-gray-600,
-body.night-mode .text-gray-500 {
-    color: #9a9ab0 !important;
-}
-
-body.night-mode .product-image-container {
-    background: #ffffff;
-}
-
-body.night-mode .theme-toggle {
-    background: var(--night-card);
-    color: var(--night-text);
-}
-
-/* ============================================ */
-/* RESPONSIVE */
-/* ============================================ */
-@media (min-width: 768px) {
-    .cart-sidebar {
-        left: auto;
-        right: 1rem;
-        bottom: 1rem;
-        width: 380px;
-        border-radius: 1rem;
-    }
-}
-
-@media (max-width: 640px) {
-    .floating-btn.whatsapp {
-        bottom: 5rem;
-    }
-    
-    .floating-btn.cart {
-        bottom: 1rem;
-    }
-}
-
-/* ============================================ */
-/* TRANSICIÓN ENTRE PÁGINAS */
-/* ============================================ */
-.page-transition {
-    position: fixed;
-    inset: 0;
-    background: white;
-    z-index: 100;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s;
-}
-
-.page-transition.active {
-    opacity: 1;
-}
-
-/* ============================================ */
-/* HERO BANNER */
-/* ============================================ */
-.hero-container {
-    position: relative;
-    height: 500px;
-    overflow: hidden;
-}
-
-.hero-bg-day,
-.hero-bg-night {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    transition: opacity 0.5s;
-}
-
-.hero-bg-day {
-    background-image: url('https://i.postimg.cc/7YfPJ9LD/banner_1l.jpg');
-}
-
-.hero-bg-night {
-    background-image: url('https://i.postimg.cc/MGfKwYjq/plaza_nocturna_(1).png');
-    opacity: 0;
-}
-
-body.night-mode .hero-bg-day { opacity: 0; }
-body.night-mode .hero-bg-night { opacity: 1; }
-
-.hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, 
-        rgba(0,0,0,0.2) 0%,
-        rgba(0,0,0,0.4) 100%
-    );
-}
-
-body.night-mode .hero-overlay {
-    background: linear-gradient(to bottom, 
-        rgba(0,0,0,0.4) 0%,
-        rgba(0,0,0,0.6) 100%
-    );
-}
-
-.hero-content {
-    position: relative;
-    z-index: 10;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
-}
-
-.hero-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-}
-
-@media (min-width: 768px) {
-    .hero-title {
-        font-size: 4rem;
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }
