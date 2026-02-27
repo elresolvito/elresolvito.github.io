@@ -28,16 +28,27 @@
                         'cuban-orange': '#FF6F00',
                         'dulce-rosa': '#FF69B4', 
                         'dulce-morado': '#9B59B6',
-                        'contador-azul': '#1E3A8A'
+                        'contador-azul': '#1E3A8A',
+                        'contador-dorado': '#B45309',
+                        'chancla-azul': '#1E4A6B',
+                        'chancla-rosa': '#C85A7A',
+                        'chancla-beige': '#D4A373',
+                        'chancla-roja': '#B22222'
                     },
                     animation: {
                         'bounce-slow': 'bounce 2s infinite',
                         'wiggle': 'wiggle 1s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'slide-up': 'slideUp 0.5s ease-out',
                     },
                     keyframes: {
                         wiggle: {
                             '0%, 100%': { transform: 'rotate(-3deg)' },
                             '50%': { transform: 'rotate(3deg)' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
                         }
                     }
                 }
@@ -187,6 +198,25 @@
             transition: opacity 0.2s;
         }
         body.night-mode #pageFade { background: #0f0f1a; }
+        
+        /* Estilos específicos para chanclas */
+        .bg-chancla-gradient {
+            background: linear-gradient(135deg, #1E4A6B 0%, #C85A7A 100%);
+        }
+        
+        .color-chip {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-block;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: transform 0.2s ease;
+        }
+        
+        .color-chip:hover {
+            transform: scale(1.2);
+            border-color: white;
+        }
     </style>
     
     <!-- CSS desde carpeta (si existe) -->
@@ -243,7 +273,7 @@
     </section>
 
     <!-- ============================================ -->
-    <!-- SECCIÓN DE PROMOCIONES ESPECIALES - ACTUALIZADA -->
+    <!-- SECCIÓN DE PROMOCIONES ESPECIALES -->
     <!-- ============================================ -->
     <section class="py-12 bg-gradient-to-b from-white to-gray-50">
         <div class="container mx-auto px-4">
@@ -452,7 +482,7 @@
     </section>
 
     <!-- ============================================ -->
-    <!-- VENTA POR MAYOR PREVIEW -->
+    <!-- OFERTAS MAYOR PREVIEW - CHANCLAS (ACTUALIZADO) -->
     <!-- ============================================ -->
     <section class="py-12 bg-cuban-dark text-white">
         <div class="container mx-auto px-4">
@@ -460,9 +490,73 @@
                 <h2 class="text-3xl font-bold"><i class="fas fa-boxes mr-3 text-cuban-yellow"></i>Venta por Mayor</h2>
                 <a href="ofertas.html" class="text-cuban-yellow font-medium hover:underline">Ver todo →</a>
             </div>
-            <div class="grid md:grid-cols-4 gap-4" id="mayorProducts">
-                <!-- Se carga dinámicamente -->
+            
+            <!-- Preview de la oferta de chanclas -->
+            <div class="bg-gradient-to-r from-chancla-azul to-chancla-rosa rounded-2xl overflow-hidden shadow-xl transform hover:scale-[1.02] transition-all duration-300">
+                <div class="md:flex items-center">
+                    <div class="md:w-1/3 p-6">
+                        <div class="bg-white/20 backdrop-blur rounded-2xl p-4 text-center hover:bg-white/30 transition-colors">
+                            <span class="text-6xl block mb-2 animate-bounce-slow">🩴</span>
+                            <span class="text-3xl font-bold">$3,500</span>
+                            <p class="text-sm opacity-90">cada par</p>
+                            <span class="inline-block mt-2 bg-cuban-yellow text-cuban-dark text-xs px-2 py-1 rounded-full font-bold animate-pulse">
+                                MAYOREO
+                            </span>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3 p-6">
+                        <span class="bg-white/30 px-3 py-1 rounded-full text-sm font-bold mb-3 inline-block backdrop-blur-sm">
+                            🔥 OFERTA ESPECIAL
+                        </span>
+                        <h3 class="text-3xl font-bold mb-2">Chanclas al por Mayor</h3>
+                        <p class="text-white/90 mb-4">Diferentes colores y estilos disponibles. Ideal para revendedores y negocios. Material duradero y cómodo.</p>
+                        
+                        <!-- Chips de colores interactivos -->
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors">
+                                <span class="color-chip" style="background-color: #000000;"></span> Negras
+                            </span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors">
+                                <span class="color-chip" style="background-color: #FFFFFF; border: 1px solid #ccc;"></span> Blancas
+                            </span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors">
+                                <span class="color-chip" style="background-color: #D4A373;"></span> Beige
+                            </span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors">
+                                <span class="color-chip" style="background-color: #C85A7A;"></span> Rosadas
+                            </span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors">
+                                <span class="color-chip" style="background-color: #1E4A6B;"></span> Azules
+                            </span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors">
+                                <span class="color-chip" style="background-color: #B22222;"></span> Rojas
+                            </span>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-3">
+                            <a href="ofertas.html" class="inline-block bg-white text-chancla-azul px-6 py-2 rounded-full font-bold hover:bg-gray-100 transition shadow-lg">
+                                <i class="fas fa-eye mr-2"></i>Ver colección completa
+                            </a>
+                            <a href="https://wa.me/5356382909?text=Hola%2C%20me%20interesan%20las%20chanclas%20al%20por%20mayor" 
+                               target="_blank"
+                               class="inline-block bg-cuban-yellow text-cuban-dark px-6 py-2 rounded-full font-bold hover:bg-yellow-400 transition shadow-lg">
+                                <i class="fab fa-whatsapp mr-2"></i>Consultar por mayor
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
+            
+            <!-- Mensaje de más productos próximamente -->
+            <div class="mt-6 text-center text-white/70">
+                <p><i class="fas fa-plus-circle mr-2 text-cuban-yellow"></i> Próximamente más productos al por mayor</p>
+            </div>
+            
+            <!-- Mini grid de otras ofertas mayor (opcional) -->
+            <div class="grid md:grid-cols-3 gap-4 mt-8" id="mayorProducts">
+                <!-- Se cargará dinámicamente con JavaScript -->
+            </div>
+            
         </div>
     </section>
 
@@ -489,7 +583,7 @@
                     <div class="p-4">
                         <span class="text-xs text-cuban-green font-bold">HOSPEDAJE</span>
                         <h3 class="font-bold text-lg mt-1">Guía para alquilar en La Habana</h3>
-                        <p class="text-gray-600 text-sm mt-2">Todo lo que necesitas saber...</p>
+                        <p class="text-gray-600 text-sm mt-2">Todo lo que necesitas saber para encontrar el mejor alojamiento...</p>
                     </div>
                 </article>
                 <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog.html'">
@@ -497,7 +591,7 @@
                     <div class="p-4">
                         <span class="text-xs text-cuban-green font-bold">CONSEJOS</span>
                         <h3 class="font-bold text-lg mt-1">¿Por qué comprar en El Resolvito?</h3>
-                        <p class="text-gray-600 text-sm mt-2">Descubre los beneficios...</p>
+                        <p class="text-gray-600 text-sm mt-2">Descubre los beneficios de comprar en tu tienda de confianza...</p>
                     </div>
                 </article>
             </div>
@@ -597,30 +691,18 @@
         // ============================================
         let cart = [];
 
-     // Función para cargar componentes
-async function loadComponent(elementId, filePath) {
-    try {
-        const response = await fetch(filePath);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const html = await response.text();
-        document.getElementById(elementId).innerHTML = html;
-    } catch (error) {
-        console.error('Error cargando componente:', filePath, error);
-        // Fallback: mostrar un mensaje o cargar un footer por defecto
-        document.getElementById(elementId).innerHTML = `
-            <footer class="bg-cuban-dark text-white py-8">
-                <div class="container text-center">
-                    <p>Error cargando el footer. Por favor recarga la página.</p>
-                </div>
-            </footer>
-        `;
-    }
-}
-
-// Llamar a la función
-document.addEventListener('DOMContentLoaded', () => {
-    loadComponent('footer-container', 'components/footer.html');
-});
+        // ============================================
+        // FUNCIONES PARA CARGAR COMPONENTES
+        // ============================================
+        async function loadComponent(elementId, filePath) {
+            try {
+                const response = await fetch(filePath);
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+            } catch (error) {
+                console.error('Error cargando componente:', filePath, error);
+            }
+        }
 
         // ============================================
         // INICIALIZACIÓN
@@ -849,7 +931,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // ============================================
         function showNotification(message) {
             const notification = document.createElement('div');
-            notification.className = 'fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-cuban-green text-white px-4 py-2 rounded-full shadow-lg z-50';
+            notification.className = 'fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-cuban-green text-white px-4 py-2 rounded-full shadow-lg z-50 animate-bounce';
             notification.textContent = message;
             document.body.appendChild(notification);
             setTimeout(() => notification.remove(), 2000);
