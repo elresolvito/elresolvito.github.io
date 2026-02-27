@@ -1,36 +1,136 @@
-<!-- Cart Sidebar Component -->
-<div id="cart-overlay" class="cart-overlay" onclick="cart.toggleCart()"></div>
+<!-- Cart Sidebar Component - Versión Mejorada -->
+<div id="cartOverlay" class="fixed inset-0 bg-black/50 z-[100] hidden backdrop-blur-sm transition-opacity duration-300" onclick="cart.toggleCart()"></div>
 
-<div id="cart-sidebar" class="cart-sidebar">
-    <div class="cart-header">
-        <h3><i class="fas fa-shopping-cart"></i> Tu Carrito</h3>
-        <button onclick="cart.toggleCart()" class="cart-close">
+<div id="cartSidebar" class="fixed bottom-0 right-0 w-full md:w-96 bg-white dark:bg-gray-900 rounded-t-3xl md:rounded-2xl shadow-2xl z-[101] transform translate-y-full md:translate-x-full transition-transform duration-300 ease-in-out max-h-[90vh] flex flex-col">
+    
+    <!-- Header del Carrito -->
+    <div class="p-4 border-b border-gray-200 dark:border-gray-800 flex justify-between items-center bg-gradient-to-r from-cuban-green to-cuban-green-dark text-white rounded-t-3xl md:rounded-t-2xl">
+        <div class="flex items-center gap-2">
+            <i class="fas fa-shopping-cart text-xl"></i>
+            <h3 class="font-bold text-lg">Tu Carrito</h3>
+        </div>
+        <button onclick="cart.toggleCart()" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
             <i class="fas fa-times"></i>
         </button>
     </div>
 
-    <div id="cart-items" class="cart-items">
-        <!-- Items se cargan dinámicamente -->
+    <!-- Contenido del Carrito (items) -->
+    <div id="cartItems" class="flex-1 overflow-y-auto p-4 space-y-4">
+        <!-- Los items se cargan dinámicamente -->
+        <div class="text-center py-8 text-gray-500 dark:text-gray-400">
+            <i class="fas fa-shopping-cart text-5xl mb-3 opacity-30"></i>
+            <p>Tu carrito está vacío</p>
+            <p class="text-sm mt-2">¡Explora nuestra tienda!</p>
+        </div>
     </div>
 
-    <div id="cart-footer" class="cart-footer">
-        <div class="cart-totals">
-            <div class="cart-row">
-                <span>Subtotal:</span>
-                <span id="cart-subtotal">$0</span>
+    <!-- Footer del Carrito (totales y checkout) -->
+    <div id="cartFooter" class="border-t border-gray-200 dark:border-gray-800 p-4 bg-gray-50 dark:bg-gray-800/50">
+        <!-- Resumen de compra -->
+        <div class="space-y-3 mb-4">
+            <div class="flex justify-between text-sm">
+                <span class="text-gray-600 dark:text-gray-400">Subtotal:</span>
+                <span id="cartSubtotal" class="font-medium text-gray-900 dark:text-white">$0</span>
             </div>
-            <div class="cart-row">
-                <span>Envío:</span>
-                <span id="cart-shipping">$200</span>
+            <div class="flex justify-between text-sm">
+                <span class="text-gray-600 dark:text-gray-400">Envío:</span>
+                <span id="cartShipping" class="font-medium text-cuban-green">$200</span>
             </div>
-            <div class="cart-row total">
+            <div class="flex justify-between text-sm">
+                <span class="text-gray-600 dark:text-gray-400">Env. gratis en:</span>
+                <span class="font-medium text-cuban-orange">+$5,000</span>
+            </div>
+            <div class="border-t border-gray-200 dark:border-gray-700 pt-3 flex justify-between text-lg font-bold">
                 <span>Total:</span>
-                <span id="cart-total" class="text-cuban-green">$200</span>
+                <span id="cartTotal" class="text-cuban-green">$200</span>
             </div>
         </div>
 
-        <button onclick="cart.checkout()" class="btn btn-whatsapp btn-block">
-            <i class="fab fa-whatsapp"></i> Hacer pedido
+        <!-- Botón de WhatsApp mejorado -->
+        <button onclick="cart.checkout()" class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white py-4 rounded-xl font-bold text-lg transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center gap-3 shadow-lg">
+            <i class="fab fa-whatsapp text-2xl"></i>
+            <span>Completar pedido</span>
         </button>
+
+        <!-- Mensaje de seguridad -->
+        <p class="text-xs text-center text-gray-500 dark:text-gray-500 mt-3">
+            <i class="fas fa-lock mr-1"></i>
+            Pedido seguro vía WhatsApp
+        </p>
     </div>
 </div>
+
+<!-- Template para items del carrito (usado por JavaScript) -->
+<template id="cart-item-template">
+    <div class="cart-item flex gap-3 bg-gray-50 dark:bg-gray-800/50 p-3 rounded-xl hover:shadow-md transition-shadow">
+        <img class="w-16 h-16 object-cover rounded-lg bg-white" src="" alt="">
+        <div class="flex-1">
+            <h4 class="font-medium text-sm text-gray-900 dark:text-white cart-item-name"></h4>
+            <p class="text-cuban-green font-bold cart-item-price"></p>
+            <div class="flex items-center gap-2 mt-2">
+                <button class="cart-qty-down w-6 h-6 bg-white dark:bg-gray-700 rounded shadow text-xs hover:bg-cuban-green hover:text-white transition-colors">-</button>
+                <span class="cart-qty text-sm font-medium"></span>
+                <button class="cart-qty-up w-6 h-6 bg-white dark:bg-gray-700 rounded shadow text-xs hover:bg-cuban-green hover:text-white transition-colors">+</button>
+                <button class="cart-remove ml-auto text-red-500 hover:text-red-700 transition-colors">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- Estilos específicos -->
+<style>
+    /* Animaciones */
+    #cartSidebar {
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    #cartSidebar.cart-open {
+        transform: translateY(0) !important;
+    }
+    
+    @media (min-width: 768px) {
+        #cartSidebar.cart-open {
+            transform: translateX(0) !important;
+        }
+    }
+    
+    /* Estilo para items del carrito */
+    .cart-item {
+        animation: slideIn 0.3s ease;
+    }
+    
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    /* Modo oscuro */
+    body.night-mode #cartSidebar {
+        background-color: #16213e;
+        border: 1px solid #2a2a3a;
+    }
+    
+    body.night-mode .cart-item {
+        background-color: #1a1a2e !important;
+    }
+    
+    /* Botón de cantidad */
+    .cart-qty-down, .cart-qty-up {
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    
+    .cart-qty-down:hover, .cart-qty-up:hover {
+        background-color: #2E7D32 !important;
+        color: white !important;
+    }
+</style>
