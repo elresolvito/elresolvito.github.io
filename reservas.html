@@ -16,7 +16,8 @@
                     fontFamily: { 'poppins': ['Poppins'], 'opensans': ['Open Sans'] },
                     colors: {
                         'cuban-green': '#2E7D32', 'cuban-dark': '#1B5E20',
-                        'cuban-yellow': '#FFB300', 'cuban-blue': '#0277BD'
+                        'cuban-yellow': '#FFB300', 'cuban-blue': '#0277BD',
+                        'bayona-oro': '#D4AF37'
                     }
                 }
             }
@@ -30,10 +31,114 @@
         .property-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px rgba(0,0,0,0.15); }
         .btn-whatsapp { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); }
         
+        /* Estilos para el carrusel */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+        
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .carousel-slide {
+            flex: 0 0 100%;
+            padding: 1rem;
+        }
+        
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            z-index: 10;
+        }
+        
+        .carousel-button:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .carousel-prev { left: 10px; }
+        .carousel-next { right: 10px; }
+        
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 1rem;
+        }
+        
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #d1d5db;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .carousel-dot.active {
+            background: #2E7D32;
+            transform: scale(1.2);
+        }
+        
+        /* Estilos para la tarjeta de alojamiento */
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .amenity-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #4b5563;
+        }
+        
+        body.night-mode .amenity-item {
+            color: #d1d5db;
+        }
+        
+        .amenity-item i {
+            color: #2E7D32;
+            width: 20px;
+        }
+        
+        .experience-badge {
+            background: linear-gradient(135deg, #FFB300 0%, #FF6F00 100%);
+            color: #1B5E20;
+            font-weight: bold;
+            padding: 0.25rem 1rem;
+            border-radius: 9999px;
+            display: inline-block;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Modo nocturno */
         body.night-mode { background-color: #0f0f1a; color: #e0e0e0; }
         body.night-mode .bg-white { background-color: #16213e !important; color: #e0e0e0 !important; }
         body.night-mode .bg-gray-50 { background-color: #1a1a2e !important; }
         body.night-mode header { background-color: #16213e !important; }
+        body.night-mode .carousel-button { background: #2a2a3a; color: white; }
+        body.night-mode .carousel-dot { background: #4a4a5a; }
+        body.night-mode .carousel-dot.active { background: #4CAF50; }
     </style>
 </head>
 <body class="bg-white text-gray-800 pb-20">
@@ -102,18 +207,33 @@
         </div>
     </section>
 
-    <!-- Propiedad Destacada -->
+
     <section class="py-12">
         <div class="container mx-auto px-4">
-            <span class="bg-cuban-yellow text-cuban-dark text-sm font-bold px-3 py-1 rounded-full">⭐ RECOMENDADO</span>
+            <span class="bg-cuban-yellow text-cuban-dark text-sm font-bold px-3 py-1 rounded-full">⭐ ALOJAMIENTO DESTACADO</span>
             
             <div class="property-card bg-white rounded-2xl shadow-xl overflow-hidden mt-4">
                 <div class="md:flex">
+                    <!-- Carrusel de imágenes -->
                     <div class="md:w-1/2">
-                        <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&auto=format&fit=crop&q=60" 
-                             alt="Terrazas de Bayona 59" 
-                             class="w-full h-64 md:h-full object-cover">
+                        <div class="carousel-container h-64 md:h-full">
+                            <div id="carouselTrack" class="carousel-track h-full">
+                                <!-- Las slides se generan dinámicamente -->
+                            </div>
+                            
+                            <button class="carousel-button carousel-prev" onclick="prevSlide()">
+                                <i class="fas fa-chevron-left text-cuban-green"></i>
+                            </button>
+                            <button class="carousel-button carousel-next" onclick="nextSlide()">
+                                <i class="fas fa-chevron-right text-cuban-green"></i>
+                            </button>
+                            
+                            <div id="carouselDots" class="carousel-dots absolute bottom-2 left-0 right-0">
+                                <!-- Se generan dinámicamente -->
+                            </div>
+                        </div>
                     </div>
+                    
                     <div class="md:w-1/2 p-6 md:p-8 flex flex-col justify-center">
                         <h3 class="text-3xl font-bold mb-2">Terrazas de Bayona 59</h3>
                         <p class="text-gray-500 mb-4"><i class="fas fa-map-marker-alt mr-2 text-cuban-green"></i>La Habana Vieja, Cuba</p>
@@ -123,6 +243,7 @@
                             <span class="bg-gray-100 px-3 py-1 rounded-full text-sm"><i class="fas fa-snowflake mr-1 text-cuban-green"></i>A/C</span>
                             <span class="bg-gray-100 px-3 py-1 rounded-full text-sm"><i class="fas fa-utensils mr-1 text-cuban-green"></i>Cocina</span>
                             <span class="bg-gray-100 px-3 py-1 rounded-full text-sm"><i class="fas fa-sun mr-1 text-cuban-green"></i>Terraza</span>
+                            <span class="bg-gray-100 px-3 py-1 rounded-full text-sm"><i class="fas fa-bath mr-1 text-cuban-green"></i>Baño privado</span>
                         </div>
 
                         <p class="text-gray-600 mb-6">Hermoso apartamento independiente en edificio colonial restaurado. Capacidad para 4 personas, terraza con vistas a la ciudad, cocina equipada y baño privado. Ubicación privilegiada a pasos del Capitolio y el Malecón.</p>
@@ -140,6 +261,32 @@
                             </div>
                         </div>
 
+                        <!-- Comodidades -->
+                        <div class="mb-4">
+                            <span class="font-semibold text-cuban-green mb-2 block">Comodidades Incluidas:</span>
+                            <div class="amenities-grid">
+                                <div class="amenity-item"><i class="fas fa-check-circle"></i> Agua caliente 24/7</div>
+                                <div class="amenity-item"><i class="fas fa-check-circle"></i> Aire acondicionado</div>
+                                <div class="amenity-item"><i class="fas fa-check-circle"></i> 2 terrazas privadas</div>
+                                <div class="amenity-item"><i class="fas fa-check-circle"></i> Baño privado</div>
+                                <div class="amenity-item"><i class="fas fa-check-circle"></i> Wi-Fi gratuito</div>
+                                <div class="amenity-item"><i class="fas fa-check-circle"></i> Cocina equipada</div>
+                                <div class="amenity-item"><i class="fas fa-check-circle"></i> Ropa de cama</div>
+                                <div class="amenity-item"><i class="fas fa-check-circle"></i> Toallas</div>
+                            </div>
+                        </div>
+
+                        <!-- Experiencia -->
+                        <div class="mb-4">
+                            <span class="font-semibold text-cuban-green mb-2 block">Lo que nos caracteriza:</span>
+                            <div>
+                                <span class="experience-badge"><i class="fas fa-star mr-1"></i> 16+ años</span>
+                                <span class="experience-badge"><i class="fas fa-clock mr-1"></i> 24/7</span>
+                                <span class="experience-badge"><i class="fas fa-heart mr-1"></i> Auténtico</span>
+                            </div>
+                        </div>
+
+                        <!-- Botones -->
                         <div class="flex gap-3">
                             <a href="https://reservaterrazasdebayona59.com/" target="_blank" class="flex-1 bg-cuban-green text-white text-center py-3 rounded-xl font-bold hover:bg-cuban-dark transition">
                                 <i class="fas fa-calendar-check mr-2"></i>Reservar Ahora
@@ -154,84 +301,62 @@
         </div>
     </section>
 
-    <!-- Más propiedades -->
+  
     <section class="py-12 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h3 class="text-2xl font-bold mb-8">Otros Alojamientos Disponibles</h3>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                <!-- Propiedad 2 -->
-                <div class="property-card bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h4 class="font-bold text-lg mb-1">Casa Colonial Completa</h4>
-                        <p class="text-gray-500 text-sm mb-3"><i class="fas fa-map-marker-alt mr-1"></i>Centro Habana</p>
-                        <div class="flex gap-2 mb-3 text-sm text-gray-600">
-                            <span><i class="fas fa-user mr-1"></i>6</span>
-                            <span><i class="fas fa-wifi mr-1"></i>WiFi</span>
-                            <span><i class="fas fa-car mr-1"></i>Parqueo</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-xl font-bold text-cuban-green">$4,000<span class="text-sm text-gray-500 font-normal">/noche</span></span>
-                            <button onclick="contactProperty('Casa Colonial')" class="bg-cuban-green text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-cuban-dark">
-                                Consultar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Propiedad 3 -->
-                <div class="property-card bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h4 class="font-bold text-lg mb-1">Estudio Moderno</h4>
-                        <p class="text-gray-500 text-sm mb-3"><i class="fas fa-map-marker-alt mr-1"></i>Vedado</p>
-                        <div class="flex gap-2 mb-3 text-sm text-gray-600">
-                            <span><i class="fas fa-user mr-1"></i>2</span>
-                            <span><i class="fas fa-wifi mr-1"></i>WiFi</span>
-                            <span><i class="fas fa-snowflake mr-1"></i>A/C</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-xl font-bold text-cuban-green">$1,800<span class="text-sm text-gray-500 font-normal">/noche</span></span>
-                            <button onclick="contactProperty('Estudio Moderno')" class="bg-cuban-green text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-cuban-dark">
-                                Consultar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Propiedad 4 -->
-                <div class="property-card bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h4 class="font-bold text-lg mb-1">Apartamento Familiar</h4>
-                        <p class="text-gray-500 text-sm mb-3"><i class="fas fa-map-marker-alt mr-1"></i>Playa</p>
-                        <div class="flex gap-2 mb-3 text-sm text-gray-600">
-                            <span><i class="fas fa-user mr-1"></i>5</span>
-                            <span><i class="fas fa-wifi mr-1"></i>WiFi</span>
-                            <span><i class="fas fa-swimming-pool mr-1"></i>Piscina</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-xl font-bold text-cuban-green">$3,200<span class="text-sm text-gray-500 font-normal">/noche</span></span>
-                            <button onclick="contactProperty('Apartamento Familiar')" class="bg-cuban-green text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-cuban-dark">
-                                Consultar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="flex justify-between items-center mb-8">
+                <h3 class="text-2xl font-bold">Próximos Alojamientos</h3>
+                <span class="text-cuban-green font-medium">Más opciones muy pronto</span>
             </div>
+            
+            <!-- Grid preparado para futuros alojamientos -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="futureProperties">
+                
+                <!-- Espacio reservado para futuras propiedades -->
+                <div class="bg-white rounded-xl shadow-md p-8 text-center border-2 border-dashed border-gray-300">
+                    <div class="text-6xl mb-4 opacity-30">🏠</div>
+                    <h4 class="font-bold text-xl mb-2 text-gray-400">Nuevo alojamiento</h4>
+                    <p class="text-gray-400 mb-4">Próximamente</p>
+                    <div class="w-16 h-1 bg-cuban-green mx-auto rounded-full"></div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-8 text-center border-2 border-dashed border-gray-300">
+                    <div class="text-6xl mb-4 opacity-30">🏡</div>
+                    <h4 class="font-bold text-xl mb-2 text-gray-400">Nuevo alojamiento</h4>
+                    <p class="text-gray-400 mb-4">Próximamente</p>
+                    <div class="w-16 h-1 bg-cuban-green mx-auto rounded-full"></div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-8 text-center border-2 border-dashed border-gray-300">
+                    <div class="text-6xl mb-4 opacity-30">🏘️</div>
+                    <h4 class="font-bold text-xl mb-2 text-gray-400">Nuevo alojamiento</h4>
+                    <p class="text-gray-400 mb-4">Próximamente</p>
+                    <div class="w-16 h-1 bg-cuban-green mx-auto rounded-full"></div>
+                </div>
+                
+            </div>
+            
+            <!-- Mensaje para añadir propiedades -->
+            <div class="mt-8 text-center">
+                <p class="text-gray-600 mb-4">¿Tienes una propiedad para alquilar?</p>
+                <a href="https://wa.me/5356382909?text=Hola, quiero publicar mi propiedad en El Resolvito" 
+                   target="_blank"
+                   class="inline-block bg-cuban-green text-white px-6 py-3 rounded-full font-bold hover:bg-cuban-dark transition">
+                    <i class="fab fa-whatsapp mr-2"></i>Publica tu propiedad
+                </a>
+            </div>
+            
         </div>
     </section>
 
-    <!-- CTA -->
-    <section class="py-12 bg-cuban-green text-white">
+    <!-- CTA Web Bayona -->
+    <section class="py-12 bg-gradient-to-r from-cuban-green to-cuban-dark text-white">
         <div class="container mx-auto px-4 text-center">
-            <h3 class="text-2xl font-bold mb-4">¿Tienes una propiedad para alquilar?</h3>
-            <p class="mb-6 opacity-90">Publica tu alojamiento con nosotros y llega a más clientes</p>
-            <a href="https://wa.me/5356382909?text=Hola, quiero publicar mi propiedad" target="_blank" class="inline-block bg-white text-cuban-green px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition">
-                <i class="fab fa-whatsapp mr-2"></i>Publicar mi propiedad
+            <h3 class="text-2xl font-bold mb-4">🌐 Sitio web oficial</h3>
+            <p class="mb-6 opacity-90">Visita la web de Terrazas de Bayona 59 para más información</p>
+            <a href="https://reservaterrazasdebayona59.com/" target="_blank" class="inline-block bg-white text-cuban-green px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition shadow-lg">
+                <i class="fas fa-external-link-alt mr-2"></i>reservaterrazasdebayona59.com
             </a>
         </div>
     </section>
@@ -244,59 +369,137 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('pageFade').classList.add('opacity-0');
-            if (localStorage.getItem('nightMode') === 'true') document.body.classList.add('night-mode');
-        });
-
-       // Transición suave entre páginas
-document.addEventListener('DOMContentLoaded', function() {
-    // Quitar transición de entrada
-    document.getElementById('pageFade').classList.add('opacity-0');
-    
-    // Restaurar modo noche
-    if (localStorage.getItem('nightMode') === 'true') {
-        document.body.classList.add('night-mode');
-    }
-});
-
-// Manejar clics en enlaces internos
-document.querySelectorAll('a[href]').forEach(link => {
-    const href = link.getAttribute('href');
-    
-    // Solo aplicar a enlaces internos
-    if (href && !href.startsWith('http') && !href.startsWith('#') && 
-        !href.startsWith('mailto') && !href.startsWith('tel') && 
-        href !== 'javascript:void(0)') {
+        // ============================================
+        // ARRAY DE IMÁGENES DEL CARRUSEL
+        // ============================================
+     
+        const propertyImages = [
+            { url: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&auto=format&fit=crop&q=60", titulo: "Vista exterior" },
+            { url: "https://i.postimg.cc/W4qCN1Ns/ba-o-de-habitacion-imagen-1.jpg", titulo: "Baño de habitación" },
+            { url: "https://i.postimg.cc/3NYcFj2b/pasillo-hacia-habitacion-cocina-y-terraza.jpg", titulo: "Pasillo" },
+            { url: "https://i.postimg.cc/PfQcrcj5/terraza-imagen-1.jpg", titulo: "Terraza" },
+            { url: "https://i.postimg.cc/8km3P3Sk/sala-imagen-1.png", titulo: "Sala" },
+            { url: "https://i.postimg.cc/76gRztJt/habitacion-imagen-2.jpg", titulo: "Habitación" }
+        ];
         
-        link.addEventListener('click', function(e) {
-            // No interceptar si es clic con tecla Ctrl o botón medio
-            if (e.ctrlKey || e.metaKey || e.button === 1) return;
+        let currentSlide = 0;
+
+        // ============================================
+        // INICIALIZACIÓN
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar carrusel
+            initCarousel();
             
-            e.preventDefault();
+            // Transición
+            document.getElementById('pageFade').classList.add('opacity-0');
             
-            // Guardar modo noche
-            localStorage.setItem('nightMode', document.body.classList.contains('night-mode') ? 'true' : 'false');
-            
-            // Activar transición
-            document.getElementById('pageFade').classList.remove('opacity-0');
-            
-            // Navegar después de la transición
-            setTimeout(() => {
-                window.location.href = href;
-            }, 200);
+            // Restaurar modo noche
+            if (localStorage.getItem('nightMode') === 'true') {
+                document.body.classList.add('night-mode');
+            }
         });
-    }
-});
 
-// Restaurar al usar botón atrás
-window.addEventListener('pageshow', function(event) {
-    // Si la página viene del caché (botón atrás)
-    if (event.persisted) {
-        document.getElementById('pageFade').classList.add('opacity-0');
-    }
-});
+        // ============================================
+        // FUNCIONES DEL CARRUSEL
+        // ============================================
+        function initCarousel() {
+            const track = document.getElementById('carouselTrack');
+            const dotsContainer = document.getElementById('carouselDots');
+            
+            // Generar slides
+            track.innerHTML = propertyImages.map((img, index) => `
+                <div class="carousel-slide h-full">
+                    <img src="${img.url}" 
+                         alt="${img.titulo}" 
+                         class="w-full h-full object-cover"
+                         onclick="openImageModal('${img.url}', '${img.titulo}')">
+                    <div class="absolute bottom-8 left-0 right-0 text-center text-white text-sm bg-black/50 py-1 mx-auto w-fit px-3 rounded-full">
+                        ${img.titulo}
+                    </div>
+                </div>
+            `).join('');
+            
+            // Generar dots
+            dotsContainer.innerHTML = propertyImages.map((_, index) => `
+                <div class="carousel-dot ${index === 0 ? 'active' : ''}" onclick="goToSlide(${index})"></div>
+            `).join('');
+            
+            updateCarousel();
+        }
+        
+        function updateCarousel() {
+            const track = document.getElementById('carouselTrack');
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Actualizar dots
+            document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % propertyImages.length;
+            updateCarousel();
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + propertyImages.length) % propertyImages.length;
+            updateCarousel();
+        }
+        
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
 
+        // ============================================
+        // MODAL DE IMAGEN
+        // ============================================
+        function openImageModal(src, title) {
+            // Crear modal si no existe
+            if (!document.getElementById('imageModal')) {
+                const modal = document.createElement('div');
+                modal.id = 'imageModal';
+                modal.className = 'fixed inset-0 bg-black/95 z-[60] hidden flex items-center justify-center p-4';
+                modal.onclick = closeImageModal;
+                modal.innerHTML = `
+                    <div class="relative max-w-3xl w-full" onclick="event.stopPropagation()">
+                        <button onclick="closeImageModal()" class="absolute -top-12 right-0 text-white text-3xl hover:text-gray-300">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <img id="modalImage" src="" alt="" class="w-full max-h-[80vh] object-contain rounded-lg">
+                        <p id="modalImageTitle" class="text-white text-center mt-4 text-xl font-bold"></p>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            }
+            
+            const modal = document.getElementById('imageModal');
+            const img = document.getElementById('modalImage');
+            const titleEl = document.getElementById('modalImageTitle');
+            
+            img.src = src;
+            titleEl.textContent = title || 'Terrazas de Bayona 59';
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeImageModal();
+        });
+
+        // ============================================
+        // NAVEGACIÓN Y UTILIDADES
+        // ============================================
         function toggleMenu() {
             document.getElementById('mobileMenu').classList.toggle('hidden');
         }
@@ -304,6 +507,36 @@ window.addEventListener('pageshow', function(event) {
         function contactProperty(name) {
             window.open(`https://wa.me/5356382909?text=Hola, consulta sobre ${name}`, '_blank');
         }
+
+        // Transición suave entre páginas
+        document.querySelectorAll('a[href]').forEach(link => {
+            const href = link.getAttribute('href');
+            
+            if (href && !href.startsWith('http') && !href.startsWith('#') && 
+                !href.startsWith('mailto') && !href.startsWith('tel') && 
+                href !== 'javascript:void(0)') {
+                
+                link.addEventListener('click', function(e) {
+                    if (e.ctrlKey || e.metaKey || e.button === 1) return;
+                    
+                    e.preventDefault();
+                    
+                    localStorage.setItem('nightMode', document.body.classList.contains('night-mode') ? 'true' : 'false');
+                    
+                    document.getElementById('pageFade').classList.remove('opacity-0');
+                    
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 200);
+                });
+            }
+        });
+
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                document.getElementById('pageFade').classList.add('opacity-0');
+            }
+        });
     </script>
 </body>
 </html>
