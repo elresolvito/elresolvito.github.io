@@ -286,17 +286,53 @@
         });
 
         // Navegación suave
-        document.querySelectorAll('a[href]').forEach(link => {
-            const href = link.getAttribute('href');
-            if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('mailto') && !href.startsWith('tel')) {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    localStorage.setItem('nightMode', document.body.classList.contains('night-mode') ? 'true' : 'false');
-                    document.getElementById('pageFade').classList.remove('opacity-0');
-                    setTimeout(() => location.href = href, 200);
-                });
-            }
+       // Transición suave entre páginas
+document.addEventListener('DOMContentLoaded', function() {
+    // Quitar transición de entrada
+    document.getElementById('pageFade').classList.add('opacity-0');
+    
+    // Restaurar modo noche
+    if (localStorage.getItem('nightMode') === 'true') {
+        document.body.classList.add('night-mode');
+    }
+});
+
+// Manejar clics en enlaces internos
+document.querySelectorAll('a[href]').forEach(link => {
+    const href = link.getAttribute('href');
+    
+    // Solo aplicar a enlaces internos
+    if (href && !href.startsWith('http') && !href.startsWith('#') && 
+        !href.startsWith('mailto') && !href.startsWith('tel') && 
+        href !== 'javascript:void(0)') {
+        
+        link.addEventListener('click', function(e) {
+            // No interceptar si es clic con tecla Ctrl o botón medio
+            if (e.ctrlKey || e.metaKey || e.button === 1) return;
+            
+            e.preventDefault();
+            
+            // Guardar modo noche
+            localStorage.setItem('nightMode', document.body.classList.contains('night-mode') ? 'true' : 'false');
+            
+            // Activar transición
+            document.getElementById('pageFade').classList.remove('opacity-0');
+            
+            // Navegar después de la transición
+            setTimeout(() => {
+                window.location.href = href;
+            }, 200);
         });
+    }
+});
+
+// Restaurar al usar botón atrás
+window.addEventListener('pageshow', function(event) {
+    // Si la página viene del caché (botón atrás)
+    if (event.persisted) {
+        document.getElementById('pageFade').classList.add('opacity-0');
+    }
+});
 
         function addToCart(name, price, image) {
             const existing = cart.find(item => item.name === name);
