@@ -137,18 +137,39 @@ class CartManager {
         return this.cart.reduce((sum, item) => sum + item.quantity, 0);
     }
 
-    // Actualizar UI del carrito
-    updateUI() {
-        // Actualizar badges
-        const count = this.getItemCount();
-        document.querySelectorAll('.cart-count, #cartCount, #cartCountMobile').forEach(el => {
-            if (el) {
-                el.textContent = count;
-                el.style.display = count > 0 ? 'flex' : 'none';
-                el.classList.toggle('hidden', count === 0);
+   // ============================================
+// ACTUALIZAR UI DEL CARRITO
+// ============================================
+function updateCartUI() {
+    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+    
+    // Actualizar TODOS los badges del carrito en TODO el sitio
+    document.querySelectorAll('.cart-badge, #cartCount, #cartCountMobile, #headerCartCount, #floatingCartCount').forEach(el => {
+        if (el) {
+            // Actualizar número
+            el.textContent = count;
+            
+            // Añadir atributo data-count para estilos condicionales
+            el.setAttribute('data-count', count);
+            
+            // Mostrar/ocultar
+            if (count === 0) {
+                el.style.display = 'none';
+            } else {
+                el.style.display = 'flex';
+                
+                // Añadir animación de "pop" cuando cambia el número
+                el.classList.add('badge-pop');
+                setTimeout(() => {
+                    el.classList.remove('badge-pop');
+                }, 300);
             }
-        });
+        }
+    });
 
+    // El resto de tu código updateCartUI() ...
+    // (calcular totales, actualizar items, etc.)
+}
         // Actualizar contenido del carrito
         const cartItemsEl = document.getElementById('cartItems');
         const cartFooterEl = document.getElementById('cartFooter');
