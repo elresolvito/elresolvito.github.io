@@ -29,17 +29,14 @@
                         'dulce-rosa': '#FF69B4', 
                         'dulce-morado': '#9B59B6',
                         'contador-azul': '#1E3A8A',
-                        'contador-dorado': '#B45309',
                         'chancla-azul': '#1E4A6B',
-                        'chancla-rosa': '#C85A7A',
-                        'chancla-beige': '#D4A373',
-                        'chancla-roja': '#B22222'
+                        'chancla-rosa': '#C85A7A'
                     },
                     animation: {
                         'bounce-slow': 'bounce 2s infinite',
                         'wiggle': 'wiggle 1s ease-in-out infinite',
-                        'pulse-slow': 'pulse 3s infinite',
-                        'slide-up': 'slideUp 0.5s ease-out',
+                        'slideUp': 'slideUp 0.3s ease-out',
+                        'slideDown': 'slideDown 0.3s ease-out',
                     },
                     keyframes: {
                         wiggle: {
@@ -49,6 +46,10 @@
                         slideUp: {
                             '0%': { transform: 'translateY(20px)', opacity: '0' },
                             '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        slideDown: {
+                            '0%': { transform: 'translateY(0)', opacity: '1' },
+                            '100%': { transform: 'translateY(20px)', opacity: '0' },
                         }
                     }
                 }
@@ -68,6 +69,7 @@
         body.night-mode .bg-gray-50 { background-color: #1a1a2e !important; }
         body.night-mode .bg-gray-100 { background-color: #252542 !important; }
         body.night-mode header { background-color: #16213e !important; }
+        body.night-mode .text-gray-600 { color: #9a9ab0 !important; }
         
         /* Hero Banner */
         .hero-container { position: relative; overflow: hidden; height: 500px; }
@@ -192,34 +194,60 @@
             position: fixed;
             inset: 0;
             background: white;
-            z-index: 100;
+            z-index: 10000;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.2s;
         }
         body.night-mode #pageFade { background: #0f0f1a; }
         
-        /* Estilos específicos para chanclas */
-        .bg-chancla-gradient {
-            background: linear-gradient(135deg, #1E4A6B 0%, #C85A7A 100%);
-        }
-        
+        /* Estilos para chips de colores */
         .color-chip {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             display: inline-block;
-            border: 2px solid rgba(255,255,255,0.3);
+            border: 2px solid rgba(255,255,255,0.5);
             transition: transform 0.2s ease;
         }
-        
         .color-chip:hover {
             transform: scale(1.2);
             border-color: white;
         }
+        
+        /* Notificaciones */
+        .cart-notification {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2E7D32;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translate(-50%, 20px); opacity: 0; }
+            to { transform: translate(-50%, 0); opacity: 1; }
+        }
+        
+        @keyframes slideDown {
+            from { transform: translate(-50%, 0); opacity: 1; }
+            to { transform: translate(-50%, 20px); opacity: 0; }
+        }
+        
+        .animate-slideUp {
+            animation: slideUp 0.3s ease forwards;
+        }
     </style>
     
-    <!-- CSS desde carpeta (si existe) -->
+    <!-- CSS desde carpeta -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="bg-white text-gray-800 pb-20">
@@ -482,7 +510,7 @@
     </section>
 
     <!-- ============================================ -->
-    <!-- OFERTAS MAYOR PREVIEW - CHANCLAS (ACTUALIZADO) -->
+    <!-- OFERTAS MAYOR PREVIEW - CHANCLAS -->
     <!-- ============================================ -->
     <section class="py-12 bg-cuban-dark text-white">
         <div class="container mx-auto px-4">
@@ -552,9 +580,9 @@
                 <p><i class="fas fa-plus-circle mr-2 text-cuban-yellow"></i> Próximamente más productos al por mayor</p>
             </div>
             
-            <!-- Mini grid de otras ofertas mayor (opcional) -->
+            <!-- Mini grid de otras ofertas mayor -->
             <div class="grid md:grid-cols-3 gap-4 mt-8" id="mayorProducts">
-                <!-- Se cargará dinámicamente con JavaScript -->
+                <!-- Se carga dinámicamente -->
             </div>
             
         </div>
@@ -623,6 +651,8 @@
                         <div class="amenity-item"><i class="fas fa-check-circle"></i> Aire acondicionado</div>
                         <div class="amenity-item"><i class="fas fa-check-circle"></i> 2 terrazas privadas</div>
                         <div class="amenity-item"><i class="fas fa-check-circle"></i> Wi-Fi gratuito</div>
+                        <div class="amenity-item"><i class="fas fa-check-circle"></i> Cocina equipada</div>
+                        <div class="amenity-item"><i class="fas fa-check-circle"></i> Ropa de cama</div>
                     </div>
                     
                     <div class="flex gap-4 mt-6">
@@ -680,10 +710,10 @@
         ];
 
         const mayorProducts = [
-            {nombre:"Café Dualis Caja 10u", precio:13000, precioNormal:14500, imagen:"https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png", desc:"Ahorra $1,500"},
-            {nombre:"Huevos 3 cartones", precio:8400, precioNormal:9000, imagen:"https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3000.png", desc:"Ahorra $600"},
-            {nombre:"Atún Pack 12u", precio:6000, precioNormal:6480, imagen:"https://i.postimg.cc/76xHK6zt/atun_precio_500.png", desc:"Ahorra $480"},
-            {nombre:"Jabón Caja 24u", precio:5400, precioNormal:6000, imagen:"https://i.postimg.cc/V6YfK6Mz/jabon_de_lavar_precio_250.png", desc:"Ahorra $600"}
+            {id:101, nombre:"Café Dualis Caja 10u", precio:13000, imagen:"https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png", desc:"Ahorra $1,500", precioNormal:14500},
+            {id:102, nombre:"Huevos 3 cartones", precio:8400, imagen:"https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3000.png", desc:"Ahorra $600", precioNormal:9000},
+            {id:103, nombre:"Atún Pack 12u", precio:6000, imagen:"https://i.postimg.cc/76xHK6zt/atun_precio_500.png", desc:"Ahorra $480", precioNormal:6480},
+            {id:104, nombre:"Jabón Caja 24u", precio:5400, imagen:"https://i.postimg.cc/V6YfK6Mz/jabon_de_lavar_precio_250.png", desc:"Ahorra $600", precioNormal:6000}
         ];
 
         // ============================================
@@ -697,6 +727,7 @@
         async function loadComponent(elementId, filePath) {
             try {
                 const response = await fetch(filePath);
+                if (!response.ok) throw new Error('Error al cargar componente');
                 const html = await response.text();
                 document.getElementById(elementId).innerHTML = html;
             } catch (error) {
@@ -708,17 +739,27 @@
         // INICIALIZACIÓN
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
+            // Limpiar cualquier dato corrupto del carrito
+            try {
+                const savedCart = localStorage.getItem('elResolvitoCart');
+                if (savedCart) {
+                    const parsed = JSON.parse(savedCart);
+                    if (Array.isArray(parsed)) {
+                        cart = parsed.filter(item => item && item.id && item.name && item.price > 0);
+                    } else {
+                        cart = [];
+                    }
+                }
+            } catch (e) {
+                console.error('Error cargando carrito:', e);
+                localStorage.removeItem('elResolvitoCart');
+                cart = [];
+            }
+            
             // Cargar componentes
             loadComponent('header-container', 'components/header.html');
             loadComponent('footer-container', 'components/footer.html');
             loadComponent('cart-container', 'components/cart-sidebar.html');
-            
-            // Cargar carrito
-            const savedCart = localStorage.getItem('elResolvitoCart');
-            if (savedCart) {
-                cart = JSON.parse(savedCart);
-                updateCartUI();
-            }
             
             // Renderizar productos
             renderFeaturedProducts();
@@ -726,6 +767,11 @@
             
             // Iniciar modo día/noche
             initDayNight();
+            
+            // Actualizar UI del carrito
+            setTimeout(() => {
+                updateCartUI();
+            }, 500);
             
             // Quitar transición
             document.getElementById('pageFade').classList.add('opacity-0');
@@ -737,17 +783,18 @@
         function renderFeaturedProducts() {
             const container = document.getElementById('featuredProducts');
             if (!container) return;
+            
             container.innerHTML = featuredProducts.map(p => `
                 <div class="product-card bg-white rounded-xl shadow-md overflow-hidden">
                     <div class="product-image-container cursor-pointer" onclick="openImageModal('${p.imagen}', '${p.nombre}')">
-                        <img src="${p.imagen}" alt="${p.nombre}" loading="lazy">
+                        <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://via.placeholder.com/300?text=Producto'">
                     </div>
                     <div class="p-3">
                         <p class="text-xs text-cuban-green font-medium">${p.categoria}</p>
                         <h3 class="font-bold text-sm mb-1">${p.nombre}</h3>
                         <div class="flex items-center justify-between">
-                            <span class="text-lg font-bold text-cuban-green">$${p.precio}</span>
-                            <button onclick="addToCart(${p.id}, '${p.nombre}', ${p.precio}, '${p.imagen}')" class="w-8 h-8 bg-cuban-green text-white rounded-full flex items-center justify-center hover:bg-cuban-dark">
+                            <span class="text-lg font-bold text-cuban-green">$${p.precio.toLocaleString('es-CU')}</span>
+                            <button onclick="addToCart(${p.id}, '${p.nombre}', ${p.precio}, '${p.imagen}')" class="w-8 h-8 bg-cuban-green text-white rounded-full flex items-center justify-center hover:bg-cuban-dark transition">
                                 <i class="fas fa-plus"></i>
                             </button>
                         </div>
@@ -759,19 +806,20 @@
         function renderMayorProducts() {
             const container = document.getElementById('mayorProducts');
             if (!container) return;
+            
             container.innerHTML = mayorProducts.map(p => `
                 <div class="bg-white/10 backdrop-blur rounded-xl p-4 border border-white/20">
                     <div class="product-image-container h-32 bg-white/10 rounded-lg mb-3 cursor-pointer" onclick="openImageModal('${p.imagen}', '${p.nombre}')">
-                        <img src="${p.imagen}" class="w-full h-full object-contain">
+                        <img src="${p.imagen}" class="w-full h-full object-contain" onerror="this.src='https://via.placeholder.com/300?text=Producto'">
                     </div>
                     <h3 class="font-bold text-sm mb-1">${p.nombre}</h3>
                     <p class="text-cuban-yellow text-xs mb-2">${p.desc}</p>
                     <div class="flex items-center justify-between">
                         <div>
-                            <span class="text-xl font-bold text-cuban-yellow">$${p.precio}</span>
-                            <span class="text-xs text-white/50 line-through ml-1">$${p.precioNormal}</span>
+                            <span class="text-xl font-bold text-cuban-yellow">$${p.precio.toLocaleString('es-CU')}</span>
+                            <span class="text-xs text-white/50 line-through ml-1">$${p.precioNormal.toLocaleString('es-CU')}</span>
                         </div>
-                        <button onclick="addToCart(0, '${p.nombre}', ${p.precio}, '${p.imagen}')" class="bg-cuban-yellow text-cuban-dark px-3 py-1 rounded font-bold text-sm hover:bg-yellow-400">
+                        <button onclick="addToCart(${p.id}, '${p.nombre}', ${p.precio}, '${p.imagen}')" class="bg-cuban-yellow text-cuban-dark px-3 py-1 rounded font-bold text-sm hover:bg-yellow-400">
                             <i class="fas fa-plus"></i>
                         </button>
                     </div>
@@ -783,70 +831,107 @@
         // FUNCIONES DEL CARRITO
         // ============================================
         function addToCart(id, name, price, image) {
-            const existing = cart.find(item => item.name === name);
+            // Validar datos
+            if (!id || !name || !price || !image) {
+                console.error('Datos de producto inválidos');
+                return;
+            }
+
+            const existing = cart.find(item => item.id === id);
+            
             if (existing) {
                 existing.quantity++;
             } else {
-                cart.push({id, name, price, image, quantity: 1});
+                cart.push({
+                    id: id,
+                    name: name,
+                    price: price,
+                    image: image,
+                    quantity: 1
+                });
             }
+            
             saveCart();
             updateCartUI();
             showNotification(`${name} añadido al carrito`);
         }
 
         function saveCart() {
-            localStorage.setItem('elResolvitoCart', JSON.stringify(cart));
+            try {
+                localStorage.setItem('elResolvitoCart', JSON.stringify(cart));
+            } catch (e) {
+                console.error('Error guardando carrito:', e);
+            }
         }
 
         function updateCartUI() {
             const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-            const cartCount = document.getElementById('cartCount');
-            if (cartCount) {
-                cartCount.textContent = count;
-                cartCount.classList.toggle('hidden', count === 0);
-            }
-
-            const cartItems = document.getElementById('cartItems');
-            if (!cartItems) return;
             
+            // Actualizar todos los contadores
+            document.querySelectorAll('#cartCount, #cartCountMobile').forEach(el => {
+                if (el) {
+                    el.textContent = count;
+                    el.classList.toggle('hidden', count === 0);
+                }
+            });
+
+            // Actualizar items del carrito
+            const cartItems = document.getElementById('cartItems');
+            const cartFooter = document.getElementById('cartFooter');
+            
+            if (!cartItems) return;
+
             if (cart.length === 0) {
-                cartItems.innerHTML = '<div class="text-center py-8 text-gray-500"><i class="fas fa-shopping-cart text-4xl mb-3 opacity-30"></i><p>Tu carrito está vacío</p></div>';
+                cartItems.innerHTML = `
+                    <div class="text-center py-8 text-gray-500">
+                        <i class="fas fa-shopping-cart text-5xl mb-3 opacity-30"></i>
+                        <p>Tu carrito está vacío</p>
+                        <p class="text-sm mt-2">¡Explora nuestra tienda!</p>
+                    </div>
+                `;
+                if (cartFooter) cartFooter.style.display = 'none';
             } else {
                 cartItems.innerHTML = cart.map(item => `
-                    <div class="flex gap-3 bg-gray-50 p-3 rounded-lg">
-                        <img src="${item.image}" class="w-16 h-16 object-cover rounded-lg">
+                    <div class="cart-item flex gap-3 bg-gray-50 p-3 rounded-lg" data-id="${item.id}">
+                        <img src="${item.image}" class="w-16 h-16 object-cover rounded-lg" onerror="this.src='https://via.placeholder.com/64?text=Producto'">
                         <div class="flex-1">
                             <h4 class="font-medium text-sm">${item.name}</h4>
-                            <p class="text-cuban-green font-bold">$${item.price}</p>
+                            <p class="text-cuban-green font-bold">$${item.price.toLocaleString('es-CU')}</p>
                             <div class="flex items-center gap-2 mt-1">
-                                <button onclick="updateQty('${item.name}', -1)" class="w-6 h-6 bg-white rounded shadow text-xs">-</button>
-                                <span class="text-sm font-medium">${item.quantity}</span>
-                                <button onclick="updateQty('${item.name}', 1)" class="w-6 h-6 bg-white rounded shadow text-xs">+</button>
-                                <button onclick="removeItem('${item.name}')" class="ml-auto text-red-500"><i class="fas fa-trash"></i></button>
+                                <button onclick="updateQty(${item.id}, -1)" class="w-6 h-6 bg-white rounded shadow text-xs hover:bg-cuban-green hover:text-white transition" ${item.quantity <= 1 ? 'disabled' : ''}>-</button>
+                                <span class="text-sm font-medium w-6 text-center">${item.quantity}</span>
+                                <button onclick="updateQty(${item.id}, 1)" class="w-6 h-6 bg-white rounded shadow text-xs hover:bg-cuban-green hover:text-white transition">+</button>
+                                <button onclick="removeItem(${item.id})" class="ml-auto text-red-500 hover:text-red-700">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
                 `).join('');
+                
+                if (cartFooter) cartFooter.style.display = 'block';
             }
 
+            // Calcular y actualizar totales
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             const shipping = subtotal > 5000 ? 0 : 200;
+            const total = subtotal + shipping;
             
             const subtotalEl = document.getElementById('cartSubtotal');
             const shippingEl = document.getElementById('cartShipping');
             const totalEl = document.getElementById('cartTotal');
             
-            if (subtotalEl) subtotalEl.textContent = `$${subtotal}`;
-            if (shippingEl) shippingEl.textContent = shipping === 0 ? 'Gratis' : `$${shipping}`;
-            if (totalEl) totalEl.textContent = `$${subtotal + shipping}`;
+            if (subtotalEl) subtotalEl.textContent = `$${subtotal.toLocaleString('es-CU')}`;
+            if (shippingEl) shippingEl.textContent = shipping === 0 ? 'Gratis' : `$${shipping.toLocaleString('es-CU')}`;
+            if (totalEl) totalEl.textContent = `$${total.toLocaleString('es-CU')}`;
         }
 
-        function updateQty(name, delta) {
-            const item = cart.find(i => i.name === name);
+        function updateQty(id, delta) {
+            const item = cart.find(i => i.id === id);
             if (item) {
                 item.quantity += delta;
                 if (item.quantity <= 0) {
-                    removeItem(name);
+                    removeItem(id);
                 } else {
                     saveCart();
                     updateCartUI();
@@ -854,10 +939,11 @@
             }
         }
 
-        function removeItem(name) {
-            cart = cart.filter(i => i.name !== name);
+        function removeItem(id) {
+            cart = cart.filter(i => i.id !== id);
             saveCart();
             updateCartUI();
+            showNotification('Producto eliminado del carrito');
         }
 
         function toggleCart() {
@@ -867,23 +953,49 @@
             if (sidebar && overlay) {
                 sidebar.classList.toggle('cart-open');
                 overlay.classList.toggle('hidden');
+                
+                // Prevenir scroll del body
+                document.body.style.overflow = sidebar.classList.contains('cart-open') ? 'hidden' : '';
             }
         }
 
         function checkout() {
-            if (cart.length === 0) return;
+            if (cart.length === 0) {
+                showNotification('El carrito está vacío');
+                return;
+            }
             
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             const shipping = subtotal > 5000 ? 0 : 200;
             const total = subtotal + shipping;
             
-            let message = `*Pedido El Resolvito*\n\n`;
+            let message = `🛒 *Pedido El Resolvito*\n\n`;
+            
             cart.forEach(item => {
-                message += `• ${item.name} x${item.quantity} = $${item.price * item.quantity}\n`;
+                message += `• ${item.name} x${item.quantity} = $${(item.price * item.quantity).toLocaleString('es-CU')}\n`;
             });
-            message += `\nSubtotal: $${subtotal}\nEnvío: ${shipping === 0 ? 'Gratis' : '$'+shipping}\n*Total: $${total}*`;
+            
+            message += `\n📦 Subtotal: $${subtotal.toLocaleString('es-CU')}`;
+            message += `\n🚚 Envío: ${shipping === 0 ? 'Gratis' : '$' + shipping.toLocaleString('es-CU')}`;
+            message += `\n💰 *Total: $${total.toLocaleString('es-CU')}*`;
             
             window.open(`https://wa.me/5356382909?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'cart-notification animate-slideUp';
+            notification.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideDown 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 2500);
         }
 
         // ============================================
@@ -911,8 +1023,9 @@
         function initDayNight() {
             const hour = new Date().getHours();
             const isNight = hour < 6 || hour >= 18;
+            const savedMode = localStorage.getItem('nightMode');
             
-            if (isNight) {
+            if (savedMode === 'true' || (savedMode === null && isNight)) {
                 document.body.classList.add('night-mode');
                 document.getElementById('dayNightIcon').textContent = '🌙';
             } else {
@@ -924,17 +1037,7 @@
             document.body.classList.toggle('night-mode');
             const isNight = document.body.classList.contains('night-mode');
             document.getElementById('dayNightIcon').textContent = isNight ? '🌙' : '☀️';
-        }
-
-        // ============================================
-        // NOTIFICACIONES
-        // ============================================
-        function showNotification(message) {
-            const notification = document.createElement('div');
-            notification.className = 'fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-cuban-green text-white px-4 py-2 rounded-full shadow-lg z-50 animate-bounce';
-            notification.textContent = message;
-            document.body.appendChild(notification);
-            setTimeout(() => notification.remove(), 2000);
+            localStorage.setItem('nightMode', isNight);
         }
 
         // ============================================
@@ -952,7 +1055,7 @@
                     
                     e.preventDefault();
                     
-                    localStorage.setItem('nightMode', document.body.classList.contains('night-mode') ? 'true' : 'false');
+                    localStorage.setItem('nightMode', document.body.classList.contains('night-mode'));
                     
                     document.getElementById('pageFade').classList.remove('opacity-0');
                     
@@ -971,9 +1074,13 @@
 
         // Cerrar modal con ESC
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeImageModal();
+            if (e.key === 'Escape') {
+                closeImageModal();
+                if (document.getElementById('cartSidebar')?.classList.contains('cart-open')) {
+                    toggleCart();
+                }
+            }
         });
     </script>
 </body>
 </html>
-
