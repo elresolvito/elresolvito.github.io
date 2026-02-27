@@ -58,43 +58,42 @@
         }
     </script>
     
-    <!-- Estilos principales mejorados (incluyendo todos los estilos del carrito) -->
+    <!-- Estilos principales -->
     <style>
-        * { -webkit-tap-highlight-color: transparent; }
+        /* ============================================ */
+        /* ESTILOS GENERALES */
+        /* ============================================ */
+        * { -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'Open Sans', sans-serif; 
+            background: #ffffff;
+            color: #1F2937;
+            line-height: 1.6;
             transition: background-color 0.5s, color 0.5s;
             padding-bottom: 0;
         }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; font-weight: 600; }
         
         /* ============================================ */
         /* MODO OSCURO */
         /* ============================================ */
         body.night-mode { 
-            background-color: #0f0f1a; 
+            background: #0f0f1a; 
             color: #e0e0e0; 
         }
-        body.night-mode .bg-white { 
-            background-color: #16213e !important; 
+        body.night-mode .bg-white,
+        body.night-mode .bg-gray-50,
+        body.night-mode .bg-gray-100 { 
+            background: #16213e !important; 
             color: #e0e0e0 !important; 
         }
-        body.night-mode .bg-gray-50 { 
-            background-color: #1a1a2e !important; 
-        }
-        body.night-mode .bg-gray-100 { 
-            background-color: #252542 !important; 
-        }
-        body.night-mode header { 
-            background-color: #16213e !important; 
-            border-bottom: 1px solid #2a2a3a;
-        }
-        body.night-mode .text-gray-600 { 
+        body.night-mode .text-gray-600,
+        body.night-mode .text-gray-500 { 
             color: #9a9ab0 !important; 
         }
         
         /* ============================================ */
-        /* HEADER MEJORADO CON TEMA INTEGRADO */
+        /* HEADER */
         /* ============================================ */
         .site-header {
             position: sticky;
@@ -134,9 +133,7 @@
             transition: transform 0.3s ease;
         }
         
-        .logo:hover .logo-icon {
-            transform: scale(1.1);
-        }
+        .logo:hover .logo-icon { transform: scale(1.1); }
         
         .logo-text h1 {
             font-size: 1.25rem;
@@ -150,14 +147,12 @@
             color: #6b7280;
         }
         
-        /* Acciones del header */
         .header-actions {
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
         
-        /* Selector de tema en header */
         .theme-toggle {
             width: 40px;
             height: 40px;
@@ -177,15 +172,10 @@
             transform: rotate(15deg);
         }
         
-        .theme-toggle:hover span {
-            color: white;
-        }
+        .theme-toggle:hover span { color: white; }
         
-        body.night-mode .theme-toggle {
-            background: rgba(255,255,255,0.1);
-        }
+        body.night-mode .theme-toggle { background: rgba(255,255,255,0.1); }
         
-        /* Icono de carrito en header (solo desktop) */
         .header-cart {
             position: relative;
             width: 40px;
@@ -198,9 +188,7 @@
             transition: all 0.3s ease;
         }
         
-        .header-cart:hover {
-            background: rgba(46, 125, 50, 0.1);
-        }
+        .header-cart:hover { background: rgba(46, 125, 50, 0.1); }
         
         .header-cart i {
             font-size: 1.25rem;
@@ -224,7 +212,6 @@
             padding: 0 3px;
         }
         
-        /* Menú móvil */
         .mobile-menu-btn {
             width: 40px;
             height: 40px;
@@ -238,19 +225,14 @@
             transition: all 0.3s ease;
         }
         
-        .mobile-menu-btn:hover {
-            background: rgba(46, 125, 50, 0.1);
-        }
+        .mobile-menu-btn:hover { background: rgba(46, 125, 50, 0.1); }
         
         .mobile-menu-btn i {
             font-size: 1.5rem;
             color: #2E7D32;
         }
         
-        /* Navegación desktop */
-        .desktop-nav {
-            display: none;
-        }
+        .desktop-nav { display: none; }
         
         @media (min-width: 1024px) {
             .desktop-nav {
@@ -268,13 +250,8 @@
                 transition: color 0.3s ease;
             }
             
-            .desktop-nav a:hover {
-                color: #2E7D32;
-            }
-            
-            .desktop-nav a.active {
-                color: #2E7D32;
-            }
+            .desktop-nav a:hover,
+            .desktop-nav a.active { color: #2E7D32; }
             
             .desktop-nav a.active::after {
                 content: '';
@@ -286,18 +263,13 @@
                 background: #2E7D32;
             }
             
-            body.night-mode .desktop-nav a {
-                color: #9a9ab0;
-            }
-            
+            body.night-mode .desktop-nav a { color: #9a9ab0; }
             body.night-mode .desktop-nav a:hover,
-            body.night-mode .desktop-nav a.active {
-                color: #2E7D32;
-            }
+            body.night-mode .desktop-nav a.active { color: #2E7D32; }
         }
         
         /* ============================================ */
-        /* BOTONES FLOTANTES MEJORADOS */
+        /* BOTONES FLOTANTES */
         /* ============================================ */
         .floating-actions {
             position: fixed;
@@ -313,7 +285,7 @@
         .floating-btn {
             width: 60px;
             height: 60px;
-            border-radius: 30px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -323,76 +295,30 @@
             cursor: pointer;
             border: none;
             position: relative;
-            overflow: hidden;
             text-decoration: none;
         }
         
-        .floating-btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(255,255,255,0.1);
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-        }
+        .floating-btn.whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); }
+        .floating-btn.cart { background: linear-gradient(135deg, #2E7D32, #1B5E20); }
         
-        .floating-btn:hover::before {
-            transform: translateX(0);
-        }
-        
-        .floating-btn.whatsapp {
-            background: linear-gradient(135deg, #25D366, #128C7E);
-        }
-        
-        .floating-btn.cart {
-            background: linear-gradient(135deg, #2E7D32, #1B5E20);
-        }
-        
-        .floating-btn i {
-            font-size: 1.5rem;
-            position: relative;
-            z-index: 1;
-        }
+        .floating-btn i { font-size: 1.5rem; }
         
         .floating-btn:hover {
             transform: scale(1.1) translateY(-4px);
             box-shadow: 0 8px 24px rgba(0,0,0,0.3);
         }
         
-        /* Tooltips */
-        .floating-btn::after {
-            content: attr(data-tooltip);
-            position: absolute;
-            right: 70px;
-            background: rgba(0,0,0,0.8);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            font-weight: normal;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-        
-        .floating-btn:hover::after {
-            opacity: 1;
-        }
-        
-        /* Badge del carrito */
         .cart-badge {
             position: absolute;
             top: -5px;
             right: -5px;
             background: #FFB300;
             color: #1B5E20;
-            font-size: 0.75rem;
-            font-weight: bold;
             min-width: 22px;
             height: 22px;
             border-radius: 11px;
+            font-size: 0.75rem;
+            font-weight: 800;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -408,7 +334,6 @@
             50% { transform: scale(1.1); }
         }
         
-        /* Responsive móvil */
         @media (max-width: 768px) {
             .floating-actions {
                 bottom: 1rem;
@@ -416,32 +341,9 @@
                 flex-direction: row;
                 gap: 0.75rem;
             }
-            
             .floating-btn {
                 width: 50px;
                 height: 50px;
-                border-radius: 25px;
-            }
-            
-            .floating-btn i {
-                font-size: 1.25rem;
-            }
-            
-            .floating-btn::after {
-                display: none;
-            }
-        }
-        
-        @media (max-width: 380px) {
-            .floating-actions {
-                bottom: 0.75rem;
-                right: 0.75rem;
-                gap: 0.5rem;
-            }
-            
-            .floating-btn {
-                width: 44px;
-                height: 44px;
             }
         }
         
@@ -450,8 +352,8 @@
         /* ============================================ */
         .hero-container {
             position: relative;
-            overflow: hidden;
             height: 500px;
+            overflow: hidden;
         }
         
         .hero-bg-day, .hero-bg-night {
@@ -462,10 +364,7 @@
             transition: opacity 0.5s ease-in-out;
         }
         
-        .hero-bg-day {
-            background-image: url('https://i.postimg.cc/7YfPJ9LD/banner_1l.jpg');
-        }
-        
+        .hero-bg-day { background-image: url('https://i.postimg.cc/7YfPJ9LD/banner_1l.jpg'); }
         .hero-bg-night {
             background-image: url('https://i.postimg.cc/MGfKwYjq/plaza_nocturna_(1).png');
             opacity: 0;
@@ -484,15 +383,9 @@
             background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%);
         }
         
-        .hero-text {
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
+        .hero-text { text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
         
-        @media (max-width: 768px) {
-            .hero-container {
-                height: 400px;
-            }
-        }
+        @media (max-width: 768px) { .hero-container { height: 400px; } }
         
         /* ============================================ */
         /* PRODUCTOS */
@@ -511,9 +404,7 @@
             box-shadow: 0 20px 25px rgba(0,0,0,0.1);
         }
         
-        body.night-mode .product-card {
-            background: #16213e;
-        }
+        body.night-mode .product-card { background: #16213e; }
         
         .product-image-container {
             height: 160px;
@@ -532,19 +423,10 @@
             transition: transform 0.4s ease;
         }
         
-        .product-card:hover .product-image-container img {
-            transform: scale(1.08);
-        }
+        .product-card:hover .product-image-container img { transform: scale(1.08); }
+        body.night-mode .product-image-container { background: #ffffff; }
         
-        body.night-mode .product-image-container {
-            background: #ffffff;
-        }
-        
-        @media (max-width: 640px) {
-            .product-image-container {
-                height: 140px;
-            }
-        }
+        @media (max-width: 640px) { .product-image-container { height: 140px; } }
         
         /* ============================================ */
         /* PROMOCIONES BANNER */
@@ -561,14 +443,6 @@
             box-shadow: 0 20px 30px rgba(0,0,0,0.15);
         }
         
-        .promo-banner img {
-            transition: transform 0.5s ease;
-        }
-        
-        .promo-banner:hover img {
-            transform: scale(1.05);
-        }
-        
         .promo-overlay {
             position: absolute;
             inset: 0;
@@ -581,7 +455,7 @@
         .modal-overlay {
             position: fixed;
             inset: 0;
-            background-color: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.5);
             z-index: 1000;
             display: none;
             align-items: center;
@@ -590,14 +464,12 @@
             backdrop-filter: blur(4px);
         }
         
-        .modal-overlay.show {
-            display: flex;
-        }
+        .modal-overlay.show { display: flex; }
         
         .modal-content {
             background: white;
             border-radius: 1rem;
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
             max-width: 500px;
             width: 100%;
             max-height: 90vh;
@@ -619,7 +491,7 @@
         }
         
         /* ============================================ */
-        /* TOAST NOTIFICATIONS */
+        /* TOAST NOTIFICATION */
         /* ============================================ */
         #cartToast {
             position: fixed;
@@ -630,7 +502,7 @@
             color: white;
             padding: 12px 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             opacity: 0;
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
             pointer-events: none;
@@ -643,95 +515,6 @@
         #cartToast.show {
             opacity: 1;
             transform: translateX(-50%) translateY(0);
-        }
-        
-        /* ============================================ */
-        /* BOTONES DE CANTIDAD */
-        /* ============================================ */
-        .cart-qty-btn {
-            width: 32px;
-            height: 32px;
-            background: #e5e7eb;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            transition: all 0.2s ease;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .cart-qty-btn:hover:not(:disabled) {
-            background: #0d3b33;
-            color: white;
-            transform: scale(1.05);
-        }
-        
-        .cart-qty-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        
-        body.night-mode .cart-qty-btn {
-            background: #1a1a2e;
-            color: #e0e0e0;
-        }
-        
-        /* ============================================ */
-        /* PROMO PROGRESS BAR */
-        /* ============================================ */
-        .promo-progress-container {
-            background: #e5e7eb;
-            height: 8px;
-            border-radius: 9999px;
-            overflow: hidden;
-            margin-top: 1rem;
-        }
-        
-        .promo-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #0d3b33, #FFB300);
-            border-radius: 9999px;
-            transition: width 0.3s ease;
-        }
-        
-        /* ============================================ */
-        /* SERVICIO CONTADOR */
-        /* ============================================ */
-        .feature-list {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-        
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.85rem;
-        }
-        
-        .feature-item i {
-            color: #10B981;
-        }
-        
-        /* ============================================ */
-        /* CHIPS DE COLORES */
-        /* ============================================ */
-        .color-chip {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: inline-block;
-            border: 2px solid rgba(255,255,255,0.5);
-            transition: transform 0.2s ease;
-        }
-        
-        .color-chip:hover {
-            transform: scale(1.2);
-            border-color: white;
         }
         
         /* ============================================ */
@@ -748,9 +531,7 @@
             padding: 1rem;
         }
         
-        .image-modal.active {
-            display: flex;
-        }
+        .image-modal.active { display: flex; }
         
         .image-modal-content {
             position: relative;
@@ -770,11 +551,6 @@
             transition: all 0.3s ease;
         }
         
-        .image-modal-close:hover {
-            color: #ccc;
-            transform: scale(1.1);
-        }
-        
         .image-modal-img {
             width: 100%;
             max-height: 80vh;
@@ -791,8 +567,33 @@
         }
         
         /* ============================================ */
-        /* ALOJAMIENTOS - Amenities */
+        /* UTILIDADES */
         /* ============================================ */
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+        
+        .feature-item i { color: #10B981; }
+        
+        .color-chip {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-block;
+            border: 2px solid rgba(255,255,255,0.5);
+            transition: transform 0.2s ease;
+        }
+        
         .amenities-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -807,18 +608,12 @@
             color: #4b5563;
         }
         
-        body.night-mode .amenity-item {
-            color: #9a9ab0;
-        }
-        
+        body.night-mode .amenity-item { color: #9a9ab0; }
         .amenity-item i {
             color: #2E7D32;
             width: 20px;
         }
         
-        /* ============================================ */
-        /* TRANSICIÓN ENTRE PÁGINAS */
-        /* ============================================ */
         #pageFade {
             position: fixed;
             inset: 0;
@@ -829,69 +624,7 @@
             transition: opacity 0.2s;
         }
         
-        body.night-mode #pageFade {
-            background: #0f0f1a;
-        }
-        
-        /* ============================================ */
-        /* ANIMACIONES */
-        /* ============================================ */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.5s ease forwards;
-        }
-        
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes slideDown {
-            from {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            to {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-        }
-        
-        .animate-bounce-slow {
-            animation: bounce 2s infinite;
-        }
-        
-        .badge-pop {
-            animation: badgePop 0.3s ease;
-        }
-        
-        @keyframes badgePop {
-            0% { transform: scale(0.5); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-        
-        /* ============================================ */
-        /* UTILIDADES */
-        /* ============================================ */
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+        body.night-mode #pageFade { background: #0f0f1a; }
     </style>
 </head>
 <body class="bg-white text-gray-800">
@@ -900,22 +633,15 @@
     <div id="pageFade"></div>
 
     <!-- ============================================ -->
-    <!-- HEADER MEJORADO CON TEMA INTEGRADO -->
+    <!-- HEADER -->
     <!-- ============================================ -->
     <header class="site-header">
         <div class="header-container">
-            <!-- Logo -->
             <a href="index.html" class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-store"></i>
-                </div>
-                <div class="logo-text">
-                    <h1>El Resolvito</h1>
-                    <p>La Habana Vieja</p>
-                </div>
+                <div class="logo-icon"><i class="fas fa-store"></i></div>
+                <div class="logo-text"><h1>El Resolvito</h1><p>La Habana Vieja</p></div>
             </a>
 
-            <!-- Navegación Desktop -->
             <nav class="desktop-nav">
                 <a href="index.html" class="active">Inicio</a>
                 <a href="tienda.html">Tienda</a>
@@ -925,20 +651,14 @@
                 <a href="reservas.html">Alojamientos</a>
             </nav>
 
-            <!-- Acciones del header -->
             <div class="header-actions">
-                <!-- Selector de tema (integrado) -->
                 <button class="theme-toggle" onclick="toggleDayNight()" title="Cambiar modo">
                     <span id="headerThemeIcon">☀️</span>
                 </button>
-
-                <!-- Carrito (solo desktop) -->
                 <button class="header-cart hidden lg:flex" onclick="toggleCart()" title="Ver carrito">
                     <i class="fas fa-shopping-cart"></i>
                     <span id="headerCartCount" class="header-cart-badge hidden">0</span>
                 </button>
-
-                <!-- Menú móvil -->
                 <button class="mobile-menu-btn lg:hidden" onclick="toggleMenu()">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -957,41 +677,19 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            
             <nav class="space-y-2">
-                <a href="index.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition">
-                    <i class="fas fa-home w-6 text-cuban-green"></i>
-                    <span>Inicio</span>
-                </a>
-                <a href="tienda.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition">
-                    <i class="fas fa-shopping-basket w-6 text-cuban-green"></i>
-                    <span>Tienda</span>
-                </a>
-                <a href="servicios.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition">
-                    <i class="fas fa-tools w-6 text-cuban-green"></i>
-                    <span>Servicios</span>
-                </a>
-                <a href="ofertas.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition">
-                    <i class="fas fa-percent w-6 text-cuban-green"></i>
-                    <span>Ofertas</span>
-                </a>
-                <a href="blog.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition">
-                    <i class="fas fa-newspaper w-6 text-cuban-green"></i>
-                    <span>Blog</span>
-                </a>
-                <a href="reservas.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition">
-                    <i class="fas fa-bed w-6 text-cuban-green"></i>
-                    <span>Alojamientos</span>
-                </a>
+                <a href="index.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-home w-6 text-cuban-green"></i><span>Inicio</span></a>
+                <a href="tienda.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-shopping-basket w-6 text-cuban-green"></i><span>Tienda</span></a>
+                <a href="servicios.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-tools w-6 text-cuban-green"></i><span>Servicios</span></a>
+                <a href="ofertas.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-percent w-6 text-cuban-green"></i><span>Ofertas</span></a>
+                <a href="blog.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-newspaper w-6 text-cuban-green"></i><span>Blog</span></a>
+                <a href="reservas.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-bed w-6 text-cuban-green"></i><span>Alojamientos</span></a>
             </nav>
-
-            <!-- Contacto rápido en móvil -->
             <div class="absolute bottom-6 left-6 right-6">
                 <div class="border-t border-gray-200 pt-4">
                     <p class="text-sm text-gray-500 mb-3">Contáctanos</p>
                     <a href="https://wa.me/5356382909" class="flex items-center gap-2 text-cuban-green hover:text-cuban-green-dark transition">
-                        <i class="fab fa-whatsapp text-xl"></i>
-                        <span class="text-sm font-medium">+53 5 638 2909</span>
+                        <i class="fab fa-whatsapp text-xl"></i><span class="text-sm font-medium">+53 5 638 2909</span>
                     </a>
                 </div>
             </div>
@@ -999,7 +697,7 @@
     </div>
 
     <!-- ============================================ -->
-    <!-- BOTONES FLOTANTES MEJORADOS -->
+    <!-- BOTONES FLOTANTES -->
     <!-- ============================================ -->
     <div class="floating-actions" id="floatingActions">
         <button class="floating-btn cart" onclick="toggleCart()" data-tooltip="Ver carrito">
@@ -1019,25 +717,19 @@
         <div class="hero-bg-night"></div>
         <div class="hero-overlay"></div>
         <div class="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center text-white">
-            <span class="hero-text inline-block bg-cuban-yellow text-cuban-dark px-4 py-1 rounded-full text-sm font-bold mb-4 animate-pulse">
-                🎉 Envío solo $200 en La Habana Vieja
-            </span>
+            <span class="hero-text inline-block bg-cuban-yellow text-cuban-dark px-4 py-1 rounded-full text-sm font-bold mb-4 animate-pulse">🎉 Envío solo $200 en La Habana Vieja</span>
             <h2 class="hero-text text-4xl md:text-6xl font-bold mb-4">El Resolvito</h2>
             <p class="hero-text text-xl md:text-2xl mb-2">Tu tienda, tus servicios, tu hogar</p>
             <p class="hero-text text-lg opacity-90 mb-8">Todo lo que necesitas en un solo lugar</p>
             <div class="flex flex-col sm:flex-row gap-4">
-                <a href="tienda.html" class="hero-button bg-cuban-yellow text-cuban-dark px-8 py-3 rounded-full font-bold hover:bg-yellow-400 transition shadow-lg">
-                    <i class="fas fa-shopping-basket mr-2"></i>Ver Tienda
-                </a>
-                <a href="servicios.html" class="hero-button bg-white/20 backdrop-blur text-white border-2 border-white px-8 py-3 rounded-full font-bold hover:bg-white/30 transition">
-                    <i class="fas fa-tools mr-2"></i>Servicios
-                </a>
+                <a href="tienda.html" class="hero-button bg-cuban-yellow text-cuban-dark px-8 py-3 rounded-full font-bold hover:bg-yellow-400 transition shadow-lg"><i class="fas fa-shopping-basket mr-2"></i>Ver Tienda</a>
+                <a href="servicios.html" class="hero-button bg-white/20 backdrop-blur text-white border-2 border-white px-8 py-3 rounded-full font-bold hover:bg-white/30 transition"><i class="fas fa-tools mr-2"></i>Servicios</a>
             </div>
         </div>
     </section>
 
     <!-- ============================================ -->
-    <!-- SECCIÓN DE PROMOCIONES ESPECIALES -->
+    <!-- PROMOCIONES ESPECIALES -->
     <!-- ============================================ -->
     <section class="py-12 bg-gradient-to-b from-white to-gray-50">
         <div class="container mx-auto px-4">
@@ -1047,65 +739,41 @@
             </div>
             
             <div class="grid md:grid-cols-3 gap-6">
-                
-                <!-- Banner 1: Alojamientos - Terrazas de Bayona -->
                 <a href="reservas.html" class="promo-banner relative h-48 rounded-2xl overflow-hidden shadow-lg group">
-                    <img src="https://i.postimg.cc/QxWvyYGy/acuarela-(1).jpg" 
-                         class="w-full h-full object-cover"
-                         alt="Terrazas de Bayona 59">
+                    <img src="https://i.postimg.cc/QxWvyYGy/acuarela-(1).jpg" class="w-full h-full object-cover" alt="Terrazas de Bayona 59">
                     <div class="promo-overlay"></div>
                     <div class="absolute inset-0 flex flex-col justify-center p-6 text-white">
                         <span class="bg-cuban-blue text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-2">🏠 ALOJAMIENTOS</span>
                         <h3 class="text-2xl font-bold mb-1">Terrazas de Bayona 59</h3>
                         <p class="text-sm opacity-90 mb-3">Casa colonial en el corazón de La Habana</p>
-                        <span class="text-cuban-yellow font-bold flex items-center group-hover:translate-x-2 transition">
-                            Ver alojamiento <i class="fas fa-arrow-right ml-2"></i>
-                        </span>
+                        <span class="text-cuban-yellow font-bold flex items-center group-hover:translate-x-2 transition">Ver alojamiento <i class="fas fa-arrow-right ml-2"></i></span>
                     </div>
                 </a>
-
-                <!-- Banner 2: Servicios - Dulce César -->
                 <a href="servicios.html" class="promo-banner relative h-48 rounded-2xl overflow-hidden shadow-lg group">
-                    <img src="https://i.postimg.cc/Qxz4FMGg/IMG_20260226-WA0025.jpg" 
-                         class="w-full h-full object-cover"
-                         alt="Dulce César Repostería">
+                    <img src="https://i.postimg.cc/Qxz4FMGg/IMG_20260226-WA0025.jpg" class="w-full h-full object-cover" alt="Dulce César Repostería">
                     <div class="promo-overlay"></div>
                     <div class="absolute inset-0 flex flex-col justify-center p-6 text-white">
                         <span class="bg-dulce-rosa text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-2">🧁 SERVICIOS</span>
                         <h3 class="text-2xl font-bold mb-1">Dulce César</h3>
                         <p class="text-sm opacity-90 mb-3">Repostería artesanal para eventos</p>
-                        <span class="text-cuban-yellow font-bold flex items-center group-hover:translate-x-2 transition">
-                            Ver servicio <i class="fas fa-arrow-right ml-2"></i>
-                        </span>
+                        <span class="text-cuban-yellow font-bold flex items-center group-hover:translate-x-2 transition">Ver servicio <i class="fas fa-arrow-right ml-2"></i></span>
                     </div>
                 </a>
-
-                <!-- Banner 3: Venta por Mayor - Chanclas -->
                 <a href="ofertas.html" class="promo-banner relative h-48 rounded-2xl overflow-hidden shadow-lg group">
-                    <img src="https://i.postimg.cc/8Cw6ZNg8/chanclas-negras-(1).png" 
-                         class="w-full h-full object-contain bg-white p-4"
-                         alt="Chanclas al por mayor">
+                    <img src="https://i.postimg.cc/8Cw6ZNg8/chanclas-negras-(1).png" class="w-full h-full object-contain bg-white p-4" alt="Chanclas al por mayor">
                     <div class="promo-overlay" style="background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%);"></div>
                     <div class="absolute inset-0 flex flex-col justify-center p-6 text-white">
                         <span class="bg-cuban-orange text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-2">💰 MAYOR</span>
                         <h3 class="text-2xl font-bold mb-1">Chanclas al por Mayor</h3>
                         <p class="text-sm opacity-90 mb-3">Precio especial: $3,500 c/u</p>
-                        <span class="text-cuban-yellow font-bold flex items-center group-hover:translate-x-2 transition">
-                            Ver oferta <i class="fas fa-arrow-right ml-2"></i>
-                        </span>
+                        <span class="text-cuban-yellow font-bold flex items-center group-hover:translate-x-2 transition">Ver oferta <i class="fas fa-arrow-right ml-2"></i></span>
                     </div>
                 </a>
             </div>
 
-            <!-- Banner destacado inferior -->
             <div class="mt-6 bg-gradient-to-r from-cuban-green to-cuban-dark rounded-2xl p-6 text-white flex flex-col md:flex-row justify-between items-center">
-                <div>
-                    <h3 class="text-xl font-bold mb-2">📱 ¿Necesitas algo en específico?</h3>
-                    <p class="opacity-90">Pregunta por productos no listados, hacemos pedidos especiales</p>
-                </div>
-                <a href="https://wa.me/5356382909" target="_blank" class="mt-4 md:mt-0 bg-white text-cuban-green px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition flex items-center gap-2">
-                    <i class="fab fa-whatsapp"></i> Consultar ahora
-                </a>
+                <div><h3 class="text-xl font-bold mb-2">📱 ¿Necesitas algo en específico?</h3><p class="opacity-90">Pregunta por productos no listados, hacemos pedidos especiales</p></div>
+                <a href="https://wa.me/5356382909" target="_blank" class="mt-4 md:mt-0 bg-white text-cuban-green px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition flex items-center gap-2"><i class="fab fa-whatsapp"></i> Consultar ahora</a>
             </div>
         </div>
     </section>
@@ -1119,14 +787,12 @@
                 <h2 class="text-3xl font-bold"><i class="fas fa-fire mr-3 text-cuban-orange"></i>Destacados</h2>
                 <a href="tienda.html" class="text-cuban-green font-medium hover:underline">Ver todo →</a>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="featuredProducts">
-                <!-- Se carga dinámicamente -->
-            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="featuredProducts"></div>
         </div>
     </section>
 
     <!-- ============================================ -->
-    <!-- SERVICIOS PREVIEW - DULCE CÉSAR Y CONTADOR -->
+    <!-- SERVICIOS PREVIEW -->
     <!-- ============================================ -->
     <section class="py-12 bg-gray-50">
         <div class="container mx-auto px-4">
@@ -1134,119 +800,68 @@
                 <h2 class="text-3xl font-bold"><i class="fas fa-tools mr-3 text-cuban-blue"></i>Servicios Destacados</h2>
                 <a href="servicios.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
             </div>
-            
             <div class="grid md:grid-cols-2 gap-6">
-                
-                <!-- Dulce César - Repostería -->
+                <!-- Dulce César -->
                 <div class="product-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
                     <div class="h-48 overflow-hidden bg-gradient-to-r from-dulce-rosa to-dulce-morado">
-                        <img src="https://i.postimg.cc/Qxz4FMGg/IMG_20260226-WA0025.jpg" 
-                             alt="Dulce César" 
-                             class="w-full h-full object-contain bg-white">
+                        <img src="https://i.postimg.cc/Qxz4FMGg/IMG_20260226-WA0025.jpg" alt="Dulce César" class="w-full h-full object-contain bg-white">
                     </div>
-                    
                     <div class="p-5">
                         <div class="flex justify-between items-start mb-2">
                             <span class="bg-dulce-rosa text-white text-xs px-2 py-1 rounded-full font-bold">✨ NUEVO</span>
                             <span class="text-sm text-gray-500">Desde $150</span>
                         </div>
-                        
                         <h3 class="font-bold text-xl mb-2 text-dulce-rosa">Dulce César</h3>
                         <p class="text-gray-600 text-sm mb-3">Repostería artesanal para eventos, cafeterías y pedidos especiales.</p>
-                        
                         <div class="flex flex-wrap gap-1 mb-4">
                             <span class="bg-pink-100 text-pink-600 text-xs px-2 py-1 rounded-full">🎂 Tortas</span>
                             <span class="bg-purple-100 text-purple-600 text-xs px-2 py-1 rounded-full">🧁 Cupcakes</span>
                             <span class="bg-yellow-100 text-yellow-600 text-xs px-2 py-1 rounded-full">🍪 Galletas</span>
                         </div>
-                        
                         <div class="flex gap-2">
-                            <a href="https://wa.me/5353342167?text=Hola%2C%20vi%20Dulce%20C%C3%A9sar%20en%20El%20Resolvito%20y%20quiero%20informaci%C3%B3n" 
-                               target="_blank" 
-                               class="flex-1 bg-dulce-rosa text-white text-center py-2 rounded-lg text-sm font-bold hover:opacity-90 transition">
-                                <i class="fab fa-whatsapp mr-1"></i> Contactar
-                            </a>
-                            <a href="servicios.html" 
-                               class="px-3 py-2 border border-dulce-rosa text-dulce-rosa rounded-lg text-sm font-bold hover:bg-dulce-rosa hover:text-white transition">
-                                <i class="fas fa-info-circle"></i>
-                            </a>
+                            <a href="https://wa.me/5353342167?text=Hola%2C%20vi%20Dulce%20C%C3%A9sar%20en%20El%20Resolvito%20y%20quiero%20informaci%C3%B3n" target="_blank" class="flex-1 bg-dulce-rosa text-white text-center py-2 rounded-lg text-sm font-bold hover:opacity-90 transition"><i class="fab fa-whatsapp mr-1"></i> Contactar</a>
+                            <a href="servicios.html" class="px-3 py-2 border border-dulce-rosa text-dulce-rosa rounded-lg text-sm font-bold hover:bg-dulce-rosa hover:text-white transition"><i class="fas fa-info-circle"></i></a>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Contador / Tenedor de Libros -->
+                <!-- Contador -->
                 <div class="product-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
                     <div class="h-48 overflow-hidden bg-gradient-to-r from-contador-azul to-cuban-orange">
-                        <img src="https://i.postimg.cc/TPPT8GM9/photo-2026-02-15-19-00-24.jpg" 
-                             alt="Contador / Tenedor de Libros" 
-                             class="w-full h-full object-cover">
+                        <img src="https://i.postimg.cc/TPPT8GM9/photo-2026-02-15-19-00-24.jpg" alt="Contador / Tenedor de Libros" class="w-full h-full object-cover">
                     </div>
-                    
                     <div class="p-5">
                         <div class="flex justify-between items-start mb-2">
                             <span class="bg-contador-azul text-white text-xs px-2 py-1 rounded-full font-bold">📊 NUEVO</span>
                             <span class="text-sm text-gray-500">Consulta gratuita</span>
                         </div>
-                        
                         <h3 class="font-bold text-xl mb-2 text-contador-azul">Contador / Tenedor de Libros</h3>
                         <p class="text-gray-600 text-sm mb-3">Gestión contable profesional para TCP y pequeños negocios.</p>
-                        
                         <div class="feature-list mb-4">
-                            <div class="feature-item">
-                                <i class="fas fa-check-circle"></i>
-                                <span class="text-xs">Gestión ONAT</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-check-circle"></i>
-                                <span class="text-xs">Registros Obligatorios</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-check-circle"></i>
-                                <span class="text-xs">Nómina y Personal</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-check-circle"></i>
-                                <span class="text-xs">Fichas de Costo</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-check-circle"></i>
-                                <span class="text-xs">Declaración Jurada</span>
-                            </div>
+                            <div class="feature-item"><i class="fas fa-check-circle"></i><span class="text-xs">Gestión ONAT</span></div>
+                            <div class="feature-item"><i class="fas fa-check-circle"></i><span class="text-xs">Registros Obligatorios</span></div>
+                            <div class="feature-item"><i class="fas fa-check-circle"></i><span class="text-xs">Nómina y Personal</span></div>
+                            <div class="feature-item"><i class="fas fa-check-circle"></i><span class="text-xs">Fichas de Costo</span></div>
+                            <div class="feature-item"><i class="fas fa-check-circle"></i><span class="text-xs">Declaración Jurada</span></div>
                         </div>
-                        
                         <div class="flex gap-2">
-                            <a href="https://wa.me/5356382909?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Contador%20%2F%20Tenedor%20de%20Libros" 
-                               target="_blank" 
-                               class="flex-1 bg-contador-azul text-white text-center py-2 rounded-lg text-sm font-bold hover:bg-blue-800 transition">
-                                <i class="fab fa-whatsapp mr-1"></i> Contactar: 56382909
-                            </a>
-                            <a href="servicios.html" 
-                               class="px-3 py-2 border border-contador-azul text-contador-azul rounded-lg text-sm font-bold hover:bg-contador-azul hover:text-white transition">
-                                <i class="fas fa-info-circle"></i>
-                            </a>
+                            <a href="https://wa.me/5356382909?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Contador%20%2F%20Tenedor%20de%20Libros" target="_blank" class="flex-1 bg-contador-azul text-white text-center py-2 rounded-lg text-sm font-bold hover:bg-blue-800 transition"><i class="fab fa-whatsapp mr-1"></i> Contactar: 56382909</a>
+                            <a href="servicios.html" class="px-3 py-2 border border-contador-azul text-contador-azul rounded-lg text-sm font-bold hover:bg-contador-azul hover:text-white transition"><i class="fas fa-info-circle"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Mini promoción de servicios -->
             <div class="mt-6 bg-gradient-to-r from-cuban-blue to-cuban-green rounded-xl p-4 text-white flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <span class="text-3xl animate-bounce">📊</span>
-                    <div>
-                        <p class="font-bold">¿Necesitas servicios profesionales?</p>
-                        <p class="text-sm opacity-90">Contador, repostería y más • Atención personalizada</p>
-                    </div>
+                    <div><p class="font-bold">¿Necesitas servicios profesionales?</p><p class="text-sm opacity-90">Contador, repostería y más • Atención personalizada</p></div>
                 </div>
-                <a href="servicios.html" class="bg-white text-cuban-green px-4 py-2 rounded-full text-sm font-bold hover:bg-gray-100 transition">
-                    Ver servicios <i class="fas fa-arrow-right ml-1"></i>
-                </a>
+                <a href="servicios.html" class="bg-white text-cuban-green px-4 py-2 rounded-full text-sm font-bold hover:bg-gray-100 transition">Ver servicios <i class="fas fa-arrow-right ml-1"></i></a>
             </div>
         </div>
     </section>
 
     <!-- ============================================ -->
-    <!-- OFERTAS MAYOR PREVIEW - CHANCLAS -->
+    <!-- OFERTAS MAYOR PREVIEW -->
     <!-- ============================================ -->
     <section class="py-12 bg-cuban-dark text-white">
         <div class="container mx-auto px-4">
@@ -1254,8 +869,6 @@
                 <h2 class="text-3xl font-bold"><i class="fas fa-boxes mr-3 text-cuban-yellow"></i>Venta por Mayor</h2>
                 <a href="ofertas.html" class="text-cuban-yellow font-medium hover:underline">Ver todo →</a>
             </div>
-            
-            <!-- Preview de la oferta de chanclas -->
             <div class="bg-gradient-to-r from-chancla-azul to-chancla-rosa rounded-2xl overflow-hidden shadow-xl transform hover:scale-[1.02] transition-all duration-300">
                 <div class="md:flex items-center">
                     <div class="md:w-1/3 p-6">
@@ -1263,64 +876,30 @@
                             <span class="text-6xl block mb-2 animate-bounce-slow">🩴</span>
                             <span class="text-3xl font-bold">$3,500</span>
                             <p class="text-sm opacity-90">cada par</p>
-                            <span class="inline-block mt-2 bg-cuban-yellow text-cuban-dark text-xs px-2 py-1 rounded-full font-bold animate-pulse">
-                                MAYOREO
-                            </span>
+                            <span class="inline-block mt-2 bg-cuban-yellow text-cuban-dark text-xs px-2 py-1 rounded-full font-bold animate-pulse">MAYOREO</span>
                         </div>
                     </div>
                     <div class="md:w-2/3 p-6">
-                        <span class="bg-white/30 px-3 py-1 rounded-full text-sm font-bold mb-3 inline-block backdrop-blur-sm">
-                            🔥 OFERTA ESPECIAL
-                        </span>
+                        <span class="bg-white/30 px-3 py-1 rounded-full text-sm font-bold mb-3 inline-block backdrop-blur-sm">🔥 OFERTA ESPECIAL</span>
                         <h3 class="text-3xl font-bold mb-2">Chanclas al por Mayor</h3>
                         <p class="text-white/90 mb-4">Diferentes colores y estilos disponibles. Ideal para revendedores y negocios. Material duradero y cómodo.</p>
-                        
-                        <!-- Chips de colores interactivos -->
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors">
-                                <span class="color-chip" style="background-color: #000000;"></span> Negras
-                            </span>
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors">
-                                <span class="color-chip" style="background-color: #FFFFFF; border: 1px solid #ccc;"></span> Blancas
-                            </span>
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors">
-                                <span class="color-chip" style="background-color: #D4A373;"></span> Beige
-                            </span>
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors">
-                                <span class="color-chip" style="background-color: #C85A7A;"></span> Rosadas
-                            </span>
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors">
-                                <span class="color-chip" style="background-color: #1E4A6B;"></span> Azules
-                            </span>
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors">
-                                <span class="color-chip" style="background-color: #B22222;"></span> Rojas
-                            </span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors"><span class="color-chip" style="background-color: #000000;"></span> Negras</span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors"><span class="color-chip" style="background-color: #FFFFFF; border: 1px solid #ccc;"></span> Blancas</span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors"><span class="color-chip" style="background-color: #D4A373;"></span> Beige</span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors"><span class="color-chip" style="background-color: #C85A7A;"></span> Rosadas</span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors"><span class="color-chip" style="background-color: #1E4A6B;"></span> Azules</span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors"><span class="color-chip" style="background-color: #B22222;"></span> Rojas</span>
                         </div>
-                        
                         <div class="flex flex-wrap gap-3">
-                            <a href="ofertas.html" class="inline-block bg-white text-chancla-azul px-6 py-2 rounded-full font-bold hover:bg-gray-100 transition shadow-lg">
-                                <i class="fas fa-eye mr-2"></i>Ver colección completa
-                            </a>
-                            <a href="https://wa.me/5356382909?text=Hola%2C%20me%20interesan%20las%20chanclas%20al%20por%20mayor" 
-                               target="_blank"
-                               class="inline-block bg-cuban-yellow text-cuban-dark px-6 py-2 rounded-full font-bold hover:bg-yellow-400 transition shadow-lg">
-                                <i class="fab fa-whatsapp mr-2"></i>Consultar por mayor
-                            </a>
+                            <a href="ofertas.html" class="inline-block bg-white text-chancla-azul px-6 py-2 rounded-full font-bold hover:bg-gray-100 transition shadow-lg"><i class="fas fa-eye mr-2"></i>Ver colección completa</a>
+                            <a href="https://wa.me/5356382909?text=Hola%2C%20me%20interesan%20las%20chanclas%20al%20por%20mayor" target="_blank" class="inline-block bg-cuban-yellow text-cuban-dark px-6 py-2 rounded-full font-bold hover:bg-yellow-400 transition shadow-lg"><i class="fab fa-whatsapp mr-2"></i>Consultar por mayor</a>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Mensaje de más productos próximamente -->
-            <div class="mt-6 text-center text-white/70">
-                <p><i class="fas fa-plus-circle mr-2 text-cuban-yellow"></i> Próximamente más productos al por mayor</p>
-            </div>
-            
-            <!-- Mini grid de otras ofertas mayor -->
-            <div class="grid md:grid-cols-3 gap-4 mt-8" id="mayorProducts">
-                <!-- Se carga dinámicamente -->
-            </div>
-            
+            <div class="mt-6 text-center text-white/70"><p><i class="fas fa-plus-circle mr-2 text-cuban-yellow"></i> Próximamente más productos al por mayor</p></div>
+            <div class="grid md:grid-cols-3 gap-4 mt-8" id="mayorProducts"></div>
         </div>
     </section>
 
@@ -1336,27 +915,15 @@
             <div class="grid md:grid-cols-3 gap-6">
                 <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog.html'">
                     <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <span class="text-xs text-cuban-green font-bold">RECETAS</span>
-                        <h3 class="font-bold text-lg mt-1">Tostadas de Atún en 5 minutos</h3>
-                        <p class="text-gray-600 text-sm mt-2">Una receta rápida usando productos de El Resolvito...</p>
-                    </div>
+                    <div class="p-4"><span class="text-xs text-cuban-green font-bold">RECETAS</span><h3 class="font-bold text-lg mt-1">Tostadas de Atún en 5 minutos</h3><p class="text-gray-600 text-sm mt-2">Una receta rápida usando productos de El Resolvito...</p></div>
                 </article>
                 <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog.html'">
                     <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <span class="text-xs text-cuban-green font-bold">HOSPEDAJE</span>
-                        <h3 class="font-bold text-lg mt-1">Guía para alquilar en La Habana</h3>
-                        <p class="text-gray-600 text-sm mt-2">Todo lo que necesitas saber para encontrar el mejor alojamiento...</p>
-                    </div>
+                    <div class="p-4"><span class="text-xs text-cuban-green font-bold">HOSPEDAJE</span><h3 class="font-bold text-lg mt-1">Guía para alquilar en La Habana</h3><p class="text-gray-600 text-sm mt-2">Todo lo que necesitas saber para encontrar el mejor alojamiento...</p></div>
                 </article>
                 <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog.html'">
                     <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <span class="text-xs text-cuban-green font-bold">CONSEJOS</span>
-                        <h3 class="font-bold text-lg mt-1">¿Por qué comprar en El Resolvito?</h3>
-                        <p class="text-gray-600 text-sm mt-2">Descubre los beneficios de comprar en tu tienda de confianza...</p>
-                    </div>
+                    <div class="p-4"><span class="text-xs text-cuban-green font-bold">CONSEJOS</span><h3 class="font-bold text-lg mt-1">¿Por qué comprar en El Resolvito?</h3><p class="text-gray-600 text-sm mt-2">Descubre los beneficios de comprar en tu tienda de confianza...</p></div>
                 </article>
             </div>
         </div>
@@ -1372,16 +939,11 @@
                 <a href="reservas.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
             </div>
             <div class="bg-white rounded-2xl shadow-lg overflow-hidden md:flex">
-                <div class="md:w-1/2">
-                    <img src="https://i.postimg.cc/QxWvyYGy/acuarela-(1).jpg" 
-                         onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop&q=60'"
-                         class="w-full h-64 md:h-full object-cover">
-                </div>
+                <div class="md:w-1/2"><img src="https://i.postimg.cc/QxWvyYGy/acuarela-(1).jpg" onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop&q=60'" class="w-full h-64 md:h-full object-cover"></div>
                 <div class="md:w-1/2 p-8">
                     <span class="text-cuban-green font-bold text-sm">🌟 ALOJAMIENTO DESTACADO</span>
                     <h3 class="text-2xl font-bold mt-2 mb-2">Terrazas de Bayona 59</h3>
                     <p class="text-gray-600 italic mb-4">Casa colonial en el corazón de La Habana Vieja</p>
-                    
                     <div class="amenities-grid mb-4">
                         <div class="amenity-item"><i class="fas fa-check-circle"></i> Agua caliente 24/7</div>
                         <div class="amenity-item"><i class="fas fa-check-circle"></i> Aire acondicionado</div>
@@ -1390,14 +952,9 @@
                         <div class="amenity-item"><i class="fas fa-check-circle"></i> Cocina equipada</div>
                         <div class="amenity-item"><i class="fas fa-check-circle"></i> Ropa de cama</div>
                     </div>
-                    
                     <div class="flex gap-4 mt-6">
-                        <a href="https://reservaterrazasdebayona59.com/" target="_blank" class="bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark transition text-center flex-1">
-                            Reservar Ahora
-                        </a>
-                        <a href="reservas.html" class="border-2 border-cuban-green text-cuban-green px-6 py-3 rounded-lg font-bold hover:bg-cuban-green hover:text-white transition text-center">
-                            Ver más
-                        </a>
+                        <a href="https://reservaterrazasdebayona59.com/" target="_blank" class="bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark transition text-center flex-1">Reservar Ahora</a>
+                        <a href="reservas.html" class="border-2 border-cuban-green text-cuban-green px-6 py-3 rounded-lg font-bold hover:bg-cuban-green hover:text-white transition text-center">Ver más</a>
                     </div>
                 </div>
             </div>
@@ -1410,79 +967,104 @@
     <footer class="bg-cuban-dark text-white py-12">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <h3 class="font-bold text-xl mb-4">El Resolvito</h3>
-                    <p class="text-gray-300 text-sm">Tu solución integral en La Habana. Productos, servicios y alojamientos de calidad.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Enlaces</h4>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li><a href="tienda.html" class="hover:text-white transition">Tienda</a></li>
-                        <li><a href="servicios.html" class="hover:text-white transition">Servicios</a></li>
-                        <li><a href="ofertas.html" class="hover:text-white transition">Ofertas</a></li>
-                        <li><a href="blog.html" class="hover:text-white transition">Blog</a></li>
-                        <li><a href="reservas.html" class="hover:text-white transition">Alojamientos</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Contacto</h4>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li><i class="fab fa-whatsapp mr-2"></i>5356382909</li>
-                        <li><i class="fas fa-envelope mr-2"></i>elresolvito@gmail.com</li>
-                        <li><i class="fas fa-map-marker-alt mr-2"></i>La Habana Vieja</li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Síguenos</h4>
-                    <div class="flex gap-4">
-                        <a href="https://instagram.com/elresolvito.habana" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://wa.me/5356382909" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                    </div>
-                </div>
+                <div><h3 class="font-bold text-xl mb-4">El Resolvito</h3><p class="text-gray-300 text-sm">Tu solución integral en La Habana. Productos, servicios y alojamientos de calidad.</p></div>
+                <div><h4 class="font-bold mb-4">Enlaces</h4><ul class="space-y-2 text-sm text-gray-300"><li><a href="tienda.html" class="hover:text-white transition">Tienda</a></li><li><a href="servicios.html" class="hover:text-white transition">Servicios</a></li><li><a href="ofertas.html" class="hover:text-white transition">Ofertas</a></li><li><a href="blog.html" class="hover:text-white transition">Blog</a></li><li><a href="reservas.html" class="hover:text-white transition">Alojamientos</a></li></ul></div>
+                <div><h4 class="font-bold mb-4">Contacto</h4><ul class="space-y-2 text-sm text-gray-300"><li><i class="fab fa-whatsapp mr-2"></i>5356382909</li><li><i class="fas fa-envelope mr-2"></i>elresolvito@gmail.com</li><li><i class="fas fa-map-marker-alt mr-2"></i>La Habana Vieja</li></ul></div>
+                <div><h4 class="font-bold mb-4">Síguenos</h4><div class="flex gap-4"><a href="https://instagram.com/elresolvito.habana" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition"><i class="fab fa-instagram"></i></a><a href="https://wa.me/5356382909" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition"><i class="fab fa-whatsapp"></i></a></div></div>
             </div>
-            <div class="border-t border-white/20 pt-8 text-center text-gray-400 text-sm">
-                <p>&copy; 2024 El Resolvito. Todos los derechos reservados.</p>
-            </div>
+            <div class="border-t border-white/20 pt-8 text-center text-gray-400 text-sm"><p>&copy; 2024 El Resolvito. Todos los derechos reservados.</p></div>
         </div>
     </footer>
 
     <!-- ============================================ -->
-    <!-- MODAL DE IMAGEN -->
+    <!-- MODALES -->
     <!-- ============================================ -->
     <div id="imageModal" class="image-modal" onclick="closeImageModal()">
         <div class="image-modal-content" onclick="event.stopPropagation()">
-            <button class="image-modal-close" onclick="closeImageModal()">
-                <i class="fas fa-times"></i>
-            </button>
+            <button class="image-modal-close" onclick="closeImageModal()"><i class="fas fa-times"></i></button>
             <img id="modalImage" class="image-modal-img" src="" alt="">
             <p id="modalImageName" class="image-modal-title"></p>
         </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- TOAST NOTIFICATION -->
-    <!-- ============================================ -->
-    <div id="cartToast">
-        <p id="cartToastMessage" class="text-sm"></p>
-    </div>
+    <div id="cartToast"><p id="cartToastMessage" class="text-sm"></p></div>
 
     <!-- ============================================ -->
-    <!-- INCLUIR CARRITO SIDEBAR -->
+    <!-- CARRITO MODAL (INCLUIDO DIRECTAMENTE) -->
     <!-- ============================================ -->
-    <div id="cartModalContainer"></div>
+    <div id="cartModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#0d3b33]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        Tu Carrito
+                    </h3>
+                    <button id="closeCartModal" class="text-gray-500 hover:text-gray-700 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="cartItems" class="p-6 overflow-y-auto flex-1">
+                <p class="text-center text-gray-500">Tu carrito está vacío</p>
+            </div>
+            <div class="p-6 border-t border-gray-200 bg-gray-50">
+                <div class="mb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-600">Subtotal:</span>
+                        <span id="cartSubtotal" class="font-semibold text-gray-800">$0</span>
+                    </div>
+                    <div class="promo-progress-container mt-3">
+                        <div id="promoProgressBar" class="promo-progress-bar" style="width: 0%;"></div>
+                    </div>
+                    <p id="progressText" class="text-xs text-gray-500 mt-1">Mínimo $500 para envío</p>
+                </div>
+                <div class="flex justify-between items-center mb-4 pt-2 border-t border-gray-200">
+                    <span class="text-lg font-bold text-gray-800">Total:</span>
+                    <span id="cartTotal" class="text-xl font-bold text-[#0d3b33]">$0</span>
+                </div>
+                <button id="sendWhatsAppOrder" class="w-full bg-green-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-600 transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2" disabled>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.033-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                    </svg>
+                    Enviar Pedido por WhatsApp
+                </button>
+                <p class="text-xs text-center text-gray-500 mt-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    Pedido seguro al 5356382909
+                </p>
+            </div>
+        </div>
+    </div>
 
     <!-- ============================================ -->
     <!-- SCRIPTS -->
     <!-- ============================================ -->
-    <script src="cart.js"></script>
     <script>
         // ============================================
-        // PRODUCTOS
+        // VARIABLES GLOBALES
         // ============================================
+        let cart = JSON.parse(localStorage.getItem('elResolvitoCart')) || [];
+        
+        const SHIPPING_RANGES = [
+            { max: 2000, fee: 200, discount: "0%" },
+            { max: 5000, fee: 150, discount: "25%" },
+            { max: Infinity, fee: 100, discount: "50%" }
+        ];
+
+        const SERVICE_FEE_PERCENTAGE = 0.08;
+        const MINIMUM_PROFIT = 300;
+        const MIN_ORDER_THRESHOLD = 500;
+        const FREE_SHIPPING_MIN = 5000;
+        const WHATSAPP_NUMBER = '5356382909';
+
+        // Productos
         const featuredProducts = [
             {id:4, nombre:"Café Dualis 250g", precio:1450, imagen:"https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png", categoria:"Alimentos"},
             {id:7, nombre:"Cartón de huevo 30u", precio:3000, imagen:"https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3000.png", categoria:"Alimentos"},
@@ -1502,106 +1084,224 @@
         ];
 
         // ============================================
-        // INICIALIZACIÓN
+        // FUNCIONES DEL CARRITO
         // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            // Cargar el sidebar del carrito
-            fetch('cart-sidebar.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('cartModalContainer').innerHTML = data;
-                    
-                    // Configurar eventos del carrito después de cargar
-                    setupCartEvents();
-                    
-                    // Actualizar UI del carrito
-                    if (typeof updateCartUI === 'function') {
-                        updateCartUI();
-                    }
-                })
-                .catch(error => {
-                    console.error('Error cargando el carrito:', error);
-                });
-            
-            // Renderizar productos
-            renderFeaturedProducts();
-            renderMayorProducts();
-            
-            // Iniciar modo día/noche
-            initDayNight();
-            
-            // Quitar transición
-            document.getElementById('pageFade').classList.add('opacity-0');
-            
-            // Configurar scroll behavior para botones flotantes
-            setupFloatingButtons();
-        });
-
-        // ============================================
-        // CONFIGURAR EVENTOS DEL CARRITO
-        // ============================================
-        function setupCartEvents() {
-            const closeCartModal = document.getElementById('closeCartModal');
-            if (closeCartModal) {
-                closeCartModal.addEventListener('click', toggleCart);
-            }
-            
-            const sendWhatsAppOrder = document.getElementById('sendWhatsAppOrder');
-            if (sendWhatsAppOrder) {
-                sendWhatsAppOrder.addEventListener('click', function() {
-                    if (typeof cart === 'undefined' || cart.length === 0) {
-                        if (typeof showCartToast === 'function') {
-                            showCartToast('El carrito está vacío');
-                        }
-                        return;
-                    }
-                    
-                    if (typeof calculateFinalPrice === 'function' && typeof generateWhatsAppMessage === 'function') {
-                        // Calcular precios usando la función de cart.js
-                        const priceDetails = calculateFinalPrice(cart);
-                        
-                        // Crear datos del cliente básicos
-                        const customerData = {
-                            name: 'Cliente',
-                            phone: '5356382909',
-                            location: 'habana-vieja',
-                            address: 'La Habana Vieja'
-                        };
-                        
-                        // Generar mensaje
-                        const message = generateWhatsAppMessage(cart, customerData, priceDetails);
-                        
-                        // Abrir WhatsApp
-                        window.open(`https://wa.me/5356382909?text=${encodeURIComponent(message)}`, '_blank');
-                    }
-                });
-            }
-        }
-
-        // ============================================
-        // COMPORTAMIENTO DE BOTONES FLOTANTES
-        // ============================================
-        function setupFloatingButtons() {
-            let lastScroll = 0;
-            const buttons = document.getElementById('floatingActions');
-            
-            window.addEventListener('scroll', () => {
-                const currentScroll = window.pageYOffset;
-                
-                if (currentScroll > lastScroll && currentScroll > 200) {
-                    buttons.style.transform = 'translateX(100px)';
-                    buttons.style.opacity = '0';
-                } else {
-                    buttons.style.transform = 'translateX(0)';
-                    buttons.style.opacity = '1';
+        function calculateShippingFee(subtotal) {
+            for (const range of SHIPPING_RANGES) {
+                if (subtotal <= range.max) {
+                    return {
+                        fee: range.fee,
+                        discount: range.discount,
+                        rangeText: range.max === Infinity ? 'Más de $5,000' : subtotal <= 2000 ? 'Hasta $2,000' : `$${SHIPPING_RANGES[0].max + 1} - $${range.max}`
+                    };
                 }
-                
-                lastScroll = currentScroll;
+            }
+            return { fee: 200, discount: "0%", rangeText: "Hasta $2,000" };
+        }
+
+        function calculateFinalPrice(cartItems) {
+            const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shippingInfo = calculateShippingFee(subtotal);
+            const shippingFee = shippingInfo.fee;
+            const serviceFee = subtotal * SERVICE_FEE_PERCENTAGE;
+            const currentProfit = serviceFee + shippingFee;
+            let adjustment = 0;
+            if (currentProfit < MINIMUM_PROFIT) {
+                adjustment = MINIMUM_PROFIT - currentProfit;
+            }
+            const finalPrice = subtotal + shippingFee + adjustment;
+            
+            return {
+                subtotal: subtotal,
+                serviceFee: serviceFee,
+                shippingFee: shippingFee,
+                shippingDiscount: shippingInfo.discount,
+                shippingRange: shippingInfo.rangeText,
+                adjustment: adjustment,
+                finalPrice: finalPrice,
+                yourProfit: currentProfit + adjustment
+            };
+        }
+
+        function generateWhatsAppMessage(cart, customerData, priceDetails) {
+            const itemsText = cart.map(item => 
+                `• ${item.name} x${item.quantity} - $${(item.price * item.quantity).toLocaleString()}`
+            ).join('\n');
+            
+            let shippingMessage = "";
+            if (priceDetails.shippingDiscount === "25%") {
+                shippingMessage = `⭐ *¡APROVECHASTE DESCUENTO EN ENVÍO!* \nPor compra mediana, solo $${priceDetails.shippingFee.toLocaleString()} (ahorras $50 vs. envío normal)`;
+            } else if (priceDetails.shippingDiscount === "50%") {
+                shippingMessage = `🎯 *¡ENVÍO A MEDIO PRECIO!*\nPor tu compra mayor a $5,000, el envío es de solo $${priceDetails.shippingFee.toLocaleString()} (50% de descuento)`;
+            } else {
+                shippingMessage = `🚚 Envío estándar: $${priceDetails.shippingFee.toLocaleString()}`;
+            }
+            
+            return `✅ *PEDIDO CONFIRMADO - EL RESOLVITO*\n\n🛒 *TU COMPRA:*\n${itemsText}\n\n💰 *DESGLOSE:*\n- Productos: $${priceDetails.subtotal.toLocaleString()}\n- ${shippingMessage}\n${priceDetails.adjustment > 0 ? `- Ajuste servicio: $${priceDetails.adjustment.toLocaleString()}\n` : ''}- *TOTAL A PAGAR: $${priceDetails.finalPrice.toLocaleString()}*\n\n📍 *ENTREGA:* ${customerData.location === 'habana-vieja' ? 'Habana Vieja' : customerData.location}\n📞 *CONTACTO:* ${customerData.phone}\n\n*Todos los precios incluyen la entrega a domicilio.*`;
+        }
+
+        function addToCart(product) {
+            if (!product || !product.id || !product.name || !product.price) {
+                console.error('Producto inválido');
+                return false;
+            }
+
+            const existingItemIndex = cart.findIndex(item => item.id === product.id);
+            
+            if (existingItemIndex !== -1) {
+                cart[existingItemIndex].quantity += product.quantity || 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    image: product.image,
+                    price: product.price,
+                    quantity: product.quantity || 1,
+                    weight: product.weight || 0
+                });
+            }
+
+            saveCart();
+            updateCartUI();
+            showCartAnimation();
+            showCartToast('Producto añadido al carrito');
+            return true;
+        }
+
+        function saveCart() {
+            try {
+                localStorage.setItem('elResolvitoCart', JSON.stringify(cart));
+            } catch (e) {
+                console.error('Error guardando carrito:', e);
+            }
+        }
+
+        function updateCartQuantity(index, newQuantity) {
+            if (newQuantity <= 0) {
+                removeFromCart(index);
+                showCartToast('Producto eliminado del carrito');
+                return;
+            }
+            cart[index].quantity = newQuantity;
+            saveCart();
+            updateCartUI();
+            showCartToast('Carrito actualizado');
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            saveCart();
+            updateCartUI();
+            showCartToast('Producto eliminado del carrito');
+        }
+
+        function clearCart() {
+            cart = [];
+            saveCart();
+            updateCartUI();
+            showCartToast('Carrito vaciado');
+        }
+
+        function updateCartUI() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = subtotal > FREE_SHIPPING_MIN ? 0 : 200;
+            const total = subtotal + shipping;
+            
+            document.querySelectorAll('#cartCount, #cartCountMobile, #headerCartCount, #floatingCartCount').forEach(el => {
+                if (el) {
+                    el.textContent = totalItems;
+                    el.classList.toggle('hidden', totalItems === 0);
+                    if (totalItems > 0) {
+                        el.classList.add('badge-pop');
+                        setTimeout(() => el.classList.remove('badge-pop'), 300);
+                    }
+                }
             });
+
+            const cartItems = document.getElementById('cartItems');
+            const sendWhatsAppOrder = document.getElementById('sendWhatsAppOrder');
+            
+            if (!cartItems) return;
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="text-center text-gray-500 text-fixed-base">Tu carrito está vacío</p>';
+                if (sendWhatsAppOrder) sendWhatsAppOrder.disabled = true;
+            } else {
+                cartItems.innerHTML = cart.map((item, index) => `
+                    <div class="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0">
+                        <div class="flex-1">
+                            <h5 class="text-fixed-base font-semibold text-gray-800">${item.name}</h5>
+                            <p class="text-fixed-sm text-gray-500">$${item.price.toLocaleString()} c/u × ${item.quantity}</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="updateCartQuantity(${index}, ${item.quantity - 1})" class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-fixed-sm font-bold hover:bg-gray-300 transition-colors">-</button>
+                            <span class="text-fixed-base font-semibold w-8 text-center">${item.quantity}</span>
+                            <button onclick="updateCartQuantity(${index}, ${item.quantity + 1})" class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-fixed-sm font-bold hover:bg-gray-300 transition-colors">+</button>
+                            <button onclick="removeFromCart(${index})" class="ml-2 text-red-500 hover:text-red-700 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+                
+                if (sendWhatsAppOrder) sendWhatsAppOrder.disabled = false;
+            }
+
+            const subtotalEl = document.getElementById('cartSubtotal');
+            const totalEl = document.getElementById('cartTotal');
+            const progressText = document.getElementById('progressText');
+            const promoProgressBar = document.getElementById('promoProgressBar');
+            
+            if (subtotalEl) subtotalEl.textContent = `$${subtotal.toLocaleString()}`;
+            if (totalEl) totalEl.textContent = `$${total.toLocaleString()}`;
+            
+            if (progressText && promoProgressBar) {
+                const remainingForFree = Math.max(0, FREE_SHIPPING_MIN - subtotal);
+                const progressPercent = Math.min(100, (subtotal / FREE_SHIPPING_MIN) * 100);
+                promoProgressBar.style.width = `${progressPercent}%`;
+                
+                if (subtotal >= FREE_SHIPPING_MIN) {
+                    progressText.innerHTML = '🎉 ¡Envío gratis aplicado!';
+                } else {
+                    progressText.innerHTML = `🚚 Faltan $${remainingForFree.toLocaleString()} para envío gratis`;
+                }
+            }
+        }
+
+        function showCartAnimation() {
+            const btn = document.getElementById('floatingCartBtn');
+            if (btn) {
+                btn.classList.add('shake');
+                setTimeout(() => btn.classList.remove('shake'), 600);
+            }
+        }
+
+        function showCartToast(message) {
+            const toast = document.getElementById('cartToast');
+            const msg = document.getElementById('cartToastMessage');
+            
+            if (!toast || !msg) return;
+            
+            clearTimeout(window.toastTimeout);
+            msg.textContent = message;
+            toast.classList.add('show');
+            
+            window.toastTimeout = setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            if (modal) {
+                modal.classList.toggle('show');
+                document.body.style.overflow = modal.classList.contains('show') ? 'hidden' : '';
+            }
         }
 
         // ============================================
-        // RENDERIZAR PRODUCTOS
+        // FUNCIONES DE UI
         // ============================================
         function renderFeaturedProducts() {
             const container = document.getElementById('featuredProducts');
@@ -1616,7 +1316,7 @@
                         <p class="text-xs text-cuban-green font-medium">${p.categoria}</p>
                         <h3 class="font-bold text-sm mb-1">${p.nombre}</h3>
                         <div class="flex items-center justify-between">
-                            <span class="text-lg font-bold text-cuban-green">$${p.precio.toLocaleString('es-CU')}</span>
+                            <span class="text-lg font-bold text-cuban-green">$${p.precio.toLocaleString()}</span>
                             <button onclick="addToCart({id:${p.id}, name:'${p.nombre}', price:${p.precio}, image:'${p.imagen}', quantity:1})" class="w-8 h-8 bg-cuban-green text-white rounded-full flex items-center justify-center hover:bg-cuban-dark transition">
                                 <i class="fas fa-plus"></i>
                             </button>
@@ -1639,8 +1339,8 @@
                     <p class="text-cuban-yellow text-xs mb-2">${p.desc}</p>
                     <div class="flex items-center justify-between">
                         <div>
-                            <span class="text-xl font-bold text-cuban-yellow">$${p.precio.toLocaleString('es-CU')}</span>
-                            <span class="text-xs text-white/50 line-through ml-1">$${p.precioNormal.toLocaleString('es-CU')}</span>
+                            <span class="text-xl font-bold text-cuban-yellow">$${p.precio.toLocaleString()}</span>
+                            <span class="text-xs text-white/50 line-through ml-1">$${p.precioNormal.toLocaleString()}</span>
                         </div>
                         <button onclick="addToCart({id:${p.id}, name:'${p.nombre}', price:${p.precio}, image:'${p.imagen}', quantity:1})" class="bg-cuban-yellow text-cuban-dark px-3 py-1 rounded font-bold text-sm hover:bg-yellow-400">
                             <i class="fas fa-plus"></i>
@@ -1650,9 +1350,6 @@
             `).join('');
         }
 
-        // ============================================
-        // MODAL DE IMAGEN
-        // ============================================
         function openImageModal(src, name) {
             const modal = document.getElementById('imageModal');
             const img = document.getElementById('modalImage');
@@ -1669,9 +1366,6 @@
             document.body.style.overflow = '';
         }
 
-        // ============================================
-        // MODO DÍA/NOCHE
-        // ============================================
         function initDayNight() {
             const hour = new Date().getHours();
             const isNight = hour < 6 || hour >= 18;
@@ -1692,18 +1386,72 @@
             localStorage.setItem('nightMode', isNight);
         }
 
-        // ============================================
-        // MENÚ MÓVIL
-        // ============================================
         function toggleMenu() {
             const menu = document.getElementById('mobileMenu');
             menu.classList.toggle('hidden');
             document.body.style.overflow = menu.classList.contains('hidden') ? '' : 'hidden';
         }
 
+        function setupFloatingButtons() {
+            let lastScroll = 0;
+            const buttons = document.getElementById('floatingActions');
+            
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll > lastScroll && currentScroll > 200) {
+                    buttons.style.transform = 'translateX(100px)';
+                    buttons.style.opacity = '0';
+                } else {
+                    buttons.style.transform = 'translateX(0)';
+                    buttons.style.opacity = '1';
+                }
+                
+                lastScroll = currentScroll;
+            });
+        }
+
         // ============================================
-        // TRANSICIÓN ENTRE PÁGINAS
+        // INICIALIZACIÓN
         // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            renderFeaturedProducts();
+            renderMayorProducts();
+            initDayNight();
+            updateCartUI();
+            setupFloatingButtons();
+            
+            document.getElementById('pageFade').classList.add('opacity-0');
+            
+            const closeCartModal = document.getElementById('closeCartModal');
+            if (closeCartModal) {
+                closeCartModal.addEventListener('click', toggleCart);
+            }
+            
+            const sendWhatsAppOrder = document.getElementById('sendWhatsAppOrder');
+            if (sendWhatsAppOrder) {
+                sendWhatsAppOrder.addEventListener('click', function() {
+                    if (cart.length === 0) {
+                        showCartToast('El carrito está vacío');
+                        return;
+                    }
+                    
+                    const priceDetails = calculateFinalPrice(cart);
+                    
+                    const customerData = {
+                        name: 'Cliente',
+                        phone: '5356382909',
+                        location: 'habana-vieja',
+                        address: 'La Habana Vieja'
+                    };
+                    
+                    const message = generateWhatsAppMessage(cart, customerData, priceDetails);
+                    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+                });
+            }
+        });
+
+        // Transición entre páginas
         document.querySelectorAll('a[href]').forEach(link => {
             const href = link.getAttribute('href');
             
@@ -1733,7 +1481,6 @@
             }
         });
 
-        // Cerrar modal con ESC
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeImageModal();
