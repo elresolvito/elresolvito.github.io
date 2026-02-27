@@ -61,6 +61,7 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     transition: background-color var(--transition-slow), color var(--transition-slow);
+    padding-bottom: 80px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -81,23 +82,40 @@ body.night-mode .bg-white {
     background: var(--bg-dark-card) !important;
 }
 
-body.night-mode .bg-gray-50 {
+body.night-mode .bg-gray-50,
+body.night-mode .bg-gray-100 {
     background: var(--bg-dark-secondary) !important;
 }
 
 body.night-mode .text-gray-600,
 body.night-mode .text-gray-500,
-body.night-mode .text-gray-700 {
+body.night-mode .text-gray-700,
+body.night-mode .text-gray-800 {
     color: var(--text-dark-secondary) !important;
 }
 
-body.night-mode .border {
+body.night-mode .border,
+body.night-mode .border-gray-200,
+body.night-mode .border-gray-300 {
     border-color: var(--border-dark) !important;
+}
+
+body.night-mode header,
+body.night-mode footer {
+    background-color: var(--bg-dark-card) !important;
+    border-bottom: 1px solid var(--border-dark);
 }
 
 /* ============================================ */
 /* COMPONENTES REUTILIZABLES */
 /* ============================================ */
+
+/* Contenedor */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
 
 /* Botones principales */
 .btn {
@@ -160,6 +178,51 @@ body.night-mode .border {
 }
 
 body.night-mode .product-card {
+    background: var(--bg-dark-card);
+    border-color: var(--border-dark);
+}
+
+.product-image-container {
+    height: 180px;
+    background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.product-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 1rem;
+    transition: transform var(--transition-base);
+}
+
+.product-card:hover .product-image-container img {
+    transform: scale(1.08);
+}
+
+body.night-mode .product-image-container {
+    background: #ffffff;
+}
+
+/* Tarjetas de servicio */
+.service-card {
+    background: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-base);
+    border: 1px solid var(--border-light);
+}
+
+.service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-xl);
+}
+
+body.night-mode .service-card {
     background: var(--bg-dark-card);
     border-color: var(--border-dark);
 }
@@ -321,6 +384,21 @@ body.night-mode .cart-sidebar {
     border: 1px solid var(--border-dark);
 }
 
+.cart-item {
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 /* ============================================ */
 /* INDICADOR DÍA/NOCHE MEJORADO */
 /* ============================================ */
@@ -389,8 +467,151 @@ body.night-mode .theme-toggle {
     background: var(--primary-green);
 }
 
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--primary-gold);
+    color: var(--text-primary);
+    font-size: 0.75rem;
+    font-weight: bold;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* ============================================ */
-/* ANIMACIONES SUAVES */
+/* MODAL DE IMAGEN */
+/* ============================================ */
+.image-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    z-index: 1100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.image-modal.active {
+    display: flex;
+}
+
+.image-modal-content {
+    position: relative;
+    max-width: 800px;
+    width: 100%;
+}
+
+.image-modal-close {
+    position: absolute;
+    top: -3rem;
+    right: 0;
+    color: white;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition-base);
+}
+
+.image-modal-close:hover {
+    color: #ccc;
+    transform: scale(1.1);
+}
+
+.image-modal-img {
+    width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 0.5rem;
+}
+
+.image-modal-title {
+    color: white;
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+/* ============================================ */
+/* ALOJAMIENTOS - Amenities */
+/* ============================================ */
+.amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.5rem;
+}
+
+.amenity-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.amenity-item i {
+    color: var(--primary-green);
+    width: 20px;
+}
+
+body.night-mode .amenity-item {
+    color: var(--text-dark-secondary);
+}
+
+.experience-badge {
+    background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-orange) 100%);
+    color: var(--primary-green-dark);
+    font-weight: bold;
+    padding: 0.25rem 1rem;
+    border-radius: 9999px;
+    display: inline-block;
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* ============================================ */
+/* SERVICIO CONTADOR - Características */
+/* ============================================ */
+.feature-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.feature-item i {
+    color: var(--success);
+    font-size: 0.875rem;
+}
+
+/* ============================================ */
+/* UTILIDADES */
+/* ============================================ */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* ============================================ */
+/* ANIMACIONES */
 /* ============================================ */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
@@ -410,6 +631,76 @@ body.night-mode .theme-toggle {
     animation: pulse 2s infinite;
 }
 
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.animate-bounce-slow {
+    animation: bounce 2s infinite;
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+}
+
+.animate-wiggle {
+    animation: wiggle 1s ease-in-out infinite;
+}
+
+/* ============================================ */
+/* TRANSICIÓN ENTRE PÁGINAS */
+/* ============================================ */
+.page-transition {
+    position: fixed;
+    inset: 0;
+    background: white;
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+.page-transition.active {
+    opacity: 1;
+}
+
+body.night-mode .page-transition {
+    background: var(--bg-dark);
+}
+
+/* ============================================ */
+/* NOTIFICACIONES */
+/* ============================================ */
+.notification {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-green);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 20px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
 /* ============================================ */
 /* ACCESIBILIDAD */
 /* ============================================ */
@@ -424,5 +715,32 @@ body.night-mode .theme-toggle {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
+    }
+}
+
+/* ============================================ */
+/* RESPONSIVE */
+/* ============================================ */
+@media (max-width: 640px) {
+    .floating-btn.whatsapp {
+        bottom: 5rem;
+    }
+    
+    .floating-btn.cart {
+        bottom: 1rem;
+    }
+    
+    .hero-container {
+        height: 400px;
+    }
+    
+    .product-image-container {
+        height: 140px;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    .product-image-container {
+        height: 160px;
     }
 }
