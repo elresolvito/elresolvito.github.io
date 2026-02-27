@@ -15,9 +15,22 @@
                 extend: {
                     fontFamily: { 'poppins': ['Poppins'], 'opensans': ['Open Sans'] },
                     colors: {
-                        'cuban-green': '#2E7D32', 'cuban-dark': '#1B5E20',
-                        'cuban-yellow': '#FFB300', 'cuban-blue': '#0277BD',
-                        'night-bg': '#1a1a2e', 'night-card': '#16213e'
+                        'cuban-green': '#2E7D32', 
+                        'cuban-dark': '#1B5E20',
+                        'cuban-yellow': '#FFB300', 
+                        'cuban-blue': '#0277BD',
+                        'dulce-rosa': '#FF69B4', 
+                        'dulce-morado': '#9B59B6'
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 2s infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' },
+                        }
                     }
                 }
             }
@@ -25,56 +38,56 @@
     </script>
     
     <style>
-        * { -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Open Sans', sans-serif; transition: background-color 0.5s, color 0.5s; }
+        body { font-family: 'Open Sans', sans-serif; background: #ffffff; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
         .service-card { transition: all 0.3s ease; }
         .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px rgba(0,0,0,0.15); }
         .btn-whatsapp { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); }
+        .btn-dulce { background: linear-gradient(135deg, #FF69B4 0%, #9B59B6 100); }
         
-        /* Modo Noche */
+        /* Animaciones personalizadas */
+        .bounce-slow {
+            animation: bounce 2s infinite;
+        }
+        
+        .wiggle {
+            animation: wiggle 1s ease-in-out infinite;
+        }
+        
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+        
+        /* Para que la imagen se vea completa */
+        .service-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: white;
+        }
+        
         body.night-mode { background-color: #0f0f1a; color: #e0e0e0; }
         body.night-mode .bg-white { background-color: #16213e !important; color: #e0e0e0 !important; }
         body.night-mode .bg-gray-50 { background-color: #1a1a2e !important; }
-        body.night-mode .bg-gray-100 { background-color: #252542 !important; }
-        body.night-mode .text-gray-800 { color: #e0e0e0 !important; }
-        body.night-mode .text-gray-700 { color: #b0b0b0 !important; }
-        body.night-mode .text-gray-600 { color: #909090 !important; }
         body.night-mode header { background-color: #16213e !important; }
-        body.night-mode .shadow-md { box-shadow: 0 4px 6px rgba(0,0,0,0.3) !important; }
-        
-        /* Indicador día/noche */
-        .day-night-indicator {
-            position: fixed; top: 20px; right: 20px; z-index: 60;
-            width: 50px; height: 50px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 24px; cursor: pointer; transition: all 0.3s;
-            background: rgba(255,255,255,0.9); box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        body.night-mode .day-night-indicator { background: rgba(30,30,60,0.9); }
     </style>
 <base target="_blank">
 </head>
 <body class="bg-white text-gray-800 pb-20">
 
-    <!-- Indicador Día/Noche -->
-    <div class="day-night-indicator" onclick="toggleDayNight()" title="Cambiar modo">
-        <span id="dayNightIcon">☀️</span>
-    </div>
+    <!-- Transición súper sutil -->
+    <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
 
-    <!-- Botón WhatsApp -->
+    <!-- Botón WhatsApp principal (El Resolvito) -->
     <a href="https://wa.me/5356382909" target="_blank" class="fixed bottom-4 right-4 z-40 btn-whatsapp text-white p-4 rounded-full shadow-lg hover:scale-110 transition">
         <i class="fab fa-whatsapp text-2xl"></i>
     </a>
 
     <!-- Header -->
-    <header class="sticky top-0 z-50 bg-white shadow-md transition-colors duration-500">
+    <header class="sticky top-0 z-50 bg-white shadow-md">
         <div class="container mx-auto px-4 py-3">
             <div class="flex items-center justify-between">
-                <button onclick="toggleMenu()" class="p-2 hover:bg-gray-100 rounded-lg lg:hidden">
-                    <i class="fas fa-bars text-2xl text-cuban-green"></i>
-                </button>
-                
                 <a href="index.html" class="flex items-center gap-2">
                     <div class="w-10 h-10 bg-cuban-green rounded-full flex items-center justify-center text-white font-bold text-xl">
                         <i class="fas fa-store"></i>
@@ -94,7 +107,9 @@
                     <a href="reservas.html" class="hover:text-cuban-green font-medium">Alojamientos</a>
                 </nav>
 
-                <div class="w-10"></div> <!-- Espaciador para equilibrio -->
+                <button onclick="toggleMenu()" class="p-2 hover:bg-gray-100 rounded-lg lg:hidden">
+                    <i class="fas fa-bars text-2xl text-cuban-green"></i>
+                </button>
             </div>
         </div>
     </header>
@@ -121,313 +136,172 @@
     <section class="bg-gradient-to-br from-cuban-green to-cuban-dark text-white py-16 px-4">
         <div class="container mx-auto text-center">
             <h2 class="text-4xl md:text-5xl font-bold mb-4">Nuestros Servicios</h2>
-            <p class="text-xl opacity-90">Profesionales de confianza para tu hogar</p>
+            <p class="text-xl opacity-90">Profesionales de confianza para ti</p>
         </div>
     </section>
 
-    <!-- Servicios -->
+    <!-- ============================================ -->
+    <!-- SECCIÓN DE SERVICIOS                         -->
+    <!-- ============================================ -->
     <section class="py-12">
         <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                <!-- SERVICIO 1: Tapicería -->
+            
+            <!-- CONTENEDOR GRID - Aquí se añaden nuevos servicios -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="servicios-container">
+                
+                <!-- ========================================= -->
+                <!-- SERVICIO 1: Dulce César                   -->
+                <!-- ========================================= -->
                 <div class="service-card bg-white rounded-2xl shadow-lg overflow-hidden">
-                    <div class="h-48 bg-amber-100 flex items-center justify-center text-6xl">
-                        🛋️
+                    <!-- Imagen SIN overlay -->
+                    <div class="h-64 w-full overflow-hidden bg-gradient-to-r from-dulce-rosa to-dulce-morado">
+                        <img src="https://i.postimg.cc/Qxz4FMGg/IMG_20260226-WA0025.jpg" 
+                             alt="Dulce César - Repostería artesanal" 
+                             class="w-full h-full object-contain bg-white">
                     </div>
+                    
                     <div class="p-6">
-                        <h3 class="text-2xl font-bold mb-2">Tapicería de Muebles</h3>
-                        <p class="text-gray-600 mb-4">Restauración completa de sofás, sillas, butacas y más. Cambio de tela, reparación de estructuras y retapizado.</p>
+                        <!-- Etiqueta de nuevo -->
+                        <span class="bg-dulce-rosa text-white text-xs px-3 py-1 rounded-full font-bold inline-block mb-3">✨ NUEVO SERVICIO</span>
                         
-                        <div class="space-y-2 mb-4">
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Cambio de tela o cuero
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Reparación de resortes
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Restauración de madera
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Limpieza profunda
-                            </div>
+                        <h3 class="text-2xl font-bold mb-2 text-dulce-rosa">Dulce César</h3>
+                        <p class="text-gray-600 mb-4">Repostería artesanal para eventos, cafeterías y pedidos especiales. Endulzamos tus momentos.</p>
+                        
+                        <!-- Características rápidas -->
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-pink-100 text-pink-600 text-xs px-3 py-1 rounded-full">🎂 Tortas</span>
+                            <span class="bg-purple-100 text-purple-600 text-xs px-3 py-1 rounded-full">🧁 Cupcakes</span>
+                            <span class="bg-yellow-100 text-yellow-600 text-xs px-3 py-1 rounded-full">🍪 Galletas</span>
+                            <span class="bg-green-100 text-green-600 text-xs px-3 py-1 rounded-full">📦 Por mayor</span>
+                            <span class="bg-blue-100 text-blue-600 text-xs px-3 py-1 rounded-full">☕ Cafeterías</span>
                         </div>
-
+                        
+                        <!-- Precio desde $150 -->
                         <div class="flex items-center justify-between mb-4">
-                            <span class="text-2xl font-bold text-cuban-green">Desde $1,500</span>
-                            <span class="text-sm text-gray-500">Presupuesto gratis</span>
+                            <span class="text-2xl font-bold text-dulce-rosa">Desde $150</span>
+                            <span class="text-sm text-gray-500">Pedidos con 48h</span>
                         </div>
-
-                        <a href="https://wa.me/5356382909?text=Hola, solicito servicio de tapicería" target="_blank" class="block w-full btn-whatsapp text-white text-center py-3 rounded-xl font-bold hover:opacity-90 transition">
-                            <i class="fab fa-whatsapp mr-2"></i>Solicitar por WhatsApp
+                        
+                        <!-- Botón de contacto con MENSAJE PREDETERMINADO -->
+                        <a href="https://wa.me/5353342167?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Dulce%20C%C3%A9sar.%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20por%20favor." 
+                           target="_blank" 
+                           class="block w-full btn-dulce text-white text-center py-3 rounded-xl font-bold hover:opacity-90 transition">
+                            <i class="fab fa-whatsapp mr-2"></i>Contactar a Dulce César
                         </a>
+                        <p class="text-xs text-center text-gray-400 mt-2">+53 5 3342167</p>
                     </div>
                 </div>
-
-                <!-- SERVICIO 2: Limpieza de Splits -->
-                <div class="service-card bg-white rounded-2xl shadow-lg overflow-hidden">
-                    <div class="h-48 bg-cyan-100 flex items-center justify-center text-6xl">
-                        ❄️
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold mb-2">Limpieza de Splits</h3>
-                        <p class="text-gray-600 mb-4">Mantenimiento profesional de aires acondicionados. Limpieza profunda, recarga de gas y reparación.</p>
-                        
-                        <div class="space-y-2 mb-4">
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Limpieza de filtros y serpentín
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Desinfección antibacterial
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Revisión de gas refrigerante
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Mantenimiento preventivo
-                            </div>
-                        </div>
-
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-2xl font-bold text-cuban-green">Desde $800</span>
-                            <span class="text-sm text-gray-500">Garantía 30 días</span>
-                        </div>
-
-                        <a href="https://wa.me/5356382909?text=Hola, solicito servicio de limpieza de splits" target="_blank" class="block w-full btn-whatsapp text-white text-center py-3 rounded-xl font-bold hover:opacity-90 transition">
-                            <i class="fab fa-whatsapp mr-2"></i>Solicitar por WhatsApp
-                        </a>
-                    </div>
-                </div>
-
-                <!-- SERVICIO 3: Carpintería -->
-                <div class="service-card bg-white rounded-2xl shadow-lg overflow-hidden">
-                    <div class="h-48 bg-amber-50 flex items-center justify-center text-6xl">
-                        🔨
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold mb-2">Carpintería a Medida</h3>
-                        <p class="text-gray-600 mb-4">Trabajos en madera personalizados. Muebles, reparaciones, instalaciones y acabados de calidad.</p>
-                        
-                        <div class="space-y-2 mb-4">
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Muebles a medida
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Puertas y ventanas
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Cocinas empotradas
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Reparaciones en general
-                            </div>
-                        </div>
-
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-2xl font-bold text-cuban-green">Desde $2,000</span>
-                            <span class="text-sm text-gray-500">Presupuesto gratis</span>
-                        </div>
-
-                        <a href="https://wa.me/5356382909?text=Hola, solicito servicio de carpintería" target="_blank" class="block w-full btn-whatsapp text-white text-center py-3 rounded-xl font-bold hover:opacity-90 transition">
-                            <i class="fab fa-whatsapp mr-2"></i>Solicitar por WhatsApp
-                        </a>
-                    </div>
-                </div>
-
-                <!-- SERVICIO 4: Electricidad -->
-                <div class="service-card bg-white rounded-2xl shadow-lg overflow-hidden">
-                    <div class="h-48 bg-yellow-100 flex items-center justify-center text-6xl">
-                        ⚡
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold mb-2">Electricidad</h3>
-                        <p class="text-gray-600 mb-4">Instalaciones eléctricas residenciales. Reparaciones, mantenimiento y urgentes 24 horas.</p>
-                        
-                        <div class="space-y-2 mb-4">
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Instalaciones nuevas
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Reparación de cortocircuitos
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Cambio de breaker
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Servicio 24 horas
-                            </div>
-                        </div>
-
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-2xl font-bold text-cuban-green">Desde $500</span>
-                            <span class="text-sm text-gray-500">Urgencias +$200</span>
-                        </div>
-
-                        <a href="https://wa.me/5356382909?text=Hola, solicito servicio eléctrico" target="_blank" class="block w-full btn-whatsapp text-white text-center py-3 rounded-xl font-bold hover:opacity-90 transition">
-                            <i class="fab fa-whatsapp mr-2"></i>Solicitar por WhatsApp
-                        </a>
-                    </div>
-                </div>
-
-                <!-- SERVICIO 5: Plomería -->
-                <div class="service-card bg-white rounded-2xl shadow-lg overflow-hidden">
-                    <div class="h-48 bg-blue-100 flex items-center justify-center text-6xl">
-                        🔧
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold mb-2">Plomería</h3>
-                        <p class="text-gray-600 mb-4">Destapes, fugas, instalación de sanitarios y calentadores. Servicio rápido y garantizado.</p>
-                        
-                        <div class="space-y-2 mb-4">
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Destapes de todo tipo
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Reparación de fugas
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Instalación de sanitarios
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Mantenimiento de tanques
-                            </div>
-                        </div>
-
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-2xl font-bold text-cuban-green">Desde $400</span>
-                            <span class="text-sm text-gray-500">Servicio rápido</span>
-                        </div>
-
-                        <a href="https://wa.me/5356382909?text=Hola, solicito servicio de plomería" target="_blank" class="block w-full btn-whatsapp text-white text-center py-3 rounded-xl font-bold hover:opacity-90 transition">
-                            <i class="fab fa-whatsapp mr-2"></i>Solicitar por WhatsApp
-                        </a>
-                    </div>
-                </div>
-
-                <!-- SERVICIO 6: Barbero -->
-                <div class="service-card bg-white rounded-2xl shadow-lg overflow-hidden">
-                    <div class="h-48 bg-gray-100 flex items-center justify-center text-6xl">
-                        💈
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold mb-2">Barbero a Domicilio</h3>
-                        <p class="text-gray-600 mb-4">Cortes modernos, barba y tratamientos capilares. Servicio profesional en la comodidad de tu hogar.</p>
-                        
-                        <div class="space-y-2 mb-4">
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Corte de cabello
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Arreglo de barba
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Tratamientos capilares
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-cuban-green mr-2"></i>Afeitado tradicional
-                            </div>
-                        </div>
-
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-2xl font-bold text-cuban-green">Desde $300</span>
-                            <span class="text-sm text-gray-500">Domicilio +$100</span>
-                        </div>
-
-                        <a href="https://wa.me/5356382909?text=Hola, solicito barbero a domicilio" target="_blank" class="block w-full btn-whatsapp text-white text-center py-3 rounded-xl font-bold hover:opacity-90 transition">
-                            <i class="fab fa-whatsapp mr-2"></i>Solicitar por WhatsApp
-                        </a>
-                    </div>
-                </div>
-
+                
+                <!-- ============================================= -->
+                <!-- ESPACIO PARA PRÓXIMOS SERVICIOS              -->
+                <!-- ============================================= -->
+                
+            </div> <!-- FIN DEL GRID DE SERVICIOS -->
+            
+            <!-- Mensaje para más servicios próximamente -->
+            <div class="mt-8 text-center text-gray-500">
+                <p><i class="fas fa-plus-circle mr-2 text-cuban-green"></i> Próximamente más servicios para ti</p>
             </div>
+            
         </div>
     </section>
 
-    <!-- CTA -->
+    <!-- ============================================ -->
+    <!-- PROMOCIÓN DESTACADA CON MOVIMIENTO           -->
+    <!-- ============================================ -->
+    <section class="py-12 bg-gradient-to-r from-dulce-rosa to-dulce-morado text-white">
+        <div class="container mx-auto px-4">
+            
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                
+                <!-- Texto de la promoción -->
+                <div class="md:w-2/3 text-center md:text-left">
+                    <span class="inline-block bg-white/20 px-4 py-1 rounded-full text-sm font-bold mb-4 animate-pulse">
+                        🧁 DULCE CÉSAR
+                    </span>
+                    <h3 class="text-3xl md:text-4xl font-bold mb-4">Repostería artesanal</h3>
+                    <p class="text-xl mb-2">Endulza tus eventos y cafeterías</p>
+                    <p class="text-white/90 mb-4">Pedidos personalizados para cualquier ocasión. Menciona "El Resolvito" al contactar.</p>
+                    
+                    <!-- Botón directo con mensaje predeterminado -->
+                    <a href="https://wa.me/5353342167?text=Hola%2C%20vi%20el%20servicio%20de%20Dulce%20C%C3%A9sar%20en%20El%20Resolvito%20y%20me%20interesa%20hacer%20un%20pedido." 
+                       target="_blank" 
+                       class="inline-block bg-white text-dulce-rosa px-8 py-3 rounded-full font-bold text-lg hover:bg-gray-100 transition shadow-lg">
+                        <i class="fab fa-whatsapp mr-2"></i>Hacer pedido
+                    </a>
+                </div>
+                
+                <!-- Imagen o ícono decorativo CON MOVIMIENTO -->
+                <div class="md:w-1/3 text-center">
+                    <div class="text-8xl animate-bounce">🧁</div> <!-- Movimiento bounce -->
+                    <p class="text-sm mt-2 opacity-80 animate-pulse">Hecho con amor</p> <!-- Movimiento pulse -->
+                </div>
+                
+            </div>
+            
+            <!-- Detalles del servicio -->
+            <div class="mt-8 grid md:grid-cols-3 gap-4 text-center">
+                <div class="bg-white/10 backdrop-blur rounded-xl p-4 hover:scale-105 transition transform">
+                    <i class="fas fa-clock text-2xl mb-2 animate-spin-slow"></i>
+                    <p class="font-bold">Pedidos con 48h</p>
+                    <p class="text-sm opacity-90">De anticipación</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur rounded-xl p-4 hover:scale-105 transition transform">
+                    <i class="fas fa-truck text-2xl mb-2 wiggle"></i>
+                    <p class="font-bold">Entrega disponible</p>
+                    <p class="text-sm opacity-90">En La Habana</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur rounded-xl p-4 hover:scale-105 transition transform">
+                    <i class="fas fa-store-alt text-2xl mb-2 bounce-slow"></i>
+                    <p class="font-bold">Precios especiales</p>
+                    <p class="text-sm opacity-90">Para cafeterías</p>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- CTA para otros emprendimientos -->
     <section class="py-12 bg-cuban-green text-white">
         <div class="container mx-auto px-4 text-center">
-            <h3 class="text-2xl font-bold mb-4">¿Necesitas otro servicio?</h3>
-            <p class="mb-6">Contáctanos y te ayudamos a encontrar la solución</p>
-            <a href="https://wa.me/5356382909" target="_blank" class="inline-block bg-white text-cuban-green px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition">
-                <i class="fab fa-whatsapp mr-2"></i>Consultar por WhatsApp
+            <h3 class="text-2xl font-bold mb-4">¿Tienes un emprendimiento?</h3>
+            <p class="mb-6">Ofrece tus servicios en El Resolvito y llega a más clientes</p>
+            <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20ofrecer%20mis%20servicios%20en%20El%20Resolvito" 
+               target="_blank" 
+               class="inline-block bg-white text-cuban-green px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition">
+                <i class="fab fa-whatsapp mr-2"></i>Contactar para publicar
             </a>
         </div>
     </section>
 
-    <!-- Footer mejorado (igual que index) -->
-    <footer class="bg-cuban-dark text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <h3 class="font-bold text-xl mb-4">El Resolvito</h3>
-                    <p class="text-gray-300 text-sm">Tu solución integral en La Habana. Productos, servicios y alojamientos de calidad.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Enlaces</h4>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li><a href="tienda.html" class="hover:text-white">Tienda</a></li>
-                        <li><a href="servicios.html" class="hover:text-white">Servicios</a></li>
-                        <li><a href="ofertas.html" class="hover:text-white">Ofertas</a></li>
-                        <li><a href="blog.html" class="hover:text-white">Blog</a></li>
-                        <li><a href="reservas.html" class="hover:text-white">Alojamientos</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Contacto</h4>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li><i class="fab fa-whatsapp mr-2"></i>5356382909</li>
-                        <li><i class="fas fa-envelope mr-2"></i>elresolvito@gmail.com</li>
-                        <li><i class="fas fa-map-marker-alt mr-2"></i>La Habana Vieja</li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Síguenos</h4>
-                    <div class="flex gap-4">
-                        <a href="https://instagram.com/elresolvito.habana" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://wa.me/5356382909" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-white/20 pt-8 text-center text-gray-400 text-sm">
-                <p>&copy; 2024 El Resolvito. Todos los derechos reservados.</p>
-            </div>
+    <!-- Footer -->
+    <footer class="bg-cuban-dark text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 El Resolvito. Todos los derechos reservados.</p>
         </div>
     </footer>
 
     <script>
-        // ============================================
-        // FUNCIONES DÍA/NOCHE
-        // ============================================
-        function initDayNight() {
-            const hour = new Date().getHours();
-            const isNight = hour < 6 || hour >= 18;
-            
-            if (isNight) {
-                document.body.classList.add('night-mode');
-                document.getElementById('dayNightIcon').textContent = '🌙';
-            } else {
-                document.getElementById('dayNightIcon').textContent = '☀️';
-            }
-        }
-
-        function toggleDayNight() {
-            document.body.classList.toggle('night-mode');
-            const isNight = document.body.classList.contains('night-mode');
-            document.getElementById('dayNightIcon').textContent = isNight ? '🌙' : '☀️';
-        }
-
         function toggleMenu() {
             document.getElementById('mobileMenu').classList.toggle('hidden');
         }
-
-        // Inicializar al cargar
+        
+        // Transición suave entre páginas
         document.addEventListener('DOMContentLoaded', function() {
-            initDayNight();
+            document.getElementById('pageFade').classList.add('opacity-0');
+            if (localStorage.getItem('nightMode') === 'true') document.body.classList.add('night-mode');
+        });
+
+        document.querySelectorAll('a[href]').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('mailto') && !href.startsWith('tel')) {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    localStorage.setItem('nightMode', document.body.classList.contains('night-mode') ? 'true' : 'false');
+                    document.getElementById('pageFade').classList.remove('opacity-0');
+                    setTimeout(() => location.href = href, 200);
+                });
+            }
         });
     </script>
 </body>
