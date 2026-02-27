@@ -20,7 +20,13 @@
                         'cuban-yellow': '#FFB300', 
                         'cuban-blue': '#0277BD',
                         'dulce-rosa': '#FF69B4', 
-                        'dulce-morado': '#9B59B6'
+                        'dulce-morado': '#9B59B6',
+                        // Colores para modo nocturno
+                        'night-bg': '#0f0f1a',
+                        'night-card': '#1e1e2e',
+                        'night-text': '#e0e0e0',
+                        'night-rosa': '#b380aa', // Rosa apagado para noche
+                        'night-morado': '#6b5b7a' // Morado apagado para noche
                     },
                     animation: {
                         'bounce-slow': 'bounce 2s infinite',
@@ -45,7 +51,7 @@
         .btn-whatsapp { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); }
         .btn-dulce { background: linear-gradient(135deg, #FF69B4 0%, #9B59B6 100); }
         
-        /* Animaciones personalizadas */
+        /* Animaciones */
         .bounce-slow {
             animation: bounce 2s infinite;
         }
@@ -67,10 +73,135 @@
             background: white;
         }
         
-        body.night-mode { background-color: #0f0f1a; color: #e0e0e0; }
-        body.night-mode .bg-white { background-color: #16213e !important; color: #e0e0e0 !important; }
-        body.night-mode .bg-gray-50 { background-color: #1a1a2e !important; }
-        body.night-mode header { background-color: #16213e !important; }
+        /* ============================================ */
+        /* MODO NOCTURNO - VERSIÓN SUAVE Y ELEGANTE    */
+        /* ============================================ */
+        body.night-mode { 
+            background-color: #0a0a12; 
+            color: #d0d0e0; 
+        }
+        
+        /* Header y elementos principales */
+        body.night-mode header { 
+            background-color: #14141f !important; 
+            border-bottom: 1px solid #2a2a3a;
+        }
+        
+        body.night-mode .bg-white { 
+            background-color: #1a1a26 !important; 
+            color: #d0d0e0 !important; 
+        }
+        
+        body.night-mode .bg-gray-50 { 
+            background-color: #1e1e2c !important; 
+        }
+        
+        /* Textos secundarios */
+        body.night-mode .text-gray-600,
+        body.night-mode .text-gray-500,
+        body.night-mode .text-gray-400 {
+            color: #9a9ab0 !important;
+        }
+        
+        /* SOMBRAS MÁS SUAVES */
+        body.night-mode .shadow-lg,
+        body.night-mode .shadow-md,
+        body.night-mode .shadow-xl {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+        }
+        
+        /* TARJETA DE SERVICIO EN MODO NOCTURNO */
+        body.night-mode .service-card {
+            background-color: #1e1e2e !important;
+            border: 1px solid #2a2a3a;
+        }
+        
+        body.night-mode .service-card .bg-pink-100,
+        body.night-mode .service-card .bg-purple-100,
+        body.night-mode .service-card .bg-yellow-100,
+        body.night-mode .service-card .bg-green-100,
+        body.night-mode .service-card .bg-blue-100 {
+            background-color: #2a2a3a !important;
+        }
+        
+        body.night-mode .service-card .text-pink-600,
+        body.night-mode .service-card .text-purple-600,
+        body.night-mode .service-card .text-yellow-600,
+        body.night-mode .service-card .text-green-600,
+        body.night-mode .service-card .text-blue-600 {
+            color: #b0b0d0 !important;
+        }
+        
+        /* Título del servicio en modo nocturno - versión más suave */
+        body.night-mode .service-card h3 {
+            color: #d0a0c0 !important; /* Rosa suave */
+        }
+        
+        /* Precio en modo nocturno */
+        body.night-mode .service-card .text-dulce-rosa {
+            color: #b380aa !important; /* Rosa apagado */
+        }
+        
+        /* Botón dulce en modo nocturno */
+        body.night-mode .btn-dulce {
+            background: linear-gradient(135deg, #6b4b63 0%, #4a3b55 100%) !important;
+            opacity: 0.9;
+        }
+        
+        body.night-mode .btn-dulce:hover {
+            opacity: 1;
+        }
+        
+        /* Etiqueta NUEVO en modo nocturno */
+        body.night-mode .bg-dulce-rosa {
+            background-color: #6b4b63 !important;
+        }
+        
+        /* SECCIÓN DE PROMOCIÓN EN MODO NOCTURNO */
+        body.night-mode .bg-gradient-to-r.from-dulce-rosa.to-dulce-morado {
+            background: linear-gradient(135deg, #2a1a2a 0%, #1a1a2a 100%) !important;
+        }
+        
+        body.night-mode .bg-white\/10 {
+            background-color: rgba(40, 40, 60, 0.3) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid #2a2a3a;
+        }
+        
+        /* Iconos en modo nocturno */
+        body.night-mode .text-white {
+            color: #d0d0e0 !important;
+        }
+        
+        body.night-mode .opacity-90,
+        body.night-mode .opacity-80 {
+            color: #9a9ab0 !important;
+        }
+        
+        /* Contenedor de imagen en modo nocturno */
+        body.night-mode .service-card .bg-gradient-to-r.from-dulce-rosa.to-dulce-morado {
+            background: #1a1a2a !important;
+            border-bottom: 1px solid #2a2a3a;
+        }
+        
+        body.night-mode .service-card img {
+            background: #1a1a2a;
+        }
+        
+        /* Footer en modo nocturno */
+        body.night-mode .bg-cuban-dark {
+            background-color: #0a0a12 !important;
+            border-top: 1px solid #2a2a3a;
+        }
+        
+        /* Menú móvil en modo nocturno */
+        body.night-mode #mobileMenu .bg-white {
+            background-color: #1a1a26 !important;
+        }
+        
+        body.night-mode #mobileMenu a:hover {
+            background-color: #2a2a3a !important;
+        }
     </style>
 <base target="_blank">
 </head>
@@ -140,20 +271,13 @@
         </div>
     </section>
 
-    <!-- ============================================ -->
-    <!-- SECCIÓN DE SERVICIOS                         -->
-    <!-- ============================================ -->
+    <!-- SERVICIOS -->
     <section class="py-12">
         <div class="container mx-auto px-4">
-            
-            <!-- CONTENEDOR GRID - Aquí se añaden nuevos servicios -->
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="servicios-container">
                 
-                <!-- ========================================= -->
-                <!-- SERVICIO 1: Dulce César                   -->
-                <!-- ========================================= -->
+                <!-- Dulce César -->
                 <div class="service-card bg-white rounded-2xl shadow-lg overflow-hidden">
-                    <!-- Imagen SIN overlay -->
                     <div class="h-64 w-full overflow-hidden bg-gradient-to-r from-dulce-rosa to-dulce-morado">
                         <img src="https://i.postimg.cc/Qxz4FMGg/IMG_20260226-WA0025.jpg" 
                              alt="Dulce César - Repostería artesanal" 
@@ -161,13 +285,11 @@
                     </div>
                     
                     <div class="p-6">
-                        <!-- Etiqueta de nuevo -->
                         <span class="bg-dulce-rosa text-white text-xs px-3 py-1 rounded-full font-bold inline-block mb-3">✨ NUEVO SERVICIO</span>
                         
                         <h3 class="text-2xl font-bold mb-2 text-dulce-rosa">Dulce César</h3>
                         <p class="text-gray-600 mb-4">Repostería artesanal para eventos, cafeterías y pedidos especiales. Endulzamos tus momentos.</p>
                         
-                        <!-- Características rápidas -->
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="bg-pink-100 text-pink-600 text-xs px-3 py-1 rounded-full">🎂 Tortas</span>
                             <span class="bg-purple-100 text-purple-600 text-xs px-3 py-1 rounded-full">🧁 Cupcakes</span>
@@ -176,13 +298,11 @@
                             <span class="bg-blue-100 text-blue-600 text-xs px-3 py-1 rounded-full">☕ Cafeterías</span>
                         </div>
                         
-                        <!-- Precio desde $150 -->
                         <div class="flex items-center justify-between mb-4">
                             <span class="text-2xl font-bold text-dulce-rosa">Desde $150</span>
                             <span class="text-sm text-gray-500">Pedidos con 48h</span>
                         </div>
                         
-                        <!-- Botón de contacto con MENSAJE PREDETERMINADO -->
                         <a href="https://wa.me/5353342167?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Dulce%20C%C3%A9sar.%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20por%20favor." 
                            target="_blank" 
                            class="block w-full btn-dulce text-white text-center py-3 rounded-xl font-bold hover:opacity-90 transition">
@@ -192,13 +312,8 @@
                     </div>
                 </div>
                 
-                <!-- ============================================= -->
-                <!-- ESPACIO PARA PRÓXIMOS SERVICIOS              -->
-                <!-- ============================================= -->
-                
-            </div> <!-- FIN DEL GRID DE SERVICIOS -->
+            </div>
             
-            <!-- Mensaje para más servicios próximamente -->
             <div class="mt-8 text-center text-gray-500">
                 <p><i class="fas fa-plus-circle mr-2 text-cuban-green"></i> Próximamente más servicios para ti</p>
             </div>
@@ -206,15 +321,10 @@
         </div>
     </section>
 
-    <!-- ============================================ -->
-    <!-- PROMOCIÓN DESTACADA CON MOVIMIENTO           -->
-    <!-- ============================================ -->
+    <!-- PROMOCIÓN -->
     <section class="py-12 bg-gradient-to-r from-dulce-rosa to-dulce-morado text-white">
         <div class="container mx-auto px-4">
-            
             <div class="flex flex-col md:flex-row items-center justify-between gap-8">
-                
-                <!-- Texto de la promoción -->
                 <div class="md:w-2/3 text-center md:text-left">
                     <span class="inline-block bg-white/20 px-4 py-1 rounded-full text-sm font-bold mb-4 animate-pulse">
                         🧁 DULCE CÉSAR
@@ -223,7 +333,6 @@
                     <p class="text-xl mb-2">Endulza tus eventos y cafeterías</p>
                     <p class="text-white/90 mb-4">Pedidos personalizados para cualquier ocasión. Menciona "El Resolvito" al contactar.</p>
                     
-                    <!-- Botón directo con mensaje predeterminado -->
                     <a href="https://wa.me/5353342167?text=Hola%2C%20vi%20el%20servicio%20de%20Dulce%20C%C3%A9sar%20en%20El%20Resolvito%20y%20me%20interesa%20hacer%20un%20pedido." 
                        target="_blank" 
                        class="inline-block bg-white text-dulce-rosa px-8 py-3 rounded-full font-bold text-lg hover:bg-gray-100 transition shadow-lg">
@@ -231,18 +340,15 @@
                     </a>
                 </div>
                 
-                <!-- Imagen o ícono decorativo CON MOVIMIENTO -->
                 <div class="md:w-1/3 text-center">
-                    <div class="text-8xl animate-bounce">🧁</div> <!-- Movimiento bounce -->
-                    <p class="text-sm mt-2 opacity-80 animate-pulse">Hecho con amor</p> <!-- Movimiento pulse -->
+                    <div class="text-8xl animate-bounce">🧁</div>
+                    <p class="text-sm mt-2 opacity-80 animate-pulse">Hecho con amor</p>
                 </div>
-                
             </div>
             
-            <!-- Detalles del servicio -->
             <div class="mt-8 grid md:grid-cols-3 gap-4 text-center">
                 <div class="bg-white/10 backdrop-blur rounded-xl p-4 hover:scale-105 transition transform">
-                    <i class="fas fa-clock text-2xl mb-2 animate-spin-slow"></i>
+                    <i class="fas fa-clock text-2xl mb-2"></i>
                     <p class="font-bold">Pedidos con 48h</p>
                     <p class="text-sm opacity-90">De anticipación</p>
                 </div>
@@ -257,11 +363,10 @@
                     <p class="text-sm opacity-90">Para cafeterías</p>
                 </div>
             </div>
-            
         </div>
     </section>
 
-    <!-- CTA para otros emprendimientos -->
+    <!-- CTA para emprendimientos -->
     <section class="py-12 bg-cuban-green text-white">
         <div class="container mx-auto px-4 text-center">
             <h3 class="text-2xl font-bold mb-4">¿Tienes un emprendimiento?</h3>
@@ -286,7 +391,6 @@
             document.getElementById('mobileMenu').classList.toggle('hidden');
         }
         
-        // Transición suave entre páginas
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('pageFade').classList.add('opacity-0');
             if (localStorage.getItem('nightMode') === 'true') document.body.classList.add('night-mode');
