@@ -1,16 +1,173 @@
-<header class="sticky top-0 z-50 bg-white shadow-md">
+<!-- Header Component - Versión Mejorada -->
+<header class="site-header sticky top-0 z-50 bg-white shadow-md transition-all duration-300">
     <div class="container mx-auto px-4 py-3">
         <div class="flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-cuban-green rounded-full flex items-center justify-center text-white font-bold text-xl">
+            
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 bg-cuban-green rounded-full flex items-center justify-center text-white font-bold text-xl group-hover:scale-110 transition-transform duration-300">
                     <i class="fas fa-store"></i>
                 </div>
                 <div>
                     <h1 class="text-xl font-bold text-cuban-green leading-tight">El Resolvito</h1>
-                    <p class="text-xs text-gray-500">La Habana Vieja</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">La Habana Vieja</p>
                 </div>
             </a>
-            <!-- ... resto del header ... -->
+
+            <!-- Navegación Desktop -->
+            <nav class="hidden lg:flex items-center gap-1">
+                <a href="index.html" class="nav-link px-4 py-2 rounded-full text-gray-700 hover:text-cuban-green hover:bg-cuban-green/10 transition-all duration-300 font-medium" data-page="index">
+                    Inicio
+                </a>
+                <a href="tienda.html" class="nav-link px-4 py-2 rounded-full text-gray-700 hover:text-cuban-green hover:bg-cuban-green/10 transition-all duration-300 font-medium" data-page="tienda">
+                    Tienda
+                </a>
+                <a href="servicios.html" class="nav-link px-4 py-2 rounded-full text-gray-700 hover:text-cuban-green hover:bg-cuban-green/10 transition-all duration-300 font-medium" data-page="servicios">
+                    Servicios
+                </a>
+                <a href="ofertas.html" class="nav-link px-4 py-2 rounded-full text-gray-700 hover:text-cuban-green hover:bg-cuban-green/10 transition-all duration-300 font-medium" data-page="ofertas">
+                    <span class="relative">
+                        Ofertas
+                        <span class="absolute -top-1 -right-3 w-2 h-2 bg-cuban-orange rounded-full animate-pulse"></span>
+                    </span>
+                </a>
+                <a href="blog.html" class="nav-link px-4 py-2 rounded-full text-gray-700 hover:text-cuban-green hover:bg-cuban-green/10 transition-all duration-300 font-medium" data-page="blog">
+                    Blog
+                </a>
+                <a href="reservas.html" class="nav-link px-4 py-2 rounded-full text-gray-700 hover:text-cuban-green hover:bg-cuban-green/10 transition-all duration-300 font-medium" data-page="reservas">
+                    Alojamientos
+                </a>
+            </nav>
+
+            <!-- Acciones (Carrito y Menú Móvil) -->
+            <div class="flex items-center gap-2">
+                <!-- Botón Carrito (visible en móvil) -->
+                <button onclick="toggleCart()" class="lg:hidden p-2 hover:bg-cuban-green/10 rounded-full relative group">
+                    <i class="fas fa-shopping-cart text-xl text-cuban-green group-hover:scale-110 transition-transform"></i>
+                    <span id="cartCountMobile" class="absolute -top-1 -right-1 bg-cuban-yellow text-cuban-dark text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                </button>
+
+                <!-- Botón Menú Móvil -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden p-2 hover:bg-cuban-green/10 rounded-full group">
+                    <i class="fas fa-bars text-2xl text-cuban-green group-hover:scale-110 transition-transform"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barra de búsqueda (solo en páginas de tienda) -->
+    <div id="search-bar" class="border-t border-gray-100 dark:border-gray-800 px-4 py-3 hidden">
+        <div class="container mx-auto">
+            <div class="relative">
+                <input type="text" id="globalSearch" placeholder="Buscar productos..." 
+                    class="w-full pl-12 pr-4 py-3 rounded-full border border-gray-200 focus:border-cuban-green focus:ring-2 focus:ring-cuban-green/20 outline-none transition-all dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            </div>
         </div>
     </div>
 </header>
+
+<!-- Menú Móvil -->
+<div id="mobileMenu" class="fixed inset-0 bg-black/50 z-50 hidden" onclick="toggleMobileMenu()">
+    <div class="bg-white dark:bg-gray-900 w-80 max-w-sm h-full p-6 shadow-2xl" onclick="event.stopPropagation()">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-xl font-bold text-cuban-green">Menú</h2>
+            <button onclick="toggleMobileMenu()" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-cuban-green hover:text-white transition-colors">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        
+        <nav class="space-y-2">
+            <a href="index.html" class="mobile-link flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition-colors">
+                <i class="fas fa-home w-6 text-cuban-green"></i>
+                <span>Inicio</span>
+            </a>
+            <a href="tienda.html" class="mobile-link flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition-colors">
+                <i class="fas fa-shopping-basket w-6 text-cuban-green"></i>
+                <span>Tienda</span>
+            </a>
+            <a href="servicios.html" class="mobile-link flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition-colors">
+                <i class="fas fa-tools w-6 text-cuban-green"></i>
+                <span>Servicios</span>
+            </a>
+            <a href="ofertas.html" class="mobile-link flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition-colors">
+                <i class="fas fa-percent w-6 text-cuban-green"></i>
+                <span>Ofertas</span>
+                <span class="ml-auto bg-cuban-orange text-white text-xs px-2 py-1 rounded-full">Nuevo</span>
+            </a>
+            <a href="blog.html" class="mobile-link flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition-colors">
+                <i class="fas fa-newspaper w-6 text-cuban-green"></i>
+                <span>Blog</span>
+            </a>
+            <a href="reservas.html" class="mobile-link flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition-colors">
+                <i class="fas fa-bed w-6 text-cuban-green"></i>
+                <span>Alojamientos</span>
+            </a>
+        </nav>
+
+        <!-- Contacto rápido en móvil -->
+        <div class="absolute bottom-6 left-6 right-6">
+            <div class="border-t border-gray-200 dark:border-gray-800 pt-4">
+                <p class="text-sm text-gray-500 mb-3">Contáctanos</p>
+                <a href="https://wa.me/5356382909" class="flex items-center gap-2 text-cuban-green hover:text-cuban-green-dark transition">
+                    <i class="fab fa-whatsapp text-xl"></i>
+                    <span class="text-sm font-medium">+53 5 638 2909</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script para manejar link activo -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Marcar link activo
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('.nav-link').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === currentPage) {
+                link.classList.add('active', 'text-cuban-green', 'bg-cuban-green/10');
+            }
+        });
+
+        // Mostrar barra de búsqueda solo en tienda.html
+        if (currentPage === 'tienda.html' || currentPage.includes('tienda')) {
+            document.getElementById('search-bar')?.classList.remove('hidden');
+        }
+    });
+
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        menu.classList.toggle('hidden');
+        document.body.style.overflow = menu.classList.contains('hidden') ? '' : 'hidden';
+    }
+</script>
+
+<!-- Estilos específicos -->
+<style>
+    .nav-link.active {
+        color: #2E7D32;
+        background-color: rgba(46, 125, 50, 0.1);
+    }
+    
+    body.night-mode .nav-link {
+        color: #e0e0e0;
+    }
+    
+    body.night-mode .nav-link:hover {
+        color: #2E7D32;
+    }
+    
+    body.night-mode .nav-link.active {
+        color: #2E7D32;
+        background-color: rgba(46, 125, 50, 0.2);
+    }
+    
+    .mobile-link {
+        transition: all 0.3s ease;
+    }
+    
+    .mobile-link:hover {
+        transform: translateX(5px);
+    }
+</style>
