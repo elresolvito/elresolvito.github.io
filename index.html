@@ -597,18 +597,30 @@
         // ============================================
         let cart = [];
 
-        // ============================================
-        // FUNCIONES PARA CARGAR COMPONENTES
-        // ============================================
-        async function loadComponent(elementId, filePath) {
-            try {
-                const response = await fetch(filePath);
-                const html = await response.text();
-                document.getElementById(elementId).innerHTML = html;
-            } catch (error) {
-                console.error('Error cargando componente:', filePath, error);
-            }
-        }
+     // Función para cargar componentes
+async function loadComponent(elementId, filePath) {
+    try {
+        const response = await fetch(filePath);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const html = await response.text();
+        document.getElementById(elementId).innerHTML = html;
+    } catch (error) {
+        console.error('Error cargando componente:', filePath, error);
+        // Fallback: mostrar un mensaje o cargar un footer por defecto
+        document.getElementById(elementId).innerHTML = `
+            <footer class="bg-cuban-dark text-white py-8">
+                <div class="container text-center">
+                    <p>Error cargando el footer. Por favor recarga la página.</p>
+                </div>
+            </footer>
+        `;
+    }
+}
+
+// Llamar a la función
+document.addEventListener('DOMContentLoaded', () => {
+    loadComponent('footer-container', 'components/footer.html');
+});
 
         // ============================================
         // INICIALIZACIÓN
@@ -882,3 +894,4 @@
     </script>
 </body>
 </html>
+
