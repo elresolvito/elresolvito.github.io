@@ -21,12 +21,11 @@
                         'cuban-blue': '#0277BD',
                         'dulce-rosa': '#FF69B4', 
                         'dulce-morado': '#9B59B6',
-                        // Colores para modo nocturno
+                        'contador-azul': '#1E3A8A',
+                        'contador-dorado': '#B45309',
                         'night-bg': '#0f0f1a',
                         'night-card': '#1e1e2e',
-                        'night-text': '#e0e0e0',
-                        'night-rosa': '#b380aa', // Rosa apagado para noche
-                        'night-morado': '#6b5b7a' // Morado apagado para noche
+                        'night-text': '#e0e0e0'
                     },
                     animation: {
                         'bounce-slow': 'bounce 2s infinite',
@@ -49,16 +48,12 @@
         .service-card { transition: all 0.3s ease; }
         .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px rgba(0,0,0,0.15); }
         .btn-whatsapp { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); }
-        .btn-dulce { background: linear-gradient(135deg, #FF69B4 0%, #9B59B6 100); }
+        .btn-dulce { background: linear-gradient(135deg, #FF69B4 0%, #9B59B6 100%); }
+        .btn-contador { background: linear-gradient(135deg, #1E3A8A 0%, #B45309 100%); }
         
         /* Animaciones */
-        .bounce-slow {
-            animation: bounce 2s infinite;
-        }
-        
-        .wiggle {
-            animation: wiggle 1s ease-in-out infinite;
-        }
+        .bounce-slow { animation: bounce 2s infinite; }
+        .wiggle { animation: wiggle 1s ease-in-out infinite; }
         
         @keyframes wiggle {
             0%, 100% { transform: rotate(-5deg); }
@@ -73,15 +68,36 @@
             background: white;
         }
         
-        /* ============================================ */
-        /* MODO NOCTURNO - VERSIÓN SUAVE Y ELEGANTE    */
-        /* ============================================ */
+        /* Estilos para el servicio de Contador */
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .feature-item i {
+            color: #10B981;
+            font-size: 0.875rem;
+        }
+        
+        .contador-badge {
+            background: linear-gradient(135deg, #1E3A8A 0%, #B45309 100%);
+        }
+        
+        /* Modo nocturno */
         body.night-mode { 
             background-color: #0a0a12; 
             color: #d0d0e0; 
         }
         
-        /* Header y elementos principales */
         body.night-mode header { 
             background-color: #14141f !important; 
             border-bottom: 1px solid #2a2a3a;
@@ -96,111 +112,31 @@
             background-color: #1e1e2c !important; 
         }
         
-        /* Textos secundarios */
         body.night-mode .text-gray-600,
         body.night-mode .text-gray-500,
         body.night-mode .text-gray-400 {
             color: #9a9ab0 !important;
         }
         
-        /* SOMBRAS MÁS SUAVES */
-        body.night-mode .shadow-lg,
-        body.night-mode .shadow-md,
-        body.night-mode .shadow-xl {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
-        }
-        
-        /* TARJETA DE SERVICIO EN MODO NOCTURNO */
         body.night-mode .service-card {
             background-color: #1e1e2e !important;
             border: 1px solid #2a2a3a;
         }
         
-        body.night-mode .service-card .bg-pink-100,
-        body.night-mode .service-card .bg-purple-100,
-        body.night-mode .service-card .bg-yellow-100,
-        body.night-mode .service-card .bg-green-100,
-        body.night-mode .service-card .bg-blue-100 {
+        body.night-mode .bg-pink-100,
+        body.night-mode .bg-purple-100,
+        body.night-mode .bg-yellow-100 {
             background-color: #2a2a3a !important;
         }
         
-        body.night-mode .service-card .text-pink-600,
-        body.night-mode .service-card .text-purple-600,
-        body.night-mode .service-card .text-yellow-600,
-        body.night-mode .service-card .text-green-600,
-        body.night-mode .service-card .text-blue-600 {
+        body.night-mode .text-pink-600,
+        body.night-mode .text-purple-600,
+        body.night-mode .text-yellow-600 {
             color: #b0b0d0 !important;
         }
         
-        /* Título del servicio en modo nocturno - versión más suave */
-        body.night-mode .service-card h3 {
-            color: #d0a0c0 !important; /* Rosa suave */
-        }
-        
-        /* Precio en modo nocturno */
-        body.night-mode .service-card .text-dulce-rosa {
-            color: #b380aa !important; /* Rosa apagado */
-        }
-        
-        /* Botón dulce en modo nocturno */
-        body.night-mode .btn-dulce {
-            background: linear-gradient(135deg, #6b4b63 0%, #4a3b55 100%) !important;
-            opacity: 0.9;
-        }
-        
-        body.night-mode .btn-dulce:hover {
-            opacity: 1;
-        }
-        
-        /* Etiqueta NUEVO en modo nocturno */
-        body.night-mode .bg-dulce-rosa {
-            background-color: #6b4b63 !important;
-        }
-        
-        /* SECCIÓN DE PROMOCIÓN EN MODO NOCTURNO */
-        body.night-mode .bg-gradient-to-r.from-dulce-rosa.to-dulce-morado {
-            background: linear-gradient(135deg, #2a1a2a 0%, #1a1a2a 100%) !important;
-        }
-        
-        body.night-mode .bg-white\/10 {
-            background-color: rgba(40, 40, 60, 0.3) !important;
-            backdrop-filter: blur(10px);
-            border: 1px solid #2a2a3a;
-        }
-        
-        /* Iconos en modo nocturno */
-        body.night-mode .text-white {
-            color: #d0d0e0 !important;
-        }
-        
-        body.night-mode .opacity-90,
-        body.night-mode .opacity-80 {
-            color: #9a9ab0 !important;
-        }
-        
-        /* Contenedor de imagen en modo nocturno */
-        body.night-mode .service-card .bg-gradient-to-r.from-dulce-rosa.to-dulce-morado {
-            background: #1a1a2a !important;
-            border-bottom: 1px solid #2a2a3a;
-        }
-        
-        body.night-mode .service-card img {
-            background: #1a1a2a;
-        }
-        
-        /* Footer en modo nocturno */
-        body.night-mode .bg-cuban-dark {
-            background-color: #0a0a12 !important;
-            border-top: 1px solid #2a2a3a;
-        }
-        
-        /* Menú móvil en modo nocturno */
-        body.night-mode #mobileMenu .bg-white {
-            background-color: #1a1a26 !important;
-        }
-        
-        body.night-mode #mobileMenu a:hover {
-            background-color: #2a2a3a !important;
+        body.night-mode .feature-item i {
+            color: #6ab04c;
         }
     </style>
 <base target="_blank">
@@ -274,9 +210,9 @@
     <!-- SERVICIOS -->
     <section class="py-12">
         <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="servicios-container">
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-6" id="servicios-container">
                 
-                <!-- Dulce César -->
+                <!-- SERVICIO 1: Dulce César -->
                 <div class="service-card bg-white rounded-2xl shadow-lg overflow-hidden">
                     <div class="h-64 w-full overflow-hidden bg-gradient-to-r from-dulce-rosa to-dulce-morado">
                         <img src="https://i.postimg.cc/Qxz4FMGg/IMG_20260226-WA0025.jpg" 
@@ -312,8 +248,61 @@
                     </div>
                 </div>
                 
+                <!-- SERVICIO 2: Contador / Tenedor de Libros (NUEVO) -->
+                <div class="service-card bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="h-64 w-full overflow-hidden bg-gradient-to-r from-contador-azul to-contador-dorado">
+                        <img src="https://i.postimg.cc/TPPT8GM9/photo-2026-02-15-19-00-24.jpg" 
+                             alt="Contador / Tenedor de Libros" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    
+                    <div class="p-6">
+                        <span class="bg-contador-azul text-white text-xs px-3 py-1 rounded-full font-bold inline-block mb-3">📊 NUEVO SERVICIO</span>
+                        
+                        <h3 class="text-2xl font-bold mb-2 text-contador-azul">Contador / Tenedor de Libros</h3>
+                        <p class="text-gray-600 mb-2">Gestión contable profesional para TCP y pequeños negocios. Trabajo con orden y transparencia para que tu negocio crezca con seguridad legal.</p>
+                        
+                        <!-- Lista completa de características -->
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span><strong>Gestión ONAT:</strong> Inscripción y trámites</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span><strong>Registros Obligatorios:</strong> Ingresos y gastos al día</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span><strong>Nómina y Personal:</strong> Contratos y control de pagos</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span><strong>Fichas de Costo:</strong> Cálculo preciso de precios</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span><strong>Declaración Jurada:</strong> Preparación y presentación</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span><strong>Atención personalizada</strong> para tu negocio</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-sm text-gray-500 italic mt-3 mb-4">"Trabajo con orden y transparencia para que tu negocio crezca con seguridad legal."</p>
+                        
+                        <a href="https://wa.me/5356382909?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Contador%20%2F%20Tenedor%20de%20Libros%20para%20mi%20TCP.%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Gestión%20ONAT%2C%20Registros%20y%20Declaración%20Jurada." 
+                           target="_blank" 
+                           class="block w-full btn-contador text-white text-center py-3 rounded-xl font-bold hover:opacity-90 transition">
+                            <i class="fab fa-whatsapp mr-2"></i>Contactar: 56382909
+                        </a>
+                    </div>
+                </div>
+                
             </div>
             
+            <!-- Mensaje de más servicios próximamente -->
             <div class="mt-8 text-center text-gray-500">
                 <p><i class="fas fa-plus-circle mr-2 text-cuban-green"></i> Próximamente más servicios para ti</p>
             </div>
@@ -321,46 +310,49 @@
         </div>
     </section>
 
-    <!-- PROMOCIÓN -->
-    <section class="py-12 bg-gradient-to-r from-dulce-rosa to-dulce-morado text-white">
+    <!-- PROMOCIÓN DE SERVICIOS -->
+    <section class="py-12 bg-gradient-to-r from-cuban-blue to-cuban-green text-white">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row items-center justify-between gap-8">
                 <div class="md:w-2/3 text-center md:text-left">
                     <span class="inline-block bg-white/20 px-4 py-1 rounded-full text-sm font-bold mb-4 animate-pulse">
-                        🧁 DULCE CÉSAR
+                        📊 SERVICIOS PROFESIONALES
                     </span>
-                    <h3 class="text-3xl md:text-4xl font-bold mb-4">Repostería artesanal</h3>
-                    <p class="text-xl mb-2">Endulza tus eventos y cafeterías</p>
-                    <p class="text-white/90 mb-4">Pedidos personalizados para cualquier ocasión. Menciona "El Resolvito" al contactar.</p>
+                    <h3 class="text-3xl md:text-4xl font-bold mb-4">Contabilidad y Repostería</h3>
+                    <p class="text-xl mb-2">Todo lo que tu negocio necesita</p>
+                    <p class="text-white/90 mb-4">Desde gestión contable hasta delicias artesanales. Profesionales de confianza.</p>
                     
-                    <a href="https://wa.me/5353342167?text=Hola%2C%20vi%20el%20servicio%20de%20Dulce%20C%C3%A9sar%20en%20El%20Resolvito%20y%20me%20interesa%20hacer%20un%20pedido." 
-                       target="_blank" 
-                       class="inline-block bg-white text-dulce-rosa px-8 py-3 rounded-full font-bold text-lg hover:bg-gray-100 transition shadow-lg">
-                        <i class="fab fa-whatsapp mr-2"></i>Hacer pedido
-                    </a>
+                    <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                        <a href="https://wa.me/5356382909?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Contabilidad" 
+                           class="inline-block bg-white text-cuban-blue px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition">
+                            <i class="fab fa-whatsapp mr-2"></i>Contador: 56382909
+                        </a>
+                        <a href="https://wa.me/5353342167?text=Hola%2C%20me%20interesa%20Dulce%20C%C3%A9sar" 
+                           class="inline-block bg-white text-dulce-rosa px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition">
+                            <i class="fab fa-whatsapp mr-2"></i>Dulce César: 53342167
+                        </a>
+                    </div>
                 </div>
                 
                 <div class="md:w-1/3 text-center">
-                    <div class="text-8xl animate-bounce">🧁</div>
-                    <p class="text-sm mt-2 opacity-80 animate-pulse">Hecho con amor</p>
+                    <div class="text-8xl animate-bounce flex justify-center gap-4">
+                        <span>📊</span>
+                        <span>🧁</span>
+                    </div>
+                    <p class="text-sm mt-2 opacity-80">Profesionales de confianza</p>
                 </div>
             </div>
             
-            <div class="mt-8 grid md:grid-cols-3 gap-4 text-center">
+            <div class="mt-8 grid md:grid-cols-2 gap-4 text-center">
                 <div class="bg-white/10 backdrop-blur rounded-xl p-4 hover:scale-105 transition transform">
-                    <i class="fas fa-clock text-2xl mb-2"></i>
-                    <p class="font-bold">Pedidos con 48h</p>
-                    <p class="text-sm opacity-90">De anticipación</p>
+                    <i class="fas fa-calculator text-3xl mb-2"></i>
+                    <p class="font-bold">Contador / Tenedor</p>
+                    <p class="text-sm opacity-90">Gestión ONAT • Registros • Nómina • Costos • Declaración</p>
                 </div>
                 <div class="bg-white/10 backdrop-blur rounded-xl p-4 hover:scale-105 transition transform">
-                    <i class="fas fa-truck text-2xl mb-2 wiggle"></i>
-                    <p class="font-bold">Entrega disponible</p>
-                    <p class="text-sm opacity-90">En La Habana</p>
-                </div>
-                <div class="bg-white/10 backdrop-blur rounded-xl p-4 hover:scale-105 transition transform">
-                    <i class="fas fa-store-alt text-2xl mb-2 bounce-slow"></i>
-                    <p class="font-bold">Precios especiales</p>
-                    <p class="text-sm opacity-90">Para cafeterías</p>
+                    <i class="fas fa-birthday-cake text-3xl mb-2 wiggle"></i>
+                    <p class="font-bold">Dulce César</p>
+                    <p class="text-sm opacity-90">Tortas • Cupcakes • Galletas • Eventos • Cafeterías</p>
                 </div>
             </div>
         </div>
@@ -382,7 +374,7 @@
     <!-- Footer -->
     <footer class="bg-cuban-dark text-white py-8">
         <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2026 El Resolvito. Todos los derechos reservados.</p>
+            <p>&copy; 2024 El Resolvito. Todos los derechos reservados.</p>
         </div>
     </footer>
 
