@@ -20,7 +20,18 @@
                         'cuban-green': '#2E7D32', 'cuban-dark': '#1B5E20',
                         'cuban-yellow': '#FFB300', 'cuban-blue': '#0277BD',
                         'cuban-orange': '#FF6F00', 'night-bg': '#1a1a2e',
-                        'night-card': '#16213e'
+                        'night-card': '#16213e',
+                        'dulce-rosa': '#FF69B4', 'dulce-morado': '#9B59B6'
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 2s infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' },
+                        }
                     }
                 }
             }
@@ -224,6 +235,27 @@
             margin-right: 0.5rem;
             margin-bottom: 0.5rem;
         }
+        
+        /* Estilos para modo nocturno - Dulce César */
+        body.night-mode .bg-dulce-rosa {
+            background-color: #b380aa !important;
+        }
+        
+        body.night-mode .text-dulce-rosa {
+            color: #b380aa !important;
+        }
+        
+        body.night-mode .btn-dulce {
+            background: linear-gradient(135deg, #6b4b63 0%, #4a3b55 100%) !important;
+        }
+        
+        body.night-mode .bg-pink-100 {
+            background-color: #2a2a3a !important;
+        }
+        
+        body.night-mode .text-pink-600 {
+            color: #b0b0d0 !important;
+        }
     </style>
 <base target="_blank">
 </head>
@@ -400,33 +432,89 @@
         </div>
     </section>
 
-    <!-- Servicios Preview -->
+    <!-- ============================================ -->
+    <!-- SERVICIOS PREVIEW - AHORA CON DULCE CÉSAR    -->
+    <!-- ============================================ -->
     <section class="py-12 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center mb-8">
-                <h2 class="text-3xl font-bold"><i class="fas fa-tools mr-3 text-cuban-blue"></i>Servicios</h2>
+                <h2 class="text-3xl font-bold"><i class="fas fa-tools mr-3 text-cuban-blue"></i>Servicios Destacados</h2>
                 <a href="servicios.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
             </div>
+            
+            <!-- Grid de servicios - Solo Dulce César por ahora -->
             <div class="grid md:grid-cols-3 gap-6">
-                <div class="service-card bg-white rounded-xl p-6 shadow-md text-center">
-                    <div class="text-5xl mb-4">🛋️</div>
-                    <h3 class="font-bold text-xl mb-2">Tapicería</h3>
-                    <p class="text-gray-600 mb-4">Restauración y cambio de tela de muebles</p>
-                    <a href="servicios.html" class="text-cuban-green font-medium">Más info →</a>
+                
+                <!-- Dulce César - Repostería -->
+                <div class="service-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
+                    <!-- Imagen -->
+                    <div class="h-48 overflow-hidden bg-gradient-to-r from-dulce-rosa to-dulce-morado">
+                        <img src="https://i.postimg.cc/Qxz4FMGg/IMG_20260226-WA0025.jpg" 
+                             alt="Dulce César" 
+                             class="w-full h-full object-contain bg-white">
+                    </div>
+                    
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="bg-dulce-rosa text-white text-xs px-2 py-1 rounded-full font-bold">✨ NUEVO</span>
+                            <span class="text-sm text-gray-500">Desde $150</span>
+                        </div>
+                        
+                        <h3 class="font-bold text-xl mb-2 text-dulce-rosa">Dulce César</h3>
+                        <p class="text-gray-600 text-sm mb-3">Repostería artesanal para eventos, cafeterías y pedidos especiales.</p>
+                        
+                        <!-- Etiquetas rápidas -->
+                        <div class="flex flex-wrap gap-1 mb-4">
+                            <span class="bg-pink-100 text-pink-600 text-xs px-2 py-1 rounded-full">🎂 Tortas</span>
+                            <span class="bg-purple-100 text-purple-600 text-xs px-2 py-1 rounded-full">🧁 Cupcakes</span>
+                            <span class="bg-yellow-100 text-yellow-600 text-xs px-2 py-1 rounded-full">🍪 Galletas</span>
+                        </div>
+                        
+                        <!-- Botones -->
+                        <div class="flex gap-2">
+                            <a href="https://wa.me/5353342167?text=Hola%2C%20vi%20Dulce%20C%C3%A9sar%20en%20El%20Resolvito%20y%20quiero%20informaci%C3%B3n" 
+                               target="_blank" 
+                               class="flex-1 bg-dulce-rosa text-white text-center py-2 rounded-lg text-sm font-bold hover:opacity-90 transition">
+                                <i class="fab fa-whatsapp mr-1"></i> Contactar
+                            </a>
+                            <a href="servicios.html" 
+                               class="px-3 py-2 border border-dulce-rosa text-dulce-rosa rounded-lg text-sm font-bold hover:bg-dulce-rosa hover:text-white transition">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="service-card bg-white rounded-xl p-6 shadow-md text-center">
-                    <div class="text-5xl mb-4">❄️</div>
-                    <h3 class="font-bold text-xl mb-2">Limpieza de Splits</h3>
-                    <p class="text-gray-600 mb-4">Mantenimiento de aires acondicionados</p>
-                    <a href="servicios.html" class="text-cuban-green font-medium">Más info →</a>
+                
+                <!-- Espacio para futuros servicios (mensaje) -->
+                <div class="service-card bg-white rounded-xl shadow-md p-6 flex flex-col items-center justify-center text-center col-span-2">
+                    <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center text-3xl mb-4">
+                        🧁
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Próximamente más servicios</h3>
+                    <p class="text-gray-600 mb-4">¿Tienes un emprendimiento? Contáctanos para aparecer aquí.</p>
+                    <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20ofrecer%20mis%20servicios%20en%20El%20Resolvito" 
+                       target="_blank"
+                       class="bg-cuban-green text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-cuban-dark transition">
+                        <i class="fab fa-whatsapp mr-1"></i> Publica tu servicio
+                    </a>
                 </div>
-                <div class="service-card bg-white rounded-xl p-6 shadow-md text-center">
-                    <div class="text-5xl mb-4">🔨</div>
-                    <h3 class="font-bold text-xl mb-2">Carpintería</h3>
-                    <p class="text-gray-600 mb-4">Trabajos a medida en madera</p>
-                    <a href="servicios.html" class="text-cuban-green font-medium">Más info →</a>
-                </div>
+                
             </div>
+            
+            <!-- Mini promoción de Dulce César -->
+            <div class="mt-6 bg-gradient-to-r from-dulce-rosa to-dulce-morado rounded-xl p-4 text-white flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <span class="text-3xl animate-bounce">🧁</span>
+                    <div>
+                        <p class="font-bold">Dulce César - Repostería artesanal</p>
+                        <p class="text-sm opacity-90">Pedidos con 48h • Entregas en La Habana</p>
+                    </div>
+                </div>
+                <a href="https://wa.me/5353342167" target="_blank" class="bg-white text-dulce-rosa px-4 py-2 rounded-full text-sm font-bold hover:bg-gray-100 transition">
+                    <i class="fab fa-whatsapp mr-1"></i> Pedir
+                </a>
+            </div>
+            
         </div>
     </section>
 
@@ -677,53 +765,41 @@
         });
 
         // Navegación suave
-       // Transición suave entre páginas
-document.addEventListener('DOMContentLoaded', function() {
-    // Quitar transición de entrada
-    document.getElementById('pageFade').classList.add('opacity-0');
-    
-    // Restaurar modo noche
-    if (localStorage.getItem('nightMode') === 'true') {
-        document.body.classList.add('night-mode');
-    }
-});
-
-// Manejar clics en enlaces internos
-document.querySelectorAll('a[href]').forEach(link => {
-    const href = link.getAttribute('href');
-    
-    // Solo aplicar a enlaces internos
-    if (href && !href.startsWith('http') && !href.startsWith('#') && 
-        !href.startsWith('mailto') && !href.startsWith('tel') && 
-        href !== 'javascript:void(0)') {
-        
-        link.addEventListener('click', function(e) {
-            // No interceptar si es clic con tecla Ctrl o botón medio
-            if (e.ctrlKey || e.metaKey || e.button === 1) return;
-            
-            e.preventDefault();
-            
-            // Guardar modo noche
-            localStorage.setItem('nightMode', document.body.classList.contains('night-mode') ? 'true' : 'false');
-            
-            // Activar transición
-            document.getElementById('pageFade').classList.remove('opacity-0');
-            
-            // Navegar después de la transición
-            setTimeout(() => {
-                window.location.href = href;
-            }, 200);
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('pageFade').classList.add('opacity-0');
+            if (localStorage.getItem('nightMode') === 'true') {
+                document.body.classList.add('night-mode');
+            }
         });
-    }
-});
 
-// Restaurar al usar botón atrás
-window.addEventListener('pageshow', function(event) {
-    // Si la página viene del caché (botón atrás)
-    if (event.persisted) {
-        document.getElementById('pageFade').classList.add('opacity-0');
-    }
-});
+        document.querySelectorAll('a[href]').forEach(link => {
+            const href = link.getAttribute('href');
+            
+            if (href && !href.startsWith('http') && !href.startsWith('#') && 
+                !href.startsWith('mailto') && !href.startsWith('tel') && 
+                href !== 'javascript:void(0)') {
+                
+                link.addEventListener('click', function(e) {
+                    if (e.ctrlKey || e.metaKey || e.button === 1) return;
+                    
+                    e.preventDefault();
+                    
+                    localStorage.setItem('nightMode', document.body.classList.contains('night-mode') ? 'true' : 'false');
+                    
+                    document.getElementById('pageFade').classList.remove('opacity-0');
+                    
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 200);
+                });
+            }
+        });
+
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                document.getElementById('pageFade').classList.add('opacity-0');
+            }
+        });
 
         // ============================================
         // EFECTO DÍA/NOCHE SIMPLIFICADO
@@ -811,7 +887,6 @@ window.addEventListener('pageshow', function(event) {
             document.body.style.overflow = '';
         }
 
-        // Cerrar modal con ESC
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeImageModal();
         });
@@ -929,4 +1004,3 @@ window.addEventListener('pageshow', function(event) {
     </script>
 </body>
 </html>
-
