@@ -23,6 +23,19 @@
             <p class="text-sm mt-2">¡Explora nuestra tienda!</p>
         </div>
     </div>
+    <!-- ============================================ -->
+<!-- BOTONES FLOTANTES (están en el index.html, no en cart-sidebar) -->
+<!-- ============================================ -->
+<!-- 
+    Estos botones están en el index.html, 
+    pero si los tienes en algún componente, 
+    asegúrate de que el badge tenga class="cart-badge"
+-->
+
+<button class="floating-btn cart" onclick="toggleCart()" data-tooltip="Ver carrito">
+    <i class="fas fa-shopping-cart"></i>
+    <span class="cart-badge" id="floatingCartCount">0</span>
+</button>
 
     <!-- Footer del Carrito (totales y checkout) -->
     <div id="cartFooter" class="border-t border-gray-200 dark:border-gray-800 p-4 bg-gray-50 dark:bg-gray-800/50">
