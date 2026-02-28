@@ -8,34 +8,39 @@ let cart = JSON.parse(localStorage.getItem('elResolvitoCart')) || [];
 
 // Constantes
 const WHATSAPP_NUMBER = '5356382909';
-const FREE_SHIPPING_MIN = 5000;
+const MINIMUM_PURCHASE = 500; // NUEVA: Compra mínima
+const SHIPPING_WITHIN_HABANA_VIEJA = 400; // NUEVA: Tarifa fija para LHV
 
-const SHIPPING_RANGES = [
-    { max: 2000, fee: 200, name: 'Estándar' },
-    { max: 5000, fee: 150, name: 'Económico' },
-    { max: Infinity, fee: 0, name: 'Gratis' }
-];
+// NOTA: Ya no usamos SHIPPING_RANGES ni FREE_SHIPPING_MIN de la misma manera.
 
-// Funciones de cálculo
-function calculateShipping(subtotal) {
-    for (const range of SHIPPING_RANGES) {
-        if (subtotal <= range.max) {
-            return range.fee;
-        }
+// Funciones de cálculo (ACTUALIZADAS)
+function calculateShipping(subtotal, location = 'habana-vieja') {
+    // Primero, verificar compra mínima (esto se hará en el checkout)
+    if (subtotal < MINIMUM_PURCHASE) {
+        return { fee: 0, isEligible: false, message: `Mínimo $${MINIMUM_PURCHASE}` };
     }
-    return 200;
+
+    if (location === 'habana-vieja') {
+        return { fee: SHIPPING_WITHIN_HABANA_VIEJA, isEligible: true, message: '' };
+    } else {
+        // Fuera de La Habana Vieja: el precio se consulta
+        return { fee: 0, isEligible: true, message: 'A consultar (peso/distancia)' };
+    }
 }
 
-function getShippingRangeName(subtotal) {
-    for (const range of SHIPPING_RANGES) {
-        if (subtotal <= range.max) {
-            return range.name;
-        }
+// Función auxiliar para obtener texto descriptivo del envío
+function getShippingDescription(location = 'habana-vieja', subtotal) {
+     if (subtotal < MINIMUM_PURCHASE) {
+        return `Mínimo de compra: $${MINIMUM_PURCHASE}`;
     }
-    return 'Estándar';
+    if (location === 'habana-vieja') {
+        return `Envío dentro de La Habana Vieja: $${SHIPPING_WITHIN_HABANA_VIEJA}`;
+    } else {
+        return 'Envío fuera de La Habana Vieja: a consultar (por peso/distancia)';
+    }
 }
 
-// Funciones principales del carrito
+// Funciones principales del carrito (addToCart, saveCart, etc. se mantienen igual)
 function addToCart(product) {
     if (!product || !product.id || !product.nombre || !product.precio) {
         console.error('Producto inválido', product);
@@ -94,10 +99,8 @@ function clearCart() {
 function updateCartUI() {
     const totalItems = cart.reduce((sum, item) => sum + (item.cantidad || 0), 0);
     const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
-    const shipping = calculateShipping(subtotal);
-    const total = subtotal + shipping;
     
-    // Actualizar todos los contadores
+    // Actualizar contadores
     document.querySelectorAll('#cartCount, #floatingCartCount').forEach(el => {
         if (el) {
             el.textContent = totalItems;
@@ -137,36 +140,32 @@ function updateCartUI() {
         }
     }
 
-    // Actualizar totales
+    // --- NUEVA LÓGICA DE TOTALES (sin barra de progreso) ---
     const subtotalEl = document.getElementById('cartSubtotal');
     const shippingEl = document.getElementById('cartShipping');
     const totalEl = document.getElementById('cartTotal');
-    const progressBar = document.getElementById('promoProgressBar');
+    const progressBar = document.getElementById('promoProgressContainer'); // Ocultaremos esto
     const progressText = document.getElementById('progressText');
 
     if (subtotalEl) subtotalEl.textContent = `$${subtotal.toLocaleString()}`;
-    if (shippingEl) {
-        if (shipping === 0) {
-            shippingEl.innerHTML = '<span class="text-green-600 font-bold">¡GRATIS!</span>';
-        } else {
-            shippingEl.textContent = `$${shipping.toLocaleString()}`;
+    
+    // Mostrar mensaje de compra mínima si aplica
+    if (subtotal < MINIMUM_PURCHASE) {
+        if (shippingEl) {
+            shippingEl.innerHTML = `<span class="text-orange-500 font-bold">Mínimo $${MINIMUM_PURCHASE}</span>`;
         }
+        if (totalEl) totalEl.textContent = `$${subtotal.toLocaleString()}`; // Total = subtotal, no se puede enviar
+    } else {
+        // Por ahora, mostramos un placeholder. La selección real se hará en el checkout modal.
+        if (shippingEl) {
+            shippingEl.innerHTML = `<span class="text-gray-600">Seleccionar en checkout</span>`;
+        }
+        if (totalEl) totalEl.textContent = `$${subtotal.toLocaleString()}`; // Total temporal
     }
-    if (totalEl) totalEl.textContent = `$${total.toLocaleString()}`;
 
-    // Actualizar barra de progreso
-    if (progressBar && progressText) {
-        const progressPercent = Math.min(100, (subtotal / FREE_SHIPPING_MIN) * 100);
-        progressBar.style.width = `${progressPercent}%`;
-        
-        if (subtotal >= FREE_SHIPPING_MIN) {
-            progressText.innerHTML = '🎉 ¡Envío GRATIS aplicado!';
-        } else {
-            const remaining = FREE_SHIPPING_MIN - subtotal;
-            const nextRange = subtotal < 2000 ? 'Estándar ($200)' : 'Económico ($150)';
-            progressText.innerHTML = `🚚 Envío ${nextRange}. Faltan $${remaining.toLocaleString()} para envío GRATIS.`;
-        }
-    }
+    // Ocultar la barra de progreso y su texto (ya no aplica)
+    if (progressBar) progressBar.style.display = 'none';
+    if (progressText) progressText.style.display = 'none';
 }
 
 function showCartToast(message) {
