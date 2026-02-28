@@ -94,4 +94,56 @@
 
                 <div class="bg-contador-azul/10 p-6 rounded-xl my-8">
                     <h3 class="text-xl font-bold mb-2 text-contador-azul">Y después de tener la licencia, ¿qué?</h3>
-                    <p class="mb-2">Tener
+                    <p class="mb-2">Tener la licencia es solo el primer paso. Después vienen las obligaciones:</p>
+                    <ul class="list-disc pl-6">
+                        <li>Llevar registros de ingresos y gastos (fundamental para no tener problemas).</li>
+                        <li>Presentar declaraciones juradas a tiempo.</li>
+                        <li>Pagar tus impuestos (según el régimen que te corresponda).</li>
+                        <li>Conservar las facturas de tus compras (en El Resolvito siempre damos factura).</li>
+                    </ul>
+                </div>
+
+                <h2 class="text-2xl font-bold mt-10 mb-4 text-contador-azul">Errores comunes al empezar</h2>
+                <ul class="list-disc pl-6 mb-6 text-gray-700">
+                    <li><strong>No investigar bien la actividad:</strong> Asegúrate de que tu actividad está permitida y qué requisitos específicos tiene.</li>
+                    <li><strong>No llevar registros desde el día 1:</strong> Luego querer arreglar las cuentas de meses atrás es un dolor de cabeza.</li>
+                    <li><strong>Confundir ingresos con ganancias:</strong> No es lo mismo lo que facturas que lo que te queda después de gastos e impuestos.</li>
+                </ul>
+
+                <div class="bg-gray-100 p-6 rounded-xl my-8">
+                    <h3 class="text-xl font-bold mb-4">¿Necesitas ayuda con la contabilidad?</h3>
+                    <p class="mb-4">Si ya tienes tu negocio o estás por abrirlo y quieres asegurarte de hacer todo bien desde el principio, yo puedo ayudarte. Ofrezco servicios de contabilidad para TCP: gestión ONAT, registros obligatorios, nómina, declaraciones juradas y más.</p>
+                    <a href="https://wa.me/5356382909?text=Hola,%20quiero%20asesoría%20para%20mi%20TCP" class="inline-block bg-contador-azul text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-800 transition"><i class="fab fa-whatsapp mr-2"></i>Contactar contador</a>
+                </div>
+
+                <div class="border-t pt-8 mt-10">
+                    <p class="text-lg">¿Te quedó alguna duda? Escríbeme por WhatsApp y con gusto te orientaré. Recuerda que emprender en Cuba es un camino bonito, solo hay que ir paso a paso [citation:7].</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mismos contenedores -->
+    <div id="image-modal-container"></div>
+    <div id="cart-sidebar-container"></div>
+    <div id="checkout-modal-container"></div>
+    <div id="footer-container"></div>
+    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none"><p id="cartToastMessage"></p></div>
+
+    <script>
+        async function loadComponent(elementId, path) {
+            try { const res = await fetch(path); const html = await res.text(); document.getElementById(elementId).innerHTML = html; } catch (error) { console.error(error); }
+        }
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadComponent('header-container', '../components/header.html');
+            await loadComponent('mobile-menu-container', '../components/mobile-menu.html');
+            await loadComponent('floating-buttons-container', '../components/floating-buttons.html');
+            await loadComponent('image-modal-container', '../components/image-modal.html');
+            await loadComponent('cart-sidebar-container', '../components/cart-sidebar.html');
+            await loadComponent('checkout-modal-container', '../components/checkout-modal.html');
+            await loadComponent('footer-container', '../components/footer.html');
+            if (typeof initializeAfterComponents === 'function') initializeAfterComponents();
+        });
+    </script>
+</body>
+</html>
