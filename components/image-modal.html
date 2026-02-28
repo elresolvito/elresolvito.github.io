@@ -1,0 +1,10 @@
+<!-- components/image-modal.html -->
+<div id="imageModal" class="fixed inset-0 bg-black/95 z-[60] hidden flex items-center justify-center p-4" onclick="closeImageModal()">
+    <div class="relative max-w-3xl w-full" onclick="event.stopPropagation()">
+        <button onclick="closeImageModal()" class="absolute -top-12 right-0 text-white text-3xl hover:text-gray-300">
+            <i class="fas fa-times"></i>
+        </button>
+        <img id="modalImage" src="" alt="" class="w-full max-h-[80vh] object-contain rounded-lg">
+        <p id="modalImageName" class="text-white text-center mt-4 text-xl font-bold"></p>
+    </div>
+</div>
