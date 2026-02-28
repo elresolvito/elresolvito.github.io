@@ -1,282 +1,37 @@
-<!-- ============================================ -->
-<!-- MODAL DEL CARRITO -->
-<!-- ============================================ -->
-<div id="cartModal" class="modal-overlay">
-    <div class="modal-content">
-        <!-- Header del carrito -->
-        <div class="p-6 border-b border-gray-200">
-            <div class="flex justify-between items-center">
-                <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#0d3b33]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                    Tu Carrito
-                </h3>
-                <button id="closeCartModal" class="text-gray-500 hover:text-gray-700 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-
-        <!-- Items del carrito (se llena dinámicamente) -->
-        <div id="cartItems" class="p-6 overflow-y-auto flex-1">
-            <p class="text-center text-gray-500">Tu carrito está vacío</p>
-        </div>
-
-        <!-- Footer del carrito con total y botón -->
-        <div class="p-6 border-t border-gray-200 bg-gray-50">
-            <!-- Resumen de compra -->
-            <div class="mb-4">
-                <div class="flex justify-between items-center mb-2">
-                    <span class="text-gray-600">Subtotal:</span>
-                    <span id="cartSubtotal" class="font-semibold text-gray-800">$0</span>
-                </div>
-                
-                <!-- Barra de progreso para envío gratis -->
-                <div class="promo-progress-container mt-3">
-                    <div id="promoProgressBar" class="promo-progress-bar" style="width: 0%;"></div>
-                </div>
-                <p id="progressText" class="text-xs text-gray-500 mt-1">
-                    Mínimo $500 para envío
-                </p>
-            </div>
-
-            <!-- Total final -->
-            <div class="flex justify-between items-center mb-4 pt-2 border-t border-gray-200">
-                <span class="text-lg font-bold text-gray-800">Total:</span>
-                <span id="cartTotal" class="text-xl font-bold text-[#0d3b33]">$0</span>
-            </div>
-
-            <!-- Botón para continuar con el pedido -->
-            <button id="sendWhatsAppOrder" class="w-full bg-green-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-600 transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2" disabled>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.033-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
-                </svg>
-                Enviar Pedido por WhatsApp
-            </button>
-
-            <!-- Mensaje de seguridad -->
-            <p class="text-xs text-center text-gray-500 mt-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-                Pedido seguro al 5356382909
-            </p>
-        </div>
+<!-- components/cart-sidebar.html -->
+<div id="cartOverlay" class="fixed inset-0 bg-black/50 z-[100] hidden" onclick="toggleCart()"></div>
+<div id="cartSidebar" class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl z-[101] transform translate-y-full cart-slide max-h-[85vh] flex flex-col">
+    <div class="p-4 border-b flex justify-between items-center bg-cuban-green text-white rounded-t-3xl">
+        <h3 class="font-bold text-lg"><i class="fas fa-shopping-cart mr-2"></i>Tu Carrito</h3>
+        <button onclick="toggleCart()" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition"><i class="fas fa-times"></i></button>
     </div>
-</div>
-
-<!-- ============================================ -->
-<!-- MODAL DE CHECKOUT (FINALIZAR PEDIDO) -->
-<!-- ============================================ -->
-<div id="checkoutModal" class="modal-overlay">
-    <div class="modal-content max-w-2xl">
-        <!-- Header -->
-        <div class="p-6 border-b border-gray-200">
-            <div class="flex justify-between items-center">
-                <h3 class="text-xl font-bold text-gray-800">Finalizar Pedido</h3>
-                <button id="closeCheckoutModal" class="text-gray-500 hover:text-gray-700 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
+    <div id="cartItems" class="flex-1 overflow-y-auto p-4 space-y-4"></div>
+    <div class="border-t p-4 bg-gray-50">
+        <div class="space-y-2 mb-4">
+            <div class="flex justify-between text-sm">
+                <span>Subtotal:</span>
+                <span id="cartSubtotal">$0</span>
             </div>
-        </div>
-
-        <div class="overflow-y-auto max-h-[70vh]">
-            <!-- Resumen del pedido -->
-            <div class="p-6 border-b border-gray-200">
-                <h4 class="text-lg font-bold text-gray-800 mb-4">Resumen de tu pedido</h4>
-                <div id="checkoutOrderSummary" class="space-y-3 mb-4"></div>
-                
-                <!-- Totales -->
-                <div class="bg-gray-50 p-4 rounded-lg space-y-2">
-                    <div class="flex justify-between text-sm">
-                        <span class="text-gray-600">Subtotal:</span>
-                        <span id="checkoutSubtotal" class="font-semibold">$0</span>
-                    </div>
-                    <div class="flex justify-between text-sm">
-                        <span class="text-gray-600">Envío:</span>
-                        <span id="checkoutShipping" class="font-semibold">Selecciona ubicación</span>
-                    </div>
-                    <hr class="my-2">
-                    <div class="flex justify-between text-lg font-bold">
-                        <span class="text-gray-800">Total:</span>
-                        <span id="checkoutTotal" class="text-[#0d3b33]">$0</span>
-                    </div>
+            <div class="flex justify-between text-sm">
+                <span>Envío:</span>
+                <span id="cartShipping">$200</span>
+            </div>
+            <div class="mt-3">
+                <div id="promoProgressContainer" class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div id="promoProgressBar" class="bg-cuban-green h-2.5 rounded-full" style="width: 0%;"></div>
                 </div>
+                <p id="progressText" class="text-xs text-gray-500 mt-1">Añade más productos para mejorar el envío</p>
             </div>
-
-            <!-- Datos del cliente -->
-            <div class="p-6 border-b border-gray-200">
-                <h4 class="text-lg font-bold text-gray-800 mb-4">Tus datos</h4>
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Nombre completo *</label>
-                        <input type="text" id="customerName" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-[#0d3b33] focus:border-transparent" required>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Dirección *</label>
-                        <input type="text" id="customerAddress" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-[#0d3b33] focus:border-transparent" required>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Referencias (opcional)</label>
-                        <input type="text" id="customerReferences" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-[#0d3b33] focus:border-transparent">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Teléfono *</label>
-                        <input type="tel" id="customerPhone" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-[#0d3b33] focus:border-transparent" required>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Ubicación *</label>
-                        <select id="deliveryLocation" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-[#0d3b33] focus:border-transparent" required>
-                            <option value="">Selecciona...</option>
-                            <option value="habana-vieja">Habana Vieja</option>
-                            <option value="otros">Otros municipios</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Método de pago -->
-            <div class="p-6">
-                <h4 class="text-lg font-bold text-gray-800 mb-4">Método de pago</h4>
-                <div class="space-y-4">
-                    <div class="space-y-2">
-                        <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                            <input type="radio" name="paymentMethod" value="efectivo" class="mr-3 text-[#0d3b33]">
-                            <span class="font-medium">Efectivo</span>
-                        </label>
-                        <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                            <input type="radio" name="paymentMethod" value="transferencia" class="mr-3 text-[#0d3b33]">
-                            <span class="font-medium">Transferencia</span>
-                        </label>
-                    </div>
-
-                    <!-- Campo para efectivo (se muestra al seleccionar efectivo) -->
-                    <div id="cashPaymentField" class="hidden mt-4">
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Pagaré con...</label>
-                        <div class="flex flex-wrap gap-2 mb-2">
-                            <button type="button" class="cash-btn" data-amount="20">$20</button>
-                            <button type="button" class="cash-btn" data-amount="50">$50</button>
-                            <button type="button" class="cash-btn" data-amount="100">$100</button>
-                            <button type="button" class="cash-btn" data-amount="200">$200</button>
-                            <button type="button" class="cash-btn" data-amount="500">$500</button>
-                            <button type="button" class="cash-btn" data-amount="1000">$1000</button>
-                            <button type="button" class="cash-btn" data-amount="otro">Otro</button>
-                        </div>
-                        <input type="text" id="otherCashAmount" placeholder="Monto" class="hidden w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg">
-                    </div>
-                </div>
+            <div class="border-t pt-2 flex justify-between text-lg font-bold">
+                <span>Total:</span>
+                <span id="cartTotal" class="text-cuban-green">$0</span>
             </div>
         </div>
-
-        <!-- Botón confirmar -->
-        <div class="p-6 border-t border-gray-200 bg-gray-50">
-            <button id="confirmOrderBtn" class="w-full bg-green-500 text-white font-bold py-4 px-4 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                Confirmar Pedido
-            </button>
-        </div>
-    </div>
-</div>
-
-<!-- ============================================ -->
-<!-- MODAL DE CONFIRMACIÓN -->
-<!-- ============================================ -->
-<div id="confirmationModal" class="modal-overlay">
-    <div class="modal-content max-w-md p-6 text-center">
-        <div class="mb-4 text-green-500">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-        </div>
-        <h3 class="text-2xl font-bold text-gray-800 mb-4">¡Pedido Confirmado!</h3>
-        <p class="text-gray-600 mb-6">Tu pedido ha sido enviado. Te contactaremos pronto por WhatsApp para coordinar la entrega.</p>
-        <button id="closeConfirmationModal" class="bg-[#0d3b33] text-white font-bold py-2 px-6 rounded-lg hover:bg-opacity-90 transition-colors">
-            Cerrar
+        <button onclick="openCheckoutModal()" class="w-full btn-whatsapp text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2">
+            <i class="fab fa-whatsapp"></i> Continuar con el pedido
         </button>
+        <p class="text-xs text-center text-gray-500 mt-3">
+            <i class="fas fa-lock mr-1"></i> Pedido seguro al 5356382909
+        </p>
     </div>
 </div>
-
-<!-- ============================================ -->
-<!-- BOTÓN FLOTANTE DEL CARRITO -->
-<!-- ============================================ -->
-<button id="floatingCartBtn" class="fixed bottom-6 right-6 bg-[#0d3b33] text-white px-5 py-3 rounded-full shadow-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 z-40 flex items-center gap-3">
-    <div class="relative">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.402H3.62a.5.5 0 0 1-.49-.598l-1-5A.5.5 0 0 1 2 1H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2.5h7.45l.5-2.5H3.14zM5 12a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-        </svg>
-        <span id="cartCount" class="cart-badge">0</span>
-    </div>
-    <span id="floatingCartTotal" class="text-lg font-bold">$0</span>
-</button>
-
-<!-- ============================================ -->
-<!-- TOAST NOTIFICATION -->
-<!-- ============================================ -->
-<div id="cartToast">
-    <p id="cartToastMessage" class="text-sm"></p>
-</div>
-
-<!-- ============================================ -->
-<!-- ESTILOS ADICIONALES (si no están en styles.css) -->
-<!-- ============================================ -->
-<style>
-    /* Estilos para botones de efectivo */
-    .cash-btn {
-        border: 1px solid #d1d5db;
-        padding: 8px 12px;
-        border-radius: 8px;
-        font-size: 0.875rem;
-        transition: all 0.2s;
-        background: white;
-        cursor: pointer;
-    }
-    
-    .cash-btn.active {
-        background-color: #0d3b33;
-        color: white;
-        border-color: #0d3b33;
-    }
-    
-    .cash-btn:hover:not(.active) {
-        background-color: #f3f4f6;
-    }
-    
-    /* Unavailable product card */
-    .unavailable-product-card {
-        background-color: #f8f8f8;
-        cursor: not-allowed !important;
-        filter: grayscale(80%);
-    }
-    
-    .unavailable-product-card .add-to-cart-btn {
-        background-color: #ef4444 !important;
-        color: white !important;
-        cursor: not-allowed !important;
-    }
-    
-    /* Scroll personalizado */
-    .overflow-y-auto::-webkit-scrollbar {
-        width: 6px;
-    }
-    
-    .overflow-y-auto::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        border-radius: 10px;
-    }
-    
-    .overflow-y-auto::-webkit-scrollbar-thumb {
-        background: #0d3b33;
-        border-radius: 10px;
-    }
-    
-    .overflow-y-auto::-webkit-scrollbar-thumb:hover {
-        background: #0a2e28;
-    }
-</style>
