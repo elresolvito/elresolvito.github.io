@@ -10,7 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css">
+    <!-- RUTA CORREGIDA: apunta a la carpeta css -->
+    <link rel="stylesheet" href="css/styles.css">
     
     <!-- Configuración de Tailwind -->
     <script>
@@ -490,9 +491,8 @@
         // ============================================
         let cart = JSON.parse(localStorage.getItem('elResolvitoCart')) || [];
         const WHATSAPP_NUMBER = '5356382909';
-        const FREE_SHIPPING_MIN = 5000; // Mínimo para envío gratis
+        const FREE_SHIPPING_MIN = 5000;
 
-        // Rangos de envío
         const SHIPPING_RANGES = [
             { max: 2000, fee: 200, name: 'Estándar' },
             { max: 5000, fee: 150, name: 'Económico' },
@@ -520,7 +520,7 @@
                     return range.fee;
                 }
             }
-            return 200; // Default
+            return 200;
         }
 
         function getShippingRangeName(subtotal) {
