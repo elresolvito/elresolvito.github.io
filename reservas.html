@@ -302,21 +302,32 @@
             updateCarousel();
         }
 
-        document.addEventListener('DOMContentLoaded', async function() {
-            await loadComponent('header-container', 'components/header.html');
-            await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
-            await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
-            await loadComponent('image-modal-container', 'components/image-modal.html');
-            await loadComponent('cart-sidebar-container', 'components/cart-sidebar.html');
-            await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
-            await loadComponent('footer-container', 'components/footer.html');
-            
-            initCarousel();
-            
-            if (typeof updateCartUI === 'function') {
-                updateCartUI();
-            }
-        });
+       document.addEventListener('DOMContentLoaded', async function() {
+    await loadComponent('header-container', 'components/header.html');
+    await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
+    await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
+    await loadComponent('image-modal-container', 'components/image-modal.html');
+    await loadComponent('cart-sidebar-container', 'components/cart-sidebar.html');
+    await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
+    await loadComponent('footer-container', 'components/footer.html');
+    
+    // AHORA SÍ, inicializar todo después de que los componentes estén cargados
+    if (typeof initializeAfterComponents === 'function') {
+        initializeAfterComponents();
+    }
+    
+    // Inicializar funciones específicas de la página (si existen)
+    if (typeof renderFeaturedProducts === 'function') {
+        renderFeaturedProducts();
+    }
+    if (typeof initCarousel === 'function') {
+        initCarousel();
+    }
+    if (typeof renderProducts === 'function') {
+        renderProducts();
+    }
+});
     </script>
 </body>
 </html>
+
