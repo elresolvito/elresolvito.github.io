@@ -4,20 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Servicios - El Resolvito</title>
-    <meta name="description" content="Servicios profesionales en El Resolvito.">
     
-    <!-- Favicons -->
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    
-    <!-- Fonts y estilos globales -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="styles.css">
     
-    <!-- Configuración de Tailwind -->
     <script>
         tailwind.config = {
             theme: {
@@ -32,17 +24,55 @@
                         'dulce-morado': '#9B59B6',
                         'contador-azul': '#1E3A8A',
                         'contador-dorado': '#B45309'
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 2s infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' },
+                        }
                     }
                 }
             }
         }
     </script>
     
-    <!-- Scripts -->
-    <script src="js/cart.js" defer></script>
-    <script src="js/checkout.js" defer></script>
-    <script src="js/ui.js" defer></script>
-    <script src="js/main.js" defer></script>
+    <style>
+        /* Estilos específicos para servicios */
+        .service-card { transition: all 0.3s ease; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px rgba(0,0,0,0.15); }
+        .btn-dulce { background: linear-gradient(135deg, #FF69B4 0%, #9B59B6 100%); }
+        .btn-contador { background: linear-gradient(135deg, #1E3A8A 0%, #B45309 100%); }
+        
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .feature-item i {
+            color: #10B981;
+            font-size: 0.875rem;
+        }
+        
+        .service-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: white;
+        }
+    </style>
 </head>
 <body class="bg-white text-gray-800">
 
@@ -68,10 +98,10 @@
                 <nav class="hidden lg:flex items-center gap-6">
                     <a href="index.html" class="hover:text-cuban-green font-medium">Inicio</a>
                     <a href="tienda.html" class="hover:text-cuban-green font-medium">Tienda</a>
-                    <a href="servicios.html" class="hover:text-cuban-green font-medium">Servicios</a>
+                    <a href="servicios.html" class="text-cuban-green font-medium border-b-2 border-cuban-green">Servicios</a>
                     <a href="ofertas.html" class="hover:text-cuban-green font-medium">Ofertas</a>
                     <a href="blog.html" class="hover:text-cuban-green font-medium">Blog</a>
-                    <a href="reservas.html" class="text-cuban-green font-medium border-b-2 border-cuban-green">Alojamientos</a>
+                    <a href="reservas.html" class="hover:text-cuban-green font-medium">Alojamientos</a>
                 </nav>
 
                 <div class="header-actions flex items-center gap-2">
@@ -134,171 +164,181 @@
     </div>
 
     <!-- ============================================ -->
-    <!-- HERO (CONTENIDO ESPECÍFICO DE RESERVAS) -->
+    <!-- HERO (CONTENIDO ESPECÍFICO DE SERVICIOS) -->
     <!-- ============================================ -->
-    <section class="bg-gradient-to-br from-cuban-blue to-purple-600 text-white py-12 px-4">
+    <section class="bg-gradient-to-br from-cuban-green to-cuban-dark text-white py-16 px-4">
         <div class="container mx-auto text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4">Alojamientos</h2>
-            <p class="text-xl opacity-90">Tu hogar en el corazón de La Habana</p>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Nuestros Servicios</h2>
+            <p class="text-xl opacity-90">Profesionales de confianza para ti</p>
         </div>
     </section>
 
     <!-- ============================================ -->
-    <!-- ALOJAMIENTO DESTACADO -->
+    <!-- SERVICIOS -->
     <!-- ============================================ -->
     <section class="py-12">
         <div class="container mx-auto px-4">
-            <span class="bg-cuban-yellow text-cuban-dark text-sm font-bold px-3 py-1 rounded-full">⭐ ALOJAMIENTO DESTACADO</span>
-            
-            <div class="property-card bg-white rounded-2xl shadow-xl overflow-hidden mt-4">
-                <div class="md:flex">
-                    <!-- Carrusel de imágenes -->
-                    <div class="md:w-1/2">
-                        <div class="carousel-container h-64 md:h-full">
-                            <div id="carouselTrack" class="carousel-track h-full">
-                                <!-- Las slides se generan dinámicamente -->
-                            </div>
-                            
-                            <button class="carousel-button carousel-prev" onclick="prevSlide()">
-                                <i class="fas fa-chevron-left text-cuban-green"></i>
-                            </button>
-                            <button class="carousel-button carousel-next" onclick="nextSlide()">
-                                <i class="fas fa-chevron-right text-cuban-green"></i>
-                            </button>
-                            
-                            <div id="carouselDots" class="carousel-dots absolute bottom-2 left-0 right-0">
-                                <!-- Se generan dinámicamente -->
-                            </div>
-                        </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-6" id="servicios-container">
+                
+                <!-- SERVICIO 1: Dulce César -->
+                <div class="service-card bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="h-64 w-full overflow-hidden bg-gradient-to-r from-dulce-rosa to-dulce-morado">
+                        <img src="https://i.postimg.cc/Qxz4FMGg/IMG_20260226-WA0025.jpg" 
+                             alt="Dulce César - Repostería artesanal" 
+                             class="w-full h-full object-contain bg-white">
                     </div>
                     
-                    <div class="md:w-1/2 p-6 md:p-8 flex flex-col justify-center">
-                        <h3 class="text-3xl font-bold mb-2">Terrazas de Bayona 59</h3>
-                        <p class="text-gray-500 mb-4"><i class="fas fa-map-marker-alt mr-2 text-cuban-green"></i>La Habana Vieja, Cuba</p>
+                    <div class="p-6">
+                        <span class="bg-dulce-rosa text-white text-xs px-3 py-1 rounded-full font-bold inline-block mb-3">✨ NUEVO SERVICIO</span>
                         
-                        <div class="flex flex-wrap gap-4 mb-6">
-                            <span class="bg-gray-100 px-3 py-1 rounded-full text-sm"><i class="fas fa-wifi mr-1 text-cuban-green"></i>WiFi</span>
-                            <span class="bg-gray-100 px-3 py-1 rounded-full text-sm"><i class="fas fa-snowflake mr-1 text-cuban-green"></i>A/C</span>
-                            <span class="bg-gray-100 px-3 py-1 rounded-full text-sm"><i class="fas fa-utensils mr-1 text-cuban-green"></i>Cocina</span>
-                            <span class="bg-gray-100 px-3 py-1 rounded-full text-sm"><i class="fas fa-sun mr-1 text-cuban-green"></i>Terraza</span>
-                            <span class="bg-gray-100 px-3 py-1 rounded-full text-sm"><i class="fas fa-bath mr-1 text-cuban-green"></i>Baño privado</span>
+                        <h3 class="text-2xl font-bold mb-2 text-dulce-rosa">Dulce César</h3>
+                        <p class="text-gray-600 mb-4">Repostería artesanal para eventos, cafeterías y pedidos especiales. Endulzamos tus momentos.</p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-pink-100 text-pink-600 text-xs px-3 py-1 rounded-full">🎂 Tortas</span>
+                            <span class="bg-purple-100 text-purple-600 text-xs px-3 py-1 rounded-full">🧁 Cupcakes</span>
+                            <span class="bg-yellow-100 text-yellow-600 text-xs px-3 py-1 rounded-full">🍪 Galletas</span>
+                            <span class="bg-green-100 text-green-600 text-xs px-3 py-1 rounded-full">📦 Por mayor</span>
+                            <span class="bg-blue-100 text-blue-600 text-xs px-3 py-1 rounded-full">☕ Cafeterías</span>
                         </div>
-
-                        <p class="text-gray-600 mb-6">Hermoso apartamento independiente en edificio colonial restaurado. Capacidad para 4 personas, terraza con vistas a la ciudad, cocina equipada y baño privado. Ubicación privilegiada a pasos del Capitolio y el Malecón.</p>
-
-                        <div class="flex items-center gap-4 mb-6">
-                            <div class="text-3xl font-bold text-cuban-green">$2,500</div>
-                            <div class="text-gray-500">/ noche</div>
-                            <div class="ml-auto flex items-center text-yellow-500">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span class="text-gray-600 ml-1 text-sm">(5.0)</span>
-                            </div>
+                        
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl font-bold text-dulce-rosa">Desde $150</span>
+                            <span class="text-sm text-gray-500">Pedidos con 48h</span>
                         </div>
-
-                        <!-- Comodidades -->
-                        <div class="mb-4">
-                            <span class="font-semibold text-cuban-green mb-2 block">Comodidades Incluidas:</span>
-                            <div class="amenities-grid">
-                                <div class="amenity-item"><i class="fas fa-check-circle"></i> Agua caliente 24/7</div>
-                                <div class="amenity-item"><i class="fas fa-check-circle"></i> Aire acondicionado</div>
-                                <div class="amenity-item"><i class="fas fa-check-circle"></i> 2 terrazas privadas</div>
-                                <div class="amenity-item"><i class="fas fa-check-circle"></i> Baño privado</div>
-                                <div class="amenity-item"><i class="fas fa-check-circle"></i> Wi-Fi gratuito</div>
-                                <div class="amenity-item"><i class="fas fa-check-circle"></i> Cocina equipada</div>
-                                <div class="amenity-item"><i class="fas fa-check-circle"></i> Ropa de cama</div>
-                                <div class="amenity-item"><i class="fas fa-check-circle"></i> Toallas</div>
-                            </div>
-                        </div>
-
-                        <!-- Experiencia -->
-                        <div class="mb-4">
-                            <span class="font-semibold text-cuban-green mb-2 block">Lo que nos caracteriza:</span>
-                            <div>
-                                <span class="experience-badge"><i class="fas fa-star mr-1"></i> 16+ años</span>
-                                <span class="experience-badge"><i class="fas fa-clock mr-1"></i> 24/7</span>
-                                <span class="experience-badge"><i class="fas fa-heart mr-1"></i> Auténtico</span>
-                            </div>
-                        </div>
-
-                        <!-- Botones -->
-                        <div class="flex gap-3">
-                            <a href="https://reservaterrazasdebayona59.com/" target="_blank" class="flex-1 bg-cuban-green text-white text-center py-3 rounded-xl font-bold hover:bg-cuban-dark transition">
-                                <i class="fas fa-calendar-check mr-2"></i>Reservar Ahora
-                            </a>
-                            <a href="https://wa.me/5356382909?text=Hola, consulta sobre Terrazas de Bayona 59" target="_blank" class="px-4 py-3 border-2 border-cuban-green text-cuban-green rounded-xl font-bold hover:bg-cuban-green hover:text-white transition">
-                                <i class="fab fa-whatsapp"></i>
-                            </a>
-                        </div>
+                        
+                        <a href="https://wa.me/5353342167?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Dulce%20C%C3%A9sar.%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20por%20favor." 
+                           target="_blank" 
+                           class="block w-full btn-dulce text-white text-center py-3 rounded-xl font-bold hover:opacity-90 transition">
+                            <i class="fab fa-whatsapp mr-2"></i>Contactar a Dulce César
+                        </a>
+                        <p class="text-xs text-center text-gray-400 mt-2">+53 5 3342167</p>
                     </div>
                 </div>
+                
+                <!-- SERVICIO 2: Contador / Tenedor de Libros (NUEVO) -->
+                <div class="service-card bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="h-64 w-full overflow-hidden bg-gradient-to-r from-contador-azul to-contador-dorado">
+                        <img src="https://i.postimg.cc/TPPT8GM9/photo-2026-02-15-19-00-24.jpg" 
+                             alt="Contador / Tenedor de Libros" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    
+                    <div class="p-6">
+                        <span class="bg-contador-azul text-white text-xs px-3 py-1 rounded-full font-bold inline-block mb-3">📊 NUEVO SERVICIO</span>
+                        
+                        <h3 class="text-2xl font-bold mb-2 text-contador-azul">Contador / Tenedor de Libros</h3>
+                        <p class="text-gray-600 mb-2">Gestión contable profesional para TCP y pequeños negocios. Trabajo con orden y transparencia para que tu negocio crezca con seguridad legal.</p>
+                        
+                        <!-- Lista completa de características -->
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span><strong>Gestión ONAT:</strong> Inscripción y trámites</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span><strong>Registros Obligatorios:</strong> Ingresos y gastos al día</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span><strong>Nómina y Personal:</strong> Contratos y control de pagos</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span><strong>Fichas de Costo:</strong> Cálculo preciso de precios</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span><strong>Declaración Jurada:</strong> Preparación y presentación</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span><strong>Atención personalizada</strong> para tu negocio</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-sm text-gray-500 italic mt-3 mb-4">"Trabajo con orden y transparencia para que tu negocio crezca con seguridad legal."</p>
+                        
+                        <a href="https://wa.me/5356382909?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Contador%20%2F%20Tenedor%20de%20Libros%20para%20mi%20TCP.%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Gestión%20ONAT%2C%20Registros%20y%20Declaración%20Jurada." 
+                           target="_blank" 
+                           class="block w-full btn-contador text-white text-center py-3 rounded-xl font-bold hover:opacity-90 transition">
+                            <i class="fab fa-whatsapp mr-2"></i>Contactar: 56382909
+                        </a>
+                    </div>
+                </div>
+                
             </div>
+            
+            <!-- Mensaje de más servicios próximamente -->
+            <div class="mt-8 text-center text-gray-500">
+                <p><i class="fas fa-plus-circle mr-2 text-cuban-green"></i> Próximamente más servicios para ti</p>
+            </div>
+            
         </div>
     </section>
 
     <!-- ============================================ -->
-    <!-- PRÓXIMOS ALOJAMIENTOS -->
+    <!-- PROMOCIÓN DE SERVICIOS -->
     <!-- ============================================ -->
-    <section class="py-12 bg-gray-50">
+    <section class="py-12 bg-gradient-to-r from-cuban-blue to-cuban-green text-white">
         <div class="container mx-auto px-4">
-            
-            <div class="flex justify-between items-center mb-8">
-                <h3 class="text-2xl font-bold">Próximos Alojamientos</h3>
-                <span class="text-cuban-green font-medium">Más opciones muy pronto</span>
-            </div>
-            
-            <!-- Grid preparado para futuros alojamientos -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="futureProperties">
-                
-                <!-- Espacio reservado para futuras propiedades -->
-                <div class="bg-white rounded-xl shadow-md p-8 text-center border-2 border-dashed border-gray-300">
-                    <div class="text-6xl mb-4 opacity-30">🏠</div>
-                    <h4 class="font-bold text-xl mb-2 text-gray-400">Nuevo alojamiento</h4>
-                    <p class="text-gray-400 mb-4">Próximamente</p>
-                    <div class="w-16 h-1 bg-cuban-green mx-auto rounded-full"></div>
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="md:w-2/3 text-center md:text-left">
+                    <span class="inline-block bg-white/20 px-4 py-1 rounded-full text-sm font-bold mb-4 animate-pulse">
+                        📊 SERVICIOS PROFESIONALES
+                    </span>
+                    <h3 class="text-3xl md:text-4xl font-bold mb-4">Contabilidad y Repostería</h3>
+                    <p class="text-xl mb-2">Todo lo que tu negocio necesita</p>
+                    <p class="text-white/90 mb-4">Desde gestión contable hasta delicias artesanales. Profesionales de confianza.</p>
+                    
+                    <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                        <a href="https://wa.me/5356382909?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Contabilidad" 
+                           class="inline-block bg-white text-cuban-blue px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition">
+                            <i class="fab fa-whatsapp mr-2"></i>Contador: 56382909
+                        </a>
+                        <a href="https://wa.me/5353342167?text=Hola%2C%20me%20interesa%20Dulce%20C%C3%A9sar" 
+                           class="inline-block bg-white text-dulce-rosa px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition">
+                            <i class="fab fa-whatsapp mr-2"></i>Dulce César: 53342167
+                        </a>
+                    </div>
                 </div>
                 
-                <div class="bg-white rounded-xl shadow-md p-8 text-center border-2 border-dashed border-gray-300">
-                    <div class="text-6xl mb-4 opacity-30">🏡</div>
-                    <h4 class="font-bold text-xl mb-2 text-gray-400">Nuevo alojamiento</h4>
-                    <p class="text-gray-400 mb-4">Próximamente</p>
-                    <div class="w-16 h-1 bg-cuban-green mx-auto rounded-full"></div>
+                <div class="md:w-1/3 text-center">
+                    <div class="text-8xl animate-bounce flex justify-center gap-4">
+                        <span>📊</span>
+                        <span>🧁</span>
+                    </div>
+                    <p class="text-sm mt-2 opacity-80">Profesionales de confianza</p>
                 </div>
-                
-                <div class="bg-white rounded-xl shadow-md p-8 text-center border-2 border-dashed border-gray-300">
-                    <div class="text-6xl mb-4 opacity-30">🏘️</div>
-                    <h4 class="font-bold text-xl mb-2 text-gray-400">Nuevo alojamiento</h4>
-                    <p class="text-gray-400 mb-4">Próximamente</p>
-                    <div class="w-16 h-1 bg-cuban-green mx-auto rounded-full"></div>
-                </div>
-                
             </div>
             
-            <!-- Mensaje para añadir propiedades -->
-            <div class="mt-8 text-center">
-                <p class="text-gray-600 mb-4">¿Tienes una propiedad para alquilar?</p>
-                <a href="https://wa.me/5356382909?text=Hola, quiero publicar mi propiedad en El Resolvito" 
-                   target="_blank"
-                   class="inline-block bg-cuban-green text-white px-6 py-3 rounded-full font-bold hover:bg-cuban-dark transition">
-                    <i class="fab fa-whatsapp mr-2"></i>Publica tu propiedad
-                </a>
+            <div class="mt-8 grid md:grid-cols-2 gap-4 text-center">
+                <div class="bg-white/10 backdrop-blur rounded-xl p-4 hover:scale-105 transition transform">
+                    <i class="fas fa-calculator text-3xl mb-2"></i>
+                    <p class="font-bold">Contador / Tenedor</p>
+                    <p class="text-sm opacity-90">Gestión ONAT • Registros • Nómina • Costos • Declaración</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur rounded-xl p-4 hover:scale-105 transition transform">
+                    <i class="fas fa-birthday-cake text-3xl mb-2 wiggle"></i>
+                    <p class="font-bold">Dulce César</p>
+                    <p class="text-sm opacity-90">Tortas • Cupcakes • Galletas • Eventos • Cafeterías</p>
+                </div>
             </div>
-            
         </div>
     </section>
 
     <!-- ============================================ -->
-    <!-- CTA WEB BAYONA -->
+    <!-- CTA PARA EMPRENDIMIENTOS -->
     <!-- ============================================ -->
-    <section class="py-12 bg-gradient-to-r from-cuban-green to-cuban-dark text-white">
+    <section class="py-12 bg-cuban-green text-white">
         <div class="container mx-auto px-4 text-center">
-            <h3 class="text-2xl font-bold mb-4">🌐 Sitio web oficial</h3>
-            <p class="mb-6 opacity-90">Visita la web de Terrazas de Bayona 59 para más información</p>
-            <a href="https://reservaterrazasdebayona59.com/" target="_blank" class="inline-block bg-white text-cuban-green px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition shadow-lg">
-                <i class="fas fa-external-link-alt mr-2"></i>reservaterrazasdebayona59.com
+            <h3 class="text-2xl font-bold mb-4">¿Tienes un emprendimiento?</h3>
+            <p class="mb-6">Ofrece tus servicios en El Resolvito y llega a más clientes</p>
+            <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20ofrecer%20mis%20servicios%20en%20El%20Resolvito" 
+               target="_blank" 
+               class="inline-block bg-white text-cuban-green px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition">
+                <i class="fab fa-whatsapp mr-2"></i>Contactar para publicar
             </a>
         </div>
     </section>
@@ -427,17 +467,6 @@
             { max: 5000, fee: 150, name: 'Económico' },
             { max: Infinity, fee: 0, name: 'Gratis' }
         ];
-
-        // Array de imágenes del carrusel de la propiedad
-        const propertyImages = [
-            { url: "https://i.postimg.cc/W4qCN1Ns/ba-o-de-habitacion-imagen-1.jpg", titulo: "Baño de habitación" },
-            { url: "https://i.postimg.cc/3NYcFj2b/pasillo-hacia-habitacion-cocina-y-terraza.jpg", titulo: "Pasillo" },
-            { url: "https://i.postimg.cc/PfQcrcj5/terraza-imagen-1.jpg", titulo: "Terraza" },
-            { url: "https://i.postimg.cc/8km3P3Sk/sala-imagen-1.png", titulo: "Sala" },
-            { url: "https://i.postimg.cc/76gRztJt/habitacion-imagen-2.jpg", titulo: "Habitación" }
-        ];
-        
-        let currentSlide = 0;
 
         // ============================================
         // FUNCIONES DEL CARRITO (UNIFICADAS)
@@ -639,7 +668,7 @@
         }
 
         // ============================================
-        // FUNCIONES DE UI (Modo noche, menú, modal, carrusel)
+        // FUNCIONES DE UI (Modo noche, menú, modal)
         // ============================================
         function initDayNight() {
             const hour = new Date().getHours();
@@ -690,66 +719,10 @@
             }
         }
 
-        // Funciones del carrusel
-        function initCarousel() {
-            const track = document.getElementById('carouselTrack');
-            const dotsContainer = document.getElementById('carouselDots');
-            
-            if (!track || !dotsContainer) return;
-            
-            // Generar slides
-            track.innerHTML = propertyImages.map((img, index) => `
-                <div class="carousel-slide h-full relative">
-                    <img src="${img.url}" 
-                         alt="${img.titulo}" 
-                         class="w-full h-full object-cover cursor-pointer"
-                         onclick="openImageModal('${img.url}', '${img.titulo}')">
-                    <div class="absolute bottom-8 left-0 right-0 text-center text-white text-sm bg-black/50 py-1 mx-auto w-fit px-3 rounded-full">
-                        ${img.titulo}
-                    </div>
-                </div>
-            `).join('');
-            
-            // Generar dots
-            dotsContainer.innerHTML = propertyImages.map((_, index) => `
-                <div class="carousel-dot ${index === 0 ? 'active' : ''}" onclick="goToSlide(${index})"></div>
-            `).join('');
-            
-            updateCarousel();
-        }
-        
-        function updateCarousel() {
-            const track = document.getElementById('carouselTrack');
-            if (track) {
-                track.style.transform = `translateX(-${currentSlide * 100}%)`;
-            }
-            
-            // Actualizar dots
-            document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-        }
-        
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % propertyImages.length;
-            updateCarousel();
-        }
-        
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + propertyImages.length) % propertyImages.length;
-            updateCarousel();
-        }
-        
-        function goToSlide(index) {
-            currentSlide = index;
-            updateCarousel();
-        }
-
         // ============================================
         // INICIALIZACIÓN Y EVENTOS GLOBALES
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            initCarousel();
             initDayNight();
             updateCartUI();
             
