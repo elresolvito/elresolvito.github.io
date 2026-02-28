@@ -116,8 +116,13 @@ body.night-mode .service-card {
     border-color: var(--border-dark);
 }
 
+/* --- CORRECCIÓN SOLICITADA: Fondo blanco para contenedor de imagen en modo oscuro --- */
 body.night-mode .product-image-container {
-    background: #ffffff;
+    background: #ffffff !important; /* Fondo blanco puro para que las imágenes se vean bien */
+}
+
+body.night-mode .service-card .h-64.w-full.overflow-hidden {
+    background: #ffffff !important; /* También para servicios si es necesario */
 }
 
 body.night-mode .carousel-button {
