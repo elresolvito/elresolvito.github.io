@@ -6,12 +6,18 @@
     <title>El Resolvito - Tu Solución en La Habana</title>
     <meta name="description" content="Tienda online, servicios, alojamientos y más en La Habana Vieja.">
     
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
     <!-- Fonts y estilos globales -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/styles.css">
     
+    <!-- Configuración de Tailwind (personalizada para cada página) -->
     <script>
         tailwind.config = {
             theme: {
@@ -37,7 +43,7 @@
         }
     </script>
     
-    <!-- Cargar scripts en orden -->
+    <!-- Scripts (defer para que no bloqueen la carga) -->
     <script src="js/cart.js" defer></script>
     <script src="js/checkout.js" defer></script>
     <script src="js/ui.js" defer></script>
@@ -407,4 +413,5 @@
     </script>
 </body>
 </html>
+
 
