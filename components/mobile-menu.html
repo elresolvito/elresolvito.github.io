@@ -1,0 +1,27 @@
+<!-- components/mobile-menu.html -->
+<div id="mobileMenu" class="fixed inset-0 bg-black/50 z-50 hidden" onclick="toggleMenu()">
+    <div class="bg-white w-80 max-w-sm h-full p-6" onclick="event.stopPropagation()">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-xl font-bold text-cuban-green">Menú</h2>
+            <button onclick="toggleMenu()" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-cuban-green hover:text-white transition">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="space-y-2">
+            <a href="index.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-home w-6 text-cuban-green"></i><span>Inicio</span></a>
+            <a href="tienda.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-shopping-basket w-6 text-cuban-green"></i><span>Tienda</span></a>
+            <a href="servicios.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-tools w-6 text-cuban-green"></i><span>Servicios</span></a>
+            <a href="ofertas.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-percent w-6 text-cuban-green"></i><span>Ofertas</span></a>
+            <a href="blog.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-newspaper w-6 text-cuban-green"></i><span>Blog</span></a>
+            <a href="reservas.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-bed w-6 text-cuban-green"></i><span>Alojamientos</span></a>
+        </nav>
+        <div class="absolute bottom-6 left-6 right-6">
+            <div class="border-t border-gray-200 pt-4">
+                <p class="text-sm text-gray-500 mb-3">Contáctanos</p>
+                <a href="https://wa.me/5356382909" class="flex items-center gap-2 text-cuban-green hover:text-cuban-green-dark transition">
+                    <i class="fab fa-whatsapp text-xl"></i><span class="text-sm font-medium">+53 5 638 2909</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
