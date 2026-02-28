@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
     
     <script>
         tailwind.config = {
@@ -23,279 +24,155 @@
         }
     </script>
     
-    <style>
-        body { font-family: 'Open Sans', sans-serif; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
-        .article-card { transition: all 0.3s ease; }
-        .article-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px rgba(0,0,0,0.1); }
-        .btn-whatsapp { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); }
-        
-        body.night-mode { background-color: #0f0f1a; color: #e0e0e0; }
-        body.night-mode .bg-white { background-color: #16213e !important; color: #e0e0e0 !important; }
-        body.night-mode .bg-gray-50 { background-color: #1a1a2e !important; }
-        body.night-mode header { background-color: #16213e !important; }
-    </style>
+    <script src="js/cart.js" defer></script>
+    <script src="js/checkout.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/main.js" defer></script>
 </head>
-<body class="bg-white text-gray-800 pb-20">
+<body class="bg-white text-gray-800">
 
-    <!-- Transición súper sutil -->
+    <!-- Transición suave entre páginas -->
     <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
 
-    <!-- Botón WhatsApp -->
-    <a href="https://wa.me/5356382909" target="_blank" class="fixed bottom-4 right-4 z-40 btn-whatsapp text-white p-4 rounded-full shadow-lg hover:scale-110 transition">
-        <i class="fab fa-whatsapp text-2xl"></i>
-    </a>
+    <!-- Contenedores para componentes -->
+    <div id="header-container"></div>
+    <div id="mobile-menu-container"></div>
+    <div id="floating-buttons-container"></div>
 
-    <!-- Header -->
-    <header class="sticky top-0 z-50 bg-white shadow-md">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex items-center justify-between">
-                <a href="index.html" class="flex items-center gap-2">
-                    <div class="w-10 h-10 bg-cuban-green rounded-full flex items-center justify-center text-white font-bold text-xl">
-                        <i class="fas fa-store"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-bold text-cuban-green leading-tight">El Resolvito</h1>
-                        <p class="text-xs text-gray-500">La Habana Vieja</p>
-                    </div>
-                </a>
-
-                <nav class="hidden lg:flex items-center gap-6">
-                    <a href="index.html" class="hover:text-cuban-green font-medium">Inicio</a>
-                    <a href="tienda.html" class="hover:text-cuban-green font-medium">Tienda</a>
-                    <a href="servicios.html" class="hover:text-cuban-green font-medium">Servicios</a>
-                    <a href="ofertas.html" class="hover:text-cuban-green font-medium">Ofertas</a>
-                    <a href="blog.html" class="text-cuban-green font-medium border-b-2 border-cuban-green">Blog</a>
-                    <a href="reservas.html" class="hover:text-cuban-green font-medium">Alojamientos</a>
-                </nav>
-
-                <button onclick="toggleMenu()" class="p-2 hover:bg-gray-100 rounded-lg lg:hidden">
-                    <i class="fas fa-bars text-2xl text-cuban-green"></i>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- Menú móvil -->
-    <div id="mobileMenu" class="fixed inset-0 bg-black/50 z-50 hidden" onclick="toggleMenu()">
-        <div class="bg-white w-3/4 max-w-sm h-full p-6" onclick="event.stopPropagation()">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-bold text-cuban-green">Menú</h2>
-                <button onclick="toggleMenu()" class="p-2"><i class="fas fa-times text-2xl"></i></button>
-            </div>
-            <nav class="space-y-4">
-                <a href="index.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-home mr-3 text-cuban-green"></i>Inicio</a>
-                <a href="tienda.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-shopping-basket mr-3 text-cuban-green"></i>Tienda</a>
-                <a href="servicios.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-tools mr-3 text-cuban-green"></i>Servicios</a>
-                <a href="ofertas.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-percent mr-3 text-cuban-green"></i>Ofertas</a>
-                <a href="blog.html" class="block p-3 rounded-lg bg-cuban-green text-white"><i class="fas fa-newspaper mr-3"></i>Blog</a>
-                <a href="reservas.html" class="block p-3 rounded-lg hover:bg-gray-100"><i class="fas fa-bed mr-3 text-cuban-green"></i>Alojamientos</a>
-            </nav>
-        </div>
-    </div>
-
+    <!-- ============================================ -->
+    <!-- CONTENIDO ESPECÍFICO DE BLOG -->
+    <!-- ============================================ -->
+    
     <!-- Hero -->
-    <section class="bg-gradient-to-br from-cuban-blue to-cuban-green text-white py-12 px-4">
+    <section class="bg-gradient-to-br from-cuban-green to-cuban-blue text-white py-16 px-4">
         <div class="container mx-auto text-center">
             <h2 class="text-4xl md:text-5xl font-bold mb-4">Blog El Resolvito</h2>
-            <p class="text-xl opacity-90">Consejos, recetas y noticias para tu día a día</p>
+            <p class="text-xl opacity-90">Consejos, recetas y novedades</p>
         </div>
     </section>
 
-    <!-- Artículos -->
+    <!-- Artículos del Blog -->
     <section class="py-12">
-        <div class="container mx-auto px-4 max-w-4xl">
-
-            <!-- ARTÍCULO 1: Receta -->
-            <article class="article-card bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
-                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop&q=60" alt="Tostadas de atún" class="w-full h-64 object-cover">
-                <div class="p-6 md:p-8">
-                    <div class="flex items-center gap-4 mb-4 text-sm text-gray-500">
-                        <span class="bg-cuban-green text-white px-3 py-1 rounded-full">Recetas</span>
-                        <span><i class="far fa-calendar mr-1"></i>20 de enero, 2024</span>
-                        <span><i class="far fa-clock mr-1"></i>5 minutos</span>
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='#'">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <span class="text-xs text-cuban-green font-bold">RECETAS</span>
+                        <h3 class="font-bold text-lg mt-1">Tostadas de Atún en 5 minutos</h3>
+                        <p class="text-gray-600 text-sm mt-2">Una receta rápida y deliciosa usando productos de El Resolvito. Ideal para un almuerzo rápido.</p>
+                        <div class="mt-3 text-cuban-green text-sm font-medium">Leer más →</div>
                     </div>
-                    
-                    <h3 class="text-2xl md:text-3xl font-bold mb-4">Tostadas de Atún y Mayonesa en 5 Minutos</h3>
-                    
-                    <p class="text-gray-600 mb-4">Una receta rápida, económica y deliciosa usando productos que encuentras en El Resolvito. Perfecta para el desayuno o una merienda ligera.</p>
-                    
-                    <div class="bg-gray-50 rounded-xl p-6 mb-6">
-                        <h4 class="font-bold mb-3">Ingredientes (para 2 personas):</h4>
-                        <ul class="space-y-2 text-gray-600">
-                            <li><i class="fas fa-check text-cuban-green mr-2"></i>1 lata de <strong>Atún El Resolvito</strong></li>
-                            <li><i class="fas fa-check text-cuban-green mr-2"></i>2 cucharadas de <strong>Mayonesa Mediana</strong></li>
-                            <li><i class="fas fa-check text-cuban-green mr-2"></i>4 rebanadas de pan</li>
-                            <li><i class="fas fa-check text-cuban-green mr-2"></i>Sal y pimienta al gusto</li>
-                            <li><i class="fas fa-check text-cuban-green mr-2"></i>Opcional: <strong>Pimiento fresco</strong> picado</li>
-                        </ul>
+                </article>
+                
+                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='#'">
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <span class="text-xs text-cuban-green font-bold">HOSPEDAJE</span>
+                        <h3 class="font-bold text-lg mt-1">Guía para alquilar en La Habana</h3>
+                        <p class="text-gray-600 text-sm mt-2">Todo lo que necesitas saber para encontrar el mejor alojamiento en La Habana Vieja.</p>
+                        <div class="mt-3 text-cuban-green text-sm font-medium">Leer más →</div>
                     </div>
-
-                    <h4 class="font-bold mb-3">Preparación:</h4>
-                    <ol class="space-y-3 text-gray-600 mb-6">
-                        <li><strong>1.</strong> Escurre el atún y colócalo en un tazón.</li>
-                        <li><strong>2.</strong> Agrega la mayonesa y mezcla bien. Si tienes pimiento fresco, agrégalo picado.</li>
-                        <li><strong>3.</strong> Tuesta el pan hasta que esté crujiente.</li>
-                        <li><strong>4.</strong> Unta la mezcla de atún sobre las tostadas.</li>
-                        <li><strong>5.</strong> ¡Sirve inmediatamente y disfruta!</li>
-                    </ol>
-
-                    <div class="bg-cuban-green/10 border-l-4 border-cuban-green p-4 rounded">
-                        <p class="text-sm"><strong>💡 Tip:</strong> Compra los ingredientes en El Resolvito y ahorra tiempo. ¡Tenemos todo listo para tu receta!</p>
+                </article>
+                
+                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='#'">
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <span class="text-xs text-cuban-green font-bold">CONSEJOS</span>
+                        <h3 class="font-bold text-lg mt-1">¿Por qué comprar en El Resolvito?</h3>
+                        <p class="text-gray-600 text-sm mt-2">Descubre los beneficios de comprar en tu tienda de confianza: calidad, precio y cercanía.</p>
+                        <div class="mt-3 text-cuban-green text-sm font-medium">Leer más →</div>
                     </div>
-                </div>
-            </article>
-
-            <!-- ARTÍCULO 2: Hospedaje -->
-            <article class="article-card bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
-                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&auto=format&fit=crop&q=60" alt="Alojamiento" class="w-full h-64 object-cover">
-                <div class="p-6 md:p-8">
-                    <div class="flex items-center gap-4 mb-4 text-sm text-gray-500">
-                        <span class="bg-cuban-blue text-white px-3 py-1 rounded-full">Hospedaje</span>
-                        <span><i class="far fa-calendar mr-1"></i>15 de enero, 2024</span>
-                        <span><i class="far fa-clock mr-1"></i>8 minutos</span>
+                </article>
+                
+                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='#'">
+                    <img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <span class="text-xs text-cuban-green font-bold">SERVICIOS</span>
+                        <h3 class="font-bold text-lg mt-1">Cómo empezar tu negocio en Cuba</h3>
+                        <p class="text-gray-600 text-sm mt-2">Consejos de nuestro contador para iniciar un TCP con todos los requisitos legales en orden.</p>
+                        <div class="mt-3 text-cuban-green text-sm font-medium">Leer más →</div>
                     </div>
-                    
-                    <h3 class="text-2xl md:text-3xl font-bold mb-4">Guía para Cubanos: Cómo Alquilar en La Habana Vieja</h3>
-                    
-                    <p class="text-gray-600 mb-4">¿Buscas un lugar para quedarte en La Habana? Te contamos todo lo que necesitas saber para encontrar el alojamiento perfecto, ya sea para turismo, negocios o una escapada de fin de semana.</p>
-
-                    <h4 class="font-bold mb-3">1. Ubicación es clave</h4>
-                    <p class="text-gray-600 mb-4">La Habana Vieja es el corazón histórico de la ciudad. Al alojarte aquí, tendrás a pocos pasos:</p>
-                    <ul class="space-y-2 text-gray-600 mb-6">
-                        <li><i class="fas fa-map-marker-alt text-cuban-blue mr-2"></i>El Capitolio y el Malecón</li>
-                        <li><i class="fas fa-map-marker-alt text-cuban-blue mr-2"></i>Plaza Vieja y Catedral</li>
-                        <li><i class="fas fa-map-marker-alt text-cuban-blue mr-2"></i>Restaurantes y bares emblemáticos</li>
-                        <li><i class="fas fa-map-marker-alt text-cuban-blue mr-2"></i>WiFi en parques públicos</li>
-                    </ul>
-
-                    <h4 class="font-bold mb-3">2. ¿Qué buscar en un alojamiento?</h4>
-                    <div class="grid md:grid-cols-2 gap-4 mb-6">
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h5 class="font-bold mb-2"><i class="fas fa-wifi text-cuban-green mr-2"></i>WiFi</h5>
-                            <p class="text-sm text-gray-600">Essencial para trabajar o comunicarte. Verifica que sea incluido.</p>
-                        </div>
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h5 class="font-bold mb-2"><i class="fas fa-snowflake text-cuban-green mr-2"></i>Aire Acondicionado</h5>
-                            <p class="text-sm text-gray-600">Imprescindible en los meses de calor (mayo-septiembre).</p>
-                        </div>
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h5 class="font-bold mb-2"><i class="fas fa-utensils text-cuban-green mr-2"></i>Cocina Equipada</h5>
-                            <p class="text-sm text-gray-600">Ahorra dinero preparando tus propias comidas.</p>
-                        </div>
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h5 class="font-bold mb-2"><i class="fas fa-shield-alt text-cuban-green mr-2"></i>Seguridad</h5>
-                            <p class="text-sm text-gray-600">Puertas seguras y buena iluminación en la zona.</p>
-                        </div>
+                </article>
+                
+                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='#'">
+                    <img src="https://images.unsplash.com/photo-1551024700-99f1d0a0d8a7?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <span class="text-xs text-cuban-green font-bold">PRODUCTOS</span>
+                        <h3 class="font-bold text-lg mt-1">Novedades en nuestra tienda</h3>
+                        <p class="text-gray-600 text-sm mt-2">Conoce los últimos productos que hemos añadido a nuestro catálogo, incluyendo perfumes y licores.</p>
+                        <div class="mt-3 text-cuban-green text-sm font-medium">Leer más →</div>
                     </div>
-
-                    <div class="bg-cuban-blue/10 border-l-4 border-cuban-blue p-4 rounded mb-6">
-                        <p class="text-sm"><strong>🏠 Recomendación:</strong> Te sugerimos <a href="https://reservaterrazasdebayona59.com/" target="_blank" class="text-cuban-blue font-bold underline">Terrazas de Bayona 59</a> - Apartamento completo con WiFi, aire acondicionado y terraza en el corazón de La Habana Vieja.</p>
+                </article>
+                
+                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='#'">
+                    <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <span class="text-xs text-cuban-green font-bold">ALOJAMIENTOS</span>
+                        <h3 class="font-bold text-lg mt-1">Terrazas de Bayona 59: Una joya colonial</h3>
+                        <p class="text-gray-600 text-sm mt-2">Te mostramos todos los detalles de nuestro alojamiento estrella en el corazón de La Habana Vieja.</p>
+                        <div class="mt-3 text-cuban-green text-sm font-medium">Leer más →</div>
                     </div>
-
-                    <a href="https://reservaterrazasdebayona59.com/" target="_blank" class="inline-block bg-cuban-blue text-white px-6 py-3 rounded-full font-bold hover:bg-blue-700 transition">
-                        <i class="fas fa-external-link-alt mr-2"></i>Ver alojamiento recomendado
-                    </a>
-                </div>
-            </article>
-
-            <!-- ARTÍCULO 3: Beneficios -->
-            <article class="article-card bg-white rounded-2xl shadow-lg overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop&q=60" alt="El Resolvito" class="w-full h-64 object-cover">
-                <div class="p-6 md:p-8">
-                    <div class="flex items-center gap-4 mb-4 text-sm text-gray-500">
-                        <span class="bg-cuban-orange text-white px-3 py-1 rounded-full">Consejos</span>
-                        <span><i class="far fa-calendar mr-1"></i>10 de enero, 2024</span>
-                        <span><i class="far fa-clock mr-1"></i>4 minutos</span>
-                    </div>
-                    
-                    <h3 class="text-2xl md:text-3xl font-bold mb-4">¿Por qué Comprar en El Resolvito?</h3>
-                    
-                    <p class="text-gray-600 mb-6">En un mercado lleno de opciones, te contamos por qué cada día más habaneros eligen El Resolvito para sus compras diarias.</p>
-
-                    <div class="space-y-6">
-                        <div class="flex gap-4">
-                            <div class="w-12 h-12 bg-cuban-green rounded-full flex items-center justify-center text-white text-xl flex-shrink-0">
-                                <i class="fas fa-bolt"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg">Entrega Rápida</h4>
-                                <p class="text-gray-600">Envío en menos de 2 horas en La Habana Vieja. Sabemos que tu tiempo vale oro.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex gap-4">
-                            <div class="w-12 h-12 bg-cuban-green rounded-full flex items-center justify-center text-white text-xl flex-shrink-0">
-                                <i class="fas fa-tag"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg">Precios Competitivos</h4>
-                                <p class="text-gray-600">Sin intermediarios. Compramos al por mayor para ofrecerte mejores precios.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex gap-4">
-                            <div class="w-12 h-12 bg-cuban-green rounded-full flex items-center justify-center text-white text-xl flex-shrink-0">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg">Calidad Garantizada</h4>
-                                <p class="text-gray-600">Todos nuestros productos son seleccionados. Si no te gusta, lo cambiamos.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex gap-4">
-                            <div class="w-12 h-12 bg-cuban-green rounded-full flex items-center justify-center text-white text-xl flex-shrink-0">
-                                <i class="fas fa-headset"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg">Atención Personalizada</h4>
-                                <p class="text-gray-600">WhatsApp directo con nosotros. Sin robots, sin esperas. Hablas con personas reales.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-8 bg-cuban-green text-white rounded-xl p-6 text-center">
-                        <h4 class="font-bold text-xl mb-2">¿Listo para probar?</h4>
-                        <p class="mb-4 opacity-90">Haz tu primera compra y descubre la diferencia.</p>
-                        <a href="tienda.html" class="inline-block bg-white text-cuban-green px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition">
-                            <i class="fas fa-shopping-basket mr-2"></i>Ir a la tienda
-                        </a>
-                    </div>
-                </div>
-            </article>
-
+                </article>
+                
+            </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-cuban-dark text-white py-8">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2024 El Resolvito. Todos los derechos reservados.</p>
-        </div>
-    </footer>
+    <!-- Contenedores para modales y footer -->
+    <div id="image-modal-container"></div>
+    <div id="cart-sidebar-container"></div>
+    <div id="checkout-modal-container"></div>
+    <div id="footer-container"></div>
+
+    <!-- Toast de notificación -->
+    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
+        <p id="cartToastMessage">Producto añadido</p>
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('pageFade').classList.add('opacity-0');
-            if (localStorage.getItem('nightMode') === 'true') document.body.classList.add('night-mode');
-        });
+        async function loadComponent(elementId, componentPath) {
+            try {
+                const response = await fetch(componentPath);
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+                
+                if (elementId === 'header-container') {
+                    updateActiveNav();
+                }
+            } catch (error) {
+                console.error(`Error cargando ${componentPath}:`, error);
+            }
+        }
 
-        document.querySelectorAll('a[href]').forEach(link => {
-            const href = link.getAttribute('href');
-            if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('mailto') && !href.startsWith('tel')) {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    localStorage.setItem('nightMode', document.body.classList.contains('night-mode') ? 'true' : 'false');
-                    document.getElementById('pageFade').classList.remove('opacity-0');
-                    setTimeout(() => location.href = href, 200);
-                });
+        function updateActiveNav() {
+            const currentPage = window.location.pathname.split('/').pop() || 'blog.html';
+            const navLinks = document.querySelectorAll('#mainNav a');
+            
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href === currentPage) {
+                    link.classList.add('text-cuban-green', 'font-medium', 'border-b-2', 'border-cuban-green');
+                } else {
+                    link.classList.remove('text-cuban-green', 'font-medium', 'border-b-2', 'border-cuban-green');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadComponent('header-container', 'components/header.html');
+            await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
+            await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
+            await loadComponent('image-modal-container', 'components/image-modal.html');
+            await loadComponent('cart-sidebar-container', 'components/cart-sidebar.html');
+            await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
+            await loadComponent('footer-container', 'components/footer.html');
+            
+            if (typeof updateCartUI === 'function') {
+                updateCartUI();
             }
         });
-
-        function toggleMenu() {
-            document.getElementById('mobileMenu').classList.toggle('hidden');
-        }
     </script>
 </body>
 </html>
