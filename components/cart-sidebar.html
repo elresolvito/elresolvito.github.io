@@ -14,21 +14,18 @@
             </div>
             <div class="flex justify-between text-sm">
                 <span>Envío:</span>
-                <span id="cartShipping">$200</span>
+                <span id="cartShipping">$400 (L.Habana Vieja)</span>
             </div>
-            <div class="mt-3">
-                <div id="promoProgressContainer" class="w-full bg-gray-200 rounded-full h-2.5">
-                    <div id="promoProgressBar" class="bg-cuban-green h-2.5 rounded-full" style="width: 0%;"></div>
-                </div>
-                <p id="progressText" class="text-xs text-gray-500 mt-1">Añade más productos para mejorar el envío</p>
-            </div>
+            <!-- INFO: Recordatorio de compra mínima -->
+            <p id="minPurchaseMsg" class="text-xs text-gray-500">* Compra mínima: $500</p>
+            
             <div class="border-t pt-2 flex justify-between text-lg font-bold">
                 <span>Total:</span>
                 <span id="cartTotal" class="text-cuban-green">$0</span>
             </div>
         </div>
         <button onclick="openCheckoutModal()" class="w-full btn-whatsapp text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2">
-            <i class="fab fa-whatsapp"></i> Continuar con el pedido
+            <i class="fab fa-whatsapp"></i> Proceder al checkout
         </button>
         <p class="text-xs text-center text-gray-500 mt-3">
             <i class="fas fa-lock mr-1"></i> Pedido seguro al 5356382909
