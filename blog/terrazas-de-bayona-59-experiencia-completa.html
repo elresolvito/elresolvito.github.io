@@ -61,4 +61,64 @@
                 <p class="mb-4">Amplio, con agua caliente 24/7, jabón, papel higiénico, toallas limpias. Nada de sorpresas desagradables [citation:2].</p>
 
                 <h3 class="text-xl font-semibold mt-6 mb-2">La cocina</h3>
-                <p class="mb-4">Es compartida, pero eso no es problema. Tiene refrigerador, estufa, microondas y utensilios. Si quieres cocinar algo tú
+                <p class="mb-4">Es compartida, pero eso no es problema. Tiene refrigerador, estufa, microondas y utensilios. Si quieres cocinar algo tú mismo, puedes hacerlo sin problema. También ofrecen desayuno por 5 USD, que incluye café cubano, frutas, pan tostado, huevos... y vale muchísimo la pena [citation:7].</p>
+
+                <h2 class="text-2xl font-bold mt-10 mb-4 text-amber-600">La ubicación</h2>
+                <p class="mb-4">Está en La Habana Vieja, a unos 15 minutos caminando del Capitolio. Cerca hay restaurantes, bodegas, tienditas. Puedes ir andando a casi todos los lugares de interés histórico. Y si quieres ir más lejos, Alexander te puede conseguir un taxi de confianza a buen precio [citation:2].</p>
+
+                <h2 class="text-2xl font-bold mt-10 mb-4 text-amber-600">Precios</h2>
+                <ul class="list-disc pl-6 mb-4 text-gray-700">
+                    <li>Habitación para 2 personas: desde 25 USD la noche (menos si te quedas más días).</li>
+                    <li>Desayuno: 5 USD por persona.</li>
+                    <li>Traslados y tours: precio a consultar, pero siempre justo.</li>
+                </ul>
+                <p class="mb-4">Tienen promociones: si reservas 7 noches o más, incluyen desayuno gratis y un tour de bienvenida por La Habana Vieja [citation:7].</p>
+
+                <h2 class="text-2xl font-bold mt-10 mb-4 text-amber-600">Lo que dicen otros huéspedes</h2>
+                <p class="mb-4">En Booking, Airbnb y otras plataformas, las reseñas son excelentes. La gente destaca la limpieza, la comodidad y sobre todo el trato humano. Repiten mucho eso de "sentirse como en casa". Y es verdad [citation:7].</p>
+
+                <div class="bg-amber-50 p-6 rounded-xl my-8">
+                    <p class="italic">"Excelente atención y ubicación. Alexander e Isaida son unos anfitriones maravillosos que hacen que te sientas como en casa. Las terrazas son el lugar perfecto para relajarse después de un día de turismo." - María G., España [citation:7]</p>
+                </div>
+
+                <h2 class="text-2xl font-bold mt-10 mb-4 text-amber-600">Consejos para tu estancia</h2>
+                <ul class="list-disc pl-6 mb-6 text-gray-700">
+                    <li><strong>Descarga Maps.me:</strong> Tiene mapas sin conexión y la ubicación de Terrazas de Bayona está guardada.</li>
+                    <li><strong>Lleva efectivo:</strong> Preferiblemente euros o dólares para cambiar a peso cubano.</li>
+                    <li><strong>Pregunta a Alexander e Isaida:</strong> Ellos saben los mejores lugares para comer, los más auténticos y económicos.</li>
+                    <li><strong>Aprovecha las terrazas:</strong> No te quedes encerrado en la habitación. Las terrazas son el alma de la casa.</li>
+                </ul>
+
+                <div class="bg-amber-600 text-white p-6 rounded-xl my-8">
+                    <h3 class="text-xl font-bold mb-2">¿Quieres vivir esta experiencia?</h3>
+                    <p class="mb-4">Reserva directa en la web de Terrazas de Bayona y asegura el mejor precio. Además, si dices que vienes de parte de El Resolvito, te hacemos un descuentito ;)</p>
+                    <a href="https://reservaterrazasdebayona59.com/" target="_blank" class="inline-block bg-white text-amber-600 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition">Reservar ahora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mismos contenedores -->
+    <div id="image-modal-container"></div>
+    <div id="cart-sidebar-container"></div>
+    <div id="checkout-modal-container"></div>
+    <div id="footer-container"></div>
+    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none"><p id="cartToastMessage"></p></div>
+
+    <script>
+        async function loadComponent(elementId, path) {
+            try { const res = await fetch(path); const html = await res.text(); document.getElementById(elementId).innerHTML = html; } catch (error) { console.error(error); }
+        }
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadComponent('header-container', '../components/header.html');
+            await loadComponent('mobile-menu-container', '../components/mobile-menu.html');
+            await loadComponent('floating-buttons-container', '../components/floating-buttons.html');
+            await loadComponent('image-modal-container', '../components/image-modal.html');
+            await loadComponent('cart-sidebar-container', '../components/cart-sidebar.html');
+            await loadComponent('checkout-modal-container', '../components/checkout-modal.html');
+            await loadComponent('footer-container', '../components/footer.html');
+            if (typeof initializeAfterComponents === 'function') initializeAfterComponents();
+        });
+    </script>
+</body>
+</html>
