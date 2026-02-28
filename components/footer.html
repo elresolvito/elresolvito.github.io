@@ -1,192 +1,46 @@
-<!-- Footer Component - Versión Mejorada -->
-<footer class="site-footer">
-    <div class="container mx-auto px-4 py-12">
-        <!-- Grid principal del footer -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-            
-            <!-- Columna 1: Info de El Resolvito -->
-            <div class="footer-col">
-                <h3 class="text-xl font-bold text-cuban-green mb-4">El Resolvito</h3>
-                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4">
-                    Tu solución integral en La Habana. Productos, servicios y alojamientos de calidad para toda la comunidad.
-                </p>
-                
-                <!-- Redes Sociales -->
-                <div class="flex gap-3">
-                    <a href="https://instagram.com/elresolvito.habana" 
-                       target="_blank" 
-                       class="w-10 h-10 bg-cuban-green/10 rounded-full flex items-center justify-center text-cuban-green hover:bg-cuban-green hover:text-white transition-all duration-300">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://wa.me/5356382909" 
-                       target="_blank" 
-                       class="w-10 h-10 bg-cuban-green/10 rounded-full flex items-center justify-center text-cuban-green hover:bg-cuban-green hover:text-white transition-all duration-300">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                    <a href="mailto:elresolvito@gmail.com" 
-                       class="w-10 h-10 bg-cuban-green/10 rounded-full flex items-center justify-center text-cuban-green hover:bg-cuban-green hover:text-white transition-all duration-300">
-                        <i class="fas fa-envelope"></i>
-                    </a>
+<!-- components/footer.html -->
+<footer class="bg-cuban-dark text-white py-12">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-10 h-10 bg-cuban-green rounded-full flex items-center justify-center text-white font-bold text-xl">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3 class="font-bold text-xl">El Resolvito</h3>
                 </div>
+                <p class="text-gray-300 text-sm">Tu solución integral en La Habana. Productos, servicios y alojamientos de calidad.</p>
             </div>
-            
-            <!-- Columna 2: Enlaces Rápidos -->
-            <div class="footer-col">
-                <h4 class="text-lg font-bold text-cuban-green mb-4">Enlaces Rápidos</h4>
-                <ul class="space-y-2">
-                    <li>
-                        <a href="index.html" class="text-gray-600 dark:text-gray-400 hover:text-cuban-green transition flex items-center gap-2">
-                            <i class="fas fa-chevron-right text-xs"></i>
-                            <span>Inicio</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="tienda.html" class="text-gray-600 dark:text-gray-400 hover:text-cuban-green transition flex items-center gap-2">
-                            <i class="fas fa-chevron-right text-xs"></i>
-                            <span>Tienda</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="servicios.html" class="text-gray-600 dark:text-gray-400 hover:text-cuban-green transition flex items-center gap-2">
-                            <i class="fas fa-chevron-right text-xs"></i>
-                            <span>Servicios</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="ofertas.html" class="text-gray-600 dark:text-gray-400 hover:text-cuban-green transition flex items-center gap-2">
-                            <i class="fas fa-chevron-right text-xs"></i>
-                            <span>Ofertas</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="blog.html" class="text-gray-600 dark:text-gray-400 hover:text-cuban-green transition flex items-center gap-2">
-                            <i class="fas fa-chevron-right text-xs"></i>
-                            <span>Blog</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="reservas.html" class="text-gray-600 dark:text-gray-400 hover:text-cuban-green transition flex items-center gap-2">
-                            <i class="fas fa-chevron-right text-xs"></i>
-                            <span>Alojamientos</span>
-                        </a>
-                    </li>
+            <div>
+                <h4 class="font-bold mb-4">Enlaces Rápidos</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li><a href="index.html" class="hover:text-white transition">Inicio</a></li>
+                    <li><a href="tienda.html" class="hover:text-white transition">Tienda</a></li>
+                    <li><a href="servicios.html" class="hover:text-white transition">Servicios</a></li>
+                    <li><a href="ofertas.html" class="hover:text-white transition">Ofertas</a></li>
+                    <li><a href="blog.html" class="hover:text-white transition">Blog</a></li>
+                    <li><a href="reservas.html" class="hover:text-white transition">Alojamientos</a></li>
                 </ul>
             </div>
-            
-            <!-- Columna 3: Contacto -->
-            <div class="footer-col">
-                <h4 class="text-lg font-bold text-cuban-green mb-4">Contacto</h4>
-                <ul class="space-y-3">
-                    <li class="flex items-start gap-3">
-                        <i class="fab fa-whatsapp text-cuban-green mt-1"></i>
-                        <div>
-                            <p class="text-sm font-medium">WhatsApp</p>
-                            <a href="https://wa.me/5356382909" class="text-gray-600 dark:text-gray-400 hover:text-cuban-green text-sm">
-                                +53 5 638 2909
-                            </a>
-                        </div>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <i class="fas fa-envelope text-cuban-green mt-1"></i>
-                        <div>
-                            <p class="text-sm font-medium">Email</p>
-                            <a href="mailto:elresolvito@gmail.com" class="text-gray-600 dark:text-gray-400 hover:text-cuban-green text-sm">
-                                elresolvito@gmail.com
-                            </a>
-                        </div>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <i class="fas fa-map-marker-alt text-cuban-green mt-1"></i>
-                        <div>
-                            <p class="text-sm font-medium">Ubicación</p>
-                            <p class="text-gray-600 dark:text-gray-400 text-sm">
-                                La Habana Vieja, Cuba
-                            </p>
-                        </div>
-                    </li>
+            <div>
+                <h4 class="font-bold mb-4">Contacto</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li class="flex items-center gap-2"><i class="fab fa-whatsapp text-cuban-yellow"></i> +53 5 638 2909</li>
+                    <li class="flex items-center gap-2"><i class="fas fa-envelope text-cuban-yellow"></i> elresolvito@gmail.com</li>
+                    <li class="flex items-center gap-2"><i class="fas fa-map-marker-alt text-cuban-yellow"></i> La Habana Vieja, Cuba</li>
                 </ul>
             </div>
-            
-            <!-- Columna 4: Servicio Destacado - Contador -->
-            <div class="footer-col bg-gradient-to-br from-cuban-blue/5 to-cuban-green/5 rounded-xl p-4 border border-cuban-blue/20">
-                <div class="flex items-center gap-3 mb-3">
-                    <div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 border-2 border-cuban-yellow shadow-md">
-                        <img src="https://i.postimg.cc/TPPT8GM9/photo-2026-02-15-19-00-24.jpg" 
-                             alt="Contador" 
-                             class="w-full h-full object-cover">
-                    </div>
-                    <div>
-                        <span class="bg-cuban-yellow text-cuban-dark text-xs px-2 py-1 rounded-full font-bold inline-block mb-1">
-                            📊 DESTACADO
-                        </span>
-                        <h4 class="font-bold text-cuban-blue">Contador / Tenedor</h4>
-                    </div>
+            <div>
+                <h4 class="font-bold mb-4">Síguenos</h4>
+                <div class="flex gap-4">
+                    <a href="https://instagram.com/elresolvito.habana" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-xl"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/5356382909" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-xl"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-xl"><i class="fab fa-facebook-f"></i></a>
                 </div>
-                
-                <p class="text-xs text-gray-600 dark:text-gray-400 mb-3 leading-relaxed">
-                    Gestión ONAT • Registros • Nómina • Costos • Declaración Jurada
-                </p>
-                
-                <div class="flex flex-wrap gap-2 mb-3">
-                    <span class="bg-cuban-blue/10 text-cuban-blue text-xs px-2 py-1 rounded-full">Profesional</span>
-                    <span class="bg-cuban-green/10 text-cuban-green text-xs px-2 py-1 rounded-full">Confiable</span>
-                    <span class="bg-cuban-yellow/10 text-cuban-dark text-xs px-2 py-1 rounded-full">TCP</span>
-                </div>
-                
-                <a href="https://wa.me/5356382909?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Contador%20%2F%20Tenedor%20de%20Libros" 
-                   class="inline-flex items-center gap-2 text-cuban-blue hover:text-cuban-green transition text-sm font-medium">
-                    <i class="fab fa-whatsapp"></i>
-                    Contactar: 56382909
-                    <i class="fas fa-arrow-right text-xs"></i>
-                </a>
             </div>
         </div>
-        
-        <!-- Barra inferior con copyright y enlaces legales -->
-        <div class="border-t border-gray-200 dark:border-gray-800 pt-6 mt-6">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-sm text-gray-500 dark:text-gray-500">
-                    © 2024 El Resolvito. Todos los derechos reservados.
-                </p>
-                <div class="flex gap-6 text-sm">
-                    <a href="#" class="text-gray-500 hover:text-cuban-green transition">Términos y Condiciones</a>
-                    <a href="#" class="text-gray-500 hover:text-cuban-green transition">Política de Privacidad</a>
-                </div>
-            </div>
+        <div class="border-t border-white/20 pt-8 text-center text-gray-400 text-sm">
+            <p>&copy; 2026 El Resolvito. Todos los derechos reservados. Hecho con ❤️ en La Habana.</p>
         </div>
     </div>
 </footer>
-
-<!-- Estilos específicos del footer (para asegurar que se vea bien) -->
-<style>
-    /* Asegurar que el footer use los colores correctos en modo oscuro */
-    body.night-mode .site-footer {
-        background-color: #0a0a12 !important;
-        border-top: 1px solid #2a2a3a;
-    }
-    
-    body.night-mode .footer-col .text-gray-600 {
-        color: #9a9ab0 !important;
-    }
-    
-    body.night-mode .border-gray-200 {
-        border-color: #2a2a3a !important;
-    }
-    
-    body.night-mode .bg-cuban-blue\/5 {
-        background-color: rgba(2, 119, 189, 0.1) !important;
-    }
-    
-    body.night-mode .bg-cuban-green\/5 {
-        background-color: rgba(46, 125, 50, 0.1) !important;
-    }
-    
-    /* Transiciones suaves */
-    .footer-col a, .footer-col .transition {
-        transition: all 0.3s ease;
-    }
-    
-    .footer-col a:hover {
-        transform: translateX(5px);
-    }
-</style>
