@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
     
     <script>
         tailwind.config = {
@@ -28,100 +29,15 @@
         }
     </script>
     
-    <style>
-        body { font-family: 'Open Sans', sans-serif; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
-        .btn-whatsapp { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); }
-        .cart-slide { transition: transform 0.3s ease-in-out; }
-        .cart-open { transform: translateY(0) !important; }
-        
-        /* Estilos para el carrusel */
-        .carousel-container {
-            position: relative;
-            overflow: hidden;
-            border-radius: 1rem;
-        }
-        
-        .carousel-track {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-        
-        .carousel-slide {
-            flex: 0 0 100%;
-            padding: 1rem;
-        }
-        
-        .carousel-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            z-index: 10;
-        }
-        
-        .carousel-button:hover {
-            background: white;
-            transform: translateY(-50%) scale(1.1);
-        }
-        
-        .carousel-prev { left: 10px; }
-        .carousel-next { right: 10px; }
-        
-        .carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 1rem;
-        }
-        
-        .carousel-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #d1d5db;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .carousel-dot.active {
-            background: #2E7D32;
-            transform: scale(1.2);
-        }
-        
-        body.night-mode { background-color: #0f0f1a; color: #e0e0e0; }
-        body.night-mode .bg-white { background-color: #16213e !important; color: #e0e0e0 !important; }
-        body.night-mode .bg-gray-50 { background-color: #1a1a2e !important; }
-        body.night-mode header { background-color: #16213e !important; }
-        body.night-mode .carousel-button { background: #2a2a3a; color: white; }
-        body.night-mode .carousel-dot { background: #4a4a5a; }
-        body.night-mode .carousel-dot.active { background: #4CAF50; }
-    </style>
 </head>
-<body class="bg-white text-gray-800 pb-20">
+<body class="bg-white text-gray-800">
 
-    <!-- Transición súper sutil -->
+    <!-- Transición suave entre páginas -->
     <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
 
-    <!-- Botones flotantes -->
-    <a href="https://wa.me/5356382909" target="_blank" class="fixed bottom-20 right-4 z-40 btn-whatsapp text-white p-4 rounded-full shadow-lg hover:scale-110 transition">
-        <i class="fab fa-whatsapp text-2xl"></i>
-    </a>
-    <button onclick="toggleCart()" class="fixed bottom-4 right-4 z-40 bg-cuban-green text-white p-4 rounded-full shadow-lg hover:scale-110 transition">
-        <i class="fas fa-shopping-cart text-xl"></i>
-        <span id="cartCount" class="absolute -top-1 -right-1 bg-cuban-yellow text-cuban-dark text-sm font-bold rounded-full w-6 h-6 flex items-center justify-center hidden">0</span>
-    </button>
-
-    <!-- Header -->
+    <!-- ============================================ -->
+    <!-- HEADER (UNIFICADO) -->
+    <!-- ============================================ -->
     <header class="sticky top-0 z-50 bg-white shadow-md">
         <div class="container mx-auto px-4 py-3">
             <div class="flex items-center justify-between">
@@ -144,14 +60,68 @@
                     <a href="reservas.html" class="hover:text-cuban-green font-medium">Alojamientos</a>
                 </nav>
 
-                <button onclick="toggleCart()" class="p-2 hover:bg-gray-100 rounded-lg relative">
-                    <i class="fas fa-shopping-cart text-2xl text-cuban-green"></i>
-                </button>
+                <div class="header-actions flex items-center gap-2">
+                    <button class="theme-toggle w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-cuban-green hover:text-white transition" onclick="toggleDayNight()" title="Cambiar modo">
+                        <span id="headerThemeIcon">☀️</span>
+                    </button>
+                    <button onclick="toggleCart()" class="p-2 hover:bg-gray-100 rounded-lg relative">
+                        <i class="fas fa-shopping-cart text-2xl text-cuban-green"></i>
+                        <span id="cartCount" class="cart-badge hidden">0</span>
+                    </button>
+                    <button class="mobile-menu-btn lg:hidden w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100" onclick="toggleMenu()">
+                        <i class="fas fa-bars text-2xl text-cuban-green"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Hero -->
+    <!-- ============================================ -->
+    <!-- MENÚ MÓVIL -->
+    <!-- ============================================ -->
+    <div id="mobileMenu" class="fixed inset-0 bg-black/50 z-50 hidden" onclick="toggleMenu()">
+        <div class="bg-white w-80 max-w-sm h-full p-6" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-xl font-bold text-cuban-green">Menú</h2>
+                <button onclick="toggleMenu()" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-cuban-green hover:text-white transition">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <nav class="space-y-2">
+                <a href="index.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-home w-6 text-cuban-green"></i><span>Inicio</span></a>
+                <a href="tienda.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-shopping-basket w-6 text-cuban-green"></i><span>Tienda</span></a>
+                <a href="servicios.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-tools w-6 text-cuban-green"></i><span>Servicios</span></a>
+                <a href="ofertas.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-percent w-6 text-cuban-green"></i><span>Ofertas</span></a>
+                <a href="blog.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-newspaper w-6 text-cuban-green"></i><span>Blog</span></a>
+                <a href="reservas.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-bed w-6 text-cuban-green"></i><span>Alojamientos</span></a>
+            </nav>
+            <div class="absolute bottom-6 left-6 right-6">
+                <div class="border-t border-gray-200 pt-4">
+                    <p class="text-sm text-gray-500 mb-3">Contáctanos</p>
+                    <a href="https://wa.me/5356382909" class="flex items-center gap-2 text-cuban-green hover:text-cuban-green-dark transition">
+                        <i class="fab fa-whatsapp text-xl"></i><span class="text-sm font-medium">+53 5 638 2909</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- BOTONES FLOTANTES (UNIFICADOS) -->
+    <!-- ============================================ -->
+    <div class="floating-actions">
+        <a href="https://wa.me/5356382909" target="_blank" class="floating-btn whatsapp" data-tooltip="Contactar por WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <button class="floating-btn cart" onclick="toggleCart()" data-tooltip="Ver carrito">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="floatingCartCount" class="cart-badge hidden">0</span>
+        </button>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HERO (CONTENIDO ESPECÍFICO DE OFERTAS) -->
+    <!-- ============================================ -->
     <section class="bg-gradient-to-br from-chancla-azul to-chancla-rosa text-white py-16 px-4">
         <div class="container mx-auto text-center">
             <span class="inline-block bg-white/20 px-4 py-1 rounded-full text-sm font-bold mb-4 animate-pulse">
@@ -166,8 +136,8 @@
     </section>
 
     <!-- ============================================ -->
-    <!-- CARRUSEL DE CHANCLAS                         -->
- 
+    <!-- CARRUSEL DE CHANCLAS -->
+    <!-- ============================================ -->
     <section class="py-12">
         <div class="container mx-auto px-4">
             
@@ -181,7 +151,7 @@
                 
                 <!-- Slides -->
                 <div id="carouselTrack" class="carousel-track">
-                    <!-- Las slides se generan dinámicamente con JavaScript -->
+                    <!-- Las slides se generan dinámicamente -->
                 </div>
                 
                 <!-- Botones de navegación -->
@@ -193,9 +163,7 @@
                 </button>
                 
                 <!-- Dots indicadores -->
-                <div id="carouselDots" class="carousel-dots">
-                    <!-- Se generan dinámicamente -->
-                </div>
+                <div id="carouselDots" class="carousel-dots"></div>
                 
             </div>
             
@@ -227,31 +195,26 @@
     </section>
 
     <!-- ============================================ -->
-    <!-- INFORMACIÓN ADICIONAL DE LA TIENDA           -->
+    <!-- INFORMACIÓN ADICIONAL -->
     <!-- ============================================ -->
     <section class="py-12 bg-gradient-to-r from-cuban-green to-cuban-dark text-white">
         <div class="container mx-auto px-4">
-            
             <div class="grid md:grid-cols-3 gap-6 text-center">
-                
                 <div class="bg-white/10 backdrop-blur rounded-xl p-6">
                     <div class="text-4xl mb-3">🚚</div>
                     <h4 class="font-bold text-xl mb-2">Envío a domicilio</h4>
                     <p class="opacity-90">Solo $1000 en La Habana Vieja.</p>
                 </div>
-                
                 <div class="bg-white/10 backdrop-blur rounded-xl p-6">
                     <div class="text-4xl mb-3">💰</div>
                     <h4 class="font-bold text-xl mb-2">Precios especiales</h4>
                     <p class="opacity-90">Ofertas exclusivas para revendedores y negocios</p>
                 </div>
-                
                 <div class="bg-white/10 backdrop-blur rounded-xl p-6">
                     <div class="text-4xl mb-3">🛒</div>
                     <h4 class="font-bold text-xl mb-2">Compra fácil</h4>
                     <p class="opacity-90">Agrega al carrito y pide por WhatsApp en 2 minutos</p>
                 </div>
-                
             </div>
             
             <div class="mt-8 text-center">
@@ -260,58 +223,135 @@
                     Ver más productos en la tienda
                 </a>
             </div>
-            
         </div>
     </section>
 
     <!-- ============================================ -->
-    <!-- SECCIÓN PARA FUTURAS OFERTAS                 -->
+    <!-- MODAL DE IMAGEN -->
     <!-- ============================================ -->
-    <section class="py-12 bg-gray-50">
-        <div class="container mx-auto px-4 text-center">
-            <h3 class="text-2xl font-bold mb-4">📢 Próximas ofertas mayoristas</h3>
-            <p class="text-gray-600 mb-6">Estamos preparando nuevos productos para ti. Mantente atento.</p>
-            <div class="flex justify-center gap-4">
-                <div class="w-16 h-16 bg-gray-200 rounded-lg animate-pulse"></div>
-                <div class="w-16 h-16 bg-gray-200 rounded-lg animate-pulse delay-100"></div>
-                <div class="w-16 h-16 bg-gray-200 rounded-lg animate-pulse delay-200"></div>
-                <div class="w-16 h-16 bg-gray-200 rounded-lg animate-pulse delay-300"></div>
-            </div>
+    <div id="imageModal" class="fixed inset-0 bg-black/95 z-[60] hidden flex items-center justify-center p-4" onclick="closeImageModal()">
+        <div class="relative max-w-3xl w-full" onclick="event.stopPropagation()">
+            <button onclick="closeImageModal()" class="absolute -top-12 right-0 text-white text-3xl hover:text-gray-300">
+                <i class="fas fa-times"></i>
+            </button>
+            <img id="modalImage" src="" alt="" class="w-full max-h-[80vh] object-contain rounded-lg">
+            <p id="modalImageName" class="text-white text-center mt-4 text-xl font-bold"></p>
         </div>
-    </section>
+    </div>
 
-    <!-- Carrito -->
-    <div id="cartOverlay" class="fixed inset-0 bg-black/50 z-50 hidden" onclick="toggleCart()"></div>
-    <div id="cartSidebar" class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl z-50 transform translate-y-full cart-slide max-h-[85vh] flex flex-col">
+    <!-- ============================================ -->
+    <!-- CARRITO LATERAL (UNIFICADO) -->
+    <!-- ============================================ -->
+    <div id="cartOverlay" class="fixed inset-0 bg-black/50 z-[100] hidden" onclick="toggleCart()"></div>
+    <div id="cartSidebar" class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl z-[101] transform translate-y-full cart-slide max-h-[85vh] flex flex-col">
         <div class="p-4 border-b flex justify-between items-center bg-cuban-green text-white rounded-t-3xl">
-            <h3 class="font-bold text-lg"><i class="fas fa-shopping-cart mr-2"></i>Tu Pedido</h3>
-            <button onclick="toggleCart()" class="w-8 h-8 bg-white/20 rounded-full"><i class="fas fa-times"></i></button>
+            <h3 class="font-bold text-lg"><i class="fas fa-shopping-cart mr-2"></i>Tu Carrito</h3>
+            <button onclick="toggleCart()" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition"><i class="fas fa-times"></i></button>
         </div>
         <div id="cartItems" class="flex-1 overflow-y-auto p-4 space-y-4"></div>
         <div class="border-t p-4 bg-gray-50">
             <div class="space-y-2 mb-4">
-                <div class="flex justify-between text-sm"><span>Subtotal:</span><span id="cartSubtotal">$0</span></div>
-                <div class="flex justify-between text-sm"><span>Envío:</span><span id="cartShipping">$200</span></div>
-                <div class="border-t pt-2 flex justify-between text-lg font-bold"><span>Total:</span><span id="cartTotal" class="text-cuban-green">$200</span></div>
+                <div class="flex justify-between text-sm">
+                    <span>Subtotal:</span>
+                    <span id="cartSubtotal">$0</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                    <span>Envío:</span>
+                    <span id="cartShipping">$200</span>
+                </div>
+                <!-- Barra de progreso -->
+                <div class="mt-3">
+                    <div id="promoProgressContainer" class="w-full bg-gray-200 rounded-full h-2.5">
+                        <div id="promoProgressBar" class="bg-cuban-green h-2.5 rounded-full" style="width: 0%;"></div>
+                    </div>
+                    <p id="progressText" class="text-xs text-gray-500 mt-1">Añade más productos para mejorar el envío</p>
+                </div>
+                <div class="border-t pt-2 flex justify-between text-lg font-bold">
+                    <span>Total:</span>
+                    <span id="cartTotal" class="text-cuban-green">$0</span>
+                </div>
             </div>
-            <button onclick="checkout()" class="w-full btn-whatsapp text-white py-3 rounded-xl font-bold">
-                <i class="fab fa-whatsapp mr-2"></i>Enviar pedido por WhatsApp
+            <button onclick="checkout()" class="w-full btn-whatsapp text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2">
+                <i class="fab fa-whatsapp"></i> Enviar pedido por WhatsApp
             </button>
+            <p class="text-xs text-center text-gray-500 mt-3">
+                <i class="fas fa-lock mr-1"></i> Pedido seguro al 5356382909
+            </p>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-cuban-dark text-white py-8">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2026 El Resolvito. Todos los derechos reservados.</p>
+    <!-- ============================================ -->
+    <!-- FOOTER (UNIFICADO Y COMPLETO) -->
+    <!-- ============================================ -->
+    <footer class="bg-cuban-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-10 h-10 bg-cuban-green rounded-full flex items-center justify-center text-white font-bold text-xl">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <h3 class="font-bold text-xl">El Resolvito</h3>
+                    </div>
+                    <p class="text-gray-300 text-sm">Tu solución integral en La Habana. Productos, servicios y alojamientos de calidad.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Enlaces Rápidos</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="index.html" class="hover:text-white transition">Inicio</a></li>
+                        <li><a href="tienda.html" class="hover:text-white transition">Tienda</a></li>
+                        <li><a href="servicios.html" class="hover:text-white transition">Servicios</a></li>
+                        <li><a href="ofertas.html" class="hover:text-white transition">Ofertas</a></li>
+                        <li><a href="blog.html" class="hover:text-white transition">Blog</a></li>
+                        <li><a href="reservas.html" class="hover:text-white transition">Alojamientos</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contacto</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li class="flex items-center gap-2"><i class="fab fa-whatsapp text-cuban-yellow"></i> +53 5 638 2909</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-envelope text-cuban-yellow"></i> elresolvito@gmail.com</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-map-marker-alt text-cuban-yellow"></i> La Habana Vieja, Cuba</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Síguenos</h4>
+                    <div class="flex gap-4">
+                        <a href="https://instagram.com/elresolvito.habana" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-xl"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/5356382909" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-xl"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-xl"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/20 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2026 El Resolvito. Todos los derechos reservados. Hecho con ❤️ en La Habana.</p>
+            </div>
         </div>
     </footer>
 
+    <!-- Toast de notificación -->
+    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
+        <p id="cartToastMessage">Producto añadido</p>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SCRIPT UNIFICADO DEL CARRITO Y FUNCIONES GLOBALES -->
+    <!-- ============================================ -->
     <script>
         // ============================================
-        // ARRAY DE IMÁGENES DE CHANCLAS
+        // VARIABLES GLOBALES Y CONFIGURACIÓN
         // ============================================
-        // Para añadir más imágenes, solo agrega la URL aquí
+        let cart = JSON.parse(localStorage.getItem('elResolvitoCart')) || [];
+        const WHATSAPP_NUMBER = '5356382909';
+        const FREE_SHIPPING_MIN = 5000;
+
+        const SHIPPING_RANGES = [
+            { max: 2000, fee: 200, name: 'Estándar' },
+            { max: 5000, fee: 150, name: 'Económico' },
+            { max: Infinity, fee: 0, name: 'Gratis' }
+        ];
+
+        // Array de imágenes de chanclas
         const chanclasImages = [
             "https://i.postimg.cc/Bn5GHz54/chancjas_negras_1(1).jpg",
             "https://i.postimg.cc/2Sdfhtdm/chanclas_beige(1).jpg",
@@ -326,31 +366,264 @@
         ];
         
         let currentSlide = 0;
-        let cart = [];
 
         // ============================================
-        // INICIALIZACIÓN
+        // FUNCIONES DEL CARRITO (UNIFICADAS)
         // ============================================
-        document.addEventListener('DOMContentLoaded', () => {
-            // Cargar carrito
-            const saved = localStorage.getItem('elResolvitoCart');
-            if (saved) cart = JSON.parse(saved);
+        function calculateShipping(subtotal) {
+            for (const range of SHIPPING_RANGES) {
+                if (subtotal <= range.max) {
+                    return range.fee;
+                }
+            }
+            return 200;
+        }
+
+        function getShippingRangeName(subtotal) {
+            for (const range of SHIPPING_RANGES) {
+                if (subtotal <= range.max) {
+                    return range.name;
+                }
+            }
+            return 'Estándar';
+        }
+
+        function addToCart(product) {
+            if (!product || !product.id || !product.nombre || !product.precio) {
+                console.error('Producto inválido', product);
+                return false;
+            }
+
+            const existingItemIndex = cart.findIndex(item => item.id === product.id);
+            
+            if (existingItemIndex !== -1) {
+                cart[existingItemIndex].cantidad += product.cantidad || 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    nombre: product.nombre,
+                    imagen: product.imagen,
+                    precio: product.precio,
+                    cantidad: product.cantidad || 1
+                });
+            }
+
+            saveCart();
             updateCartUI();
+            showCartToast('Producto añadido al carrito');
+            return true;
+        }
+
+        function saveCart() {
+            localStorage.setItem('elResolvitoCart', JSON.stringify(cart));
+        }
+
+        function updateCartQuantity(index, newQuantity) {
+            if (newQuantity <= 0) {
+                removeFromCart(index);
+                return;
+            }
+            cart[index].cantidad = newQuantity;
+            saveCart();
+            updateCartUI();
+            showCartToast('Carrito actualizado');
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            saveCart();
+            updateCartUI();
+            showCartToast('Producto eliminado');
+        }
+
+        function updateCartUI() {
+            const totalItems = cart.reduce((sum, item) => sum + (item.cantidad || 0), 0);
+            const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
+            const shipping = calculateShipping(subtotal);
+            const total = subtotal + shipping;
             
-            // Inicializar carrusel
-            initCarousel();
-            
-            // Transición
-            document.getElementById('pageFade').classList.add('opacity-0');
-            if (localStorage.getItem('nightMode') === 'true') document.body.classList.add('night-mode');
-        });
+            // Actualizar contadores
+            document.querySelectorAll('#cartCount, #floatingCartCount').forEach(el => {
+                if (el) {
+                    el.textContent = totalItems;
+                    if (totalItems > 0) {
+                        el.classList.remove('hidden');
+                        el.classList.add('badge-pop');
+                        setTimeout(() => el.classList.remove('badge-pop'), 300);
+                    } else {
+                        el.classList.add('hidden');
+                    }
+                }
+            });
+
+            // Actualizar items
+            const cartItemsContainer = document.getElementById('cartItems');
+            if (cartItemsContainer) {
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = '<div class="text-center py-8 text-gray-500"><i class="fas fa-shopping-cart text-4xl mb-3 opacity-30"></i><p>Tu carrito está vacío</p></div>';
+                } else {
+                    cartItemsContainer.innerHTML = cart.map((item, index) => `
+                        <div class="flex gap-3 bg-gray-50 p-3 rounded-lg">
+                            <img src="${item.imagen || 'https://via.placeholder.com/80'}" class="w-16 h-16 object-contain bg-white rounded-lg" onerror="this.src='https://via.placeholder.com/80'">
+                            <div class="flex-1">
+                                <h4 class="font-medium text-sm">${item.nombre}</h4>
+                                <p class="text-cuban-green font-bold">$${item.precio?.toLocaleString()}</p>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <button onclick="updateCartQuantity(${index}, ${(item.cantidad || 1) - 1})" class="w-6 h-6 bg-white rounded shadow text-xs hover:bg-cuban-green hover:text-white transition">-</button>
+                                    <span class="text-sm font-medium">${item.cantidad || 1}</span>
+                                    <button onclick="updateCartQuantity(${index}, ${(item.cantidad || 1) + 1})" class="w-6 h-6 bg-white rounded shadow text-xs hover:bg-cuban-green hover:text-white transition">+</button>
+                                    <button onclick="removeFromCart(${index})" class="ml-auto text-red-500 hover:text-red-700 transition">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            }
+
+            // Actualizar totales
+            const subtotalEl = document.getElementById('cartSubtotal');
+            const shippingEl = document.getElementById('cartShipping');
+            const totalEl = document.getElementById('cartTotal');
+            const progressBar = document.getElementById('promoProgressBar');
+            const progressText = document.getElementById('progressText');
+
+            if (subtotalEl) subtotalEl.textContent = `$${subtotal.toLocaleString()}`;
+            if (shippingEl) {
+                if (shipping === 0) {
+                    shippingEl.innerHTML = '<span class="text-green-600 font-bold">¡GRATIS!</span>';
+                } else {
+                    shippingEl.textContent = `$${shipping.toLocaleString()}`;
+                }
+            }
+            if (totalEl) totalEl.textContent = `$${total.toLocaleString()}`;
+
+            // Barra de progreso
+            if (progressBar && progressText) {
+                const progressPercent = Math.min(100, (subtotal / FREE_SHIPPING_MIN) * 100);
+                progressBar.style.width = `${progressPercent}%`;
+                
+                if (subtotal >= FREE_SHIPPING_MIN) {
+                    progressText.innerHTML = '🎉 ¡Envío GRATIS aplicado!';
+                } else {
+                    const remaining = FREE_SHIPPING_MIN - subtotal;
+                    const nextRange = subtotal < 2000 ? 'Estándar ($200)' : 'Económico ($150)';
+                    progressText.innerHTML = `🚚 Envío ${nextRange}. Faltan $${remaining.toLocaleString()} para envío GRATIS.`;
+                }
+            }
+        }
+
+        function showCartToast(message) {
+            const toast = document.getElementById('cartToast');
+            const msgEl = document.getElementById('cartToastMessage');
+            if (!toast || !msgEl) return;
+
+            msgEl.textContent = message;
+            toast.classList.add('opacity-100');
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+
+            clearTimeout(window.toastTimeout);
+            window.toastTimeout = setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 2500);
+        }
+
+        function toggleCart() {
+            const sidebar = document.getElementById('cartSidebar');
+            const overlay = document.getElementById('cartOverlay');
+            if (sidebar && overlay) {
+                sidebar.classList.toggle('cart-open');
+                overlay.classList.toggle('hidden');
+                document.body.style.overflow = sidebar.classList.contains('cart-open') ? 'hidden' : '';
+            }
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                showCartToast('El carrito está vacío');
+                return;
+            }
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
+            const shipping = calculateShipping(subtotal);
+            const total = subtotal + shipping;
+
+            let message = `*PEDIDO - EL RESOLVITO*\n\n`;
+            message += `🛒 *TU COMPRA:*\n`;
+            cart.forEach(item => {
+                message += `• ${item.nombre} x${item.cantidad} = $${(item.precio * item.cantidad).toLocaleString()}\n`;
+            });
+            message += `\n💰 *DESGLOSE:*\n`;
+            message += `- Subtotal: $${subtotal.toLocaleString()}\n`;
+            message += `- Envío (${getShippingRangeName(subtotal)}): ${shipping === 0 ? 'GRATIS' : '$' + shipping.toLocaleString()}\n`;
+            message += `- *TOTAL: $${total.toLocaleString()}*\n\n`;
+            message += `📍 *ENTREGA:* La Habana Vieja\n`;
+            message += `📞 *CONTACTO:* 5356382909\n\n`;
+            message += `_Gracias por comprar en El Resolvito._`;
+
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+        }
 
         // ============================================
-        // FUNCIONES DEL CARRUSEL
+        // FUNCIONES DE UI (Modo noche, menú, modal, carrusel)
         // ============================================
+        function initDayNight() {
+            const hour = new Date().getHours();
+            const isNight = hour < 6 || hour >= 18;
+            const savedMode = localStorage.getItem('nightMode');
+            
+            if (savedMode === 'true' || (savedMode === null && isNight)) {
+                document.body.classList.add('night-mode');
+                document.getElementById('headerThemeIcon').textContent = '🌙';
+            } else {
+                document.getElementById('headerThemeIcon').textContent = '☀️';
+            }
+        }
+
+        function toggleDayNight() {
+            document.body.classList.toggle('night-mode');
+            const isNight = document.body.classList.contains('night-mode');
+            document.getElementById('headerThemeIcon').textContent = isNight ? '🌙' : '☀️';
+            localStorage.setItem('nightMode', isNight);
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            if (menu) {
+                menu.classList.toggle('hidden');
+                document.body.style.overflow = menu.classList.contains('hidden') ? '' : 'hidden';
+            }
+        }
+
+        function openImageModal(src, name) {
+            const modal = document.getElementById('imageModal');
+            const img = document.getElementById('modalImage');
+            const nameEl = document.getElementById('modalImageName');
+            
+            if (modal && img && nameEl) {
+                img.src = src;
+                nameEl.textContent = name || 'Imagen';
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Funciones del carrusel
         function initCarousel() {
             const track = document.getElementById('carouselTrack');
             const dotsContainer = document.getElementById('carouselDots');
+            
+            if (!track || !dotsContainer) return;
             
             // Generar slides
             track.innerHTML = chanclasImages.map((img, index) => `
@@ -358,7 +631,7 @@
                     <div class="bg-white rounded-xl shadow-lg p-4">
                         <img src="${img}" 
                              alt="Chancla ${index + 1}" 
-                             class="w-full h-64 object-contain mx-auto"
+                             class="w-full h-64 object-contain mx-auto cursor-pointer"
                              onclick="openImageModal('${img}', 'Chancla ${index + 1}')">
                         <p class="text-center mt-2 text-gray-600">Modelo ${index + 1}</p>
                     </div>
@@ -375,7 +648,9 @@
         
         function updateCarousel() {
             const track = document.getElementById('carouselTrack');
-            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            if (track) {
+                track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
             
             // Actualizar dots
             document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
@@ -399,158 +674,47 @@
         }
 
         // ============================================
-        // MODAL DE IMAGEN
-        // ============================================
-        function openImageModal(src, name) {
-            // Si no existe el modal, lo creamos
-            if (!document.getElementById('imageModal')) {
-                const modal = document.createElement('div');
-                modal.id = 'imageModal';
-                modal.className = 'fixed inset-0 bg-black/95 z-[60] hidden flex items-center justify-center p-4';
-                modal.onclick = closeImageModal;
-                modal.innerHTML = `
-                    <div class="relative max-w-3xl w-full" onclick="event.stopPropagation()">
-                        <button onclick="closeImageModal()" class="absolute -top-12 right-0 text-white text-3xl hover:text-gray-300">
-                            <i class="fas fa-times"></i>
-                        </button>
-                        <img id="modalImage" src="" alt="" class="w-full max-h-[80vh] object-contain rounded-lg">
-                        <p id="modalImageName" class="text-white text-center mt-4 text-xl font-bold"></p>
-                    </div>
-                `;
-                document.body.appendChild(modal);
-            }
-            
-            const modal = document.getElementById('imageModal');
-            const img = document.getElementById('modalImage');
-            const nameEl = document.getElementById('modalImageName');
-            
-            img.src = src;
-            nameEl.textContent = name || 'Chancla';
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeImageModal() {
-            const modal = document.getElementById('imageModal');
-            if (modal) {
-                modal.classList.add('hidden');
-                document.body.style.overflow = '';
-            }
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeImageModal();
-        });
-
-        // ============================================
-        // FUNCIONES DEL CARRITO
-        // ============================================
-        function addToCart(name, price, image) {
-            const existing = cart.find(item => item.name === name);
-            if (existing) {
-                existing.quantity++;
-            } else {
-                cart.push({name, price, image, quantity: 1});
-            }
-            localStorage.setItem('elResolvitoCart', JSON.stringify(cart));
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-            document.getElementById('cartCount').textContent = count;
-            document.getElementById('cartCount').classList.toggle('hidden', count === 0);
-            
-            const container = document.getElementById('cartItems');
-            if (cart.length === 0) {
-                container.innerHTML = '<div class="text-center py-8 text-gray-500"><i class="fas fa-shopping-cart text-4xl mb-3 opacity-30"></i><p>Carrito vacío</p></div>';
-            } else {
-                container.innerHTML = cart.map(item => `
-                    <div class="flex gap-3 bg-gray-50 p-3 rounded-lg">
-                        <img src="${item.image}" class="w-16 h-16 object-cover rounded-lg">
-                        <div class="flex-1">
-                            <h4 class="font-medium text-sm">${item.name}</h4>
-                            <p class="text-cuban-green font-bold">$${item.price}</p>
-                            <div class="flex items-center gap-2 mt-1">
-                                <button onclick="updateQty('${item.name}', -1)" class="w-6 h-6 bg-white rounded shadow text-xs">-</button>
-                                <span class="text-sm font-medium">${item.quantity}</span>
-                                <button onclick="updateQty('${item.name}', 1)" class="w-6 h-6 bg-white rounded shadow text-xs">+</button>
-                                <button onclick="removeItem('${item.name}')" class="ml-auto text-red-500"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
-            }
-            
-            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            const shipping = subtotal > 5000 ? 0 : 200;
-            document.getElementById('cartSubtotal').textContent = `$${subtotal}`;
-            document.getElementById('cartShipping').textContent = shipping === 0 ? 'Gratis' : `$${shipping}`;
-            document.getElementById('cartTotal').textContent = `$${subtotal + shipping}`;
-        }
-
-        function updateQty(name, delta) {
-            const item = cart.find(i => i.name === name);
-            if (item) {
-                item.quantity += delta;
-                if (item.quantity <= 0) {
-                    cart = cart.filter(i => i.name !== name);
-                }
-                localStorage.setItem('elResolvitoCart', JSON.stringify(cart));
-                updateCartUI();
-            }
-        }
-
-        function removeItem(name) {
-            cart = cart.filter(i => i.name !== name);
-            localStorage.setItem('elResolvitoCart', JSON.stringify(cart));
-            updateCartUI();
-        }
-
-        function toggleCart() {
-            document.getElementById('cartSidebar').classList.toggle('cart-open');
-            document.getElementById('cartOverlay').classList.toggle('hidden');
-        }
-
-        function checkout() {
-            if (cart.length === 0) return;
-            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            const shipping = subtotal > 5000 ? 0 : 200;
-            let msg = `*Pedido - El Resolvito*\n\n`;
-            cart.forEach(item => msg += `• ${item.name} x${item.quantity} = $${item.price * item.quantity}\n`);
-            msg += `\nSubtotal: $${subtotal}\nEnvío: ${shipping === 0 ? 'Gratis' : '$'+shipping}\n*Total: $${subtotal + shipping}*`;
-            window.open(`https://wa.me/5356382909?text=${encodeURIComponent(msg)}`, '_blank');
-        }
-
-        // ============================================
-        // NAVEGACIÓN SUAVE
+        // INICIALIZACIÓN Y EVENTOS GLOBALES
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
+            initCarousel();
+            initDayNight();
+            updateCartUI();
+            
+            // Quitar fade de entrada
             document.getElementById('pageFade').classList.add('opacity-0');
-            if (localStorage.getItem('nightMode') === 'true') {
-                document.body.classList.add('night-mode');
+        });
+
+        // Cerrar modales con ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeImageModal();
+                if (document.getElementById('cartSidebar')?.classList.contains('cart-open')) {
+                    toggleCart();
+                }
             }
         });
 
+        // Transición suave entre páginas
         document.querySelectorAll('a[href]').forEach(link => {
             const href = link.getAttribute('href');
             
             if (href && !href.startsWith('http') && !href.startsWith('#') && 
                 !href.startsWith('mailto') && !href.startsWith('tel') && 
-                href !== 'javascript:void(0)') {
+                href !== 'javascript:void(0)' && !href.includes('wa.me') && !href.includes('instagram')) {
                 
                 link.addEventListener('click', function(e) {
                     if (e.ctrlKey || e.metaKey || e.button === 1) return;
                     
                     e.preventDefault();
                     
-                    localStorage.setItem('nightMode', document.body.classList.contains('night-mode') ? 'true' : 'false');
+                    localStorage.setItem('nightMode', document.body.classList.contains('night-mode'));
                     
                     document.getElementById('pageFade').classList.remove('opacity-0');
                     
                     setTimeout(() => {
                         window.location.href = href;
-                    }, 200);
+                    }, 150);
                 });
             }
         });
@@ -563,4 +727,3 @@
     </script>
 </body>
 </html>
-
