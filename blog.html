@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Blog - El Resolvito</title>
-    <meta name="description" content="Blog de El Resolvito - Consejos, recetas y novedades.">
+    <title>Blog - El Resolvito | Consejos, Recetas y Noticias en La Habana</title>
+    <meta name="description" content="Blog de El Resolvito: Recetas con productos de nuestra tienda, consejos para emprendedores en Cuba, guías de La Habana y novedades.">
     
     <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -49,82 +49,226 @@
     <div id="floating-buttons-container"></div>
 
     <!-- ============================================ -->
-    <!-- CONTENIDO ESPECÍFICO DE BLOG -->
+    <!-- CONTENIDO DEL BLOG -->
     <!-- ============================================ -->
     
     <!-- Hero -->
     <section class="bg-gradient-to-br from-cuban-green to-cuban-blue text-white py-16 px-4">
         <div class="container mx-auto text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4">Blog El Resolvito</h2>
-            <p class="text-xl opacity-90">Consejos, recetas y novedades</p>
+            <span class="inline-block bg-white/20 px-4 py-1 rounded-full text-sm font-bold mb-4">📖 BLOG</span>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">El Resolvito Blog</h1>
+            <p class="text-xl opacity-90 max-w-2xl mx-auto">Consejos prácticos, recetas con nuestros productos y noticias para la comunidad de La Habana</p>
+        </div>
+    </section>
+
+    <!-- Categorías del Blog -->
+    <section class="py-8 bg-white border-b">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center gap-3">
+                <button class="category-blog-btn px-5 py-2 bg-cuban-green text-white rounded-full text-sm font-bold">Todos</button>
+                <button class="category-blog-btn px-5 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-bold hover:bg-gray-200 transition">🍳 Recetas</button>
+                <button class="category-blog-btn px-5 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-bold hover:bg-gray-200 transition">📊 Emprendimiento</button>
+                <button class="category-blog-btn px-5 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-bold hover:bg-gray-200 transition">🏠 La Habana</button>
+                <button class="category-blog-btn px-5 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-bold hover:bg-gray-200 transition">🛍️ Productos</button>
+                <button class="category-blog-btn px-5 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-bold hover:bg-gray-200 transition">🏡 Alojamientos</button>
+            </div>
         </div>
     </section>
 
     <!-- Artículos del Blog -->
     <section class="py-12">
         <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
-                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='#'">
-                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <span class="text-xs text-cuban-green font-bold">RECETAS</span>
-                        <h3 class="font-bold text-lg mt-1">Tostadas de Atún en 5 minutos</h3>
-                        <p class="text-gray-600 text-sm mt-2">Una receta rápida y deliciosa usando productos de El Resolvito. Ideal para un almuerzo rápido.</p>
-                        <div class="mt-3 text-cuban-green text-sm font-medium">Leer más →</div>
+            <!-- Artículo destacado -->
+            <div class="mb-12">
+                <div class="bg-gradient-to-r from-cuban-green/10 to-transparent p-6 rounded-2xl mb-6">
+                    <span class="text-cuban-green font-bold text-sm">📌 ARTÍCULO DESTACADO</span>
+                </div>
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden md:flex">
+                    <div class="md:w-2/5 h-64 md:h-auto">
+                        <img src="https://images.unsplash.com/photo-1606787366850-de6330128b1c?w=800&auto=format&fit=crop" 
+                             class="w-full h-full object-cover" 
+                             alt="Receta con atún en lata"
+                             onerror="this.src='https://via.placeholder.com/800x600?text=Receta+con+Atún'">
                     </div>
+                    <div class="md:w-3/5 p-8">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="bg-cuban-green text-white text-xs px-3 py-1 rounded-full font-bold">🍳 RECETA</span>
+                            <span class="text-gray-500 text-sm">15 min · Fácil</span>
+                        </div>
+                        <h2 class="text-3xl font-bold mb-3">3 recetas rápidas con atún en lata (productos de nuestra tienda)</h2>
+                        <p class="text-gray-600 mb-4 text-lg">Aprovecha al máximo nuestras latas de atún con estas recetas fáciles, económicas y deliciosas. Ideal para comidas rápidas sin sacrificar sabor.</p>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="flex items-center gap-2">
+                                <img src="https://ui-avatars.com/api/?name=Ana+Maria&background=2E7D32&color=fff&size=40" class="w-10 h-10 rounded-full">
+                                <div>
+                                    <p class="font-medium text-sm">Ana María</p>
+                                    <p class="text-xs text-gray-500">Chef · 3 min lectura</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="blog/recetas-rapidas-con-atun.html" class="inline-flex items-center gap-2 bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark transition">
+                            Leer artículo completo
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid de artículos -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Artículo 1: Receta -->
+                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition group">
+                    <a href="blog/tostadas-de-aguacate-y-huevo.html" class="block">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=500&auto=format&fit=crop" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                                 alt="Tostadas de aguacate y huevo">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="bg-cuban-green/10 text-cuban-green text-xs px-2 py-1 rounded-full font-bold">🍳 RECETA</span>
+                                <span class="text-gray-400 text-xs">10 min</span>
+                            </div>
+                            <h3 class="font-bold text-xl mb-2 group-hover:text-cuban-green transition">Tostadas de aguacate y huevo para un desayuno completo</h3>
+                            <p class="text-gray-600 text-sm mb-4">Con pan fresco, aguacate maduro y huevos de nuestra tienda. Una receta nutritiva para empezar el día.</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-cuban-green text-sm font-medium">Leer más →</span>
+                                <span class="text-gray-400 text-xs">15 feb 2026</span>
+                            </div>
+                        </div>
+                    </a>
                 </article>
                 
-                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='#'">
-                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <span class="text-xs text-cuban-green font-bold">HOSPEDAJE</span>
-                        <h3 class="font-bold text-lg mt-1">Guía para alquilar en La Habana</h3>
-                        <p class="text-gray-600 text-sm mt-2">Todo lo que necesitas saber para encontrar el mejor alojamiento en La Habana Vieja.</p>
-                        <div class="mt-3 text-cuban-green text-sm font-medium">Leer más →</div>
-                    </div>
+                <!-- Artículo 2: Emprendimiento -->
+                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition group">
+                    <a href="blog/como-empezar-tcp-en-cuba-guia-2026.html" class="block">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=500&auto=format&fit=crop" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                                 alt="Guía para TCP en Cuba">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="bg-contador-azul/10 text-contador-azul text-xs px-2 py-1 rounded-full font-bold">📊 EMPRENDIMIENTO</span>
+                                <span class="text-gray-400 text-xs">8 min</span>
+                            </div>
+                            <h3 class="font-bold text-xl mb-2 group-hover:text-contador-azul transition">Guía completa para ser TCP en Cuba 2026: trámites y obligaciones</h3>
+                            <p class="text-gray-600 text-sm mb-4">Todo lo que necesitas saber para iniciar tu negocio por cuenta propia: inscripción, registros, impuestos y más.</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-contador-azul text-sm font-medium">Leer más →</span>
+                                <span class="text-gray-400 text-xs">10 feb 2026</span>
+                            </div>
+                        </div>
+                    </a>
                 </article>
                 
-                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='#'">
-                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <span class="text-xs text-cuban-green font-bold">CONSEJOS</span>
-                        <h3 class="font-bold text-lg mt-1">¿Por qué comprar en El Resolvito?</h3>
-                        <p class="text-gray-600 text-sm mt-2">Descubre los beneficios de comprar en tu tienda de confianza: calidad, precio y cercanía.</p>
-                        <div class="mt-3 text-cuban-green text-sm font-medium">Leer más →</div>
-                    </div>
+                <!-- Artículo 3: La Habana -->
+                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition group">
+                    <a href="blog/que-hacer-en-la-habana-vieja-gratis.html" class="block">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1591123226833-99b5138c3fb1?w=500&auto=format&fit=crop" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                                 alt="La Habana Vieja">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="bg-cuban-blue/10 text-cuban-blue text-xs px-2 py-1 rounded-full font-bold">🏠 LA HABANA</span>
+                                <span class="text-gray-400 text-xs">5 min</span>
+                            </div>
+                            <h3 class="font-bold text-xl mb-2 group-hover:text-cuban-blue transition">10 cosas gratis que hacer en La Habana Vieja (y disfrutar como local)</h3>
+                            <p class="text-gray-600 text-sm mb-4">Desde miradores secretos hasta museos con entrada libre. Descubre La Habana sin gastar dinero.</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-cuban-blue text-sm font-medium">Leer más →</span>
+                                <span class="text-gray-400 text-xs">5 feb 2026</span>
+                            </div>
+                        </div>
+                    </a>
                 </article>
                 
-                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='#'">
-                    <img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <span class="text-xs text-cuban-green font-bold">SERVICIOS</span>
-                        <h3 class="font-bold text-lg mt-1">Cómo empezar tu negocio en Cuba</h3>
-                        <p class="text-gray-600 text-sm mt-2">Consejos de nuestro contador para iniciar un TCP con todos los requisitos legales en orden.</p>
-                        <div class="mt-3 text-cuban-green text-sm font-medium">Leer más →</div>
-                    </div>
+                <!-- Artículo 4: Productos -->
+                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition group">
+                    <a href="blog/guia-de-perfumes-candy-precios-y-tips.html" class="block">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500&auto=format&fit=crop" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                                 alt="Perfumes Candy">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="bg-dulce-rosa/10 text-dulce-rosa text-xs px-2 py-1 rounded-full font-bold">🛍️ PRODUCTOS</span>
+                                <span class="text-gray-400 text-xs">4 min</span>
+                            </div>
+                            <h3 class="font-bold text-xl mb-2 group-hover:text-dulce-rosa transition">Guía de perfumes Candy: precios, duración y cómo elegir el tuyo</h3>
+                            <p class="text-gray-600 text-sm mb-4">Te contamos todo sobre los perfumes Candy que tenemos en tienda: cuál dura más, sus aromas y relación precio-calidad.</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-dulce-rosa text-sm font-medium">Leer más →</span>
+                                <span class="text-gray-400 text-xs">1 feb 2026</span>
+                            </div>
+                        </div>
+                    </a>
                 </article>
                 
-                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='#'">
-                    <img src="https://images.unsplash.com/photo-1551024700-99f1d0a0d8a7?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <span class="text-xs text-cuban-green font-bold">PRODUCTOS</span>
-                        <h3 class="font-bold text-lg mt-1">Novedades en nuestra tienda</h3>
-                        <p class="text-gray-600 text-sm mt-2">Conoce los últimos productos que hemos añadido a nuestro catálogo, incluyendo perfumes y licores.</p>
-                        <div class="mt-3 text-cuban-green text-sm font-medium">Leer más →</div>
-                    </div>
+                <!-- Artículo 5: Alojamientos -->
+                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition group">
+                    <a href="blog/terrazas-de-bayona-59-experiencia-completa.html" class="block">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://i.postimg.cc/QxWvyYGy/acuarela-(1).jpg" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                                 alt="Terrazas de Bayona 59">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="bg-bayona-oro/10 text-yellow-700 text-xs px-2 py-1 rounded-full font-bold">🏡 ALOJAMIENTOS</span>
+                                <span class="text-gray-400 text-xs">6 min</span>
+                            </div>
+                            <h3 class="font-bold text-xl mb-2 group-hover:text-yellow-700 transition">Vivir como un habanero: nuestra experiencia en Terrazas de Bayona 59</h3>
+                            <p class="text-gray-600 text-sm mb-4">Te mostramos todos los detalles de este colonial restaurado en el corazón de La Habana Vieja. Fotos, precios y consejos.</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-yellow-700 text-sm font-medium">Leer más →</span>
+                                <span class="text-gray-400 text-xs">28 ene 2026</span>
+                            </div>
+                        </div>
+                    </a>
                 </article>
                 
-                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='#'">
-                    <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <span class="text-xs text-cuban-green font-bold">ALOJAMIENTOS</span>
-                        <h3 class="font-bold text-lg mt-1">Terrazas de Bayona 59: Una joya colonial</h3>
-                        <p class="text-gray-600 text-sm mt-2">Te mostramos todos los detalles de nuestro alojamiento estrella en el corazón de La Habana Vieja.</p>
-                        <div class="mt-3 text-cuban-green text-sm font-medium">Leer más →</div>
-                    </div>
+                <!-- Artículo 6: Receta dulce -->
+                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition group">
+                    <a href="blog/cupcakes-faciles-con-productos-de-nuestra-tienda.html" class="block">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1586788224331-947f68671cf1?w=500&auto=format&fit=crop" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                                 alt="Cupcakes caseros">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="bg-dulce-rosa/10 text-dulce-rosa text-xs px-2 py-1 rounded-full font-bold">🍳 RECETA</span>
+                                <span class="text-gray-400 text-xs">20 min</span>
+                            </div>
+                            <h3 class="font-bold text-xl mb-2 group-hover:text-dulce-rosa transition">Cupcakes fáciles con ingredientes de nuestra tienda (sin horno complicado)</h3>
+                            <p class="text-gray-600 text-sm mb-4">Usando nuestra harina, leche condensada y huevos, preparamos unos cupcakes esponjosos que encantarán a todos.</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-dulce-rosa text-sm font-medium">Leer más →</span>
+                                <span class="text-gray-400 text-xs">20 ene 2026</span>
+                            </div>
+                        </div>
+                    </a>
                 </article>
                 
+            </div>
+
+            <!-- Newsletter -->
+            <div class="mt-16 bg-gradient-to-r from-cuban-green to-cuban-dark rounded-2xl p-8 text-white">
+                <div class="max-w-2xl mx-auto text-center">
+                    <h3 class="text-2xl font-bold mb-2">📬 Recibe nuestras novedades</h3>
+                    <p class="mb-6 opacity-90">Suscríbete para recibir recetas, consejos y ofertas especiales directamente en tu WhatsApp</p>
+                    <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20suscribirme%20al%20blog%20de%20El%20Resolvito" 
+                       target="_blank"
+                       class="inline-flex items-center gap-2 bg-white text-cuban-green px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition">
+                        <i class="fab fa-whatsapp text-xl"></i>
+                        Suscribirme por WhatsApp
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -170,33 +314,37 @@
         }
 
         document.addEventListener('DOMContentLoaded', async function() {
-    await loadComponent('header-container', 'components/header.html');
-    await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
-    await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
-    await loadComponent('image-modal-container', 'components/image-modal.html');
-    await loadComponent('cart-sidebar-container', 'components/cart-sidebar.html');
-    await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
-    await loadComponent('footer-container', 'components/footer.html');
-    
-    // AHORA SÍ, inicializar todo después de que los componentes estén cargados
-    if (typeof initializeAfterComponents === 'function') {
-        initializeAfterComponents();
-    }
-    
-    // Inicializar funciones específicas de la página (si existen)
-    if (typeof renderFeaturedProducts === 'function') {
-        renderFeaturedProducts();
-    }
-    if (typeof initCarousel === 'function') {
-        initCarousel();
-    }
-    if (typeof renderProducts === 'function') {
-        renderProducts();
-    }
-});
+            await loadComponent('header-container', 'components/header.html');
+            await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
+            await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
+            await loadComponent('image-modal-container', 'components/image-modal.html');
+            await loadComponent('cart-sidebar-container', 'components/cart-sidebar.html');
+            await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
+            await loadComponent('footer-container', 'components/footer.html');
+            
+            if (typeof initializeAfterComponents === 'function') {
+                initializeAfterComponents();
+            }
+        });
+
+        // Filtrado por categorías (simple)
+        document.querySelectorAll('.category-blog-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Quitar active de todos
+                document.querySelectorAll('.category-blog-btn').forEach(b => {
+                    b.classList.remove('bg-cuban-green', 'text-white');
+                    b.classList.add('bg-gray-100', 'text-gray-700');
+                });
+                // Activar el clickeado
+                this.classList.remove('bg-gray-100', 'text-gray-700');
+                this.classList.add('bg-cuban-green', 'text-white');
+                
+                // Aquí iría la lógica de filtrado real
+                // Por ahora solo es visual
+            });
+        });
     </script>
 </body>
 </html>
-
 
 
