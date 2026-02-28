@@ -106,6 +106,39 @@ body.night-mode footer {
     border-bottom: 1px solid var(--border-dark);
 }
 
+body.night-mode .product-card {
+    background: var(--bg-dark-card);
+    border-color: var(--border-dark);
+}
+
+body.night-mode .service-card {
+    background: var(--bg-dark-card);
+    border-color: var(--border-dark);
+}
+
+body.night-mode .product-image-container {
+    background: #ffffff;
+}
+
+body.night-mode .carousel-button {
+    background: #2a2a3a;
+    color: white;
+}
+
+body.night-mode .carousel-dot {
+    background: #4a4a5a;
+}
+
+body.night-mode .carousel-dot.active {
+    background: #4CAF50;
+}
+
+body.night-mode .theme-toggle {
+    background: var(--bg-dark-card);
+    color: var(--text-dark-primary);
+    border-color: var(--primary-gold);
+}
+
 /* ============================================ */
 /* COMPONENTES REUTILIZABLES */
 /* ============================================ */
@@ -177,11 +210,6 @@ body.night-mode footer {
     box-shadow: var(--shadow-xl);
 }
 
-body.night-mode .product-card {
-    background: var(--bg-dark-card);
-    border-color: var(--border-dark);
-}
-
 .product-image-container {
     height: 180px;
     background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
@@ -203,10 +231,6 @@ body.night-mode .product-card {
     transform: scale(1.08);
 }
 
-body.night-mode .product-image-container {
-    background: #ffffff;
-}
-
 /* Tarjetas de servicio */
 .service-card {
     background: white;
@@ -220,11 +244,6 @@ body.night-mode .product-image-container {
 .service-card:hover {
     transform: translateY(-6px);
     box-shadow: var(--shadow-xl);
-}
-
-body.night-mode .service-card {
-    background: var(--bg-dark-card);
-    border-color: var(--border-dark);
 }
 
 /* Badges y etiquetas */
@@ -257,7 +276,7 @@ body.night-mode .service-card {
 /* SECCIONES ESPECIALES POR SERVICIO */
 /* ============================================ */
 
-/* Sección Contador - Transmite profesionalismo */
+/* Sección Contador */
 .service-contador {
     border-left: 4px solid var(--primary-blue);
 }
@@ -266,7 +285,7 @@ body.night-mode .service-card {
     color: var(--primary-blue);
 }
 
-/* Sección Dulce César - Transmite dulzura */
+/* Sección Dulce César */
 .service-dulce {
     border-left: 4px solid var(--primary-pink);
 }
@@ -275,18 +294,45 @@ body.night-mode .service-card {
     color: var(--primary-pink);
 }
 
-/* Sección Ofertas - Urgencia */
+/* Sección Ofertas */
 .section-offers {
     background: linear-gradient(135deg, var(--primary-orange), var(--primary-gold));
 }
 
 /* ============================================ */
-/* HERO BANNER - Optimizado para ambos modos */
+/* HERO BANNER */
 /* ============================================ */
 .hero-container {
     position: relative;
     height: 500px;
     overflow: hidden;
+}
+
+.hero-bg-day {
+    background-image: url('https://i.postimg.cc/7YfPJ9LD/banner_1l.jpg');
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    inset: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.hero-bg-night {
+    background-image: url('https://i.postimg.cc/MGfKwYjq/plaza_nocturna_(1).png');
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+body.night-mode .hero-bg-day {
+    opacity: 0;
+}
+
+body.night-mode .hero-bg-night {
+    opacity: 1;
 }
 
 .hero-overlay {
@@ -343,19 +389,26 @@ body.night-mode .hero-overlay {
 /* ============================================ */
 /* CARRITO DE COMPRAS */
 /* ============================================ */
+.cart-slide {
+    transition: transform 0.3s ease-in-out;
+}
+
+.cart-open {
+    transform: translateY(0) !important;
+}
+
 .cart-sidebar {
     position: fixed;
     bottom: 0;
+    left: 0;
     right: 0;
-    width: 100%;
-    max-width: 400px;
     background: white;
     border-radius: 1.5rem 1.5rem 0 0;
     box-shadow: var(--shadow-xl);
     z-index: 1000;
     transform: translateY(100%);
     transition: transform var(--transition-base);
-    max-height: 90vh;
+    max-height: 85vh;
     display: flex;
     flex-direction: column;
 }
@@ -364,24 +417,15 @@ body.night-mode .hero-overlay {
     .cart-sidebar {
         bottom: 1rem;
         right: 1rem;
+        left: auto;
+        width: 400px;
         border-radius: 1rem;
         transform: translateX(100%);
     }
-}
-
-.cart-sidebar.open {
-    transform: translateY(0);
-}
-
-@media (min-width: 768px) {
-    .cart-sidebar.open {
+    
+    .cart-sidebar.cart-open {
         transform: translateX(0);
     }
-}
-
-body.night-mode .cart-sidebar {
-    background: var(--bg-dark-card);
-    border: 1px solid var(--border-dark);
 }
 
 .cart-item {
@@ -400,40 +444,114 @@ body.night-mode .cart-sidebar {
 }
 
 /* ============================================ */
-/* INDICADOR DÍA/NOCHE MEJORADO */
+/* BADGE DEL CARRITO */
 /* ============================================ */
-.theme-toggle {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: white;
-    box-shadow: var(--shadow-lg);
+.cart-badge, #cartCount, #headerCartCount, #floatingCartCount {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #FFB300;
+    color: #1B5E20;
+    min-width: 22px;
+    height: 22px;
+    border-radius: 11px;
+    font-size: 0.75rem;
+    font-weight: 800;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
-    cursor: pointer;
-    z-index: 100;
-    transition: all var(--transition-base);
-    border: 2px solid transparent;
+    padding: 0 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    border: 2px solid white;
+    z-index: 10;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    animation: badgePulse 2s infinite;
 }
 
-.theme-toggle:hover {
-    transform: scale(1.1) rotate(15deg);
-    border-color: var(--primary-gold);
+@keyframes badgePulse {
+    0%, 100% {
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    50% {
+        box-shadow: 0 2px 8px rgba(255, 179, 0, 0.6);
+    }
 }
 
-body.night-mode .theme-toggle {
-    background: var(--bg-dark-card);
-    color: var(--text-dark-primary);
-    border-color: var(--primary-gold);
+@keyframes badgePop {
+    0% { transform: scale(0.5); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.badge-pop {
+    animation: badgePop 0.3s ease;
 }
 
 /* ============================================ */
-/* BOTONES FLOTANTES CON BADGE OPTIMIZADO */
+/* MODAL DE IMAGEN */
+/* ============================================ */
+#imageModal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    z-index: 1100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+#imageModal:not(.hidden) {
+    display: flex;
+}
+
+.image-modal-close {
+    position: absolute;
+    top: -3rem;
+    right: 0;
+    color: white;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition-base);
+}
+
+.image-modal-close:hover {
+    color: #ccc;
+    transform: scale(1.1);
+}
+
+/* ============================================ */
+/* TOAST NOTIFICATION */
+/* ============================================ */
+#cartToast {
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2937;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    pointer-events: none;
+    z-index: 200;
+    font-size: 0.875rem;
+    min-width: 200px;
+    text-align: center;
+}
+
+#cartToast.opacity-100 {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================ */
+/* BOTONES FLOTANTES */
 /* ============================================ */
 .floating-actions {
     position: fixed;
@@ -447,7 +565,7 @@ body.night-mode .theme-toggle {
 }
 
 .floating-btn {
-    position: relative; /* IMPORTANTE: para posicionar el badge */
+    position: relative;
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -480,67 +598,6 @@ body.night-mode .theme-toggle {
     box-shadow: 0 8px 24px rgba(0,0,0,0.3);
 }
 
-/* ============================================ */
-/* BADGE DEL CARRITO - VERSIÓN SUPERPUESTA (ESTÁNDAR INDUSTRIA) */
-/* ============================================ */
-.cart-badge {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background: #FFB300;
-    color: #1B5E20;
-    min-width: 24px;
-    height: 24px;
-    border-radius: 12px;
-    font-size: 0.8rem;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    border: 2px solid white;
-    z-index: 2;
-    letter-spacing: -0.5px;
-    line-height: 1;
-    animation: badgePulse 2s infinite;
-}
-
-/* Ajuste para números de 2 dígitos */
-.cart-badge[data-count="10"],
-.cart-badge[data-count^="1"] {
-    min-width: 28px;
-    font-size: 0.75rem;
-}
-
-/* Ajuste para números de 3 dígitos */
-.cart-badge[data-count="100"],
-.cart-badge[data-count^="1"][data-count.length="3"] {
-    min-width: 32px;
-    font-size: 0.7rem;
-}
-
-/* Animación al añadir producto */
-@keyframes badgePop {
-    0% { transform: scale(0.5); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-}
-
-.badge-pop {
-    animation: badgePop 0.3s ease;
-}
-
-@keyframes badgePulse {
-    0%, 100% {
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
-    50% {
-        box-shadow: 0 2px 8px rgba(255, 179, 0, 0.6);
-    }
-}
-
-/* Tooltips (solo desktop) */
 .floating-btn::after {
     content: attr(data-tooltip);
     position: absolute;
@@ -561,9 +618,6 @@ body.night-mode .theme-toggle {
     opacity: 1;
 }
 
-/* ============================================ */
-/* RESPONSIVE MÓVIL */
-/* ============================================ */
 @media (max-width: 768px) {
     .floating-actions {
         bottom: 1rem;
@@ -581,97 +635,115 @@ body.night-mode .theme-toggle {
         font-size: 1.4rem;
     }
     
-    .cart-badge {
-        top: -4px;
-        right: -4px;
-        min-width: 22px;
-        height: 22px;
-        font-size: 0.75rem;
-        border-width: 1.5px;
-    }
-    
     .floating-btn::after {
         display: none;
     }
 }
 
-@media (max-width: 380px) {
-    .floating-actions {
-        bottom: 0.75rem;
-        right: 0.75rem;
-        gap: 0.5rem;
-    }
-    
-    .floating-btn {
-        width: 48px;
-        height: 48px;
-    }
-    
-    .cart-badge {
-        min-width: 20px;
-        height: 20px;
-        font-size: 0.7rem;
-    }
+/* ============================================ */
+/* CARRUSEL */
+/* ============================================ */
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
 }
-/* ============================================ */
-/* MODAL DE IMAGEN */
-/* ============================================ */
-.image-modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.95);
-    z-index: 1100;
-    display: none;
-    align-items: center;
-    justify-content: center;
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.carousel-slide {
+    flex: 0 0 100%;
     padding: 1rem;
 }
 
-.image-modal.active {
-    display: flex;
-}
-
-.image-modal-content {
-    position: relative;
-    max-width: 800px;
-    width: 100%;
-}
-
-.image-modal-close {
+.carousel-button {
     position: absolute;
-    top: -3rem;
-    right: 0;
-    color: white;
-    font-size: 2rem;
-    background: none;
-    border: none;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    transition: var(--transition-base);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+    z-index: 10;
+    border: none;
 }
 
-.image-modal-close:hover {
-    color: #ccc;
-    transform: scale(1.1);
+.carousel-button:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.1);
 }
 
-.image-modal-img {
-    width: 100%;
-    max-height: 80vh;
-    object-fit: contain;
-    border-radius: 0.5rem;
-}
+.carousel-prev { left: 10px; }
+.carousel-next { right: 10px; }
 
-.image-modal-title {
-    color: white;
-    text-align: center;
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
     margin-top: 1rem;
-    font-size: 1.25rem;
-    font-weight: bold;
+}
+
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #d1d5db;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.carousel-dot.active {
+    background: #2E7D32;
+    transform: scale(1.2);
 }
 
 /* ============================================ */
-/* ALOJAMIENTOS - Amenities */
+/* UTILIDADES */
 /* ============================================ */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.feature-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.feature-item i {
+    color: var(--success);
+}
+
+.color-chip {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 2px solid rgba(255,255,255,0.5);
+    transition: transform 0.2s ease;
+}
+
 .amenities-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -689,55 +761,6 @@ body.night-mode .theme-toggle {
 .amenity-item i {
     color: var(--primary-green);
     width: 20px;
-}
-
-body.night-mode .amenity-item {
-    color: var(--text-dark-secondary);
-}
-
-.experience-badge {
-    background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-orange) 100%);
-    color: var(--primary-green-dark);
-    font-weight: bold;
-    padding: 0.25rem 1rem;
-    border-radius: 9999px;
-    display: inline-block;
-    font-size: 0.8rem;
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
-}
-
-/* ============================================ */
-/* SERVICIO CONTADOR - Características */
-/* ============================================ */
-.feature-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
-}
-
-.feature-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
-}
-
-.feature-item i {
-    color: var(--success);
-    font-size: 0.875rem;
-}
-
-/* ============================================ */
-/* UTILIDADES */
-/* ============================================ */
-.hide-scrollbar::-webkit-scrollbar {
-    display: none;
-}
-
-.hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
 }
 
 /* ============================================ */
@@ -782,7 +805,7 @@ body.night-mode .amenity-item {
 /* ============================================ */
 /* TRANSICIÓN ENTRE PÁGINAS */
 /* ============================================ */
-.page-transition {
+#pageFade {
     position: fixed;
     inset: 0;
     background: white;
@@ -792,43 +815,8 @@ body.night-mode .amenity-item {
     transition: opacity 0.2s;
 }
 
-.page-transition.active {
-    opacity: 1;
-}
-
-body.night-mode .page-transition {
+body.night-mode #pageFade {
     background: var(--bg-dark);
-}
-
-/* ============================================ */
-/* NOTIFICACIONES */
-/* ============================================ */
-.notification {
-    position: fixed;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--primary-green);
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 9999px;
-    box-shadow: var(--shadow-lg);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    animation: slideUp 0.3s ease;
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translate(-50%, 20px);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, 0);
-    }
 }
 
 /* ============================================ */
@@ -852,14 +840,6 @@ body.night-mode .page-transition {
 /* RESPONSIVE */
 /* ============================================ */
 @media (max-width: 640px) {
-    .floating-btn.whatsapp {
-        bottom: 5rem;
-    }
-    
-    .floating-btn.cart {
-        bottom: 1rem;
-    }
-    
     .hero-container {
         height: 400px;
     }
@@ -867,262 +847,20 @@ body.night-mode .page-transition {
     .product-image-container {
         height: 140px;
     }
-}
-
-@media (min-width: 641px) and (max-width: 1024px) {
-    .product-image-container {
-        height: 160px;
-    }
-}
-/* ============================================ */
-/* ESTILOS DEL CARRITO Y BADGES */
-/* ============================================ */
-
-/* BADGE DEL CARRITO - VERSIÓN SUPERPUESTA */
-.cart-badge, #cartCount, #headerCartCount, #floatingCartCount {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background: #FFB300;
-    color: #1B5E20;
-    min-width: 22px;
-    height: 22px;
-    border-radius: 11px;
-    font-size: 0.75rem;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    border: 2px solid white;
-    z-index: 10;
-    letter-spacing: -0.5px;
-    line-height: 1;
-    animation: badgePulse 2s infinite;
-}
-
-/* Ajuste para números de 2 dígitos */
-.cart-badge[data-count="10"],
-.cart-badge[data-count^="1"],
-#cartCount[data-count="10"],
-#cartCount[data-count^="1"] {
-    min-width: 26px;
-    font-size: 0.7rem;
-}
-
-/* Ajuste para números de 3 dígitos */
-.cart-badge[data-count="100"],
-.cart-badge[data-count^="1"][data-count.length="3"],
-#cartCount[data-count="100"],
-#cartCount[data-count^="1"][data-count.length="3"] {
-    min-width: 30px;
-    font-size: 0.65rem;
-}
-
-/* Animación al añadir producto */
-@keyframes badgePop {
-    0% { transform: scale(0.5); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-}
-
-.badge-pop {
-    animation: badgePop 0.3s ease;
-}
-
-@keyframes badgePulse {
-    0%, 100% {
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
-    50% {
-        box-shadow: 0 2px 8px rgba(255, 179, 0, 0.6);
-    }
-}
-
-/* ============================================ */
-/* MODAL DEL CARRITO */
-/* ============================================ */
-.modal-overlay {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-}
-
-.modal-overlay.show {
-    opacity: 1;
-    visibility: visible;
-}
-
-.modal-content {
-    background: white;
-    border-radius: 1rem;
-    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
-    max-width: 500px;
-    width: 100%;
-    max-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    transform: translateY(-20px);
-    opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.modal-overlay.show .modal-content {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-/* ============================================ */
-/* BOTÓN FLOTANTE DEL CARRITO */
-/* ============================================ */
-#floatingCartBtn {
-    position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    background: #0d3b33;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 9999px;
-    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
-    z-index: 40;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    border: none;
-    cursor: pointer;
-}
-
-#floatingCartBtn:hover {
-    transform: scale(1.05);
-    background: #0a2e28;
-}
-
-#floatingCartBtn .relative {
-    position: relative;
-}
-
-/* Animación shake */
-.shake {
-    animation: shake-animation 0.6s ease-in-out;
-}
-
-@keyframes shake-animation {
-    0% { transform: translateX(0); }
-    15% { transform: translateX(-8px) rotate(-5deg); }
-    30% { transform: translateX(8px) rotate(5deg); }
-    45% { transform: translateX(-8px) rotate(-5deg); }
-    60% { transform: translateX(8px) rotate(5deg); }
-    75% { transform: translateX(-5px) rotate(-2deg); }
-    90% { transform: translateX(5px) rotate(2deg); }
-    100% { transform: translateX(0); }
-}
-
-/* ============================================ */
-/* TOAST NOTIFICATIONS */
-/* ============================================ */
-#cartToast {
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #1f2937;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-    pointer-events: none;
-    z-index: 9999;
-    font-size: 0.875rem;
-    min-width: 200px;
-    text-align: center;
-}
-
-#cartToast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-}
-
-/* ============================================ */
-/* BOTONES DE CANTIDAD */
-/* ============================================ */
-.cart-qty-btn {
-    width: 32px;
-    height: 32px;
-    background: #e5e7eb;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    transition: all 0.2s ease;
-    border: none;
-    cursor: pointer;
-}
-
-.cart-qty-btn:hover:not(:disabled) {
-    background: #0d3b33;
-    color: white;
-    transform: scale(1.05);
-}
-
-.cart-qty-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-/* ============================================ */
-/* CHECKOUT - BANNER DE PROMOCIONES */
-/* ============================================ */
-#deliveryPromoBanner {
-    background: white;
-    border: 2px dashed #0d3b33;
-    padding: 1rem;
-    border-radius: 0.75rem;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-    margin-bottom: 2rem;
-    text-align: center;
-}
-
-.promo-progress-container {
-    background: #e5e7eb;
-    height: 8px;
-    border-radius: 9999px;
-    overflow: hidden;
-    margin-top: 1rem;
-}
-
-.promo-progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, #0d3b33, #FFB300);
-    border-radius: 9999px;
-    transition: width 0.3s ease;
-}
-
-/* ============================================ */
-/* RESPONSIVE */
-/* ============================================ */
-@media (max-width: 768px) {
-    #floatingCartBtn {
+    
+    .floating-actions {
         bottom: 1rem;
         right: 1rem;
-        padding: 0.5rem 1rem;
+        flex-direction: row;
+        gap: 0.5rem;
     }
     
-    .cart-badge, #cartCount {
-        top: -4px;
-        right: -4px;
+    .floating-btn {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .cart-badge {
         min-width: 20px;
         height: 20px;
         font-size: 0.7rem;
@@ -1130,13 +868,8 @@ body.night-mode .page-transition {
     }
 }
 
-@media (max-width: 480px) {
-    .modal-content {
-        max-width: 95%;
-    }
-    
-    .cart-qty-btn {
-        width: 28px;
-        height: 28px;
+@media (min-width: 641px) and (max-width: 1024px) {
+    .product-image-container {
+        height: 160px;
     }
 }
