@@ -22,7 +22,6 @@
     <div id="mobile-menu-container"></div>
     <div id="floating-buttons-container"></div>
 
-    <!-- Contenido del artículo -->
     <section class="py-12 bg-gray-50">
         <div class="container mx-auto px-4 max-w-3xl">
             <!-- Cabecera -->
@@ -45,7 +44,7 @@
             <!-- Imagen destacada -->
             <img src="https://images.unsplash.com/photo-1606787366850-de6330128b1c?w=800&auto=format&fit=crop" class="w-full h-96 object-cover rounded-2xl mb-8" alt="Recetas con atún">
 
-            <!-- Introducción -->
+            <!-- Contenido del artículo -->
             <div class="prose prose-lg max-w-none">
                 <p class="text-lg text-gray-700 mb-6">El atún en lata es de esos productos que nunca pueden faltar en la despensa. Es económico, duradero y te saca de apuros cuando no tienes tiempo o ganas de cocinar algo complicado. En El Resolvito tenemos varias presentaciones y hoy te traigo tres maneras diferentes de prepararlo para que no te aburras de la clásica ensalada. ¡Vamos allá!</p>
 
@@ -122,29 +121,119 @@
                 </ol>
                 <p class="bg-yellow-50 p-4 rounded-lg italic mb-8">💡 Tip: Esta ensalada aguanta bien en la nevera y al día siguiente está igual de buena.</p>
 
-                <!-- Despedida -->
-                <div class="border-t pt-8 mt-10">
-                    <p class="text-lg">¿Probaste alguna? Cuéntanos en los comentarios o mándanos una foto por WhatsApp. Y si necesitas los ingredientes, ya sabes que en <strong>El Resolvito</strong> los tenemos todos [citation:4].</p>
-                    <a href="https://wa.me/5356382909?text=Probé%20una%20receta%20del%20blog%20de%20atún" class="inline-block bg-cuban-green text-white px-6 py-3 rounded-full font-bold hover:bg-cuban-dark transition mt-4"><i class="fab fa-whatsapp mr-2"></i>Comparte tu resultado</a>
+                <!-- ============================================ -->
+                <!-- SECCIÓN DE COMENTARIOS VÍA WHATSAPP -->
+                <!-- ============================================ -->
+                <div class="border-t-2 border-gray-200 pt-10 mt-16">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-cuban-green text-3xl"></i>
+                        Comentarios de los lectores
+                    </h3>
+                    
+                    <!-- Comentarios existentes (ejemplos) -->
+                    <div class="space-y-4 mb-8">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="flex items-center gap-3 mb-2">
+                                <img src="https://ui-avatars.com/api/?name=Marta+Rodriguez&background=2E7D32&color=fff&size=40" class="w-8 h-8 rounded-full">
+                                <div>
+                                    <p class="font-semibold">Marta Rodríguez</p>
+                                    <p class="text-xs text-gray-500">Hace 2 días</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700">Probé las torticas de atún y quedaron espectaculares. Mi esposo no paraba de comer. Gracias por la receta!</p>
+                            <div class="flex items-center gap-3 mt-2 text-sm">
+                                <button onclick="enviarReaccion('me-gusta', 'Marta Rodríguez')" class="text-gray-500 hover:text-cuban-green transition flex items-center gap-1">
+                                    <i class="far fa-heart"></i> 5
+                                </button>
+                                <button onclick="enviarReaccion('responder', 'Marta Rodríguez')" class="text-gray-500 hover:text-cuban-green transition">
+                                    Responder
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="flex items-center gap-3 mb-2">
+                                <img src="https://ui-avatars.com/api/?name=Carlos+Perez&background=FFB300&color=000&size=40" class="w-8 h-8 rounded-full">
+                                <div>
+                                    <p class="font-semibold">Carlos Pérez</p>
+                                    <p class="text-xs text-gray-500">Hace 5 días</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700">¿Se puede sustituir el atún por pollo desmenuzado?</p>
+                            <div class="flex items-center gap-3 mt-2 text-sm">
+                                <button onclick="enviarReaccion('me-gusta', 'Carlos Pérez')" class="text-gray-500 hover:text-cuban-green transition flex items-center gap-1">
+                                    <i class="far fa-heart"></i> 2
+                                </button>
+                                <button onclick="enviarReaccion('responder', 'Carlos Pérez')" class="text-gray-500 hover:text-cuban-green transition">
+                                    Responder
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formulario para nuevo comentario -->
+                    <div class="bg-cuban-green/5 p-6 rounded-xl">
+                        <h4 class="font-bold text-lg mb-3">Deja tu comentario</h4>
+                        <p class="text-sm text-gray-600 mb-4">¿Probaste la receta? ¿Tienes alguna duda? Escríbenos por WhatsApp y aparecerá aquí (previo filtro).</p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <input type="text" id="comentario-nombre-atun" placeholder="Tu nombre" 
+                                   class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent outline-none">
+                            <textarea id="comentario-texto-atun" placeholder="Escribe tu comentario..." 
+                                      class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent outline-none" rows="2"></textarea>
+                            <button onclick="enviarComentario('atun')" 
+                                    class="bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark transition flex items-center justify-center gap-2">
+                                <i class="fab fa-whatsapp"></i>
+                                Enviar
+                            </button>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-3">Tu comentario será publicado después de que lo revisemos (para evitar spam).</p>
+                    </div>
+
+                    <!-- Botón para ver más comentarios en WhatsApp -->
+                    <div class="text-center mt-6">
+                        <a href="https://wa.me/5356382909?text=Quiero%20ver%20los%20comentarios%20de%20atun" 
+                           target="_blank"
+                           class="inline-flex items-center gap-2 text-cuban-green hover:underline">
+                            <i class="fab fa-whatsapp"></i>
+                            Ver todos los comentarios en WhatsApp
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Contenedores para modales y footer -->
     <div id="image-modal-container"></div>
     <div id="cart-sidebar-container"></div>
     <div id="checkout-modal-container"></div>
     <div id="footer-container"></div>
-    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none"><p id="cartToastMessage"></p></div>
+
+    <!-- Toast de notificación -->
+    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
+        <p id="cartToastMessage"></p>
+    </div>
 
     <script>
         async function loadComponent(elementId, path) {
-            try { const res = await fetch(path); const html = await res.text(); document.getElementById(elementId).innerHTML = html; if (elementId === 'header-container') updateActiveNav(); } catch (error) { console.error(`Error cargando ${path}:`, error); }
+            try {
+                const res = await fetch(path);
+                const html = await res.text();
+                document.getElementById(elementId).innerHTML = html;
+                if (elementId === 'header-container') updateActiveNav();
+            } catch (error) {
+                console.error(`Error cargando ${path}:`, error);
+            }
         }
+
         function updateActiveNav() {
             const navLinks = document.querySelectorAll('#mainNav a');
-            navLinks.forEach(link => { link.classList.remove('text-cuban-green', 'font-medium', 'border-b-2', 'border-cuban-green'); });
+            navLinks.forEach(link => {
+                link.classList.remove('text-cuban-green', 'font-medium', 'border-b-2', 'border-cuban-green');
+            });
         }
+
         document.addEventListener('DOMContentLoaded', async function() {
             await loadComponent('header-container', '../components/header.html');
             await loadComponent('mobile-menu-container', '../components/mobile-menu.html');
@@ -153,8 +242,55 @@
             await loadComponent('cart-sidebar-container', '../components/cart-sidebar.html');
             await loadComponent('checkout-modal-container', '../components/checkout-modal.html');
             await loadComponent('footer-container', '../components/footer.html');
-            if (typeof initializeAfterComponents === 'function') initializeAfterComponents();
+            
+            if (typeof initializeAfterComponents === 'function') {
+                initializeAfterComponents();
+            }
         });
+
+        // Funciones para comentarios
+        function enviarComentario(articuloId) {
+            const nombre = document.getElementById(`comentario-nombre-${articuloId}`)?.value.trim();
+            const comentario = document.getElementById(`comentario-texto-${articuloId}`)?.value.trim();
+            
+            if (!nombre) {
+                alert('Por favor, escribe tu nombre.');
+                return;
+            }
+            if (!comentario) {
+                alert('Por favor, escribe tu comentario.');
+                return;
+            }
+
+            const tituloArticulo = document.querySelector('h1')?.textContent || 'Artículo';
+            
+            const mensaje = `*📝 NUEVO COMENTARIO EN EL BLOG*\n\n` +
+                           `📌 *Artículo:* ${tituloArticulo}\n` +
+                           `👤 *Nombre:* ${nombre}\n` +
+                           `💬 *Comentario:* ${comentario}\n\n` +
+                           `_Responde a este mensaje para publicar el comentario._`;
+
+            window.open(`https://wa.me/5356382909?text=${encodeURIComponent(mensaje)}`, '_blank');
+            
+            document.getElementById(`comentario-nombre-${articuloId}`).value = '';
+            document.getElementById(`comentario-texto-${articuloId}`).value = '';
+        }
+
+        function enviarReaccion(tipo, autor) {
+            const tituloArticulo = document.querySelector('h1')?.textContent || 'Artículo';
+            let mensaje = '';
+            
+            if (tipo === 'me-gusta') {
+                mensaje = `❤️ *Me gusta*\n\n` +
+                         `Le di "me gusta" al comentario de *${autor}* en el artículo "${tituloArticulo}".`;
+            } else if (tipo === 'responder') {
+                mensaje = `💬 *Respuesta a comentario*\n\n` +
+                         `Quiero responder al comentario de *${autor}* en el artículo "${tituloArticulo}".\n\n` +
+                         `Mi respuesta: `;
+            }
+            
+            window.open(`https://wa.me/5356382909?text=${encodeURIComponent(mensaje)}`, '_blank');
+        }
     </script>
 </body>
 </html>
