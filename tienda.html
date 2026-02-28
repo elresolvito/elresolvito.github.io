@@ -24,120 +24,48 @@
         }
     </script>
     
+    <!-- Cargar scripts en orden -->
+    <script src="js/cart.js" defer></script>
+    <script src="js/checkout.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/main.js" defer></script>
 </head>
 <body class="bg-white text-gray-800">
 
     <!-- Transición suave entre páginas -->
     <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
 
-    <!-- ============================================ -->
-    <!-- HEADER (UNIFICADO) -->
-    <!-- ============================================ -->
-    <header class="sticky top-0 z-50 bg-white shadow-md">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex items-center justify-between">
-                <a href="index.html" class="flex items-center gap-2">
-                    <div class="w-10 h-10 bg-cuban-green rounded-full flex items-center justify-center text-white font-bold text-xl">
-                        <i class="fas fa-store"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-bold text-cuban-green leading-tight">El Resolvito</h1>
-                        <p class="text-xs text-gray-500">La Habana Vieja</p>
-                    </div>
-                </a>
+    <!-- Contenedores para componentes -->
+    <div id="header-container"></div>
+    <div id="mobile-menu-container"></div>
+    <div id="floating-buttons-container"></div>
 
-                <nav class="hidden lg:flex items-center gap-6">
-                    <a href="index.html" class="hover:text-cuban-green font-medium">Inicio</a>
-                    <a href="tienda.html" class="text-cuban-green font-medium border-b-2 border-cuban-green">Tienda</a>
-                    <a href="servicios.html" class="hover:text-cuban-green font-medium">Servicios</a>
-                    <a href="ofertas.html" class="hover:text-cuban-green font-medium">Ofertas</a>
-                    <a href="blog.html" class="hover:text-cuban-green font-medium">Blog</a>
-                    <a href="reservas.html" class="hover:text-cuban-green font-medium">Alojamientos</a>
-                </nav>
-
-                <div class="header-actions flex items-center gap-2">
-                    <button class="theme-toggle w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-cuban-green hover:text-white transition" onclick="toggleDayNight()" title="Cambiar modo">
-                        <span id="headerThemeIcon">☀️</span>
-                    </button>
-                    <button onclick="toggleCart()" class="p-2 hover:bg-gray-100 rounded-lg relative">
-                        <i class="fas fa-shopping-cart text-2xl text-cuban-green"></i>
-                        <span id="cartCount" class="cart-badge hidden">0</span>
-                    </button>
-                    <button class="mobile-menu-btn lg:hidden w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100" onclick="toggleMenu()">
-                        <i class="fas fa-bars text-2xl text-cuban-green"></i>
-                    </button>
+    <!-- ============================================ -->
+    <!-- CONTENIDO ESPECÍFICO DE TIENDA -->
+    <!-- ============================================ -->
+    
+    <!-- Barra de búsqueda y filtros (específica de tienda) -->
+    <div class="border-t border-gray-100 px-4 py-3 bg-white">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row gap-3">
+                <div class="relative flex-1">
+                    <input type="text" id="searchInput" placeholder="Buscar productos..." 
+                        class="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:border-cuban-green"
+                        onkeyup="searchProducts()">
+                    <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
                 </div>
-            </div>
-        </div>
-
-        <!-- Búsqueda y filtros -->
-        <div class="border-t border-gray-100 px-4 py-3">
-            <div class="container mx-auto">
-                <div class="flex flex-col md:flex-row gap-3">
-                    <div class="relative flex-1">
-                        <input type="text" id="searchInput" placeholder="Buscar productos..." 
-                            class="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:border-cuban-green"
-                            onkeyup="searchProducts()">
-                        <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                    </div>
-                    <div class="flex gap-2 overflow-x-auto hide-scrollbar">
-                        <button onclick="filterCategory('todos')" class="category-btn px-4 py-2 bg-cuban-green text-white rounded-full text-sm whitespace-nowrap">Todos</button>
-                        <button onclick="filterCategory('Alimentos y conservas')" class="category-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm whitespace-nowrap">Alimentos</button>
-                        <button onclick="filterCategory('Snacks y golosinas')" class="category-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm whitespace-nowrap">Snacks</button>
-                        <button onclick="filterCategory('Higiene personal')" class="category-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm whitespace-nowrap">Higiene</button>
-                        <button onclick="filterCategory('Bebidas alcohólicas y malta')" class="category-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm whitespace-nowrap">Bebidas</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- ============================================ -->
-    <!-- MENÚ MÓVIL -->
-    <!-- ============================================ -->
-    <div id="mobileMenu" class="fixed inset-0 bg-black/50 z-50 hidden" onclick="toggleMenu()">
-        <div class="bg-white w-80 max-w-sm h-full p-6" onclick="event.stopPropagation()">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-xl font-bold text-cuban-green">Menú</h2>
-                <button onclick="toggleMenu()" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-cuban-green hover:text-white transition">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <nav class="space-y-2">
-                <a href="index.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-home w-6 text-cuban-green"></i><span>Inicio</span></a>
-                <a href="tienda.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-shopping-basket w-6 text-cuban-green"></i><span>Tienda</span></a>
-                <a href="servicios.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-tools w-6 text-cuban-green"></i><span>Servicios</span></a>
-                <a href="ofertas.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-percent w-6 text-cuban-green"></i><span>Ofertas</span></a>
-                <a href="blog.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-newspaper w-6 text-cuban-green"></i><span>Blog</span></a>
-                <a href="reservas.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-bed w-6 text-cuban-green"></i><span>Alojamientos</span></a>
-            </nav>
-            <div class="absolute bottom-6 left-6 right-6">
-                <div class="border-t border-gray-200 pt-4">
-                    <p class="text-sm text-gray-500 mb-3">Contáctanos</p>
-                    <a href="https://wa.me/5356382909" class="flex items-center gap-2 text-cuban-green hover:text-cuban-green-dark transition">
-                        <i class="fab fa-whatsapp text-xl"></i><span class="text-sm font-medium">+53 5 638 2909</span>
-                    </a>
+                <div class="flex gap-2 overflow-x-auto hide-scrollbar">
+                    <button onclick="filterCategory('todos')" class="category-btn px-4 py-2 bg-cuban-green text-white rounded-full text-sm whitespace-nowrap">Todos</button>
+                    <button onclick="filterCategory('Alimentos y conservas')" class="category-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm whitespace-nowrap">Alimentos</button>
+                    <button onclick="filterCategory('Snacks y golosinas')" class="category-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm whitespace-nowrap">Snacks</button>
+                    <button onclick="filterCategory('Higiene personal')" class="category-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm whitespace-nowrap">Higiene</button>
+                    <button onclick="filterCategory('Bebidas alcohólicas y malta')" class="category-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm whitespace-nowrap">Bebidas</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- BOTONES FLOTANTES (UNIFICADOS) -->
-    <!-- ============================================ -->
-    <div class="floating-actions">
-        <a href="https://wa.me/5356382909" target="_blank" class="floating-btn whatsapp" data-tooltip="Contactar por WhatsApp">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-        <button class="floating-btn cart" onclick="toggleCart()" data-tooltip="Ver carrito">
-            <i class="fas fa-shopping-cart"></i>
-            <span id="floatingCartCount" class="cart-badge hidden">0</span>
-        </button>
-    </div>
-
-    <!-- ============================================ -->
-    <!-- PRODUCTOS (CONTENIDO ESPECÍFICO DE TIENDA) -->
-    <!-- ============================================ -->
+    <!-- Productos -->
     <section class="py-8">
         <div class="container mx-auto px-4">
             <h2 class="text-2xl font-bold mb-6">Catálogo Completo</h2>
@@ -147,132 +75,65 @@
         </div>
     </section>
 
-    <!-- ============================================ -->
-    <!-- MODAL DE IMAGEN -->
-    <!-- ============================================ -->
-    <div id="imageModal" class="fixed inset-0 bg-black/95 z-[60] hidden flex items-center justify-center p-4" onclick="closeImageModal()">
-        <div class="relative max-w-3xl w-full" onclick="event.stopPropagation()">
-            <button onclick="closeImageModal()" class="absolute -top-12 right-0 text-white text-3xl hover:text-gray-300">
-                <i class="fas fa-times"></i>
-            </button>
-            <img id="modalImage" src="" alt="" class="w-full max-h-[80vh] object-contain rounded-lg">
-            <p id="modalImageName" class="text-white text-center mt-4 text-xl font-bold"></p>
-        </div>
-    </div>
-
-    <!-- ============================================ -->
-    <!-- CARRITO LATERAL (UNIFICADO) -->
-    <!-- ============================================ -->
-    <div id="cartOverlay" class="fixed inset-0 bg-black/50 z-[100] hidden" onclick="toggleCart()"></div>
-    <div id="cartSidebar" class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl z-[101] transform translate-y-full cart-slide max-h-[85vh] flex flex-col">
-        <div class="p-4 border-b flex justify-between items-center bg-cuban-green text-white rounded-t-3xl">
-            <h3 class="font-bold text-lg"><i class="fas fa-shopping-cart mr-2"></i>Tu Carrito</h3>
-            <button onclick="toggleCart()" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition"><i class="fas fa-times"></i></button>
-        </div>
-        <div id="cartItems" class="flex-1 overflow-y-auto p-4 space-y-4"></div>
-        <div class="border-t p-4 bg-gray-50">
-            <div class="space-y-2 mb-4">
-                <div class="flex justify-between text-sm">
-                    <span>Subtotal:</span>
-                    <span id="cartSubtotal">$0</span>
-                </div>
-                <div class="flex justify-between text-sm">
-                    <span>Envío:</span>
-                    <span id="cartShipping">$200</span>
-                </div>
-                <!-- Barra de progreso -->
-                <div class="mt-3">
-                    <div id="promoProgressContainer" class="w-full bg-gray-200 rounded-full h-2.5">
-                        <div id="promoProgressBar" class="bg-cuban-green h-2.5 rounded-full" style="width: 0%;"></div>
-                    </div>
-                    <p id="progressText" class="text-xs text-gray-500 mt-1">Añade más productos para mejorar el envío</p>
-                </div>
-                <div class="border-t pt-2 flex justify-between text-lg font-bold">
-                    <span>Total:</span>
-                    <span id="cartTotal" class="text-cuban-green">$0</span>
-                </div>
-            </div>
-            <button onclick="checkout()" class="w-full btn-whatsapp text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2">
-                <i class="fab fa-whatsapp"></i> Enviar pedido por WhatsApp
-            </button>
-            <p class="text-xs text-center text-gray-500 mt-3">
-                <i class="fas fa-lock mr-1"></i> Pedido seguro al 5356382909
-            </p>
-        </div>
-    </div>
-
-    <!-- ============================================ -->
-    <!-- FOOTER (UNIFICADO Y COMPLETO) -->
-    <!-- ============================================ -->
-    <footer class="bg-cuban-dark text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <div class="flex items-center gap-2 mb-4">
-                        <div class="w-10 h-10 bg-cuban-green rounded-full flex items-center justify-center text-white font-bold text-xl">
-                            <i class="fas fa-store"></i>
-                        </div>
-                        <h3 class="font-bold text-xl">El Resolvito</h3>
-                    </div>
-                    <p class="text-gray-300 text-sm">Tu solución integral en La Habana. Productos, servicios y alojamientos de calidad.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Enlaces Rápidos</h4>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li><a href="index.html" class="hover:text-white transition">Inicio</a></li>
-                        <li><a href="tienda.html" class="hover:text-white transition">Tienda</a></li>
-                        <li><a href="servicios.html" class="hover:text-white transition">Servicios</a></li>
-                        <li><a href="ofertas.html" class="hover:text-white transition">Ofertas</a></li>
-                        <li><a href="blog.html" class="hover:text-white transition">Blog</a></li>
-                        <li><a href="reservas.html" class="hover:text-white transition">Alojamientos</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Contacto</h4>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li class="flex items-center gap-2"><i class="fab fa-whatsapp text-cuban-yellow"></i> +53 5 638 2909</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-envelope text-cuban-yellow"></i> elresolvito@gmail.com</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-map-marker-alt text-cuban-yellow"></i> La Habana Vieja, Cuba</li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Síguenos</h4>
-                    <div class="flex gap-4">
-                        <a href="https://instagram.com/elresolvito.habana" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-xl"><i class="fab fa-instagram"></i></a>
-                        <a href="https://wa.me/5356382909" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-xl"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-xl"><i class="fab fa-facebook-f"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-white/20 pt-8 text-center text-gray-400 text-sm">
-                <p>&copy; 2026 El Resolvito. Todos los derechos reservados. Hecho con ❤️ en La Habana.</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Contenedores para modales y footer -->
+    <div id="image-modal-container"></div>
+    <div id="cart-sidebar-container"></div>
+    <div id="checkout-modal-container"></div>
+    <div id="footer-container"></div>
 
     <!-- Toast de notificación -->
     <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
         <p id="cartToastMessage">Producto añadido</p>
     </div>
 
-    <!-- ============================================ -->
-    <!-- SCRIPT UNIFICADO DEL CARRITO Y FUNCIONES GLOBALES -->
-    <!-- ============================================ -->
     <script>
-        // ============================================
-        // VARIABLES GLOBALES Y CONFIGURACIÓN
-        // ============================================
-        let cart = JSON.parse(localStorage.getItem('elResolvitoCart')) || [];
-        const WHATSAPP_NUMBER = '5356382909';
-        const FREE_SHIPPING_MIN = 5000;
+        // Función para cargar componentes HTML
+        async function loadComponent(elementId, componentPath) {
+            try {
+                const response = await fetch(componentPath);
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+                
+                if (elementId === 'header-container') {
+                    updateActiveNav();
+                }
+            } catch (error) {
+                console.error(`Error cargando ${componentPath}:`, error);
+            }
+        }
 
-        const SHIPPING_RANGES = [
-            { max: 2000, fee: 200, name: 'Estándar' },
-            { max: 5000, fee: 150, name: 'Económico' },
-            { max: Infinity, fee: 0, name: 'Gratis' }
-        ];
+        function updateActiveNav() {
+            const currentPage = window.location.pathname.split('/').pop() || 'tienda.html';
+            const navLinks = document.querySelectorAll('#mainNav a');
+            
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href === currentPage) {
+                    link.classList.add('text-cuban-green', 'font-medium', 'border-b-2', 'border-cuban-green');
+                } else {
+                    link.classList.remove('text-cuban-green', 'font-medium', 'border-b-2', 'border-cuban-green');
+                }
+            });
+        }
 
-        // Todos los 36 productos del CSV (con nombres de campo estandarizados)
+        // Cargar componentes
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadComponent('header-container', 'components/header.html');
+            await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
+            await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
+            await loadComponent('image-modal-container', 'components/image-modal.html');
+            await loadComponent('cart-sidebar-container', 'components/cart-sidebar.html');
+            await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
+            await loadComponent('footer-container', 'components/footer.html');
+            
+            // Inicializar tienda
+            renderProducts();
+            if (typeof updateCartUI === 'function') {
+                updateCartUI();
+            }
+        });
+
+        // Todos los productos
         const allProducts = [
             {id:1, nombre:"Atún en lata", categoria:"Alimentos y conservas", precio:540, imagen:"https://i.postimg.cc/76xHK6zt/atun_precio_500.png"},
             {id:2, nombre:"Pasta de tomate", categoria:"Alimentos y conservas", precio:350, imagen:"https://i.postimg.cc/gjjYPTNv/pasta_tomate_precio_350.png"},
@@ -314,267 +175,6 @@
 
         let currentCategory = 'todos';
 
-        // ============================================
-        // FUNCIONES DEL CARRITO (UNIFICADAS)
-        // ============================================
-        function calculateShipping(subtotal) {
-            for (const range of SHIPPING_RANGES) {
-                if (subtotal <= range.max) {
-                    return range.fee;
-                }
-            }
-            return 200;
-        }
-
-        function getShippingRangeName(subtotal) {
-            for (const range of SHIPPING_RANGES) {
-                if (subtotal <= range.max) {
-                    return range.name;
-                }
-            }
-            return 'Estándar';
-        }
-
-        function addToCart(product) {
-            if (!product || !product.id || !product.nombre || !product.precio) {
-                console.error('Producto inválido', product);
-                return false;
-            }
-
-            const existingItemIndex = cart.findIndex(item => item.id === product.id);
-            
-            if (existingItemIndex !== -1) {
-                cart[existingItemIndex].cantidad += product.cantidad || 1;
-            } else {
-                cart.push({
-                    id: product.id,
-                    nombre: product.nombre,
-                    imagen: product.imagen,
-                    precio: product.precio,
-                    cantidad: product.cantidad || 1
-                });
-            }
-
-            saveCart();
-            updateCartUI();
-            showCartToast('Producto añadido al carrito');
-            return true;
-        }
-
-        function saveCart() {
-            localStorage.setItem('elResolvitoCart', JSON.stringify(cart));
-        }
-
-        function updateCartQuantity(index, newQuantity) {
-            if (newQuantity <= 0) {
-                removeFromCart(index);
-                return;
-            }
-            cart[index].cantidad = newQuantity;
-            saveCart();
-            updateCartUI();
-            showCartToast('Carrito actualizado');
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            saveCart();
-            updateCartUI();
-            showCartToast('Producto eliminado');
-        }
-
-        function clearCart() {
-            cart = [];
-            saveCart();
-            updateCartUI();
-            showCartToast('Carrito vaciado');
-        }
-
-        function updateCartUI() {
-            const totalItems = cart.reduce((sum, item) => sum + (item.cantidad || 0), 0);
-            const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
-            const shipping = calculateShipping(subtotal);
-            const total = subtotal + shipping;
-            
-            // Actualizar contadores
-            document.querySelectorAll('#cartCount, #floatingCartCount').forEach(el => {
-                if (el) {
-                    el.textContent = totalItems;
-                    if (totalItems > 0) {
-                        el.classList.remove('hidden');
-                        el.classList.add('badge-pop');
-                        setTimeout(() => el.classList.remove('badge-pop'), 300);
-                    } else {
-                        el.classList.add('hidden');
-                    }
-                }
-            });
-
-            // Actualizar items
-            const cartItemsContainer = document.getElementById('cartItems');
-            if (cartItemsContainer) {
-                if (cart.length === 0) {
-                    cartItemsContainer.innerHTML = '<div class="text-center py-8 text-gray-500"><i class="fas fa-shopping-cart text-4xl mb-3 opacity-30"></i><p>Tu carrito está vacío</p></div>';
-                } else {
-                    cartItemsContainer.innerHTML = cart.map((item, index) => `
-                        <div class="flex gap-3 bg-gray-50 p-3 rounded-lg">
-                            <img src="${item.imagen || 'https://via.placeholder.com/80'}" class="w-16 h-16 object-contain bg-white rounded-lg" onerror="this.src='https://via.placeholder.com/80'">
-                            <div class="flex-1">
-                                <h4 class="font-medium text-sm">${item.nombre}</h4>
-                                <p class="text-cuban-green font-bold">$${item.precio?.toLocaleString()}</p>
-                                <div class="flex items-center gap-2 mt-1">
-                                    <button onclick="updateCartQuantity(${index}, ${(item.cantidad || 1) - 1})" class="w-6 h-6 bg-white rounded shadow text-xs hover:bg-cuban-green hover:text-white transition">-</button>
-                                    <span class="text-sm font-medium">${item.cantidad || 1}</span>
-                                    <button onclick="updateCartQuantity(${index}, ${(item.cantidad || 1) + 1})" class="w-6 h-6 bg-white rounded shadow text-xs hover:bg-cuban-green hover:text-white transition">+</button>
-                                    <button onclick="removeFromCart(${index})" class="ml-auto text-red-500 hover:text-red-700 transition">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    `).join('');
-                }
-            }
-
-            // Actualizar totales
-            const subtotalEl = document.getElementById('cartSubtotal');
-            const shippingEl = document.getElementById('cartShipping');
-            const totalEl = document.getElementById('cartTotal');
-            const progressBar = document.getElementById('promoProgressBar');
-            const progressText = document.getElementById('progressText');
-
-            if (subtotalEl) subtotalEl.textContent = `$${subtotal.toLocaleString()}`;
-            if (shippingEl) {
-                if (shipping === 0) {
-                    shippingEl.innerHTML = '<span class="text-green-600 font-bold">¡GRATIS!</span>';
-                } else {
-                    shippingEl.textContent = `$${shipping.toLocaleString()}`;
-                }
-            }
-            if (totalEl) totalEl.textContent = `$${total.toLocaleString()}`;
-
-            // Barra de progreso
-            if (progressBar && progressText) {
-                const progressPercent = Math.min(100, (subtotal / FREE_SHIPPING_MIN) * 100);
-                progressBar.style.width = `${progressPercent}%`;
-                
-                if (subtotal >= FREE_SHIPPING_MIN) {
-                    progressText.innerHTML = '🎉 ¡Envío GRATIS aplicado!';
-                } else {
-                    const remaining = FREE_SHIPPING_MIN - subtotal;
-                    const nextRange = subtotal < 2000 ? 'Estándar ($200)' : 'Económico ($150)';
-                    progressText.innerHTML = `🚚 Envío ${nextRange}. Faltan $${remaining.toLocaleString()} para envío GRATIS.`;
-                }
-            }
-        }
-
-        function showCartToast(message) {
-            const toast = document.getElementById('cartToast');
-            const msgEl = document.getElementById('cartToastMessage');
-            if (!toast || !msgEl) return;
-
-            msgEl.textContent = message;
-            toast.classList.add('opacity-100');
-            toast.classList.remove('opacity-0', 'pointer-events-none');
-
-            clearTimeout(window.toastTimeout);
-            window.toastTimeout = setTimeout(() => {
-                toast.classList.remove('opacity-100');
-                toast.classList.add('opacity-0', 'pointer-events-none');
-            }, 2500);
-        }
-
-        function toggleCart() {
-            const sidebar = document.getElementById('cartSidebar');
-            const overlay = document.getElementById('cartOverlay');
-            if (sidebar && overlay) {
-                sidebar.classList.toggle('cart-open');
-                overlay.classList.toggle('hidden');
-                document.body.style.overflow = sidebar.classList.contains('cart-open') ? 'hidden' : '';
-            }
-        }
-
-        function checkout() {
-            if (cart.length === 0) {
-                showCartToast('El carrito está vacío');
-                return;
-            }
-
-            const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
-            const shipping = calculateShipping(subtotal);
-            const total = subtotal + shipping;
-
-            let message = `*PEDIDO - EL RESOLVITO*\n\n`;
-            message += `🛒 *TU COMPRA:*\n`;
-            cart.forEach(item => {
-                message += `• ${item.nombre} x${item.cantidad} = $${(item.precio * item.cantidad).toLocaleString()}\n`;
-            });
-            message += `\n💰 *DESGLOSE:*\n`;
-            message += `- Subtotal: $${subtotal.toLocaleString()}\n`;
-            message += `- Envío (${getShippingRangeName(subtotal)}): ${shipping === 0 ? 'GRATIS' : '$' + shipping.toLocaleString()}\n`;
-            message += `- *TOTAL: $${total.toLocaleString()}*\n\n`;
-            message += `📍 *ENTREGA:* La Habana Vieja\n`;
-            message += `📞 *CONTACTO:* 5356382909\n\n`;
-            message += `_Gracias por comprar en El Resolvito._`;
-
-            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
-        }
-
-        // ============================================
-        // FUNCIONES DE UI (Modo noche, menú, modal)
-        // ============================================
-        function initDayNight() {
-            const hour = new Date().getHours();
-            const isNight = hour < 6 || hour >= 18;
-            const savedMode = localStorage.getItem('nightMode');
-            
-            if (savedMode === 'true' || (savedMode === null && isNight)) {
-                document.body.classList.add('night-mode');
-                document.getElementById('headerThemeIcon').textContent = '🌙';
-            } else {
-                document.getElementById('headerThemeIcon').textContent = '☀️';
-            }
-        }
-
-        function toggleDayNight() {
-            document.body.classList.toggle('night-mode');
-            const isNight = document.body.classList.contains('night-mode');
-            document.getElementById('headerThemeIcon').textContent = isNight ? '🌙' : '☀️';
-            localStorage.setItem('nightMode', isNight);
-        }
-
-        function toggleMenu() {
-            const menu = document.getElementById('mobileMenu');
-            if (menu) {
-                menu.classList.toggle('hidden');
-                document.body.style.overflow = menu.classList.contains('hidden') ? '' : 'hidden';
-            }
-        }
-
-        function openImageModal(src, name) {
-            const modal = document.getElementById('imageModal');
-            const img = document.getElementById('modalImage');
-            const nameEl = document.getElementById('modalImageName');
-            
-            if (modal && img && nameEl) {
-                img.src = src;
-                nameEl.textContent = name || 'Imagen';
-                modal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        function closeImageModal() {
-            const modal = document.getElementById('imageModal');
-            if (modal) {
-                modal.classList.add('hidden');
-                document.body.style.overflow = '';
-            }
-        }
-
-        // ============================================
-        // FUNCIONES ESPECÍFICAS DE TIENDA
-        // ============================================
         function renderProducts(filter = 'todos', search = '') {
             let filtered = allProducts;
             if (filter !== 'todos') filtered = filtered.filter(p => p.categoria === filter);
@@ -627,59 +227,6 @@
         function searchProducts() {
             renderProducts(currentCategory, document.getElementById('searchInput')?.value || '');
         }
-
-        // ============================================
-        // INICIALIZACIÓN Y EVENTOS GLOBALES
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            renderProducts();
-            initDayNight();
-            updateCartUI();
-            
-            // Quitar fade de entrada
-            document.getElementById('pageFade').classList.add('opacity-0');
-        });
-
-        // Cerrar modales con ESC
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeImageModal();
-                if (document.getElementById('cartSidebar')?.classList.contains('cart-open')) {
-                    toggleCart();
-                }
-            }
-        });
-
-        // Transición suave entre páginas
-        document.querySelectorAll('a[href]').forEach(link => {
-            const href = link.getAttribute('href');
-            
-            if (href && !href.startsWith('http') && !href.startsWith('#') && 
-                !href.startsWith('mailto') && !href.startsWith('tel') && 
-                href !== 'javascript:void(0)' && !href.includes('wa.me') && !href.includes('instagram')) {
-                
-                link.addEventListener('click', function(e) {
-                    if (e.ctrlKey || e.metaKey || e.button === 1) return;
-                    
-                    e.preventDefault();
-                    
-                    localStorage.setItem('nightMode', document.body.classList.contains('night-mode'));
-                    
-                    document.getElementById('pageFade').classList.remove('opacity-0');
-                    
-                    setTimeout(() => {
-                        window.location.href = href;
-                    }, 150);
-                });
-            }
-        });
-
-        window.addEventListener('pageshow', function(event) {
-            if (event.persisted) {
-                document.getElementById('pageFade').classList.add('opacity-0');
-            }
-        });
     </script>
 </body>
 </html>
-
