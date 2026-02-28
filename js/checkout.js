@@ -1,6 +1,6 @@
 // js/checkout.js
 // ============================================
-// LÓGICA DEL CHECKOUT
+// LÓGICA DEL CHECKOUT (ACTUALIZADA)
 // ============================================
 
 function openCheckoutModal() {
@@ -9,15 +9,19 @@ function openCheckoutModal() {
         return;
     }
 
+    const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
+
+    // Validar compra mínima
+    if (subtotal < MINIMUM_PURCHASE) {
+        showCartToast(`Compra mínima: $${MINIMUM_PURCHASE}`);
+        return;
+    }
+
     // Actualizar resumen del carrito en el modal
     const summaryEl = document.getElementById('checkoutCartSummary');
     const totalEl = document.getElementById('checkoutTotal');
     
     if (summaryEl) {
-        const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
-        const shipping = calculateShipping(subtotal);
-        const total = subtotal + shipping;
-        
         summaryEl.innerHTML = cart.map(item => 
             `<div class="flex justify-between mb-1">
                 <span>${item.nombre} x${item.cantidad}</span>
@@ -25,7 +29,7 @@ function openCheckoutModal() {
             </div>`
         ).join('');
         
-        if (totalEl) totalEl.textContent = `$${total.toLocaleString()}`;
+        if (totalEl) totalEl.textContent = `$${subtotal.toLocaleString()}`;
     }
 
     // Abrir modal
@@ -44,8 +48,17 @@ function closeCheckoutModal() {
     }
 }
 
+function calculateFinalTotal(subtotal, location) {
+    if (location === 'habana-vieja') {
+        return subtotal + SHIPPING_WITHIN_HABANA_VIEJA;
+    } else {
+        // Fuera de LHV: el total se determina después por WhatsApp
+        return subtotal; // El costo de envío se añade en el mensaje
+    }
+}
+
 function sendCompleteOrder() {
-    // Validar que el carrito no esté vacío
+    // Validar carrito
     if (cart.length === 0) {
         showCartToast('El carrito está vacío');
         closeCheckoutModal();
@@ -55,6 +68,7 @@ function sendCompleteOrder() {
     // Obtener datos del formulario
     const customerName = document.getElementById('customerName')?.value.trim();
     const customerAddress = document.getElementById('customerAddress')?.value.trim();
+    const deliveryZone = document.querySelector('input[name="deliveryZone"]:checked')?.value;
     const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value;
     const customerNotes = document.getElementById('customerNotes')?.value.trim();
 
@@ -67,6 +81,10 @@ function sendCompleteOrder() {
         alert('Por favor, ingresa tu dirección de entrega.');
         return;
     }
+    if (!deliveryZone) {
+        alert('Por favor, selecciona la zona de entrega.');
+        return;
+    }
     if (!paymentMethod) {
         alert('Por favor, selecciona un método de pago.');
         return;
@@ -74,14 +92,30 @@ function sendCompleteOrder() {
 
     // Calcular totales
     const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
-    const shipping = calculateShipping(subtotal);
-    const total = subtotal + shipping;
+    
+    if (subtotal < MINIMUM_PURCHASE) {
+        alert(`El subtotal debe ser de al menos $${MINIMUM_PURCHASE}.`);
+        return;
+    }
+
+    let shippingCost = 0;
+    let shippingDescription = '';
+
+    if (deliveryZone === 'habana-vieja') {
+        shippingCost = SHIPPING_WITHIN_HABANA_VIEJA;
+        shippingDescription = `Envío dentro de La Habana Vieja: $${SHIPPING_WITHIN_HABANA_VIEJA}`;
+    } else {
+        shippingDescription = 'Envío fuera de La Habana Vieja: costo a consultar (por peso y distancia)';
+    }
+
+    const totalToShow = (deliveryZone === 'habana-vieja') ? subtotal + shippingCost : subtotal;
 
     // Construir mensaje
     let message = `*✅ PEDIDO CONFIRMADO - EL RESOLVITO*\n\n`;
     message += `👤 *DATOS DEL CLIENTE:*\n`;
     message += `• Nombre: ${customerName}\n`;
     message += `• Dirección: ${customerAddress}\n`;
+    message += `• Zona: ${deliveryZone === 'habana-vieja' ? 'La Habana Vieja' : 'Fuera de La Habana Vieja'}\n`;
     message += `• Pago: ${paymentMethod}\n`;
     if (customerNotes) {
         message += `• Notas: ${customerNotes}\n`;
@@ -94,15 +128,20 @@ function sendCompleteOrder() {
     
     message += `\n💰 *RESUMEN:*\n`;
     message += `- Subtotal: $${subtotal.toLocaleString()}\n`;
-    message += `- Envío (${getShippingRangeName(subtotal)}): ${shipping === 0 ? 'GRATIS' : '$' + shipping.toLocaleString()}\n`;
-    message += `- *TOTAL A PAGAR: $${total.toLocaleString()}*\n\n`;
-    message += `_Gracias por tu compra. En breve te contactaremos._`;
+    message += `- ${shippingDescription}\n`;
+    message += `- *TOTAL A PAGAR: $${totalToShow.toLocaleString()}*`;
+    
+    if (deliveryZone !== 'habana-vieja') {
+        message += ` (más envío a consultar)`;
+    }
+    
+    message += `\n\n_Recibirás un mensaje de confirmación con el costo final de envío (si aplica)._`;
 
     // Enviar por WhatsApp
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
 
-    // Limpiar carrito (opcional - puedes comentar si no quieres vaciarlo)
-    clearCart();
+    // Opcional: limpiar carrito después del envío
+    // clearCart();
     
     // Cerrar modales
     closeCheckoutModal();
