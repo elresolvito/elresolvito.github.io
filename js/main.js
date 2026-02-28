@@ -3,13 +3,35 @@
 // INICIALIZACIÓN Y EVENTOS GLOBALES
 // ============================================
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar UI común
+// Función para inicializar todo DESPUÉS de cargar componentes
+function initializeAfterComponents() {
+    // Ahora sí podemos inicializar el modo noche
     initDayNight();
-    updateCartUI();
     
+    // Actualizar carrito
+    if (typeof updateCartUI === 'function') {
+        updateCartUI();
+    }
+    
+    // Inicializar funciones específicas de cada página
+    if (typeof renderFeaturedProducts === 'function') {
+        renderFeaturedProducts();
+    }
+    if (typeof initCarousel === 'function') {
+        initCarousel();
+    }
+    if (typeof renderProducts === 'function') {
+        renderProducts();
+    }
+}
+
+// Modificar el DOMContentLoaded para esperar a los componentes
+document.addEventListener('DOMContentLoaded', function() {
     // Quitar fade de entrada
     document.getElementById('pageFade').classList.add('opacity-0');
+    
+    // NOTA: ya no llamamos a initDayNight() aquí porque los componentes
+    // aún no se han cargado. La llamada se hará después de cargar componentes.
 });
 
 // Cerrar modales con ESC
