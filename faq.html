@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Preguntas Frecuentes - El Resolvito</title>
+    <meta name="description" content="Resolvemos tus dudas sobre compras, envíos, pagos y servicios en El Resolvito.">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <!-- Fonts y estilos -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Config Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'poppins': ['Poppins'], 'opensans': ['Open Sans'] },
+                    colors: {
+                        'cuban-green': '#2E7D32', 'cuban-dark': '#1B5E20',
+                        'cuban-yellow': '#FFB300', 'cuban-blue': '#0277BD'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Estilos para el acordeón de preguntas */
+        .faq-question {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .faq-question:hover {
+            background-color: #f9fafb;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .faq-answer.open {
+            max-height: 500px;
+        }
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        .faq-question.open .faq-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+
+    <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
+
+    <!-- Contenedores para componentes -->
+    <div id="header-container"></div>
+    <div id="mobile-menu-container"></div>
+    <div id="floating-buttons-container"></div>
+
+    <!-- ============================================ -->
+    <!-- CONTENIDO DE PREGUNTAS FRECUENTES -->
+    <!-- ============================================ -->
+    
+    <!-- Hero -->
+    <section class="bg-gradient-to-br from-cuban-green to-cuban-dark text-white py-16 px-4">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Preguntas Frecuentes</h1>
+            <p class="text-xl opacity-90 max-w-2xl mx-auto">Encuentra respuestas a las dudas más comunes sobre compras, envíos y servicios</p>
+        </div>
+    </section>
+
+    <!-- Categorías -->
+    <section class="py-12 border-b">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center gap-3">
+                <button class="faq-category-btn px-6 py-2 bg-cuban-green text-white rounded-full font-medium" data-category="all">Todas</button>
+                <button class="faq-category-btn px-6 py-2 bg-gray-100 text-gray-700 rounded-full font-medium hover:bg-gray-200" data-category="compras">🛒 Compras</button>
+                <button class="faq-category-btn px-6 py-2 bg-gray-100 text-gray-700 rounded-full font-medium hover:bg-gray-200" data-category="envios">🚚 Envíos</button>
+                <button class="faq-category-btn px-6 py-2 bg-gray-100 text-gray-700 rounded-full font-medium hover:bg-gray-200" data-category="pagos">💳 Pagos</button>
+                <button class="faq-category-btn px-6 py-2 bg-gray-100 text-gray-700 rounded-full font-medium hover:bg-gray-200" data-category="servicios">📊 Servicios</button>
+                <button class="faq-category-btn px-6 py-2 bg-gray-100 text-gray-700 rounded-full font-medium hover:bg-gray-200" data-category="alojamientos">🏠 Alojamientos</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preguntas -->
+    <section class="py-12">
+        <div class="container mx-auto px-4 max-w-3xl">
+            
+            <!-- COMPRAS -->
+            <div class="faq-category" data-category="compras">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                    <i class="fas fa-shopping-cart text-cuban-green"></i> Compras
+                </h2>
+                
+                <div class="space-y-4 mb-12">
+                    <div class="faq-item border rounded-lg overflow-hidden">
+                        <div class="faq-question p-4 flex justify-between items-center" onclick="toggleFaq(this)">
+                            <h3 class="font-semibold text-lg">¿Cómo realizo un pedido?</h3>
+                            <i class="fas fa-chevron-down faq-icon text-cuban-green"></i>
+                        </div>
+                        <div class="faq-answer px-4 pb-4">
+                            <p class="text-gray-600">Es muy sencillo:</p>
+                            <ol class="list-decimal pl-5 mt-2 text-gray-600 space-y-1">
+                                <li>Navega por nuestra tienda y añade los productos al carrito.</li>
+                                <li>Haz clic en "Proceder al checkout" y completa el formulario con tus datos.</li>
+                                <li>Envía el pedido por WhatsApp haciendo clic en el botón.</li>
+                                <li>Recibirás un mensaje de confirmación y coordinaremos la entrega.</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item border rounded-lg overflow-hidden">
+                        <div class="faq-question p-4 flex justify-between items-center" onclick="toggleFaq(this)">
+                            <h3 class="font-semibold text-lg">¿Hay un monto mínimo de compra?</h3>
+                            <i class="fas fa-chevron-down faq-icon text-cuban-green"></i>
+                        </div>
+                        <div class="faq-answer px-4 pb-4">
+                            <p class="text-gray-600">Sí, el monto mínimo de compra es de <strong>$500 CUP</strong>. Esto nos permite ofrecer un servicio de entrega eficiente y mantener la calidad en nuestros productos.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item border rounded-lg overflow-hidden">
+                        <div class="faq-question p-4 flex justify-between items-center" onclick="toggleFaq(this)">
+                            <h3 class="font-semibold text-lg">¿Puedo modificar mi pedido después de enviarlo?</h3>
+                            <i class="fas fa-chevron-down faq-icon text-cuban-green"></i>
+                        </div>
+                        <div class="faq-answer px-4 pb-4">
+                            <p class="text-gray-600">Sí, puedes contactarnos por WhatsApp al <strong>+53 5 638 2909</strong> dentro de los 30 minutos posteriores al pedido para realizar cambios. Pasado ese tiempo, es posible que ya esté en proceso de preparación.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ENVÍOS -->
+            <div class="faq-category" data-category="envios">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                    <i class="fas fa-truck text-cuban-green"></i> Envíos
+                </h2>
+                
+                <div class="space-y-4 mb-12">
+                    <div class="faq-item border rounded-lg overflow-hidden">
+                        <div class="faq-question p-4 flex justify-between items-center" onclick="toggleFaq(this)">
+                            <h3 class="font-semibold text-lg">¿Cuánto cuesta el envío?</h3>
+                            <i class="fas fa-chevron-down faq-icon text-cuban-green"></i>
+                        </div>
+                        <div class="faq-answer px-4 pb-4">
+                            <p class="text-gray-600">El costo del envío depende de tu ubicación:</p>
+                            <ul class="list-disc pl-5 mt-2 text-gray-600">
+                                <li><strong>Dentro de La Habana Vieja:</strong> $400 CUP (tarifa fija).</li>
+                                <li><strong>Fuera de La Habana Vieja:</strong> Se calcula según distancia y peso. Te informaremos el costo antes de confirmar la entrega.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item border rounded-lg overflow-hidden">
+                        <div class="faq-question p-4 flex justify-between items-center" onclick="toggleFaq(this)">
+                            <h3 class="font-semibold text-lg">¿Cuánto tarda la entrega?</h3>
+                            <i class="fas fa-chevron-down faq-icon text-cuban-green"></i>
+                        </div>
+                        <div class="faq-answer px-4 pb-4">
+                            <p class="text-gray-600">Generalmente realizamos las entregas en un plazo de <strong>24 a 48 horas hábiles</strong> dentro de La Habana Vieja. Para otras zonas, el tiempo puede variar y te lo confirmaremos al momento de coordinar la entrega.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item border rounded-lg overflow-hidden">
+                        <div class="faq-question p-4 flex justify-between items-center" onclick="toggleFaq(this)">
+                            <h3 class="font-semibold text-lg">¿Puedo recoger mi pedido personalmente?</h3>
+                            <i class="fas fa-chevron-down faq-icon text-cuban-green"></i>
+                        </div>
+                        <div class="faq-answer px-4 pb-4">
+                            <p class="text-gray-600">¡Claro que sí! Puedes pasar a recoger tu pedido por nuestra dirección en La Habana Vieja. Coordina el horario con nosotros por WhatsApp para asegurarte de que estaremos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PAGOS -->
+            <div class="faq-category" data-category="pagos">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                    <i class="fas fa-credit-card text-cuban-green"></i> Pagos
+                </h2>
+                
+                <div class="space-y-4 mb-12">
+                    <div class="faq-item border rounded-lg overflow-hidden">
+                        <div class="faq-question p-4 flex justify-between items-center" onclick="toggleFaq(this)">
+                            <h3 class="font-semibold text-lg">¿Qué métodos de pago aceptan?</h3>
+                            <i class="fas fa-chevron-down faq-icon text-cuban-green"></i>
+                        </div>
+                        <div class="faq-answer px-4 pb-4">
+                            <p class="text-gray-600">Aceptamos dos formas de pago:</p>
+                            <ul class="list-disc pl-5 mt-2 text-gray-600">
+                                <li><strong>Efectivo:</strong> En el momento de la entrega.</li>
+                                <li><strong>Transferencia bancaria:</strong> Te indicaremos la cuenta al confirmar el pedido.</li>
+                            </ul>
+                            <p class="mt-2 text-gray-600">No almacenamos información de tarjetas de crédito ni datos bancarios.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item border rounded-lg overflow-hidden">
+                        <div class="faq-question p-4 flex justify-between items-center" onclick="toggleFaq(this)">
+                            <h3 class="font-semibold text-lg">¿Hay algún cargo adicional?</h3>
+                            <i class="fas fa-chevron-down faq-icon text-cuban-green"></i>
+                        </div>
+                        <div class="faq-answer px-4 pb-4">
+                            <p class="text-gray-600">No. El precio que ves en la web es el precio final, incluye impuestos. Solo se añade el costo de envío según tu ubicación.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SERVICIOS -->
+            <div class="faq-category" data-category="servicios">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                    <i class="fas fa-tools text-cuban-green"></i> Servicios
+                </h2>
+                
+                <div class="space-y-4 mb-12">
+                    <div class="faq-item border rounded-lg overflow-hidden">
+                        <div class="faq-question p-4 flex justify-between items-center" onclick="toggleFaq(this)">
+                            <h3 class="font-semibold text-lg">¿Cómo contrato un servicio?</h3>
+                            <i class="fas fa-chevron-down faq-icon text-cuban-green"></i>
+                        </div>
+                        <div class="faq-answer px-4 pb-4">
+                            <p class="text-gray-600">En nuestra sección de <a href="servicios.html" class="text-cuban-green hover:underline">Servicios</a> encontrarás los profesionales disponibles. Haz clic en "Contactar" y te llevará directamente a WhatsApp para acordar los detalles.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item border rounded-lg overflow-hidden">
+                        <div class="faq-question p-4 flex justify-between items-center" onclick="toggleFaq(this)">
+                            <h3 class="font-semibold text-lg">¿El Resolvito se responsabiliza por los servicios?</h3>
+                            <i class="fas fa-chevron-down faq-icon text-cuban-green"></i>
+                        </div>
+                        <div class="faq-answer px-4 pb-4">
+                            <p class="text-gray-600">Actuamos como intermediarios para conectar a clientes con profesionales independientes. Aunque recomendamos a personas de confianza, el acuerdo y la responsabilidad del servicio es directamente entre el cliente y el profesional.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ALOJAMIENTOS -->
+            <div class="faq-category" data-category="alojamientos">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                    <i class="fas fa-bed text-cuban-green"></i> Alojamientos
+                </h2>
+                
+                <div class="space-y-4 mb-12">
+                    <div class="faq-item border rounded-lg overflow-hidden">
+                        <div class="faq-question p-4 flex justify-between items-center" onclick="toggleFaq(this)">
+                            <h3 class="font-semibold text-lg">¿Cómo reservo en Terrazas de Bayona 59?</h3>
+                            <i class="fas fa-chevron-down faq-icon text-cuban-green"></i>
+                        </div>
+                        <div class="faq-answer px-4 pb-4">
+                            <p class="text-gray-600">Puedes reservar directamente en su <a href="https://reservaterrazasdebayona59.com/" target="_blank" class="text-cuban-green hover:underline">sitio web oficial</a> o contactarlos por WhatsApp para consultar disponibilidad y precios.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item border rounded-lg overflow-hidden">
+                        <div class="faq-question p-4 flex justify-between items-center" onclick="toggleFaq(this)">
+                            <h3 class="font-semibold text-lg">¿Hay más alojamientos disponibles?</h3>
+                            <i class="fas fa-chevron-down faq-icon text-cuban-green"></i>
+                        </div>
+                        <div class="faq-answer px-4 pb-4">
+                            <p class="text-gray-600">Por ahora tenemos este alojamiento destacado, pero estamos trabajando para incorporar más opciones muy pronto. Si tienes una propiedad y quieres publicarla, <a href="https://wa.me/5356382909?text=Quiero%20publicar%20mi%20propiedad" class="text-cuban-green hover:underline">contáctanos</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- OTRAS PREGUNTAS -->
+            <div class="faq-category" data-category="otras">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                    <i class="fas fa-question-circle text-cuban-green"></i> Otras preguntas
+                </h2>
+                
+                <div class="space-y-4 mb-12">
+                    <div class="faq-item border rounded-lg overflow-hidden">
+                        <div class="faq-question p-4 flex justify-between items-center" onclick="toggleFaq(this)">
+                            <h3 class="font-semibold text-lg">¿Cómo puedo contactarlos?</h3>
+                            <i class="fas fa-chevron-down faq-icon text-cuban-green"></i>
+                        </div>
+                        <div class="faq-answer px-4 pb-4">
+                            <p class="text-gray-600">Puedes escribirnos por WhatsApp al <strong>+53 5 638 2909</strong> o enviar un correo a <strong>elresolvito@gmail.com</strong>. Estamos disponibles de lunes a sábado de 9am a 6pm.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item border rounded-lg overflow-hidden">
+                        <div class="faq-question p-4 flex justify-between items-center" onclick="toggleFaq(this)">
+                            <h3 class="font-semibold text-lg">¿Tienen políticas de devolución?</h3>
+                            <i class="fas fa-chevron-down faq-icon text-cuban-green"></i>
+                        </div>
+                        <div class="faq-answer px-4 pb-4">
+                            <p class="text-gray-600">Sí, aceptamos devoluciones por productos en mal estado o incorrectos dentro de las 24 horas posteriores a la entrega. Consulta nuestros <a href="terminos.html" class="text-cuban-green hover:underline">Términos y Condiciones</a> para más detalles.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ¿No encuentras tu pregunta? -->
+            <div class="mt-12 bg-cuban-green/5 p-8 rounded-2xl text-center">
+                <i class="fas fa-question-circle text-5xl text-cuban-green mb-4"></i>
+                <h3 class="text-2xl font-bold mb-2">¿No encuentras tu pregunta?</h3>
+                <p class="text-gray-600 mb-6">Escríbenos directamente por WhatsApp y te responderemos a la mayor brevedad</p>
+                <a href="https://wa.me/5356382909?text=Hola,%20tengo%20una%20pregunta%20sobre..." target="_blank" class="inline-flex items-center gap-2 bg-cuban-green text-white px-8 py-3 rounded-full font-bold hover:bg-cuban-dark transition shadow-lg">
+                    <i class="fab fa-whatsapp text-xl"></i>
+                    Preguntar por WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contenedores para modales y footer -->
+    <div id="image-modal-container"></div>
+    <div id="cart-sidebar-container"></div>
+    <div id="checkout-modal-container"></div>
+    <div id="footer-container"></div>
+
+    <!-- Toast de notificación -->
+    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
+        <p id="cartToastMessage"></p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/elresolvito.js" defer></script>
+    
+    <script>
+        // Función para el acordeón de preguntas
+        function toggleFaq(element) {
+            element.classList.toggle('open');
+            const answer = element.nextElementSibling;
+            answer.classList.toggle('open');
+        }
+        
+        // Filtrado por categorías
+        document.querySelectorAll('.faq-category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Actualizar botones
+                document.querySelectorAll('.faq-category-btn').forEach(b => {
+                    b.classList.remove('bg-cuban-green', 'text-white');
+                    b.classList.add('bg-gray-100', 'text-gray-700');
+                });
+                this.classList.remove('bg-gray-100', 'text-gray-700');
+                this.classList.add('bg-cuban-green', 'text-white');
+                
+                const category = this.dataset.category;
+                
+                // Mostrar/ocultar categorías
+                if (category === 'all') {
+                    document.querySelectorAll('.faq-category').forEach(cat => {
+                        cat.style.display = 'block';
+                    });
+                } else {
+                    document.querySelectorAll('.faq-category').forEach(cat => {
+                        if (cat.dataset.category === category) {
+                            cat.style.display = 'block';
+                        } else {
+                            cat.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
