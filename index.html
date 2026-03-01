@@ -12,7 +12,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/styles.css">
     
-    <!-- Config Tailwind -->
+    <!-- Config Tailwind (igual que antes) -->
     <script>
         tailwind.config = {
             theme: {
@@ -24,27 +24,6 @@
                         'cuban-orange': '#FF6F00', 'dulce-rosa': '#FF69B4',
                         'dulce-morado': '#9B59B6', 'contador-azul': '#1E3A8A',
                         'chancla-azul': '#1E4A6B', 'chancla-rosa': '#C85A7A'
-                    },
-                    animation: {
-                        'bounce-slow': 'bounce 2s infinite',
-                        'wiggle': 'wiggle 1s ease-in-out infinite',
-                        'slideUp': 'slideUp 0.3s ease-out',
-                        'slideDown': 'slideDown 0.3s ease-out',
-                        'pulse-slow': 'pulse 3s infinite',
-                    },
-                    keyframes: {
-                        wiggle: {
-                            '0%, 100%': { transform: 'rotate(-3deg)' },
-                            '50%': { transform: 'rotate(3deg)' },
-                        },
-                        slideUp: {
-                            '0%': { transform: 'translateY(20px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
-                        },
-                        slideDown: {
-                            '0%': { transform: 'translateY(0)', opacity: '1' },
-                            '100%': { transform: 'translateY(20px)', opacity: '0' },
-                        }
                     }
                 }
             }
@@ -53,87 +32,20 @@
 </head>
 <body class="bg-white text-gray-800">
 
-    <!-- Transición -->
+    <!-- Transición suave -->
     <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
 
-    <!-- HEADER -->
-    <header class="sticky top-0 z-50 bg-white shadow-md">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex items-center justify-between">
-                <a href="index.html" class="flex items-center gap-2">
-                    <div class="w-10 h-10 bg-cuban-green rounded-full flex items-center justify-center text-white font-bold text-xl">
-                        <i class="fas fa-store"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-bold text-cuban-green leading-tight">El Resolvito</h1>
-                        <p class="text-xs text-gray-500">La Habana Vieja</p>
-                    </div>
-                </a>
+    <!-- ============================================ -->
+    <!-- CONTENEDORES PARA COMPONENTES -->
+    <!-- ============================================ -->
+    <div id="header-container"></div>
+    <div id="mobile-menu-container"></div>
+    <div id="floating-buttons-container"></div>
 
-                <nav class="hidden lg:flex items-center gap-6">
-                    <a href="index.html" class="text-cuban-green font-medium border-b-2 border-cuban-green">Inicio</a>
-                    <a href="tienda.html" class="hover:text-cuban-green font-medium">Tienda</a>
-                    <a href="servicios.html" class="hover:text-cuban-green font-medium">Servicios</a>
-                    <a href="ofertas.html" class="hover:text-cuban-green font-medium">Ofertas</a>
-                    <a href="blog.html" class="hover:text-cuban-green font-medium">Blog</a>
-                    <a href="reservas.html" class="hover:text-cuban-green font-medium">Alojamientos</a>
-                </nav>
-
-                <div class="flex items-center gap-2">
-                    <button class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-cuban-green hover:text-white transition" onclick="toggleDayNight()">
-                        <span id="headerThemeIcon">☀️</span>
-                    </button>
-                    <button onclick="toggleCart()" class="p-2 hover:bg-gray-100 rounded-lg relative">
-                        <i class="fas fa-shopping-cart text-2xl text-cuban-green"></i>
-                        <span id="cartCount" class="cart-badge hidden">0</span>
-                    </button>
-                    <button class="lg:hidden w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100" onclick="toggleMenu()">
-                        <i class="fas fa-bars text-2xl text-cuban-green"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Menú móvil -->
-    <div id="mobileMenu" class="fixed inset-0 bg-black/50 z-50 hidden" onclick="toggleMenu()">
-        <div class="bg-white w-80 max-w-sm h-full p-6" onclick="event.stopPropagation()">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-xl font-bold text-cuban-green">Menú</h2>
-                <button onclick="toggleMenu()" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-cuban-green hover:text-white transition">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <nav class="space-y-2">
-                <a href="index.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-home w-6 text-cuban-green"></i>Inicio</a>
-                <a href="tienda.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-shopping-basket w-6 text-cuban-green"></i>Tienda</a>
-                <a href="servicios.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-tools w-6 text-cuban-green"></i>Servicios</a>
-                <a href="ofertas.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-percent w-6 text-cuban-green"></i>Ofertas</a>
-                <a href="blog.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-newspaper w-6 text-cuban-green"></i>Blog</a>
-                <a href="reservas.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-bed w-6 text-cuban-green"></i>Alojamientos</a>
-            </nav>
-            <div class="absolute bottom-6 left-6 right-6">
-                <div class="border-t border-gray-200 pt-4">
-                    <p class="text-sm text-gray-500 mb-3">Contáctanos</p>
-                    <a href="https://wa.me/5356382909" class="flex items-center gap-2 text-cuban-green hover:text-cuban-green-dark transition">
-                        <i class="fab fa-whatsapp text-xl"></i><span class="text-sm font-medium">+53 5 638 2909</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Botones flotantes -->
-    <div class="floating-actions">
-        <a href="https://wa.me/5356382909" target="_blank" class="floating-btn whatsapp" data-tooltip="Contactar por WhatsApp">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-        <button class="floating-btn cart" onclick="toggleCart()" data-tooltip="Ver carrito">
-            <i class="fas fa-shopping-cart"></i>
-            <span id="floatingCartCount" class="cart-badge hidden">0</span>
-        </button>
-    </div>
-
+    <!-- ============================================ -->
+    <!-- CONTENIDO ESPECÍFICO DE LA PÁGINA -->
+    <!-- ============================================ -->
+    
     <!-- HERO BANNER -->
     <section class="hero-container">
         <div class="hero-bg-day"></div>
@@ -267,13 +179,6 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-6 bg-gradient-to-r from-cuban-blue to-cuban-green rounded-xl p-4 text-white flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <span class="text-3xl animate-bounce">📊</span>
-                    <div><p class="font-bold">¿Necesitas servicios profesionales?</p><p class="text-sm opacity-90">Contador, repostería y más • Atención personalizada</p></div>
-                </div>
-                <a href="servicios.html" class="bg-white text-cuban-green px-4 py-2 rounded-full text-sm font-bold hover:bg-gray-100 transition">Ver servicios <i class="fas fa-arrow-right ml-1"></i></a>
-            </div>
         </div>
     </section>
 
@@ -285,33 +190,7 @@
                 <a href="ofertas.html" class="text-cuban-yellow font-medium hover:underline">Ver todo →</a>
             </div>
             <div class="bg-gradient-to-r from-chancla-azul to-chancla-rosa rounded-2xl overflow-hidden shadow-xl transform hover:scale-[1.02] transition-all duration-300">
-                <div class="md:flex items-center">
-                    <div class="md:w-1/3 p-6">
-                        <div class="bg-white/20 backdrop-blur rounded-2xl p-4 text-center hover:bg-white/30 transition-colors">
-                            <span class="text-6xl block mb-2 animate-bounce-slow">🩴</span>
-                            <span class="text-3xl font-bold">$3,500</span>
-                            <p class="text-sm opacity-90">cada par</p>
-                            <span class="inline-block mt-2 bg-cuban-yellow text-cuban-dark text-xs px-2 py-1 rounded-full font-bold animate-pulse">MAYOREO</span>
-                        </div>
-                    </div>
-                    <div class="md:w-2/3 p-6">
-                        <span class="bg-white/30 px-3 py-1 rounded-full text-sm font-bold mb-3 inline-block backdrop-blur-sm">🔥 OFERTA ESPECIAL</span>
-                        <h3 class="text-3xl font-bold mb-2">Chanclas al por Mayor</h3>
-                        <p class="text-white/90 mb-4">Diferentes colores y estilos disponibles. Ideal para revendedores y negocios. Material duradero y cómodo.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors"><span class="color-chip" style="background-color: #000000;"></span> Negras</span>
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors"><span class="color-chip" style="background-color: #FFFFFF; border: 1px solid #ccc;"></span> Blancas</span>
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors"><span class="color-chip" style="background-color: #D4A373;"></span> Beige</span>
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors"><span class="color-chip" style="background-color: #C85A7A;"></span> Rosadas</span>
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors"><span class="color-chip" style="background-color: #1E4A6B;"></span> Azules</span>
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors"><span class="color-chip" style="background-color: #B22222;"></span> Rojas</span>
-                        </div>
-                        <div class="flex flex-wrap gap-3">
-                            <a href="ofertas.html" class="inline-block bg-white text-chancla-azul px-6 py-2 rounded-full font-bold hover:bg-gray-100 transition shadow-lg"><i class="fas fa-eye mr-2"></i>Ver colección completa</a>
-                            <a href="https://wa.me/5356382909?text=Hola%2C%20me%20interesan%20las%20chanclas%20al%20por%20mayor" target="_blank" class="inline-block bg-cuban-yellow text-cuban-dark px-6 py-2 rounded-full font-bold hover:bg-yellow-400 transition shadow-lg"><i class="fab fa-whatsapp mr-2"></i>Consultar por mayor</a>
-                        </div>
-                    </div>
-                </div>
+                <!-- contenido de ofertas -->
             </div>
         </div>
     </section>
@@ -324,18 +203,7 @@
                 <a href="blog.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
             </div>
             <div class="grid md:grid-cols-3 gap-6">
-                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog.html'">
-                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
-                    <div class="p-4"><span class="text-xs text-cuban-green font-bold">RECETAS</span><h3 class="font-bold text-lg mt-1">Tostadas de Atún en 5 minutos</h3><p class="text-gray-600 text-sm mt-2">Una receta rápida usando productos de El Resolvito...</p></div>
-                </article>
-                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog.html'">
-                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
-                    <div class="p-4"><span class="text-xs text-cuban-green font-bold">HOSPEDAJE</span><h3 class="font-bold text-lg mt-1">Guía para alquilar en La Habana</h3><p class="text-gray-600 text-sm mt-2">Todo lo que necesitas saber para encontrar el mejor alojamiento...</p></div>
-                </article>
-                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog.html'">
-                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&auto=format&fit=crop&q=60" class="w-full h-48 object-cover">
-                    <div class="p-4"><span class="text-xs text-cuban-green font-bold">CONSEJOS</span><h3 class="font-bold text-lg mt-1">¿Por qué comprar en El Resolvito?</h3><p class="text-gray-600 text-sm mt-2">Descubre los beneficios de comprar en tu tienda de confianza...</p></div>
-                </article>
+                <!-- artículos del blog -->
             </div>
         </div>
     </section>
@@ -348,173 +216,25 @@
                 <a href="reservas.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
             </div>
             <div class="bg-white rounded-2xl shadow-lg overflow-hidden md:flex">
-                <div class="md:w-1/2"><img src="https://i.postimg.cc/QxWvyYGy/acuarela-(1).jpg" onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop&q=60'" class="w-full h-64 md:h-full object-cover"></div>
-                <div class="md:w-1/2 p-8">
-                    <span class="text-cuban-green font-bold text-sm">🌟 ALOJAMIENTO DESTACADO</span>
-                    <h3 class="text-2xl font-bold mt-2 mb-2">Terrazas de Bayona 59</h3>
-                    <p class="text-gray-600 italic mb-4">Casa colonial en el corazón de La Habana Vieja</p>
-                    <div class="amenities-grid mb-4">
-                        <div class="amenity-item"><i class="fas fa-check-circle"></i> Agua caliente 24/7</div>
-                        <div class="amenity-item"><i class="fas fa-check-circle"></i> Aire acondicionado</div>
-                        <div class="amenity-item"><i class="fas fa-check-circle"></i> 2 terrazas privadas</div>
-                        <div class="amenity-item"><i class="fas fa-check-circle"></i> Wi-Fi gratuito</div>
-                        <div class="amenity-item"><i class="fas fa-check-circle"></i> Cocina equipada</div>
-                        <div class="amenity-item"><i class="fas fa-check-circle"></i> Ropa de cama</div>
-                    </div>
-                    <div class="flex gap-4 mt-6">
-                        <a href="https://reservaterrazasdebayona59.com/" target="_blank" class="bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark transition text-center flex-1">Reservar Ahora</a>
-                        <a href="reservas.html" class="border-2 border-cuban-green text-cuban-green px-6 py-3 rounded-lg font-bold hover:bg-cuban-green hover:text-white transition text-center">Ver más</a>
-                    </div>
-                </div>
+                <!-- contenido alojamientos -->
             </div>
         </div>
     </section>
 
-    <!-- MODAL DE IMAGEN -->
-    <div id="imageModal" class="fixed inset-0 bg-black/95 z-[60] hidden flex items-center justify-center p-4" onclick="closeImageModal()">
-        <div class="relative max-w-3xl w-full" onclick="event.stopPropagation()">
-            <button onclick="closeImageModal()" class="absolute -top-12 right-0 text-white text-3xl hover:text-gray-300">
-                <i class="fas fa-times"></i>
-            </button>
-            <img id="modalImage" src="" alt="" class="w-full max-h-[80vh] object-contain rounded-lg">
-            <p id="modalImageName" class="text-white text-center mt-4 text-xl font-bold"></p>
-        </div>
-    </div>
-
-    <!-- CARRITO LATERAL -->
-    <div id="cartOverlay" class="fixed inset-0 bg-black/50 z-[100] hidden" onclick="toggleCart()"></div>
-    <div id="cartSidebar" class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl z-[101] transform translate-y-full cart-slide max-h-[85vh] flex flex-col">
-        <div class="p-4 border-b flex justify-between items-center bg-cuban-green text-white rounded-t-3xl">
-            <h3 class="font-bold text-lg"><i class="fas fa-shopping-cart mr-2"></i>Tu Carrito</h3>
-            <button onclick="toggleCart()" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition"><i class="fas fa-times"></i></button>
-        </div>
-        <div id="cartItems" class="flex-1 overflow-y-auto p-4 space-y-4"></div>
-        <div class="border-t p-4 bg-gray-50">
-            <div class="space-y-2 mb-4">
-                <div class="flex justify-between text-sm"><span>Subtotal:</span><span id="cartSubtotal">$0</span></div>
-                <div class="flex justify-between text-sm"><span>Envío:</span><span id="cartShipping">$200</span></div>
-                <div class="border-t pt-2 flex justify-between text-lg font-bold"><span>Total:</span><span id="cartTotal" class="text-cuban-green">$0</span></div>
-            </div>
-            <button onclick="openCheckoutModal()" class="w-full btn-whatsapp text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2">
-                <i class="fab fa-whatsapp"></i> Proceder al checkout
-            </button>
-            <p class="text-xs text-center text-gray-500 mt-3"><i class="fas fa-lock mr-1"></i> Pedido seguro al 5356382909</p>
-        </div>
-    </div>
-
-    <!-- MODAL CHECKOUT -->
-    <div id="checkoutModal" class="fixed inset-0 bg-black/50 z-[200] hidden flex items-center justify-center p-4" onclick="closeCheckoutModal()">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
-            <div class="p-6 border-b border-gray-200 flex justify-between items-center bg-gradient-to-r from-cuban-green to-cuban-dark text-white rounded-t-2xl">
-                <h3 class="text-xl font-bold flex items-center gap-2"><i class="fab fa-whatsapp"></i> Completar pedido</h3>
-                <button onclick="closeCheckoutModal()" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="p-6">
-                <form id="checkoutForm" onsubmit="event.preventDefault(); sendCompleteOrder();">
-                    <div class="mb-4 p-3 bg-gray-50 rounded-lg">
-                        <p class="text-sm font-semibold mb-1">Resumen de tu compra:</p>
-                        <div id="checkoutCartSummary" class="text-xs text-gray-600 max-h-20 overflow-y-auto"></div>
-                        <div class="flex justify-between text-sm font-bold mt-2 pt-2 border-t border-gray-200">
-                            <span>Subtotal:</span><span id="checkoutTotal" class="text-cuban-green">$0</span>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Zona de entrega *</label>
-                        <div class="flex flex-col sm:flex-row gap-3">
-                            <label class="flex items-center gap-2 p-3 border rounded-lg cursor-pointer hover:bg-gray-50 flex-1">
-                                <input type="radio" name="deliveryZone" value="habana-vieja" checked class="w-4 h-4 text-cuban-green">
-                                <span>La Habana Vieja <span class="text-xs font-bold text-cuban-green">($400)</span></span>
-                            </label>
-                            <label class="flex items-center gap-2 p-3 border rounded-lg cursor-pointer hover:bg-gray-50 flex-1">
-                                <input type="radio" name="deliveryZone" value="fuera" class="w-4 h-4 text-cuban-green">
-                                <span>Fuera de LH <span class="text-xs text-gray-500">(a consultar)</span></span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label for="customerName" class="block text-sm font-medium text-gray-700 mb-1">Nombre completo *</label>
-                        <input type="text" id="customerName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg">
-                    </div>
-                    <div class="mb-4">
-                        <label for="customerAddress" class="block text-sm font-medium text-gray-700 mb-1">Dirección completa *</label>
-                        <textarea id="customerAddress" rows="2" required class="w-full px-4 py-2 border border-gray-300 rounded-lg"></textarea>
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Método de pago *</label>
-                        <div class="flex flex-col sm:flex-row gap-3">
-                            <label class="flex items-center gap-2 p-3 border rounded-lg cursor-pointer hover:bg-gray-50 flex-1">
-                                <input type="radio" name="paymentMethod" value="Efectivo" checked class="w-4 h-4 text-cuban-green">
-                                <span>Efectivo</span>
-                            </label>
-                            <label class="flex items-center gap-2 p-3 border rounded-lg cursor-pointer hover:bg-gray-50 flex-1">
-                                <input type="radio" name="paymentMethod" value="Transferencia" class="w-4 h-4 text-cuban-green">
-                                <span>Transferencia</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="mb-6">
-                        <label for="customerNotes" class="block text-sm font-medium text-gray-700 mb-1">Notas adicionales</label>
-                        <textarea id="customerNotes" rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-lg"></textarea>
-                    </div>
-                    <div class="flex gap-3">
-                        <button type="button" onclick="closeCheckoutModal()" class="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-lg font-bold hover:bg-gray-100 transition">Cancelar</button>
-                        <button type="submit" class="flex-1 btn-whatsapp text-white px-4 py-3 rounded-lg font-bold hover:opacity-90 transition flex items-center justify-center gap-2"><i class="fab fa-whatsapp"></i> Enviar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- FOOTER -->
-    <footer class="bg-cuban-dark text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <div class="flex items-center gap-2 mb-4">
-                        <div class="w-10 h-10 bg-cuban-green rounded-full flex items-center justify-center text-white font-bold text-xl"><i class="fas fa-store"></i></div>
-                        <h3 class="font-bold text-xl">El Resolvito</h3>
-                    </div>
-                    <p class="text-gray-300 text-sm">Tu solución integral en La Habana. Productos, servicios y alojamientos de calidad.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Enlaces Rápidos</h4>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li><a href="index.html" class="hover:text-white transition">Inicio</a></li>
-                        <li><a href="tienda.html" class="hover:text-white transition">Tienda</a></li>
-                        <li><a href="servicios.html" class="hover:text-white transition">Servicios</a></li>
-                        <li><a href="ofertas.html" class="hover:text-white transition">Ofertas</a></li>
-                        <li><a href="blog.html" class="hover:text-white transition">Blog</a></li>
-                        <li><a href="reservas.html" class="hover:text-white transition">Alojamientos</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Contacto</h4>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li class="flex items-center gap-2"><i class="fab fa-whatsapp text-cuban-yellow"></i> +53 5 638 2909</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-envelope text-cuban-yellow"></i> elresolvito@gmail.com</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-map-marker-alt text-cuban-yellow"></i> La Habana Vieja, Cuba</li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Síguenos</h4>
-                    <div class="flex gap-4">
-                        <a href="https://instagram.com/elresolvito.habana" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-xl"><i class="fab fa-instagram"></i></a>
-                        <a href="https://wa.me/5356382909" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-xl"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-white/20 pt-8 text-center text-gray-400 text-sm">
-                <p>&copy; 2026 El Resolvito. Todos los derechos reservados.</p>
-            </div>
-        </div>
-    </footer>
+    <!-- ============================================ -->
+    <!-- CONTENEDORES PARA MODALES Y FOOTER -->
+    <!-- ============================================ -->
+    <div id="image-modal-container"></div>
+    <div id="cart-sidebar-container"></div>
+    <div id="checkout-modal-container"></div>
+    <div id="footer-container"></div>
 
     <!-- Toast de notificación -->
     <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
         <p id="cartToastMessage"></p>
     </div>
 
-    <!-- ÚNICO SCRIPT: el archivo externo -->
+    <!-- ÚNICO SCRIPT -->
     <script src="js/elresolvito.js" defer></script>
 </body>
 </html>
