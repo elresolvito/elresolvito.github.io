@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>El Resolvito - Tu Solución en La Habana</title>
-    <meta name="description" content="Tienda online, servicios, alojamientos y más en La Habana Vieja.">
-     <!-- Favicons -->
+    <meta name="description" content="Tienda online, servicios, alojamientos y más en La Habana Vieja. Productos de primera necesidad, contabilidad, repostería y alojamientos coloniales.">
+    
+    <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -16,45 +17,132 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/styles.css">
     
-    <!-- Config Tailwind -->
+    <!-- Configuración de Tailwind -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { 'poppins': ['Poppins'], 'opensans': ['Open Sans'] },
+                    fontFamily: { 
+                        'poppins': ['Poppins'], 
+                        'opensans': ['Open Sans'] 
+                    },
                     colors: {
-                        'cuban-green': '#2E7D32', 'cuban-dark': '#1B5E20',
-                        'cuban-yellow': '#FFB300', 'cuban-blue': '#0277BD',
-                        'cuban-orange': '#FF6F00', 'dulce-rosa': '#FF69B4',
-                        'dulce-morado': '#9B59B6', 'contador-azul': '#1E3A8A',
-                        'chancla-azul': '#1E4A6B', 'chancla-rosa': '#C85A7A'
+                        'cuban-green': '#2E7D32', 
+                        'cuban-dark': '#1B5E20',
+                        'cuban-yellow': '#FFB300', 
+                        'cuban-blue': '#0277BD',
+                        'cuban-orange': '#FF6F00',
+                        'dulce-rosa': '#FF69B4', 
+                        'dulce-morado': '#9B59B6',
+                        'contador-azul': '#1E3A8A',
+                        'chancla-azul': '#1E4A6B',
+                        'chancla-rosa': '#C85A7A'
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 2s infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' },
+                        }
                     }
                 }
             }
         }
     </script>
+    
+    <!-- ESTILOS RESPONSIVE PARA MÓVIL -->
+    <style>
+        @media (max-width: 640px) {
+            body {
+                font-size: 16px !important;
+            }
+            .text-xs { font-size: 0.875rem !important; }
+            .text-sm { font-size: 1rem !important; }
+            .text-base { font-size: 1.125rem !important; }
+            .text-lg { font-size: 1.25rem !important; }
+            .text-xl { font-size: 1.375rem !important; }
+            .text-2xl { font-size: 1.75rem !important; }
+            .text-3xl { font-size: 2rem !important; }
+            .text-4xl { font-size: 2.25rem !important; }
+            .text-5xl { font-size: 2.5rem !important; }
+            .text-6xl { font-size: 3rem !important; }
+            
+            /* Hero banner */
+            .hero-container {
+                height: 350px;
+            }
+            .hero-text {
+                font-size: 1.5rem !important;
+            }
+            
+            /* Productos destacados */
+            .product-card .font-bold.text-lg {
+                font-size: 1.375rem !important;
+            }
+            .product-card .text-cuban-green.text-lg {
+                font-size: 1.5rem !important;
+            }
+            
+            /* Botones */
+            button, .btn, [onclick], a.btn, a[href] {
+                min-height: 48px;
+                padding: 0.75rem 1rem;
+                font-size: 1rem;
+            }
+            
+            /* Ajustar grid de productos */
+            .grid-cols-2 {
+                gap: 0.75rem;
+            }
+            
+            /* Aumentar área táctil del menú */
+            .mobile-menu-btn {
+                width: 48px !important;
+                height: 48px !important;
+            }
+            
+            /* Promociones */
+            .promo-banner h3 {
+                font-size: 1.5rem !important;
+            }
+            .promo-banner p {
+                font-size: 0.9rem !important;
+            }
+            
+            /* Ajustar badges de experiencia */
+            .experience-badge {
+                font-size: 0.9rem !important;
+                padding: 0.5rem 1rem !important;
+            }
+        }
+    </style>
+    
+    <!-- Scripts -->
+    <script src="js/products.js" defer></script>
+    <script src="js/elresolvito.js" defer></script>
 </head>
 <body class="bg-white text-gray-800">
 
-    <!-- Transición suave -->
+    <!-- Transición suave entre páginas -->
     <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
 
-    <!-- CONTENEDORES PARA COMPONENTES -->
+    <!-- Contenedores para componentes -->
     <div id="header-container"></div>
     <div id="mobile-menu-container"></div>
     <div id="floating-buttons-container"></div>
 
     <!-- ============================================ -->
-    <!-- CONTENIDO ESPECÍFICO DE LA PÁGINA -->
-    <!-- ============================================ -->
-    
     <!-- HERO BANNER -->
+    <!-- ============================================ -->
     <section class="hero-container">
         <div class="hero-bg-day"></div>
         <div class="hero-bg-night"></div>
         <div class="hero-overlay"></div>
         <div class="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center text-white">
-            <span class="hero-text inline-block bg-cuban-yellow text-cuban-dark px-4 py-1 rounded-full text-sm font-bold mb-4 animate-pulse">🎉 Envío solo $200 en La Habana Vieja</span>
+            <span class="hero-text inline-block bg-cuban-yellow text-cuban-dark px-4 py-1 rounded-full text-sm font-bold mb-4 animate-pulse">🎉 Envío solo $400 en La Habana Vieja</span>
             <h2 class="hero-text text-4xl md:text-6xl font-bold mb-4">El Resolvito</h2>
             <p class="hero-text text-xl md:text-2xl mb-2">Tu tienda, tus servicios, tu hogar</p>
             <p class="hero-text text-lg opacity-90 mb-8">Todo lo que necesitas en un solo lugar</p>
@@ -65,7 +153,9 @@
         </div>
     </section>
 
+    <!-- ============================================ -->
     <!-- PROMOCIONES ESPECIALES -->
+    <!-- ============================================ -->
     <section class="py-12 bg-gradient-to-b from-white to-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-8">
@@ -75,7 +165,10 @@
             
             <div class="grid md:grid-cols-3 gap-6">
                 <a href="reservas.html" class="promo-banner relative h-48 rounded-2xl overflow-hidden shadow-lg group">
-                    <img src="https://i.postimg.cc/QxWvyYGy/acuarela-(1).jpg" class="w-full h-full object-cover" alt="Terrazas de Bayona 59">
+                    <img src="https://i.postimg.cc/QxWvyYGy/acuarela-(1).jpg" 
+                         class="w-full h-full object-cover" 
+                         alt="Terrazas de Bayona 59"
+                         onerror="this.src='https://placehold.co/600x400/0277BD/white?text=Alojamiento'">
                     <div class="promo-overlay"></div>
                     <div class="absolute inset-0 flex flex-col justify-center p-6 text-white">
                         <span class="bg-cuban-blue text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-2">🏠 ALOJAMIENTOS</span>
@@ -85,7 +178,10 @@
                     </div>
                 </a>
                 <a href="servicios.html" class="promo-banner relative h-48 rounded-2xl overflow-hidden shadow-lg group">
-                    <img src="https://i.postimg.cc/Qxz4FMGg/IMG_20260226-WA0025.jpg" class="w-full h-full object-cover" alt="Dulce César Repostería">
+                    <img src="https://i.postimg.cc/Qxz4FMGg/IMG_20260226-WA0025.jpg" 
+                         class="w-full h-full object-cover" 
+                         alt="Dulce César Repostería"
+                         onerror="this.src='https://placehold.co/600x400/FF69B4/white?text=Dulce+César'">
                     <div class="promo-overlay"></div>
                     <div class="absolute inset-0 flex flex-col justify-center p-6 text-white">
                         <span class="bg-dulce-rosa text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-2">🧁 SERVICIOS</span>
@@ -95,7 +191,10 @@
                     </div>
                 </a>
                 <a href="ofertas.html" class="promo-banner relative h-48 rounded-2xl overflow-hidden shadow-lg group">
-                    <img src="https://i.postimg.cc/8Cw6ZNg8/chanclas-negras-(1).png" class="w-full h-full object-contain bg-white p-4" alt="Chanclas al por mayor">
+                    <img src="https://i.postimg.cc/8Cw6ZNg8/chanclas-negras-(1).png" 
+                         class="w-full h-full object-contain bg-white p-4" 
+                         alt="Chanclas al por mayor"
+                         onerror="this.src='https://placehold.co/600x400/1E90FF/white?text=Chanclas'">
                     <div class="promo-overlay" style="background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%);"></div>
                     <div class="absolute inset-0 flex flex-col justify-center p-6 text-white">
                         <span class="bg-cuban-orange text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-2">💰 MAYOR</span>
@@ -107,24 +206,38 @@
             </div>
 
             <div class="mt-6 bg-gradient-to-r from-cuban-green to-cuban-dark rounded-2xl p-6 text-white flex flex-col md:flex-row justify-between items-center">
-                <div><h3 class="text-xl font-bold mb-2">📱 ¿Necesitas algo en específico?</h3><p class="opacity-90">Pregunta por productos no listados, hacemos pedidos especiales</p></div>
-                <a href="https://wa.me/5356382909" target="_blank" class="mt-4 md:mt-0 bg-white text-cuban-green px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition flex items-center gap-2"><i class="fab fa-whatsapp"></i> Consultar ahora</a>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">📱 ¿Necesitas algo en específico?</h3>
+                    <p class="opacity-90">Pregunta por productos no listados, hacemos pedidos especiales</p>
+                </div>
+                <a href="https://wa.me/5356382909" target="_blank" class="mt-4 md:mt-0 bg-white text-cuban-green px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition flex items-center gap-2">
+                    <i class="fab fa-whatsapp"></i> Consultar ahora
+                </a>
             </div>
         </div>
     </section>
 
+    <!-- ============================================ -->
     <!-- PRODUCTOS DESTACADOS -->
+    <!-- ============================================ -->
     <section class="py-12">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center mb-8">
                 <h2 class="text-3xl font-bold"><i class="fas fa-fire mr-3 text-cuban-orange"></i>Destacados</h2>
                 <a href="tienda.html" class="text-cuban-green font-medium hover:underline">Ver todo →</a>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="featuredProducts"></div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="featuredProducts">
+                <div class="col-span-full text-center py-8 text-gray-500">
+                    <i class="fas fa-spinner fa-spin text-3xl mb-3"></i>
+                    <p>Cargando productos destacados...</p>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- ============================================ -->
     <!-- SERVICIOS PREVIEW -->
+    <!-- ============================================ -->
     <section class="py-12 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center mb-8">
@@ -135,7 +248,10 @@
                 <!-- Dulce César -->
                 <div class="product-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
                     <div class="h-48 overflow-hidden bg-gradient-to-r from-dulce-rosa to-dulce-morado">
-                        <img src="https://i.postimg.cc/Qxz4FMGg/IMG_20260226-WA0025.jpg" alt="Dulce César" class="w-full h-full object-contain bg-white">
+                        <img src="https://i.postimg.cc/Qxz4FMGg/IMG_20260226-WA0025.jpg" 
+                             alt="Dulce César" 
+                             class="w-full h-full object-contain bg-white"
+                             onerror="this.src='https://placehold.co/600x400/FF69B4/white?text=Dulce+César'">
                     </div>
                     <div class="p-5">
                         <div class="flex justify-between items-start mb-2">
@@ -158,7 +274,10 @@
                 <!-- Contador -->
                 <div class="product-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
                     <div class="h-48 overflow-hidden bg-gradient-to-r from-contador-azul to-cuban-orange">
-                        <img src="https://i.postimg.cc/TPPT8GM9/photo-2026-02-15-19-00-24.jpg" alt="Contador / Tenedor de Libros" class="w-full h-full object-cover">
+                        <img src="https://i.postimg.cc/TPPT8GM9/photo-2026-02-15-19-00-24.jpg" 
+                             alt="Contador / Tenedor de Libros" 
+                             class="w-full h-full object-cover"
+                             onerror="this.src='https://placehold.co/600x400/1E3A8A/white?text=Contador'">
                     </div>
                     <div class="p-5">
                         <div class="flex justify-between items-start mb-2">
@@ -181,17 +300,12 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-6 bg-gradient-to-r from-cuban-blue to-cuban-green rounded-xl p-4 text-white flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <span class="text-3xl animate-bounce">📊</span>
-                    <div><p class="font-bold">¿Necesitas servicios profesionales?</p><p class="text-sm opacity-90">Contador, repostería y más • Atención personalizada</p></div>
-                </div>
-                <a href="servicios.html" class="bg-white text-cuban-green px-4 py-2 rounded-full text-sm font-bold hover:bg-gray-100 transition">Ver servicios <i class="fas fa-arrow-right ml-1"></i></a>
-            </div>
         </div>
     </section>
 
+    <!-- ============================================ -->
     <!-- OFERTAS MAYOR PREVIEW -->
+    <!-- ============================================ -->
     <section class="py-12 bg-cuban-dark text-white">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center mb-8">
@@ -227,11 +341,12 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-6 text-center text-white/70"><p><i class="fas fa-plus-circle mr-2 text-cuban-yellow"></i> Próximamente más productos al por mayor</p></div>
         </div>
     </section>
 
+    <!-- ============================================ -->
     <!-- BLOG PREVIEW -->
+    <!-- ============================================ -->
     <section class="py-12 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center mb-8">
@@ -240,22 +355,42 @@
             </div>
             <div class="grid md:grid-cols-3 gap-6">
                 <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog/recetas-rapidas-con-atun.html'">
-                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&auto=format&fit=crop" class="w-full h-48 object-cover">
-                    <div class="p-4"><span class="text-xs text-cuban-green font-bold">RECETAS</span><h3 class="font-bold text-lg mt-1">3 recetas rápidas con atún</h3><p class="text-gray-600 text-sm mt-2">Recetas fáciles y económicas...</p></div>
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&auto=format&fit=crop" 
+                         class="w-full h-48 object-cover"
+                         onerror="this.src='https://placehold.co/600x400/2E7D32/white?text=Recetas'">
+                    <div class="p-4">
+                        <span class="text-xs text-cuban-green font-bold">RECETAS</span>
+                        <h3 class="font-bold text-lg mt-1">3 recetas rápidas con atún</h3>
+                        <p class="text-gray-600 text-sm mt-2">Recetas fáciles y económicas con productos de nuestra tienda.</p>
+                    </div>
                 </article>
                 <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog/como-empezar-tcp-en-cuba-guia-2026.html'">
-                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=500&auto=format&fit=crop" class="w-full h-48 object-cover">
-                    <div class="p-4"><span class="text-xs text-contador-azul font-bold">EMPRENDIMIENTO</span><h3 class="font-bold text-lg mt-1">Guía TCP 2026</h3><p class="text-gray-600 text-sm mt-2">Paso a paso para tu negocio...</p></div>
+                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=500&auto=format&fit=crop" 
+                         class="w-full h-48 object-cover"
+                         onerror="this.src='https://placehold.co/600x400/1E3A8A/white?text=Emprendimiento'">
+                    <div class="p-4">
+                        <span class="text-xs text-contador-azul font-bold">EMPRENDIMIENTO</span>
+                        <h3 class="font-bold text-lg mt-1">Guía TCP 2026</h3>
+                        <p class="text-gray-600 text-sm mt-2">Paso a paso para iniciar tu negocio en Cuba.</p>
+                    </div>
                 </article>
                 <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog/que-hacer-en-la-habana-vieja-gratis.html'">
-                    <img src="https://images.unsplash.com/photo-1591123226833-99b5138c3fb1?w=500&auto=format&fit=crop" class="w-full h-48 object-cover">
-                    <div class="p-4"><span class="text-xs text-cuban-blue font-bold">LA HABANA</span><h3 class="font-bold text-lg mt-1">10 cosas gratis en La Habana</h3><p class="text-gray-600 text-sm mt-2">Disfruta la ciudad sin gastar...</p></div>
+                    <img src="https://images.unsplash.com/photo-1591123226833-99b5138c3fb1?w=500&auto=format&fit=crop" 
+                         class="w-full h-48 object-cover"
+                         onerror="this.src='https://placehold.co/600x400/0277BD/white?text=La+Habana'">
+                    <div class="p-4">
+                        <span class="text-xs text-cuban-blue font-bold">LA HABANA</span>
+                        <h3 class="font-bold text-lg mt-1">10 cosas gratis en La Habana</h3>
+                        <p class="text-gray-600 text-sm mt-2">Disfruta la ciudad sin gastar dinero.</p>
+                    </div>
                 </article>
             </div>
         </div>
     </section>
 
+    <!-- ============================================ -->
     <!-- ALOJAMIENTOS PREVIEW -->
+    <!-- ============================================ -->
     <section class="py-12">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center mb-8">
@@ -263,7 +398,11 @@
                 <a href="reservas.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
             </div>
             <div class="bg-white rounded-2xl shadow-lg overflow-hidden md:flex">
-                <div class="md:w-1/2"><img src="https://i.postimg.cc/QxWvyYGy/acuarela-(1).jpg" onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop'" class="w-full h-64 md:h-full object-cover"></div>
+                <div class="md:w-1/2">
+                    <img src="https://i.postimg.cc/QxWvyYGy/acuarela-(1).jpg" 
+                         class="w-full h-64 md:h-full object-cover"
+                         onerror="this.src='https://placehold.co/800x600/0277BD/white?text=Terrazas+de+Bayona'">
+                </div>
                 <div class="md:w-1/2 p-8">
                     <span class="text-cuban-green font-bold text-sm">🌟 ALOJAMIENTO DESTACADO</span>
                     <h3 class="text-2xl font-bold mt-2 mb-2">Terrazas de Bayona 59</h3>
@@ -298,10 +437,110 @@
         <p id="cartToastMessage"></p>
     </div>
 
-    <!-- SCRIPTS: primero los datos, luego la lógica -->
-     <script src="js/products.js" defer></script>
-    <script src="js/elresolvito.js" defer></script>
+    <script>
+        // ============================================
+        // CARGA DE COMPONENTES
+        // ============================================
+        async function loadComponent(elementId, componentPath) {
+            try {
+                const response = await fetch(componentPath);
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+                
+                if (elementId === 'header-container') {
+                    updateActiveNav();
+                }
+            } catch (error) {
+                console.error(`Error cargando ${componentPath}:`, error);
+            }
+        }
+
+        function updateActiveNav() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('#mainNav a');
+            
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href === currentPage) {
+                    link.classList.add('text-cuban-green', 'font-medium', 'border-b-2', 'border-cuban-green');
+                } else {
+                    link.classList.remove('text-cuban-green', 'font-medium', 'border-b-2', 'border-cuban-green');
+                }
+            });
+        }
+
+        // ============================================
+        // RENDERIZAR PRODUCTOS DESTACADOS
+        // ============================================
+        function renderFeaturedProducts() {
+            console.log('renderFeaturedProducts ejecutado');
+            const container = document.getElementById('featuredProducts');
+            if (!container) {
+                console.error('ERROR: #featuredProducts no encontrado');
+                return;
+            }
+            
+            if (typeof FEATURED_PRODUCTS === 'undefined') {
+                console.error('ERROR: FEATURED_PRODUCTS no está definido. ¿products.js se cargó?');
+                container.innerHTML = '<div class="col-span-full text-center py-8 text-red-500"><i class="fas fa-exclamation-triangle text-3xl mb-3"></i><p>Error cargando productos. Recarga la página.</p></div>';
+                return;
+            }
+            
+            container.innerHTML = FEATURED_PRODUCTS.map(p => `
+                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer">
+                    <div class="product-image-container h-40 bg-gray-100 flex items-center justify-center p-2" onclick="openImageModal('${p.imagen}', '${p.nombre}')">
+                        <img src="${p.imagen}" 
+                             alt="${p.nombre}" 
+                             loading="lazy" 
+                             class="max-h-full max-w-full object-contain" 
+                             onerror="this.src='https://placehold.co/300x300/2E7D32/white?text=${encodeURIComponent(p.nombre)}'">
+                    </div>
+                    <div class="p-3">
+                        <p class="text-xs text-cuban-green font-medium">${p.categoria || 'Producto'}</p>
+                        <h3 class="font-bold text-sm mb-1 line-clamp-2">${p.nombre}</h3>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg font-bold text-cuban-green">$${p.precio?.toLocaleString() || '0'}</span>
+                            <button onclick="addToCart({id:${p.id}, nombre:'${p.nombre.replace(/'/g, "\\'")}', precio:${p.precio}, imagen:'${p.imagen}', cantidad:1})" 
+                                    class="w-8 h-8 bg-cuban-green text-white rounded-full flex items-center justify-center hover:bg-cuban-dark transition">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            console.log(`✅ ${FEATURED_PRODUCTS.length} productos destacados renderizados`);
+        }
+
+        // ============================================
+        // INICIALIZACIÓN
+        // ============================================
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('Inicializando index...');
+            
+            await loadComponent('header-container', 'components/header.html');
+            await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
+            await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
+            await loadComponent('image-modal-container', 'components/image-modal.html');
+            await loadComponent('cart-sidebar-container', 'components/cart-sidebar.html');
+            await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
+            await loadComponent('footer-container', 'components/footer.html');
+            
+            // Esperar un poco a que products.js esté disponible
+            setTimeout(() => {
+                if (typeof FEATURED_PRODUCTS !== 'undefined') {
+                    console.log(`✅ products.js cargado, ${FEATURED_PRODUCTS.length} productos destacados`);
+                    renderFeaturedProducts();
+                } else {
+                    console.error('❌ products.js no está disponible');
+                    const container = document.getElementById('featuredProducts');
+                    if (container) {
+                        container.innerHTML = '<div class="col-span-full text-center py-8 text-red-500"><i class="fas fa-exclamation-triangle text-3xl mb-3"></i><p>Error cargando productos. Recarga la página.</p></div>';
+                    }
+                }
+            }, 100);
+        });
+    </script>
 </body>
 </html>
-
 
