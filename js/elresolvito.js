@@ -3,6 +3,19 @@
    'use strict';
    
    // ============================================
+   // MANEJAR FAVICON FALTANTE
+   // ============================================
+   (function() {
+      const favicon = document.querySelector('link[rel="icon"]');
+      if (!favicon) {
+         const link = document.createElement('link');
+         link.rel = 'icon';
+         link.href = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🏪</text></svg>';
+         document.head.appendChild(link);
+      }
+   })();
+   
+   // ============================================
    // VARIABLES GLOBALES
    // ============================================
    let cart = JSON.parse(localStorage.getItem('elResolvitoCart')) || [];
@@ -15,9 +28,14 @@
    // ============================================
    async function loadComponent(elementId, componentPath) {
       try {
+         const element = document.getElementById(elementId);
+         if (!element) {
+            console.log(`Elemento ${elementId} no encontrado, saltando carga de ${componentPath}`);
+            return;
+         }
          const response = await fetch(componentPath);
          const html = await response.text();
-         document.getElementById(elementId).innerHTML = html;
+         element.innerHTML = html;
          if (elementId === 'header-container') updateActiveNav();
          if (elementId === 'footer-container') fixFooterColor();
       } catch (error) {
@@ -46,7 +64,7 @@
    }
    
    // ============================================
-   // FUNCIONES DE UI (DEFINIDAS ANTES DE initializeSite)
+   // FUNCIONES DE UI
    // ============================================
    function initDayNight() {
       console.log('initDayNight ejecutado');
@@ -141,7 +159,7 @@
    
    function addToCart(product) {
       if (!product?.id || !product?.nombre || !product?.precio) {
-         console.error('Producto inválido');
+         console.error('Producto inválido', product);
          return false;
       }
       const existingItemIndex = cart.findIndex(item => item.id === product.id);
@@ -182,13 +200,6 @@
       saveCart();
       updateCartUI();
       showToast('Producto eliminado');
-   }
-   
-   function clearCart() {
-      cart = [];
-      saveCart();
-      updateCartUI();
-      showToast('Carrito vaciado');
    }
    
    function updateCartUI() {
@@ -350,23 +361,126 @@
    }
    
    // ============================================
-   // FUNCIONES DE INICIALIZACIÓN
+   // FUNCIONES DE PRODUCTOS (¡NUEVAS O VERIFICADAS!)
+   // ============================================
+   function renderFeaturedProducts() {
+      console.log('renderFeaturedProducts ejecutado');
+      const container = document.getElementById('featuredProducts');
+      if (!container) {
+         console.log('No hay #featuredProducts en esta página');
+         return;
+      }
+      
+      if (typeof FEATURED_PRODUCTS === 'undefined') {
+         console.error('ERROR: FEATURED_PRODUCTS no está definido. ¿products.js se cargó?');
+         return;
+      }
+      
+      container.innerHTML = FEATURED_PRODUCTS.map(p => `
+         <div class="product-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer">
+            <div class="product-image-container h-40 bg-gray-100 flex items-center justify-center p-2" onclick="openImageModal('${p.imagen}', '${p.nombre}')">
+               <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" class="max-h-full max-w-full object-contain" onerror="this.src='https://via.placeholder.com/150?text=Producto'">
+            </div>
+            <div class="p-3">
+               <p class="text-xs text-cuban-green font-medium">${p.categoria || 'Producto'}</p>
+               <h3 class="font-bold text-sm mb-1 line-clamp-2">${p.nombre}</h3>
+               <div class="flex items-center justify-between">
+                  <span class="text-lg font-bold text-cuban-green">$${p.precio?.toLocaleString() || '0'}</span>
+                  <button onclick="addToCart({id:${p.id}, nombre:'${p.nombre.replace(/'/g, "\\'")}', precio:${p.precio}, imagen:'${p.imagen}', cantidad:1})" class="w-8 h-8 bg-cuban-green text-white rounded-full flex items-center justify-center hover:bg-cuban-dark transition">
+                     <i class="fas fa-plus"></i>
+                  </button>
+               </div>
+            </div>
+         </div>
+      `).join('');
+      
+      console.log(`✅ ${FEATURED_PRODUCTS.length} productos destacados renderizados`);
+   }
+   
+   function renderProducts() {
+      console.log('renderProducts ejecutado');
+      const container = document.getElementById('productsGrid');
+      if (!container) {
+         console.log('No hay #productsGrid en esta página');
+         return;
+      }
+      
+      if (typeof PRODUCTS === 'undefined') {
+         console.error('ERROR: PRODUCTS no está definido. ¿products.js se cargó?');
+         return;
+      }
+      
+      container.innerHTML = PRODUCTS.map(p => `
+         <div class="product-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer">
+            <div class="product-image-container h-40 bg-gray-100 flex items-center justify-center p-2" onclick="openImageModal('${p.imagen}', '${p.nombre}')">
+               <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" class="max-h-full max-w-full object-contain" onerror="this.src='https://via.placeholder.com/150?text=Producto'">
+            </div>
+            <div class="p-3">
+               <p class="text-xs text-cuban-green font-medium">${p.categoria}</p>
+               <h3 class="font-bold text-sm mb-1 line-clamp-2">${p.nombre}</h3>
+               <p class="text-xs text-gray-500 mb-2">${p.descripcion || ''}</p>
+               <div class="flex items-center justify-between">
+                  <span class="text-lg font-bold text-cuban-green">$${p.precio.toLocaleString()}</span>
+                  <button onclick="addToCart({id:${p.id}, nombre:'${p.nombre.replace(/'/g, "\\'")}', precio:${p.precio}, imagen:'${p.imagen}', cantidad:1})" class="w-8 h-8 bg-cuban-green text-white rounded-full flex items-center justify-center hover:bg-cuban-dark transition">
+                     <i class="fas fa-plus"></i>
+                  </button>
+               </div>
+            </div>
+         </div>
+      `).join('');
+      
+      console.log(`✅ ${PRODUCTS.length} productos renderizados en catálogo`);
+   }
+   
+   // ============================================
+   // FUNCIONES DE INICIALIZACIÓN (CORREGIDA)
    // ============================================
    async function initializeSite() {
       console.log('Inicializando sitio...');
       
-      // Cargar componentes
-      await loadComponent('header-container', 'components/header.html');
-      await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
-      await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
-      await loadComponent('image-modal-container', 'components/image-modal.html');
-      await loadComponent('cart-sidebar-container', 'components/cart-sidebar.html');
-      await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
-      await loadComponent('footer-container', 'components/footer.html');
+      // Cargar componentes si existen los contenedores
+      const needsHeader = document.getElementById('header-container');
+      if (needsHeader) await loadComponent('header-container', 'components/header.html');
       
-      // Inicializar UI (AHORA SÍ, initDayNight YA ESTÁ DEFINIDA)
+      const needsMobileMenu = document.getElementById('mobile-menu-container');
+      if (needsMobileMenu) await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
+      
+      const needsFloating = document.getElementById('floating-buttons-container');
+      if (needsFloating) await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
+      
+      const needsImageModal = document.getElementById('image-modal-container');
+      if (needsImageModal) await loadComponent('image-modal-container', 'components/image-modal.html');
+      
+      const needsCartSidebar = document.getElementById('cart-sidebar-container');
+      if (needsCartSidebar) await loadComponent('cart-sidebar-container', 'components/cart-sidebar.html');
+      
+      const needsCheckoutModal = document.getElementById('checkout-modal-container');
+      if (needsCheckoutModal) await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
+      
+      const needsFooter = document.getElementById('footer-container');
+      if (needsFooter) await loadComponent('footer-container', 'components/footer.html');
+      
+      // Inicializar UI
       initDayNight();
       updateCartUI();
+      
+      // ============================================
+      // RENDERIZAR PRODUCTOS (¡ESTAS LÍNEAS SON CLAVE!)
+      // ============================================
+      // Pequeño retraso para asegurar que el DOM está listo
+      setTimeout(() => {
+         // Productos destacados (para index.html)
+         if (document.getElementById('featuredProducts')) {
+            console.log('Renderizando productos destacados...');
+            renderFeaturedProducts();
+         }
+         
+         // Catálogo completo (para tienda.html)
+         if (document.getElementById('productsGrid')) {
+            console.log('Renderizando catálogo de tienda...');
+            renderProducts();
+         }
+      }, 100);
       
       console.log('Sitio inicializado correctamente');
    }
@@ -387,6 +501,8 @@
    window.enviarReaccion = enviarReaccion;
    window.openImageModal = openImageModal;
    window.closeImageModal = closeImageModal;
+   window.renderFeaturedProducts = renderFeaturedProducts;
+   window.renderProducts = renderProducts;
    
    // ============================================
    // INICIAR TODO
