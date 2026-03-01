@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Quiénes Somos - El Resolvito</title>
+    <meta name="description" content="Conoce la historia de El Resolvito, nuestra misión y el equipo que hace posible tu tienda de confianza en La Habana Vieja.">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <!-- Fonts y estilos -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Config Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'poppins': ['Poppins'], 'opensans': ['Open Sans'] },
+                    colors: {
+                        'cuban-green': '#2E7D32', 'cuban-dark': '#1B5E20',
+                        'cuban-yellow': '#FFB300', 'cuban-blue': '#0277BD'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white text-gray-800">
+
+    <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
+
+    <!-- Contenedores para componentes -->
+    <div id="header-container"></div>
+    <div id="mobile-menu-container"></div>
+    <div id="floating-buttons-container"></div>
+
+    <!-- ============================================ -->
+    <!-- CONTENIDO DE QUIÉNES SOMOS -->
+    <!-- ============================================ -->
+    
+    <!-- Hero -->
+    <section class="bg-gradient-to-br from-cuban-green to-cuban-dark text-white py-16 px-4">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Quiénes Somos</h1>
+            <p class="text-xl opacity-90 max-w-2xl mx-auto">Conoce la historia detrás de El Resolvito, nuestro propósito y el equipo que lo hace posible</p>
+        </div>
+    </section>
+
+    <!-- Nuestra Historia -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <span class="text-cuban-green font-bold text-sm uppercase tracking-wider">Nuestra Historia</span>
+                    <h2 class="text-3xl font-bold mt-2 mb-6">Nace de una necesidad real</h2>
+                    <div class="prose prose-lg text-gray-600">
+                        <p class="mb-4"><strong>El Resolvito</strong> nació en La Habana Vieja con una idea muy simple: ofrecer productos de primera necesidad, servicios profesionales y alojamientos de calidad, todo en un solo lugar y con la confianza de quien te conoce.</p>
+                        <p class="mb-4">Vimos que muchas personas tenían que ir a diferentes lugares para conseguir lo que necesitaban, y que la confianza era un factor clave. Así que decidimos crear un espacio donde cada cliente sea tratado como familia, donde puedas pedir por WhatsApp y recibir en tu casa, y donde los precios sean justos y transparentes.</p>
+                        <p>Hoy, El Resolvito es más que una tienda: somos un punto de encuentro, un apoyo para emprendedores y un hogar lejos de casa para quienes nos visitan. Y todo esto gracias a ti, que confías en nosotros día a día.</p>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1577415124269-fc1140a69e91?w=800&auto=format&fit=crop" 
+                         alt="La Habana Vieja" 
+                         class="rounded-2xl shadow-xl"
+                         onerror="this.src='https://placehold.co/800x600/2E7D32/white?text=La+Habana+Vieja'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Misión y Visión -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="text-cuban-green font-bold text-sm uppercase tracking-wider">Nuestro Propósito</span>
+                <h2 class="text-3xl font-bold mt-2">Misión y Visión</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white p-8 rounded-2xl shadow-lg">
+                    <div class="w-16 h-16 bg-cuban-green/10 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-bullseye text-3xl text-cuban-green"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-center mb-4">Misión</h3>
+                    <p class="text-gray-600 text-center">Ofrecer productos y servicios de calidad con un trato cercano y transparente, facilitando la vida de nuestros clientes en La Habana a través de un sistema de compra simple, confiable y accesible para todos.</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-2xl shadow-lg">
+                    <div class="w-16 h-16 bg-cuban-green/10 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-eye text-3xl text-cuban-green"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-center mb-4">Visión</h3>
+                    <p class="text-gray-600 text-center">Convertirnos en el referente de confianza en La Habana para la compra de productos, contratación de servicios y reserva de alojamientos, expandiendo nuestra comunidad y manteniendo la esencia familiar que nos caracteriza.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Valores -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="text-cuban-green font-bold text-sm uppercase tracking-wider">Lo que nos define</span>
+                <h2 class="text-3xl font-bold mt-2">Nuestros Valores</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="text-center p-6">
+                    <div class="w-20 h-20 bg-cuban-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-hand-holding-heart text-3xl text-cuban-green"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Confianza</h3>
+                    <p class="text-gray-600">Cada cliente es tratado como familia, con honestidad y transparencia en cada compra.</p>
+                </div>
+                
+                <div class="text-center p-6">
+                    <div class="w-20 h-20 bg-cuban-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-3xl text-cuban-green"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Comunidad</h3>
+                    <p class="text-gray-600">Apoyamos a emprendedores locales y fomentamos el crecimiento de nuestra comunidad.</p>
+                </div>
+                
+                <div class="text-center p-6">
+                    <div class="w-20 h-20 bg-cuban-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-check-circle text-3xl text-cuban-green"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Calidad</h3>
+                    <p class="text-gray-600">Seleccionamos cuidadosamente cada producto y servicio para garantizar tu satisfacción.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- El Equipo -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="text-cuban-green font-bold text-sm uppercase tracking-wider">Las personas detrás</span>
+                <h2 class="text-3xl font-bold mt-2">Nuestro Equipo</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <img src="https://ui-avatars.com/api/?name=Carlos+Rodriguez&background=2E7D32&color=fff&size=300" 
+                         alt="Carlos Rodríguez" 
+                         class="w-full h-64 object-cover">
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold">Carlos Rodríguez</h3>
+                        <p class="text-cuban-green font-medium mb-3">Fundador</p>
+                        <p class="text-gray-600 text-sm">Con más de 15 años en el barrio, Carlos conoce cada rincón de La Habana y las necesidades de su gente.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <img src="https://ui-avatars.com/api/?name=Ana+Maria+Garcia&background=0277BD&color=fff&size=300" 
+                         alt="Ana María García" 
+                         class="w-full h-64 object-cover">
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold">Ana María García</h3>
+                        <p class="text-cuban-green font-medium mb-3">Atención al Cliente</p>
+                        <p class="text-gray-600 text-sm">La sonrisa de El Resolvito. Ana María coordina los pedidos y se asegura de que cada entrega llegue perfecta.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <img src="https://ui-avatars.com/api/?name=Roberto+Gomez&background=FFB300&color=000&size=300" 
+                         alt="Roberto Gómez" 
+                         class="w-full h-64 object-cover">
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold">Roberto Gómez</h3>
+                        <p class="text-cuban-green font-medium mb-3">Contador</p>
+                        <p class="text-gray-600 text-sm">Profesional con años de experiencia ayudando a TCP a mantener sus cuentas claras y al día.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 bg-gradient-to-r from-cuban-green to-cuban-dark text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">¿Quieres saber más?</h2>
+            <p class="text-xl mb-8 opacity-90">Contáctanos directamente por WhatsApp, estamos para ayudarte</p>
+            <a href="https://wa.me/5356382909" target="_blank" class="inline-flex items-center gap-2 bg-white text-cuban-green px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition shadow-lg">
+                <i class="fab fa-whatsapp text-2xl"></i>
+                Escribir por WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- Contenedores para modales y footer -->
+    <div id="image-modal-container"></div>
+    <div id="cart-sidebar-container"></div>
+    <div id="checkout-modal-container"></div>
+    <div id="footer-container"></div>
+
+    <!-- Toast de notificación -->
+    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
+        <p id="cartToastMessage"></p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/elresolvito.js" defer></script>
+</body>
+</html>
