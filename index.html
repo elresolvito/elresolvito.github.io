@@ -12,7 +12,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/styles.css">
     
-    <!-- Config Tailwind (igual que antes) -->
+    <!-- Config Tailwind -->
     <script>
         tailwind.config = {
             theme: {
@@ -24,6 +24,16 @@
                         'cuban-orange': '#FF6F00', 'dulce-rosa': '#FF69B4',
                         'dulce-morado': '#9B59B6', 'contador-azul': '#1E3A8A',
                         'chancla-azul': '#1E4A6B', 'chancla-rosa': '#C85A7A'
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 2s infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' },
+                        }
                     }
                 }
             }
@@ -179,6 +189,13 @@
                     </div>
                 </div>
             </div>
+            <div class="mt-6 bg-gradient-to-r from-cuban-blue to-cuban-green rounded-xl p-4 text-white flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <span class="text-3xl animate-bounce">📊</span>
+                    <div><p class="font-bold">¿Necesitas servicios profesionales?</p><p class="text-sm opacity-90">Contador, repostería y más • Atención personalizada</p></div>
+                </div>
+                <a href="servicios.html" class="bg-white text-cuban-green px-4 py-2 rounded-full text-sm font-bold hover:bg-gray-100 transition">Ver servicios <i class="fas fa-arrow-right ml-1"></i></a>
+            </div>
         </div>
     </section>
 
@@ -190,8 +207,35 @@
                 <a href="ofertas.html" class="text-cuban-yellow font-medium hover:underline">Ver todo →</a>
             </div>
             <div class="bg-gradient-to-r from-chancla-azul to-chancla-rosa rounded-2xl overflow-hidden shadow-xl transform hover:scale-[1.02] transition-all duration-300">
-                <!-- contenido de ofertas -->
+                <div class="md:flex items-center">
+                    <div class="md:w-1/3 p-6">
+                        <div class="bg-white/20 backdrop-blur rounded-2xl p-4 text-center hover:bg-white/30 transition-colors">
+                            <span class="text-6xl block mb-2 animate-bounce-slow">🩴</span>
+                            <span class="text-3xl font-bold">$3,500</span>
+                            <p class="text-sm opacity-90">cada par</p>
+                            <span class="inline-block mt-2 bg-cuban-yellow text-cuban-dark text-xs px-2 py-1 rounded-full font-bold animate-pulse">MAYOREO</span>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3 p-6">
+                        <span class="bg-white/30 px-3 py-1 rounded-full text-sm font-bold mb-3 inline-block backdrop-blur-sm">🔥 OFERTA ESPECIAL</span>
+                        <h3 class="text-3xl font-bold mb-2">Chanclas al por Mayor</h3>
+                        <p class="text-white/90 mb-4">Diferentes colores y estilos disponibles. Ideal para revendedores y negocios. Material duradero y cómodo.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors"><span class="color-chip" style="background-color: #000000;"></span> Negras</span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors"><span class="color-chip" style="background-color: #FFFFFF; border: 1px solid #ccc;"></span> Blancas</span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors"><span class="color-chip" style="background-color: #D4A373;"></span> Beige</span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors"><span class="color-chip" style="background-color: #C85A7A;"></span> Rosadas</span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors"><span class="color-chip" style="background-color: #1E4A6B;"></span> Azules</span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm flex items-center gap-1 hover:bg-white/30 transition-colors"><span class="color-chip" style="background-color: #B22222;"></span> Rojas</span>
+                        </div>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="ofertas.html" class="inline-block bg-white text-chancla-azul px-6 py-2 rounded-full font-bold hover:bg-gray-100 transition shadow-lg"><i class="fas fa-eye mr-2"></i>Ver colección completa</a>
+                            <a href="https://wa.me/5356382909?text=Hola%2C%20me%20interesan%20las%20chanclas%20al%20por%20mayor" target="_blank" class="inline-block bg-cuban-yellow text-cuban-dark px-6 py-2 rounded-full font-bold hover:bg-yellow-400 transition shadow-lg"><i class="fab fa-whatsapp mr-2"></i>Consultar por mayor</a>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div class="mt-6 text-center text-white/70"><p><i class="fas fa-plus-circle mr-2 text-cuban-yellow"></i> Próximamente más productos al por mayor</p></div>
         </div>
     </section>
 
@@ -203,7 +247,18 @@
                 <a href="blog.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
             </div>
             <div class="grid md:grid-cols-3 gap-6">
-                <!-- artículos del blog -->
+                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog/recetas-rapidas-con-atun.html'">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&auto=format&fit=crop" class="w-full h-48 object-cover">
+                    <div class="p-4"><span class="text-xs text-cuban-green font-bold">RECETAS</span><h3 class="font-bold text-lg mt-1">3 recetas rápidas con atún</h3><p class="text-gray-600 text-sm mt-2">Recetas fáciles y económicas...</p></div>
+                </article>
+                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog/como-empezar-tcp-en-cuba-guia-2026.html'">
+                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=500&auto=format&fit=crop" class="w-full h-48 object-cover">
+                    <div class="p-4"><span class="text-xs text-contador-azul font-bold">EMPRENDIMIENTO</span><h3 class="font-bold text-lg mt-1">Guía TCP 2026</h3><p class="text-gray-600 text-sm mt-2">Paso a paso para tu negocio...</p></div>
+                </article>
+                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog/que-hacer-en-la-habana-vieja-gratis.html'">
+                    <img src="https://images.unsplash.com/photo-1591123226833-99b5138c3fb1?w=500&auto=format&fit=crop" class="w-full h-48 object-cover">
+                    <div class="p-4"><span class="text-xs text-cuban-blue font-bold">LA HABANA</span><h3 class="font-bold text-lg mt-1">10 cosas gratis en La Habana</h3><p class="text-gray-600 text-sm mt-2">Disfruta la ciudad sin gastar...</p></div>
+                </article>
             </div>
         </div>
     </section>
@@ -216,7 +271,24 @@
                 <a href="reservas.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
             </div>
             <div class="bg-white rounded-2xl shadow-lg overflow-hidden md:flex">
-                <!-- contenido alojamientos -->
+                <div class="md:w-1/2"><img src="https://i.postimg.cc/QxWvyYGy/acuarela-(1).jpg" onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop'" class="w-full h-64 md:h-full object-cover"></div>
+                <div class="md:w-1/2 p-8">
+                    <span class="text-cuban-green font-bold text-sm">🌟 ALOJAMIENTO DESTACADO</span>
+                    <h3 class="text-2xl font-bold mt-2 mb-2">Terrazas de Bayona 59</h3>
+                    <p class="text-gray-600 italic mb-4">Casa colonial en el corazón de La Habana Vieja</p>
+                    <div class="amenities-grid mb-4">
+                        <div class="amenity-item"><i class="fas fa-check-circle"></i> Agua caliente 24/7</div>
+                        <div class="amenity-item"><i class="fas fa-check-circle"></i> Aire acondicionado</div>
+                        <div class="amenity-item"><i class="fas fa-check-circle"></i> 2 terrazas privadas</div>
+                        <div class="amenity-item"><i class="fas fa-check-circle"></i> Wi-Fi gratuito</div>
+                        <div class="amenity-item"><i class="fas fa-check-circle"></i> Cocina equipada</div>
+                        <div class="amenity-item"><i class="fas fa-check-circle"></i> Ropa de cama</div>
+                    </div>
+                    <div class="flex gap-4 mt-6">
+                        <a href="https://reservaterrazasdebayona59.com/" target="_blank" class="bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark transition text-center flex-1">Reservar Ahora</a>
+                        <a href="reservas.html" class="border-2 border-cuban-green text-cuban-green px-6 py-3 rounded-lg font-bold hover:bg-cuban-green hover:text-white transition text-center">Ver más</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
