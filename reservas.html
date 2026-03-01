@@ -2,10 +2,11 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-   <title>Alojamiento Terrazas de Bayona 59 - La Habana Vieja</title>
-<meta name="description" content="Alójate en Terrazas de Bayona 59, casa colonial en el corazón de La Habana Vieja. Habitaciones con terraza, agua caliente, A/C, WiFi. Reserva directa.">
-<meta property="og:title" content="Terrazas de Bayona 59 - Alojamiento colonial en La Habana">
-<meta property="og:description" content="Apartamento independiente con 2 terrazas privadas. Capacidad 4 personas. Ubicación privilegiada.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Alojamiento Terrazas de Bayona 59 - La Habana Vieja</title>
+    <meta name="description" content="Alójate en Terrazas de Bayona 59, casa colonial en el corazón de La Habana Vieja. Habitaciones con terraza, agua caliente, A/C, WiFi. Reserva directa.">
+    <meta property="og:title" content="Terrazas de Bayona 59 - Alojamiento colonial en La Habana">
+    <meta property="og:description" content="Apartamento independiente con 2 terrazas privadas. Capacidad 4 personas. Ubicación privilegiada.">
     
     <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -14,7 +15,7 @@
     
     <!-- Fonts y estilos globales -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/styles.css">
     
@@ -35,7 +36,7 @@
     </script>
     
     <!-- Scripts -->
-  <script src="js/elresolvito.js" defer></script>
+    <script src="js/elresolvito.js" defer></script>
 </head>
 <body class="bg-white text-gray-800">
 
@@ -269,7 +270,8 @@
                     <img src="${img.url}" 
                          alt="${img.titulo}" 
                          class="w-full h-full object-cover cursor-pointer"
-                         onclick="openImageModal('${img.url}', '${img.titulo}')">
+                         onclick="openImageModal('${img.url}', '${img.titulo}')"
+                         onerror="this.src='https://placehold.co/800x600/2E7D32/white?text=${encodeURIComponent(img.titulo)}'">
                     <div class="absolute bottom-8 left-0 right-0 text-center text-white text-sm bg-black/50 py-1 mx-auto w-fit px-3 rounded-full">
                         ${img.titulo}
                     </div>
@@ -309,35 +311,20 @@
             updateCarousel();
         }
 
-       document.addEventListener('DOMContentLoaded', async function() {
-    await loadComponent('header-container', 'components/header.html');
-    await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
-    await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
-    await loadComponent('image-modal-container', 'components/image-modal.html');
-    await loadComponent('cart-sidebar-container', 'components/cart-sidebar.html');
-    await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
-    await loadComponent('footer-container', 'components/footer.html');
-    
-    // AHORA SÍ, inicializar todo después de que los componentes estén cargados
-    if (typeof initializeAfterComponents === 'function') {
-        initializeAfterComponents();
-    }
-    
-    // Inicializar funciones específicas de la página (si existen)
-    if (typeof renderFeaturedProducts === 'function') {
-        renderFeaturedProducts();
-    }
-    if (typeof initCarousel === 'function') {
-        initCarousel();
-    }
-    if (typeof renderProducts === 'function') {
-        renderProducts();
-    }
-});
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadComponent('header-container', 'components/header.html');
+            await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
+            await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
+            await loadComponent('image-modal-container', 'components/image-modal.html');
+            await loadComponent('cart-sidebar-container', 'components/cart-sidebar.html');
+            await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
+            await loadComponent('footer-container', 'components/footer.html');
+            
+            // Inicializar carrusel
+            initCarousel();
+        });
     </script>
 </body>
 </html>
-
-
 
 
