@@ -2,36 +2,34 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-  <title>3 recetas rápidas con atún en lata - El Resolvito Blog</title>
-<meta name="description" content="Aprende a preparar torticas de atún, enfrijolada y ensalada con atún. Recetas fáciles con productos de nuestra tienda en La Habana.">
-<meta property="og:title" content="3 recetas rápidas con atún en lata">
-<meta property="og:description" content="Recetas económicas y deliciosas con atún en lata. Ideas para comidas rápidas.">
-<meta property="og:type" content="article">
-<meta property="article:published_time" content="2026-02-15">
-<meta property="article:author" content="Ana María">
-<meta property="article:section" content="Recetas">
-
-<!-- Favicons -->
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-
-<!-- Fonts y estilos -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="../css/styles.css">
-
-<!-- Script principal -->
-<script src="../js/elresolvito.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>3 recetas rápidas con atún en lata - El Resolvito Blog</title>
+    <meta name="description" content="Aprende a preparar torticas de atún, enfrijolada y ensalada con atún. Recetas fáciles con productos de nuestra tienda en La Habana.">
+    
+    <!-- Meta tags Open Graph -->
+    <meta property="og:title" content="3 recetas rápidas con atún en lata">
+    <meta property="og:description" content="Recetas económicas y deliciosas con atún en lata. Ideas para comidas rápidas.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1606787366850-de6330128b1c?w=800">
+    <meta property="article:published_time" content="2026-02-15">
+    <meta property="article:author" content="Ana María">
+    <meta property="article:section" content="Recetas">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    
+    <!-- Fonts y estilos -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body class="bg-white text-gray-800">
+
     <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
-    <div id="header-container"></div>
-    <div id="mobile-menu-container"></div>
-    <div id="floating-buttons-container"></div>
-</head>
-<body class="bg-white text-gray-800">
-    <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
+
+    <!-- Contenedores para componentes -->
     <div id="header-container"></div>
     <div id="mobile-menu-container"></div>
     <div id="floating-buttons-container"></div>
@@ -47,7 +45,7 @@
                 </div>
                 <h1 class="text-4xl font-bold mb-4">3 recetas rápidas con atún en lata (con productos de nuestra tienda)</h1>
                 <div class="flex items-center gap-4 mb-6">
-                    <img src="https://ui-avatars.com/api/?name=Ana+Maria&background=2E7D32&color=fff&size=60" class="w-12 h-12 rounded-full">
+                    <img src="https://ui-avatars.com/api/?name=Ana+Maria&background=2E7D32&color=fff&size=60" class="w-12 h-12 rounded-full" alt="Ana María">
                     <div>
                         <p class="font-semibold">Ana María</p>
                         <p class="text-sm text-gray-500">Chef y colaboradora · Publicado: 15 feb 2026</p>
@@ -55,16 +53,22 @@
                 </div>
             </div>
 
-            <!-- Imagen destacada -->
-            <img src="https://images.unsplash.com/photo-1606787366850-de6330128b1c?w=800&auto=format&fit=crop" class="w-full h-96 object-cover rounded-2xl mb-8" alt="Recetas con atún">
+            <!-- Imagen destacada con fallback -->
+            <img src="https://images.unsplash.com/photo-1606787366850-de6330128b1c?w=800&auto=format&fit=crop" 
+                 class="w-full h-96 object-cover rounded-2xl mb-8" 
+                 alt="Recetas con atún"
+                 onerror="this.src='https://via.placeholder.com/800x600?text=Recetas+con+Atún'">
 
-            <!-- Contenido del artículo -->
+            <!-- Contenido -->
             <div class="prose prose-lg max-w-none">
                 <p class="text-lg text-gray-700 mb-6">El atún en lata es de esos productos que nunca pueden faltar en la despensa. Es económico, duradero y te saca de apuros cuando no tienes tiempo o ganas de cocinar algo complicado. En El Resolvito tenemos varias presentaciones y hoy te traigo tres maneras diferentes de prepararlo para que no te aburras de la clásica ensalada. ¡Vamos allá!</p>
 
                 <!-- Receta 1 -->
                 <h2 class="text-2xl font-bold mt-10 mb-4 text-cuban-green">1. Torticas de atún (croquetas rápidas)</h2>
-                <img src="https://images.unsplash.com/photo-1625944529189-6c0cb0501d0d?w=800&auto=format&fit=crop" class="w-full h-64 object-cover rounded-xl mb-4" alt="Torticas de atún">
+                <img src="https://images.unsplash.com/photo-1625944529189-6c0cb0501d0d?w=800&auto=format&fit=crop" 
+                     class="w-full h-64 object-cover rounded-xl mb-4" 
+                     alt="Torticas de atún"
+                     onerror="this.src='https://via.placeholder.com/800x400?text=Torticas+de+Atún'">
                 <p class="mb-4">Estas torticas quedan crocanticas por fuera y suaves por dentro. Ideales para comer con arroz y ensalada o para ponerle un toque diferente a tu comida.</p>
                 
                 <h3 class="text-xl font-semibold mt-6 mb-2">Ingredientes:</h3>
@@ -90,7 +94,10 @@
 
                 <!-- Receta 2 -->
                 <h2 class="text-2xl font-bold mt-10 mb-4 text-cuban-green">2. Enfrijolada de atún</h2>
-                <img src="https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=800&auto=format&fit=crop" class="w-full h-64 object-cover rounded-xl mb-4" alt="Enfrijolada de atún">
+                <img src="https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=800&auto=format&fit=crop" 
+                     class="w-full h-64 object-cover rounded-xl mb-4" 
+                     alt="Enfrijolada de atún"
+                     onerror="this.src='https://via.placeholder.com/800x400?text=Enfrijolada+de+Atún'">
                 <p class="mb-4">Un plato bien cubano que combina los frijoles con el atún. Queda cremoso y súper sabroso. Perfecto para cuando tienes poco en la nevera.</p>
                 
                 <h3 class="text-xl font-semibold mt-6 mb-2">Ingredientes:</h3>
@@ -113,7 +120,10 @@
 
                 <!-- Receta 3 -->
                 <h2 class="text-2xl font-bold mt-10 mb-4 text-cuban-green">3. Ensalada de atún con un toque diferente</h2>
-                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop" class="w-full h-64 object-cover rounded-xl mb-4" alt="Ensalada de atún">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop" 
+                     class="w-full h-64 object-cover rounded-xl mb-4" 
+                     alt="Ensalada de atún"
+                     onerror="this.src='https://via.placeholder.com/800x400?text=Ensalada+de+Atún'">
                 <p class="mb-4">La clásica ensalada de atún pero con un par de ingredientes que le dan una vuelta completa. Ideal para comer con galletitas o pan tostado.</p>
                 
                 <h3 class="text-xl font-semibold mt-6 mb-2">Ingredientes:</h3>
@@ -135,16 +145,13 @@
                 </ol>
                 <p class="bg-yellow-50 p-4 rounded-lg italic mb-8">💡 Tip: Esta ensalada aguanta bien en la nevera y al día siguiente está igual de buena.</p>
 
-                <!-- ============================================ -->
-                <!-- SECCIÓN DE COMENTARIOS VÍA WHATSAPP -->
-                <!-- ============================================ -->
+                <!-- Sección de comentarios -->
                 <div class="border-t-2 border-gray-200 pt-10 mt-16">
                     <h3 class="text-2xl font-bold mb-6 flex items-center gap-2">
                         <i class="fab fa-whatsapp text-cuban-green text-3xl"></i>
-                        Comentarios de los lectores
+                        Comentarios
                     </h3>
                     
-                    <!-- Comentarios existentes (ejemplos) -->
                     <div class="space-y-4 mb-8">
                         <div class="bg-gray-50 p-4 rounded-lg">
                             <div class="flex items-center gap-3 mb-2">
@@ -154,64 +161,21 @@
                                     <p class="text-xs text-gray-500">Hace 2 días</p>
                                 </div>
                             </div>
-                            <p class="text-gray-700">Probé las torticas de atún y quedaron espectaculares. Mi esposo no paraba de comer. Gracias por la receta!</p>
-                            <div class="flex items-center gap-3 mt-2 text-sm">
-                                <button onclick="enviarReaccion('me-gusta', 'Marta Rodríguez')" class="text-gray-500 hover:text-cuban-green transition flex items-center gap-1">
-                                    <i class="far fa-heart"></i> 5
-                                </button>
-                                <button onclick="enviarReaccion('responder', 'Marta Rodríguez')" class="text-gray-500 hover:text-cuban-green transition">
-                                    Responder
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <div class="flex items-center gap-3 mb-2">
-                                <img src="https://ui-avatars.com/api/?name=Carlos+Perez&background=FFB300&color=000&size=40" class="w-8 h-8 rounded-full">
-                                <div>
-                                    <p class="font-semibold">Carlos Pérez</p>
-                                    <p class="text-xs text-gray-500">Hace 5 días</p>
-                                </div>
-                            </div>
-                            <p class="text-gray-700">¿Se puede sustituir el atún por pollo desmenuzado?</p>
-                            <div class="flex items-center gap-3 mt-2 text-sm">
-                                <button onclick="enviarReaccion('me-gusta', 'Carlos Pérez')" class="text-gray-500 hover:text-cuban-green transition flex items-center gap-1">
-                                    <i class="far fa-heart"></i> 2
-                                </button>
-                                <button onclick="enviarReaccion('responder', 'Carlos Pérez')" class="text-gray-500 hover:text-cuban-green transition">
-                                    Responder
-                                </button>
+                            <p class="text-gray-700">Probé las torticas de atún y quedaron espectaculares. ¡Gracias!</p>
+                            <div class="flex items-center gap-3 mt-2">
+                                <button onclick="enviarReaccion('me-gusta', 'Marta Rodríguez')" class="text-gray-500 hover:text-cuban-green"><i class="far fa-heart"></i> 5</button>
+                                <button onclick="enviarReaccion('responder', 'Marta Rodríguez')" class="text-gray-500 hover:text-cuban-green">Responder</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Formulario para nuevo comentario -->
                     <div class="bg-cuban-green/5 p-6 rounded-xl">
                         <h4 class="font-bold text-lg mb-3">Deja tu comentario</h4>
-                        <p class="text-sm text-gray-600 mb-4">¿Probaste la receta? ¿Tienes alguna duda? Escríbenos por WhatsApp y aparecerá aquí (previo filtro).</p>
-                        
                         <div class="flex flex-col sm:flex-row gap-3">
-                            <input type="text" id="comentario-nombre-atun" placeholder="Tu nombre" 
-                                   class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent outline-none">
-                            <textarea id="comentario-texto-atun" placeholder="Escribe tu comentario..." 
-                                      class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent outline-none" rows="2"></textarea>
-                            <button onclick="enviarComentario('atun')" 
-                                    class="bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark transition flex items-center justify-center gap-2">
-                                <i class="fab fa-whatsapp"></i>
-                                Enviar
-                            </button>
+                            <input type="text" id="comentario-nombre-atun" placeholder="Tu nombre" class="flex-1 px-4 py-3 border rounded-lg">
+                            <textarea id="comentario-texto-atun" placeholder="Escribe tu comentario..." class="flex-1 px-4 py-3 border rounded-lg" rows="2"></textarea>
+                            <button onclick="enviarComentario('atun')" class="bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark"><i class="fab fa-whatsapp mr-2"></i>Enviar</button>
                         </div>
-                        <p class="text-xs text-gray-500 mt-3">Tu comentario será publicado después de que lo revisemos (para evitar spam).</p>
-                    </div>
-
-                    <!-- Botón para ver más comentarios en WhatsApp -->
-                    <div class="text-center mt-6">
-                        <a href="https://wa.me/5356382909?text=Quiero%20ver%20los%20comentarios%20de%20atun" 
-                           target="_blank"
-                           class="inline-flex items-center gap-2 text-cuban-green hover:underline">
-                            <i class="fab fa-whatsapp"></i>
-                            Ver todos los comentarios en WhatsApp
-                        </a>
                     </div>
                 </div>
             </div>
@@ -229,82 +193,29 @@
         <p id="cartToastMessage"></p>
     </div>
 
+    <!-- SCRIPTS: SOLO ESTOS DOS -->
+    <script src="../js/products.js" defer></script>
+    <script src="../js/elresolvito.js" defer></script>
+
     <script>
-        async function loadComponent(elementId, path) {
-            try {
-                const res = await fetch(path);
-                const html = await res.text();
-                document.getElementById(elementId).innerHTML = html;
-                if (elementId === 'header-container') updateActiveNav();
-            } catch (error) {
-                console.error(`Error cargando ${path}:`, error);
-            }
-        }
-
-        function updateActiveNav() {
-            const navLinks = document.querySelectorAll('#mainNav a');
-            navLinks.forEach(link => {
-                link.classList.remove('text-cuban-green', 'font-medium', 'border-b-2', 'border-cuban-green');
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', async function() {
-            await loadComponent('header-container', '../components/header.html');
-            await loadComponent('mobile-menu-container', '../components/mobile-menu.html');
-            await loadComponent('floating-buttons-container', '../components/floating-buttons.html');
-            await loadComponent('image-modal-container', '../components/image-modal.html');
-            await loadComponent('cart-sidebar-container', '../components/cart-sidebar.html');
-            await loadComponent('checkout-modal-container', '../components/checkout-modal.html');
-            await loadComponent('footer-container', '../components/footer.html');
-            
-            if (typeof initializeAfterComponents === 'function') {
-                initializeAfterComponents();
-            }
+        async function loadComponent(e,p){try{const r=await fetch(p),t=await r.text();document.getElementById(e).innerHTML=t}catch(e){console.error(e)}}
+        document.addEventListener('DOMContentLoaded',async()=>{
+            await loadComponent('header-container','../components/header.html');
+            await loadComponent('mobile-menu-container','../components/mobile-menu.html');
+            await loadComponent('floating-buttons-container','../components/floating-buttons.html');
+            await loadComponent('image-modal-container','../components/image-modal.html');
+            await loadComponent('cart-sidebar-container','../components/cart-sidebar.html');
+            await loadComponent('checkout-modal-container','../components/checkout-modal.html');
+            await loadComponent('footer-container','../components/footer.html');
         });
 
-        // Funciones para comentarios
-        function enviarComentario(articuloId) {
-            const nombre = document.getElementById(`comentario-nombre-${articuloId}`)?.value.trim();
-            const comentario = document.getElementById(`comentario-texto-${articuloId}`)?.value.trim();
-            
-            if (!nombre) {
-                alert('Por favor, escribe tu nombre.');
-                return;
-            }
-            if (!comentario) {
-                alert('Por favor, escribe tu comentario.');
-                return;
-            }
-
-            const tituloArticulo = document.querySelector('h1')?.textContent || 'Artículo';
-            
-            const mensaje = `*📝 NUEVO COMENTARIO EN EL BLOG*\n\n` +
-                           `📌 *Artículo:* ${tituloArticulo}\n` +
-                           `👤 *Nombre:* ${nombre}\n` +
-                           `💬 *Comentario:* ${comentario}\n\n` +
-                           `_Responde a este mensaje para publicar el comentario._`;
-
-            window.open(`https://wa.me/5356382909?text=${encodeURIComponent(mensaje)}`, '_blank');
-            
-            document.getElementById(`comentario-nombre-${articuloId}`).value = '';
-            document.getElementById(`comentario-texto-${articuloId}`).value = '';
+        function enviarComentario(id){
+            const n=document.getElementById(`comentario-nombre-${id}`)?.value;
+            const c=document.getElementById(`comentario-texto-${id}`)?.value;
+            if(!n||!c)return alert('Completa todos los campos');
+            window.open(`https://wa.me/5356382909?text=${encodeURIComponent(`*Nuevo comentario*\n\n${n}: ${c}`)}`,'_blank');
         }
-
-        function enviarReaccion(tipo, autor) {
-            const tituloArticulo = document.querySelector('h1')?.textContent || 'Artículo';
-            let mensaje = '';
-            
-            if (tipo === 'me-gusta') {
-                mensaje = `❤️ *Me gusta*\n\n` +
-                         `Le di "me gusta" al comentario de *${autor}* en el artículo "${tituloArticulo}".`;
-            } else if (tipo === 'responder') {
-                mensaje = `💬 *Respuesta a comentario*\n\n` +
-                         `Quiero responder al comentario de *${autor}* en el artículo "${tituloArticulo}".\n\n` +
-                         `Mi respuesta: `;
-            }
-            
-            window.open(`https://wa.me/5356382909?text=${encodeURIComponent(mensaje)}`, '_blank');
-        }
+        function enviarReaccion(t,a){}
     </script>
 </body>
 </html>
