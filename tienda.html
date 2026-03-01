@@ -2,23 +2,17 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-   <title>Tienda El Resolvito - Productos de primera necesidad en La Habana</title>
-<meta name="description" content="Catálogo completo de productos en El Resolvito: atún, café, huevos, mayonesa, perfumes, licores y más. Precios actualizados. Compra por WhatsApp.">
-<meta property="og:title" content="Tienda El Resolvito - Productos en La Habana Vieja">
-<meta property="og:description" content="Más de 36 productos disponibles: alimentos, bebidas, higiene, perfumes. Envío a domicilio.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Tienda - El Resolvito</title>
+    <meta name="description" content="Catálogo de productos en La Habana Vieja. Alimentos, bebidas, higiene y más.">
     
-    <!-- Favicons -->
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    
-    <!-- Fonts y estilos globales -->
+    <!-- Fonts y estilos -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/styles.css">
     
-    <!-- Configuración de Tailwind -->
+    <!-- Config Tailwind -->
     <script>
         tailwind.config = {
             theme: {
@@ -32,16 +26,13 @@
             }
         }
     </script>
-    
-    <!-- Scripts -->
-   <script src="js/elresolvito.js" defer></script>
 </head>
 <body class="bg-white text-gray-800">
 
-    <!-- Transición suave entre páginas -->
+    <!-- Transición suave -->
     <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
 
-    <!-- Contenedores para componentes -->
+    <!-- CONTENEDORES PARA COMPONENTES -->
     <div id="header-container"></div>
     <div id="mobile-menu-container"></div>
     <div id="floating-buttons-container"></div>
@@ -50,7 +41,7 @@
     <!-- CONTENIDO ESPECÍFICO DE TIENDA -->
     <!-- ============================================ -->
     
-    <!-- Barra de búsqueda y filtros (específica de tienda) -->
+    <!-- Barra de búsqueda y filtros -->
     <div class="border-t border-gray-100 px-4 py-3 bg-white">
         <div class="container mx-auto">
             <div class="flex flex-col md:flex-row gap-3">
@@ -62,10 +53,10 @@
                 </div>
                 <div class="flex gap-2 overflow-x-auto hide-scrollbar">
                     <button onclick="filterCategory('todos')" class="category-btn px-4 py-2 bg-cuban-green text-white rounded-full text-sm whitespace-nowrap">Todos</button>
-                    <button onclick="filterCategory('Alimentos y conservas')" class="category-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm whitespace-nowrap">Alimentos</button>
-                    <button onclick="filterCategory('Snacks y golosinas')" class="category-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm whitespace-nowrap">Snacks</button>
-                    <button onclick="filterCategory('Higiene personal')" class="category-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm whitespace-nowrap">Higiene</button>
-                    <button onclick="filterCategory('Bebidas alcohólicas y malta')" class="category-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm whitespace-nowrap">Bebidas</button>
+                    <button onclick="filterCategory('Alimentos y conservas')" class="category-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm">Alimentos</button>
+                    <button onclick="filterCategory('Snacks y golosinas')" class="category-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm">Snacks</button>
+                    <button onclick="filterCategory('Higiene personal')" class="category-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm">Higiene</button>
+                    <button onclick="filterCategory('Bebidas alcohólicas y malta')" class="category-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm">Bebidas</button>
                 </div>
             </div>
         </div>
@@ -76,12 +67,12 @@
         <div class="container mx-auto px-4">
             <h2 class="text-2xl font-bold mb-6">Catálogo Completo</h2>
             <div id="productsGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                <!-- Productos se cargan aquí -->
+                <!-- Productos se cargan dinámicamente -->
             </div>
         </div>
     </section>
 
-    <!-- Contenedores para modales y footer -->
+    <!-- CONTENEDORES PARA MODALES Y FOOTER -->
     <div id="image-modal-container"></div>
     <div id="cart-sidebar-container"></div>
     <div id="checkout-modal-container"></div>
@@ -89,163 +80,12 @@
 
     <!-- Toast de notificación -->
     <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
-        <p id="cartToastMessage">Producto añadido</p>
+        <p id="cartToastMessage"></p>
     </div>
 
-    <script>
-        // Función para cargar componentes HTML
-        async function loadComponent(elementId, componentPath) {
-            try {
-                const response = await fetch(componentPath);
-                const html = await response.text();
-                document.getElementById(elementId).innerHTML = html;
-                
-                if (elementId === 'header-container') {
-                    updateActiveNav();
-                }
-            } catch (error) {
-                console.error(`Error cargando ${componentPath}:`, error);
-            }
-        }
-
-        function updateActiveNav() {
-            const currentPage = window.location.pathname.split('/').pop() || 'tienda.html';
-            const navLinks = document.querySelectorAll('#mainNav a');
-            
-            navLinks.forEach(link => {
-                const href = link.getAttribute('href');
-                if (href === currentPage) {
-                    link.classList.add('text-cuban-green', 'font-medium', 'border-b-2', 'border-cuban-green');
-                } else {
-                    link.classList.remove('text-cuban-green', 'font-medium', 'border-b-2', 'border-cuban-green');
-                }
-            });
-        }
-
-        // Cargar componentes
-document.addEventListener('DOMContentLoaded', async function() {
-    await loadComponent('header-container', 'components/header.html');
-    await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
-    await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
-    await loadComponent('image-modal-container', 'components/image-modal.html');
-    await loadComponent('cart-sidebar-container', 'components/cart-sidebar.html');
-    await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
-    await loadComponent('footer-container', 'components/footer.html');
-    
-    // AHORA SÍ, inicializar todo después de que los componentes estén cargados
-    if (typeof initializeAfterComponents === 'function') {
-        initializeAfterComponents();
-    }
-    
-    // Inicializar funciones específicas de la página (si existen)
-    if (typeof renderFeaturedProducts === 'function') {
-        renderFeaturedProducts();
-    }
-    if (typeof initCarousel === 'function') {
-        initCarousel();
-    }
-    if (typeof renderProducts === 'function') {
-        renderProducts();
-    }
-});
-        // Todos los productos
-        const allProducts = [
-            {id:1, nombre:"Atún en lata", categoria:"Alimentos y conservas", precio:540, imagen:"https://i.postimg.cc/76xHK6zt/atun_precio_500.png"},
-            {id:2, nombre:"Pasta de tomate", categoria:"Alimentos y conservas", precio:350, imagen:"https://i.postimg.cc/gjjYPTNv/pasta_tomate_precio_350.png"},
-            {id:3, nombre:"Pimiento fresco", categoria:"Alimentos y conservas", precio:750, imagen:"https://i.postimg.cc/4yyJTSBj/pimiento_presio_750.png"},
-            {id:4, nombre:"Café Dualis 250g", categoria:"Alimentos y conservas", precio:1450, imagen:"https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png"},
-            {id:5, nombre:"Café Dufiltro 250g", categoria:"Alimentos y conservas", precio:1450, imagen:"https://i.postimg.cc/hG26fv31/cafe_Dufiltro_250_g_precio_1450.png"},
-            {id:6, nombre:"Café Enepa", categoria:"Alimentos y conservas", precio:470, imagen:"https://i.postimg.cc/nhY6f04N/cafe_enepa_precio_450.png"},
-            {id:7, nombre:"Cartón de huevo 30u", categoria:"Alimentos y conservas", precio:3000, imagen:"https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3000.png"},
-            {id:8, nombre:"Leche condensada", categoria:"Alimentos y conservas", precio:950, imagen:"https://i.postimg.cc/tT2XwjtT/leche_condensada.png"},
-            {id:9, nombre:"Harina blanca 1Kg", categoria:"Alimentos y conservas", precio:600, imagen:"https://i.postimg.cc/3xc2NHFB/harina_blanca1_kg.png"},
-            {id:10, nombre:"Chicoticos Pelly 90g", categoria:"Snacks y golosinas", precio:400, imagen:"https://i.postimg.cc/1zv2fXjZ/chicoticos_pelly_90_g_precio_400.png"},
-            {id:11, nombre:"Papitas Campesinas", categoria:"Snacks y golosinas", precio:690, imagen:"https://i.postimg.cc/cLgrDtf9/papitas_campesinas_precio_690.png"},
-            {id:12, nombre:"Pelly Jamón", categoria:"Snacks y golosinas", precio:580, imagen:"https://i.postimg.cc/pdQV7frX/pelly_jamon_precio_580.png"},
-            {id:13, nombre:"Mayonesa Mediana", categoria:"Salsas", precio:850, imagen:"https://i.postimg.cc/KzJZw2rR/mayonesa_precio_850.png"},
-            {id:14, nombre:"Mayonesa Grande", categoria:"Salsas", precio:1100, imagen:"https://i.postimg.cc/Px2t9jzz/mayonesa_precio1100.png"},
-            {id:15, nombre:"Cuchilla de Afeitar", categoria:"Higiene personal", precio:100, imagen:"https://i.postimg.cc/8CdkdW7x/cuchilla_de_afeitar_precio_100.png"},
-            {id:16, nombre:"Jabón Marwa", categoria:"Higiene personal", precio:150, imagen:"https://i.postimg.cc/3RK8tRpR/jabon_marwa_precio_150.png"},
-            {id:17, nombre:"Papel Sanitario", categoria:"Higiene personal", precio:490, imagen:"https://i.postimg.cc/bwW289qD/papel_sanitario_precio_490i.png"},
-            {id:18, nombre:"Toallas Sanitarias", categoria:"Higiene personal", precio:450, imagen:"https://i.postimg.cc/KjjZyH0b/toallas_sanitarias_precio_450.png"},
-            {id:19, nombre:"Toallas Húmedas", categoria:"Higiene personal", precio:690, imagen:"https://i.postimg.cc/W4ZSP3cw/toallas_humedas_precio_690.png"},
-            {id:20, nombre:"Jabón de Lavar", categoria:"Aseo del hogar", precio:250, imagen:"https://i.postimg.cc/V6YfK6Mz/jabon_de_lavar_precio_250.png"},
-            {id:21, nombre:"Perfume Candy", categoria:"Perfumes y desodorantes", precio:3100, imagen:"https://i.postimg.cc/vTgJRyhp/perfume_candy_precio_3100.png"},
-            {id:22, nombre:"Perfume genérico", categoria:"Perfumes y desodorantes", precio:3100, imagen:"https://i.postimg.cc/ZKrT0PPG/perfume_precio_3100.png"},
-            {id:23, nombre:"Perfume Q", categoria:"Perfumes y desodorantes", precio:3100, imagen:"https://i.postimg.cc/CL03P3Dn/perfume_q_precio_3100.png"},
-            {id:24, nombre:"Desodorante Obao", categoria:"Perfumes y desodorantes", precio:1100, imagen:"https://i.postimg.cc/PxtXSxD2/desodorante_obao_precio_1100.png"},
-            {id:25, nombre:"Desodorante Rush Blanco", categoria:"Perfumes y desodorantes", precio:1000, imagen:"https://i.postimg.cc/FR9rTRS8/desodorante_rush_blanco_precio_1000.png"},
-            {id:26, nombre:"Desodorante Rush", categoria:"Perfumes y desodorantes", precio:1000, imagen:"https://i.postimg.cc/sXVjTXSF/desodorante_rush_precio_1000.png"},
-            {id:27, nombre:"Colonia Niña", categoria:"Perfumes y desodorantes", precio:1100, imagen:"https://i.postimg.cc/G3v04rsM/colonia_nina.png"},
-            {id:28, nombre:"Macarrones", categoria:"Pastas y fideos", precio:300, imagen:"https://i.postimg.cc/Hsmz1H69/macarrones_precio_300.png"},
-            {id:29, nombre:"Sopas instantáneas", categoria:"Pastas y fideos", precio:160, imagen:"https://i.postimg.cc/FzNTpQqK/sopas_instantaneas_precio_160.png"},
-            {id:30, nombre:"Licor de fresa", categoria:"Bebidas alcohólicas y malta", precio:2500, imagen:"https://i.postimg.cc/59YT2x5p/licor_de_fresa_precio_2500.png"},
-            {id:31, nombre:"Licor Cocobay", categoria:"Bebidas alcohólicas y malta", precio:2500, imagen:"https://i.postimg.cc/7ZDW90Fz/locor_cocobay_precio_2500.png"},
-            {id:32, nombre:"Whisky Spirit 200ml", categoria:"Bebidas alcohólicas y malta", precio:320, imagen:"https://i.postimg.cc/4N8W6q1t/tea_precio_320.png"},
-            {id:33, nombre:"Whisky 1L", categoria:"Bebidas alcohólicas y malta", precio:1350, imagen:"https://i.postimg.cc/cLyrb4T0/whisky_1L_precio_1350.png"},
-            {id:34, nombre:"Whisky Sir Albin", categoria:"Bebidas alcohólicas y malta", precio:550, imagen:"https://i.postimg.cc/y84kbYnC/whisky_sir_albin_precio_550.png"},
-            {id:35, nombre:"Vino Pluvium", categoria:"Bebidas alcohólicas y malta", precio:1200, imagen:"https://i.postimg.cc/XNLLWmmx/vino_pluvium_precio_1200.png"},
-            {id:36, nombre:"Baterías Triple A", categoria:"Electrónicos y accesorios", precio:300, imagen:"https://i.postimg.cc/DZ2vxZsT/Gemini_Generated_Image_824rio824rio824r.png"}
-        ];
-
-        let currentCategory = 'todos';
-
-        function renderProducts(filter = 'todos', search = '') {
-            let filtered = allProducts;
-            if (filter !== 'todos') filtered = filtered.filter(p => p.categoria === filter);
-            if (search) filtered = filtered.filter(p => p.nombre.toLowerCase().includes(search.toLowerCase()));
-            
-            const grid = document.getElementById('productsGrid');
-            if (!grid) return;
-            
-            grid.innerHTML = filtered.map(p => `
-                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer">
-                    <div class="product-image-container h-40 bg-gray-100 flex items-center justify-center p-2" onclick="openImageModal('${p.imagen}', '${p.nombre}')">
-                        <img src="${p.imagen}" 
-                             alt="${p.nombre}" 
-                             loading="lazy"
-                             class="max-h-full max-w-full object-contain"
-                             onerror="this.src='https://via.placeholder.com/150?text=Producto'">
-                    </div>
-                    <div class="p-3">
-                        <p class="text-xs text-cuban-green font-medium">${p.categoria}</p>
-                        <h3 class="font-bold text-sm mb-1 line-clamp-2">${p.nombre}</h3>
-                        <div class="flex items-center justify-between">
-                            <span class="text-lg font-bold text-cuban-green">$${p.precio.toLocaleString()}</span>
-                            <button onclick="addToCart({id:${p.id}, nombre:'${p.nombre.replace(/'/g, "\\'")}', precio:${p.precio}, imagen:'${p.imagen}', cantidad:1})" class="w-8 h-8 bg-cuban-green text-white rounded-full flex items-center justify-center hover:bg-cuban-dark transition">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function filterCategory(cat) {
-            currentCategory = cat;
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                const btnText = btn.textContent.trim();
-                if (cat === 'todos' && btnText === 'Todos') {
-                    btn.classList.remove('bg-gray-100', 'text-gray-700');
-                    btn.classList.add('bg-cuban-green', 'text-white');
-                } else if (btnText === cat.split(' ')[0]) {
-                    btn.classList.remove('bg-gray-100', 'text-gray-700');
-                    btn.classList.add('bg-cuban-green', 'text-white');
-                } else {
-                    btn.classList.remove('bg-cuban-green', 'text-white');
-                    btn.classList.add('bg-gray-100', 'text-gray-700');
-                }
-            });
-            renderProducts(cat, document.getElementById('searchInput')?.value || '');
-        }
-
-        function searchProducts() {
-            renderProducts(currentCategory, document.getElementById('searchInput')?.value || '');
-        }
-    </script>
+    <!-- ÚNICO SCRIPT -->
+    <script src="js/elresolvito.js" defer></script>
 </body>
 </html>
-
-
 
 
