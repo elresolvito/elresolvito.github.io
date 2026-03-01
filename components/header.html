@@ -2,6 +2,7 @@
 <header class="sticky top-0 z-50 bg-white shadow-md">
     <div class="container mx-auto px-4 py-3">
         <div class="flex items-center justify-between">
+            <!-- Logo -->
             <a href="index.html" class="flex items-center gap-2">
                 <div class="w-10 h-10 bg-cuban-green rounded-full flex items-center justify-center text-white font-bold text-xl">
                     <i class="fas fa-store"></i>
@@ -12,22 +13,46 @@
                 </div>
             </a>
 
-            <nav class="hidden lg:flex items-center gap-6" id="mainNav">
-                <!-- Los enlaces se cargarán dinámicamente según la página -->
+            <!-- MENÚ DE NAVEGACIÓN (ESTO ES LO QUE FALTABA) -->
+            <nav class="hidden lg:flex items-center gap-6">
+                <a href="index.html" class="hover:text-cuban-green font-medium">Inicio</a>
+                <a href="tienda.html" class="hover:text-cuban-green font-medium">Tienda</a>
+                <a href="servicios.html" class="hover:text-cuban-green font-medium">Servicios</a>
+                <a href="ofertas.html" class="hover:text-cuban-green font-medium">Ofertas</a>
+                <a href="blog.html" class="hover:text-cuban-green font-medium">Blog</a>
+                <a href="reservas.html" class="hover:text-cuban-green font-medium">Alojamientos</a>
             </nav>
 
-            <div class="header-actions flex items-center gap-2">
-                <button class="theme-toggle w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-cuban-green hover:text-white transition" onclick="toggleDayNight()" title="Cambiar modo">
+            <!-- Botones de acción -->
+            <div class="flex items-center gap-2">
+                <button class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-cuban-green hover:text-white transition" onclick="toggleDayNight()">
                     <span id="headerThemeIcon">☀️</span>
                 </button>
                 <button onclick="toggleCart()" class="p-2 hover:bg-gray-100 rounded-lg relative">
                     <i class="fas fa-shopping-cart text-2xl text-cuban-green"></i>
                     <span id="cartCount" class="cart-badge hidden">0</span>
                 </button>
-                <button class="mobile-menu-btn lg:hidden w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100" onclick="toggleMenu()">
+                <button class="lg:hidden w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100" onclick="toggleMenu()">
                     <i class="fas fa-bars text-2xl text-cuban-green"></i>
                 </button>
             </div>
         </div>
     </div>
 </header>
+
+<!-- Script para marcar la página activa -->
+<script>
+    (function() {
+        // Marcar el enlace activo según la página actual
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('header nav a');
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === currentPage) {
+                link.classList.add('text-cuban-green', 'font-medium', 'border-b-2', 'border-cuban-green');
+            } else {
+                link.classList.remove('text-cuban-green', 'font-medium', 'border-b-2', 'border-cuban-green');
+            }
+        });
+    })();
+</script>
