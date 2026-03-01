@@ -182,8 +182,72 @@
         <p id="cartToastMessage"></p>
     </div>
 
-    <!-- SCRIPTS CORRECTOS (solo estos dos) -->
-  
+    <!-- SCRIPTS -->
     <script src="../js/elresolvito.js" defer></script>
+
+    <script>
+        // ============================================
+        // CARGA DE COMPONENTES CON RUTA ABSOLUTA
+        // ============================================
+        const basePath = '/elresolvito/';
+
+        async function loadComponent(elementId, componentPath) {
+            try {
+                const fullPath = basePath + componentPath;
+                console.log(`Cargando ${elementId} desde:`, fullPath);
+                
+                const response = await fetch(fullPath);
+                if (!response.ok) {
+                    console.error(`Error ${response.status} cargando ${fullPath}`);
+                    return;
+                }
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+            } catch (error) {
+                console.error(`Error cargando ${componentPath}:`, error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('Iniciando carga de componentes con basePath:', basePath);
+            
+            await loadComponent('header-container', 'components/header.html');
+            await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
+            await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
+            await loadComponent('image-modal-container', 'components/image-modal.html');
+            await loadComponent('cart-sidebar-container', 'components/cart-sidebar.html');
+            await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
+            await loadComponent('footer-container', 'components/footer.html');
+            
+            console.log('Carga de componentes finalizada');
+        });
+
+        // Funciones para comentarios (si el artículo las tiene)
+        function enviarComentario(articuloId) {
+            const nombre = document.getElementById(`comentario-nombre-${articuloId}`)?.value.trim();
+            const comentario = document.getElementById(`comentario-texto-${articuloId}`)?.value.trim();
+            
+            if (!nombre || !comentario) {
+                alert('Por favor, completa todos los campos.');
+                return;
+            }
+
+            const titulo = document.querySelector('h1')?.textContent || 'Artículo';
+            const mensaje = `*📝 NUEVO COMENTARIO*\n\n📌 *${titulo}*\n👤 *${nombre}*\n💬 ${comentario}`;
+            
+            window.open(`https://wa.me/5356382909?text=${encodeURIComponent(mensaje)}`, '_blank');
+            
+            document.getElementById(`comentario-nombre-${articuloId}`).value = '';
+            document.getElementById(`comentario-texto-${articuloId}`).value = '';
+        }
+
+        function enviarReaccion(tipo, autor) {
+            const titulo = document.querySelector('h1')?.textContent || 'Artículo';
+            const mensaje = tipo === 'me-gusta' 
+                ? `❤️ Me gusta el comentario de ${autor} en "${titulo}"`
+                : `💬 Quiero responder a ${autor} en "${titulo}"`;
+            window.open(`https://wa.me/5356382909?text=${encodeURIComponent(mensaje)}`, '_blank');
+        }
+    </script>
 </body>
 </html>
