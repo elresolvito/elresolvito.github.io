@@ -24,16 +24,6 @@
                         'cuban-orange': '#FF6F00', 'dulce-rosa': '#FF69B4',
                         'dulce-morado': '#9B59B6', 'contador-azul': '#1E3A8A',
                         'chancla-azul': '#1E4A6B', 'chancla-rosa': '#C85A7A'
-                    },
-                    animation: {
-                        'bounce-slow': 'bounce 2s infinite',
-                        'wiggle': 'wiggle 1s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        wiggle: {
-                            '0%, 100%': { transform: 'rotate(-3deg)' },
-                            '50%': { transform: 'rotate(3deg)' },
-                        }
                     }
                 }
             }
@@ -45,9 +35,7 @@
     <!-- Transición suave -->
     <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
 
-    <!-- ============================================ -->
     <!-- CONTENEDORES PARA COMPONENTES -->
-    <!-- ============================================ -->
     <div id="header-container"></div>
     <div id="mobile-menu-container"></div>
     <div id="floating-buttons-container"></div>
@@ -306,7 +294,8 @@
         <p id="cartToastMessage"></p>
     </div>
 
-    <!-- ÚNICO SCRIPT -->
+    <!-- SCRIPTS: primero los datos, luego la lógica -->
+    <script src="js/products.js" defer></script>
     <script src="js/elresolvito.js" defer></script>
 </body>
 </html>
