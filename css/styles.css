@@ -838,21 +838,31 @@ body.night-mode #pageFade {
         height: 140px;
     }
     
-    /* ===== AJUSTES DEL CARRUSEL ===== */
-    .carousel-slide {
-        padding: 0.5rem;
-    }
-    
-    .carousel-slide img {
-        height: 200px;
-    }
-    
-    /* Textos del carrusel de alojamiento - MÁS PEQUEÑOS (AJUSTE SOLICITADO) */
-    .carousel-slide .absolute.bottom-8 {
-        font-size: 0.75rem !important;
-        padding: 0.25rem 0.75rem !important;
-        bottom: 4px !important;
-    }
+  /* ===== AJUSTES DEL CARRUSEL ===== */
+.carousel-slide {
+    padding: 0.5rem;
+}
+
+.carousel-slide img {
+    height: 200px;
+}
+
+/* Dots del carrusel más pequeños */
+.carousel-dot {
+    width: 6px !important;
+    height: 6px !important;
+}
+
+.carousel-dot.active {
+    transform: scale(1.2) !important;
+}
+
+/* Textos del carrusel de alojamiento */
+.carousel-slide .absolute.bottom-8 {
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.75rem !important;
+    bottom: 4px !important;
+}
     
     /* ===== BOTONES FLOTANTES ===== */
     .floating-actions {
