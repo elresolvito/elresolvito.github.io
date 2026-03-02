@@ -795,7 +795,7 @@ body.night-mode #pageFade {
 }
 
 /* ============================================ */
-/* RESPONSIVE MEJORADO - PROPORCIONES CORRECTAS */
+/* RESPONSIVE MEJORADO - CON AJUSTES SOLICITADOS */
 /* ============================================ */
 
 /* Móviles pequeños */
@@ -812,8 +812,6 @@ body.night-mode #pageFade {
     .text-2xl { font-size: 1.75rem !important; }
     .text-3xl { font-size: 2rem !important; }
     .text-4xl { font-size: 2.25rem !important; }
-    .text-5xl { font-size: 2.5rem !important; }
-    .text-6xl { font-size: 3rem !important; }
     
     .product-card .text-cuban-green.text-lg {
         font-size: 1.5rem !important;
@@ -840,6 +838,7 @@ body.night-mode #pageFade {
         height: 140px;
     }
     
+    /* ===== AJUSTES DEL CARRUSEL ===== */
     .carousel-slide {
         padding: 0.5rem;
     }
@@ -848,6 +847,14 @@ body.night-mode #pageFade {
         height: 200px;
     }
     
+    /* Textos del carrusel de alojamiento - MÁS PEQUEÑOS (AJUSTE SOLICITADO) */
+    .carousel-slide .absolute.bottom-8 {
+        font-size: 0.75rem !important;
+        padding: 0.25rem 0.75rem !important;
+        bottom: 4px !important;
+    }
+    
+    /* ===== BOTONES FLOTANTES ===== */
     .floating-actions {
         bottom: 1rem;
         right: 1rem;
@@ -867,6 +874,7 @@ body.night-mode #pageFade {
         border-width: 1.5px;
     }
     
+    /* ===== HEADER ===== */
     .mobile-menu-btn {
         width: 48px !important;
         height: 48px !important;
@@ -877,19 +885,23 @@ body.night-mode #pageFade {
         height: 48px !important;
     }
     
+    /* ===== HERO BANNER ===== */
     .hero-container {
         height: 400px;
     }
     
+    /* Texto del banner - MÁS PEQUEÑO (AJUSTE SOLICITADO) */
     .hero-text {
-        font-size: 1.5rem !important;
+        font-size: 1.2rem !important;
     }
     
+    /* ===== INPUTS ===== */
     input, textarea, select {
         font-size: 16px !important;
         padding: 0.75rem !important;
     }
     
+    /* ===== GRIDS ===== */
     .grid-cols-2 {
         gap: 0.75rem;
     }
