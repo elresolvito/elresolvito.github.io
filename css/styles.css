@@ -795,7 +795,7 @@ body.night-mode #pageFade {
 }
 
 /* ============================================ */
-/* RESPONSIVE MEJORADO - CON AJUSTES SOLICITADOS */
+/* RESPONSIVE MEJORADO - VERSIÓN FINAL */
 /* ============================================ */
 
 /* Móviles pequeños */
@@ -838,31 +838,38 @@ body.night-mode #pageFade {
         height: 140px;
     }
     
-  /* ===== AJUSTES DEL CARRUSEL ===== */
-.carousel-slide {
-    padding: 0.5rem;
-}
-
-.carousel-slide img {
-    height: 200px;
-}
-
-/* Dots del carrusel más pequeños */
-.carousel-dot {
-    width: 6px !important;
-    height: 6px !important;
-}
-
-.carousel-dot.active {
-    transform: scale(1.2) !important;
-}
-
-/* Textos del carrusel de alojamiento */
-.carousel-slide .absolute.bottom-8 {
-    font-size: 0.75rem !important;
-    padding: 0.25rem 0.75rem !important;
-    bottom: 4px !important;
-}
+    /* ===== CARRUSEL COMPACTO ===== */
+    .carousel-slide {
+        padding: 0.25rem;
+    }
+    
+    .carousel-slide img {
+        height: 180px;
+        border-radius: 0.5rem;
+    }
+    
+    .carousel-dot {
+        width: 6px !important;
+        height: 6px !important;
+        margin: 0 2px !important;
+    }
+    
+    .carousel-dot.active {
+        transform: scale(1.2) !important;
+    }
+    
+    .carousel-slide .absolute.bottom-8 {
+        bottom: 8px !important;
+        font-size: 0.7rem !important;
+        padding: 0.2rem 0.6rem !important;
+        background: rgba(0,0,0,0.7) !important;
+        border-radius: 20px !important;
+    }
+    
+    .carousel-dots {
+        gap: 6px !important;
+        margin-top: 0.15rem !important;
+    }
     
     /* ===== BOTONES FLOTANTES ===== */
     .floating-actions {
@@ -895,14 +902,36 @@ body.night-mode #pageFade {
         height: 48px !important;
     }
     
-    /* ===== HERO BANNER ===== */
+    /* ===== HERO BANNER COMPACTO ===== */
     .hero-container {
-        height: 400px;
+        height: 300px !important;
     }
     
-    /* Texto del banner - MÁS PEQUEÑO (AJUSTE SOLICITADO) */
     .hero-text {
-        font-size: 1.2rem !important;
+        font-size: 0.85rem !important;
+        margin-bottom: 0.5rem !important;
+        padding: 0.2rem 0.8rem !important;
+    }
+    
+    .hero-container h2 {
+        font-size: 2rem !important;
+        margin-bottom: 0.25rem !important;
+        line-height: 1.1 !important;
+    }
+    
+    .hero-container p {
+        margin-bottom: 0.5rem !important;
+        font-size: 1rem !important;
+    }
+    
+    .hero-container .flex {
+        gap: 0.5rem !important;
+    }
+    
+    .hero-button {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.9rem !important;
+        min-height: 40px !important;
     }
     
     /* ===== INPUTS ===== */
