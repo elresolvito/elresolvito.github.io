@@ -3,28 +3,28 @@
 /* ============================================ */
 :root {
     /* MODO CLARO - Colores Principales */
-    --primary-green: #2E7D32;      /* Confianza, crecimiento, frescura */
-    --primary-green-dark: #1B5E20;  /* Estabilidad, seguridad */
-    --primary-gold: #FFB300;         /* Optimismo, atención, ofertas */
-    --primary-blue: #0277BD;         /* Profesionalismo, servicios contables */
-    --primary-pink: #FF69B4;         /* Dulzura, repostería */
-    --primary-orange: #FF6F00;       /* Urgencia, acción */
+    --primary-green: #2E7D32;      
+    --primary-green-dark: #1B5E20;  
+    --primary-gold: #FFB300;         
+    --primary-blue: #0277BD;         
+    --primary-pink: #FF69B4;         
+    --primary-orange: #FF6F00;       
     
     /* MODO CLARO - Neutros */
-    --bg-light: #FFFFFF;              /* Fondo principal */
-    --bg-light-secondary: #F9FAFB;    /* Fondo secundario suave */
-    --text-primary: #1F2937;          /* Texto principal casi negro */
-    --text-secondary: #4B5563;        /* Texto secundario */
-    --text-tertiary: #9CA3AF;         /* Texto terciario */
-    --border-light: #E5E7EB;          /* Bordes suaves */
+    --bg-light: #FFFFFF;              
+    --bg-light-secondary: #F9FAFB;    
+    --text-primary: #1F2937;          
+    --text-secondary: #4B5563;        
+    --text-tertiary: #9CA3AF;         
+    --border-light: #E5E7EB;          
     
     /* MODO OSCURO */
-    --bg-dark: #0F0F1A;               /* Fondo principal noche */
-    --bg-dark-card: #16213E;           /* Fondo tarjetas noche */
-    --bg-dark-secondary: #1A1A2E;      /* Fondo secundario noche */
-    --text-dark-primary: #E0E0E0;      /* Texto principal noche */
-    --text-dark-secondary: #9A9AB0;     /* Texto secundario noche */
-    --border-dark: #2A2A3A;            /* Bordes noche */
+    --bg-dark: #0F0F1A;               
+    --bg-dark-card: #16213E;           
+    --bg-dark-secondary: #1A1A2E;      
+    --text-dark-primary: #E0E0E0;      
+    --text-dark-secondary: #9A9AB0;     
+    --border-dark: #2A2A3A;            
     
     /* Funcionales */
     --whatsapp: #25D366;
@@ -78,13 +78,10 @@ body.night-mode {
     color: var(--text-dark-primary);
 }
 
-body.night-mode .bg-white {
-    background: var(--bg-dark-card) !important;
-}
-
+body.night-mode .bg-white,
 body.night-mode .bg-gray-50,
 body.night-mode .bg-gray-100 {
-    background: var(--bg-dark-secondary) !important;
+    background: var(--bg-dark-card) !important;
 }
 
 body.night-mode .text-gray-600,
@@ -103,26 +100,20 @@ body.night-mode .border-gray-300 {
 body.night-mode header,
 body.night-mode footer {
     background-color: var(--bg-dark-card) !important;
-    border-bottom: 1px solid var(--border-dark);
 }
 
-body.night-mode .product-card {
-    background: var(--bg-dark-card);
-    border-color: var(--border-dark);
-}
-
+body.night-mode .product-card,
 body.night-mode .service-card {
     background: var(--bg-dark-card);
     border-color: var(--border-dark);
 }
 
-/* --- CORRECCIÓN SOLICITADA: Fondo blanco para contenedor de imagen en modo oscuro --- */
 body.night-mode .product-image-container {
-    background: #ffffff !important; /* Fondo blanco puro para que las imágenes se vean bien */
+    background: #ffffff !important;
 }
 
 body.night-mode .service-card .h-64.w-full.overflow-hidden {
-    background: #ffffff !important; /* También para servicios si es necesario */
+    background: #ffffff !important;
 }
 
 body.night-mode .carousel-button {
@@ -148,14 +139,12 @@ body.night-mode .theme-toggle {
 /* COMPONENTES REUTILIZABLES */
 /* ============================================ */
 
-/* Contenedor */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
 }
 
-/* Botones principales */
 .btn {
     display: inline-block;
     padding: 0.75rem 1.5rem;
@@ -199,7 +188,6 @@ body.night-mode .theme-toggle {
     color: white;
 }
 
-/* Tarjetas de producto */
 .product-card {
     background: white;
     border-radius: 1rem;
@@ -236,7 +224,6 @@ body.night-mode .theme-toggle {
     transform: scale(1.08);
 }
 
-/* Tarjetas de servicio */
 .service-card {
     background: white;
     border-radius: 1rem;
@@ -251,7 +238,6 @@ body.night-mode .theme-toggle {
     box-shadow: var(--shadow-xl);
 }
 
-/* Badges y etiquetas */
 .badge {
     display: inline-block;
     padding: 0.25rem 0.75rem;
@@ -277,11 +263,6 @@ body.night-mode .theme-toggle {
     color: white;
 }
 
-/* ============================================ */
-/* SECCIONES ESPECIALES POR SERVICIO */
-/* ============================================ */
-
-/* Sección Contador */
 .service-contador {
     border-left: 4px solid var(--primary-blue);
 }
@@ -290,7 +271,6 @@ body.night-mode .theme-toggle {
     color: var(--primary-blue);
 }
 
-/* Sección Dulce César */
 .service-dulce {
     border-left: 4px solid var(--primary-pink);
 }
@@ -299,7 +279,6 @@ body.night-mode .theme-toggle {
     color: var(--primary-pink);
 }
 
-/* Sección Ofertas */
 .section-offers {
     background: linear-gradient(135deg, var(--primary-orange), var(--primary-gold));
 }
@@ -343,21 +322,11 @@ body.night-mode .hero-bg-night {
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.2) 0%,
-        rgba(0,0,0,0.4) 50%,
-        rgba(0,0,0,0.6) 100%
-    );
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 100%);
 }
 
 body.night-mode .hero-overlay {
-    background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.4) 0%,
-        rgba(0,0,0,0.6) 50%,
-        rgba(0,0,0,0.8) 100%
-    );
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%);
 }
 
 .hero-title {
@@ -384,11 +353,7 @@ body.night-mode .hero-overlay {
 .promo-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        90deg,
-        rgba(0,0,0,0.8) 0%,
-        rgba(0,0,0,0.4) 100%
-    );
+    background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%);
 }
 
 /* ============================================ */
@@ -438,14 +403,8 @@ body.night-mode .hero-overlay {
 }
 
 @keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
 /* ============================================ */
@@ -469,18 +428,12 @@ body.night-mode .hero-overlay {
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     border: 2px solid white;
     z-index: 10;
-    letter-spacing: -0.5px;
-    line-height: 1;
     animation: badgePulse 2s infinite;
 }
 
 @keyframes badgePulse {
-    0%, 100% {
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
-    50% {
-        box-shadow: 0 2px 8px rgba(255, 179, 0, 0.6);
-    }
+    0%, 100% { box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+    50% { box-shadow: 0 2px 8px rgba(255, 179, 0, 0.6); }
 }
 
 @keyframes badgePop {
@@ -842,41 +795,59 @@ body.night-mode #pageFade {
 }
 
 /* ============================================ */
-/* RESPONSIVE (con ajustes de texto) */
+/* RESPONSIVE MEJORADO - PROPORCIONES CORRECTAS */
 /* ============================================ */
+
+/* Móviles pequeños */
 @media (max-width: 640px) {
-    /* Aumentar tamaño de texto base */
     body {
         font-size: 16px;
     }
     
-    /* Textos más grandes */
-    .text-xs { font-size: 0.875rem; } /* 14px */
-    .text-sm { font-size: 1rem; }     /* 16px */
-    .text-base { font-size: 1.125rem; } /* 18px */
-    .text-lg { font-size: 1.25rem; }    /* 20px */
-    .text-xl { font-size: 1.375rem; }   /* 22px */
-    .text-2xl { font-size: 1.75rem; }   /* 28px */
-    .text-3xl { font-size: 2rem; }      /* 32px */
-    .text-4xl { font-size: 2.25rem; }   /* 36px */
+    .text-xs { font-size: 0.875rem !important; }
+    .text-sm { font-size: 1rem !important; }
+    .text-base { font-size: 1.125rem !important; }
+    .text-lg { font-size: 1.25rem !important; }
+    .text-xl { font-size: 1.375rem !important; }
+    .text-2xl { font-size: 1.75rem !important; }
+    .text-3xl { font-size: 2rem !important; }
+    .text-4xl { font-size: 2.25rem !important; }
+    .text-5xl { font-size: 2.5rem !important; }
+    .text-6xl { font-size: 3rem !important; }
     
-    /* Botones más grandes */
-    button, .btn, [onclick], a.btn {
-        min-height: 48px;
-        padding: 0.75rem 1rem;
-        font-size: 1rem;
+    .product-card .text-cuban-green.text-lg {
+        font-size: 1.5rem !important;
     }
     
-    /* Ajustes de altura */
-    .hero-container {
-        height: 400px;
+    .badge, .cart-badge, [class*="rounded-full"].text-xs {
+        font-size: 0.875rem !important;
+        padding: 0.25rem 0.75rem !important;
+    }
+    
+    button, .btn, [onclick], a.btn, a[href], .floating-btn {
+        min-height: 48px !important;
+        min-width: 48px !important;
+        padding: 0.75rem 1rem !important;
+        font-size: 1rem !important;
+    }
+    
+    .w-6.h-6 {
+        width: 2.5rem !important;
+        height: 2.5rem !important;
     }
     
     .product-image-container {
         height: 140px;
     }
     
-    /* Botones flotantes */
+    .carousel-slide {
+        padding: 0.5rem;
+    }
+    
+    .carousel-slide img {
+        height: 200px;
+    }
+    
     .floating-actions {
         bottom: 1rem;
         right: 1rem;
@@ -895,10 +866,41 @@ body.night-mode #pageFade {
         font-size: 0.7rem;
         border-width: 1.5px;
     }
+    
+    .mobile-menu-btn {
+        width: 48px !important;
+        height: 48px !important;
+    }
+    
+    .header-actions button {
+        width: 48px !important;
+        height: 48px !important;
+    }
+    
+    .hero-container {
+        height: 400px;
+    }
+    
+    .hero-text {
+        font-size: 1.5rem !important;
+    }
+    
+    input, textarea, select {
+        font-size: 16px !important;
+        padding: 0.75rem !important;
+    }
+    
+    .grid-cols-2 {
+        gap: 0.75rem;
+    }
 }
 
+/* Tablets */
 @media (min-width: 641px) and (max-width: 1024px) {
     .product-image-container {
         height: 160px;
     }
+    
+    .text-xs { font-size: 0.8125rem; }
+    .text-sm { font-size: 0.9375rem; }
 }
