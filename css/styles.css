@@ -726,9 +726,193 @@ body.night-mode .hero-overlay {
 }
 
 /* ============================================ */
-/* VERSIÓN MÓVIL - CONSISTENTE */
+/* VARIANTE ESPECIAL PARA OFERTAS (IMÁGENES CONTENIDAS) */
 /* ============================================ */
+.ofertas-carousel .carousel-slide img {
+    object-fit: contain;  /* Para que las chanclas se vean completas */
+    background: #f8fafc;
+    padding: 1rem;
+}
+
+.ofertas-carousel .carousel-slide .image-caption {
+    display: none;  /* Sin texto en ofertas */
+}
+
+/* ============================================ */
+/* VARIANTE PARA RESERVAS (CON TEXTO) */
+/* ============================================ */
+.reservas-carousel .carousel-slide {
+    position: relative;
+}
+
+.reservas-carousel .carousel-slide img {
+    object-fit: cover;
+}
+
+/* ============================================ */
+/* UTILIDADES */
+/* ============================================ */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.feature-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.feature-item i {
+    color: var(--success);
+}
+
+.color-chip {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 2px solid rgba(255,255,255,0.5);
+    transition: transform 0.2s ease;
+}
+
+.amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.5rem;
+}
+
+.amenity-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.amenity-item i {
+    color: var(--primary-green);
+    width: 20px;
+}
+
+/* ============================================ */
+/* ANIMACIONES */
+/* ============================================ */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.pulse-slow {
+    animation: pulse 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.animate-bounce-slow {
+    animation: bounce 2s infinite;
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+}
+
+.animate-wiggle {
+    animation: wiggle 1s ease-in-out infinite;
+}
+
+/* ============================================ */
+/* TRANSICIÓN ENTRE PÁGINAS */
+/* ============================================ */
+#pageFade {
+    position: fixed;
+    inset: 0;
+    background: white;
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+body.night-mode #pageFade {
+    background: var(--bg-dark);
+}
+
+/* ============================================ */
+/* ACCESIBILIDAD */
+/* ============================================ */
+:focus-visible {
+    outline: 3px solid var(--primary-gold);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ============================================ */
+/* RESPONSIVE MEJORADO - VERSIÓN MÓVIL */
+/* ============================================ */
+
+/* Móviles pequeños */
 @media (max-width: 640px) {
+    body {
+        font-size: 16px;
+    }
+    
+    .text-xs { font-size: 0.875rem !important; }
+    .text-sm { font-size: 1rem !important; }
+    .text-base { font-size: 1.125rem !important; }
+    .text-lg { font-size: 1.25rem !important; }
+    .text-xl { font-size: 1.375rem !important; }
+    .text-2xl { font-size: 1.75rem !important; }
+    .text-3xl { font-size: 2rem !important; }
+    
+    .product-card .text-cuban-green.text-lg {
+        font-size: 1.5rem !important;
+    }
+    
+    button, .btn, [onclick], a.btn, a[href], .floating-btn {
+        min-height: 48px !important;
+        min-width: 48px !important;
+        padding: 0.75rem 1rem !important;
+        font-size: 1rem !important;
+    }
+    
+    .product-image-container {
+        height: 140px;
+    }
+    
+    /* ===== CARRUSEL EN MÓVIL ===== */
     .carousel-slide {
         padding: 0.5rem;
     }
@@ -766,31 +950,11 @@ body.night-mode .hero-overlay {
     .carousel-dot.active {
         width: 20px;
     }
-}
-
-/* ============================================ */
-/* VARIANTE ESPECIAL PARA OFERTAS (IMÁGENES CONTENIDAS) */
-/* ============================================ */
-.ofertas-carousel .carousel-slide img {
-    object-fit: contain;  /* Para que las chanclas se vean completas */
-    background: #f8fafc;
-    padding: 1rem;
-}
-
-.ofertas-carousel .carousel-slide .image-caption {
-    display: none;  /* Sin texto en ofertas */
-}
-
-/* ============================================ */
-/* VARIANTE PARA RESERVAS (CON TEXTO) */
-/* ============================================ */
-.reservas-carousel .carousel-slide {
-    position: relative;
-}
-
-.reservas-carousel .carousel-slide img {
-    object-fit: cover;
-}
+    
+    .ofertas-carousel .carousel-slide img {
+        padding: 0.5rem;
+    }
+    
     /* ===== BOTONES FLOTANTES ===== */
     .floating-actions {
         bottom: 1rem;
@@ -824,7 +988,7 @@ body.night-mode .hero-overlay {
     
     /* ===== HERO BANNER ===== */
     .hero-container {
-        height: 280px !important;
+        height: 300px !important;
     }
     
     .hero-container h2 {
