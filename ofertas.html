@@ -36,48 +36,6 @@
             }
         }
     </script>
-    
-    <!-- ESTILOS RESPONSIVE PARA MÓVIL -->
-    <style>
-        @media (max-width: 640px) {
-            body {
-                font-size: 16px !important;
-            }
-            .text-xs { font-size: 0.875rem !important; }
-            .text-sm { font-size: 1rem !important; }
-            .text-base { font-size: 1.125rem !important; }
-            .text-lg { font-size: 1.25rem !important; }
-            .text-xl { font-size: 1.375rem !important; }
-            .text-2xl { font-size: 1.75rem !important; }
-            .text-3xl { font-size: 2rem !important; }
-            .text-4xl { font-size: 2.25rem !important; }
-            h1, h2, h3, .font-bold.text-3xl {
-                font-size: 2rem !important;
-                line-height: 1.2;
-            }
-            .text-2xl.font-bold {
-                font-size: 2rem !important;
-            }
-            button, .btn, [onclick], a.btn, a[href] {
-                min-height: 48px;
-                padding: 0.75rem 1rem;
-                font-size: 1rem;
-            }
-            .carousel-slide {
-                padding: 0.5rem;
-            }
-            .carousel-slide img {
-                height: 200px;
-            }
-            .mobile-menu-btn {
-                width: 48px !important;
-                height: 48px !important;
-            }
-        }
-    </style>
-    
-    <!-- Scripts -->
-    <script src="js/elresolvito.js" defer></script>
 </head>
 <body class="bg-white text-gray-800">
 
@@ -107,7 +65,7 @@
         </div>
     </section>
 
-    <!-- Carrusel de Chanclas -->
+    <!-- Carrusel de Chanclas con clase ofertas-carousel -->
     <section class="py-12">
         <div class="container mx-auto px-4">
             
@@ -117,19 +75,19 @@
             </div>
             
             <!-- Carrusel -->
-            <div class="carousel-container max-w-4xl mx-auto bg-gray-50 rounded-2xl shadow-xl p-4">
+            <div class="ofertas-carousel carousel-container max-w-4xl mx-auto bg-gray-50 rounded-2xl shadow-xl p-4">
                 
                 <!-- Slides -->
                 <div id="carouselTrack" class="carousel-track">
-                    <!-- Las slides se generan dinámicamente con JavaScript -->
+                    <!-- Las slides se generan dinámicamente -->
                 </div>
                 
                 <!-- Botones de navegación -->
                 <button class="carousel-button carousel-prev" onclick="prevSlide()">
-                    <i class="fas fa-chevron-left text-chancla-azul"></i>
+                    <i class="fas fa-chevron-left"></i>
                 </button>
                 <button class="carousel-button carousel-next" onclick="nextSlide()">
-                    <i class="fas fa-chevron-right text-chancla-azul"></i>
+                    <i class="fas fa-chevron-right"></i>
                 </button>
                 
                 <!-- Dots indicadores -->
@@ -210,7 +168,7 @@
 
     <!-- Toast de notificación -->
     <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
-        <p id="cartToastMessage">Producto añadido</p>
+        <p id="cartToastMessage"></p>
     </div>
 
     <script>
@@ -241,13 +199,13 @@
             
             if (!track || !dotsContainer) return;
             
-            // Generar slides con fallback de imagen
+            // Generar slides
             track.innerHTML = chanclasImages.map((img, index) => `
                 <div class="carousel-slide">
                     <div class="bg-white rounded-xl shadow-lg p-4">
                         <img src="${img}" 
                              alt="Chancla ${index + 1}" 
-                             class="w-full h-64 object-contain mx-auto cursor-pointer"
+                             class="w-full h-64 object-contain mx-auto"
                              onclick="openImageModal('${img}', 'Chancla ${index + 1}')"
                              onerror="this.src='https://placehold.co/400x300/2E7D32/white?text=Chancla+${index + 1}'">
                         <p class="text-center mt-2 text-gray-600">Modelo ${index + 1}</p>
@@ -269,7 +227,6 @@
                 track.style.transform = `translateX(-${currentSlide * 100}%)`;
             }
             
-            // Actualizar dots
             document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
                 dot.classList.toggle('active', index === currentSlide);
             });
@@ -312,10 +269,8 @@
             await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
             await loadComponent('footer-container', 'components/footer.html');
             
-            // Inicializar carrusel
             initCarousel();
         });
     </script>
 </body>
 </html>
-
