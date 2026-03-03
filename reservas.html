@@ -67,25 +67,25 @@
             
             <div class="property-card bg-white rounded-2xl shadow-xl overflow-hidden mt-4">
                 <div class="md:flex">
-                    <!-- Carrusel de imágenes -->
-                    <div class="md:w-1/2">
-                        <div class="carousel-container h-64 md:h-full">
-                            <div id="carouselTrack" class="carousel-track h-full">
-                                <!-- Las slides se generan dinámicamente -->
-                            </div>
-                            
-                            <button class="carousel-button carousel-prev" onclick="prevSlide()">
-                                <i class="fas fa-chevron-left text-cuban-green"></i>
-                            </button>
-                            <button class="carousel-button carousel-next" onclick="nextSlide()">
-                                <i class="fas fa-chevron-right text-cuban-green"></i>
-                            </button>
-                            
-                            <div id="carouselDots" class="carousel-dots absolute bottom-2 left-0 right-0">
-                                <!-- Se generan dinámicamente -->
-                            </div>
-                        </div>
-                    </div>
+                 <!-- Carrusel de imágenes -->
+<div class="md:w-1/2">
+    <div class="carousel-container h-64 md:h-full">
+        <div id="carouselTrack" class="carousel-track h-full">
+            <!-- Las slides se generan dinámicamente con JavaScript -->
+        </div>
+        
+        <button class="carousel-button carousel-prev" onclick="prevSlide()">
+            <i class="fas fa-chevron-left text-cuban-green"></i>
+        </button>
+        <button class="carousel-button carousel-next" onclick="nextSlide()">
+            <i class="fas fa-chevron-right text-cuban-green"></i>
+        </button>
+        
+        <div id="carouselDots" class="carousel-dots">
+            <!-- Los dots (líneas) se generan dinámicamente -->
+        </div>
+    </div>
+</div>
                     
                     <div class="md:w-1/2 p-6 md:p-8 flex flex-col justify-center">
                         <h3 class="text-3xl font-bold mb-2">Terrazas de Bayona 59</h3>
@@ -326,5 +326,6 @@
     </script>
 </body>
 </html>
+
 
 
