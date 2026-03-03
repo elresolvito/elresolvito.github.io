@@ -811,15 +811,9 @@ body.night-mode #pageFade {
     .text-xl { font-size: 1.375rem !important; }
     .text-2xl { font-size: 1.75rem !important; }
     .text-3xl { font-size: 2rem !important; }
-    .text-4xl { font-size: 2.25rem !important; }
     
     .product-card .text-cuban-green.text-lg {
         font-size: 1.5rem !important;
-    }
-    
-    .badge, .cart-badge, [class*="rounded-full"].text-xs {
-        font-size: 0.875rem !important;
-        padding: 0.25rem 0.75rem !important;
     }
     
     button, .btn, [onclick], a.btn, a[href], .floating-btn {
@@ -829,46 +823,56 @@ body.night-mode #pageFade {
         font-size: 1rem !important;
     }
     
-    .w-6.h-6 {
-        width: 2.5rem !important;
-        height: 2.5rem !important;
-    }
-    
     .product-image-container {
         height: 140px;
     }
     
-    /* ===== CARRUSEL COMPACTO ===== */
+    /* ===== CARRUSEL ULTRA COMPACTO ===== */
     .carousel-slide {
-        padding: 0.25rem;
+        padding: 0 !important;
     }
     
     .carousel-slide img {
-        height: 180px;
-        border-radius: 0.5rem;
-    }
-    
-    .carousel-dot {
-        width: 6px !important;
-        height: 6px !important;
-        margin: 0 2px !important;
-    }
-    
-    .carousel-dot.active {
-        transform: scale(1.2) !important;
+        height: 160px !important;
+        border-radius: 0.5rem !important;
+        object-fit: cover !important;
     }
     
     .carousel-slide .absolute.bottom-8 {
-        bottom: 8px !important;
-        font-size: 0.7rem !important;
-        padding: 0.2rem 0.6rem !important;
+        bottom: 4px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        font-size: 0.65rem !important;
+        padding: 0.15rem 0.5rem !important;
         background: rgba(0,0,0,0.7) !important;
-        border-radius: 20px !important;
+        border-radius: 12px !important;
+        white-space: nowrap !important;
+        color: white !important;
+        max-width: 90% !important;
+        text-overflow: ellipsis !important;
+        overflow: hidden !important;
     }
     
     .carousel-dots {
-        gap: 6px !important;
-        margin-top: 0.15rem !important;
+        gap: 4px !important;
+        margin-top: 0.1rem !important;
+    }
+    
+    .carousel-dot {
+        width: 4px !important;
+        height: 4px !important;
+        margin: 0 1px !important;
+    }
+    
+    .carousel-dot.active {
+        width: 6px !important;
+        height: 6px !important;
+        background: #2E7D32 !important;
+    }
+    
+    .carousel-container {
+        margin-bottom: 0 !important;
+        border-radius: 0.75rem !important;
     }
     
     /* ===== BOTONES FLOTANTES ===== */
@@ -902,36 +906,29 @@ body.night-mode #pageFade {
         height: 48px !important;
     }
     
-    /* ===== HERO BANNER COMPACTO ===== */
+    /* ===== HERO BANNER ===== */
     .hero-container {
-        height: 300px !important;
-    }
-    
-    .hero-text {
-        font-size: 0.85rem !important;
-        margin-bottom: 0.5rem !important;
-        padding: 0.2rem 0.8rem !important;
+        height: 280px !important;
     }
     
     .hero-container h2 {
-        font-size: 2rem !important;
-        margin-bottom: 0.25rem !important;
-        line-height: 1.1 !important;
+        font-size: 1.8rem !important;
+        margin-bottom: 0.2rem !important;
     }
     
     .hero-container p {
-        margin-bottom: 0.5rem !important;
-        font-size: 1rem !important;
+        margin-bottom: 0.4rem !important;
+        font-size: 0.9rem !important;
     }
     
     .hero-container .flex {
-        gap: 0.5rem !important;
+        gap: 0.4rem !important;
     }
     
     .hero-button {
-        padding: 0.5rem 1rem !important;
-        font-size: 0.9rem !important;
-        min-height: 40px !important;
+        padding: 0.4rem 0.8rem !important;
+        font-size: 0.8rem !important;
+        min-height: 36px !important;
     }
     
     /* ===== INPUTS ===== */
