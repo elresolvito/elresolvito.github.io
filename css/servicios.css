@@ -1,0 +1,273 @@
+/* ============================================ */
+/* ESTILOS EXCLUSIVOS PARA SERVICIOS */
+/* ============================================ */
+
+/* Hero */
+.servicios-hero {
+    background: linear-gradient(135deg, #2E7D32, #1B5E20);
+    padding: 4rem 1rem;
+    text-align: center;
+    color: white;
+}
+
+/* Tarjetas de servicio */
+.service-card {
+    background: white;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 30px -10px rgba(0,0,0,0.2);
+}
+
+.service-image {
+    height: 240px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f5f5f5, #ffffff);
+}
+
+.service-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 1.5rem;
+}
+
+.service-content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.service-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    width: fit-content;
+}
+
+.badge-dulce {
+    background: #FF69B4;
+    color: white;
+}
+
+.badge-contador {
+    background: #1E3A8A;
+    color: white;
+}
+
+.service-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.service-title.dulce {
+    color: #FF69B4;
+}
+
+.service-title.contador {
+    color: #1E3A8A;
+}
+
+.service-description {
+    color: #4B5563;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+/* Etiquetas */
+.service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.service-tag {
+    background: #f3f4f6;
+    color: #4B5563;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Características (para contador) */
+.feature-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin: 1rem 0;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #4B5563;
+}
+
+.feature-item i {
+    color: #10B981;
+    font-size: 0.875rem;
+}
+
+/* Precio */
+.service-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 1rem 0;
+}
+
+.price-dulce {
+    color: #FF69B4;
+}
+
+.price-contador {
+    color: #1E3A8A;
+}
+
+/* Botones */
+.btn-dulce {
+    background: linear-gradient(135deg, #FF69B4, #9B59B6);
+    color: white;
+    padding: 0.875rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    transition: opacity 0.2s ease;
+    display: block;
+    width: 100%;
+}
+
+.btn-dulce:hover {
+    opacity: 0.9;
+}
+
+.btn-contador {
+    background: linear-gradient(135deg, #1E3A8A, #B45309);
+    color: white;
+    padding: 0.875rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    transition: opacity 0.2s ease;
+    display: block;
+    width: 100%;
+}
+
+.btn-contador:hover {
+    opacity: 0.9;
+}
+
+/* Promoción de servicios */
+.promocion-servicios {
+    background: linear-gradient(135deg, #0277BD, #2E7D32);
+    color: white;
+    padding: 3rem 1rem;
+}
+
+.promocion-servicios h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.promocion-servicios .botones {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.promocion-servicios .botones a {
+    background: white;
+    color: #0277BD;
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+.promocion-servicios .botones a:hover {
+    background: #f3f4f6;
+}
+
+/* CTA emprendimientos */
+.cta-emprendimientos {
+    background: #2E7D32;
+    color: white;
+    padding: 3rem 1rem;
+    text-align: center;
+}
+
+.cta-emprendimientos h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.cta-emprendimientos a {
+    background: white;
+    color: #2E7D32;
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    display: inline-block;
+    transition: background 0.2s ease;
+}
+
+.cta-emprendimientos a:hover {
+    background: #f3f4f6;
+}
+
+/* ============================================ */
+/* RESPONSIVE */
+/* ============================================ */
+@media (max-width: 640px) {
+    .service-image {
+        height: 180px;
+    }
+    
+    .service-image img {
+        padding: 1rem;
+    }
+    
+    .service-title {
+        font-size: 1.5rem;
+    }
+    
+    .feature-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .promocion-servicios h3 {
+        font-size: 1.5rem;
+    }
+    
+    .promocion-servicios .botones {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .promocion-servicios .botones a {
+        text-align: center;
+    }
+}
