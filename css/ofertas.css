@@ -1,37 +1,274 @@
-/* ============================================ */
-/* ESTILOS EXCLUSIVOS PARA OFERTAS */
-/* ============================================ */
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Ofertas Mayor - Chanclas - El Resolvito</title>
+    <meta name="description" content="Chanclas al por mayor en La Habana. Precio especial $3,500 c/u. Diferentes colores y estilos. Ideal para revendedores.">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <!-- ESTILOS (ORDEN CORRECTO) -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/ofertas.css">
+    
+    <!-- Fonts y Tailwind -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuración de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'poppins': ['Poppins'], 'opensans': ['Open Sans'] },
+                    colors: {
+                        'cuban-green': '#2E7D32', 
+                        'cuban-dark': '#1B5E20',
+                        'cuban-yellow': '#FFB300', 
+                        'cuban-orange': '#FF6F00',
+                        'chancla-azul': '#1E90FF',
+                        'chancla-rosa': '#FF69B4'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white text-gray-800">
 
-/* Hero específico de ofertas */
-.ofertas-hero {
-    background: linear-gradient(135deg, #1E90FF, #FF69B4);
-    padding: 4rem 1rem;
-}
+    <!-- Transición suave entre páginas -->
+    <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
 
-/* Carrusel de ofertas - SOLO PARA OFERTAS */
-.ofertas-carousel .carousel-slide img {
-    height: 300px;
-    object-fit: contain;
-    background: #f8fafc;
-    padding: 1rem;
-}
+    <!-- Componentes fijos -->
+    <div id="header-container"></div>
+    <div id="mobile-menu-container"></div>
+    <div id="floating-buttons-container"></div>
 
-.ofertas-carousel .carousel-dots {
-    display: none; /* Sin dots en ofertas */
-}
+    <!-- ============================================ -->
+    <!-- CONTENIDO DE OFERTAS -->
+    <!-- ============================================ -->
+    
+    <!-- Hero -->
+    <section class="ofertas-hero">
+        <div class="container mx-auto px-4">
+            <span class="inline-block bg-white/20 px-4 py-1 rounded-full text-sm font-bold mb-4 animate-pulse">
+                👡 OFERTA ESPECIAL MAYORISTA
+            </span>
+            <h1>Chanclas para Todos</h1>
+            <p>La mejor calidad al mejor precio</p>
+            <div class="precio-destacado">
+                $3,500 c/u
+            </div>
+        </div>
+    </section>
 
-.ofertas-carousel .carousel-slide p {
-    text-align: center;
-    margin-top: 0.5rem;
-    color: #4B5563;
-}
+    <!-- Carrusel de Chanclas -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            
+            <div class="ofertas-titulo">
+                <h2>🩴 Colección de Chanclas</h2>
+                <p>Precio especial por mayoreo: <span class="precio-mayor">$3,500</span> cada par</p>
+            </div>
+            
+            <!-- Carrusel SIN DOTS -->
+            <div class="ofertas-carousel">
+                
+                <!-- Slides -->
+                <div id="carouselTrack" class="carousel-track">
+                    <!-- Las slides se generan dinámicamente -->
+                </div>
+                
+                <!-- Botones de navegación -->
+                <button class="carousel-button carousel-prev" onclick="prevSlide()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-button carousel-next" onclick="nextSlide()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <!-- Dots (ocultos por CSS) -->
+                <div id="carouselDots" class="carousel-dots"></div>
+                
+            </div>
+            
+            <!-- Descripción de la oferta -->
+            <div class="ofertas-descripcion">
+                <p>
+                    <i class="fas fa-tag text-cuban-green mr-2"></i>
+                    <span class="font-bold">Oferta por mayoreo:</span> Todas las chanclas a <span class="precio-final">$3,500</span>
+                </p>
+                <p class="text-gray-600">
+                    Ideal para revendedores, tiendas y negocios. Diferentes colores y estilos disponibles.
+                </p>
+                
+                <!-- Botón de WhatsApp -->
+                <a href="https://wa.me/5356382909?text=Hola%2C%20me%20interesa%20la%20oferta%20de%20chanclas%20a%20%243%2C500.%20Quiero%20hacer%20un%20pedido%20por%20mayor." 
+                   target="_blank"
+                   class="btn-whatsapp">
+                    <i class="fab fa-whatsapp mr-2 text-2xl"></i>
+                    Hacer pedido por WhatsApp
+                </a>
+            </div>
+            
+            <!-- Mensaje de más productos próximamente -->
+            <div class="mt-8 text-center text-gray-500 border-t pt-8">
+                <p><i class="fas fa-boxes mr-2 text-cuban-green"></i> Próximamente más productos al por mayor</p>
+            </div>
+            
+        </div>
+    </section>
 
-/* ============================================ */
-/* RESPONSIVE - SOLO PARA OFERTAS */
-/* ============================================ */
-@media (max-width: 640px) {
-    .ofertas-carousel .carousel-slide img {
-        height: 220px;
-        padding: 0.5rem;
-    }
-}
+    <!-- Información adicional -->
+    <section class="ofertas-info">
+        <div class="container mx-auto px-4">
+            
+            <div class="ofertas-info-grid">
+                
+                <div class="ofertas-info-card">
+                    <i class="fas fa-truck"></i>
+                    <h3>Envío a domicilio</h3>
+                    <p>Solo $400 en La Habana Vieja.</p>
+                </div>
+                
+                <div class="ofertas-info-card">
+                    <i class="fas fa-tag"></i>
+                    <h3>Precios especiales</h3>
+                    <p>Ofertas exclusivas para revendedores y negocios</p>
+                </div>
+                
+                <div class="ofertas-info-card">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3>Compra fácil</h3>
+                    <p>Agrega al carrito y pide por WhatsApp en 2 minutos</p>
+                </div>
+                
+            </div>
+            
+            <div class="mt-8 text-center">
+                <a href="tienda.html" class="inline-block bg-white text-cuban-green px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition">
+                    <i class="fas fa-store mr-2"></i>
+                    Ver más productos en la tienda
+                </a>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Contenedores para modales y footer -->
+    <div id="image-modal-container"></div>
+    <div id="cart-sidebar-container"></div>
+    <div id="checkout-modal-container"></div>
+    <div id="footer-container"></div>
+
+    <!-- Toast de notificación -->
+    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
+        <p id="cartToastMessage"></p>
+    </div>
+
+    <script>
+        // ============================================
+        // ARRAY DE IMÁGENES DE CHANCLAS
+        // ============================================
+        const chanclasImages = [
+            "https://i.postimg.cc/Bn5GHz54/chancjas_negras_1(1).jpg",
+            "https://i.postimg.cc/2Sdfhtdm/chanclas_beige(1).jpg",
+            "https://i.postimg.cc/525MLr5M/chanclas_blanca_y_azul(1).jpg",
+            "https://i.postimg.cc/dVRKrfRD/chanclas_blanca_y_negra(1).jpg",
+            "https://i.postimg.cc/Qdgr1zgp/chanclas_blancas_1(1).jpg",
+            "https://i.postimg.cc/rp82J9gS/chanclas_negras-2-1.jpg",
+            "https://i.postimg.cc/SKybrGV1/chanclas_negras-3-1.jpg",
+            "https://i.postimg.cc/tgXG5zDm/chanclas_roja-y-blanca-1.jpg",
+            "https://i.postimg.cc/CKFpN4Jt/chanclas_rosas-1.jpg",
+            "https://i.postimg.cc/7Z1y0R14/chanclas-1.jpg"
+        ];
+        
+        let currentSlide = 0;
+
+        // ============================================
+        // FUNCIONES DEL CARRUSEL
+        // ============================================
+        function initCarousel() {
+            const track = document.getElementById('carouselTrack');
+            const dotsContainer = document.getElementById('carouselDots');
+            
+            if (!track) return;
+            
+            // Generar slides
+            track.innerHTML = chanclasImages.map((img, index) => `
+                <div class="carousel-slide">
+                    <div>
+                        <img src="${img}" 
+                             alt="Chancla ${index + 1}" 
+                             class="w-full h-64 object-contain mx-auto"
+                             onclick="openImageModal('${img}', 'Chancla ${index + 1}')"
+                             onerror="this.src='https://placehold.co/400x300/1E90FF/white?text=Chancla'">
+                        <p>Modelo ${index + 1}</p>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Generar dots (se generan pero están ocultos por CSS)
+            if (dotsContainer) {
+                dotsContainer.innerHTML = chanclasImages.map((_, index) => `
+                    <div class="carousel-dot ${index === 0 ? 'active' : ''}" onclick="goToSlide(${index})"></div>
+                `).join('');
+            }
+            
+            updateCarousel();
+        }
+        
+        function updateCarousel() {
+            const track = document.getElementById('carouselTrack');
+            if (track) {
+                track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % chanclasImages.length;
+            updateCarousel();
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + chanclasImages.length) % chanclasImages.length;
+            updateCarousel();
+        }
+        
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        // ============================================
+        // CARGA DE COMPONENTES
+        // ============================================
+        async function loadComponent(elementId, componentPath) {
+            try {
+                const response = await fetch(componentPath);
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+            } catch (error) {
+                console.error(`Error cargando ${componentPath}:`, error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadComponent('header-container', 'components/header.html');
+            await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
+            await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
+            await loadComponent('image-modal-container', 'components/image-modal.html');
+            await loadComponent('cart-sidebar-container', 'components/cart-sidebar.html');
+            await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
+            await loadComponent('footer-container', 'components/footer.html');
+            
+            initCarousel();
+        });
+    </script>
+</body>
+</html>
