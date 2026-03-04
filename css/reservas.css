@@ -2,17 +2,62 @@
 /* ESTILOS EXCLUSIVOS PARA RESERVAS */
 /* ============================================ */
 
-/* Hero específico de reservas */
-.reservas-hero {
+/* Hero */
+.bg-gradient-to-br.from-cuban-blue.to-purple-600 {
     background: linear-gradient(135deg, #0277BD, #8B5CF6);
-    padding: 3rem 1rem;
 }
 
-/* Carrusel de reservas - SOLO PARA RESERVAS */
+/* Carrusel de reservas */
+.reservas-carousel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+}
+
+.reservas-carousel .carousel-track {
+    display: flex;
+    transition: transform 0.4s ease;
+    height: 100%;
+}
+
+.reservas-carousel .carousel-slide {
+    flex: 0 0 100%;
+    padding: 0.25rem;
+}
+
 .reservas-carousel .carousel-slide img {
+    width: 100%;
     height: 240px;
     object-fit: cover;
     border-radius: 0.75rem;
+}
+
+.reservas-carousel .carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 10;
+    color: #2E7D32;
+}
+
+.reservas-carousel .carousel-prev { left: 10px; }
+.reservas-carousel .carousel-next { right: 10px; }
+
+.reservas-carousel .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 0.75rem;
 }
 
 .reservas-carousel .carousel-dot {
@@ -20,6 +65,8 @@
     height: 10px;
     border-radius: 50%;
     background: #d1d5db;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .reservas-carousel .carousel-dot.active {
@@ -38,9 +85,10 @@
     font-size: 0.8rem;
     padding: 0.25rem 1rem;
     border-radius: 20px;
+    white-space: nowrap;
 }
 
-/* Amenities grid - SOLO PARA RESERVAS */
+/* Amenities grid */
 .amenities-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -52,21 +100,28 @@
     align-items: center;
     gap: 0.5rem;
     font-size: 0.9rem;
+    color: #4B5563;
 }
 
-/* Experience badges - SOLO PARA RESERVAS */
+.amenity-item i {
+    color: #2E7D32;
+}
+
+/* Experience badges */
 .experience-badge {
     background: linear-gradient(135deg, #FFB300, #FF6F00);
     color: #1B5E20;
     padding: 0.25rem 1rem;
     border-radius: 9999px;
     font-size: 0.8rem;
+    font-weight: 600;
     display: inline-block;
     margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 /* ============================================ */
-/* RESPONSIVE - SOLO PARA RESERVAS */
+/* RESPONSIVE */
 /* ============================================ */
 @media (max-width: 640px) {
     .reservas-carousel .carousel-slide img {
@@ -85,5 +140,10 @@
     .reservas-carousel .image-caption {
         font-size: 0.7rem;
         padding: 0.2rem 0.8rem;
+        bottom: 0.75rem;
+    }
+    
+    .amenities-grid {
+        grid-template-columns: 1fr;
     }
 }
