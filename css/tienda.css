@@ -1,0 +1,225 @@
+/* ============================================ */
+/* ESTILOS EXCLUSIVOS PARA TIENDA */
+/* ============================================ */
+
+/* Barra de búsqueda y filtros */
+.busqueda-container {
+    background: white;
+    border-top: 1px solid #e5e7eb;
+    padding: 0.75rem 1rem;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 9999px;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: #2E7D32;
+    box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.1);
+}
+
+.category-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    border: none;
+    cursor: pointer;
+}
+
+.category-btn.active {
+    background: #2E7D32;
+    color: white;
+}
+
+.category-btn:not(.active) {
+    background: #f3f4f6;
+    color: #4b5563;
+}
+
+.category-btn:not(.active):hover {
+    background: #e5e7eb;
+}
+
+/* Grid de productos */
+#productsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    min-height: 300px;
+}
+
+.product-card {
+    background: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #e5e7eb;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px -8px rgba(0,0,0,0.15);
+}
+
+.product-image-container {
+    height: 160px;
+    background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+.product-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image-container img {
+    transform: scale(1.08);
+}
+
+.product-info {
+    padding: 1rem;
+}
+
+.product-categoria {
+    font-size: 0.75rem;
+    color: #2E7D32;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+}
+
+.product-nombre {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 0.25rem;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-descripcion {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+}
+
+.product-precio {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2E7D32;
+}
+
+.product-card button {
+    width: 2rem;
+    height: 2rem;
+    background: #2E7D32;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.product-card button:hover {
+    background: #1B5E20;
+}
+
+/* Mensajes de estado */
+.loading-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem 0;
+    color: #6b7280;
+}
+
+.loading-message i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #9ca3af;
+}
+
+.error-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem 0;
+    color: #dc2626;
+}
+
+.empty-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem 0;
+    color: #6b7280;
+}
+
+/* ============================================ */
+/* RESPONSIVE - SOLO PARA TIENDA */
+/* ============================================ */
+@media (min-width: 768px) {
+    #productsGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    #productsGrid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .busqueda-container {
+        padding: 0.5rem;
+    }
+    
+    #searchInput {
+        font-size: 16px;
+        padding: 0.75rem 1rem 0.75rem 2.5rem;
+    }
+    
+    .category-btn {
+        padding: 0.5rem 0.875rem;
+        font-size: 0.8rem;
+    }
+    
+    .product-image-container {
+        height: 120px;
+        padding: 0.5rem;
+    }
+    
+    .product-nombre {
+        font-size: 0.8rem;
+    }
+    
+    .product-precio {
+        font-size: 1rem;
+    }
+    
+    .product-card button {
+        width: 1.75rem;
+        height: 1.75rem;
+    }
+}
