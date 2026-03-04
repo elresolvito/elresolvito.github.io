@@ -11,13 +11,16 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     
-    <!-- Fonts y estilos -->
+    <!-- ESTILOS (ORDEN CORRECTO) -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/tienda.css">
+    
+    <!-- Fonts y Tailwind -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/styles.css">
     
-    <!-- Configuración de Tailwind -->
+    <!-- Config Tailwind -->
     <script>
         tailwind.config = {
             theme: {
@@ -31,97 +34,35 @@
             }
         }
     </script>
-    
-    <!-- ESTILOS RESPONSIVE PARA MÓVIL -->
-    <style>
-        @media (max-width: 640px) {
-            body {
-                font-size: 16px !important;
-            }
-            .text-xs { font-size: 0.875rem !important; }
-            .text-sm { font-size: 1rem !important; }
-            .text-base { font-size: 1.125rem !important; }
-            .text-lg { font-size: 1.25rem !important; }
-            .text-xl { font-size: 1.375rem !important; }
-            .text-2xl { font-size: 1.75rem !important; }
-            .text-3xl { font-size: 2rem !important; }
-            
-            /* Productos */
-            .product-card .font-bold.text-lg {
-                font-size: 1.375rem !important;
-            }
-            .product-card .text-cuban-green.text-lg {
-                font-size: 1.5rem !important;
-            }
-            
-            /* Botones */
-            button, .btn, [onclick], a.btn, a[href] {
-                min-height: 48px;
-                padding: 0.75rem 1rem;
-                font-size: 1rem;
-            }
-            
-            /* Ajustar grid de productos */
-            .grid-cols-2 {
-                gap: 0.75rem;
-            }
-            
-            /* Aumentar área táctil del menú */
-            .mobile-menu-btn {
-                width: 48px !important;
-                height: 48px !important;
-            }
-            
-            /* Barra de búsqueda más grande */
-            #searchInput {
-                font-size: 16px !important;
-                padding: 0.75rem 1rem !important;
-            }
-            
-            /* Filtros más grandes */
-            .category-btn {
-                min-height: 40px;
-                padding: 0.5rem 1rem !important;
-                font-size: 0.95rem !important;
-            }
-        }
-    </style>
-    
-    <!-- Scripts -->
-    <script src="js/products.js" defer></script>
-    <script src="js/elresolvito.js" defer></script>
 </head>
 <body class="bg-white text-gray-800">
 
-    <!-- Transición suave entre páginas -->
     <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
 
-    <!-- Contenedores para componentes -->
+    <!-- Componentes fijos -->
     <div id="header-container"></div>
     <div id="mobile-menu-container"></div>
     <div id="floating-buttons-container"></div>
 
     <!-- ============================================ -->
-    <!-- CONTENIDO ESPECÍFICO DE TIENDA -->
+    <!-- CONTENIDO DE TIENDA -->
     <!-- ============================================ -->
     
     <!-- Barra de búsqueda y filtros -->
-    <div class="border-t border-gray-100 px-4 py-3 bg-white">
+    <div class="busqueda-container">
         <div class="container mx-auto">
             <div class="flex flex-col md:flex-row gap-3">
                 <div class="relative flex-1">
-                    <input type="text" id="searchInput" placeholder="Buscar productos..." 
-                        class="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:border-cuban-green"
-                        onkeyup="searchProducts()">
                     <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar productos...">
                 </div>
-                <div class="flex gap-2 overflow-x-auto hide-scrollbar pb-2">
-                    <button onclick="filterCategory('todos')" class="category-btn px-4 py-2 bg-cuban-green text-white rounded-full text-sm whitespace-nowrap">Todos</button>
-                    <button onclick="filterCategory('Alimentos y conservas')" class="category-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm whitespace-nowrap">Alimentos</button>
-                    <button onclick="filterCategory('Snacks y golosinas')" class="category-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm whitespace-nowrap">Snacks</button>
-                    <button onclick="filterCategory('Higiene personal')" class="category-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm whitespace-nowrap">Higiene</button>
-                    <button onclick="filterCategory('Bebidas alcohólicas y malta')" class="category-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm whitespace-nowrap">Bebidas</button>
-                    <button onclick="filterCategory('Perfumes y desodorantes')" class="category-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm whitespace-nowrap">Perfumes</button>
+                <div class="flex gap-2 overflow-x-auto hide-scrollbar pb-1">
+                    <button onclick="filtrarCategoria('todos')" class="category-btn active">Todos</button>
+                    <button onclick="filtrarCategoria('Alimentos y conservas')" class="category-btn">Alimentos</button>
+                    <button onclick="filtrarCategoria('Snacks y golosinas')" class="category-btn">Snacks</button>
+                    <button onclick="filtrarCategoria('Higiene personal')" class="category-btn">Higiene</button>
+                    <button onclick="filtrarCategoria('Bebidas alcohólicas y malta')" class="category-btn">Bebidas</button>
+                    <button onclick="filtrarCategoria('Perfumes y desodorantes')" class="category-btn">Perfumes</button>
                 </div>
             </div>
         </div>
@@ -131,10 +72,9 @@
     <section class="py-8">
         <div class="container mx-auto px-4">
             <h2 class="text-2xl font-bold mb-6">Catálogo Completo</h2>
-            <div id="productsGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                <!-- Los productos se cargarán dinámicamente con JavaScript -->
-                <div class="col-span-full text-center py-8 text-gray-500">
-                    <i class="fas fa-spinner fa-spin text-3xl mb-3"></i>
+            <div id="productsGrid" class="products-grid">
+                <div class="loading-message">
+                    <i class="fas fa-spinner fa-spin"></i>
                     <p>Cargando productos...</p>
                 </div>
             </div>
@@ -147,172 +87,94 @@
     <div id="checkout-modal-container"></div>
     <div id="footer-container"></div>
 
-    <!-- Toast de notificación -->
-    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
-        <p id="cartToastMessage">Producto añadido</p>
-    </div>
+    <!-- Toast -->
+    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none"></div>
+
+    <!-- Scripts -->
+    <script src="js/products.js" defer></script>
+    <script src="js/elresolvito.js" defer></script>
 
     <script>
-        // ============================================
-        // FUNCIONES DE CARGA DE COMPONENTES
-        // ============================================
-        async function loadComponent(elementId, componentPath) {
-            try {
-                const response = await fetch(componentPath);
-                const html = await response.text();
-                document.getElementById(elementId).innerHTML = html;
-                
-                if (elementId === 'header-container') {
-                    updateActiveNav();
-                }
-            } catch (error) {
-                console.error(`Error cargando ${componentPath}:`, error);
-            }
-        }
-
-        function updateActiveNav() {
-            const currentPage = window.location.pathname.split('/').pop() || 'tienda.html';
-            const navLinks = document.querySelectorAll('#mainNav a');
-            
-            navLinks.forEach(link => {
-                const href = link.getAttribute('href');
-                if (href === currentPage) {
-                    link.classList.add('text-cuban-green', 'font-medium', 'border-b-2', 'border-cuban-green');
-                } else {
-                    link.classList.remove('text-cuban-green', 'font-medium', 'border-b-2', 'border-cuban-green');
-                }
-            });
-        }
-
-        // ============================================
-        // FUNCIONES DE TIENDA
-        // ============================================
+        // Variables globales
         let currentCategory = 'todos';
+        let allProducts = [];
 
-        function renderProducts() {
-            console.log('renderProducts ejecutado');
-            const container = document.getElementById('productsGrid');
-            if (!container) {
-                console.error('ERROR: #productsGrid no encontrado');
+        // Cargar componentes
+        async function loadComponent(id, path) {
+            const res = await fetch(path);
+            document.getElementById(id).innerHTML = await res.text();
+        }
+
+        // Renderizar productos
+        function renderizarProductos(productos) {
+            const grid = document.getElementById('productsGrid');
+            
+            if (!productos || productos.length === 0) {
+                grid.innerHTML = '<div class="empty-message"><i class="fas fa-box-open text-4xl mb-3"></i><p>No hay productos disponibles</p></div>';
                 return;
             }
             
-            if (typeof PRODUCTS === 'undefined') {
-                console.error('ERROR: PRODUCTS no está definido. ¿products.js se cargó?');
-                container.innerHTML = '<div class="col-span-full text-center py-8 text-red-500"><i class="fas fa-exclamation-triangle text-3xl mb-3"></i><p>Error cargando productos. Recarga la página.</p></div>';
-                return;
-            }
-            
-            let filtered = PRODUCTS;
-            if (currentCategory !== 'todos') {
-                filtered = PRODUCTS.filter(p => p.categoria === currentCategory);
-            }
-            
-            if (filtered.length === 0) {
-                container.innerHTML = '<div class="col-span-full text-center py-8 text-gray-500"><i class="fas fa-box-open text-3xl mb-3"></i><p>No hay productos en esta categoría</p></div>';
-                return;
-            }
-            
-            container.innerHTML = filtered.map(p => `
-                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer">
-                    <div class="product-image-container h-40 bg-gray-100 flex items-center justify-center p-2" onclick="openImageModal('${p.imagen}', '${p.nombre}')">
-                        <img src="${p.imagen}" 
-                             alt="${p.nombre}" 
-                             loading="lazy"
-                             class="max-h-full max-w-full object-contain"
-                             onerror="this.src='https://placehold.co/300x300/2E7D32/white?text=${encodeURIComponent(p.nombre)}'">
+            grid.innerHTML = productos.map(p => `
+                <div class="product-card">
+                    <div class="product-image-container" onclick="openImageModal('${p.imagen}', '${p.nombre}')">
+                        <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/300x300/2E7D32/white?text=Producto'">
                     </div>
-                    <div class="p-3">
-                        <p class="text-xs text-cuban-green font-medium">${p.categoria}</p>
-                        <h3 class="font-bold text-sm mb-1 line-clamp-2">${p.nombre}</h3>
-                        <p class="text-xs text-gray-500 mb-2">${p.descripcion || ''}</p>
+                    <div class="product-info">
+                        <div class="product-categoria">${p.categoria.split(' ')[0]}</div>
+                        <div class="product-nombre">${p.nombre}</div>
+                        <div class="product-descripcion">${p.descripcion || ''}</div>
                         <div class="flex items-center justify-between">
-                            <span class="text-lg font-bold text-cuban-green">$${p.precio.toLocaleString()}</span>
-                            <button onclick="addToCart({id:${p.id}, nombre:'${p.nombre.replace(/'/g, "\\'")}', precio:${p.precio}, imagen:'${p.imagen}', cantidad:1})" 
-                                    class="w-8 h-8 bg-cuban-green text-white rounded-full flex items-center justify-center hover:bg-cuban-dark transition">
+                            <span class="product-precio">$${p.precio.toLocaleString()}</span>
+                            <button onclick="addToCart({id:${p.id}, nombre:'${p.nombre.replace(/'/g, "\\'")}', precio:${p.precio}, imagen:'${p.imagen}', cantidad:1})">
                                 <i class="fas fa-plus"></i>
                             </button>
                         </div>
                     </div>
                 </div>
             `).join('');
-            
-            console.log(`✅ ${filtered.length} productos renderizados`);
         }
 
-        function filterCategory(cat) {
-            currentCategory = cat;
+        // Filtrar por categoría
+        function filtrarCategoria(categoria) {
+            currentCategory = categoria;
             
-            // Actualizar estilo de botones
             document.querySelectorAll('.category-btn').forEach(btn => {
-                const btnText = btn.textContent.trim();
-                if (cat === 'todos' && btnText === 'Todos') {
-                    btn.classList.remove('bg-gray-100', 'text-gray-700');
-                    btn.classList.add('bg-cuban-green', 'text-white');
-                } else if (btnText === cat.split(' ')[0]) {
-                    btn.classList.remove('bg-gray-100', 'text-gray-700');
-                    btn.classList.add('bg-cuban-green', 'text-white');
-                } else {
-                    btn.classList.remove('bg-cuban-green', 'text-white');
-                    btn.classList.add('bg-gray-100', 'text-gray-700');
-                }
+                btn.classList.remove('active');
             });
+            event.target.classList.add('active');
             
-            renderProducts();
+            if (categoria === 'todos') {
+                renderizarProductos(allProducts);
+            } else {
+                const filtrados = allProducts.filter(p => p.categoria === categoria);
+                renderizarProductos(filtrados);
+            }
         }
 
-        function searchProducts() {
-            const searchTerm = document.getElementById('searchInput')?.value.toLowerCase() || '';
+        // Buscar productos
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const termino = e.target.value.toLowerCase();
             
-            if (searchTerm === '') {
-                renderProducts();
+            if (!termino) {
+                if (currentCategory === 'todos') {
+                    renderizarProductos(allProducts);
+                } else {
+                    const filtrados = allProducts.filter(p => p.categoria === currentCategory);
+                    renderizarProductos(filtrados);
+                }
                 return;
             }
             
-            const container = document.getElementById('productsGrid');
-            if (!container) return;
-            
-            const filtered = PRODUCTS.filter(p => 
-                p.nombre.toLowerCase().includes(searchTerm) || 
-                (p.categoria && p.categoria.toLowerCase().includes(searchTerm))
+            const resultados = allProducts.filter(p => 
+                p.nombre.toLowerCase().includes(termino) || 
+                (p.categoria && p.categoria.toLowerCase().includes(termino))
             );
             
-            if (filtered.length === 0) {
-                container.innerHTML = '<div class="col-span-full text-center py-8 text-gray-500"><i class="fas fa-search text-3xl mb-3"></i><p>No se encontraron productos</p></div>';
-                return;
-            }
-            
-            container.innerHTML = filtered.map(p => `
-                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer">
-                    <div class="product-image-container h-40 bg-gray-100 flex items-center justify-center p-2" onclick="openImageModal('${p.imagen}', '${p.nombre}')">
-                        <img src="${p.imagen}" 
-                             alt="${p.nombre}" 
-                             loading="lazy"
-                             class="max-h-full max-w-full object-contain"
-                             onerror="this.src='https://placehold.co/300x300/2E7D32/white?text=${encodeURIComponent(p.nombre)}'">
-                    </div>
-                    <div class="p-3">
-                        <p class="text-xs text-cuban-green font-medium">${p.categoria}</p>
-                        <h3 class="font-bold text-sm mb-1 line-clamp-2">${p.nombre}</h3>
-                        <p class="text-xs text-gray-500 mb-2">${p.descripcion || ''}</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-lg font-bold text-cuban-green">$${p.precio.toLocaleString()}</span>
-                            <button onclick="addToCart({id:${p.id}, nombre:'${p.nombre.replace(/'/g, "\\'")}', precio:${p.precio}, imagen:'${p.imagen}', cantidad:1})" 
-                                    class="w-8 h-8 bg-cuban-green text-white rounded-full flex items-center justify-center hover:bg-cuban-dark transition">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
+            renderizarProductos(resultados);
+        });
 
-        // ============================================
-        // INICIALIZACIÓN
-        // ============================================
-        document.addEventListener('DOMContentLoaded', async function() {
-            console.log('Inicializando tienda...');
-            
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', async () => {
             await loadComponent('header-container', 'components/header.html');
             await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
             await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
@@ -321,18 +183,18 @@
             await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
             await loadComponent('footer-container', 'components/footer.html');
             
-            // Esperar un poco a que products.js esté disponible
+            // Cargar productos
             setTimeout(() => {
                 if (typeof PRODUCTS !== 'undefined') {
-                    console.log(`✅ products.js cargado con ${PRODUCTS.length} productos`);
-                    renderProducts();
+                    allProducts = PRODUCTS;
+                    renderizarProductos(allProducts);
                 } else {
-                    console.error('❌ products.js no está disponible');
+                    document.getElementById('productsGrid').innerHTML = 
+                        '<div class="error-message"><i class="fas fa-exclamation-triangle text-3xl mb-3"></i><p>Error al cargar productos</p></div>';
                 }
             }, 100);
         });
     </script>
 </body>
 </html>
-
 
