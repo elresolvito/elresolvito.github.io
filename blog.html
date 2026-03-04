@@ -11,13 +11,16 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     
-    <!-- Fonts y estilos (RUTAS CORREGIDAS: sin /) -->
+    <!-- ESTILOS (ORDEN CORRECTO) -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/blog.css">
+    
+    <!-- Fonts y Tailwind -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/styles.css">
     
-    <!-- Configuración de Tailwind -->
+    <!-- Config Tailwind -->
     <script>
         tailwind.config = {
             theme: {
@@ -32,39 +35,12 @@
             }
         }
     </script>
-    
-    <!-- ESTILOS RESPONSIVE PARA MÓVIL -->
-    <style>
-        @media (max-width: 640px) {
-            body { font-size: 16px !important; }
-            .text-xs { font-size: 0.875rem !important; }
-            .text-sm { font-size: 1rem !important; }
-            .text-base { font-size: 1.125rem !important; }
-            .text-lg { font-size: 1.25rem !important; }
-            .text-xl { font-size: 1.375rem !important; }
-            .text-2xl { font-size: 1.75rem !important; }
-            .text-3xl { font-size: 2rem !important; }
-            article h3 { font-size: 1.5rem !important; }
-            button, .btn, [onclick], a.btn, a[href] {
-                min-height: 48px;
-                padding: 0.75rem 1rem;
-                font-size: 1rem;
-            }
-            .mobile-menu-btn {
-                width: 48px !important;
-                height: 48px !important;
-            }
-        }
-    </style>
-    
-    <!-- Script principal (RUTA CORREGIDA: sin /) -->
-    <script src="js/elresolvito.js" defer></script>
 </head>
 <body class="bg-white text-gray-800">
 
     <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
 
-    <!-- Contenedores para componentes (RUTAS CORREGIDAS) -->
+    <!-- Componentes fijos -->
     <div id="header-container"></div>
     <div id="mobile-menu-container"></div>
     <div id="floating-buttons-container"></div>
@@ -73,113 +49,146 @@
     <!-- CONTENIDO DEL BLOG -->
     <!-- ============================================ -->
     
-    <section class="bg-gradient-to-br from-cuban-green to-cuban-blue text-white py-16 px-4">
-        <div class="container mx-auto text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Blog El Resolvito</h1>
+    <!-- Hero -->
+    <section class="blog-hero">
+        <div class="container mx-auto px-4">
+            <h1>Blog El Resolvito</h1>
             <p class="text-xl opacity-90">Consejos, recetas y novedades</p>
         </div>
     </section>
 
-    <section class="py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
-                <!-- Artículo 1 -->
-                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog/recetas-rapidas-con-atun.html'">
-                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&auto=format&fit=crop" 
-                         class="w-full h-48 object-cover"
-                         onerror="this.src='https://placehold.co/600x400/2E7D32/white?text=Recetas'">
-                    <div class="p-4">
-                        <span class="text-xs text-cuban-green font-bold">RECETAS</span>
-                        <h3 class="font-bold text-lg mt-1">3 recetas rápidas con atún en lata</h3>
-                        <p class="text-gray-600 text-sm mt-2">Aprovecha al máximo el atún con estas recetas fáciles y económicas.</p>
-                    </div>
-                </article>
-                
-                <!-- Artículo 2 -->
-                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog/tostadas-de-aguacate-y-huevo.html'">
-                    <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=500&auto=format&fit=crop" 
-                         class="w-full h-48 object-cover"
-                         onerror="this.src='https://placehold.co/600x400/2E7D32/white?text=Tostadas'">
-                    <div class="p-4">
-                        <span class="text-xs text-cuban-green font-bold">RECETAS</span>
-                        <h3 class="font-bold text-lg mt-1">Tostadas de aguacate y huevo</h3>
-                        <p class="text-gray-600 text-sm mt-2">El desayuno perfecto para empezar el día con energía.</p>
-                    </div>
-                </article>
-                
-                <!-- Artículo 3 -->
-                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog/como-empezar-tcp-en-cuba-guia-2026.html'">
-                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=500&auto=format&fit=crop" 
-                         class="w-full h-48 object-cover"
-                         onerror="this.src='https://placehold.co/600x400/1E3A8A/white?text=TCP'">
-                    <div class="p-4">
-                        <span class="text-xs text-contador-azul font-bold">EMPRENDIMIENTO</span>
-                        <h3 class="font-bold text-lg mt-1">Cómo empezar tu negocio en Cuba (TCP)</h3>
-                        <p class="text-gray-600 text-sm mt-2">Guía completa para ser trabajador por cuenta propia en 2026.</p>
-                    </div>
-                </article>
-                
-                <!-- Artículo 4 -->
-                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog/que-hacer-en-la-habana-vieja-gratis.html'">
-                    <img src="https://images.unsplash.com/photo-1591123226833-99b5138c3fb1?w=500&auto=format&fit=crop" 
-                         class="w-full h-48 object-cover"
-                         onerror="this.src='https://placehold.co/600x400/0277BD/white?text=La+Habana'">
-                    <div class="p-4">
-                        <span class="text-xs text-cuban-blue font-bold">LA HABANA</span>
-                        <h3 class="font-bold text-lg mt-1">10 cosas gratis en La Habana Vieja</h3>
-                        <p class="text-gray-600 text-sm mt-2">Disfruta la ciudad sin gastar dinero, como un habanero más.</p>
-                    </div>
-                </article>
-                
-                <!-- Artículo 5 -->
-                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog/guia-de-perfumes-candy-precios-y-tips.html'">
-                    <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500&auto=format&fit=crop" 
-                         class="w-full h-48 object-cover"
-                         onerror="this.src='https://placehold.co/600x400/FF69B4/white?text=Perfumes'">
-                    <div class="p-4">
-                        <span class="text-xs text-dulce-rosa font-bold">PRODUCTOS</span>
-                        <h3 class="font-bold text-lg mt-1">Guía de perfumes Candy</h3>
-                        <p class="text-gray-600 text-sm mt-2">Precios, duración y cómo elegir el tuyo.</p>
-                    </div>
-                </article>
-                
-                <!-- Artículo 6 -->
-                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog/terrazas-de-bayona-59-experiencia-completa.html'">
-                    <img src="https://i.postimg.cc/QxWvyYGy/acuarela-(1).jpg" 
-                         class="w-full h-48 object-cover"
-                         onerror="this.src='https://placehold.co/600x400/D4AF37/white?text=Alojamiento'">
-                    <div class="p-4">
-                        <span class="text-xs text-yellow-600 font-bold">ALOJAMIENTOS</span>
-                        <h3 class="font-bold text-lg mt-1">Terrazas de Bayona 59</h3>
-                        <p class="text-gray-600 text-sm mt-2">Experiencia completa en nuestro alojamiento colonial.</p>
-                    </div>
-                </article>
-                
-                <!-- Artículo 7 -->
-                <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer" onclick="location.href='blog/cupcakes-faciles-con-productos-de-nuestra-tienda.html'">
-                    <img src="https://images.unsplash.com/photo-1586788224331-947f68671cf1?w=500&auto=format&fit=crop" 
-                         class="w-full h-48 object-cover"
-                         onerror="this.src='https://placehold.co/600x400/FF69B4/white?text=Cupcakes'">
-                    <div class="p-4">
-                        <span class="text-xs text-dulce-rosa font-bold">RECETAS</span>
-                        <h3 class="font-bold text-lg mt-1">Cupcakes fáciles</h3>
-                        <p class="text-gray-600 text-sm mt-2">Con ingredientes de nuestra tienda.</p>
-                    </div>
-                </article>
-                
+    <!-- Artículos -->
+    <div class="articulos-grid">
+        
+        <!-- Artículo 1: Recetas con atún -->
+        <article class="articulo-card" onclick="location.href='blog/recetas-rapidas-con-atun.html'">
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop" 
+                 class="articulo-imagen" 
+                 alt="Recetas con atún"
+                 onerror="this.src='https://placehold.co/600x400/2E7D32/white?text=Recetas'">
+            <div class="articulo-contenido">
+                <span class="articulo-categoria categoria-recetas">🍳 RECETAS</span>
+                <h2 class="articulo-titulo">3 recetas rápidas con atún en lata</h2>
+                <p class="articulo-descripcion">Aprovecha al máximo el atún con estas recetas fáciles, económicas y deliciosas. Torticas, enfrijolada y ensalada.</p>
+                <div class="articulo-meta">
+                    <span class="articulo-fecha"><i class="far fa-calendar mr-1"></i>15 feb 2026</span>
+                    <span class="articulo-leer-mas">Leer más <i class="fas fa-arrow-right"></i></span>
+                </div>
             </div>
-        </div>
-    </section>
+        </article>
+        
+        <!-- Artículo 2: Tostadas de aguacate -->
+        <article class="articulo-card" onclick="location.href='blog/tostadas-de-aguacate-y-huevo.html'">
+            <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&auto=format&fit=crop" 
+                 class="articulo-imagen" 
+                 alt="Tostadas de aguacate"
+                 onerror="this.src='https://placehold.co/600x400/2E7D32/white?text=Tostadas'">
+            <div class="articulo-contenido">
+                <span class="articulo-categoria categoria-recetas">🍳 RECETAS</span>
+                <h2 class="articulo-titulo">Tostadas de aguacate y huevo</h2>
+                <p class="articulo-descripcion">El desayuno perfecto para empezar el día con energía. Fácil, rápido y nutritivo.</p>
+                <div class="articulo-meta">
+                    <span class="articulo-fecha"><i class="far fa-calendar mr-1"></i>10 feb 2026</span>
+                    <span class="articulo-leer-mas">Leer más <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </div>
+        </article>
+        
+        <!-- Artículo 3: Guía TCP -->
+        <article class="articulo-card" onclick="location.href='blog/como-empezar-tcp-en-cuba-guia-2026.html'">
+            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&auto=format&fit=crop" 
+                 class="articulo-imagen" 
+                 alt="Guía TCP"
+                 onerror="this.src='https://placehold.co/600x400/1E3A8A/white?text=TCP'">
+            <div class="articulo-contenido">
+                <span class="articulo-categoria categoria-emprendimiento">📊 EMPRENDIMIENTO</span>
+                <h2 class="articulo-titulo">Cómo empezar tu negocio en Cuba (TCP)</h2>
+                <p class="articulo-descripcion">Guía completa para ser trabajador por cuenta propia en 2026: trámites, requisitos y plazos.</p>
+                <div class="articulo-meta">
+                    <span class="articulo-fecha"><i class="far fa-calendar mr-1"></i>5 feb 2026</span>
+                    <span class="articulo-leer-mas">Leer más <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </div>
+        </article>
+        
+        <!-- Artículo 4: Cosas gratis en La Habana -->
+        <article class="articulo-card" onclick="location.href='blog/que-hacer-en-la-habana-vieja-gratis.html'">
+            <img src="https://images.unsplash.com/photo-1591123226833-99b5138c3fb1?w=600&auto=format&fit=crop" 
+                 class="articulo-imagen" 
+                 alt="La Habana Vieja"
+                 onerror="this.src='https://placehold.co/600x400/0277BD/white?text=La+Habana'">
+            <div class="articulo-contenido">
+                <span class="articulo-categoria categoria-habana">🏠 LA HABANA</span>
+                <h2 class="articulo-titulo">10 cosas gratis en La Habana Vieja</h2>
+                <p class="articulo-descripcion">Descubre La Habana sin gastar dinero: miradores, museos y planes auténticos.</p>
+                <div class="articulo-meta">
+                    <span class="articulo-fecha"><i class="far fa-calendar mr-1"></i>1 feb 2026</span>
+                    <span class="articulo-leer-mas">Leer más <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </div>
+        </article>
+        
+        <!-- Artículo 5: Perfumes Candy -->
+        <article class="articulo-card" onclick="location.href='blog/guia-de-perfumes-candy-precios-y-tips.html'">
+            <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=600&auto=format&fit=crop" 
+                 class="articulo-imagen" 
+                 alt="Perfumes Candy"
+                 onerror="this.src='https://placehold.co/600x400/FF69B4/white?text=Perfumes'">
+            <div class="articulo-contenido">
+                <span class="articulo-categoria categoria-productos">🛍️ PRODUCTOS</span>
+                <h2 class="articulo-titulo">Guía de perfumes Candy</h2>
+                <p class="articulo-descripcion">Precios, duración y cómo elegir el tuyo. Todo sobre los perfumes que tenemos en tienda.</p>
+                <div class="articulo-meta">
+                    <span class="articulo-fecha"><i class="far fa-calendar mr-1"></i>28 ene 2026</span>
+                    <span class="articulo-leer-mas">Leer más <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </div>
+        </article>
+        
+        <!-- Artículo 6: Terrazas de Bayona -->
+        <article class="articulo-card" onclick="location.href='blog/terrazas-de-bayona-59-experiencia-completa.html'">
+            <img src="https://i.postimg.cc/QxWvyYGy/acuarela-1.jpg" 
+                 class="articulo-imagen" 
+                 alt="Terrazas de Bayona"
+                 onerror="this.src='https://placehold.co/600x400/D4AF37/white?text=Alojamiento'">
+            <div class="articulo-contenido">
+                <span class="articulo-categoria categoria-alojamientos">🏡 ALOJAMIENTOS</span>
+                <h2 class="articulo-titulo">Terrazas de Bayona 59</h2>
+                <p class="articulo-descripcion">Experiencia completa en nuestro alojamiento colonial en el corazón de La Habana.</p>
+                <div class="articulo-meta">
+                    <span class="articulo-fecha"><i class="far fa-calendar mr-1"></i>20 ene 2026</span>
+                    <span class="articulo-leer-mas">Leer más <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </div>
+        </article>
+        
+        <!-- Artículo 7: Cupcakes -->
+        <article class="articulo-card" onclick="location.href='blog/cupcakes-faciles-con-productos-de-nuestra-tienda.html'">
+            <img src="https://images.unsplash.com/photo-1586788224331-947f68671cf1?w=600&auto=format&fit=crop" 
+                 class="articulo-imagen" 
+                 alt="Cupcakes"
+                 onerror="this.src='https://placehold.co/600x400/FF69B4/white?text=Cupcakes'">
+            <div class="articulo-contenido">
+                <span class="articulo-categoria categoria-recetas">🍳 RECETAS</span>
+                <h2 class="articulo-titulo">Cupcakes fáciles</h2>
+                <p class="articulo-descripcion">Aprende a hacer cupcakes esponjosos con ingredientes de nuestra tienda.</p>
+                <div class="articulo-meta">
+                    <span class="articulo-fecha"><i class="far fa-calendar mr-1"></i>15 ene 2026</span>
+                    <span class="articulo-leer-mas">Leer más <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </div>
+        </article>
+        
+    </div>
 
-    <section class="py-12 bg-gray-50">
-        <div class="container mx-auto px-4 text-center">
-            <h3 class="text-2xl font-bold mb-4">📬 Recibe nuestras novedades</h3>
-            <p class="mb-6">Suscríbete por WhatsApp para recibir recetas y ofertas</p>
-            <a href="https://wa.me/5356382909?text=Quiero%20suscribirme%20al%20blog" 
-               target="_blank"
-               class="inline-block bg-cuban-green text-white px-8 py-3 rounded-full font-bold hover:bg-cuban-dark transition">
-                <i class="fab fa-whatsapp mr-2"></i>Suscribirme
+    <!-- Newsletter -->
+    <section class="newsletter-section">
+        <div class="container mx-auto px-4">
+            <h3>📬 Recibe nuestras novedades</h3>
+            <p>Suscríbete por WhatsApp para recibir recetas, consejos y ofertas especiales directamente en tu teléfono</p>
+            <a href="https://wa.me/5356382909?text=Quiero%20suscribirme%20al%20blog" target="_blank" class="newsletter-button">
+                <i class="fab fa-whatsapp text-xl"></i>
+                Suscribirme por WhatsApp
             </a>
         </div>
     </section>
@@ -190,38 +199,24 @@
     <div id="checkout-modal-container"></div>
     <div id="footer-container"></div>
 
-    <!-- Toast de notificación -->
-    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
-        <p id="cartToastMessage"></p>
-    </div>
+    <!-- Toast -->
+    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none"></div>
 
-    <!-- Script de carga de componentes (RUTAS CORREGIDAS) -->
+    <!-- Scripts -->
+    <script src="js/elresolvito.js" defer></script>
+
     <script>
-        async function loadComponent(elementId, path) {
+        async function loadComponent(id, path) {
             try {
-                const response = await fetch(path);
-                const html = await response.text();
-                document.getElementById(elementId).innerHTML = html;
-                if (elementId === 'header-container') updateActiveNav();
+                const res = await fetch(path);
+                const html = await res.text();
+                document.getElementById(id).innerHTML = html;
             } catch (error) {
                 console.error(`Error cargando ${path}:`, error);
             }
         }
 
-        function updateActiveNav() {
-            const currentPage = window.location.pathname.split('/').pop() || 'blog.html';
-            const navLinks = document.querySelectorAll('#mainNav a');
-            navLinks.forEach(link => {
-                const href = link.getAttribute('href');
-                if (href === currentPage) {
-                    link.classList.add('text-cuban-green', 'font-medium', 'border-b-2', 'border-cuban-green');
-                } else {
-                    link.classList.remove('text-cuban-green', 'font-medium', 'border-b-2', 'border-cuban-green');
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', async function() {
+        document.addEventListener('DOMContentLoaded', async () => {
             await loadComponent('header-container', 'components/header.html');
             await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
             await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
@@ -233,4 +228,3 @@
     </script>
 </body>
 </html>
-
