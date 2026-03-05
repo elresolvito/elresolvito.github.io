@@ -42,14 +42,14 @@ const PRODUCTS = [
 
 // Productos destacados para el inicio
 const FEATURED_PRODUCTS = [
-    PRODUCTS.find(p => p.id === 4), // Café Dualis
-    PRODUCTS.find(p => p.id === 7), // Huevos
-    PRODUCTS.find(p => p.id === 1), // Atún
-    PRODUCTS.find(p => p.id === 13), // Mayonesa
-    PRODUCTS.find(p => p.id === 21), // Perfume Candy
-    PRODUCTS.find(p => p.id === 30), // Licor fresa
-    PRODUCTS.find(p => p.id === 17), // Papel
-    PRODUCTS.find(p => p.id === 9)  // Harina
+    PRODUCTS.find(p => p.id === 4),
+    PRODUCTS.find(p => p.id === 7),
+    PRODUCTS.find(p => p.id === 1),
+    PRODUCTS.find(p => p.id === 13),
+    PRODUCTS.find(p => p.id === 21),
+    PRODUCTS.find(p => p.id === 30),
+    PRODUCTS.find(p => p.id === 17),
+    PRODUCTS.find(p => p.id === 9)
 ];
 
 // Productos al por mayor
