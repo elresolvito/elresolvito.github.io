@@ -1,17 +1,17 @@
 <!-- components/checkout-modal.html -->
-<div id="checkoutModal" class="fixed inset-0 bg-black/50 z-[200] hidden flex items-center justify-center p-4" onclick="closeCheckoutModal()">
+<div id="checkoutModal" class="fixed inset-0 bg-black/50 z-[200] hidden flex items-center justify-center p-4" onclick="window.closeCheckoutModal()">
     <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
         <div class="p-6 border-b border-gray-200 flex justify-between items-center bg-gradient-to-r from-cuban-green to-cuban-dark text-white rounded-t-2xl">
             <h3 class="text-xl font-bold flex items-center gap-2">
                 <i class="fab fa-whatsapp"></i> Completar pedido
             </h3>
-            <button onclick="closeCheckoutModal()" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
+            <button onclick="window.closeCheckoutModal()" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
                 <i class="fas fa-times"></i>
             </button>
         </div>
         
         <div class="p-6">
-            <form id="checkoutForm" onsubmit="event.preventDefault(); sendCompleteOrder();">
+            <form id="checkoutForm" onsubmit="event.preventDefault(); window.sendCompleteOrder()">
                 <div class="mb-4 p-3 bg-gray-50 rounded-lg">
                     <p class="text-sm font-semibold mb-1">Resumen de tu compra:</p>
                     <div id="checkoutCartSummary" class="text-xs text-gray-600 max-h-20 overflow-y-auto"></div>
@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="flex gap-3">
-                    <button type="button" onclick="closeCheckoutModal()" class="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-lg font-bold hover:bg-gray-100 transition">Cancelar</button>
+                    <button type="button" onclick="window.closeCheckoutModal()" class="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-lg font-bold hover:bg-gray-100 transition">Cancelar</button>
                     <button type="submit" class="flex-1 btn-whatsapp text-white px-4 py-3 rounded-lg font-bold hover:opacity-90 transition flex items-center justify-center gap-2">
                         <i class="fab fa-whatsapp"></i> Enviar pedido
                     </button>
