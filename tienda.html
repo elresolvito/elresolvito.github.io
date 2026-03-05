@@ -4,23 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Tienda - El Resolvito</title>
-    <meta name="description" content="Catálogo completo de productos en El Resolvito: alimentos, bebidas, higiene, perfumes y más. Compra fácil por WhatsApp.">
+    <meta name="description" content="Catálogo completo de productos en El Resolvito.">
     
-    <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     
-    <!-- ESTILOS -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/tienda.css">
     
-    <!-- Fonts y Tailwind -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Config Tailwind -->
     <script>
         tailwind.config = {
             theme: {
@@ -39,15 +35,10 @@
 
     <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
 
-    <!-- Componentes fijos -->
     <div id="header-container"></div>
     <div id="mobile-menu-container"></div>
     <div id="floating-buttons-container"></div>
 
-    <!-- ============================================ -->
-    <!-- CONTENIDO DE TIENDA -->
-    <!-- ============================================ -->
-    
     <!-- Barra de búsqueda y filtros -->
     <div class="busqueda-container">
         <div class="container mx-auto">
@@ -81,32 +72,35 @@
         </div>
     </section>
 
-    <!-- Contenedores para modales y footer -->
     <div id="image-modal-container"></div>
     <div id="cart-sidebar-container"></div>
     <div id="checkout-modal-container"></div>
     <div id="footer-container"></div>
 
-    <!-- Toast -->
     <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
         <p id="cartToastMessage"></p>
     </div>
 
-    <!-- Scripts -->
     <script src="js/products.js" defer></script>
     <script src="js/elresolvito.js" defer></script>
 
     <script>
         // ============================================
-        // VARIABLES GLOBALES DE TIENDA
+        // VARIABLES GLOBALES
         // ============================================
         let allProducts = [];
         let currentCategory = 'todos';
 
         // ============================================
-        // FUNCIONES DE TIENDA
+        // FUNCIÓN DE RESPALDO DE IMÁGENES
         // ============================================
-        
+        function getFallbackImage(nombre) {
+            return `https://placehold.co/300x300/2E7D32/white?text=${encodeURIComponent(nombre)}`;
+        }
+
+        // ============================================
+        // RENDERIZAR PRODUCTOS
+        // ============================================
         function renderizarProductos(productos) {
             const grid = document.getElementById('productsGrid');
             
@@ -117,36 +111,46 @@
                 return;
             }
             
-            grid.innerHTML = productos.map(p => `
-                <div class="product-card">
-                    <div class="product-image-container" onclick="window.openImageModal('${p.imagen}', '${p.nombre}')">
-                        <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/300x300/2E7D32/white?text=Producto'">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-categoria">${p.categoria ? p.categoria.split(' ')[0] : 'Producto'}</div>
-                        <div class="product-nombre">${p.nombre}</div>
-                        <div class="product-descripcion">${p.descripcion || ''}</div>
-                        <div class="flex items-center justify-between mt-2">
-                            <span class="product-precio">$${p.precio.toLocaleString()}</span>
-                            <button onclick="window.addToCart({id:${p.id}, nombre:'${p.nombre.replace(/'/g, "\\'")}', precio:${p.precio}, imagen:'${p.imagen}', cantidad:1})" class="product-btn">
-                                <i class="fas fa-plus"></i>
-                            </button>
+            grid.innerHTML = productos.map(p => {
+                // Sanitizar nombre para evitar errores de comillas
+                const nombreSanitizado = p.nombre.replace(/'/g, "\\'");
+                const fallbackUrl = getFallbackImage(p.nombre);
+                
+                return `
+                    <div class="product-card">
+                        <div class="product-image-container" onclick="window.openImageModal('${p.imagen}', '${nombreSanitizado}')">
+                            <img src="${p.imagen}" 
+                                 alt="${p.nombre}" 
+                                 loading="lazy"
+                                 onerror="this.onerror=null; this.src='${fallbackUrl}'">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-categoria">${p.categoria ? p.categoria.split(' ')[0] : 'Producto'}</div>
+                            <div class="product-nombre">${p.nombre}</div>
+                            <div class="product-descripcion">${p.descripcion || ''}</div>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="product-precio">$${p.precio.toLocaleString()}</span>
+                                <button onclick="window.addToCart({id:${p.id}, nombre:'${nombreSanitizado}', precio:${p.precio}, imagen:'${p.imagen}', cantidad:1})" class="product-btn">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
+        // ============================================
+        // FILTRAR POR CATEGORÍA
+        // ============================================
         window.filtrarCategoria = function(categoria) {
             currentCategory = categoria;
             
-            // Actualizar botones
             document.querySelectorAll('.category-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
             event.target.classList.add('active');
             
-            // Filtrar productos
             if (categoria === 'todos') {
                 renderizarProductos(allProducts);
             } else {
@@ -161,6 +165,7 @@
         async function loadComponent(id, path) {
             try {
                 const response = await fetch(path);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const html = await response.text();
                 document.getElementById(id).innerHTML = html;
             } catch (error) {
@@ -183,22 +188,27 @@
             await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
             await loadComponent('footer-container', 'components/footer.html');
             
-            // Cargar productos (con un pequeño retraso para asegurar que todo esté listo)
+            // Cargar productos
             setTimeout(() => {
                 if (typeof PRODUCTS !== 'undefined') {
                     allProducts = PRODUCTS;
                     console.log(`✅ ${allProducts.length} productos cargados`);
                     renderizarProductos(allProducts);
+                    
+                    // Forzar actualización del carrito
+                    if (typeof window.updateCartUI === 'function') {
+                        window.updateCartUI();
+                    }
                 } else {
                     console.error('❌ PRODUCTS no está definido');
                     document.getElementById('productsGrid').innerHTML = 
                         '<div class="col-span-full text-center py-12 text-red-500"><i class="fas fa-exclamation-triangle text-5xl mb-3"></i><p class="text-lg">Error al cargar productos</p></div>';
                 }
-            }, 200);
+            }, 300);
         });
 
         // ============================================
-        // BÚSQUEDA EN TIEMPO REAL
+        // BÚSQUEDA
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = document.getElementById('searchInput');
@@ -207,7 +217,6 @@
                     const termino = e.target.value.toLowerCase().trim();
                     
                     if (!termino) {
-                        // Si no hay término, mostrar según categoría actual
                         if (currentCategory === 'todos') {
                             renderizarProductos(allProducts);
                         } else {
@@ -217,11 +226,9 @@
                         return;
                     }
                     
-                    // Filtrar productos que coincidan con el término
                     const resultados = allProducts.filter(p => 
                         p.nombre.toLowerCase().includes(termino) || 
-                        (p.categoria && p.categoria.toLowerCase().includes(termino)) ||
-                        (p.descripcion && p.descripcion.toLowerCase().includes(termino))
+                        (p.categoria && p.categoria.toLowerCase().includes(termino))
                     );
                     
                     renderizarProductos(resultados);
@@ -231,4 +238,3 @@
     </script>
 </body>
 </html>
-
