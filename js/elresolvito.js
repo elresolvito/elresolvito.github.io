@@ -2,16 +2,13 @@
 (function() {
     'use strict';
     
-    // ============================================
-    // VARIABLES GLOBALES
-    // ============================================
     let cart = JSON.parse(localStorage.getItem('elResolvitoCart')) || [];
     const WHATSAPP_NUMBER = '5356382909';
     const MINIMUM_PURCHASE = 500;
     const SHIPPING_WITHIN_HABANA_VIEJA = 400;
     
     // ============================================
-    // FUNCIONES DEL CARRITO - EXPUESTAS GLOBALMENTE
+    // CARRITO
     // ============================================
     
     window.addToCart = function(product) {
@@ -67,33 +64,18 @@
         window.showToast(`✗ ${item.nombre} eliminado`);
     };
 
-    window.clearCart = function() {
-        cart = [];
-        saveCart();
-        window.updateCartUI();
-        window.showToast('✓ Carrito vaciado');
-    };
-
     window.updateCartUI = function() {
         console.log('Actualizando UI del carrito');
         const totalItems = cart.reduce((sum, item) => sum + (item.cantidad || 0), 0);
         const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
         
-        // Actualizar contadores
         document.querySelectorAll('#cartCount, #floatingCartCount').forEach(el => {
             if (el) {
                 el.textContent = totalItems;
-                if (totalItems > 0) {
-                    el.classList.remove('hidden');
-                    el.classList.add('badge-pop');
-                    setTimeout(() => el.classList.remove('badge-pop'), 300);
-                } else {
-                    el.classList.add('hidden');
-                }
+                el.classList.toggle('hidden', totalItems === 0);
             }
         });
         
-        // Actualizar items del carrito
         const cartItemsContainer = document.getElementById('cartItems');
         if (cartItemsContainer) {
             if (cart.length === 0) {
@@ -101,7 +83,9 @@
             } else {
                 cartItemsContainer.innerHTML = cart.map((item, index) => `
                     <div class="flex gap-3 bg-gray-50 p-3 rounded-lg">
-                        <img src="${item.imagen || 'https://placehold.co/80'}" class="w-16 h-16 object-contain bg-white rounded-lg" onerror="this.src='https://placehold.co/80'">
+                        <img src="${item.imagen || 'https://placehold.co/80'}" 
+                             class="w-16 h-16 object-contain bg-white rounded-lg" 
+                             onerror="this.src='https://placehold.co/80'">
                         <div class="flex-1">
                             <h4 class="font-medium text-sm">${item.nombre}</h4>
                             <p class="text-cuban-green font-bold">$${item.precio?.toLocaleString()}</p>
@@ -119,7 +103,6 @@
             }
         }
         
-        // Actualizar totales
         const subtotalEl = document.getElementById('cartSubtotal');
         const shippingEl = document.getElementById('cartShipping');
         const totalEl = document.getElementById('cartTotal');
@@ -265,7 +248,7 @@
     };
 
     // ============================================
-    // FUNCIONES DE UI
+    // UI
     // ============================================
     
     window.toggleDayNight = function() {
@@ -327,7 +310,7 @@
         
         setTimeout(() => {
             window.updateCartUI();
-        }, 200);
+        }, 500);
         
         const pageFade = document.getElementById('pageFade');
         if (pageFade) pageFade.classList.add('opacity-0');
