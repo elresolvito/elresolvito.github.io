@@ -1,9 +1,9 @@
 <!-- components/cart-sidebar.html -->
-<div id="cartOverlay" class="fixed inset-0 bg-black/50 z-[100] hidden" onclick="toggleCart()"></div>
+<div id="cartOverlay" class="fixed inset-0 bg-black/50 z-[100] hidden" onclick="window.toggleCart()"></div>
 <div id="cartSidebar" class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl z-[101] transform translate-y-full cart-slide max-h-[85vh] flex flex-col">
     <div class="p-4 border-b flex justify-between items-center bg-cuban-green text-white rounded-t-3xl">
         <h3 class="font-bold text-lg"><i class="fas fa-shopping-cart mr-2"></i>Tu Carrito</h3>
-        <button onclick="toggleCart()" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
+        <button onclick="window.toggleCart()" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
             <i class="fas fa-times"></i>
         </button>
     </div>
@@ -25,7 +25,7 @@
                 <span id="cartTotal" class="text-cuban-green">$0</span>
             </div>
         </div>
-        <button onclick="openCheckoutModal()" class="w-full btn-whatsapp text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2">
+        <button onclick="window.openCheckoutModal()" class="w-full btn-whatsapp text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2">
             <i class="fab fa-whatsapp"></i> Proceder al checkout
         </button>
         <p class="text-xs text-center text-gray-500 mt-3">
