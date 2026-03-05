@@ -229,6 +229,21 @@
                 });
             }
         });
-    </script>
+        
+    <!-- Contenedores para modales y footer -->
+    <div id="image-modal-container"></div>
+    <div id="cart-sidebar-container"></div>
+    <div id="checkout-modal-container"></div>
+    <div id="footer-container"></div>
+
+    <!-- Toast (opcional, puedes dejarlo) -->
+    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
+        <p id="cartToastMessage"></p>
+    </div>
+
+    <!-- SCRIPTS (SOLO ESTOS DOS) -->
+    <script src="js/products.js" defer></script>
+    <script src="js/elresolvito.js" defer></script>
 </body>
 </html>
+
