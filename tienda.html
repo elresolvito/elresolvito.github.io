@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Tienda - El Resolvito</title>
-    <meta name="description" content="Catálogo completo de productos en El Resolvito.">
+    <meta name="description" content="Catálogo completo de productos en El Resolvito: alimentos, bebidas, higiene, perfumes y más. Compra fácil por WhatsApp.">
     
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -59,7 +59,6 @@
         </div>
     </div>
 
-    <!-- Productos -->
     <section class="py-8">
         <div class="container mx-auto px-4">
             <h2 class="text-2xl font-bold mb-6">Catálogo Completo</h2>
@@ -103,7 +102,6 @@
         // ============================================
         function renderizarProductos(productos) {
             const grid = document.getElementById('productsGrid');
-            
             if (!grid) return;
             
             if (!productos || productos.length === 0) {
@@ -112,7 +110,6 @@
             }
             
             grid.innerHTML = productos.map(p => {
-                // Sanitizar nombre para evitar errores de comillas
                 const nombreSanitizado = p.nombre.replace(/'/g, "\\'");
                 const fallbackUrl = getFallbackImage(p.nombre);
                 
@@ -179,7 +176,6 @@
         document.addEventListener('DOMContentLoaded', async () => {
             console.log('Inicializando tienda...');
             
-            // Cargar componentes
             await loadComponent('header-container', 'components/header.html');
             await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
             await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
@@ -188,14 +184,12 @@
             await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
             await loadComponent('footer-container', 'components/footer.html');
             
-            // Cargar productos
             setTimeout(() => {
                 if (typeof PRODUCTS !== 'undefined') {
                     allProducts = PRODUCTS;
                     console.log(`✅ ${allProducts.length} productos cargados`);
                     renderizarProductos(allProducts);
                     
-                    // Forzar actualización del carrito
                     if (typeof window.updateCartUI === 'function') {
                         window.updateCartUI();
                     }
