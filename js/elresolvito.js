@@ -2,21 +2,21 @@
 (function() {
     'use strict';
     
+    // ============================================
+    // VARIABLES GLOBALES
+    // ============================================
     let cart = JSON.parse(localStorage.getItem('elResolvitoCart')) || [];
     const WHATSAPP_NUMBER = '5356382909';
     const MINIMUM_PURCHASE = 500;
     const SHIPPING_WITHIN_HABANA_VIEJA = 400;
     
     // ============================================
-    // CARRITO
+    // FUNCIONES DEL CARRITO
     // ============================================
     
     window.addToCart = function(product) {
-        console.log('addToCart llamado con:', product);
-        
         if (!product || !product.id || !product.nombre || !product.precio) {
-            console.error('Producto inválido', product);
-            window.showToast('Error al añadir producto');
+            alert('Error al añadir producto');
             return false;
         }
 
@@ -24,7 +24,6 @@
         
         if (existingItemIndex !== -1) {
             cart[existingItemIndex].cantidad += product.cantidad || 1;
-            window.showToast(`✓ ${product.nombre} (cantidad actualizada)`);
         } else {
             cart.push({
                 id: product.id,
@@ -33,11 +32,11 @@
                 precio: product.precio,
                 cantidad: product.cantidad || 1
             });
-            window.showToast(`✓ ${product.nombre} añadido al carrito`);
         }
 
         saveCart();
         window.updateCartUI();
+        alert('✓ Producto añadido al carrito');
         return true;
     };
 
@@ -53,26 +52,26 @@
         cart[index].cantidad = newQuantity;
         saveCart();
         window.updateCartUI();
-        window.showToast('✓ Carrito actualizado');
     };
 
     window.removeFromCart = function(index) {
-        const item = cart[index];
         cart.splice(index, 1);
         saveCart();
         window.updateCartUI();
-        window.showToast(`✗ ${item.nombre} eliminado`);
     };
 
     window.updateCartUI = function() {
-        console.log('Actualizando UI del carrito');
         const totalItems = cart.reduce((sum, item) => sum + (item.cantidad || 0), 0);
         const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
         
         document.querySelectorAll('#cartCount, #floatingCartCount').forEach(el => {
             if (el) {
                 el.textContent = totalItems;
-                el.classList.toggle('hidden', totalItems === 0);
+                if (totalItems > 0) {
+                    el.classList.remove('hidden');
+                } else {
+                    el.classList.add('hidden');
+                }
             }
         });
         
@@ -83,19 +82,15 @@
             } else {
                 cartItemsContainer.innerHTML = cart.map((item, index) => `
                     <div class="flex gap-3 bg-gray-50 p-3 rounded-lg">
-                        <img src="${item.imagen || 'https://placehold.co/80'}" 
-                             class="w-16 h-16 object-contain bg-white rounded-lg" 
-                             onerror="this.src='https://placehold.co/80'">
+                        <img src="${item.imagen || 'https://placehold.co/80'}" class="w-16 h-16 object-contain bg-white rounded-lg">
                         <div class="flex-1">
                             <h4 class="font-medium text-sm">${item.nombre}</h4>
                             <p class="text-cuban-green font-bold">$${item.precio?.toLocaleString()}</p>
                             <div class="flex items-center gap-2 mt-1">
-                                <button onclick="window.updateCartQuantity(${index}, ${(item.cantidad || 1) - 1})" class="w-8 h-8 bg-white rounded-full shadow text-sm font-bold hover:bg-cuban-green hover:text-white transition">-</button>
-                                <span class="text-base font-medium w-8 text-center">${item.cantidad || 1}</span>
-                                <button onclick="window.updateCartQuantity(${index}, ${(item.cantidad || 1) + 1})" class="w-8 h-8 bg-white rounded-full shadow text-sm font-bold hover:bg-cuban-green hover:text-white transition">+</button>
-                                <button onclick="window.removeFromCart(${index})" class="ml-2 text-red-500 hover:text-red-700 text-lg">
-                                    <i class="fas fa-trash"></i>
-                                </button>
+                                <button onclick="window.updateCartQuantity(${index}, ${(item.cantidad || 1) - 1})" class="w-6 h-6 bg-white rounded shadow">-</button>
+                                <span class="text-sm font-medium">${item.cantidad || 1}</span>
+                                <button onclick="window.updateCartQuantity(${index}, ${(item.cantidad || 1) + 1})" class="w-6 h-6 bg-white rounded shadow">+</button>
+                                <button onclick="window.removeFromCart(${index})" class="ml-auto text-red-500">🗑️</button>
                             </div>
                         </div>
                     </div>
@@ -110,7 +105,7 @@
         if (subtotalEl) subtotalEl.textContent = `$${subtotal.toLocaleString()}`;
         
         if (subtotal < MINIMUM_PURCHASE) {
-            if (shippingEl) shippingEl.innerHTML = `<span class="text-orange-500 font-bold">Mínimo $${MINIMUM_PURCHASE}</span>`;
+            if (shippingEl) shippingEl.innerHTML = `<span class="text-orange-500">Mínimo $${MINIMUM_PURCHASE}</span>`;
             if (totalEl) totalEl.textContent = `$${subtotal.toLocaleString()}`;
         } else {
             if (shippingEl) shippingEl.innerHTML = `<span class="text-gray-600">Seleccionar en checkout</span>`;
@@ -118,29 +113,12 @@
         }
     };
 
-    window.showToast = function(message) {
-        const toast = document.getElementById('cartToast');
-        const msgEl = document.getElementById('cartToastMessage');
-        if (!toast || !msgEl) return;
-
-        msgEl.textContent = message;
-        toast.classList.add('opacity-100');
-        toast.classList.remove('opacity-0', 'pointer-events-none');
-
-        clearTimeout(window.toastTimeout);
-        window.toastTimeout = setTimeout(() => {
-            toast.classList.remove('opacity-100');
-            toast.classList.add('opacity-0', 'pointer-events-none');
-        }, 2500);
-    };
-
     window.toggleCart = function() {
-        console.log('toggleCart llamado');
         const sidebar = document.getElementById('cartSidebar');
         const overlay = document.getElementById('cartOverlay');
         
         if (!sidebar || !overlay) {
-            console.error('Elementos del carrito no encontrados');
+            alert('Error: Elementos del carrito no encontrados');
             return;
         }
         
@@ -150,105 +128,7 @@
     };
 
     // ============================================
-    // CHECKOUT
-    // ============================================
-    
-    window.openCheckoutModal = function() {
-        if (cart.length === 0) {
-            window.showToast('El carrito está vacío');
-            return;
-        }
-        
-        const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
-        if (subtotal < MINIMUM_PURCHASE) {
-            window.showToast(`Compra mínima: $${MINIMUM_PURCHASE}`);
-            return;
-        }
-        
-        const modal = document.getElementById('checkoutModal');
-        if (modal) {
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-            
-            const summaryEl = document.getElementById('checkoutCartSummary');
-            const totalEl = document.getElementById('checkoutTotal');
-            if (summaryEl) {
-                summaryEl.innerHTML = cart.map(item => `
-                    <div class="flex justify-between mb-1">
-                        <span>${item.nombre} x${item.cantidad}</span>
-                        <span>$${(item.precio * item.cantidad).toLocaleString()}</span>
-                    </div>
-                `).join('');
-                if (totalEl) totalEl.textContent = `$${subtotal.toLocaleString()}`;
-            }
-        }
-    };
-
-    window.closeCheckoutModal = function() {
-        const modal = document.getElementById('checkoutModal');
-        if (modal) {
-            modal.classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-    };
-
-    window.sendCompleteOrder = function() {
-        if (cart.length === 0) {
-            window.showToast('El carrito está vacío');
-            window.closeCheckoutModal();
-            return;
-        }
-
-        const customerName = document.getElementById('customerName')?.value.trim();
-        const customerAddress = document.getElementById('customerAddress')?.value.trim();
-        const deliveryZone = document.querySelector('input[name="deliveryZone"]:checked')?.value;
-        const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value;
-        const customerNotes = document.getElementById('customerNotes')?.value.trim();
-
-        if (!customerName || !customerAddress || !deliveryZone || !paymentMethod) {
-            alert('Por favor, completa todos los campos obligatorios.');
-            return;
-        }
-
-        const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
-        if (subtotal < MINIMUM_PURCHASE) {
-            alert(`El subtotal debe ser de al menos $${MINIMUM_PURCHASE}.`);
-            return;
-        }
-
-        const shippingCost = deliveryZone === 'habana-vieja' ? SHIPPING_WITHIN_HABANA_VIEJA : 0;
-        const shippingDescription = deliveryZone === 'habana-vieja' 
-            ? `Envío dentro de La Habana Vieja: $${SHIPPING_WITHIN_HABANA_VIEJA}`
-            : 'Envío fuera de La Habana Vieja: costo a consultar';
-        const total = subtotal + shippingCost;
-
-        let message = `*✅ PEDIDO CONFIRMADO - EL RESOLVITO*\n\n`;
-        message += `👤 *DATOS DEL CLIENTE:*\n`;
-        message += `• Nombre: ${customerName}\n`;
-        message += `• Dirección: ${customerAddress}\n`;
-        message += `• Zona: ${deliveryZone === 'habana-vieja' ? 'La Habana Vieja' : 'Fuera'}\n`;
-        message += `• Pago: ${paymentMethod}\n`;
-        if (customerNotes) message += `• Notas: ${customerNotes}\n`;
-        
-        message += `\n🛒 *DETALLE DEL PEDIDO:*\n`;
-        cart.forEach(item => {
-            message += `• ${item.nombre} x${item.cantidad} = $${(item.precio * item.cantidad).toLocaleString()}\n`;
-        });
-        
-        message += `\n💰 *RESUMEN:*\n`;
-        message += `- Subtotal: $${subtotal.toLocaleString()}\n`;
-        message += `- ${shippingDescription}\n`;
-        message += `- *TOTAL: $${total.toLocaleString()}*`;
-        
-        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
-        
-        window.closeCheckoutModal();
-        window.toggleCart();
-        window.showToast('✓ Pedido enviado por WhatsApp');
-    };
-
-    // ============================================
-    // UI
+    // FUNCIONES DE UI
     // ============================================
     
     window.toggleDayNight = function() {
@@ -292,38 +172,13 @@
     // INICIALIZACIÓN
     // ============================================
     
-    function initDayNight() {
-        const hour = new Date().getHours();
-        const isNight = hour < 6 || hour >= 18;
-        const savedMode = localStorage.getItem('nightMode') === 'true';
-        
-        if (savedMode || (savedMode === null && isNight)) {
-            document.body.classList.add('night-mode');
-            const themeIcon = document.getElementById('headerThemeIcon');
-            if (themeIcon) themeIcon.textContent = '🌙';
-        }
-    }
-
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('elresolvito.js iniciado');
-        initDayNight();
-        
-        setTimeout(() => {
-            window.updateCartUI();
-        }, 500);
-        
+        // Quitar fade
         const pageFade = document.getElementById('pageFade');
         if (pageFade) pageFade.classList.add('opacity-0');
-    });
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            window.closeImageModal();
-            const checkoutModal = document.getElementById('checkoutModal');
-            if (checkoutModal && !checkoutModal.classList.contains('hidden')) {
-                window.closeCheckoutModal();
-            }
-        }
+        
+        // Actualizar carrito
+        window.updateCartUI();
     });
 
 })();
