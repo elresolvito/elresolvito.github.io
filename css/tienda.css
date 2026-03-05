@@ -1,8 +1,7 @@
 /* ============================================ */
-/* ESTILOS EXCLUSIVOS PARA TIENDA - VERSIÓN MEJORADA */
+/* ESTILOS EXCLUSIVOS PARA TIENDA */
 /* ============================================ */
 
-/* Barra de búsqueda y filtros */
 .busqueda-container {
     background: white;
     border-top: 1px solid #e5e7eb;
@@ -49,8 +48,7 @@
     background: #e5e7eb;
 }
 
-/* Grid de productos */
-#productsGrid {
+.products-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
@@ -149,7 +147,6 @@
     transform: scale(1.1);
 }
 
-/* Mensajes de estado */
 .loading-message {
     grid-column: 1 / -1;
     text-align: center;
@@ -163,32 +160,15 @@
     color: #9ca3af;
 }
 
-.error-message {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 3rem 0;
-    color: #dc2626;
-}
-
-.empty-message {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 3rem 0;
-    color: #6b7280;
-}
-
-/* ============================================ */
-/* RESPONSIVE - TIENDA MEJORADA */
-/* ============================================ */
 @media (min-width: 768px) {
-    #productsGrid {
+    .products-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 2rem;
     }
 }
 
 @media (min-width: 1024px) {
-    #productsGrid {
+    .products-grid {
         grid-template-columns: repeat(4, 1fr);
     }
 }
