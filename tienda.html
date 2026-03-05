@@ -11,7 +11,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     
-    <!-- ESTILOS (ORDEN CORRECTO) -->
+    <!-- ESTILOS -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/tienda.css">
     
@@ -88,44 +88,47 @@
     <div id="footer-container"></div>
 
     <!-- Toast -->
-    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none"></div>
+    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
+        <p id="cartToastMessage"></p>
+    </div>
 
     <!-- Scripts -->
     <script src="js/products.js" defer></script>
     <script src="js/elresolvito.js" defer></script>
 
     <script>
-        // Variables globales
-        let currentCategory = 'todos';
+        // ============================================
+        // VARIABLES GLOBALES DE TIENDA
+        // ============================================
         let allProducts = [];
+        let currentCategory = 'todos';
 
-        // Cargar componentes
-        async function loadComponent(id, path) {
-            const res = await fetch(path);
-            document.getElementById(id).innerHTML = await res.text();
-        }
-
-        // Renderizar productos
+        // ============================================
+        // FUNCIONES DE TIENDA
+        // ============================================
+        
         function renderizarProductos(productos) {
             const grid = document.getElementById('productsGrid');
             
+            if (!grid) return;
+            
             if (!productos || productos.length === 0) {
-                grid.innerHTML = '<div class="empty-message"><i class="fas fa-box-open text-4xl mb-3"></i><p>No hay productos disponibles</p></div>';
+                grid.innerHTML = '<div class="col-span-full text-center py-12 text-gray-500"><i class="fas fa-box-open text-5xl mb-3 opacity-30"></i><p class="text-lg">No hay productos disponibles</p></div>';
                 return;
             }
             
             grid.innerHTML = productos.map(p => `
                 <div class="product-card">
-                    <div class="product-image-container" onclick="openImageModal('${p.imagen}', '${p.nombre}')">
+                    <div class="product-image-container" onclick="window.openImageModal('${p.imagen}', '${p.nombre}')">
                         <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/300x300/2E7D32/white?text=Producto'">
                     </div>
                     <div class="product-info">
-                        <div class="product-categoria">${p.categoria.split(' ')[0]}</div>
+                        <div class="product-categoria">${p.categoria ? p.categoria.split(' ')[0] : 'Producto'}</div>
                         <div class="product-nombre">${p.nombre}</div>
                         <div class="product-descripcion">${p.descripcion || ''}</div>
-                        <div class="flex items-center justify-between">
+                        <div class="flex items-center justify-between mt-2">
                             <span class="product-precio">$${p.precio.toLocaleString()}</span>
-                            <button onclick="addToCart({id:${p.id}, nombre:'${p.nombre.replace(/'/g, "\\'")}', precio:${p.precio}, imagen:'${p.imagen}', cantidad:1})">
+                            <button onclick="window.addToCart({id:${p.id}, nombre:'${p.nombre.replace(/'/g, "\\'")}', precio:${p.precio}, imagen:'${p.imagen}', cantidad:1})" class="product-btn">
                                 <i class="fas fa-plus"></i>
                             </button>
                         </div>
@@ -134,47 +137,44 @@
             `).join('');
         }
 
-        // Filtrar por categoría
-        function filtrarCategoria(categoria) {
+        window.filtrarCategoria = function(categoria) {
             currentCategory = categoria;
             
+            // Actualizar botones
             document.querySelectorAll('.category-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
             event.target.classList.add('active');
             
+            // Filtrar productos
             if (categoria === 'todos') {
                 renderizarProductos(allProducts);
             } else {
                 const filtrados = allProducts.filter(p => p.categoria === categoria);
                 renderizarProductos(filtrados);
             }
+        };
+
+        // ============================================
+        // CARGA DE COMPONENTES
+        // ============================================
+        async function loadComponent(id, path) {
+            try {
+                const response = await fetch(path);
+                const html = await response.text();
+                document.getElementById(id).innerHTML = html;
+            } catch (error) {
+                console.error(`Error cargando ${path}:`, error);
+            }
         }
 
-        // Buscar productos
-        document.getElementById('searchInput').addEventListener('input', function(e) {
-            const termino = e.target.value.toLowerCase();
-            
-            if (!termino) {
-                if (currentCategory === 'todos') {
-                    renderizarProductos(allProducts);
-                } else {
-                    const filtrados = allProducts.filter(p => p.categoria === currentCategory);
-                    renderizarProductos(filtrados);
-                }
-                return;
-            }
-            
-            const resultados = allProducts.filter(p => 
-                p.nombre.toLowerCase().includes(termino) || 
-                (p.categoria && p.categoria.toLowerCase().includes(termino))
-            );
-            
-            renderizarProductos(resultados);
-        });
-
-        // Inicializar
+        // ============================================
+        // INICIALIZACIÓN
+        // ============================================
         document.addEventListener('DOMContentLoaded', async () => {
+            console.log('Inicializando tienda...');
+            
+            // Cargar componentes
             await loadComponent('header-container', 'components/header.html');
             await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
             await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
@@ -183,16 +183,50 @@
             await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
             await loadComponent('footer-container', 'components/footer.html');
             
-            // Cargar productos
+            // Cargar productos (con un pequeño retraso para asegurar que todo esté listo)
             setTimeout(() => {
                 if (typeof PRODUCTS !== 'undefined') {
                     allProducts = PRODUCTS;
+                    console.log(`✅ ${allProducts.length} productos cargados`);
                     renderizarProductos(allProducts);
                 } else {
+                    console.error('❌ PRODUCTS no está definido');
                     document.getElementById('productsGrid').innerHTML = 
-                        '<div class="error-message"><i class="fas fa-exclamation-triangle text-3xl mb-3"></i><p>Error al cargar productos</p></div>';
+                        '<div class="col-span-full text-center py-12 text-red-500"><i class="fas fa-exclamation-triangle text-5xl mb-3"></i><p class="text-lg">Error al cargar productos</p></div>';
                 }
-            }, 100);
+            }, 200);
+        });
+
+        // ============================================
+        // BÚSQUEDA EN TIEMPO REAL
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('input', function(e) {
+                    const termino = e.target.value.toLowerCase().trim();
+                    
+                    if (!termino) {
+                        // Si no hay término, mostrar según categoría actual
+                        if (currentCategory === 'todos') {
+                            renderizarProductos(allProducts);
+                        } else {
+                            const filtrados = allProducts.filter(p => p.categoria === currentCategory);
+                            renderizarProductos(filtrados);
+                        }
+                        return;
+                    }
+                    
+                    // Filtrar productos que coincidan con el término
+                    const resultados = allProducts.filter(p => 
+                        p.nombre.toLowerCase().includes(termino) || 
+                        (p.categoria && p.categoria.toLowerCase().includes(termino)) ||
+                        (p.descripcion && p.descripcion.toLowerCase().includes(termino))
+                    );
+                    
+                    renderizarProductos(resultados);
+                });
+            }
         });
     </script>
 </body>
