@@ -129,7 +129,7 @@
     color: #2E7D32;
 }
 
-.product-card button {
+.product-btn {
     width: 2.5rem;
     height: 2.5rem;
     background: #2E7D32;
@@ -144,9 +144,37 @@
     font-size: 1.2rem;
 }
 
-.product-card button:hover {
+.product-btn:hover {
     background: #1B5E20;
     transform: scale(1.1);
+}
+
+/* Mensajes de estado */
+.loading-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem 0;
+    color: #6b7280;
+}
+
+.loading-message i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #9ca3af;
+}
+
+.error-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem 0;
+    color: #dc2626;
+}
+
+.empty-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem 0;
+    color: #6b7280;
 }
 
 /* ============================================ */
@@ -193,7 +221,7 @@
         font-size: 1.25rem;
     }
     
-    .product-card button {
+    .product-btn {
         width: 2rem;
         height: 2rem;
         font-size: 1rem;
