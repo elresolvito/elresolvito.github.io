@@ -1,18 +1,41 @@
-// js/elresolvito.js
+// ============================================
+// PRODUCTOS (movidos desde products.js)
+// ============================================
+var PRODUCTS = [
+    { id: 1, nombre: "Atún en lata", categoria: "Alimentos y conservas", precio: 540, imagen: "https://i.postimg.cc/76xHK6zt/atun_precio_500.png", descripcion: "Lata 200g" },
+    { id: 2, nombre: "Pasta de tomate", categoria: "Alimentos y conservas", precio: 350, imagen: "https://i.postimg.cc/gjjYPTNv/pasta_tomate_precio_350.png", descripcion: "Paquete" },
+    // ... (todos los productos) ...
+    { id: 36, nombre: "Baterías Triple A", categoria: "Electrónicos y accesorios", precio: 300, imagen: "https://i.postimg.cc/DZ2vxZsT/Gemini_Generated_Image_824rio824rio824r.png", descripcion: "Pack 4 unidades" }
+];
+
+var FEATURED_PRODUCTS = [
+    PRODUCTS.find(p => p.id === 4),
+    PRODUCTS.find(p => p.id === 7),
+    PRODUCTS.find(p => p.id === 1),
+    PRODUCTS.find(p => p.id === 13),
+    PRODUCTS.find(p => p.id === 21),
+    PRODUCTS.find(p => p.id === 30),
+    PRODUCTS.find(p => p.id === 17),
+    PRODUCTS.find(p => p.id === 9)
+];
+
+var WHOLESALE_PRODUCTS = [
+    { nombre: "Café Dualis Caja 10u", precio: 13000, precioNormal: 14500, imagen: "https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png", desc: "Ahorra $1,500" },
+    { nombre: "Huevos 3 cartones", precio: 8400, precioNormal: 9000, imagen: "https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3000.png", desc: "Ahorra $600" },
+    { nombre: "Atún Pack 12u", precio: 6000, precioNormal: 6480, imagen: "https://i.postimg.cc/76xHK6zt/atun_precio_500.png", desc: "Ahorra $480" },
+    { nombre: "Jabón Caja 24u", precio: 5400, precioNormal: 6000, imagen: "https://i.postimg.cc/V6YfK6Mz/jabon_de_lavar_precio_250.png", desc: "Ahorra $600" }
+];
+
+// ============================================
+// CARRITO Y FUNCIONES
+// ============================================
 (function() {
     'use strict';
     
-    // ============================================
-    // VARIABLES GLOBALES
-    // ============================================
     let cart = JSON.parse(localStorage.getItem('elResolvitoCart')) || [];
     const WHATSAPP_NUMBER = '5356382909';
     const MINIMUM_PURCHASE = 500;
     const SHIPPING_WITHIN_HABANA_VIEJA = 400;
-    
-    // ============================================
-    // FUNCIONES DEL CARRITO
-    // ============================================
     
     window.addToCart = function(product) {
         if (!product || !product.id || !product.nombre || !product.precio) {
@@ -67,11 +90,7 @@
         document.querySelectorAll('#cartCount, #floatingCartCount').forEach(el => {
             if (el) {
                 el.textContent = totalItems;
-                if (totalItems > 0) {
-                    el.classList.remove('hidden');
-                } else {
-                    el.classList.add('hidden');
-                }
+                el.classList.toggle('hidden', totalItems === 0);
             }
         });
         
@@ -127,10 +146,6 @@
         document.body.style.overflow = sidebar.classList.contains('cart-open') ? 'hidden' : '';
     };
 
-    // ============================================
-    // FUNCIONES DE UI
-    // ============================================
-    
     window.toggleDayNight = function() {
         document.body.classList.toggle('night-mode');
         const themeIcon = document.getElementById('headerThemeIcon');
@@ -168,16 +183,9 @@
         }
     };
 
-    // ============================================
-    // INICIALIZACIÓN
-    // ============================================
-    
     document.addEventListener('DOMContentLoaded', function() {
-        // Quitar fade
         const pageFade = document.getElementById('pageFade');
         if (pageFade) pageFade.classList.add('opacity-0');
-        
-        // Actualizar carrito
         window.updateCartUI();
     });
 
