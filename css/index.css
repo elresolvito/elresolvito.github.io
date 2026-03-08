@@ -89,12 +89,13 @@ body.night-mode .hero-overlay {
 }
 
 #featuredProducts .product-card {
-    background: white;
+    background: var(--bg-card);
     border-radius: 1rem;
     overflow: hidden;
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
     cursor: pointer;
+    border: 1px solid var(--border-color);
 }
 
 #featuredProducts .product-card:hover {
@@ -104,7 +105,7 @@ body.night-mode .hero-overlay {
 
 #featuredProducts .product-image-container {
     height: 180px; /* Aumentado de 160px a 180px */
-    background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+    background: var(--bg-card);  /* Fondo igual a la tarjeta */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -116,7 +117,12 @@ body.night-mode .hero-overlay {
     height: 100%;
     object-fit: contain;
     padding: 1rem;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* En modo oscuro, ajuste de imágenes */
+body.night-mode #featuredProducts .product-image-container img {
+    filter: brightness(0.9) contrast(1.1);
 }
 
 #featuredProducts .product-card:hover .product-image-container img {
@@ -124,18 +130,19 @@ body.night-mode .hero-overlay {
 }
 
 #featuredProducts .product-card .text-cuban-green {
-    color: #2E7D32;
+    color: var(--primary-green);
     font-weight: 700;
     font-size: 1.25rem;
 }
 
 /* Servicios preview */
 #servicios-container .product-card {
-    background: white;
+    background: var(--bg-card);
     border-radius: 1rem;
     overflow: hidden;
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
 #servicios-container .product-card:hover {
@@ -155,6 +162,7 @@ body.night-mode .hero-overlay {
     align-items: center;
     gap: 0.5rem;
     font-size: 0.85rem;
+    color: var(--text-secondary);
 }
 
 #servicios-container .feature-item i {
@@ -177,12 +185,13 @@ body.night-mode .hero-overlay {
 
 /* Blog preview */
 article {
-    background: white;
+    background: var(--bg-card);
     border-radius: 1rem;
     overflow: hidden;
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
     cursor: pointer;
+    border: 1px solid var(--border-color);
 }
 
 article:hover {
@@ -200,14 +209,20 @@ article h3 {
     font-size: 1.125rem;
     font-weight: 700;
     margin-top: 0.5rem;
+    color: var(--text-primary);
+}
+
+article p {
+    color: var(--text-light);
 }
 
 /* Alojamientos preview */
 #alojamientos-preview {
-    background: white;
+    background: var(--bg-card);
     border-radius: 1.5rem;
     overflow: hidden;
     box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+    border: 1px solid var(--border-color);
 }
 
 #alojamientos-preview .amenities-grid {
@@ -221,11 +236,11 @@ article h3 {
     align-items: center;
     gap: 0.5rem;
     font-size: 0.9rem;
-    color: #4B5563;
+    color: var(--text-secondary);
 }
 
 #alojamientos-preview .amenity-item i {
-    color: #2E7D32;
+    color: var(--primary-green);
 }
 
 /* ============================================ */
