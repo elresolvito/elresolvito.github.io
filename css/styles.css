@@ -1,4 +1,4 @@
-/* ============================================ */
+9/* ============================================ */
 /* ESTILOS GLOBALES - EL RESOLVITO */
 /* ============================================ */
 
@@ -352,8 +352,8 @@ body.night-mode .product-image-container {
 .product-image-container img {
     width: auto;
     height: auto;
-    max-width: 80%;    /* <-- CAMBIO AQUÍ: limita el ancho máximo */
-    max-height: 80%;   /* <-- CAMBIO AQUÍ: limita el alto máximo */
+    max-width: 90%;    /* <-- CAMBIO AQUÍ: limita el ancho máximo */
+    max-height: 90%;   /* <-- CAMBIO AQUÍ: limita el alto máximo */
     object-fit: contain;
     padding: 0.5rem;
     transition: transform 0.3s ease;
