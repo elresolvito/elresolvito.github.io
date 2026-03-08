@@ -21,39 +21,45 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { 'poppins': ['Poppins'], 'opensans': ['Open Sans'] },
+                    fontFamily: { 
+                        'poppins': ['Poppins', 'sans-serif'], 
+                        'opensans': ['Open Sans', 'sans-serif'] 
+                    },
                     colors: {
-                        'cuban-green': '#2E7D32', 'cuban-dark': '#1B5E20',
-                        'cuban-yellow': '#FFB300', 'cuban-blue': '#0277BD'
+                        'cuban-green': '#2E7D32', 
+                        'cuban-dark': '#1B5E20',
+                        'cuban-yellow': '#FFB300', 
+                        'cuban-blue': '#0277BD'
                     }
                 }
             }
         }
     </script>
 </head>
-<body class="bg-white text-gray-800">
+<body class="bg-white text-gray-800 font-opensans">
 
     <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
 
+    <!-- Contenedores de componentes -->
     <div id="header-container"></div>
     <div id="mobile-menu-container"></div>
     <div id="floating-buttons-container"></div>
 
     <!-- Barra de búsqueda y filtros -->
     <div class="busqueda-container">
-        <div class="container mx-auto">
+        <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row gap-3">
                 <div class="relative flex-1">
                     <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                    <input type="text" id="searchInput" placeholder="Buscar productos...">
+                    <input type="text" id="searchInput" placeholder="Buscar productos..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cuban-green focus:border-transparent">
                 </div>
                 <div class="flex gap-2 overflow-x-auto hide-scrollbar pb-1">
-                    <button onclick="filtrarCategoria('todos')" class="category-btn active">Todos</button>
-                    <button onclick="filtrarCategoria('Alimentos y conservas')" class="category-btn">Alimentos</button>
-                    <button onclick="filtrarCategoria('Snacks y golosinas')" class="category-btn">Snacks</button>
-                    <button onclick="filtrarCategoria('Higiene personal')" class="category-btn">Higiene</button>
-                    <button onclick="filtrarCategoria('Bebidas alcohólicas y malta')" class="category-btn">Bebidas</button>
-                    <button onclick="filtrarCategoria('Perfumes y desodorantes')" class="category-btn">Perfumes</button>
+                    <button onclick="filtrarCategoria('todos')" class="category-btn active px-4 py-2 rounded-full text-sm font-medium transition-colors bg-cuban-green text-white">Todos</button>
+                    <button onclick="filtrarCategoria('Alimentos y conservas')" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Alimentos</button>
+                    <button onclick="filtrarCategoria('Snacks y golosinas')" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Snacks</button>
+                    <button onclick="filtrarCategoria('Higiene personal')" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Higiene</button>
+                    <button onclick="filtrarCategoria('Bebidas alcohólicas y malta')" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Bebidas</button>
+                    <button onclick="filtrarCategoria('Perfumes y desodorantes')" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Perfumes</button>
                 </div>
             </div>
         </div>
@@ -61,17 +67,17 @@
 
     <section class="py-8">
         <div class="container mx-auto px-4">
-            <h2 class="text-2xl font-bold mb-6">Catálogo Completo</h2>
-            <div id="productsGrid" class="products-grid">
-                <div class="loading-message">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <p>Cargando productos...</p>
+            <h2 class="text-2xl font-bold mb-6 font-poppins">Catálogo Completo</h2>
+            <div id="productsGrid" class="products-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="col-span-full text-center py-12">
+                    <i class="fas fa-spinner fa-spin text-4xl text-cuban-green"></i>
+                    <p class="mt-2 text-gray-600">Cargando productos...</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contenedores para componentes (una sola vez) -->
+    <!-- Contenedores para modales (una sola vez) -->
     <div id="image-modal-container"></div>
     <div id="cart-sidebar-container"></div>
     <div id="checkout-modal-container"></div>
@@ -96,7 +102,7 @@
         // FUNCIÓN DE RESPALDO DE IMÁGENES
         // ============================================
         function getFallbackImage(nombre) {
-            return `https://placehold.co/300x300/2E7D32/white?text=${encodeURIComponent(nombre)}`;
+            return `https://placehold.co/300x300/2E7D32/white?text=${encodeURIComponent(nombre.substring(0, 20))}`;
         }
 
         // ============================================
@@ -112,25 +118,26 @@
             }
             
             grid.innerHTML = productos.map(p => {
-                const nombreSanitizado = p.nombre.replace(/'/g, "\\'");
+                const nombreSanitizado = p.nombre.replace(/'/g, "\\'").replace(/"/g, '&quot;');
                 const fallbackUrl = getFallbackImage(p.nombre);
                 
                 return `
-                    <div class="product-card">
-                        <div class="product-image-container" onclick="window.openImageModal('${p.imagen}', '${nombreSanitizado}')">
+                    <div class="product-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                        <div class="product-image-container aspect-square bg-gray-100 cursor-pointer" onclick="window.openImageModal('${p.imagen}', '${nombreSanitizado}')">
                             <img src="${p.imagen}" 
                                  alt="${p.nombre}" 
+                                 class="w-full h-full object-contain p-2"
                                  loading="lazy"
                                  onerror="this.onerror=null; this.src='${fallbackUrl}'">
                         </div>
-                        <div class="product-info">
-                            <div class="product-categoria">${p.categoria ? p.categoria.split(' ')[0] : 'Producto'}</div>
-                            <div class="product-nombre">${p.nombre}</div>
-                            <div class="product-descripcion">${p.descripcion || ''}</div>
+                        <div class="product-info p-3">
+                            <div class="product-categoria text-xs text-cuban-green font-semibold mb-1">${p.categoria ? p.categoria.split(' ')[0] : 'Producto'}</div>
+                            <div class="product-nombre font-medium text-sm mb-1 line-clamp-2">${p.nombre}</div>
+                            <div class="product-descripcion text-xs text-gray-500 mb-2 line-clamp-1">${p.descripcion || ''}</div>
                             <div class="flex items-center justify-between mt-2">
-                                <span class="product-precio">$${p.precio.toLocaleString()}</span>
-                                <button onclick="window.addToCart({id:${p.id}, nombre:'${nombreSanitizado}', precio:${p.precio}, imagen:'${p.imagen}', cantidad:1})" class="product-btn">
-                                    <i class="fas fa-plus"></i>
+                                <span class="product-precio text-lg font-bold text-cuban-green">$${p.precio.toLocaleString()}</span>
+                                <button onclick="window.addToCart({id:${p.id}, nombre:'${nombreSanitizado}', precio:${p.precio}, imagen:'${p.imagen}', cantidad:1})" class="product-btn bg-cuban-green text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-cuban-dark transition-colors">
+                                    <i class="fas fa-plus text-sm"></i>
                                 </button>
                             </div>
                         </div>
@@ -142,13 +149,18 @@
         // ============================================
         // FILTRAR POR CATEGORÍA
         // ============================================
-        window.filtrarCategoria = function(categoria) {
+        window.filtrarCategoria = function(categoria, event) {
             currentCategory = categoria;
             
             document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.classList.remove('active');
+                btn.classList.remove('active', 'bg-cuban-green', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
             });
-            event.target.classList.add('active');
+            
+            if (event) {
+                event.target.classList.remove('bg-gray-200', 'text-gray-700');
+                event.target.classList.add('active', 'bg-cuban-green', 'text-white');
+            }
             
             if (categoria === 'todos') {
                 renderizarProductos(allProducts);
@@ -178,6 +190,7 @@
         document.addEventListener('DOMContentLoaded', async () => {
             console.log('Inicializando tienda...');
             
+            // Cargar componentes
             await loadComponent('header-container', 'components/header.html');
             await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
             await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
@@ -186,9 +199,9 @@
             await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
             await loadComponent('footer-container', 'components/footer.html');
             
-            // Esperamos un poco para que los componentes se rendericen
+            // Esperar un poco para que los componentes se rendericen
             setTimeout(() => {
-                if (typeof PRODUCTS !== 'undefined') {
+                if (typeof PRODUCTS !== 'undefined' && PRODUCTS.length > 0) {
                     allProducts = PRODUCTS;
                     console.log(`✅ ${allProducts.length} productos cargados`);
                     renderizarProductos(allProducts);
@@ -201,7 +214,7 @@
                     document.getElementById('productsGrid').innerHTML = 
                         '<div class="col-span-full text-center py-12 text-red-500"><i class="fas fa-exclamation-triangle text-5xl mb-3"></i><p class="text-lg">Error al cargar productos</p></div>';
                 }
-            }, 300);
+            }, 500);
         });
 
         // ============================================
@@ -210,29 +223,4 @@
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = document.getElementById('searchInput');
             if (searchInput) {
-                searchInput.addEventListener('input', function(e) {
-                    const termino = e.target.value.toLowerCase().trim();
-                    
-                    if (!termino) {
-                        if (currentCategory === 'todos') {
-                            renderizarProductos(allProducts);
-                        } else {
-                            const filtrados = allProducts.filter(p => p.categoria === currentCategory);
-                            renderizarProductos(filtrados);
-                        }
-                        return;
-                    }
-                    
-                    const resultados = allProducts.filter(p => 
-                        p.nombre.toLowerCase().includes(termino) || 
-                        (p.categoria && p.categoria.toLowerCase().includes(termino))
-                    );
-                    
-                    renderizarProductos(resultados);
-                });
-            }
-        });
-    </script>
-</body>
-</html>
-
+                searchInput.addEventListener('input', function(e)
