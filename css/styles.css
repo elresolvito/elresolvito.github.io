@@ -385,5 +385,27 @@ body.night-mode .product-card:hover { box-shadow: 0 0 15px rgba(46, 125, 50, 0.3
     body { padding-bottom: 70px; }
     .floating-actions { bottom: 1rem; right: 1rem; }
     .floating-btn { width: 50px; height: 50px; }
-    #cartSidebar { max-height: 90vh; }
+    #cartSidebar { max-height: 90vh; } 
+}  
+/* ============================================ */
+/* TÍTULOS PRINCIPALES BLANCOS EN MODO CLARO */
+/* ============================================ */
+
+/* Título "El Resolvito" en el hero (modo claro y oscuro) */
+.hero-container h1,
+.hero-container .hero-text {
+    color: #ffffff !important;
+}
+
+/* Título del servicio de mensajería (fondo con overlay oscuro) */
+section:has(.bg-gradient-to-r.from-black\/70) h2,
+section .relative.z-10 h2 {
+    color: #ffffff !important;
+}
+
+/* Opcional: si hay otros títulos en tarjetas con overlay oscuro */
+.relative.z-10 h1,
+.relative.z-10 h2,
+.relative.z-10 h3 {
+    color: #ffffff !important;
 }
