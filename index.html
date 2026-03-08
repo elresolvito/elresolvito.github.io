@@ -6,21 +6,17 @@
     <title>El Resolvito - Tu Solución en La Habana</title>
     <meta name="description" content="Tienda online, servicios, alojamientos y más en La Habana Vieja.">
     
-    <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     
-    <!-- ESTILOS (ORDEN CORRECTO) -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/index.css">
     
-    <!-- Fonts y Tailwind -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Config Tailwind -->
     <script>
         tailwind.config = {
             theme: {
@@ -50,15 +46,11 @@
 
     <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
 
-    <!-- Componentes fijos -->
+    <!-- Contenedores de componentes -->
     <div id="header-container"></div>
     <div id="mobile-menu-container"></div>
     <div id="floating-buttons-container"></div>
 
-    <!-- ============================================ -->
-    <!-- CONTENIDO DE INDEX -->
-    <!-- ============================================ -->
-    
     <!-- Hero Banner -->
     <section class="hero-container">
         <div class="hero-bg-day"></div>
@@ -279,17 +271,67 @@
         </div>
     </section>
 
-    <!-- Contenedores para modales y footer -->
+    <!-- Contenedores para modales -->
     <div id="image-modal-container"></div>
     <div id="cart-sidebar-container"></div>
     <div id="checkout-modal-container"></div>
     <div id="footer-container"></div>
 
     <!-- Toast -->
-    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none"></div>
+    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
+        <p id="cartToastMessage"></p>
+    </div>
 
     <!-- Scripts -->
-    <script src="js/products.js" defer></script>
     <script src="js/elresolvito.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('Inicializando index...');
+
+            async function loadComponent(id, path) {
+                try {
+                    const response = await fetch(path);
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    const html = await response.text();
+                    document.getElementById(id).innerHTML = html;
+                } catch (error) {
+                    console.error(`Error cargando ${path}:`, error);
+                }
+            }
+
+            await loadComponent('header-container', 'components/header.html');
+            await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
+            await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
+            await loadComponent('image-modal-container', 'components/image-modal.html');
+            await loadComponent('cart-sidebar-container', 'components/cart-sidebar.html');
+            await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
+            await loadComponent('footer-container', 'components/footer.html');
+
+            // Renderizar productos destacados
+            if (typeof FEATURED_PRODUCTS !== 'undefined' && FEATURED_PRODUCTS.length) {
+                const container = document.getElementById('featuredProducts');
+                if (container) {
+                    container.innerHTML = FEATURED_PRODUCTS.map(p => {
+                        if (!p) return '';
+                        return `
+                            <div class="product-card" onclick="location.href='tienda.html'">
+                                <div class="product-image-container">
+                                    <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/300x300/2E7D32/white?text=${encodeURIComponent(p.nombre)}'">
+                                </div>
+                                <div class="product-info p-3">
+                                    <h3 class="font-semibold text-sm line-clamp-2">${p.nombre}</h3>
+                                    <p class="text-cuban-green font-bold mt-1">$${p.precio.toLocaleString()}</p>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                }
+            }
+
+            if (typeof window.updateCartUI === 'function') {
+                window.updateCartUI();
+            }
+        });
+    </script>
 </body>
 </html>
