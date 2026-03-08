@@ -1,4 +1,4 @@
-9/* ============================================ */
+/* ============================================ */
 /* ESTILOS GLOBALES - EL RESOLVITO */
 /* ============================================ */
 
@@ -35,7 +35,7 @@ body.night-mode {
     --text-light: #9CA3AF;
     --bg-card: #16213E;
     --border-color: #2D3748;
-    --image-bg: #FFFFFF; /* Se mantiene blanco para evitar recortes irregulares */
+    --image-bg: #FFFFFF; /* Se mantiene blanco - decisión del usuario */
     --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
     background: var(--bg-dark);
     color: var(--text-primary);
@@ -342,6 +342,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* Sombra sutil en modo oscuro para que el contenedor blanco destaque */
     transition: box-shadow 0.2s ease;
 }
 
@@ -349,19 +350,30 @@ body.night-mode .product-image-container {
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
+/* ===== AJUSTE CLAVE PARA UNIFORMAR TAMAÑO VISUAL DE IMÁGENES ===== */
 .product-image-container img {
     width: auto;
     height: auto;
-    max-width: 90%;    /* <-- CAMBIO AQUÍ: limita el ancho máximo */
-    max-height: 90%;   /* <-- CAMBIO AQUÍ: limita el alto máximo */
-    object-fit: contain;
-    padding: 0.5rem;
+    max-width: 80%;        /* Limita el ancho máximo al 80% del contenedor */
+    max-height: 80%;       /* Limita el alto máximo al 80% del contenedor */
+    object-fit: contain;   /* Mantiene la proporción original */
+    padding: 0.5rem;       /* Espaciado interno */
     transition: transform 0.3s ease;
+}
+
+/* En móviles, podemos permitir que ocupen un poco más si queremos */
+@media (max-width: 640px) {
+    .product-image-container img {
+        max-width: 85%;
+        max-height: 85%;
+        padding: 0.4rem;
+    }
 }
 
 .product-image-container:hover img {
     transform: scale(1.05);
 }
+/* ================================================================ */
 
 .product-info {
     padding: 1rem;
