@@ -342,7 +342,6 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Pequeña sombra en modo oscuro para destacar la imagen sobre el fondo oscuro */
     transition: box-shadow 0.2s ease;
 }
 
@@ -350,21 +349,14 @@ body.night-mode .product-image-container {
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
-/* ============================================ */
-/* AJUSTE PARA UNIFORMIDAD DE IMÁGENES */
-/* ============================================ */
 .product-image-container img {
     width: auto;
     height: auto;
-    max-width: 80%;      /* Límite del 80% del contenedor */
-    max-height: 80%;     /* Límite del 80% del contenedor */
+    max-width: 80%;    /* <-- CAMBIO AQUÍ: limita el ancho máximo */
+    max-height: 80%;   /* <-- CAMBIO AQUÍ: limita el alto máximo */
     object-fit: contain;
-    padding: 0.5rem;     /* Reducimos un poco el padding para compensar */
+    padding: 0.5rem;
     transition: transform 0.3s ease;
-}
-
-body.night-mode .product-image-container img {
-    /* Sin filtro, para mantener los colores originales */
 }
 
 .product-image-container:hover img {
