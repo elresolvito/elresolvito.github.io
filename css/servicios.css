@@ -271,3 +271,45 @@
         text-align: center;
     }
 }
+/* ============================================ */
+/* ESTILOS PARA MENSAJERÍA */
+/* ============================================ */
+
+.badge-mensajero {
+    background: #F59E0B;
+    color: white;
+}
+
+.service-title.mensajero {
+    color: #F59E0B;
+}
+
+.price-mensajero {
+    color: #F59E0B;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 1rem 0;
+}
+
+.btn-mensajero {
+    background: linear-gradient(135deg, #F59E0B, #D97706);
+    color: white;
+    padding: 0.875rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    transition: opacity 0.2s ease;
+    display: block;
+    width: 100%;
+}
+
+.btn-mensajero:hover {
+    opacity: 0.9;
+}
+
+/* Ajuste responsive para 3 columnas en móvil se mantiene 1 columna */
+@media (max-width: 768px) {
+    .grid.md\:grid-cols-3 {
+        grid-template-columns: 1fr;
+    }
+}
