@@ -223,4 +223,28 @@
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = document.getElementById('searchInput');
             if (searchInput) {
-                searchInput.addEventListener('input', function(e)
+                searchInput.addEventListener('input', function(e) {
+                    const termino = e.target.value.toLowerCase().trim();
+                    
+                    if (!termino) {
+                        if (currentCategory === 'todos') {
+                            renderizarProductos(allProducts);
+                        } else {
+                            const filtrados = allProducts.filter(p => p.categoria === currentCategory);
+                            renderizarProductos(filtrados);
+                        }
+                        return;
+                    }
+                    
+                    const resultados = allProducts.filter(p => 
+                        p.nombre.toLowerCase().includes(termino) || 
+                        (p.categoria && p.categoria.toLowerCase().includes(termino))
+                    );
+                    
+                    renderizarProductos(resultados);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
