@@ -104,12 +104,17 @@ body.night-mode .hero-overlay {
 }
 
 #featuredProducts .product-image-container {
-    height: 180px; /* Aumentado de 160px a 180px */
-    background: var(--bg-card);  /* Fondo igual a la tarjeta */
+    height: 180px;
+    background: var(--image-bg);  /* Siempre blanco */
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    transition: box-shadow 0.2s ease;
+}
+
+body.night-mode #featuredProducts .product-image-container {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 #featuredProducts .product-image-container img {
@@ -117,12 +122,7 @@ body.night-mode .hero-overlay {
     height: 100%;
     object-fit: contain;
     padding: 1rem;
-    transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-/* En modo oscuro, ajuste de imágenes */
-body.night-mode #featuredProducts .product-image-container img {
-    filter: brightness(0.9) contrast(1.1);
+    transition: transform 0.3s ease;
 }
 
 #featuredProducts .product-card:hover .product-image-container img {
@@ -269,7 +269,7 @@ article p {
     }
     
     #featuredProducts .product-image-container {
-        height: 140px; /* Aumentado de 120px a 140px */
+        height: 140px;
     }
     
     #featuredProducts .product-card .text-cuban-green {
