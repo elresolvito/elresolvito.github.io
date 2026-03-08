@@ -350,11 +350,16 @@ body.night-mode .product-image-container {
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
+/* ============================================ */
+/* AJUSTE PARA UNIFORMIDAD DE IMÁGENES */
+/* ============================================ */
 .product-image-container img {
-    width: 100%;
-    height: 100%;
+    width: auto;
+    height: auto;
+    max-width: 80%;      /* Límite del 80% del contenedor */
+    max-height: 80%;     /* Límite del 80% del contenedor */
     object-fit: contain;
-    padding: 0.75rem;
+    padding: 0.5rem;     /* Reducimos un poco el padding para compensar */
     transition: transform 0.3s ease;
 }
 
