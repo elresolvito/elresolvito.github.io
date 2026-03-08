@@ -15,15 +15,16 @@
     <meta property="article:author" content="Ana María">
     <meta property="article:section" content="Recetas">
     
-    <!-- Favicons (rutas absolutas) -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/elresolvito/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/elresolvito/favicon-16x16.png">
+    <!-- Favicons (rutas relativas) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
     
     <!-- Fonts y estilos -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/elresolvito/css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
     
     <!-- Configuración de Tailwind -->
     <script>
@@ -40,7 +41,7 @@
         }
     </script>
     
-    <!-- Estilos responsive -->
+    <!-- Estilos responsive adicionales -->
     <style>
         @media (max-width: 640px) {
             body { font-size: 16px !important; }
@@ -66,7 +67,7 @@
 
     <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
 
-    <!-- Contenedores para componentes (rutas absolutas) -->
+    <!-- Contenedores para componentes -->
     <div id="header-container"></div>
     <div id="mobile-menu-container"></div>
     <div id="floating-buttons-container"></div>
@@ -79,7 +80,7 @@
         <div class="container mx-auto px-4 max-w-3xl">
             <!-- Cabecera -->
             <div class="mb-8">
-                <a href="/elresolvito/blog.html" class="text-cuban-green hover:underline mb-4 inline-block">
+                <a href="../blog.html" class="text-cuban-green hover:underline mb-4 inline-block">
                     <i class="fas fa-arrow-left mr-2"></i>Volver al Blog
                 </a>
                 <div class="flex items-center gap-2 mb-4">
@@ -100,6 +101,7 @@
             <img src="https://images.unsplash.com/photo-1606787366850-de6330128b1c?w=800&auto=format&fit=crop" 
                  class="w-full h-96 object-cover rounded-2xl mb-8" 
                  alt="Recetas con atún"
+                 loading="lazy"
                  onerror="this.src='https://placehold.co/800x600/2E7D32/white?text=Recetas+con+Atún'">
 
             <!-- Contenido -->
@@ -111,6 +113,7 @@
                 <img src="https://images.unsplash.com/photo-1625944529189-6c0cb0501d0d?w=800&auto=format&fit=crop" 
                      class="w-full h-64 object-cover rounded-xl mb-4" 
                      alt="Torticas de atún"
+                     loading="lazy"
                      onerror="this.src='https://placehold.co/800x400/2E7D32/white?text=Torticas+de+Atún'">
                 <p class="mb-4">Estas torticas quedan crocanticas por fuera y suaves por dentro. Ideales para comer con arroz y ensalada o para ponerle un toque diferente a tu comida.</p>
                 
@@ -140,6 +143,7 @@
                 <img src="https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=800&auto=format&fit=crop" 
                      class="w-full h-64 object-cover rounded-xl mb-4" 
                      alt="Enfrijolada de atún"
+                     loading="lazy"
                      onerror="this.src='https://placehold.co/800x400/2E7D32/white?text=Enfrijolada+de+Atún'">
                 <p class="mb-4">Un plato bien cubano que combina los frijoles con el atún. Queda cremoso y súper sabroso. Perfecto para cuando tienes poco en la nevera.</p>
                 
@@ -166,6 +170,7 @@
                 <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop" 
                      class="w-full h-64 object-cover rounded-xl mb-4" 
                      alt="Ensalada de atún"
+                     loading="lazy"
                      onerror="this.src='https://placehold.co/800x400/2E7D32/white?text=Ensalada+de+Atún'">
                 <p class="mb-4">La clásica ensalada de atún pero con un par de ingredientes que le dan una vuelta completa. Ideal para comer con galletitas o pan tostado.</p>
                 
@@ -198,7 +203,7 @@
                     <div class="space-y-4 mb-8">
                         <div class="bg-gray-50 p-4 rounded-lg">
                             <div class="flex items-center gap-3 mb-2">
-                                <img src="https://ui-avatars.com/api/?name=Marta+Rodriguez&background=2E7D32&color=fff&size=40" class="w-8 h-8 rounded-full">
+                                <img src="https://ui-avatars.com/api/?name=Marta+Rodriguez&background=2E7D32&color=fff&size=40" class="w-8 h-8 rounded-full" alt="Avatar">
                                 <div>
                                     <p class="font-semibold">Marta Rodríguez</p>
                                     <p class="text-xs text-gray-500">Hace 2 días</p>
@@ -206,8 +211,8 @@
                             </div>
                             <p class="text-gray-700">Probé las torticas de atún y quedaron espectaculares. ¡Gracias!</p>
                             <div class="flex items-center gap-3 mt-2">
-                                <button onclick="enviarReaccion('me-gusta', 'Marta Rodríguez')" class="text-gray-500 hover:text-cuban-green"><i class="far fa-heart"></i> 5</button>
-                                <button onclick="enviarReaccion('responder', 'Marta Rodríguez')" class="text-gray-500 hover:text-cuban-green">Responder</button>
+                                <button onclick="enviarReaccion('me-gusta', 'Marta Rodríguez')" class="text-gray-500 hover:text-cuban-green transition"><i class="far fa-heart"></i> 5</button>
+                                <button onclick="enviarReaccion('responder', 'Marta Rodríguez')" class="text-gray-500 hover:text-cuban-green transition">Responder</button>
                             </div>
                         </div>
                     </div>
@@ -215,9 +220,11 @@
                     <div class="bg-cuban-green/5 p-6 rounded-xl">
                         <h4 class="font-bold text-lg mb-3">Deja tu comentario</h4>
                         <div class="flex flex-col sm:flex-row gap-3">
-                            <input type="text" id="comentario-nombre-atun" placeholder="Tu nombre" class="flex-1 px-4 py-3 border rounded-lg">
-                            <textarea id="comentario-texto-atun" placeholder="Escribe tu comentario..." class="flex-1 px-4 py-3 border rounded-lg" rows="2"></textarea>
-                            <button onclick="enviarComentario('atun')" class="bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark"><i class="fab fa-whatsapp mr-2"></i>Enviar</button>
+                            <input type="text" id="comentario-nombre-atun" placeholder="Tu nombre" class="flex-1 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent outline-none">
+                            <textarea id="comentario-texto-atun" placeholder="Escribe tu comentario..." class="flex-1 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent outline-none" rows="2"></textarea>
+                            <button onclick="enviarComentario('atun')" class="bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark transition flex items-center justify-center gap-2">
+                                <i class="fab fa-whatsapp"></i>Enviar
+                            </button>
                         </div>
                         <p class="text-xs text-gray-500 mt-3">Tu comentario se publicará tras revisión.</p>
                     </div>
@@ -240,22 +247,20 @@
     <div id="checkout-modal-container"></div>
     <div id="footer-container"></div>
 
-    <!-- Toast de notificación -->
+    <!-- Toast -->
     <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
         <p id="cartToastMessage"></p>
     </div>
 
-    <!-- Script principal (ruta absoluta) -->
-    <script src="/elresolvito/js/elresolvito.js" defer></script>
+    <!-- Script principal (unificado) -->
+    <script src="../js/elresolvito.js" defer></script>
 
-    <!-- Script de carga de componentes -->
     <script>
-        const basePath = '/elresolvito/';
-
+        // Carga de componentes
         async function loadComponent(elementId, componentPath) {
             try {
-                const fullPath = basePath + componentPath;
-                const response = await fetch(fullPath);
+                const response = await fetch(componentPath);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const html = await response.text();
                 document.getElementById(elementId).innerHTML = html;
             } catch (error) {
@@ -264,13 +269,13 @@
         }
 
         document.addEventListener('DOMContentLoaded', async function() {
-            await loadComponent('header-container', 'components/header.html');
-            await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
-            await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
-            await loadComponent('image-modal-container', 'components/image-modal.html');
-            await loadComponent('cart-sidebar-container', 'components/cart-sidebar.html');
-            await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
-            await loadComponent('footer-container', 'components/footer.html');
+            await loadComponent('header-container', '../components/header.html');
+            await loadComponent('mobile-menu-container', '../components/mobile-menu.html');
+            await loadComponent('floating-buttons-container', '../components/floating-buttons.html');
+            await loadComponent('image-modal-container', '../components/image-modal.html');
+            await loadComponent('cart-sidebar-container', '../components/cart-sidebar.html');
+            await loadComponent('checkout-modal-container', '../components/checkout-modal.html');
+            await loadComponent('footer-container', '../components/footer.html');
         });
 
         // Funciones para comentarios
