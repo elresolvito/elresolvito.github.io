@@ -1,5 +1,5 @@
 // ============================================
-// PRODUCTOS (única declaración)
+// PRODUCTOS
 // ============================================
 var PRODUCTS = [
     { id: 1, nombre: "Atún en lata", categoria: "Alimentos y conservas", precio: 540, imagen: "https://i.postimg.cc/76xHK6zt/atun_precio_500.png", descripcion: "Lata 200g" },
@@ -67,10 +67,13 @@ var WHOLESALE_PRODUCTS = [
     let cart = JSON.parse(localStorage.getItem('elResolvitoCart')) || [];
     const WHATSAPP_NUMBER = '5356382909';
     const MINIMUM_PURCHASE = 500;
-    const SHIPPING_WITHIN_HABANA_VIEJA = 400;
     
-    // EXPONER FUNCIONES GLOBALMENTE
+    // ============================================
+    // FUNCIONES DEL CARRITO
+    // ============================================
     window.addToCart = function(product) {
+        console.log('Añadiendo producto:', product);
+        
         if (!product || !product.id || !product.nombre || !product.precio) {
             console.error('Producto inválido:', product);
             showToast('Error al añadir producto', 'error');
@@ -92,7 +95,7 @@ var WHOLESALE_PRODUCTS = [
         }
 
         saveCart();
-        window.updateCartUI();
+        updateCartUI();
         showToast('✓ Producto añadido al carrito');
         return true;
     };
@@ -103,13 +106,13 @@ var WHOLESALE_PRODUCTS = [
 
     window.updateCartQuantity = function(index, newQuantity) {
         if (newQuantity <= 0) {
-            window.removeFromCart(index);
+            removeFromCart(index);
             return;
         }
         if (cart[index]) {
             cart[index].cantidad = newQuantity;
             saveCart();
-            window.updateCartUI();
+            updateCartUI();
         }
     };
 
@@ -117,12 +120,22 @@ var WHOLESALE_PRODUCTS = [
         if (cart[index]) {
             cart.splice(index, 1);
             saveCart();
-            window.updateCartUI();
+            updateCartUI();
             showToast('Producto eliminado');
         }
     };
 
-    window.updateCartUI = function() {
+    // Versión local para uso interno
+    function removeFromCart(index) {
+        if (cart[index]) {
+            cart.splice(index, 1);
+            saveCart();
+            updateCartUI();
+            showToast('Producto eliminado');
+        }
+    }
+
+    function updateCartUI() {
         const totalItems = cart.reduce((sum, item) => sum + (item.cantidad || 0), 0);
         const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
         
@@ -130,7 +143,11 @@ var WHOLESALE_PRODUCTS = [
         document.querySelectorAll('#cartCount, #floatingCartCount').forEach(el => {
             if (el) {
                 el.textContent = totalItems;
-                el.classList.toggle('hidden', totalItems === 0);
+                if (totalItems === 0) {
+                    el.classList.add('hidden');
+                } else {
+                    el.classList.remove('hidden');
+                }
             }
         });
         
@@ -175,28 +192,50 @@ var WHOLESALE_PRODUCTS = [
             if (shippingEl) shippingEl.innerHTML = `<span class="text-gray-600">Seleccionar en checkout</span>`;
             if (totalEl) totalEl.textContent = `$${subtotal.toLocaleString()}`;
         }
-    };
+    }
 
+    window.updateCartUI = updateCartUI;
+
+    // ============================================
+    // TOGGLE CARRITO - VERSIÓN CORREGIDA
+    // ============================================
     window.toggleCart = function() {
+        console.log('🛒 Ejecutando toggleCart');
+        
         const sidebar = document.getElementById('cartSidebar');
         const overlay = document.getElementById('cartOverlay');
         
-        if (!sidebar || !overlay) {
-            console.error('Elementos del carrito no encontrados');
-            showToast('Error al abrir el carrito', 'error');
+        if (!sidebar) {
+            console.error('❌ sidebar no encontrado');
             return;
         }
         
-        sidebar.classList.toggle('cart-open');
-        overlay.classList.toggle('hidden');
-        document.body.style.overflow = sidebar.classList.contains('cart-open') ? 'hidden' : '';
+        if (!overlay) {
+            console.error('❌ overlay no encontrado');
+            return;
+        }
         
-        // Actualizar UI cuando se abre
+        console.log('Estado actual - sidebar tiene cart-open:', sidebar.classList.contains('cart-open'));
+        
         if (sidebar.classList.contains('cart-open')) {
-            window.updateCartUI();
+            // Cerrar
+            sidebar.classList.remove('cart-open');
+            overlay.classList.add('hidden');
+            document.body.style.overflow = '';
+            console.log('👋 Carrito cerrado');
+        } else {
+            // Abrir
+            sidebar.classList.add('cart-open');
+            overlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            console.log('✅ Carrito abierto');
+            updateCartUI();
         }
     };
 
+    // ============================================
+    // OTRAS FUNCIONES
+    // ============================================
     window.openCheckoutModal = function() {
         if (cart.length === 0) {
             showToast('El carrito está vacío', 'warning');
@@ -210,7 +249,6 @@ var WHOLESALE_PRODUCTS = [
             return;
         }
         
-        // Aquí iría la lógica del modal de checkout
         const mensaje = generarMensajeWhatsApp();
         window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank');
     };
@@ -227,7 +265,6 @@ var WHOLESALE_PRODUCTS = [
         mensaje += `\n*Subtotal:* $${subtotal.toLocaleString()}`;
         mensaje += `\n*Total:* $${subtotal.toLocaleString()}`;
         mensaje += `\n\n📍 *Zona:* La Habana Vieja`;
-        mensaje += `\n\n⏱️ *Envío a coordinar*`;
         
         return mensaje;
     }
@@ -238,76 +275,3 @@ var WHOLESALE_PRODUCTS = [
         if (themeIcon) {
             themeIcon.textContent = document.body.classList.contains('night-mode') ? '🌙' : '☀️';
         }
-        localStorage.setItem('nightMode', document.body.classList.contains('night-mode'));
-    };
-
-    window.toggleMenu = function() {
-        const menu = document.getElementById('mobileMenu');
-        if (menu) {
-            menu.classList.toggle('hidden');
-            document.body.style.overflow = menu.classList.contains('hidden') ? '' : 'hidden';
-        }
-    };
-
-    window.openImageModal = function(src, name) {
-        const modal = document.getElementById('imageModal');
-        const img = document.getElementById('modalImage');
-        const nameEl = document.getElementById('modalImageName');
-        if (modal && img && nameEl) {
-            img.src = src;
-            nameEl.textContent = name || 'Imagen';
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-    };
-
-    window.closeImageModal = function() {
-        const modal = document.getElementById('imageModal');
-        if (modal) {
-            modal.classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-    };
-
-    // Función para mostrar notificaciones toast
-    function showToast(message, type = 'success') {
-        const toast = document.getElementById('cartToast');
-        const toastMessage = document.getElementById('cartToastMessage');
-        
-        if (toast && toastMessage) {
-            toastMessage.textContent = message;
-            toast.classList.remove('opacity-0', 'pointer-events-none');
-            toast.classList.add('opacity-100');
-            
-            if (type === 'error') {
-                toast.classList.add('bg-red-600');
-                toast.classList.remove('bg-gray-800');
-            } else {
-                toast.classList.add('bg-gray-800');
-                toast.classList.remove('bg-red-600');
-            }
-            
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'pointer-events-none');
-                toast.classList.remove('opacity-100');
-            }, 3000);
-        }
-    }
-
-    // Inicialización
-    document.addEventListener('DOMContentLoaded', function() {
-        const pageFade = document.getElementById('pageFade');
-        if (pageFade) pageFade.classList.add('opacity-0');
-        
-        // Restaurar modo nocturno
-        if (localStorage.getItem('nightMode') === 'true') {
-            document.body.classList.add('night-mode');
-        }
-        
-        // Actualizar UI del carrito
-        window.updateCartUI();
-        
-        console.log('✅ El Resolvito JS inicializado correctamente');
-    });
-
-})();
