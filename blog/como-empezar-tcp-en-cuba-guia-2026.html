@@ -20,12 +20,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
     <link rel="apple-touch-icon" href="../apple-touch-icon.png">
     
-    <!-- Estilos -->
+    <!-- Estilos y fuentes -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../css/styles.css">
     
+    <!-- Config Tailwind -->
     <script>
         tailwind.config = {
             theme: {
@@ -41,11 +42,69 @@
         }
     </script>
     
+    <!-- Estilos adicionales para la interacción -->
     <style>
-        @media (max-width: 640px) {
-            body { font-size: 16px; }
-            .prose h1 { font-size: 2rem; }
-            button { min-height: 48px; }
+        .interaccion-blog {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin: 2rem 0;
+            padding: 1rem 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .like-btn, .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+        .like-btn {
+            background: #f3f4f6;
+            color: #1f2937;
+        }
+        .like-btn:hover {
+            background: #e5e7eb;
+        }
+        .like-btn.liked {
+            background: #dc2626;
+            color: white;
+        }
+        .share-btn {
+            background: #25D366;
+            color: white;
+        }
+        .share-btn:hover {
+            background: #128C7E;
+        }
+        .comentarios-destacados {
+            background: #f9fafb;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        .comentario-item {
+            border-bottom: 1px dashed #d1d5db;
+            padding: 1rem 0;
+        }
+        .comentario-item:last-child {
+            border-bottom: none;
+        }
+        .comentario-autor {
+            font-weight: 600;
+            color: var(--contador-azul);
+        }
+        .comentario-texto {
+            margin: 0.25rem 0 0.5rem;
+        }
+        .comentario-fecha {
+            font-size: 0.8rem;
+            color: #6b7280;
         }
     </style>
 </head>
@@ -69,7 +128,7 @@
                     <span class="bg-contador-azul text-white text-xs px-3 py-1 rounded-full font-bold">📊 EMPRENDIMIENTO</span>
                     <span class="text-gray-500 text-sm">8 min · Guía práctica</span>
                 </div>
-                <h1 class="text-4xl font-bold mb-4">Cómo empezar tu negocio en Cuba: Guía TCP 2026 (paso a paso)</h1>
+                <h1 id="titulo-articulo" class="text-4xl font-bold mb-4">Cómo empezar tu negocio en Cuba: Guía TCP 2026 (paso a paso)</h1>
                 <div class="flex items-center gap-4 mb-6">
                     <img src="https://ui-avatars.com/api/?name=Roberto+Gomez&background=1E3A8A&color=fff&size=60" class="w-12 h-12 rounded-full" alt="Roberto Gómez">
                     <div>
@@ -86,6 +145,7 @@
                  onerror="this.src='https://placehold.co/800x600/1E3A8A/white?text=Guía+TCP'">
 
             <div class="prose prose-lg max-w-none">
+                <!-- CONTENIDO COMPLETO DEL ARTÍCULO (el que ya tenías) -->
                 <p class="text-lg text-gray-700 mb-6">¿Tienes una idea de negocio y quieres hacerla legal? ¿Ya eres TCP pero no tienes claros todos los trámites? Como contador, he ayudado a decenas de personas a dar este paso y sé que al principio puede ser abrumador. Pero no te preocupes, es más sencillo de lo que parece si vas paso a paso. Te explico todo lo que necesitas saber para 2026.</p>
 
                 <h2 class="text-2xl font-bold mt-10 mb-4 text-contador-azul">¿Qué es ser TCP en Cuba?</h2>
@@ -141,43 +201,43 @@
                     <a href="https://wa.me/5356382909?text=Hola,%20quiero%20asesoría%20para%20mi%20TCP" class="inline-block bg-contador-azul text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-800 transition"><i class="fab fa-whatsapp mr-2"></i>Contactar contador</a>
                 </div>
 
-                <!-- SECCIÓN DE COMENTARIOS -->
-                <div class="border-t-2 border-gray-200 pt-10 mt-16">
-                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-2">
-                        <i class="fab fa-whatsapp text-contador-azul text-3xl"></i>Comentarios
+                <!-- ============================================ -->
+                <!-- SECCIÓN DE INTERACCIÓN (NUEVA) -->
+                <!-- ============================================ -->
+                
+                <!-- Botones de like y compartir -->
+                <div class="interaccion-blog">
+                    <button id="likeButton" class="like-btn">
+                        <i class="far fa-thumbs-up"></i> Me gusta <span id="likeCount">0</span>
+                    </button>
+                    <button id="shareButton" class="share-btn">
+                        <i class="fab fa-whatsapp"></i> Compartir
+                    </button>
+                </div>
+
+                <!-- Comentarios destacados (gestionados manualmente) -->
+                <div class="comentarios-destacados">
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fas fa-star text-contador-azul"></i> Comentarios destacados
                     </h3>
                     
-                    <div class="space-y-4 mb-8">
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <div class="flex items-center gap-3 mb-2">
-                                <img src="https://ui-avatars.com/api/?name=Jose+Alvarez&background=1E3A8A&color=fff&size=40" class="w-8 h-8 rounded-full" alt="Avatar">
-                                <div>
-                                    <p class="font-semibold">José Álvarez</p>
-                                    <p class="text-xs text-gray-500">Hace 1 semana</p>
-                                </div>
-                            </div>
-                            <p class="text-gray-700">Excelente guía, Roberto. ¿Puedes recomendar algún modelo de registro de ingresos y gastos?</p>
-                            <div class="flex items-center gap-3 mt-2">
-                                <button onclick="enviarReaccion('me-gusta', 'José Álvarez')" class="text-gray-500 hover:text-cuban-green transition"><i class="far fa-heart"></i> 4</button>
-                                <button onclick="enviarReaccion('responder', 'José Álvarez')" class="text-gray-500 hover:text-cuban-green transition">Responder</button>
-                            </div>
+                    <div id="comentarios-lista">
+                        <!-- Puedes editar estos comentarios directamente en el HTML -->
+                        <div class="comentario-item">
+                            <p class="comentario-autor">José Álvarez</p>
+                            <p class="comentario-texto">Excelente guía, Roberto. ¿Puedes recomendar algún modelo de registro de ingresos y gastos?</p>
+                            <p class="comentario-fecha">Hace 1 semana</p>
+                        </div>
+                        <div class="comentario-item">
+                            <p class="comentario-autor">María Rodríguez</p>
+                            <p class="comentario-texto">Gracias por la información, me animé a sacar mi licencia de repostera.</p>
+                            <p class="comentario-fecha">Hace 3 días</p>
                         </div>
                     </div>
 
-                    <div class="bg-contador-azul/5 p-6 rounded-xl">
-                        <h4 class="font-bold text-lg mb-3">Deja tu comentario</h4>
-                        <div class="flex flex-col sm:flex-row gap-3">
-                            <input type="text" id="comentario-nombre-tcp" placeholder="Tu nombre" class="flex-1 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-contador-azul outline-none">
-                            <textarea id="comentario-texto-tcp" placeholder="Escribe tu comentario..." class="flex-1 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-contador-azul outline-none" rows="2"></textarea>
-                            <button onclick="enviarComentario('tcp')" class="bg-contador-azul text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-800 transition flex items-center gap-2">
-                                <i class="fab fa-whatsapp"></i>Enviar
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="text-center mt-6">
-                        <a href="https://wa.me/5356382909?text=Quiero%20ver%20los%20comentarios%20de%20tcp" target="_blank" class="inline-flex items-center gap-2 text-contador-azul hover:underline">
-                            <i class="fab fa-whatsapp"></i> Ver todos en WhatsApp
+                    <div class="mt-6 text-center">
+                        <a href="https://wa.me/5356382909?text=Quiero%20comentar%20el%20artículo%20de%20TCP" target="_blank" class="inline-flex items-center gap-2 text-contador-azul hover:underline">
+                            <i class="fab fa-whatsapp"></i> Deja tu comentario por WhatsApp
                         </a>
                     </div>
                 </div>
@@ -190,15 +250,74 @@
     <div id="cart-sidebar-container"></div>
     <div id="checkout-modal-container"></div>
     <div id="footer-container"></div>
+
+    <!-- Toast -->
     <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
         <p id="cartToastMessage"></p>
     </div>
 
     <script src="../js/elresolvito.js" defer></script>
+
     <script>
-        async function loadComponent(id, path) {
-            try { const res = await fetch(path); if (!res.ok) throw new Error(); document.getElementById(id).innerHTML = await res.text(); } catch (error) { console.error(error); }
+        // ============================================
+        // INTERACCIÓN DEL BLOG (Likes y Compartir)
+        // ============================================
+
+        // IDENTIFICADOR ÚNICO PARA ESTE ARTÍCULO
+        const articuloId = 'guia-tcp'; // ¡Importante! Debe coincidir con el usado en blog.html
+
+        function cargarLike() {
+            const likesGuardados = JSON.parse(localStorage.getItem('likesBlog')) || {};
+            const contador = likesGuardados[articuloId] || 0;
+            document.getElementById('likeCount').textContent = contador;
+
+            const usuarioDioLike = localStorage.getItem(`like_${articuloId}_user`);
+            if (usuarioDioLike) {
+                document.getElementById('likeButton').classList.add('liked');
+                document.getElementById('likeButton').innerHTML = '<i class="fas fa-thumbs-up"></i> Me gusta <span id="likeCount">' + contador + '</span>';
+            }
         }
+
+        document.getElementById('likeButton').addEventListener('click', function() {
+            const yaDioLike = localStorage.getItem(`like_${articuloId}_user`);
+            if (yaDioLike) {
+                alert('Ya has dado like a este artículo');
+                return;
+            }
+
+            const likesGuardados = JSON.parse(localStorage.getItem('likesBlog')) || {};
+            likesGuardados[articuloId] = (likesGuardados[articuloId] || 0) + 1;
+            localStorage.setItem('likesBlog', JSON.stringify(likesGuardados));
+            localStorage.setItem(`like_${articuloId}_user`, 'true');
+
+            document.getElementById('likeCount').textContent = likesGuardados[articuloId];
+            document.getElementById('likeButton').classList.add('liked');
+            document.getElementById('likeButton').innerHTML = '<i class="fas fa-thumbs-up"></i> Me gusta <span id="likeCount">' + likesGuardados[articuloId] + '</span>';
+        });
+
+        document.getElementById('shareButton').addEventListener('click', function() {
+            const titulo = document.getElementById('titulo-articulo').textContent;
+            const url = window.location.href;
+            const mensaje = `Mira este artículo de El Resolvito: ${titulo} - ${url}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(mensaje)}`, '_blank');
+        });
+
+        cargarLike();
+
+        // ============================================
+        // CARGA DE COMPONENTES
+        // ============================================
+        async function loadComponent(id, path) {
+            try {
+                const res = await fetch(path);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const html = await res.text();
+                document.getElementById(id).innerHTML = html;
+            } catch (error) {
+                console.error(`Error cargando ${path}:`, error);
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', async () => {
             await loadComponent('header-container', '../components/header.html');
             await loadComponent('mobile-menu-container', '../components/mobile-menu.html');
@@ -208,23 +327,6 @@
             await loadComponent('checkout-modal-container', '../components/checkout-modal.html');
             await loadComponent('footer-container', '../components/footer.html');
         });
-
-        function enviarComentario(articuloId) {
-            const nombre = document.getElementById(`comentario-nombre-${articuloId}`)?.value.trim();
-            const comentario = document.getElementById(`comentario-texto-${articuloId}`)?.value.trim();
-            if (!nombre || !comentario) return alert('Completa todos los campos');
-            const titulo = document.querySelector('h1')?.textContent || 'Artículo';
-            const mensaje = `*📝 NUEVO COMENTARIO*\n\n📌 *${titulo}*\n👤 *${nombre}*\n💬 ${comentario}`;
-            window.open(`https://wa.me/5356382909?text=${encodeURIComponent(mensaje)}`, '_blank');
-            document.getElementById(`comentario-nombre-${articuloId}`).value = '';
-            document.getElementById(`comentario-texto-${articuloId}`).value = '';
-        }
-
-        function enviarReaccion(tipo, autor) {
-            const titulo = document.querySelector('h1')?.textContent || 'Artículo';
-            const mensaje = tipo === 'me-gusta' ? `❤️ Me gusta el comentario de ${autor} en "${titulo}"` : `💬 Quiero responder a ${autor} en "${titulo}"`;
-            window.open(`https://wa.me/5356382909?text=${encodeURIComponent(mensaje)}`, '_blank');
-        }
     </script>
 </body>
 </html>
