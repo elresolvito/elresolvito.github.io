@@ -1,10 +1,42 @@
 // ============================================
-// PRODUCTOS (movidos desde products.js)
+// PRODUCTOS (única declaración)
 // ============================================
 var PRODUCTS = [
     { id: 1, nombre: "Atún en lata", categoria: "Alimentos y conservas", precio: 540, imagen: "https://i.postimg.cc/76xHK6zt/atun_precio_500.png", descripcion: "Lata 200g" },
     { id: 2, nombre: "Pasta de tomate", categoria: "Alimentos y conservas", precio: 350, imagen: "https://i.postimg.cc/gjjYPTNv/pasta_tomate_precio_350.png", descripcion: "Paquete" },
-    // ... (todos los productos) ...
+    { id: 3, nombre: "Pimiento fresco", categoria: "Alimentos y conservas", precio: 750, imagen: "https://i.postimg.cc/4yyJTSBj/pimiento_presio_750.png", descripcion: "Unidad" },
+    { id: 4, nombre: "Café Dualis 250g", categoria: "Alimentos y conservas", precio: 1450, imagen: "https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png", descripcion: "Paquete 250g" },
+    { id: 5, nombre: "Café Dufiltro 250g", categoria: "Alimentos y conservas", precio: 1450, imagen: "https://i.postimg.cc/hG26fv31/cafe_Dufiltro_250_g_precio_1450.png", descripcion: "Paquete 250g" },
+    { id: 6, nombre: "Café Enepa", categoria: "Alimentos y conservas", precio: 470, imagen: "https://i.postimg.cc/nhY6f04N/cafe_enepa_precio_450.png", descripcion: "Paquete" },
+    { id: 7, nombre: "Cartón de huevo 30u", categoria: "Alimentos y conservas", precio: 3000, imagen: "https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3000.png", descripcion: "Cartón" },
+    { id: 8, nombre: "Leche condensada", categoria: "Alimentos y conservas", precio: 950, imagen: "https://i.postimg.cc/tT2XwjtT/leche_condensada.png", descripcion: "Lata 397g" },
+    { id: 9, nombre: "Harina blanca 1Kg", categoria: "Alimentos y conservas", precio: 600, imagen: "https://i.postimg.cc/3xc2NHFB/harina_blanca1_kg.png", descripcion: "Paquete 1Kg" },
+    { id: 10, nombre: "Chicoticos Pelly 90g", categoria: "Snacks y golosinas", precio: 400, imagen: "https://i.postimg.cc/1zv2fXjZ/chicoticos_pelly_90_g_precio_400.png", descripcion: "Paquete 90g" },
+    { id: 11, nombre: "Papitas Campesinas", categoria: "Snacks y golosinas", precio: 690, imagen: "https://i.postimg.cc/cLgrDtf9/papitas_campesinas_precio_690.png", descripcion: "Paquete" },
+    { id: 12, nombre: "Pelly Jamón", categoria: "Snacks y golosinas", precio: 580, imagen: "https://i.postimg.cc/pdQV7frX/pelly_jamon_precio_580.png", descripcion: "Paquete" },
+    { id: 13, nombre: "Mayonesa Mediana", categoria: "Salsas", precio: 850, imagen: "https://i.postimg.cc/KzJZw2rR/mayonesa_precio_850.png", descripcion: "Frasco mediano" },
+    { id: 14, nombre: "Mayonesa Grande", categoria: "Salsas", precio: 1100, imagen: "https://i.postimg.cc/Px2t9jzz/mayonesa_precio1100.png", descripcion: "Frasco grande" },
+    { id: 15, nombre: "Cuchilla de Afeitar", categoria: "Higiene personal", precio: 100, imagen: "https://i.postimg.cc/8CdkdW7x/cuchilla_de_afeitar_precio_100.png", descripcion: "Unidad" },
+    { id: 16, nombre: "Jabón Marwa", categoria: "Higiene personal", precio: 150, imagen: "https://i.postimg.cc/3RK8tRpR/jabon_marwa_precio_150.png", descripcion: "Pastilla" },
+    { id: 17, nombre: "Papel Sanitario", categoria: "Higiene personal", precio: 490, imagen: "https://i.postimg.cc/bwW289qD/papel_sanitario_precio_490i.png", descripcion: "Paquete" },
+    { id: 18, nombre: "Toallas Sanitarias", categoria: "Higiene personal", precio: 450, imagen: "https://i.postimg.cc/KjjZyH0b/toallas_sanitarias_precio_450.png", descripcion: "Paquete" },
+    { id: 19, nombre: "Toallas Húmedas", categoria: "Higiene personal", precio: 690, imagen: "https://i.postimg.cc/W4ZSP3cw/toallas_humedas_precio_690.png", descripcion: "Paquete" },
+    { id: 20, nombre: "Jabón de Lavar", categoria: "Aseo del hogar", precio: 250, imagen: "https://i.postimg.cc/V6YfK6Mz/jabon_de_lavar_precio_250.png", descripcion: "Pastilla" },
+    { id: 21, nombre: "Perfume Candy", categoria: "Perfumes y desodorantes", precio: 3100, imagen: "https://i.postimg.cc/vTgJRyhp/perfume_candy_precio_3100.png", descripcion: "Frasco 50ml" },
+    { id: 22, nombre: "Perfume genérico", categoria: "Perfumes y desodorantes", precio: 3100, imagen: "https://i.postimg.cc/ZKrT0PPG/perfume_precio_3100.png", descripcion: "Frasco 50ml" },
+    { id: 23, nombre: "Perfume Q", categoria: "Perfumes y desodorantes", precio: 3100, imagen: "https://i.postimg.cc/CL03P3Dn/perfume_q_precio_3100.png", descripcion: "Frasco 50ml" },
+    { id: 24, nombre: "Desodorante Obao", categoria: "Perfumes y desodorantes", precio: 1100, imagen: "https://i.postimg.cc/PxtXSxD2/desodorante_obao_precio_1100.png", descripcion: "Spray/Roll-on" },
+    { id: 25, nombre: "Desodorante Rush Blanco", categoria: "Perfumes y desodorantes", precio: 1000, imagen: "https://i.postimg.cc/FR9rTRS8/desodorante_rush_blanco_precio_1000.png", descripcion: "Roll-on" },
+    { id: 26, nombre: "Desodorante Rush", categoria: "Perfumes y desodorantes", precio: 1000, imagen: "https://i.postimg.cc/sXVjTXSF/desodorante_rush_precio_1000.png", descripcion: "Spray" },
+    { id: 27, nombre: "Colonia Niña", categoria: "Perfumes y desodorantes", precio: 1100, imagen: "https://i.postimg.cc/G3v04rsM/colonia_nina.png", descripcion: "Botella 100ml" },
+    { id: 28, nombre: "Macarrones", categoria: "Pastas y fideos", precio: 300, imagen: "https://i.postimg.cc/Hsmz1H69/macarrones_precio_300.png", descripcion: "Paquete" },
+    { id: 29, nombre: "Sopas instantáneas", categoria: "Pastas y fideos", precio: 160, imagen: "https://i.postimg.cc/FzNTpQqK/sopas_instantaneas_precio_160.png", descripcion: "Paquete" },
+    { id: 30, nombre: "Licor de fresa", categoria: "Bebidas alcohólicas y malta", precio: 2500, imagen: "https://i.postimg.cc/59YT2x5p/licor_de_fresa_precio_2500.png", descripcion: "Botella" },
+    { id: 31, nombre: "Licor Cocobay", categoria: "Bebidas alcohólicas y malta", precio: 2500, imagen: "https://i.postimg.cc/7ZDW90Fz/locor_cocobay_precio_2500.png", descripcion: "Botella" },
+    { id: 32, nombre: "Whisky Spirit 200ml", categoria: "Bebidas alcohólicas y malta", precio: 320, imagen: "https://i.postimg.cc/4N8W6q1t/tea_precio_320.png", descripcion: "Botella 200ml" },
+    { id: 33, nombre: "Whisky 1L", categoria: "Bebidas alcohólicas y malta", precio: 1350, imagen: "https://i.postimg.cc/cLyrb4T0/whisky_1L_precio_1350.png", descripcion: "Botella 1L" },
+    { id: 34, nombre: "Whisky Sir Albin", categoria: "Bebidas alcohólicas y malta", precio: 550, imagen: "https://i.postimg.cc/y84kbYnC/whisky_sir_albin_precio_550.png", descripcion: "Botella pequeña" },
+    { id: 35, nombre: "Vino Pluvium", categoria: "Bebidas alcohólicas y malta", precio: 1200, imagen: "https://i.postimg.cc/XNLLWmmx/vino_pluvium_precio_1200.png", descripcion: "Botella" },
     { id: 36, nombre: "Baterías Triple A", categoria: "Electrónicos y accesorios", precio: 300, imagen: "https://i.postimg.cc/DZ2vxZsT/Gemini_Generated_Image_824rio824rio824r.png", descripcion: "Pack 4 unidades" }
 ];
 
@@ -37,9 +69,11 @@ var WHOLESALE_PRODUCTS = [
     const MINIMUM_PURCHASE = 500;
     const SHIPPING_WITHIN_HABANA_VIEJA = 400;
     
+    // EXPONER FUNCIONES GLOBALMENTE
     window.addToCart = function(product) {
         if (!product || !product.id || !product.nombre || !product.precio) {
-            alert('Error al añadir producto');
+            console.error('Producto inválido:', product);
+            showToast('Error al añadir producto', 'error');
             return false;
         }
 
@@ -51,7 +85,7 @@ var WHOLESALE_PRODUCTS = [
             cart.push({
                 id: product.id,
                 nombre: product.nombre,
-                imagen: product.imagen,
+                imagen: product.imagen || 'https://placehold.co/300x300/2E7D32/white',
                 precio: product.precio,
                 cantidad: product.cantidad || 1
             });
@@ -59,7 +93,7 @@ var WHOLESALE_PRODUCTS = [
 
         saveCart();
         window.updateCartUI();
-        alert('✓ Producto añadido al carrito');
+        showToast('✓ Producto añadido al carrito');
         return true;
     };
 
@@ -72,21 +106,27 @@ var WHOLESALE_PRODUCTS = [
             window.removeFromCart(index);
             return;
         }
-        cart[index].cantidad = newQuantity;
-        saveCart();
-        window.updateCartUI();
+        if (cart[index]) {
+            cart[index].cantidad = newQuantity;
+            saveCart();
+            window.updateCartUI();
+        }
     };
 
     window.removeFromCart = function(index) {
-        cart.splice(index, 1);
-        saveCart();
-        window.updateCartUI();
+        if (cart[index]) {
+            cart.splice(index, 1);
+            saveCart();
+            window.updateCartUI();
+            showToast('Producto eliminado');
+        }
     };
 
     window.updateCartUI = function() {
         const totalItems = cart.reduce((sum, item) => sum + (item.cantidad || 0), 0);
         const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
         
+        // Actualizar contadores
         document.querySelectorAll('#cartCount, #floatingCartCount').forEach(el => {
             if (el) {
                 el.textContent = totalItems;
@@ -94,29 +134,34 @@ var WHOLESALE_PRODUCTS = [
             }
         });
         
+        // Renderizar items del carrito
         const cartItemsContainer = document.getElementById('cartItems');
         if (cartItemsContainer) {
             if (cart.length === 0) {
                 cartItemsContainer.innerHTML = '<div class="text-center py-8 text-gray-500"><i class="fas fa-shopping-cart text-4xl mb-3 opacity-30"></i><p>Tu carrito está vacío</p></div>';
             } else {
-                cartItemsContainer.innerHTML = cart.map((item, index) => `
-                    <div class="flex gap-3 bg-gray-50 p-3 rounded-lg">
-                        <img src="${item.imagen || 'https://placehold.co/80'}" class="w-16 h-16 object-contain bg-white rounded-lg">
-                        <div class="flex-1">
-                            <h4 class="font-medium text-sm">${item.nombre}</h4>
-                            <p class="text-cuban-green font-bold">$${item.precio?.toLocaleString()}</p>
-                            <div class="flex items-center gap-2 mt-1">
-                                <button onclick="window.updateCartQuantity(${index}, ${(item.cantidad || 1) - 1})" class="w-6 h-6 bg-white rounded shadow">-</button>
-                                <span class="text-sm font-medium">${item.cantidad || 1}</span>
-                                <button onclick="window.updateCartQuantity(${index}, ${(item.cantidad || 1) + 1})" class="w-6 h-6 bg-white rounded shadow">+</button>
-                                <button onclick="window.removeFromCart(${index})" class="ml-auto text-red-500">🗑️</button>
+                cartItemsContainer.innerHTML = cart.map((item, index) => {
+                    const imgSrc = item.imagen || 'https://placehold.co/80';
+                    return `
+                        <div class="flex gap-3 bg-gray-50 p-3 rounded-lg">
+                            <img src="${imgSrc}" alt="${item.nombre}" class="w-16 h-16 object-contain bg-white rounded-lg" onerror="this.src='https://placehold.co/80'">
+                            <div class="flex-1">
+                                <h4 class="font-medium text-sm">${item.nombre}</h4>
+                                <p class="text-cuban-green font-bold">$${(item.precio || 0).toLocaleString()}</p>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <button onclick="window.updateCartQuantity(${index}, ${(item.cantidad || 1) - 1})" class="w-6 h-6 bg-white rounded shadow hover:bg-gray-100">-</button>
+                                    <span class="text-sm font-medium">${item.cantidad || 1}</span>
+                                    <button onclick="window.updateCartQuantity(${index}, ${(item.cantidad || 1) + 1})" class="w-6 h-6 bg-white rounded shadow hover:bg-gray-100">+</button>
+                                    <button onclick="window.removeFromCart(${index})" class="ml-auto text-red-500 hover:text-red-700">🗑️</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `).join('');
+                    `;
+                }).join('');
             }
         }
         
+        // Actualizar totals
         const subtotalEl = document.getElementById('cartSubtotal');
         const shippingEl = document.getElementById('cartShipping');
         const totalEl = document.getElementById('cartTotal');
@@ -137,14 +182,55 @@ var WHOLESALE_PRODUCTS = [
         const overlay = document.getElementById('cartOverlay');
         
         if (!sidebar || !overlay) {
-            alert('Error: Elementos del carrito no encontrados');
+            console.error('Elementos del carrito no encontrados');
+            showToast('Error al abrir el carrito', 'error');
             return;
         }
         
         sidebar.classList.toggle('cart-open');
         overlay.classList.toggle('hidden');
         document.body.style.overflow = sidebar.classList.contains('cart-open') ? 'hidden' : '';
+        
+        // Actualizar UI cuando se abre
+        if (sidebar.classList.contains('cart-open')) {
+            window.updateCartUI();
+        }
     };
+
+    window.openCheckoutModal = function() {
+        if (cart.length === 0) {
+            showToast('El carrito está vacío', 'warning');
+            return;
+        }
+        
+        const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
+        
+        if (subtotal < MINIMUM_PURCHASE) {
+            showToast(`Mínimo de compra: $${MINIMUM_PURCHASE}`, 'warning');
+            return;
+        }
+        
+        // Aquí iría la lógica del modal de checkout
+        const mensaje = generarMensajeWhatsApp();
+        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank');
+    };
+
+    function generarMensajeWhatsApp() {
+        let mensaje = "🛒 *Nuevo pedido - El Resolvito*\n\n";
+        mensaje += "*PRODUCTOS:*\n";
+        
+        cart.forEach(item => {
+            mensaje += `• ${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString()}\n`;
+        });
+        
+        const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
+        mensaje += `\n*Subtotal:* $${subtotal.toLocaleString()}`;
+        mensaje += `\n*Total:* $${subtotal.toLocaleString()}`;
+        mensaje += `\n\n📍 *Zona:* La Habana Vieja`;
+        mensaje += `\n\n⏱️ *Envío a coordinar*`;
+        
+        return mensaje;
+    }
 
     window.toggleDayNight = function() {
         document.body.classList.toggle('night-mode');
@@ -183,10 +269,45 @@ var WHOLESALE_PRODUCTS = [
         }
     };
 
+    // Función para mostrar notificaciones toast
+    function showToast(message, type = 'success') {
+        const toast = document.getElementById('cartToast');
+        const toastMessage = document.getElementById('cartToastMessage');
+        
+        if (toast && toastMessage) {
+            toastMessage.textContent = message;
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            toast.classList.add('opacity-100');
+            
+            if (type === 'error') {
+                toast.classList.add('bg-red-600');
+                toast.classList.remove('bg-gray-800');
+            } else {
+                toast.classList.add('bg-gray-800');
+                toast.classList.remove('bg-red-600');
+            }
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none');
+                toast.classList.remove('opacity-100');
+            }, 3000);
+        }
+    }
+
+    // Inicialización
     document.addEventListener('DOMContentLoaded', function() {
         const pageFade = document.getElementById('pageFade');
         if (pageFade) pageFade.classList.add('opacity-0');
+        
+        // Restaurar modo nocturno
+        if (localStorage.getItem('nightMode') === 'true') {
+            document.body.classList.add('night-mode');
+        }
+        
+        // Actualizar UI del carrito
         window.updateCartUI();
+        
+        console.log('✅ El Resolvito JS inicializado correctamente');
     });
 
 })();
