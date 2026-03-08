@@ -44,10 +44,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================ */
-/* COMPONENTES FIJOS */
-/* ============================================ */
-
 /* HEADER */
+/* ============================================ */
 header {
     position: sticky;
     top: 0;
@@ -56,27 +54,32 @@ header {
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
+/* ============================================ */
 /* FOOTER */
+/* ============================================ */
 footer {
     background: var(--primary-green-dark);
     color: white;
 }
 
 /* ============================================ */
-/* CARRITO DE COMPRAS - ESTILOS CORREGIDOS */
+/* CARRITO DE COMPRAS - VERSIÓN CORREGIDA */
 /* ============================================ */
 
 /* Overlay del carrito */
 #cartOverlay {
     position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 100;
-    transition: opacity 0.3s ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    transition: opacity 0.3s ease;
 }
 
 #cartOverlay.hidden {
-    display: none;
+    display: none !important;
 }
 
 /* Sidebar del carrito */
@@ -86,26 +89,29 @@ footer {
     left: 0;
     right: 0;
     background: white;
-    border-top-left-radius: 1.5rem;
-    border-top-right-radius: 1.5rem;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
     box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
-    z-index: 101;
-    transform: translateY(100%);
-    transition: transform 0.3s ease-in-out;
+    z-index: 10000;
     max-height: 85vh;
     display: flex;
     flex-direction: column;
+    
+    /* Estado inicial: oculto */
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
 }
 
+/* Estado visible */
 #cartSidebar.cart-open {
-    transform: translateY(0);
+    transform: translateY(0) !important;
 }
 
-/* Área de items del carrito */
+/* Área de items */
 #cartItems {
     flex: 1;
     overflow-y: auto;
-    padding: 1rem;
+    padding: 16px;
 }
 
 #cartItems::-webkit-scrollbar {
@@ -119,6 +125,15 @@ footer {
 #cartItems::-webkit-scrollbar-thumb {
     background: var(--primary-green);
     border-radius: 3px;
+}
+
+/* Header del carrito */
+#cartSidebar .bg-cuban-green {
+    background-color: #2E7D32 !important;
+    color: white;
+    padding: 16px;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
 }
 
 /* Badge del carrito */
@@ -233,7 +248,6 @@ footer {
     pointer-events: none;
 }
 
-/* Toast de error */
 #cartToast.bg-red-600 {
     background: #dc2626;
 }
@@ -364,7 +378,6 @@ footer {
     font-size: 0.9rem;
 }
 
-/* Botones de categoría */
 .category-btn {
     padding: 0.5rem 1rem;
     border-radius: 2rem;
@@ -387,7 +400,6 @@ footer {
     color: white;
 }
 
-/* Buscador */
 #searchInput {
     width: 100%;
     padding: 0.75rem 1rem 0.75rem 2.5rem;
@@ -415,7 +427,6 @@ footer {
     scrollbar-width: none;
 }
 
-/* Líneas truncadas */
 .line-clamp-1 {
     display: -webkit-box;
     -webkit-line-clamp: 1;
@@ -430,15 +441,8 @@ footer {
     overflow: hidden;
 }
 
-.line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
 /* ============================================ */
-/* MODO OSCURO (NIGHT MODE) */
+/* MODO OSCURO */
 /* ============================================ */
 body.night-mode {
     background: #0f0f1a;
@@ -473,27 +477,10 @@ body.night-mode .bg-gray-200 {
     background: #2d3748 !important;
 }
 
-body.night-mode .product-btn {
-    background: var(--primary-green);
-}
-
-body.night-mode .product-btn:hover {
-    background: var(--primary-green-dark);
-}
-
 body.night-mode #searchInput {
     background: #1e293b;
     border-color: #2d3748;
     color: #e0e0e0;
-}
-
-body.night-mode .category-btn:not(.active) {
-    background: #1e293b;
-    color: #a0a0a0;
-}
-
-body.night-mode .category-btn:not(.active):hover {
-    background: #2d3748;
 }
 
 /* ============================================ */
@@ -517,33 +504,4 @@ body.night-mode .category-btn:not(.active):hover {
     #cartSidebar {
         max-height: 90vh;
     }
-}
-
-/* ============================================ */
-/* ANIMACIONES */
-/* ============================================ */
-@keyframes slideUp {
-    from {
-        transform: translateY(100%);
-    }
-    to {
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.slide-up {
-    animation: slideUp 0.3s ease-out;
-}
-
-.fade-in {
-    animation: fadeIn 0.3s ease-out;
 }
