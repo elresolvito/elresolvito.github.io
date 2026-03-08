@@ -24,6 +24,7 @@
     --text-light: #6B7280;
     --bg-card: #FFFFFF;
     --border-color: #E5E7EB;
+    --image-bg: #FFFFFF; /* Fondo blanco para contenedor de imagen en ambos modos */
 }
 
 /* Variables de color - MODO OSCURO */
@@ -34,6 +35,7 @@ body.night-mode {
     --text-light: #9CA3AF;
     --bg-card: #16213E;
     --border-color: #2D3748;
+    --image-bg: #FFFFFF; /* Se mantiene blanco para evitar recortes irregulares */
     --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
     background: var(--bg-dark);
     color: var(--text-primary);
@@ -82,7 +84,7 @@ footer {
 }
 
 /* ============================================ */
-/* CARRITO DE COMPRAS - VERSIÓN CORREGIDA */
+/* CARRITO DE COMPRAS */
 /* ============================================ */
 
 /* Overlay del carrito */
@@ -330,16 +332,22 @@ footer {
     box-shadow: var(--shadow-lg);
 }
 
-/* Contenedor de imagen - ajustes para modo oscuro */
+/* Contenedor de imagen - fondo blanco en ambos modos */
 .product-image-container {
     aspect-ratio: 1 / 1;
     overflow: hidden;
-    background: var(--bg-card);  /* Fondo del color de la tarjeta en lugar de gris claro */
+    background: var(--image-bg);  /* Siempre blanco */
     cursor: pointer;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    /* Pequeña sombra en modo oscuro para destacar la imagen sobre el fondo oscuro */
+    transition: box-shadow 0.2s ease;
+}
+
+body.night-mode .product-image-container {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 .product-image-container img {
@@ -347,12 +355,11 @@ footer {
     height: 100%;
     object-fit: contain;
     padding: 0.75rem;
-    transition: transform 0.3s ease, filter 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
-/* En modo oscuro, ajustamos brillo y contraste de las imágenes para integrarlas mejor */
 body.night-mode .product-image-container img {
-    filter: brightness(0.9) contrast(1.1);
+    /* Sin filtro, para mantener los colores originales */
 }
 
 .product-image-container:hover img {
