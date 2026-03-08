@@ -275,3 +275,108 @@ var WHOLESALE_PRODUCTS = [
         if (themeIcon) {
             themeIcon.textContent = document.body.classList.contains('night-mode') ? '🌙' : '☀️';
         }
+        localStorage.setItem('nightMode', document.body.classList.contains('night-mode'));
+    };
+
+    window.toggleMenu = function() {
+        const menu = document.getElementById('mobileMenu');
+        if (menu) {
+            menu.classList.toggle('hidden');
+            document.body.style.overflow = menu.classList.contains('hidden') ? '' : 'hidden';
+        }
+    };
+
+    window.openImageModal = function(src, name) {
+        const modal = document.getElementById('imageModal');
+        const img = document.getElementById('modalImage');
+        const nameEl = document.getElementById('modalImageName');
+        if (modal && img && nameEl) {
+            img.src = src;
+            nameEl.textContent = name || 'Imagen';
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+    };
+
+    window.closeImageModal = function() {
+        const modal = document.getElementById('imageModal');
+        if (modal) {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+    };
+
+    function showToast(message, type = 'success') {
+        const toast = document.getElementById('cartToast');
+        const toastMessage = document.getElementById('cartToastMessage');
+        
+        if (toast && toastMessage) {
+            toastMessage.textContent = message;
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            toast.classList.add('opacity-100');
+            
+            if (type === 'error') {
+                toast.classList.add('bg-red-600');
+                toast.classList.remove('bg-gray-800');
+            } else {
+                toast.classList.add('bg-gray-800');
+                toast.classList.remove('bg-red-600');
+            }
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none');
+                toast.classList.remove('opacity-100');
+            }, 3000);
+        }
+    }
+
+    // ============================================
+    // INICIALIZACIÓN
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('✅ El Resolvito JS inicializado');
+        
+        const pageFade = document.getElementById('pageFade');
+        if (pageFade) pageFade.classList.add('opacity-0');
+        
+        if (localStorage.getItem('nightMode') === 'true') {
+            document.body.classList.add('night-mode');
+        }
+        
+        updateCartUI();
+        
+        // Verificar que los elementos del carrito existen
+        setTimeout(() => {
+            const sidebar = document.getElementById('cartSidebar');
+            const overlay = document.getElementById('cartOverlay');
+            console.log('Sidebar existe:', !!sidebar);
+            console.log('Overlay existe:', !!overlay);
+            if (sidebar) console.log('Clases iniciales sidebar:', sidebar.className);
+            if (overlay) console.log('Clases iniciales overlay:', overlay.className);
+        }, 1000);
+    });
+
+})();
+
+// ============================================
+// FUNCIÓN DE DEPURACIÓN
+// ============================================
+window.debugCart = function() {
+    console.log('=== DEBUG CARRITO ===');
+    const sidebar = document.getElementById('cartSidebar');
+    const overlay = document.getElementById('cartOverlay');
+    
+    console.log('sidebar existe:', !!sidebar);
+    console.log('overlay existe:', !!overlay);
+    
+    if (sidebar) {
+        console.log('sidebar clases:', sidebar.className);
+        console.log('sidebar tiene cart-open:', sidebar.classList.contains('cart-open'));
+        console.log('transform:', window.getComputedStyle(sidebar).transform);
+    }
+    
+    if (overlay) {
+        console.log('overlay clases:', overlay.className);
+        console.log('overlay hidden:', overlay.classList.contains('hidden'));
+    }
+};
