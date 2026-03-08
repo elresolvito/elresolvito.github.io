@@ -1,0 +1,227 @@
+/* ============================================ */
+/* ESTILOS EXCLUSIVOS PARA EL BLOG */
+/* ============================================ */
+
+/* Hero del blog */
+.blog-hero {
+    background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-green-dark) 100%);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.blog-hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+@media (max-width: 640px) {
+    .blog-hero {
+        padding: 2rem 0;
+    }
+    .blog-hero h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Grid de artículos */
+.articulos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+    padding: 0 1rem;
+}
+
+@media (max-width: 1024px) {
+    .articulos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .articulos-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Tarjeta de artículo */
+.articulo-card {
+    background: var(--bg-card);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.articulo-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.articulo-imagen {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.articulo-contenido {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.articulo-categoria {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+    margin-bottom: 0.75rem;
+    width: fit-content;
+}
+
+.categoria-recetas {
+    background: #2E7D32;
+    color: white;
+}
+.categoria-emprendimiento {
+    background: #1E3A8A;
+    color: white;
+}
+.categoria-habana {
+    background: #0277BD;
+    color: white;
+}
+.categoria-productos {
+    background: #FF69B4;
+    color: white;
+}
+.categoria-alojamientos {
+    background: #D4AF37;
+    color: #000;
+}
+
+.articulo-titulo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+.articulo-descripcion {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.articulo-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+}
+
+.articulo-fecha {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.articulo-leer-mas {
+    color: var(--primary-green);
+    font-weight: 600;
+    transition: transform 0.2s;
+}
+
+.articulo-card:hover .articulo-leer-mas {
+    transform: translateX(4px);
+}
+
+/* Newsletter */
+.newsletter-section {
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.newsletter-section h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+}
+
+.newsletter-section p {
+    font-size: 1rem;
+    color: var(--text-light);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+.newsletter-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #25D366;
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.newsletter-button:hover {
+    background: #128C7E;
+    transform: scale(1.05);
+}
+
+@media (max-width: 640px) {
+    .articulo-imagen {
+        height: 160px;
+    }
+    .newsletter-section h3 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Modo oscuro ajustes adicionales */
+body.night-mode .categoria-recetas {
+    background: #2E7D32;
+}
+body.night-mode .categoria-emprendimiento {
+    background: #1E3A8A;
+}
+body.night-mode .categoria-habana {
+    background: #0277BD;
+}
+body.night-mode .categoria-productos {
+    background: #FF69B4;
+}
+body.night-mode .categoria-alojamientos {
+    background: #D4AF37;
+    color: #000;
+}
