@@ -11,7 +11,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     
-    <!-- ESTILOS (orden correcto) -->
+    <!-- ESTILOS -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/blog.css">
     
@@ -35,6 +35,65 @@
             }
         }
     </script>
+
+    <style>
+        /* Estilos adicionales para la sección de populares y badges de likes */
+        .popular-section {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-green-dark) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin: 2rem 1rem;
+            text-align: center;
+        }
+        .popular-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .popular-item {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            transition: transform 0.2s;
+        }
+        .popular-item:hover {
+            transform: translateY(-4px);
+            background: rgba(255,255,255,0.3);
+        }
+        .popular-item a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .popular-item small {
+            display: block;
+            font-size: 0.8rem;
+            opacity: 0.9;
+            margin-top: 0.25rem;
+        }
+        .like-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: #dc2626;
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 1rem;
+            margin-left: 0.5rem;
+        }
+        .articulo-meta .like-badge {
+            background: #ef4444;
+        }
+        @media (max-width: 640px) {
+            .popular-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body class="bg-white text-gray-800">
 
@@ -57,11 +116,21 @@
         </div>
     </section>
 
-    <!-- Artículos -->
-    <div class="articulos-grid">
-        
-        <!-- Artículo 1: Recetas con atún -->
-        <article class="articulo-card" onclick="location.href='blog/recetas-rapidas-con-atun.html'">
+    <!-- SECCIÓN DE ARTÍCULOS MÁS POPULARES (dinámica) -->
+    <section class="popular-section" id="popularSection" style="display: none;">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-2">🔥 Los más populares</h2>
+            <p class="opacity-90 mb-4">Artículos con más "Me gusta" de nuestros lectores</p>
+            <div class="popular-grid" id="popularGrid">
+                <!-- Se llenará con JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Grid de artículos -->
+    <div class="articulos-grid" id="articulosGrid">
+        <!-- Cada artículo tiene un atributo data-article-id único -->
+        <article class="articulo-card" data-article-id="recetas-atun" onclick="location.href='blog/recetas-rapidas-con-atun.html'">
             <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop" 
                  class="articulo-imagen" 
                  alt="Recetas con atún"
@@ -75,11 +144,11 @@
                     <span class="articulo-fecha"><i class="far fa-calendar mr-1"></i>15 feb 2026</span>
                     <span class="articulo-leer-mas">Leer más <i class="fas fa-arrow-right"></i></span>
                 </div>
+                <div class="like-badge-container" style="margin-top: 0.5rem;"></div>
             </div>
         </article>
         
-        <!-- Artículo 2: Tostadas de aguacate -->
-        <article class="articulo-card" onclick="location.href='blog/tostadas-de-aguacate-y-huevo.html'">
+        <article class="articulo-card" data-article-id="tostadas-aguacate" onclick="location.href='blog/tostadas-de-aguacate-y-huevo.html'">
             <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&auto=format&fit=crop" 
                  class="articulo-imagen" 
                  alt="Tostadas de aguacate"
@@ -93,11 +162,11 @@
                     <span class="articulo-fecha"><i class="far fa-calendar mr-1"></i>10 feb 2026</span>
                     <span class="articulo-leer-mas">Leer más <i class="fas fa-arrow-right"></i></span>
                 </div>
+                <div class="like-badge-container" style="margin-top: 0.5rem;"></div>
             </div>
         </article>
         
-        <!-- Artículo 3: Guía TCP -->
-        <article class="articulo-card" onclick="location.href='blog/como-empezar-tcp-en-cuba-guia-2026.html'">
+        <article class="articulo-card" data-article-id="guia-tcp" onclick="location.href='blog/como-empezar-tcp-en-cuba-guia-2026.html'">
             <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&auto=format&fit=crop" 
                  class="articulo-imagen" 
                  alt="Guía TCP"
@@ -111,11 +180,11 @@
                     <span class="articulo-fecha"><i class="far fa-calendar mr-1"></i>5 feb 2026</span>
                     <span class="articulo-leer-mas">Leer más <i class="fas fa-arrow-right"></i></span>
                 </div>
+                <div class="like-badge-container" style="margin-top: 0.5rem;"></div>
             </div>
         </article>
         
-        <!-- Artículo 4: Cosas gratis en La Habana -->
-        <article class="articulo-card" onclick="location.href='blog/que-hacer-en-la-habana-vieja-gratis.html'">
+        <article class="articulo-card" data-article-id="habana-gratis" onclick="location.href='blog/que-hacer-en-la-habana-vieja-gratis.html'">
             <img src="https://images.unsplash.com/photo-1591123226833-99b5138c3fb1?w=600&auto=format&fit=crop" 
                  class="articulo-imagen" 
                  alt="La Habana Vieja"
@@ -129,11 +198,11 @@
                     <span class="articulo-fecha"><i class="far fa-calendar mr-1"></i>1 feb 2026</span>
                     <span class="articulo-leer-mas">Leer más <i class="fas fa-arrow-right"></i></span>
                 </div>
+                <div class="like-badge-container" style="margin-top: 0.5rem;"></div>
             </div>
         </article>
         
-        <!-- Artículo 6: Terrazas de Bayona -->
-        <article class="articulo-card" onclick="location.href='blog/terrazas-de-bayona-59-experiencia-completa.html'">
+        <article class="articulo-card" data-article-id="terrazas-bayona" onclick="location.href='blog/terrazas-de-bayona-59-experiencia-completa.html'">
             <img src="https://i.postimg.cc/QxWvyYGy/acuarela-1.jpg" 
                  class="articulo-imagen" 
                  alt="Terrazas de Bayona"
@@ -147,11 +216,11 @@
                     <span class="articulo-fecha"><i class="far fa-calendar mr-1"></i>20 ene 2026</span>
                     <span class="articulo-leer-mas">Leer más <i class="fas fa-arrow-right"></i></span>
                 </div>
+                <div class="like-badge-container" style="margin-top: 0.5rem;"></div>
             </div>
         </article>
         
-        <!-- Artículo 7: Cupcakes -->
-        <article class="articulo-card" onclick="location.href='blog/cupcakes-faciles-con-productos-de-nuestra-tienda.html'">
+        <article class="articulo-card" data-article-id="cupcakes" onclick="location.href='blog/cupcakes-faciles-con-productos-de-nuestra-tienda.html'">
             <img src="https://images.unsplash.com/photo-1586788224331-947f68671cf1?w=600&auto=format&fit=crop" 
                  class="articulo-imagen" 
                  alt="Cupcakes"
@@ -165,9 +234,9 @@
                     <span class="articulo-fecha"><i class="far fa-calendar mr-1"></i>15 ene 2026</span>
                     <span class="articulo-leer-mas">Leer más <i class="fas fa-arrow-right"></i></span>
                 </div>
+                <div class="like-badge-container" style="margin-top: 0.5rem;"></div>
             </div>
         </article>
-        
     </div>
 
     <!-- Newsletter -->
@@ -191,10 +260,86 @@
     <!-- Toast -->
     <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none"></div>
 
-    <!-- Script principal (unificado) -->
+    <!-- Script principal -->
     <script src="js/elresolvito.js" defer></script>
 
     <script>
+        // ============================================
+        // INTERACCIÓN EN BLOG.HTML (likes y populares)
+        // ============================================
+
+        // Mapeo de IDs de artículo a títulos y URLs
+        const articulosInfo = {
+            'recetas-atun': { titulo: '3 recetas rápidas con atún en lata', url: 'blog/recetas-rapidas-con-atun.html' },
+            'tostadas-aguacate': { titulo: 'Tostadas de aguacate y huevo', url: 'blog/tostadas-de-aguacate-y-huevo.html' },
+            'guia-tcp': { titulo: 'Cómo empezar tu negocio en Cuba (TCP)', url: 'blog/como-empezar-tcp-en-cuba-guia-2026.html' },
+            'habana-gratis': { titulo: '10 cosas gratis en La Habana Vieja', url: 'blog/que-hacer-en-la-habana-vieja-gratis.html' },
+            'terrazas-bayona': { titulo: 'Terrazas de Bayona 59', url: 'blog/terrazas-de-bayona-59-experiencia-completa.html' },
+            'cupcakes': { titulo: 'Cupcakes fáciles', url: 'blog/cupcakes-faciles-con-productos-de-nuestra-tienda.html' }
+        };
+
+        // Cargar likes de localStorage
+        function cargarLikesEnTarjetas() {
+            const likesGuardados = JSON.parse(localStorage.getItem('likesBlog')) || {};
+
+            // Para cada tarjeta, mostrar el contador de likes
+            document.querySelectorAll('.articulo-card').forEach(card => {
+                const articleId = card.dataset.articleId;
+                if (!articleId) return;
+
+                const likes = likesGuardados[articleId] || 0;
+                const contenedor = card.querySelector('.like-badge-container');
+                if (contenedor) {
+                    if (likes > 0) {
+                        contenedor.innerHTML = `<span class="like-badge"><i class="fas fa-heart"></i> ${likes}</span>`;
+                    } else {
+                        contenedor.innerHTML = ''; // No mostrar si es 0
+                    }
+                }
+            });
+
+            return likesGuardados;
+        }
+
+        // Generar sección de populares (top 3)
+        function generarPopulares(likesGuardados) {
+            // Convertir objeto a array de [id, likes]
+            const likesArray = Object.entries(likesGuardados).filter(([id]) => articulosInfo[id]); // solo IDs válidos
+            likesArray.sort((a, b) => b[1] - a[1]); // orden descendente
+
+            const top3 = likesArray.slice(0, 3);
+
+            const popularSection = document.getElementById('popularSection');
+            const popularGrid = document.getElementById('popularGrid');
+
+            if (top3.length > 0) {
+                popularSection.style.display = 'block';
+                popularGrid.innerHTML = top3.map(([id, likes]) => {
+                    const info = articulosInfo[id];
+                    if (!info) return '';
+                    return `
+                        <div class="popular-item">
+                            <a href="${info.url}">
+                                ${info.titulo}
+                                <small><i class="fas fa-heart"></i> ${likes} me gusta</small>
+                            </a>
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                popularSection.style.display = 'none';
+            }
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            const likes = cargarLikesEnTarjetas();
+            generarPopulares(likes);
+        });
+
+        // ============================================
+        // CARGA DE COMPONENTES (header, footer, etc.)
+        // ============================================
         async function loadComponent(id, path) {
             try {
                 const res = await fetch(path);
@@ -217,4 +362,3 @@
     </script>
 </body>
 </html>
-
