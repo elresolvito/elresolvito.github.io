@@ -10,7 +10,7 @@
     <meta property="og:title" content="10 cosas gratis en La Habana Vieja">
     <meta property="og:description" content="Planes auténticos para disfrutar La Habana sin gastar un centavo.">
     <meta property="og:type" content="article">
-    <meta property="og:image" content="<a href='https://postimg.cc/jwyL58hL' target='_blank'><img src='https://i.postimg.cc/nzP73gjY/Gemini-Generated-Image-h9hdglh9hdglh9hd-1-11zon.webp' border='0' alt='Gemini-Generated-Image-h9hdglh9hdglh9hd-1-11zon'></a>">
+    <meta property="og:image" content="https://i.postimg.cc/nzP73gjY/Gemini-Generated-Image-h9hdglh9hdglh9hd-1-11zon.webp">
     <meta property="article:published_time" content="2026-02-01">
     <meta property="article:author" content="Alejandro Rodríguez">
     <meta property="article:section" content="La Habana">
@@ -20,12 +20,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
     <link rel="apple-touch-icon" href="../apple-touch-icon.png">
     
-    <!-- Estilos -->
+    <!-- Estilos y fuentes -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../css/styles.css">
     
+    <!-- Config Tailwind -->
     <script>
         tailwind.config = {
             theme: {
@@ -39,6 +40,72 @@
             }
         }
     </script>
+    
+    <!-- Estilos adicionales para la interacción -->
+    <style>
+        .interaccion-blog {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin: 2rem 0;
+            padding: 1rem 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .like-btn, .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+        .like-btn {
+            background: #f3f4f6;
+            color: #1f2937;
+        }
+        .like-btn:hover {
+            background: #e5e7eb;
+        }
+        .like-btn.liked {
+            background: #dc2626;
+            color: white;
+        }
+        .share-btn {
+            background: #25D366;
+            color: white;
+        }
+        .share-btn:hover {
+            background: #128C7E;
+        }
+        .comentarios-destacados {
+            background: #f9fafb;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        .comentario-item {
+            border-bottom: 1px dashed #d1d5db;
+            padding: 1rem 0;
+        }
+        .comentario-item:last-child {
+            border-bottom: none;
+        }
+        .comentario-autor {
+            font-weight: 600;
+            color: var(--cuban-blue);
+        }
+        .comentario-texto {
+            margin: 0.25rem 0 0.5rem;
+        }
+        .comentario-fecha {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+    </style>
 </head>
 <body class="bg-white text-gray-800">
 
@@ -60,7 +127,7 @@
                     <span class="bg-cuban-blue text-white text-xs px-3 py-1 rounded-full font-bold">🏠 LA HABANA</span>
                     <span class="text-gray-500 text-sm">6 min · Guía local</span>
                 </div>
-                <h1 class="text-4xl font-bold mb-4">10 cosas gratis que hacer en La Habana Vieja (como un habanero más)</h1>
+                <h1 id="titulo-articulo" class="text-4xl font-bold mb-4">10 cosas gratis que hacer en La Habana Vieja (como un habanero más)</h1>
                 <div class="flex items-center gap-4 mb-6">
                     <img src="https://ui-avatars.com/api/?name=Alejandro+Rodriguez&background=0277BD&color=fff&size=60" class="w-12 h-12 rounded-full" alt="Alejandro Rodríguez">
                     <div>
@@ -70,11 +137,13 @@
                 </div>
             </div>
 
-            <img src="https://images.unsplash.com/photo-1591123226833-99b5138c3fb1?w=800&auto=format&fit=crop" 
-                 class="w-full h-96 object-cover rounded-2xl mb-8" 
-                 alt="La Habana Vieja"
+            <!-- Imagen destacada (NUEVA) -->
+            <img src="https://i.postimg.cc/nzP73gjY/Gemini-Generated-Image-h9hdglh9hdglh9hd-1-11zon.webp" 
+                 class="w-full h-96 object-cover rounded-2xl mb-4" 
+                 alt="Escena típica de La Habana Vieja"
                  loading="lazy"
                  onerror="this.src='https://placehold.co/800x600/0277BD/white?text=La+Habana+Vieja'">
+            <p class="text-sm text-gray-500 mb-8 text-center">La Habana Vieja, una ciudad llena de historia y rincones por descubrir.</p>
 
             <div class="prose prose-lg max-w-none">
                 <p class="text-lg text-gray-700 mb-6">Vivir en La Habana no es caro si sabes dónde ir. Yo llevo toda mi vida aquí y te puedo asegurar que los mejores planes no cuestan un peso. Te comparto mis lugares favoritos para disfrutar la ciudad sin gastar ni un centavo, como hacemos los de aquí.</p>
@@ -120,22 +189,42 @@
                     <a href="../reservas.html" class="inline-block bg-cuban-blue text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-700 transition mt-2">Ver alojamiento</a>
                 </div>
 
-                <!-- Comentarios -->
-                <div class="border-t-2 border-gray-200 pt-10 mt-16">
-                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-2"><i class="fab fa-whatsapp text-cuban-blue text-3xl"></i>Comentarios</h3>
-                    <div class="bg-cuban-blue/5 p-6 rounded-xl">
-                        <h4 class="font-bold text-lg mb-3">Deja tu comentario</h4>
-                        <div class="flex flex-col sm:flex-row gap-3">
-                            <input type="text" id="comentario-nombre-habana" placeholder="Tu nombre" class="flex-1 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-cuban-blue outline-none">
-                            <textarea id="comentario-texto-habana" placeholder="Escribe tu comentario..." class="flex-1 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-cuban-blue outline-none" rows="2"></textarea>
-                            <button onclick="enviarComentario('habana')" class="bg-cuban-blue text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-700 transition flex items-center gap-2">
-                                <i class="fab fa-whatsapp"></i>Enviar
-                            </button>
+                <!-- ============================================ -->
+                <!-- SECCIÓN DE INTERACCIÓN -->
+                <!-- ============================================ -->
+                
+                <!-- Botones de like y compartir -->
+                <div class="interaccion-blog">
+                    <button id="likeButton" class="like-btn">
+                        <i class="far fa-thumbs-up"></i> Me gusta <span id="likeCount">0</span>
+                    </button>
+                    <button id="shareButton" class="share-btn">
+                        <i class="fab fa-whatsapp"></i> Compartir
+                    </button>
+                </div>
+
+                <!-- Comentarios destacados -->
+                <div class="comentarios-destacados">
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fas fa-star text-cuban-blue"></i> Comentarios
+                    </h3>
+                    
+                    <div id="comentarios-lista">
+                        <div class="comentario-item">
+                            <p class="comentario-autor">Carlos Pérez</p>
+                            <p class="comentario-texto">Excelentes recomendaciones, Alejandro. El Malecón al atardecer es imperdible.</p>
+                            <p class="comentario-fecha">Hace 2 semanas</p>
+                        </div>
+                        <div class="comentario-item">
+                            <p class="comentario-autor">Laura Martínez</p>
+                            <p class="comentario-texto">No sabía lo del Edificio Focsa. La próxima vez que vaya a La Habana lo pruebo. ¡Gracias!</p>
+                            <p class="comentario-fecha">Hace 5 días</p>
                         </div>
                     </div>
-                    <div class="text-center mt-6">
-                        <a href="https://wa.me/5356382909?text=Quiero%20ver%20los%20comentarios%20de%20habana" target="_blank" class="inline-flex items-center gap-2 text-cuban-blue hover:underline">
-                            <i class="fab fa-whatsapp"></i> Ver todos en WhatsApp
+
+                    <div class="mt-6 text-center">
+                        <a href="https://wa.me/5356382909?text=Quiero%20comentar%20el%20artículo%20de%20cosas%20gratis%20en%20La%20Habana" target="_blank" class="inline-flex items-center gap-2 text-cuban-blue hover:underline">
+                            <i class="fab fa-whatsapp"></i> Deja tu comentario por WhatsApp
                         </a>
                     </div>
                 </div>
@@ -148,15 +237,81 @@
     <div id="cart-sidebar-container"></div>
     <div id="checkout-modal-container"></div>
     <div id="footer-container"></div>
+
+    <!-- Toast -->
     <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
         <p id="cartToastMessage"></p>
     </div>
 
     <script src="../js/elresolvito.js" defer></script>
+
     <script>
-        async function loadComponent(id, path) {
-            try { const res = await fetch(path); if (!res.ok) throw new Error(); document.getElementById(id).innerHTML = await res.text(); } catch (error) { console.error(error); }
+        // ============================================
+        // INTERACCIÓN DEL BLOG (Likes y Compartir)
+        // ============================================
+
+        const articuloId = 'habana-gratis'; // ID único para este artículo
+
+        function cargarLike() {
+            const likesGuardados = JSON.parse(localStorage.getItem('likesBlog')) || {};
+            const contador = likesGuardados[articuloId] || 0;
+            const likeSpan = document.getElementById('likeCount');
+            if (likeSpan) likeSpan.textContent = contador;
+
+            const usuarioDioLike = localStorage.getItem(`like_${articuloId}_user`);
+            const likeButton = document.getElementById('likeButton');
+            if (usuarioDioLike && likeButton) {
+                likeButton.classList.add('liked');
+                likeButton.innerHTML = '<i class="fas fa-thumbs-up"></i> Me gusta <span id="likeCount">' + contador + '</span>';
+            }
         }
+
+        const likeButton = document.getElementById('likeButton');
+        if (likeButton) {
+            likeButton.addEventListener('click', function() {
+                const yaDioLike = localStorage.getItem(`like_${articuloId}_user`);
+                if (yaDioLike) {
+                    alert('Ya has dado like a este artículo');
+                    return;
+                }
+
+                const likesGuardados = JSON.parse(localStorage.getItem('likesBlog')) || {};
+                likesGuardados[articuloId] = (likesGuardados[articuloId] || 0) + 1;
+                localStorage.setItem('likesBlog', JSON.stringify(likesGuardados));
+                localStorage.setItem(`like_${articuloId}_user`, 'true');
+
+                document.getElementById('likeCount').textContent = likesGuardados[articuloId];
+                this.classList.add('liked');
+                this.innerHTML = '<i class="fas fa-thumbs-up"></i> Me gusta <span id="likeCount">' + likesGuardados[articuloId] + '</span>';
+            });
+        }
+
+        const shareButton = document.getElementById('shareButton');
+        if (shareButton) {
+            shareButton.addEventListener('click', function() {
+                const titulo = document.getElementById('titulo-articulo').textContent;
+                const url = window.location.href;
+                const mensaje = `Mira este artículo de El Resolvito: ${titulo} - ${url}`;
+                window.open(`https://wa.me/?text=${encodeURIComponent(mensaje)}`, '_blank');
+            });
+        }
+
+        cargarLike();
+
+        // ============================================
+        // CARGA DE COMPONENTES
+        // ============================================
+        async function loadComponent(id, path) {
+            try {
+                const res = await fetch(path);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const html = await res.text();
+                document.getElementById(id).innerHTML = html;
+            } catch (error) {
+                console.error(`Error cargando ${path}:`, error);
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', async () => {
             await loadComponent('header-container', '../components/header.html');
             await loadComponent('mobile-menu-container', '../components/mobile-menu.html');
@@ -166,23 +321,6 @@
             await loadComponent('checkout-modal-container', '../components/checkout-modal.html');
             await loadComponent('footer-container', '../components/footer.html');
         });
-
-        function enviarComentario(articuloId) {
-            const nombre = document.getElementById(`comentario-nombre-${articuloId}`)?.value.trim();
-            const comentario = document.getElementById(`comentario-texto-${articuloId}`)?.value.trim();
-            if (!nombre || !comentario) return alert('Completa todos los campos');
-            const titulo = document.querySelector('h1')?.textContent || 'Artículo';
-            const mensaje = `*📝 NUEVO COMENTARIO*\n\n📌 *${titulo}*\n👤 *${nombre}*\n💬 ${comentario}`;
-            window.open(`https://wa.me/5356382909?text=${encodeURIComponent(mensaje)}`, '_blank');
-            document.getElementById(`comentario-nombre-${articuloId}`).value = '';
-            document.getElementById(`comentario-texto-${articuloId}`).value = '';
-        }
-
-        function enviarReaccion(tipo, autor) {
-            const titulo = document.querySelector('h1')?.textContent || 'Artículo';
-            const mensaje = tipo === 'me-gusta' ? `❤️ Me gusta el comentario de ${autor} en "${titulo}"` : `💬 Quiero responder a ${autor} en "${titulo}"`;
-            window.open(`https://wa.me/5356382909?text=${encodeURIComponent(mensaje)}`, '_blank');
-        }
     </script>
 </body>
 </html>
