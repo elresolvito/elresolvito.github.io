@@ -11,11 +11,14 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     
-    <!-- Fonts y estilos -->
+    <!-- ESTILOS (ORDEN CORRECTO) -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/ofertas.css">
+    
+    <!-- Fonts y Tailwind -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/styles.css">
     
     <!-- Configuración de Tailwind -->
     <script>
@@ -29,45 +32,25 @@
                         'cuban-yellow': '#FFB300', 
                         'cuban-orange': '#FF6F00',
                         'chancla-azul': '#1E90FF',
-                        'chancla-roja': '#DC143C',
                         'chancla-rosa': '#FF69B4'
                     }
                 }
             }
         }
     </script>
-    
-    <!-- Estilos adicionales específicos para ofertas -->
-    <style>
-        /* Ocultar dots en el carrusel de ofertas */
-        .ofertas-carousel .carousel-dots {
-            display: none !important;
-        }
-        
-        /* Imagen más grande en ofertas */
-        .ofertas-carousel .carousel-slide img {
-            height: 300px !important;
-        }
-        
-        @media (max-width: 640px) {
-            .ofertas-carousel .carousel-slide img {
-                height: 220px !important;
-            }
-        }
-    </style>
 </head>
 <body class="bg-white text-gray-800">
 
     <!-- Transición suave entre páginas -->
     <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
 
-    <!-- Contenedores para componentes -->
+    <!-- Componentes fijos -->
     <div id="header-container"></div>
     <div id="mobile-menu-container"></div>
     <div id="floating-buttons-container"></div>
 
     <!-- ============================================ -->
-    <!-- CONTENIDO ESPECÍFICO DE OFERTAS -->
+    <!-- CONTENIDO DE OFERTAS -->
     <!-- ============================================ -->
     
     <!-- Hero -->
@@ -84,7 +67,7 @@
         </div>
     </section>
 
-    <!-- Carrusel de Chanclas con clase ofertas-carousel -->
+    <!-- Grid de Chanclas (reemplaza al carrusel) -->
     <section class="py-12">
         <div class="container mx-auto px-4">
             
@@ -93,41 +76,16 @@
                 <p class="text-gray-600">Precio especial por mayoreo: <span class="font-bold text-cuban-green text-2xl">$3,500</span> cada par</p>
             </div>
             
-            <!-- Carrusel -->
-            <div class="ofertas-carousel carousel-container max-w-4xl mx-auto bg-gray-50 rounded-2xl shadow-xl p-4">
-                
-                <!-- Slides -->
-                <div id="carouselTrack" class="carousel-track">
-                    <!-- Las slides se generan dinámicamente -->
-                </div>
-                
-                <!-- Botones de navegación -->
-                <button class="carousel-button carousel-prev" onclick="prevSlide()">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="carousel-button carousel-next" onclick="nextSlide()">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-                
-                <!-- Dots indicadores (ocultos por CSS) -->
-                <div id="carouselDots" class="carousel-dots"></div>
-                
+            <!-- Grid responsivo -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <!-- Las imágenes se generan con JavaScript -->
             </div>
             
-            <!-- Descripción de la oferta -->
-            <div class="mt-8 text-center">
-                <p class="text-lg text-gray-700 mb-4">
-                    <i class="fas fa-tag text-cuban-green mr-2"></i>
-                    <span class="font-bold">Oferta por mayoreo:</span> Todas las chanclas a <span class="font-bold text-2xl text-cuban-green">$3,500</span>
-                </p>
-                <p class="text-gray-600 mb-6">
-                    Ideal para revendedores, tiendas y negocios. Diferentes colores y estilos disponibles.
-                </p>
-                
-                <!-- Botón de WhatsApp -->
+            <!-- Botón de WhatsApp fijo -->
+            <div class="mt-10 text-center">
                 <a href="https://wa.me/5356382909?text=Hola%2C%20me%20interesa%20la%20oferta%20de%20chanclas%20a%20%243%2C500.%20Quiero%20hacer%20un%20pedido%20por%20mayor." 
                    target="_blank"
-                   class="inline-block btn-whatsapp text-white px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition shadow-lg">
+                   class="inline-block bg-[#25D366] hover:bg-[#128C7E] text-white px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition shadow-lg">
                     <i class="fab fa-whatsapp mr-2 text-2xl"></i>
                     Hacer pedido por WhatsApp
                 </a>
@@ -204,65 +162,29 @@
             "https://i.postimg.cc/CKFpN4Jt/chanclas_rosas(1).jpg",
             "https://i.postimg.cc/7Z1y0R14/chanclas(1).jpg"
         ];
-        
-        let currentSlide = 0;
 
         // ============================================
-        // FUNCIONES DEL CARRUSEL
+        // GENERAR GRID DE IMÁGENES
         // ============================================
-        function initCarousel() {
-            const track = document.getElementById('carouselTrack');
-            const dotsContainer = document.getElementById('carouselDots');
-            
-            if (!track || !dotsContainer) return;
-            
-            // Generar slides
-            track.innerHTML = chanclasImages.map((img, index) => `
-                <div class="carousel-slide">
-                    <div class="bg-white rounded-xl shadow-lg p-4">
+        function generarGrid() {
+            const gridContainer = document.querySelector('.grid.grid-cols-2');
+            if (!gridContainer) return;
+
+            gridContainer.innerHTML = chanclasImages.map((img, index) => `
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 group cursor-pointer"
+                     onclick="window.openImageModal('${img}', 'Chancla ${index + 1}')">
+                    <div class="aspect-square overflow-hidden bg-gray-50 p-2">
                         <img src="${img}" 
                              alt="Chancla ${index + 1}" 
-                             class="w-full h-64 object-contain mx-auto"
-                             onclick="openImageModal('${img}', 'Chancla ${index + 1}')"
-                             onerror="this.src='https://placehold.co/400x300/2E7D32/white?text=Chancla+${index + 1}'">
-                        <p class="text-center mt-2 text-gray-600">Modelo ${index + 1}</p>
+                             class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                             loading="lazy"
+                             onerror="this.src='https://placehold.co/400x300/2E7D32/white?text=Chancla'">
+                    </div>
+                    <div class="p-2 text-center border-t">
+                        <p class="text-sm font-medium text-gray-700">Modelo ${index + 1}</p>
                     </div>
                 </div>
             `).join('');
-            
-            // Generar dots (se generan pero estarán ocultos por CSS)
-            dotsContainer.innerHTML = chanclasImages.map((_, index) => `
-                <div class="carousel-dot ${index === 0 ? 'active' : ''}" onclick="goToSlide(${index})"></div>
-            `).join('');
-            
-            updateCarousel();
-        }
-        
-        function updateCarousel() {
-            const track = document.getElementById('carouselTrack');
-            if (track) {
-                track.style.transform = `translateX(-${currentSlide * 100}%)`;
-            }
-            
-            // Actualizar dots (aunque estén ocultos, se actualizan por si acaso)
-            document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-        }
-        
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % chanclasImages.length;
-            updateCarousel();
-        }
-        
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + chanclasImages.length) % chanclasImages.length;
-            updateCarousel();
-        }
-        
-        function goToSlide(index) {
-            currentSlide = index;
-            updateCarousel();
         }
 
         // ============================================
@@ -287,9 +209,8 @@
             await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
             await loadComponent('footer-container', 'components/footer.html');
             
-            initCarousel();
+            generarGrid(); // En lugar de initCarousel
         });
     </script>
 </body>
 </html>
-
