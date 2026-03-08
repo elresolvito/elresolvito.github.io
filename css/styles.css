@@ -2,7 +2,7 @@
 /* ESTILOS GLOBALES - EL RESOLVITO */
 /* ============================================ */
 
-/* Variables de color */
+/* Variables de color - MODO CLARO (por defecto) */
 :root {
     --primary-green: #2E7D32;
     --primary-green-dark: #1B5E20;
@@ -13,18 +13,30 @@
     --bg-light: #FFFFFF;
     --bg-dark: #0F0F1A;
     --bg-dark-card: #16213E;
-    --text-light: #1F2937;
-    --text-dark: #E5E7EB;
-    --text-muted-light: #6B7280;
-    --text-muted-dark: #9CA3AF;
     --whatsapp: #25D366;
     --whatsapp-dark: #128C7E;
     --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
     --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
     --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
     --shadow-xl: 0 20px 32px rgba(0,0,0,0.15);
-    --border-light: #E5E7EB;
-    --border-dark: #2D3748;
+    --text-primary: #1F2937;
+    --text-secondary: #4B5563;
+    --text-light: #6B7280;
+    --bg-card: #FFFFFF;
+    --border-color: #E5E7EB;
+}
+
+/* Variables de color - MODO OSCURO */
+body.night-mode {
+    --bg-light: #0F0F1A;
+    --text-primary: #F9FAFB;
+    --text-secondary: #E5E7EB;
+    --text-light: #9CA3AF;
+    --bg-card: #16213E;
+    --border-color: #2D3748;
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+    background: var(--bg-dark);
+    color: var(--text-primary);
 }
 
 /* Estilos base */
@@ -38,15 +50,16 @@
 body {
     font-family: 'Open Sans', sans-serif;
     background: var(--bg-light);
-    color: var(--text-light);
+    color: var(--text-primary);
     line-height: 1.6;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.5s, color 0.5s;
     padding-bottom: 80px;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
+    color: var(--text-primary);
 }
 
 /* ============================================ */
@@ -56,9 +69,8 @@ header {
     position: sticky;
     top: 0;
     z-index: 50;
-    background: white;
+    background: var(--bg-card);
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ============================================ */
@@ -70,7 +82,7 @@ footer {
 }
 
 /* ============================================ */
-/* CARRITO DE COMPRAS */
+/* CARRITO DE COMPRAS - VERSIÓN CORREGIDA */
 /* ============================================ */
 
 /* Overlay del carrito */
@@ -95,7 +107,7 @@ footer {
     bottom: 0;
     left: 0;
     right: 0;
-    background: white;
+    background: var(--bg-card);
     border-top-left-radius: 24px;
     border-top-right-radius: 24px;
     box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
@@ -305,12 +317,12 @@ footer {
 }
 
 .product-card {
-    background: white;
+    background: var(--bg-card);
     border-radius: 0.75rem;
     overflow: hidden;
     box-shadow: var(--shadow-sm);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.3s ease;
-    border: 1px solid var(--border-light);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: 1px solid var(--border-color);
 }
 
 .product-card:hover {
@@ -318,13 +330,16 @@ footer {
     box-shadow: var(--shadow-lg);
 }
 
+/* Contenedor de imagen - ajustes para modo oscuro */
 .product-image-container {
     aspect-ratio: 1 / 1;
     overflow: hidden;
-    background: #f9f9f9;
+    background: var(--bg-card);  /* Fondo del color de la tarjeta en lugar de gris claro */
     cursor: pointer;
     position: relative;
-    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .product-image-container img {
@@ -332,7 +347,12 @@ footer {
     height: 100%;
     object-fit: contain;
     padding: 0.75rem;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* En modo oscuro, ajustamos brillo y contraste de las imágenes para integrarlas mejor */
+body.night-mode .product-image-container img {
+    filter: brightness(0.9) contrast(1.1);
 }
 
 .product-image-container:hover img {
@@ -341,8 +361,6 @@ footer {
 
 .product-info {
     padding: 1rem;
-    background: white;
-    transition: background-color 0.3s ease;
 }
 
 .product-categoria {
@@ -359,15 +377,13 @@ footer {
     font-weight: 600;
     margin-bottom: 0.25rem;
     line-height: 1.4;
-    color: var(--text-light);
-    transition: color 0.3s ease;
+    color: var(--text-primary);
 }
 
 .product-descripcion {
     font-size: 0.75rem;
-    color: var(--text-muted-light);
+    color: var(--text-light);
     margin-bottom: 0.5rem;
-    transition: color 0.3s ease;
 }
 
 .product-precio {
@@ -425,12 +441,12 @@ footer {
 #searchInput {
     width: 100%;
     padding: 0.75rem 1rem 0.75rem 2.5rem;
-    border: 1px solid var(--border-light);
+    border: 1px solid var(--border-color);
     border-radius: 0.5rem;
     font-size: 0.95rem;
     transition: all 0.2s ease;
-    background: white;
-    color: var(--text-light);
+    background: var(--bg-card);
+    color: var(--text-primary);
 }
 
 #searchInput:focus {
@@ -466,11 +482,11 @@ footer {
 }
 
 /* ============================================ */
-/* MODO OSCURO - MEJORADO */
+/* MODO OSCURO - AJUSTES ADICIONALES */
 /* ============================================ */
 body.night-mode {
     background: var(--bg-dark);
-    color: var(--text-dark);
+    color: var(--text-primary);
 }
 
 body.night-mode .bg-white,
@@ -478,93 +494,57 @@ body.night-mode .bg-gray-50,
 body.night-mode .product-card,
 body.night-mode #cartSidebar,
 body.night-mode header {
-    background: var(--bg-dark-card) !important;
-    border-color: var(--border-dark) !important;
+    background: var(--bg-card) !important;
+    color: var(--text-primary) !important;
 }
 
-body.night-mode .product-info {
-    background: var(--bg-dark-card) !important;
-}
-
-body.night-mode .product-image-container {
-    background: var(--bg-dark-card) !important; /* Fondo oscuro en lugar de blanco */
-}
-
-body.night-mode .product-image-container img {
-    /* La imagen mantiene su color, pero el fondo ahora es oscuro */
-    filter: brightness(0.95); /* Pequeño ajuste para que no destaque demasiado */
-}
-
+body.night-mode .text-gray-800,
 body.night-mode .product-nombre {
-    color: var(--text-dark) !important;
-}
-
-body.night-mode .product-descripcion {
-    color: var(--text-muted-dark) !important;
+    color: var(--text-primary) !important;
 }
 
 body.night-mode .text-gray-600,
-body.night-mode .text-gray-500,
-body.night-mode .text-gray-700 {
-    color: var(--text-muted-dark) !important;
+body.night-mode .product-descripcion {
+    color: var(--text-light) !important;
 }
 
-body.night-mode .border,
-body.night-mode .border-gray-200,
-body.night-mode .border-gray-300 {
-    border-color: var(--border-dark) !important;
+body.night-mode .border-gray-200 {
+    border-color: var(--border-color) !important;
 }
 
 body.night-mode .bg-gray-100,
 body.night-mode .bg-gray-200 {
-    background: #1e293b !important;
+    background: #2d3748 !important;
 }
 
 body.night-mode #searchInput {
-    background: #1e293b;
-    border-color: var(--border-dark);
-    color: var(--text-dark);
+    background: var(--bg-card);
+    border-color: var(--border-color);
+    color: var(--text-primary);
 }
 
 body.night-mode .category-btn:not(.active) {
     background: #1e293b;
-    color: var(--text-muted-dark);
+    color: var(--text-secondary);
 }
 
 body.night-mode .category-btn:not(.active):hover {
     background: #2d3748;
 }
 
-body.night-mode .promo-banner .promo-overlay {
-    background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 100%);
+/* Efecto de glow en hover para tarjetas en modo oscuro */
+body.night-mode .product-card:hover {
+    box-shadow: 0 0 15px rgba(46, 125, 50, 0.3);
 }
 
-body.night-mode article {
-    background: var(--bg-dark-card);
-    border-color: var(--border-dark);
+/* Ajuste de enlaces */
+a {
+    color: var(--primary-green);
+    transition: color 0.2s;
 }
 
-body.night-mode article p {
-    color: var(--text-muted-dark);
-}
-
-body.night-mode #alojamientos-preview {
-    background: var(--bg-dark-card);
-}
-
-body.night-mode #alojamientos-preview .amenity-item {
-    color: var(--text-muted-dark);
-}
-
-body.night-mode .product-precio {
-    color: #4CAF50; /* Un verde más brillante para destacar en modo oscuro */
-}
-
-/* Efecto sutil de brillo en textos importantes */
-body.night-mode h1,
-body.night-mode h2,
-body.night-mode h3 {
-    text-shadow: 0 0 5px rgba(255,255,255,0.1);
+a:hover {
+    color: var(--primary-green-dark);
 }
 
 /* ============================================ */
