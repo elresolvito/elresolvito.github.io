@@ -117,11 +117,16 @@ body.night-mode #featuredProducts .product-image-container {
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
+/* ============================================ */
+/* AJUSTE PARA UNIFORMIDAD DE IMÁGENES EN INDEX */
+/* ============================================ */
 #featuredProducts .product-image-container img {
-    width: 100%;
-    height: 100%;
+    width: auto;
+    height: auto;
+    max-width: 80%;      /* Límite del 80% del contenedor */
+    max-height: 80%;     /* Límite del 80% del contenedor */
     object-fit: contain;
-    padding: 1rem;
+    padding: 0.5rem;     /* Reducimos un poco el padding */
     transition: transform 0.3s ease;
 }
 
