@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>¿Por qué comprar en El Resolvito? Ventajas de tu tienda de confianza - El Resolvito Blog</title>
+    <meta name="description" content="Descubre las ventajas de comprar en El Resolvito: cercanía, atención personalizada por WhatsApp, variedad de productos y entregas rápidas en La Habana Vieja.">
+    
+    <!-- Meta tags Open Graph -->
+    <meta property="og:title" content="¿Por qué comprar en El Resolvito?">
+    <meta property="og:description" content="Razones para elegirnos: atención por WhatsApp, productos variados y entrega en La Habana Vieja.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://i.postimg.cc/7YfPJ9LD/banner-1l.jpg">
+    <meta property="article:published_time" content="2026-03-08">
+    <meta property="article:author" content="Equipo El Resolvito">
+    <meta property="article:section" content="Tienda">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+    
+    <!-- Estilos y fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Config Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'poppins': ['Poppins'], 'opensans': ['Open Sans'] },
+                    colors: {
+                        'cuban-green': '#2E7D32', 'cuban-dark': '#1B5E20',
+                        'cuban-yellow': '#FFB300', 'cuban-blue': '#0277BD'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Estilos adicionales para la interacción -->
+    <style>
+        .interaccion-blog {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin: 2rem 0;
+            padding: 1rem 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .like-btn, .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+        .like-btn {
+            background: #f3f4f6;
+            color: #1f2937;
+        }
+        .like-btn:hover {
+            background: #e5e7eb;
+        }
+        .like-btn.liked {
+            background: #dc2626;
+            color: white;
+        }
+        .share-btn {
+            background: #25D366;
+            color: white;
+        }
+        .share-btn:hover {
+            background: #128C7E;
+        }
+        .comentarios-destacados {
+            background: #f9fafb;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        .comentario-item {
+            border-bottom: 1px dashed #d1d5db;
+            padding: 1rem 0;
+        }
+        .comentario-item:last-child {
+            border-bottom: none;
+        }
+        .comentario-autor {
+            font-weight: 600;
+            color: var(--primary-green);
+        }
+        .comentario-texto {
+            margin: 0.25rem 0 0.5rem;
+        }
+        .comentario-fecha {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+
+    <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
+
+    <!-- Componentes -->
+    <div id="header-container"></div>
+    <div id="mobile-menu-container"></div>
+    <div id="floating-buttons-container"></div>
+
+    <!-- Contenido del artículo -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4 max-w-3xl">
+            <!-- Cabecera -->
+            <div class="mb-8">
+                <a href="../blog.html" class="text-cuban-green hover:underline mb-4 inline-block">
+                    <i class="fas fa-arrow-left mr-2"></i>Volver al Blog
+                </a>
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="bg-cuban-green text-white text-xs px-3 py-1 rounded-full font-bold">🛒 TIENDA</span>
+                    <span class="text-gray-500 text-sm">4 min · Ventajas</span>
+                </div>
+                <h1 id="titulo-articulo" class="text-4xl font-bold mb-4">¿Por qué comprar en El Resolvito? Tu tienda de confianza en La Habana Vieja</h1>
+                <div class="flex items-center gap-4 mb-6">
+                    <img src="https://ui-avatars.com/api/?name=Equipo+ER&background=2E7D32&color=fff&size=60" class="w-12 h-12 rounded-full" alt="Equipo El Resolvito">
+                    <div>
+                        <p class="font-semibold">Equipo El Resolvito</p>
+                        <p class="text-sm text-gray-500">Publicado: 8 mar 2026</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Imagen destacada -->
+            <img src="https://i.postimg.cc/7YfPJ9LD/banner-1l.jpg" 
+                 class="w-full h-96 object-cover rounded-2xl mb-8" 
+                 alt="El Resolvito"
+                 loading="lazy"
+                 onerror="this.src='https://placehold.co/800x600/2E7D32/white?text=El+Resolvito'">
+
+            <div class="prose prose-lg max-w-none">
+                <p class="text-lg text-gray-700 mb-6">En un mundo donde cada vez es más complicado conseguir productos de calidad y atención cercana, <strong>El Resolvito</strong> nació para ser tu aliado en La Habana Vieja. No solo somos una tienda; somos la solución rápida, confiable y humana que necesitas en el día a día. Aquí te contamos por qué cada vez más personas nos eligen.</p>
+
+                <h2 class="text-2xl font-bold mt-10 mb-4 text-cuban-green">📍 Cercanía que se siente</h2>
+                <p class="mb-4">Estamos en el corazón de La Habana Vieja, a minutos de ti. No importa si vives en Centro Habana o en cualquier punto de la ciudad: nuestro servicio de entrega rápida (especialmente dentro de La Habana Vieja) hace que recibir tus productos sea fácil y sin complicaciones. Puedes pasar a recogerlos o solicitar que te los llevemos.</p>
+
+                <h2 class="text-2xl font-bold mt-10 mb-4 text-cuban-green">📲 Atención personalizada por WhatsApp</h2>
+                <p class="mb-4">¿Tienes dudas? ¿Quieres saber si tenemos un producto en específico? ¿Necesitas ayuda para armar tu pedido? <strong>Escríbenos al 5356382909</strong> y te responderemos a la mayor brevedad. No somos un chatbot; somos personas reales que entienden tus necesidades y te orientan con gusto. Además, puedes hacer tu pedido directamente por WhatsApp sin complicaciones.</p>
+
+                <h2 class="text-2xl font-bold mt-10 mb-4 text-cuban-green">🛒 Variedad de productos</h2>
+                <p class="mb-4">En nuestra tienda encontrarás de todo: desde alimentos básicos como atún, café, huevos y harina, hasta productos de higiene, perfumes, bebidas y artículos para el hogar. Constantemente estamos ampliando nuestro catálogo para ofrecerte lo que necesitas. ¿No encuentras algo? Dínoslo y lo gestionamos.</p>
+
+                <h2 class="text-2xl font-bold mt-10 mb-4 text-cuban-green">💰 Precios justos y transparentes</h2>
+                <p class="mb-4">Sabemos lo importante que es cuidar el bolsillo. Por eso trabajamos con precios claros, sin sorpresas. Publicamos nuestras ofertas en el <a href="https://whatsapp.com/channel/0029VbAdqJO2f3EL764Cro3G" target="_blank" class="text-cuban-green underline">canal de WhatsApp</a> y en la web, para que siempre estés informado.</p>
+
+                <h2 class="text-2xl font-bold mt-10 mb-4 text-cuban-green">📦 Envíos rápidos y seguros</h2>
+                <p class="mb-4">Si estás en La Habana Vieja, te llevamos el pedido en el día. Coordinamos la entrega a tu conveniencia. Para otras zonas de La Habana, consulta disponibilidad. Nuestro objetivo es que recibas tus productos en perfecto estado y a tiempo.</p>
+
+                <h2 class="text-2xl font-bold mt-10 mb-4 text-cuban-green">🤝 Confianza que se construye</h2>
+                <p class="mb-4">Detrás de El Resolvito hay un equipo comprometido con la satisfacción de nuestros clientes. Cada pedido, cada consulta, cada entrega, la hacemos pensando en ti. Las reseñas y recomendaciones de quienes ya nos conocen son nuestro mejor aval.</p>
+
+                <!-- Llamada a la acción -->
+                <div class="bg-cuban-green/10 p-6 rounded-xl my-8">
+                    <h3 class="text-xl font-bold mb-2 text-cuban-green">¿Quieres probar?</h3>
+                    <p class="mb-4">Visita nuestra tienda online o escríbenos por WhatsApp. Estaremos encantados de atenderte.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="../tienda.html" class="inline-flex items-center gap-2 bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark transition">
+                            <i class="fas fa-store"></i> Ir a la tienda
+                        </a>
+                        <a href="https://wa.me/5356382909?text=Hola,%20quiero%20información%20sobre%20sus%20productos" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-lg font-bold hover:bg-[#128C7E] transition">
+                            <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ============================================ -->
+                <!-- SECCIÓN DE INTERACCIÓN -->
+                <!-- ============================================ -->
+                
+                <!-- Botones de like y compartir -->
+                <div class="interaccion-blog">
+                    <button id="likeButton" class="like-btn">
+                        <i class="far fa-thumbs-up"></i> Me gusta <span id="likeCount">0</span>
+                    </button>
+                    <button id="shareButton" class="share-btn">
+                        <i class="fab fa-whatsapp"></i> Compartir
+                    </button>
+                </div>
+
+                <!-- Comentarios destacados (gestionados manualmente) -->
+                <div class="comentarios-destacados">
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fas fa-star text-cuban-green"></i> Comentarios destacados
+                    </h3>
+                    
+                    <div id="comentarios-lista">
+                        <!-- Puedes editar estos comentarios directamente en el HTML -->
+                        <div class="comentario-item">
+                            <p class="comentario-autor">Laura Martínez</p>
+                            <p class="comentario-texto">Llevo varios meses comprando aquí y siempre recibo buen trato y productos de calidad. Recomendados.</p>
+                            <p class="comentario-fecha">Hace 2 días</p>
+                        </div>
+                        <div class="comentario-item">
+                            <p class="comentario-autor">Carlos Pérez</p>
+                            <p class="comentario-texto">La atención por WhatsApp es súper rápida y me han solucionado más de un apuro. ¡Gracias!</p>
+                            <p class="comentario-fecha">Hace 1 semana</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 text-center">
+                        <a href="https://wa.me/5356382909?text=Quiero%20comentar%20el%20artículo%20'Por%20qué%20comprar%20en%20El%20Resolvito'" target="_blank" class="inline-flex items-center gap-2 text-cuban-green hover:underline">
+                            <i class="fab fa-whatsapp"></i> Deja tu comentario por WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modales y footer -->
+    <div id="image-modal-container"></div>
+    <div id="cart-sidebar-container"></div>
+    <div id="checkout-modal-container"></div>
+    <div id="footer-container"></div>
+
+    <!-- Toast -->
+    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
+        <p id="cartToastMessage"></p>
+    </div>
+
+    <script src="../js/elresolvito.js" defer></script>
+
+    <script>
+        // ============================================
+        // INTERACCIÓN DEL BLOG (Likes y Compartir)
+        // ============================================
+
+        // IDENTIFICADOR ÚNICO PARA ESTE ARTÍCULO
+        const articuloId = 'por-que-comprar';
+
+        function cargarLike() {
+            const likesGuardados = JSON.parse(localStorage.getItem('likesBlog')) || {};
+            const contador = likesGuardados[articuloId] || 0;
+            document.getElementById('likeCount').textContent = contador;
+
+            const usuarioDioLike = localStorage.getItem(`like_${articuloId}_user`);
+            if (usuarioDioLike) {
+                document.getElementById('likeButton').classList.add('liked');
+                document.getElementById('likeButton').innerHTML = '<i class="fas fa-thumbs-up"></i> Me gusta <span id="likeCount">' + contador + '</span>';
+            }
+        }
+
+        document.getElementById('likeButton').addEventListener('click', function() {
+            const yaDioLike = localStorage.getItem(`like_${articuloId}_user`);
+            if (yaDioLike) {
+                alert('Ya has dado like a este artículo');
+                return;
+            }
+
+            const likesGuardados = JSON.parse(localStorage.getItem('likesBlog')) || {};
+            likesGuardados[articuloId] = (likesGuardados[articuloId] || 0) + 1;
+            localStorage.setItem('likesBlog', JSON.stringify(likesGuardados));
+            localStorage.setItem(`like_${articuloId}_user`, 'true');
+
+            document.getElementById('likeCount').textContent = likesGuardados[articuloId];
+            document.getElementById('likeButton').classList.add('liked');
+            document.getElementById('likeButton').innerHTML = '<i class="fas fa-thumbs-up"></i> Me gusta <span id="likeCount">' + likesGuardados[articuloId] + '</span>';
+        });
+
+        document.getElementById('shareButton').addEventListener('click', function() {
+            const titulo = document.getElementById('titulo-articulo').textContent;
+            const url = window.location.href;
+            const mensaje = `Mira este artículo de El Resolvito: ${titulo} - ${url}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(mensaje)}`, '_blank');
+        });
+
+        cargarLike();
+
+        // ============================================
+        // CARGA DE COMPONENTES
+        // ============================================
+        async function loadComponent(id, path) {
+            try {
+                const res = await fetch(path);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const html = await res.text();
+                document.getElementById(id).innerHTML = html;
+            } catch (error) {
+                console.error(`Error cargando ${path}:`, error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadComponent('header-container', '../components/header.html');
+            await loadComponent('mobile-menu-container', '../components/mobile-menu.html');
+            await loadComponent('floating-buttons-container', '../components/floating-buttons.html');
+            await loadComponent('image-modal-container', '../components/image-modal.html');
+            await loadComponent('cart-sidebar-container', '../components/cart-sidebar.html');
+            await loadComponent('checkout-modal-container', '../components/checkout-modal.html');
+            await loadComponent('footer-container', '../components/footer.html');
+        });
+    </script>
+</body>
+</html>
