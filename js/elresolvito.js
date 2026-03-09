@@ -201,6 +201,15 @@ var WHOLESALE_PRODUCTS = [
             return;
         }
 
+        // ✅ Cerrar el sidebar del carrito si está abierto
+        const sidebar = document.getElementById('cartSidebar');
+        const overlay = document.getElementById('cartOverlay');
+        if (sidebar && sidebar.classList.contains('cart-open')) {
+            sidebar.classList.remove('cart-open');
+            overlay?.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
         // Actualizar resumen en el modal antes de mostrarlo
         updateCheckoutSummary();
         
