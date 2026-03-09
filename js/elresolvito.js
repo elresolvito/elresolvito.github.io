@@ -1,5 +1,5 @@
 // ============================================
-// PRODUCTOS
+// PRODUCTOS (BASE DE DATOS)
 // ============================================
 var PRODUCTS = [
     { id: 1, nombre: "Atún en lata", categoria: "Alimentos y conservas", precio: 540, imagen: "https://i.postimg.cc/76xHK6zt/atun_precio_500.png", descripcion: "Lata 200g" },
@@ -59,7 +59,7 @@ var WHOLESALE_PRODUCTS = [
 ];
 
 // ============================================
-// CARRITO Y FUNCIONES
+// CARRITO Y FUNCIONES PRINCIPALES
 // ============================================
 (function() {
     'use strict';
@@ -67,15 +67,13 @@ var WHOLESALE_PRODUCTS = [
     let cart = JSON.parse(localStorage.getItem('elResolvitoCart')) || [];
     const WHATSAPP_NUMBER = '5356382909';
     const MINIMUM_PURCHASE = 500;
-    
+    const SHIPPING_COST_HABANA_VIEJA = 400;
+
     // ============================================
     // FUNCIONES DEL CARRITO
     // ============================================
     window.addToCart = function(product) {
-        console.log('Añadiendo producto:', product);
-        
         if (!product || !product.id || !product.nombre || !product.precio) {
-            console.error('Producto inválido:', product);
             showToast('Error al añadir producto', 'error');
             return false;
         }
@@ -95,7 +93,7 @@ var WHOLESALE_PRODUCTS = [
         }
 
         saveCart();
-        updateCartUI();
+        window.updateCartUI();
         showToast('✓ Producto añadido al carrito');
         return true;
     };
@@ -112,30 +110,24 @@ var WHOLESALE_PRODUCTS = [
         if (cart[index]) {
             cart[index].cantidad = newQuantity;
             saveCart();
-            updateCartUI();
+            window.updateCartUI();
         }
     };
 
     window.removeFromCart = function(index) {
-        if (cart[index]) {
-            cart.splice(index, 1);
-            saveCart();
-            updateCartUI();
-            showToast('Producto eliminado');
-        }
+        removeFromCart(index);
     };
 
-    // Versión local para uso interno
     function removeFromCart(index) {
         if (cart[index]) {
             cart.splice(index, 1);
             saveCart();
-            updateCartUI();
+            window.updateCartUI();
             showToast('Producto eliminado');
         }
     }
 
-    function updateCartUI() {
+    window.updateCartUI = function() {
         const totalItems = cart.reduce((sum, item) => sum + (item.cantidad || 0), 0);
         const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
         
@@ -143,11 +135,7 @@ var WHOLESALE_PRODUCTS = [
         document.querySelectorAll('#cartCount, #floatingCartCount').forEach(el => {
             if (el) {
                 el.textContent = totalItems;
-                if (totalItems === 0) {
-                    el.classList.add('hidden');
-                } else {
-                    el.classList.remove('hidden');
-                }
+                el.classList.toggle('hidden', totalItems === 0);
             }
         });
         
@@ -178,7 +166,7 @@ var WHOLESALE_PRODUCTS = [
             }
         }
         
-        // Actualizar totals
+        // Actualizar totales en el sidebar del carrito
         const subtotalEl = document.getElementById('cartSubtotal');
         const shippingEl = document.getElementById('cartShipping');
         const totalEl = document.getElementById('cartTotal');
@@ -192,49 +180,13 @@ var WHOLESALE_PRODUCTS = [
             if (shippingEl) shippingEl.innerHTML = `<span class="text-gray-600">Seleccionar en checkout</span>`;
             if (totalEl) totalEl.textContent = `$${subtotal.toLocaleString()}`;
         }
-    }
 
-    window.updateCartUI = updateCartUI;
-
-    // ============================================
-    // TOGGLE CARRITO - VERSIÓN CORREGIDA
-    // ============================================
-    window.toggleCart = function() {
-        console.log('🛒 Ejecutando toggleCart');
-        
-        const sidebar = document.getElementById('cartSidebar');
-        const overlay = document.getElementById('cartOverlay');
-        
-        if (!sidebar) {
-            console.error('❌ sidebar no encontrado');
-            return;
-        }
-        
-        if (!overlay) {
-            console.error('❌ overlay no encontrado');
-            return;
-        }
-        
-        console.log('Estado actual - sidebar tiene cart-open:', sidebar.classList.contains('cart-open'));
-        
-        if (sidebar.classList.contains('cart-open')) {
-            // Cerrar
-            sidebar.classList.remove('cart-open');
-            overlay.classList.add('hidden');
-            document.body.style.overflow = '';
-            console.log('👋 Carrito cerrado');
-        } else {
-            // Abrir
-            sidebar.classList.add('cart-open');
-            overlay.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-            console.log('✅ Carrito abierto');
-            updateCartUI();
-        }
+        // Actualizar resumen en el modal de checkout (si está abierto)
+        updateCheckoutSummary();
     };
 
     // ============================================
-    // OTRAS FUNCIONES
+    // FUNCIONES DEL CHECKOUT
     // ============================================
     window.openCheckoutModal = function() {
         if (cart.length === 0) {
@@ -248,26 +200,184 @@ var WHOLESALE_PRODUCTS = [
             showToast(`Mínimo de compra: $${MINIMUM_PURCHASE}`, 'warning');
             return;
         }
+
+        // Actualizar resumen en el modal antes de mostrarlo
+        updateCheckoutSummary();
         
-        const mensaje = generarMensajeWhatsApp();
-        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank');
+        const modal = document.getElementById('checkoutModal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
     };
 
-    function generarMensajeWhatsApp() {
-        let mensaje = "🛒 *Nuevo pedido - El Resolvito*\n\n";
-        mensaje += "*PRODUCTOS:*\n";
+    window.closeCheckoutModal = function() {
+        const modal = document.getElementById('checkoutModal');
+        if (modal) {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+    };
+
+    function updateCheckoutSummary() {
+        const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
+        const summaryEl = document.getElementById('checkoutCartSummary');
+        const totalEl = document.getElementById('checkoutTotal');
         
+        if (summaryEl) {
+            if (cart.length === 0) {
+                summaryEl.innerHTML = '<p class="text-gray-500">Carrito vacío</p>';
+            } else {
+                summaryEl.innerHTML = cart.map(item => 
+                    `<div class="flex justify-between text-xs"><span>${item.nombre} x${item.cantidad}</span><span>$${(item.precio * item.cantidad).toLocaleString()}</span></div>`
+                ).join('');
+            }
+        }
+        if (totalEl) {
+            totalEl.textContent = `$${subtotal.toLocaleString()}`;
+        }
+    }
+
+    window.sendCompleteOrder = function() {
+        // Obtener datos del carrito
+        if (cart.length === 0) {
+            alert('El carrito está vacío');
+            return;
+        }
+
+        // Obtener valores del formulario
+        const customerName = document.getElementById('customerName')?.value.trim();
+        const customerAddress = document.getElementById('customerAddress')?.value.trim();
+        const deliveryZone = document.querySelector('input[name="deliveryZone"]:checked')?.value;
+        const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value;
+        const weight = document.getElementById('approximateWeight')?.value || '';
+        const notes = document.getElementById('customerNotes')?.value.trim() || '';
+
+        // Validaciones básicas
+        if (!customerName || !customerAddress || !deliveryZone || !paymentMethod) {
+            alert('Por favor, completa todos los campos obligatorios.');
+            return;
+        }
+
+        // Calcular subtotal
+        const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
+        if (subtotal < MINIMUM_PURCHASE) {
+            alert(`El pedido mínimo es de $${MINIMUM_PURCHASE}`);
+            return;
+        }
+
+        // Generar mensaje
+        let mensaje = "🛒 *NUEVO PEDIDO - EL RESOLVITO*\n\n";
+        mensaje += "*PRODUCTOS:*\n";
         cart.forEach(item => {
             mensaje += `• ${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString()}\n`;
         });
-        
-        const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
+
         mensaje += `\n*Subtotal:* $${subtotal.toLocaleString()}`;
-        mensaje += `\n*Total:* $${subtotal.toLocaleString()}`;
-        mensaje += `\n\n📍 *Zona:* La Habana Vieja`;
+
+        // Costo de envío según zona
+        let envioTexto = '';
+        if (deliveryZone === 'habana-vieja') {
+            envioTexto = `$${SHIPPING_COST_HABANA_VIEJA} (La Habana Vieja)`;
+            // Nota de peso si aplica
+            if (weight === 'mas-10kg') {
+                envioTexto += ' - Peso superior a 10kg, el costo podría ajustarse.';
+            }
+        } else {
+            envioTexto = 'A convenir (fuera de La Habana Vieja)';
+        }
+        mensaje += `\n*Envío:* ${envioTexto}`;
+
+        // Total estimado (solo si es La Habana Vieja y peso normal, sino se deja abierto)
+        if (deliveryZone === 'habana-vieja' && weight !== 'mas-10kg') {
+            mensaje += `\n*Total estimado:* $${(subtotal + SHIPPING_COST_HABANA_VIEJA).toLocaleString()}`;
+        } else {
+            mensaje += `\n*Total:* A confirmar`;
+        }
+
+        // Datos del cliente
+        mensaje += `\n\n*DATOS DEL CLIENTE*`;
+        mensaje += `\n👤 *Nombre:* ${customerName}`;
+        mensaje += `\n📍 *Dirección:* ${customerAddress}`;
+
+        // Peso si se seleccionó
+        const pesoTexto = {
+            'menos-1kg': 'Menos de 1 kg',
+            '1-3kg': '1-3 kg',
+            '3-5kg': '3-5 kg',
+            '5-10kg': '5-10 kg',
+            'mas-10kg': 'Más de 10 kg'
+        };
+        if (weight && pesoTexto[weight]) {
+            mensaje += `\n⚖️ *Peso aproximado:* ${pesoTexto[weight]}`;
+        }
+
+        mensaje += `\n💳 *Pago propuesto:* ${paymentMethod}`;
+
+        if (notes) {
+            mensaje += `\n📝 *Notas:* ${notes}`;
+        }
+
+        mensaje += `\n\n_Te contactaremos para confirmar disponibilidad y coordinar la entrega._`;
+
+        // Abrir WhatsApp
+        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank');
+
+        // Cerrar modal y carrito
+        window.closeCheckoutModal();
+        if (document.getElementById('cartSidebar')?.classList.contains('cart-open')) {
+            window.toggleCart(); // cierra el carrito si está abierto
+        }
+
+        // Opcional: limpiar carrito después de enviar? Por ahora no, para poder reutilizar.
+        // Si se desea vaciar, descomentar la siguiente línea:
+        // cart = []; saveCart(); window.updateCartUI();
+    };
+
+    // ============================================
+    // FUNCIONES DE UTILIDAD (TOAST, MODALES)
+    // ============================================
+    function showToast(message, type = 'success') {
+        const toast = document.getElementById('cartToast');
+        const toastMessage = document.getElementById('cartToastMessage');
         
-        return mensaje;
+        if (toast && toastMessage) {
+            toastMessage.textContent = message;
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            toast.classList.add('opacity-100');
+            
+            if (type === 'error') {
+                toast.classList.add('bg-red-600');
+                toast.classList.remove('bg-gray-800');
+            } else {
+                toast.classList.add('bg-gray-800');
+                toast.classList.remove('bg-red-600');
+            }
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none');
+                toast.classList.remove('opacity-100');
+            }, 3000);
+        }
     }
+
+    window.toggleCart = function() {
+        const sidebar = document.getElementById('cartSidebar');
+        const overlay = document.getElementById('cartOverlay');
+        
+        if (!sidebar || !overlay) {
+            console.error('Elementos del carrito no encontrados');
+            return;
+        }
+        
+        sidebar.classList.toggle('cart-open');
+        overlay.classList.toggle('hidden');
+        document.body.style.overflow = sidebar.classList.contains('cart-open') ? 'hidden' : '';
+        
+        if (sidebar.classList.contains('cart-open')) {
+            window.updateCartUI();
+        }
+    };
 
     window.toggleDayNight = function() {
         document.body.classList.toggle('night-mode');
@@ -306,60 +416,27 @@ var WHOLESALE_PRODUCTS = [
         }
     };
 
-    function showToast(message, type = 'success') {
-        const toast = document.getElementById('cartToast');
-        const toastMessage = document.getElementById('cartToastMessage');
-        
-        if (toast && toastMessage) {
-            toastMessage.textContent = message;
-            toast.classList.remove('opacity-0', 'pointer-events-none');
-            toast.classList.add('opacity-100');
-            
-            if (type === 'error') {
-                toast.classList.add('bg-red-600');
-                toast.classList.remove('bg-gray-800');
-            } else {
-                toast.classList.add('bg-gray-800');
-                toast.classList.remove('bg-red-600');
-            }
-            
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'pointer-events-none');
-                toast.classList.remove('opacity-100');
-            }, 3000);
-        }
-    }
-
     // ============================================
     // INICIALIZACIÓN
     // ============================================
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('✅ El Resolvito JS inicializado');
-        
         const pageFade = document.getElementById('pageFade');
         if (pageFade) pageFade.classList.add('opacity-0');
         
+        // Restaurar modo nocturno
         if (localStorage.getItem('nightMode') === 'true') {
             document.body.classList.add('night-mode');
         }
         
-        updateCartUI();
+        window.updateCartUI();
         
-        // Verificar que los elementos del carrito existen
-        setTimeout(() => {
-            const sidebar = document.getElementById('cartSidebar');
-            const overlay = document.getElementById('cartOverlay');
-            console.log('Sidebar existe:', !!sidebar);
-            console.log('Overlay existe:', !!overlay);
-            if (sidebar) console.log('Clases iniciales sidebar:', sidebar.className);
-            if (overlay) console.log('Clases iniciales overlay:', overlay.className);
-        }, 1000);
+        console.log('✅ El Resolvito JS inicializado correctamente');
     });
 
 })();
 
 // ============================================
-// FUNCIÓN DE DEPURACIÓN
+// FUNCIÓN DE DEPURACIÓN (OPCIONAL)
 // ============================================
 window.debugCart = function() {
     console.log('=== DEBUG CARRITO ===');
