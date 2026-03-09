@@ -12,6 +12,7 @@
         
         <div class="p-6">
             <form id="checkoutForm" onsubmit="event.preventDefault(); window.sendCompleteOrder()">
+                <!-- Resumen del carrito -->
                 <div class="mb-4 p-3 bg-gray-50 rounded-lg">
                     <p class="text-sm font-semibold mb-1">Resumen de tu compra:</p>
                     <div id="checkoutCartSummary" class="text-xs text-gray-600 max-h-20 overflow-y-auto"></div>
@@ -22,20 +23,43 @@
                     <p class="text-xs text-gray-500 mt-1">Compra mínima: $500</p>
                 </div>
 
+                <!-- Zona de entrega (con lógica real) -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Zona de entrega *</label>
-                    <div class="flex flex-col sm:flex-row gap-3">
-                        <label class="flex items-center gap-2 p-3 border rounded-lg cursor-pointer hover:bg-gray-50 flex-1">
-                            <input type="radio" name="deliveryZone" value="habana-vieja" checked class="w-4 h-4 text-cuban-green">
-                            <span>La Habana Vieja <span class="text-xs font-bold text-cuban-green">($400)</span></span>
+                    <div class="flex flex-col gap-3">
+                        <label class="flex items-start gap-2 p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="deliveryZone" value="habana-vieja" checked class="w-4 h-4 text-cuban-green mt-1">
+                            <div>
+                                <span class="font-medium">La Habana Vieja</span>
+                                <span class="text-xs font-bold text-cuban-green ml-2">+ $400</span>
+                                <p class="text-xs text-gray-500 mt-1">* Para pedidos de más de 10 kg, el costo de envío puede variar. Lo coordinamos por WhatsApp.</p>
+                            </div>
                         </label>
-                        <label class="flex items-center gap-2 p-3 border rounded-lg cursor-pointer hover:bg-gray-50 flex-1">
-                            <input type="radio" name="deliveryZone" value="fuera" class="w-4 h-4 text-cuban-green">
-                            <span>Fuera de LH <span class="text-xs text-gray-500">(a consultar)</span></span>
+                        <label class="flex items-start gap-2 p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="deliveryZone" value="otro" class="w-4 h-4 text-cuban-green mt-1">
+                            <div>
+                                <span class="font-medium">Otro municipio</span>
+                                <p class="text-xs text-gray-600 mt-1">El costo de la mensajería se acuerda directamente con el mensajero según la distancia y el peso. Te contactaremos para coordinar.</p>
+                            </div>
                         </label>
                     </div>
                 </div>
 
+                <!-- Peso aproximado (opcional, pero útil) -->
+                <div class="mb-4">
+                    <label for="approximateWeight" class="block text-sm font-medium text-gray-700 mb-1">Peso aproximado (opcional)</label>
+                    <select id="approximateWeight" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                        <option value="">Selecciona una opción</option>
+                        <option value="menos-1kg">Menos de 1 kg</option>
+                        <option value="1-3kg">Entre 1 y 3 kg</option>
+                        <option value="3-5kg">Entre 3 y 5 kg</option>
+                        <option value="5-10kg">Entre 5 y 10 kg</option>
+                        <option value="mas-10kg">Más de 10 kg</option>
+                    </select>
+                    <p class="text-xs text-gray-500 mt-1">Esto ayuda a calcular mejor el envío, especialmente si estás fuera de La Habana Vieja.</p>
+                </div>
+
+                <!-- Datos del cliente -->
                 <div class="mb-4">
                     <label for="customerName" class="block text-sm font-medium text-gray-700 mb-1">Nombre completo *</label>
                     <input type="text" id="customerName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg">
@@ -46,25 +70,34 @@
                     <textarea id="customerAddress" rows="2" required class="w-full px-4 py-3 border border-gray-300 rounded-lg"></textarea>
                 </div>
 
+                <!-- Método de pago (con advertencia realista) -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Método de pago *</label>
-                    <div class="flex flex-col sm:flex-row gap-3">
-                        <label class="flex items-center gap-2 p-3 border rounded-lg cursor-pointer hover:bg-gray-50 flex-1">
-                            <input type="radio" name="paymentMethod" value="Efectivo" checked class="w-4 h-4 text-cuban-green">
-                            <span>Efectivo</span>
+                    <div class="flex flex-col gap-3">
+                        <label class="flex items-start gap-2 p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="paymentMethod" value="Efectivo" checked class="w-4 h-4 text-cuban-green mt-1">
+                            <div>
+                                <span class="font-medium">Efectivo</span>
+                                <p class="text-xs text-gray-500">Pagas al recibir el pedido.</p>
+                            </div>
                         </label>
-                        <label class="flex items-center gap-2 p-3 border rounded-lg cursor-pointer hover:bg-gray-50 flex-1">
-                            <input type="radio" name="paymentMethod" value="Transferencia" class="w-4 h-4 text-cuban-green">
-                            <span>Transferencia</span>
+                        <label class="flex items-start gap-2 p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="paymentMethod" value="Transferencia" class="w-4 h-4 text-cuban-green mt-1">
+                            <div>
+                                <span class="font-medium">Transferencia</span>
+                                <p class="text-xs text-gray-500">No siempre disponible. Te confirmaremos si se puede aceptar. Si no, puedes pagar en efectivo.</p>
+                            </div>
                         </label>
                     </div>
                 </div>
 
+                <!-- Notas adicionales -->
                 <div class="mb-6">
                     <label for="customerNotes" class="block text-sm font-medium text-gray-700 mb-1">Notas adicionales</label>
-                    <textarea id="customerNotes" rows="2" class="w-full px-4 py-3 border border-gray-300 rounded-lg"></textarea>
+                    <textarea id="customerNotes" rows="2" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="Ej: ¿A qué hora prefieres recibir? ¿Hay algún punto de referencia?"></textarea>
                 </div>
 
+                <!-- Botones de acción -->
                 <div class="flex gap-3">
                     <button type="button" onclick="window.closeCheckoutModal()" class="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-lg font-bold hover:bg-gray-100 transition">Cancelar</button>
                     <button type="submit" class="flex-1 btn-whatsapp text-white px-4 py-3 rounded-lg font-bold hover:opacity-90 transition flex items-center justify-center gap-2">
