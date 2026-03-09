@@ -1,38 +1,60 @@
 <!-- components/cart-sidebar.html -->
 <div id="cartOverlay" class="fixed inset-0 bg-black/50 z-[9999] hidden" onclick="window.toggleCart()"></div>
+
 <div id="cartSidebar" class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl z-[10000] max-h-[85vh] flex flex-col" style="transform: translateY(100%);">
-    <div class="p-4 border-b flex justify-between items-center bg-cuban-green text-white rounded-t-3xl">
-        <h3 class="font-bold text-lg"><i class="fas fa-shopping-cart mr-2"></i>Tu Carrito</h3>
-        <button onclick="window.toggleCart()" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-    <div id="cartItems" class="flex-1 overflow-y-auto p-4 space-y-4">
-        <div class="text-center py-8 text-gray-500">
-            <i class="fas fa-shopping-cart text-4xl mb-3 opacity-30"></i>
-            <p>Tu carrito está vacío</p>
+    
+    <!-- Cabecera más atractiva -->
+    <div class="p-5 bg-gradient-to-r from-cuban-green to-cuban-dark text-white rounded-t-3xl">
+        <div class="flex justify-between items-center">
+            <h3 class="text-xl font-bold flex items-center gap-2">
+                <i class="fas fa-shopping-cart"></i> Tu Carrito
+                <span id="cartCount" class="bg-cuban-yellow text-cuban-dark text-sm px-2 py-0.5 rounded-full hidden">0</span>
+            </h3>
+            <button onclick="window.toggleCart()" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
+        <p class="text-sm opacity-90 mt-1">Revisa tus productos antes de finalizar</p>
     </div>
-    <div class="border-t p-4 bg-gray-50">
-        <div class="space-y-2 mb-4">
-            <div class="flex justify-between text-sm">
-                <span>Subtotal:</span>
-                <span id="cartSubtotal">$0</span>
+    
+    <!-- Lista de productos -->
+    <div id="cartItems" class="flex-1 overflow-y-auto p-5 space-y-3 bg-gray-50">
+        <!-- Los items se cargan dinámicamente -->
+    </div>
+    
+    <!-- Resumen y botón de checkout -->
+    <div class="p-5 bg-white border-t border-gray-200 shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
+        <div class="space-y-3 mb-5">
+            <!-- Subtotal -->
+            <div class="flex justify-between items-center text-base">
+                <span class="text-gray-600">Subtotal:</span>
+                <span id="cartSubtotal" class="font-bold text-gray-800">$0</span>
             </div>
-            <div class="flex justify-between text-sm">
-                <span>Envío:</span>
-                <span id="cartShipping">$200</span>
+            
+            <!-- Envío (se muestra según selección) -->
+            <div class="flex justify-between items-center text-base border-t border-gray-100 pt-2">
+                <span class="text-gray-600">Envío:</span>
+                <span id="cartShipping" class="text-gray-600">A calcular en checkout</span>
             </div>
-            <div class="border-t pt-2 flex justify-between text-lg font-bold">
+            
+            <!-- Total -->
+            <div class="flex justify-between items-center text-lg font-bold border-t border-gray-200 pt-3">
                 <span>Total:</span>
                 <span id="cartTotal" class="text-cuban-green">$0</span>
             </div>
         </div>
-        <button onclick="window.openCheckoutModal()" class="w-full bg-green-600 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-green-700 transition">
-            <i class="fab fa-whatsapp"></i> Proceder al checkout
+        
+        <!-- Botón de checkout mejorado -->
+        <button onclick="window.openCheckoutModal()" 
+                class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-3 hover:opacity-90 transition shadow-md text-lg">
+            <i class="fab fa-whatsapp text-xl"></i>
+            Proceder al checkout
         </button>
-        <p class="text-xs text-center text-gray-500 mt-3">
-            <i class="fas fa-lock mr-1"></i> Pedido seguro al 5356382909
+        
+        <!-- Mensaje de seguridad -->
+        <p class="text-xs text-center text-gray-500 mt-4 flex items-center justify-center gap-1">
+            <i class="fas fa-lock text-cuban-green"></i> 
+            Pedido seguro por WhatsApp al 5356382909
         </p>
     </div>
 </div>
