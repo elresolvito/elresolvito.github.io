@@ -31,6 +31,54 @@
             }
         }
     </script>
+    
+    <!-- Estilos adicionales para la sección del logo -->
+    <style>
+        .logo-container {
+            background: linear-gradient(135deg, #2E7D32, #1B5E20);
+            border-radius: 2rem;
+            padding: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+        
+        .logo-icon {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem auto;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        
+        .logo-icon i {
+            font-size: 4rem;
+            color: #2E7D32;
+        }
+        
+        .logo-text {
+            text-align: center;
+            color: white;
+        }
+        
+        .logo-text h3 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .logo-text p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body class="bg-white text-gray-800">
 
@@ -53,7 +101,7 @@
         </div>
     </section>
 
-    <!-- Nuestra Historia (con imagen más genérica de La Habana) -->
+    <!-- Nuestra Historia (con LOGO en lugar de imagen) -->
     <section class="py-16">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row items-center gap-12">
@@ -66,12 +114,20 @@
                         <p>Hoy, El Resolvito es más que una tienda: somos un punto de encuentro, un apoyo para emprendedores y un hogar lejos de casa para quienes nos visitan. Y todo esto gracias a ti, que confías en nosotros día a día.</p>
                     </div>
                 </div>
+                
+                <!-- Lado derecho: LOGO de El Resolvito (sin fotos de personas) -->
                 <div class="md:w-1/2">
-                    <!-- Imagen reemplazada: una escena de La Habana con productos o una tienda, sin personas -->
-                    <img src="https://images.unsplash.com/photo-1578911373434-0cb395d2cbfb?w=800&auto=format&fit=crop" 
-                         alt="Tienda en La Habana" 
-                         class="rounded-2xl shadow-xl"
-                         onerror="this.src='https://placehold.co/800x600/2E7D32/white?text=El+Resolvito'">
+                    <div class="logo-container">
+                        <div>
+                            <div class="logo-icon">
+                                <i class="fas fa-store"></i>
+                            </div>
+                            <div class="logo-text">
+                                <h3>El Resolvito</h3>
+                                <p>Tu tienda, tus servicios, tu hogar</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -105,7 +161,7 @@
         </div>
     </section>
 
-    <!-- Valores (sin cambios) -->
+    <!-- Valores -->
     <section class="py-16">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
@@ -141,7 +197,7 @@
         </div>
     </section>
 
-    <!-- SECCIÓN DE EQUIPO REDISEÑADA (sin rostros, con enfoque en el esfuerzo colectivo) -->
+    <!-- Sección de Equipo (sin rostros) -->
     <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
@@ -151,7 +207,7 @@
             
             <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
                 
-                <!-- Tarjeta 1: Fundador (sin foto personal) -->
+                <!-- Tarjeta 1: Fundador -->
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden text-center p-6">
                     <div class="w-24 h-24 bg-cuban-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-lightbulb text-4xl text-cuban-green"></i>
@@ -161,7 +217,7 @@
                     <p class="text-gray-600 text-sm">Un habanero que conoce las necesidades del barrio y soñó con crear un espacio donde todos encuentren lo que buscan.</p>
                 </div>
                 
-                <!-- Tarjeta 2: Atención al Cliente (sin foto personal) -->
+                <!-- Tarjeta 2: Atención al Cliente -->
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden text-center p-6">
                     <div class="w-24 h-24 bg-cuban-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-headset text-4xl text-cuban-green"></i>
@@ -171,7 +227,7 @@
                     <p class="text-gray-600 text-sm">Personas comprometidas que hacen posible que cada pedido llegue a tiempo y con una sonrisa.</p>
                 </div>
                 
-                <!-- Tarjeta 3: Aliados (sin foto personal) -->
+                <!-- Tarjeta 3: Aliados -->
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden text-center p-6">
                     <div class="w-24 h-24 bg-cuban-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-handshake text-4xl text-cuban-green"></i>
@@ -218,7 +274,6 @@
     <!-- Scripts -->
     <script src="js/elresolvito.js" defer></script>
     <script>
-        // Carga de componentes
         async function loadComponent(id, path) {
             try {
                 const res = await fetch(path);
