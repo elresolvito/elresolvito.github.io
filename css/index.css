@@ -1,5 +1,5 @@
 /* ============================================ */
-/* ESTILOS EXCLUSIVOS DE LA PÁGINA DE INICIO */
+/* ESTILOS EXCLUSIVOS PARA INDEX (PÁGINA PRINCIPAL) */
 /* ============================================ */
 
 /* Hero banner */
@@ -8,6 +8,7 @@
     height: 500px;
     overflow: hidden;
 }
+
 .hero-bg-day {
     background-image: url('https://i.postimg.cc/7YfPJ9LD/banner_1l.jpg');
     background-size: cover;
@@ -16,6 +17,7 @@
     inset: 0;
     transition: opacity 0.5s ease-in-out;
 }
+
 .hero-bg-night {
     background-image: url('https://i.postimg.cc/MGfKwYjq/plaza-nocturna-1.png');
     background-size: cover;
@@ -25,16 +27,25 @@
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
 }
-body.night-mode .hero-bg-day { opacity: 0; }
-body.night-mode .hero-bg-night { opacity: 1; }
+
+body.night-mode .hero-bg-day {
+    opacity: 0;
+}
+
+body.night-mode .hero-bg-night {
+    opacity: 1;
+}
+
 .hero-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 100%);
 }
+
 body.night-mode .hero-overlay {
     background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%);
 }
+
 .hero-text {
     text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
     font-size: clamp(1.5rem, 5vw, 2.5rem);
@@ -49,109 +60,113 @@ body.night-mode .hero-overlay {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     height: 180px;
 }
+
 .promo-banner:hover {
     transform: translateY(-4px);
     box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
 }
+
 .promo-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%);
 }
+
 .promo-banner img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-.promo-banner h3 { font-size: 1.25rem; margin-bottom: 0.25rem; }
+
+.promo-banner h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+}
 
 /* Productos destacados */
-#featuredProducts { min-height: 200px; }
+#featuredProducts {
+    min-height: 200px;
+}
+
 #featuredProducts .product-card {
-    background: var(--bg-card);
+    background: white;
     border-radius: 1rem;
     overflow: hidden;
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
     cursor: pointer;
-    border: 1px solid var(--border-color);
 }
+
 #featuredProducts .product-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
 }
+
 #featuredProducts .product-image-container {
-    height: 180px; /* altura fija para destacados */
-    background: var(--image-bg);
+    height: 160px;
+    background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    transition: box-shadow 0.2s ease;
 }
-body.night-mode #featuredProducts .product-image-container {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
+
 #featuredProducts .product-image-container img {
-    width: auto;
-    height: auto;
-    max-width: 80%;
-    max-height: 80%;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
     padding: 1rem;
     transition: transform 0.3s ease;
 }
-@media (max-width: 640px) {
-    #featuredProducts .product-image-container {
-        height: 140px;
-    }
-    #featuredProducts .product-image-container img {
-        max-width: 85%;
-        max-height: 85%;
-        padding: 0.5rem;
-    }
-}
+
 #featuredProducts .product-card:hover .product-image-container img {
     transform: scale(1.08);
 }
+
 #featuredProducts .product-card .text-cuban-green {
-    color: var(--primary-green);
+    color: #2E7D32;
     font-weight: 700;
     font-size: 1.25rem;
 }
 
 /* Servicios preview */
 #servicios-container .product-card {
-    background: var(--bg-card);
+    background: white;
     border-radius: 1rem;
     overflow: hidden;
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
-    border: 1px solid var(--border-color);
 }
+
 #servicios-container .product-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
 }
+
 #servicios-container .feature-list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
     margin: 1rem 0;
 }
+
 #servicios-container .feature-item {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     font-size: 0.85rem;
-    color: var(--text-secondary);
 }
-#servicios-container .feature-item i { color: #10B981; font-size: 0.875rem; }
 
-/* Ofertas mayor preview */
+#servicios-container .feature-item i {
+    color: #10B981;
+    font-size: 0.875rem;
+}
+
+/* Ofertas mayor preview - ajustes para móvil */
 .bg-gradient-to-r.from-chancla-azul.to-chancla-rosa {
     background: linear-gradient(135deg, #1E90FF, #FF69B4);
 }
+
 .color-chip {
     width: 20px;
     height: 20px;
@@ -162,64 +177,129 @@ body.night-mode #featuredProducts .product-image-container {
 
 /* Blog preview */
 article {
-    background: var(--bg-card);
+    background: white;
     border-radius: 1rem;
     overflow: hidden;
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
     cursor: pointer;
-    border: 1px solid var(--border-color);
 }
+
 article:hover {
     transform: translateY(-4px);
     box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
 }
+
 article img {
     width: 100%;
     height: 180px;
     object-fit: cover;
 }
+
 article h3 {
     font-size: 1.125rem;
     font-weight: 700;
     margin-top: 0.5rem;
-    color: var(--text-primary);
 }
-article p { color: var(--text-light); }
 
 /* Alojamientos preview */
 #alojamientos-preview {
-    background: var(--bg-card);
+    background: white;
     border-radius: 1.5rem;
     overflow: hidden;
     box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
-    border: 1px solid var(--border-color);
 }
+
 #alojamientos-preview .amenities-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
 }
+
 #alojamientos-preview .amenity-item {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     font-size: 0.9rem;
-    color: var(--text-secondary);
+    color: #4B5563;
 }
-#alojamientos-preview .amenity-item i { color: var(--primary-green); }
 
-/* Responsive solo para inicio */
-@media (max-width: 640px) {
-    .hero-container { height: 350px; }
-    .hero-text { font-size: 1rem; }
-    .hero-container h2 { font-size: 2rem; margin-bottom: 0.5rem; }
-    .promo-banner { height: 140px; }
-    .promo-banner h3 { font-size: 1rem; }
-    article img { height: 140px; }
-    article h3 { font-size: 1rem; }
-    #alojamientos-preview .amenities-grid { grid-template-columns: 1fr; }
+#alojamientos-preview .amenity-item i {
+    color: #2E7D32;
 }
+
+/* Estilos para la nueva sección de horarios (opcional, por si se quiere personalizar más) */
+.bg-cuban-yellow\/10 {
+    background-color: rgba(255, 180, 0, 0.1);
+}
+
+/* ============================================ */
+/* RESPONSIVE - SOLO PARA INDEX */
+/* ============================================ */
+@media (max-width: 640px) {
+    .hero-container {
+        height: 350px;
+    }
+    
+    .hero-text {
+        font-size: 1rem;
+    }
+    
+    .hero-container h2 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .promo-banner {
+        height: 140px;
+    }
+    
+    .promo-banner h3 {
+        font-size: 1rem;
+    }
+    
+    #featuredProducts .product-image-container {
+        height: 120px;
+    }
+    
+    #featuredProducts .product-card .text-cuban-green {
+        font-size: 1rem;
+    }
+    
+    article img {
+        height: 140px;
+    }
+    
+    article h3 {
+        font-size: 1rem;
+    }
+    
+    #alojamientos-preview .amenities-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Ajustes para la sección de ofertas mayor en móvil */
+    .grid-cols-1.md\:grid-cols-2 {
+        gap: 1rem;
+    }
+    .max-w-xs {
+        max-width: 200px; /* imagen más pequeña */
+    }
+    .text-3xl {
+        font-size: 1.8rem;
+    }
+    .space-y-3 {
+        space-y: 0.75rem;
+    }
+}
+
+/* Tablets */
 @media (min-width: 641px) and (max-width: 1024px) {
-    .hero-container { height: 400px; }
+    .hero-container {
+        height: 400px;
+    }
+    
+    #featuredProducts .product-image-container {
+        height: 140px;
+    }
 }
