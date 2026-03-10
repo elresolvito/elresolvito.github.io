@@ -45,6 +45,15 @@
     <div id="mobile-menu-container"></div>
     <div id="floating-buttons-container"></div>
 
+    <!-- ============================================ -->
+    <!-- BANNER DE ENTREGAS RÁPIDAS (NUEVO) -->
+    <!-- ============================================ -->
+    <div class="bg-cuban-green text-white py-2 text-center text-sm font-medium">
+        <i class="fas fa-truck mr-2"></i>
+        📍 Entregas rápidas hoy en Habana Vieja y Centro Habana
+        <i class="fas fa-bolt ml-2 text-yellow-300"></i>
+    </div>
+
     <!-- Barra de búsqueda y filtros -->
     <div class="busqueda-container">
         <div class="container mx-auto px-4">
@@ -106,7 +115,7 @@
         }
 
         // ============================================
-        // RENDERIZAR PRODUCTOS
+        // RENDERIZAR PRODUCTOS (CON BOTÓN MEJORADO)
         // ============================================
         function renderizarProductos(productos) {
             const grid = document.getElementById('productsGrid');
@@ -136,8 +145,11 @@
                             <div class="product-descripcion text-xs text-gray-500 mb-2 line-clamp-1">${p.descripcion || ''}</div>
                             <div class="flex items-center justify-between mt-2">
                                 <span class="product-precio text-lg font-bold text-cuban-green">$${p.precio.toLocaleString()}</span>
-                                <button onclick="window.addToCart({id:${p.id}, nombre:'${nombreSanitizado}', precio:${p.precio}, imagen:'${p.imagen}', cantidad:1})" class="product-btn bg-cuban-green text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-cuban-dark transition-colors">
-                                    <i class="fas fa-plus text-sm"></i>
+                                <!-- 🔥 BOTÓN MEJORADO: más ancho y con texto claro -->
+                                <button onclick="window.addToCart({id:${p.id}, nombre:'${nombreSanitizado}', precio:${p.precio}, imagen:'${p.imagen}', cantidad:1})" 
+                                        class="bg-cuban-green text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-cuban-dark transition-colors flex items-center gap-1">
+                                    <i class="fas fa-cart-plus text-xs"></i>
+                                    AÑADIR
                                 </button>
                             </div>
                         </div>
