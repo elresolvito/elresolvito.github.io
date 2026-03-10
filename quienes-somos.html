@@ -31,54 +31,6 @@
             }
         }
     </script>
-    
-    <!-- Estilos adicionales para la sección del logo -->
-    <style>
-        .logo-container {
-            background: linear-gradient(135deg, #2E7D32, #1B5E20);
-            border-radius: 2rem;
-            padding: 3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
-        }
-        
-        .logo-icon {
-            width: 120px;
-            height: 120px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 2rem auto;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-        }
-        
-        .logo-icon i {
-            font-size: 4rem;
-            color: #2E7D32;
-        }
-        
-        .logo-text {
-            text-align: center;
-            color: white;
-        }
-        
-        .logo-text h3 {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-        
-        .logo-text p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            max-width: 300px;
-            margin: 0 auto;
-        }
-    </style>
 </head>
 <body class="bg-white text-gray-800">
 
@@ -101,7 +53,7 @@
         </div>
     </section>
 
-    <!-- Nuestra Historia (con LOGO en lugar de imagen) -->
+    <!-- Nuestra Historia (con imagen de La Habana desde PostImages) -->
     <section class="py-16">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row items-center gap-12">
@@ -115,19 +67,15 @@
                     </div>
                 </div>
                 
-                <!-- Lado derecho: LOGO de El Resolvito (sin fotos de personas) -->
+                <!-- Lado derecho: Imagen de La Habana (CONFIABLE) -->
                 <div class="md:w-1/2">
-                    <div class="logo-container">
-                        <div>
-                            <div class="logo-icon">
-                                <i class="fas fa-store"></i>
-                            </div>
-                            <div class="logo-text">
-                                <h3>El Resolvito</h3>
-                                <p>Tu tienda, tus servicios, tu hogar</p>
-                            </div>
-                        </div>
+                    <div class="rounded-2xl overflow-hidden shadow-2xl">
+                        <img src="https://i.postimg.cc/rsCKV7LZ/1755367982611.jpg" 
+                             alt="Calle típica de La Habana Vieja" 
+                             class="w-full h-auto object-cover hover:scale-105 transition duration-700"
+                             onerror="this.src='https://placehold.co/800x600/2E7D32/white?text=La+Habana+Vieja'">
                     </div>
+                    <p class="text-sm text-gray-500 mt-3 text-center italic">"Las calles de La Habana Vieja, donde cada rincón guarda una historia"</p>
                 </div>
             </div>
         </div>
@@ -197,12 +145,21 @@
         </div>
     </section>
 
-    <!-- Sección de Equipo (sin rostros) -->
+    <!-- Sección de Equipo (sin rostros) con foto grupal simbólica -->
     <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
                 <span class="text-cuban-green font-bold text-sm uppercase tracking-wider">Detrás del proyecto</span>
                 <h2 class="text-3xl font-bold mt-2">Un equipo con un mismo propósito</h2>
+            </div>
+            
+            <!-- Imagen grupal simbólica (manos, no rostros) -->
+            <div class="max-w-3xl mx-auto mb-12">
+                <img src="https://i.postimg.cc/ydY7Kp4D/manos-trabajo-equipo.jpg" 
+                     alt="Trabajo en equipo" 
+                     class="w-full h-64 object-cover rounded-2xl shadow-xl"
+                     onerror="this.src='https://placehold.co/800x400/2E7D32/white?text=Trabajo+en+equipo'">
+                <p class="text-sm text-gray-500 mt-2 text-center">Manos que trabajan juntas para ofrecerte lo mejor</p>
             </div>
             
             <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
