@@ -83,7 +83,9 @@ body.night-mode .hero-overlay {
     margin-bottom: 0.25rem;
 }
 
-/* Productos destacados */
+/* ============================================ */
+/* PRODUCTOS DESTACADOS - TAMAÑO AUMENTADO */
+/* ============================================ */
 #featuredProducts {
     min-height: 200px;
 }
@@ -103,7 +105,7 @@ body.night-mode .hero-overlay {
 }
 
 #featuredProducts .product-image-container {
-    height: 160px;
+    height: 200px;  /* ⬆️ Aumentado de 160px a 200px */
     background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
     display: flex;
     align-items: center;
@@ -228,7 +230,7 @@ article h3 {
     color: #2E7D32;
 }
 
-/* Estilos para la nueva sección de horarios (opcional, por si se quiere personalizar más) */
+/* Estilos para la nueva sección de horarios */
 .bg-cuban-yellow\/10 {
     background-color: rgba(255, 180, 0, 0.1);
 }
@@ -258,8 +260,9 @@ article h3 {
         font-size: 1rem;
     }
     
+    /* 📱 Productos destacados en móvil - más grandes */
     #featuredProducts .product-image-container {
-        height: 120px;
+        height: 150px;  /* ⬆️ Aumentado de 120px a 150px */
     }
     
     #featuredProducts .product-card .text-cuban-green {
@@ -283,7 +286,7 @@ article h3 {
         gap: 1rem;
     }
     .max-w-xs {
-        max-width: 200px; /* imagen más pequeña */
+        max-width: 200px;
     }
     .text-3xl {
         font-size: 1.8rem;
@@ -299,7 +302,8 @@ article h3 {
         height: 400px;
     }
     
+    /* 📟 Productos destacados en tablets - más grandes */
     #featuredProducts .product-image-container {
-        height: 140px;
+        height: 170px;  /* ⬆️ Aumentado de 140px a 170px */
     }
 }
