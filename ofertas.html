@@ -67,7 +67,7 @@
         </div>
     </section>
 
-    <!-- Grid de Chanclas (reemplaza al carrusel) -->
+    <!-- Grid de Chanclas (solo 4 imágenes) -->
     <section class="py-12">
         <div class="container mx-auto px-4">
             
@@ -76,9 +76,9 @@
                 <p class="text-gray-600">Precio especial por mayoreo: <span class="font-bold text-cuban-green text-2xl">$3,500</span> cada par</p>
             </div>
             
-            <!-- Grid responsivo -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                <!-- Las imágenes se generan con JavaScript -->
+            <!-- Grid responsivo - 4 imágenes -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <!-- Las 4 imágenes se generan con JavaScript -->
             </div>
             
             <!-- Botón de WhatsApp fijo -->
@@ -148,40 +148,52 @@
 
     <script>
         // ============================================
-        // ARRAY DE IMÁGENES DE CHANCLAS
+        // ARRAY DE IMÁGENES DE CHANCLAS (SOLO 4)
         // ============================================
         const chanclasImages = [
-            "https://i.postimg.cc/Bn5GHz54/chancjas_negras_1(1).jpg",
-            "https://i.postimg.cc/2Sdfhtdm/chanclas_beige(1).jpg",
-            "https://i.postimg.cc/525MLr5M/chanclas_blanca_y_azul(1).jpg",
-            "https://i.postimg.cc/dVRKrfRD/chanclas_blanca_y_negra(1).jpg",
-            "https://i.postimg.cc/Qdgr1zgp/chanclas_blancas_1(1).jpg",
-            "https://i.postimg.cc/rp82J9gS/chanclas_negras_2-(1).jpg",
-            "https://i.postimg.cc/SKybrGV1/chanclas_negras-3(1).jpg",
-            "https://i.postimg.cc/tgXG5zDm/chanclas_roja_y_blanca-(1).jpg",
-            "https://i.postimg.cc/CKFpN4Jt/chanclas_rosas(1).jpg",
-            "https://i.postimg.cc/7Z1y0R14/chanclas(1).jpg"
+            {
+                url: "https://i.postimg.cc/13Tq4MfP/chanclas_negras.png",
+                nombre: "Chanclas Negras",
+                descripcion: "Clásicas y elegantes"
+            },
+            {
+                url: "https://i.postimg.cc/fRF9k5Jy/Gemini_Generated_Image_4ltgjx4ltgjx4ltg.png",
+                nombre: "Chanclas Estilo 2",
+                descripcion: "Diseño moderno"
+            },
+            {
+                url: "https://i.postimg.cc/7Zc2bXff/Gemini_Generated_Image_4ywe1b4ywe1b4ywe.png",
+                nombre: "Chanclas Estilo 3",
+                descripcion: "Cómodas y duraderas"
+            },
+            {
+                url: "https://i.postimg.cc/P5cwNKPx/Gemini_Generated_Image_8o7edp8o7edp8o7e.png",
+                nombre: "Chanclas Estilo 4",
+                descripcion: "Color vibrante"
+            }
         ];
 
         // ============================================
-        // GENERAR GRID DE IMÁGENES
+        // GENERAR GRID DE IMÁGENES (4 CHANCLAS)
         // ============================================
         function generarGrid() {
             const gridContainer = document.querySelector('.grid.grid-cols-2');
             if (!gridContainer) return;
 
-            gridContainer.innerHTML = chanclasImages.map((img, index) => `
-                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 group cursor-pointer"
-                     onclick="window.openImageModal('${img}', 'Chancla ${index + 1}')">
-                    <div class="aspect-square overflow-hidden bg-gray-50 p-2">
-                        <img src="${img}" 
-                             alt="Chancla ${index + 1}" 
-                             class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+            gridContainer.innerHTML = chanclasImages.map((item, index) => `
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group cursor-pointer"
+                     onclick="window.openImageModal('${item.url}', '${item.nombre}')">
+                    <div class="aspect-square overflow-hidden bg-gray-50 p-3">
+                        <img src="${item.url}" 
+                             alt="${item.nombre}" 
+                             class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
                              loading="lazy"
-                             onerror="this.src='https://placehold.co/400x300/2E7D32/white?text=Chancla'">
+                             onerror="this.src='https://placehold.co/400x400/2E7D32/white?text=Chancla'">
                     </div>
-                    <div class="p-2 text-center border-t">
-                        <p class="text-sm font-medium text-gray-700">Modelo ${index + 1}</p>
+                    <div class="p-3 text-center border-t">
+                        <p class="font-medium text-gray-800">${item.nombre}</p>
+                        <p class="text-xs text-gray-500 mt-1">${item.descripcion}</p>
+                        <p class="text-cuban-green font-bold mt-2">$3,500</p>
                     </div>
                 </div>
             `).join('');
@@ -209,7 +221,7 @@
             await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
             await loadComponent('footer-container', 'components/footer.html');
             
-            generarGrid(); // En lugar de initCarousel
+            generarGrid(); // Genera las 4 chanclas
         });
     </script>
 </body>
