@@ -37,7 +37,8 @@ var PRODUCTS = [
     { id: 33, nombre: "Whisky 1L", categoria: "Bebidas alcohólicas y malta", precio: 1350, imagen: "https://i.postimg.cc/cLyrb4T0/whisky_1L_precio_1350.png", descripcion: "Botella 1L" },
     { id: 34, nombre: "Whisky Sir Albin", categoria: "Bebidas alcohólicas y malta", precio: 550, imagen: "https://i.postimg.cc/y84kbYnC/whisky_sir_albin_precio_550.png", descripcion: "Botella pequeña" },
     { id: 35, nombre: "Vino Pluvium", categoria: "Bebidas alcohólicas y malta", precio: 1200, imagen: "https://i.postimg.cc/XNLLWmmx/vino_pluvium_precio_1200.png", descripcion: "Botella" },
-    { id: 36, nombre: "Baterías Triple A", categoria: "Electrónicos y accesorios", precio: 300, imagen: "https://i.postimg.cc/DZ2vxZsT/Gemini_Generated_Image_824rio824rio824r.png", descripcion: "Pack 4 unidades" }
+    { id: 36, nombre: "Baterías Triple A", categoria: "Electrónicos y accesorios", precio: 300, imagen: "https://i.postimg.cc/DZ2vxZsT/Gemini_Generated_Image_824rio824rio824r.png", descripcion: "Pack 4 unidades" },
+     { id:37, nombre: "bolsa de arroz", categoria: "Alimentos y conservas", precio: 650, imagen: "https://i.postimg.cc/ZRR352mX/arroz.jpg", descripcion: "Paquete 1 kg" },
 ];
 
 var FEATURED_PRODUCTS = [
