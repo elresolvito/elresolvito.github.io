@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Lienys - Moda y Accesorios - El Resolvito</title>
-    <meta name="description" content="Colección de Lienys: chanclas, carteras, pullovers, jeans y más. Moda cubana con estilo.">
+    <meta name="description" content="Colección de Lienys: chanclas, carteras y más. Moda cubana con estilo.">
     
     <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     
-    <!-- ESTILOS -->
+    <!-- ESTILOS - ORDEN CORRECTO -->
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/lienys.css"> <!-- NUEVO CSS ESPECÍFICO -->
+    <link rel="stylesheet" href="css/lienys.css">
     
     <!-- Fonts y Tailwind -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -194,7 +194,7 @@
 
     <script>
         // ============================================
-        // DATOS DE PRODUCTOS LIENYS
+        // DATOS DE PRODUCTOS LIENYS (CORREGIDOS)
         // ============================================
         const lienysProducts = {
             chanclas: [
@@ -202,7 +202,6 @@
                     id: 1,
                     nombre: "Chanclas Negras",
                     imagen: "https://i.postimg.cc/qvBVZPcH/chancletas_negras.png",
-                    colores: ["Negras"],
                     precio: 4500,
                     descripcion: "Clásicas y elegantes"
                 },
@@ -210,31 +209,27 @@
                     id: 2,
                     nombre: "Chanclas Negras Clásicas",
                     imagen: "https://i.postimg.cc/qvBVZPcH/chancletas_negras.png",
-                    colores: ["Negras"],
                     precio: 4500,
                     descripcion: "Modelo tradicional"
                 },
                 {
                     id: 3,
                     nombre: "Chanclas Blancas",
-                    imagen: "https://i.postimg.cc/8Pmg4pv5/CHANCLETAS_BLANCAS.png",
-                    colores: ["Blancas"],
+                    imagen: "https://i.postimg.cc/8Pmg4pv5/CHANCLETAS-BLANCAS.png",
                     precio: 4500,
                     descripcion: "Luminosas y frescas"
                 },
                 {
                     id: 4,
-                    nombre: "Cartera Beige",
-                    imagen: "https://i.postimg.cc/5ywdZ1kL/cartera_beige.png",
-                    colores: ["Beige"],
+                    nombre: "Chanclas Beige",
+                    imagen: "https://i.postimg.cc/5ywdZ1kL/cartera-beige.png",
                     precio: 4500,
                     descripcion: "Tonos tierra"
                 },
                 {
                     id: 5,
-                    nombre: "Cartera Rosada",
-                    imagen: "https://i.postimg.cc/CxMT63C1/cartera_rozada.png",
-                    colores: ["Rosadas"],
+                    nombre: "Chanclas Rosadas",
+                    imagen: "https://i.postimg.cc/CxMT63C1/cartera-rozada.png",
                     precio: 4500,
                     descripcion: "Suaves y femeninas"
                 }
@@ -243,7 +238,7 @@
                 {
                     id: 101,
                     nombre: "Cartera Azul",
-                    imagen: "https://i.postimg.cc/Vk4RDT46/cartera_azul_muchacha.png",
+                    imagen: "https://i.postimg.cc/Vk4RDT46/cartera-azul-muchacha.png",
                     tipo: "normal",
                     precio: 5000,
                     descripcion: "Azul vibrante"
@@ -251,7 +246,7 @@
                 {
                     id: 102,
                     nombre: "Cartera Beige",
-                    imagen: "https://i.postimg.cc/2STw2JT8/cartera_beige_muchacha.png",
+                    imagen: "https://i.postimg.cc/2STw2JT8/cartera-beige-muchacha.png",
                     tipo: "normal",
                     precio: 5000,
                     descripcion: "Beige elegante"
@@ -259,7 +254,7 @@
                 {
                     id: 103,
                     nombre: "Cartera Carmelita",
-                    imagen: "https://i.postimg.cc/nV7JsYcJ/cartera_carmelita.png",
+                    imagen: "https://i.postimg.cc/nV7JsYcJ/cartera-carmelita.png",
                     tipo: "normal",
                     precio: 5000,
                     descripcion: "Marrón clásico"
@@ -267,7 +262,7 @@
                 {
                     id: 104,
                     nombre: "Cartera Negra",
-                    imagen: "https://i.postimg.cc/sxpdty04/cartera_negra.png",
+                    imagen: "https://i.postimg.cc/sxpdty04/cartera-negra.png",
                     tipo: "normal",
                     precio: 5000,
                     descripcion: "Negra elegante"
@@ -275,7 +270,7 @@
                 {
                     id: 105,
                     nombre: "Cartera Rosada",
-                    imagen: "https://i.postimg.cc/CxMT63C1/cartera_rozada.png",
+                    imagen: "https://i.postimg.cc/CxMT63C1/cartera-rozada.png",
                     tipo: "normal",
                     precio: 5000,
                     descripcion: "Rosada suave"
@@ -283,7 +278,7 @@
                 {
                     id: 106,
                     nombre: "Cartera con Corbata",
-                    imagen: "https://i.postimg.cc/wxJptcTq/cartera_azul.png",
+                    imagen: "https://i.postimg.cc/wxJptcTq/cartera-azul.png",
                     tipo: "especial",
                     precio: 6000,
                     descripcion: "Diseño exclusivo con corbata"
@@ -305,7 +300,7 @@
         }
 
         // ============================================
-        // RENDERIZAR PRODUCTOS
+        // RENDERIZAR PRODUCTOS (VERSIÓN CORREGIDA)
         // ============================================
         function renderProductos() {
             // Renderizar chanclas
@@ -314,7 +309,7 @@
                 chanclasGrid.innerHTML = lienysProducts.chanclas.map(p => `
                     <div class="producto-card group cursor-pointer" onclick="abrirModal('${p.imagen}', '${p.nombre}', '${p.descripcion}', ${p.precio})">
                         <div class="producto-imagen">
-                            <img src="${p.imagen}" alt="${p.nombre}" onerror="this.src='https://placehold.co/400x400/F69B9B/white?text=Chancla'">
+                            <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/400x400/F69B9B/white?text=Chancla'">
                         </div>
                         <div class="producto-info">
                             <h3>${p.nombre}</h3>
@@ -337,7 +332,7 @@
                 carterasGrid.innerHTML = lienysProducts.carteras.map(p => `
                     <div class="producto-card group cursor-pointer" onclick="abrirModal('${p.imagen}', '${p.nombre}', '${p.descripcion}', ${p.precio})">
                         <div class="producto-imagen">
-                            <img src="${p.imagen}" alt="${p.nombre}" onerror="this.src='https://placehold.co/400x400/9B59B6/white?text=Cartera'">
+                            <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/400x400/9B59B6/white?text=Cartera'">
                         </div>
                         <div class="producto-info">
                             <h3>${p.nombre}</h3>
