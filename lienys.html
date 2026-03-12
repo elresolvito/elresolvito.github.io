@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Lienys - Moda y Accesorios - El Resolvito</title>
-    <meta name="description" content="Colección de Lienys: chanclas, carteras y más. Moda cubana con estilo.">
+    <meta name="description" content="Colección de Lienys: chanclas, carteras, pullovers, jeans y más. Moda cubana con estilo.">
     
     <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     
-    <!-- ESTILOS - ORDEN CORRECTO -->
+    <!-- ESTILOS -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/lienys.css">
     
@@ -93,7 +93,7 @@
             </div>
             
             <!-- Grid de chanclas -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="chanclas-grid">
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4" id="chanclas-grid">
                 <!-- Se carga con JavaScript -->
             </div>
             
@@ -133,7 +133,7 @@
             </div>
             
             <!-- Grid de carteras -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="carteras-grid">
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4" id="carteras-grid">
                 <!-- Se carga con JavaScript -->
             </div>
             
@@ -307,7 +307,7 @@
             const chanclasGrid = document.getElementById('chanclas-grid');
             if (chanclasGrid) {
                 chanclasGrid.innerHTML = lienysProducts.chanclas.map(p => `
-                    <div class="producto-card group cursor-pointer" onclick="abrirModal('${p.imagen}', '${p.nombre}', '${p.descripcion}', ${p.precio})">
+                    <div class="producto-card group" onclick="abrirModal('${p.imagen}', '${p.nombre}', '${p.descripcion}', ${p.precio})">
                         <div class="producto-imagen">
                             <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/400x400/F69B9B/white?text=Chancla'">
                         </div>
@@ -330,7 +330,7 @@
             const carterasGrid = document.getElementById('carteras-grid');
             if (carterasGrid) {
                 carterasGrid.innerHTML = lienysProducts.carteras.map(p => `
-                    <div class="producto-card group cursor-pointer" onclick="abrirModal('${p.imagen}', '${p.nombre}', '${p.descripcion}', ${p.precio})">
+                    <div class="producto-card group" onclick="abrirModal('${p.imagen}', '${p.nombre}', '${p.descripcion}', ${p.precio})">
                         <div class="producto-imagen">
                             <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/400x400/9B59B6/white?text=Cartera'">
                         </div>
