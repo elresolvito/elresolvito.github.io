@@ -38,7 +38,7 @@
     </script>
 
     <style>
-        /* Estilos adicionales para la sección de populares y badges de likes */
+        /* Estilos para el blog */
         .popular-section {
             background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%);
             color: white;
@@ -90,19 +90,35 @@
             background: #ef4444;
         }
         
-        /* Estilos para la sección de solicitud de artículos */
-        .tema-card {
+        /* Estilos para temas solicitados */
+        .tema-solicitado {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 4px solid #FF6F00;
             transition: all 0.3s ease;
         }
-        .tema-card:hover {
+        .tema-solicitado:hover {
             transform: translateX(5px);
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        .badge-activado {
-            background: linear-gradient(135deg, #059669, #10B981);
+        .badge-proceso {
+            background: #10B981;
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            display: inline-block;
         }
-        .badge-cerca {
-            background: linear-gradient(135deg, #D97706, #F59E0B);
+        .badge-popular {
+            background: #F59E0B;
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            display: inline-block;
             animation: pulse 2s infinite;
         }
         @keyframes pulse {
@@ -110,17 +126,14 @@
             50% { opacity: 0.7; }
         }
         
-        /* Newsletter mejorado */
+        /* Newsletter */
         .newsletter-section {
             background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%);
             color: white;
-            padding: 4rem 1rem;
+            padding: 3rem 1rem;
             margin-top: 3rem;
             text-align: center;
-        }
-        .newsletter-section .max-w-2xl {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 1rem;
         }
         .newsletter-button {
             display: inline-flex;
@@ -131,7 +144,6 @@
             padding: 1rem 2rem;
             border-radius: 3rem;
             font-weight: bold;
-            font-size: 1.1rem;
             transition: all 0.3s;
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
@@ -168,7 +180,7 @@
         </div>
     </section>
 
-    <!-- SECCIÓN DE ARTÍCULOS MÁS POPULARES (dinámica) -->
+    <!-- SECCIÓN DE ARTÍCULOS MÁS POPULARES -->
     <section class="popular-section" id="popularSection" style="display: none;">
         <div class="container mx-auto px-4">
             <h2 class="text-2xl font-bold mb-2">🔥 Los más populares</h2>
@@ -181,7 +193,7 @@
 
     <!-- Grid de artículos -->
     <div class="articulos-grid" id="articulosGrid">
-        <!-- Cada artículo tiene un atributo data-article-id único -->
+        <!-- Artículo 1: Recetas de atún -->
         <article class="articulo-card" data-article-id="recetas-atun" onclick="location.href='blog/recetas-rapidas-con-atun.html'">
             <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop" 
                  class="articulo-imagen" 
@@ -189,9 +201,9 @@
                  loading="lazy"
                  onerror="this.src='https://placehold.co/600x400/2E7D32/white?text=Recetas'">
             <div class="articulo-contenido">
-                <span class="articulo-categoria categoria-recetas">🍳 RECETAS</span>
+                <span class="articulo-categoria" style="background:#FF69B4; color:white;">🍳 RECETAS</span>
                 <h2 class="articulo-titulo">3 recetas rápidas con atún en lata</h2>
-                <p class="articulo-descripcion">Aprovecha al máximo el atún con estas recetas fáciles, económicas y deliciosas. Torticas, enfrijolada y ensalada.</p>
+                <p class="articulo-descripcion">Aprovecha al máximo el atún con estas recetas fáciles, económicas y deliciosas.</p>
                 <div class="articulo-meta">
                     <span class="articulo-fecha"><i class="far fa-calendar mr-1"></i>15 feb 2026</span>
                     <span class="articulo-leer-mas">Leer más <i class="fas fa-arrow-right"></i></span>
@@ -200,6 +212,7 @@
             </div>
         </article>
         
+        <!-- Artículo 2: Tostadas de aguacate -->
         <article class="articulo-card" data-article-id="tostadas-aguacate" onclick="location.href='blog/tostadas-de-aguacate-y-huevo.html'">
             <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&auto=format&fit=crop" 
                  class="articulo-imagen" 
@@ -207,9 +220,9 @@
                  loading="lazy"
                  onerror="this.src='https://placehold.co/600x400/2E7D32/white?text=Tostadas'">
             <div class="articulo-contenido">
-                <span class="articulo-categoria categoria-recetas">🍳 RECETAS</span>
+                <span class="articulo-categoria" style="background:#FF69B4; color:white;">🍳 RECETAS</span>
                 <h2 class="articulo-titulo">Tostadas de aguacate y huevo</h2>
-                <p class="articulo-descripcion">El desayuno perfecto para empezar el día con energía. Fácil, rápido y nutritivo.</p>
+                <p class="articulo-descripcion">El desayuno perfecto para empezar el día con energía.</p>
                 <div class="articulo-meta">
                     <span class="articulo-fecha"><i class="far fa-calendar mr-1"></i>10 feb 2026</span>
                     <span class="articulo-leer-mas">Leer más <i class="fas fa-arrow-right"></i></span>
@@ -218,7 +231,7 @@
             </div>
         </article> 
         
-        <!-- Artículo nuevo: Por qué comprar en El Resolvito -->
+        <!-- Artículo 3: Por qué comprar en El Resolvito -->
         <article class="articulo-card" data-article-id="por-que-comprar" onclick="location.href='blog/por-que-comprar-en-el-resolvito.html'">
             <img src="https://i.postimg.cc/7YfPJ9LD/banner-1l.jpg" 
                  class="articulo-imagen" 
@@ -228,7 +241,7 @@
             <div class="articulo-contenido">
                 <span class="articulo-categoria" style="background:#2E7D32; color:white;">🛒 TIENDA</span>
                 <h2 class="articulo-titulo">¿Por qué comprar en El Resolvito?</h2>
-                <p class="articulo-descripcion">Descubre las ventajas de comprar en tu tienda de confianza en La Habana Vieja: atención personalizada, entregas rápidas y variedad de productos.</p>
+                <p class="articulo-descripcion">Descubre las ventajas de comprar en tu tienda de confianza en La Habana Vieja.</p>
                 <div class="articulo-meta">
                     <span class="articulo-fecha"><i class="far fa-calendar mr-1"></i>8 mar 2026</span>
                     <span class="articulo-leer-mas">Leer más <i class="fas fa-arrow-right"></i></span>
@@ -237,6 +250,7 @@
             </div>
         </article>
         
+        <!-- Artículo 4: Guía TCP (marcado como SOLICITADO) -->
         <article class="articulo-card" data-article-id="guia-tcp" onclick="location.href='blog/como-empezar-tcp-en-cuba-guia-2026.html'">
             <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&auto=format&fit=crop" 
                  class="articulo-imagen" 
@@ -244,17 +258,22 @@
                  loading="lazy"
                  onerror="this.src='https://placehold.co/600x400/1E3A8A/white?text=TCP'">
             <div class="articulo-contenido">
-                <span class="articulo-categoria categoria-emprendimiento">📊 EMPRENDIMIENTO</span>
-                <h2 class="articulo-titulo">Cómo empezar tu negocio en Cuba (TCP)</h2>
+                <span class="articulo-categoria" style="background:#1E3A8A; color:white;">📊 EMPRENDIMIENTO</span>
+                <h2 class="articulo-titulo">Cómo empezar tu negocio en Cuba (TCP) 
+                    <span style="background:#FF6F00; color:white; font-size:0.7rem; padding:0.2rem 0.5rem; border-radius:1rem; margin-left:0.5rem; display:inline-block;">
+                        ⭐ SOLICITADO
+                    </span>
+                </h2>
                 <p class="articulo-descripcion">Guía completa para ser trabajador por cuenta propia en 2026: trámites, requisitos y plazos.</p>
                 <div class="articulo-meta">
-                    <span class="articulo-fecha"><i class="far fa-calendar mr-1"></i>5 feb 2026</span>
-                    <span class="articulo-leer-mas">Leer más <i class="fas fa-arrow-right"></i></span>
+                    <span class="articulo-fecha"><i class="far fa-calendar mr-1"></i>Próximamente</span>
+                    <span class="articulo-leer-mas" style="opacity:0.5; pointer-events:none;">En preparación</span>
                 </div>
                 <div class="like-badge-container" style="margin-top: 0.5rem;"></div>
             </div>
         </article>
         
+        <!-- Artículo 5: La Habana gratis -->
         <article class="articulo-card" data-article-id="habana-gratis" onclick="location.href='blog/que-hacer-en-la-habana-vieja-gratis.html'">
             <img src="https://i.postimg.cc/nzP73gjY/Gemini_Generated_Image_h9hdglh9hdglh9hd_1_11zon.webp" 
                  class="articulo-imagen" 
@@ -262,7 +281,7 @@
                  loading="lazy"
                  onerror="this.src='https://placehold.co/600x400/0277BD/white?text=La+Habana'">
             <div class="articulo-contenido">
-                <span class="articulo-categoria categoria-habana">🏠 LA HABANA</span>
+                <span class="articulo-categoria" style="background:#0277BD; color:white;">🏠 LA HABANA</span>
                 <h2 class="articulo-titulo">10 cosas gratis en La Habana Vieja</h2>
                 <p class="articulo-descripcion">Descubre La Habana sin gastar dinero: miradores, museos y planes auténticos.</p>
                 <div class="articulo-meta">
@@ -273,6 +292,7 @@
             </div>
         </article>
         
+        <!-- Artículo 6: Terrazas de Bayona -->
         <article class="articulo-card" data-article-id="terrazas-bayona" onclick="location.href='blog/terrazas-de-bayona-59-experiencia-completa.html'">
             <img src="https://i.postimg.cc/QxWvyYGy/acuarela-1.jpg" 
                  class="articulo-imagen" 
@@ -280,7 +300,7 @@
                  loading="lazy"
                  onerror="this.src='https://placehold.co/600x400/D4AF37/white?text=Alojamiento'">
             <div class="articulo-contenido">
-                <span class="articulo-categoria categoria-alojamientos">🏡 ALOJAMIENTOS</span>
+                <span class="articulo-categoria" style="background:#D4AF37; color:white;">🏡 ALOJAMIENTOS</span>
                 <h2 class="articulo-titulo">Terrazas de Bayona 59</h2>
                 <p class="articulo-descripcion">Experiencia completa en nuestro alojamiento colonial en el corazón de La Habana.</p>
                 <div class="articulo-meta">
@@ -291,6 +311,7 @@
             </div>
         </article>
         
+        <!-- Artículo 7: Cupcakes -->
         <article class="articulo-card" data-article-id="cupcakes" onclick="location.href='blog/cupcakes-faciles-con-productos-de-nuestra-tienda.html'">
             <img src="https://images.unsplash.com/photo-1586788224331-947f68671cf1?w=600&auto=format&fit=crop" 
                  class="articulo-imagen" 
@@ -298,7 +319,7 @@
                  loading="lazy"
                  onerror="this.src='https://placehold.co/600x400/FF69B4/white?text=Cupcakes'">
             <div class="articulo-contenido">
-                <span class="articulo-categoria categoria-recetas">🍳 RECETAS</span>
+                <span class="articulo-categoria" style="background:#FF69B4; color:white;">🍳 RECETAS</span>
                 <h2 class="articulo-titulo">Cupcakes fáciles</h2>
                 <p class="articulo-descripcion">Aprende a hacer cupcakes esponjosos con ingredientes de nuestra tienda.</p>
                 <div class="articulo-meta">
@@ -311,136 +332,132 @@
     </div>
 
     <!-- ============================================ -->
-    <!-- SECCIÓN: SOLICITA TU ARTÍCULO (NUEVA) -->
+    <!-- SECCIÓN: SOLICITA TU ARTÍCULO -->
     <!-- ============================================ -->
-    <section class="py-12 bg-gradient-to-r from-purple-50 to-pink-50">
+    <section class="py-12 bg-gradient-to-r from-orange-50 to-yellow-50">
         <div class="container mx-auto px-4">
             
             <div class="text-center mb-8">
                 <span class="inline-block bg-cuban-orange text-white px-4 py-1 rounded-full text-sm font-bold mb-3">
-                    <i class="fas fa-lightbulb mr-1"></i> TU OPINIÓN CUENTA
+                    <i class="fas fa-lightbulb mr-1"></i> TÚ DECIDES
                 </span>
                 <h2 class="text-3xl md:text-4xl font-bold mb-3">¿Sobre qué tema quieres leer?</h2>
                 <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Proponé el tema que te interese. Si más de 5 personas piden lo mismo, 
+                    Propón un tema. Si más personas lo piden, 
                     <span class="font-bold text-cuban-green">¡lo escribimos!</span>
                 </p>
             </div>
             
-            <!-- Grid de temas solicitados y formulario -->
             <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 
-                <!-- COLUMNA IZQUIERDA: Temas más solicitados -->
+                <!-- COLUMNA IZQUIERDA: Temas solicitados -->
                 <div class="bg-white rounded-2xl shadow-xl p-6">
                     <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
                         <i class="fas fa-chart-line text-cuban-green"></i>
-                        Temas más pedidos
+                        Temas que han pedido
                     </h3>
                     
-                    <!-- Lista de temas solicitados (se carga con JS) -->
                     <div id="temasSolicitados" class="space-y-3">
-                        <!-- Se llenará dinámicamente -->
+                        <!-- Los temas se cargan aquí -->
+                        <div class="tema-solicitado flex justify-between items-center">
+                            <div>
+                                <p class="font-semibold">Cómo empezar negocio en Cuba (TCP)</p>
+                                <div class="flex items-center gap-2 text-sm text-gray-500">
+                                    <i class="fas fa-users"></i>
+                                    <span>7 personas</span>
+                                </div>
+                            </div>
+                            <span class="badge-proceso">✍️ EN PROCESO</span>
+                        </div>
+                        <div class="tema-solicitado flex justify-between items-center">
+                            <div>
+                                <p class="font-semibold">Recetas con productos enlatados</p>
+                                <div class="flex items-center gap-2 text-sm text-gray-500">
+                                    <i class="fas fa-users"></i>
+                                    <span>4 personas</span>
+                                </div>
+                            </div>
+                            <span class="badge-popular">🔥 POPULAR</span>
+                        </div>
+                        <div class="tema-solicitado flex justify-between items-center">
+                            <div>
+                                <p class="font-semibold">Cómo cuidar carteras de cuero</p>
+                                <div class="flex items-center gap-2 text-sm text-gray-500">
+                                    <i class="fas fa-users"></i>
+                                    <span>3 personas</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     
-                    <!-- Meta información -->
-                    <div class="mt-4 text-xs text-gray-400 border-t pt-3">
-                        <i class="fas fa-info-circle mr-1"></i> Los temas con más de 5 solicitudes se escriben en 1 semana.
-                    </div>
+                    <p class="text-xs text-gray-400 mt-4 border-t pt-3">
+                        <i class="fas fa-info-circle mr-1"></i> Cuando un tema llega a 5 personas, empezamos a escribirlo.
+                    </p>
                 </div>
                 
-                <!-- COLUMNA DERECHA: Formulario para pedir tema -->
+                <!-- COLUMNA DERECHA: Formulario -->
                 <div class="bg-white rounded-2xl shadow-xl p-6">
                     <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
                         <i class="fas fa-pen text-cuban-orange"></i>
-                        Propone tu tema
+                        Propón tu tema
                     </h3>
                     
                     <form id="formSolicitudTema" class="space-y-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Tu nombre (opcional)</label>
                             <input type="text" id="nombreSolicitante" placeholder="Ej: María" 
-                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent">
+                                   class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-cuban-green">
                         </div>
                         
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">¿Sobre qué quieres leer? *</label>
                             <textarea id="temaSolicitado" rows="3" required
-                                   placeholder="Ej: 'Recetas fáciles con atún', 'Cómo cuidar carteras de cuero', 'Consejos para revender chanclas'..."
-                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent"></textarea>
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">¿Por qué te interesa? (opcional)</label>
-                            <select id="categoriaTema" class="w-full px-4 py-2 border border-gray-300 rounded-lg">
-                                <option value="">Selecciona una opción</option>
-                                <option value="cocina">Me gusta cocinar</option>
-                                <option value="emprendimiento">Soy emprendedor/a</option>
-                                <option value="moda">Me interesa la moda</option>
-                                <option value="habana">Vivo en La Habana</option>
-                                <option value="general">Otro</option>
-                            </select>
+                                   placeholder="Ej: 'Recetas fáciles con atún', 'Cómo cuidar carteras', 'Consejos para revender'..."
+                                   class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-cuban-green"></textarea>
                         </div>
                         
                         <button type="submit" 
-                                class="w-full bg-gradient-to-r from-cuban-orange to-cuban-yellow text-white py-3 rounded-lg font-bold hover:scale-105 transition transform">
+                                class="w-full bg-gradient-to-r from-cuban-orange to-cuban-yellow text-white py-3 rounded-lg font-bold hover:scale-105 transition">
                             <i class="fas fa-paper-plane mr-2"></i>
                             Proponer tema
                         </button>
                     </form>
                     
                     <p class="text-xs text-gray-400 text-center mt-3">
-                        <i class="fas fa-shield-alt mr-1"></i> Tu opinión nos ayuda a crear contenido útil para ti
+                        <i class="fas fa-shield-alt mr-1"></i> Todos pueden ver los temas pedidos, pero no quién los pidió.
                     </p>
                 </div>
             </div>
-            
-            <!-- Ejemplo de temas ya publicados por solicitud popular -->
-            <div class="mt-8 text-center">
-                <p class="text-sm text-gray-500 mb-2">📚 Artículos escritos por pedido de los lectores:</p>
-                <div class="flex flex-wrap gap-2 justify-center">
-                    <span class="bg-white px-3 py-1 rounded-full text-xs shadow-sm border border-gray-200">✅ Cómo hacer pan sin horno (7 solicitudes)</span>
-                    <span class="bg-white px-3 py-1 rounded-full text-xs shadow-sm border border-gray-200">✅ Dónde comprar ropa por mayor en La Habana (6 solicitudes)</span>
-                    <span class="bg-white px-3 py-1 rounded-full text-xs shadow-sm border border-gray-200">✅ 10 usos para el aceite de coco (5 solicitudes)</span>
-                </div>
-            </div>
-            
         </div>
     </section>
 
-    <!-- Newsletter MEJORADO -->
-    <section class="newsletter-section">
+    <!-- Newsletter -->
+    <section class="newsletter-section mx-4">
         <div class="container mx-auto px-4">
-            
-            <!-- Badge de valor -->
             <span class="inline-block bg-cuban-yellow text-cuban-dark text-sm font-bold px-4 py-1 rounded-full mb-4">
                 ⭐ GRATIS · SIN SPAM ⭐
             </span>
             
-            <!-- Título llamativo -->
             <h3 class="text-3xl font-bold mb-3">
-                📬 Únete a +200 vecinos de La Habana
+                📬 Únete a nuestros lectores
             </h3>
             
-            <!-- Beneficios claros -->
             <div class="max-w-2xl mx-auto mb-6 text-left bg-white/10 p-4 rounded-xl">
-                <p class="mb-2"><i class="fas fa-check-circle text-cuban-yellow mr-2"></i> <strong>Receta nueva cada semana</strong> (con productos de la tienda)</p>
-                <p class="mb-2"><i class="fas fa-check-circle text-cuban-yellow mr-2"></i> <strong>Ofertas exclusivas</strong> que no publicamos en la web</p>
-                <p class="mb-2"><i class="fas fa-check-circle text-cuban-yellow mr-2"></i> <strong>Estrenos de productos</strong> (como las chanclas de Lienys)</p>
-                <p class="mb-2"><i class="fas fa-check-circle text-cuban-yellow mr-2"></i> <strong>Consejos para tu hogar y negocio</strong></p>
+                <p class="mb-2"><i class="fas fa-check-circle text-cuban-yellow mr-2"></i> <strong>Receta nueva cada semana</strong></p>
+                <p class="mb-2"><i class="fas fa-check-circle text-cuban-yellow mr-2"></i> <strong>Ofertas exclusivas</strong> para suscriptores</p>
+                <p class="mb-2"><i class="fas fa-check-circle text-cuban-yellow mr-2"></i> <strong>Novedades de productos</strong></p>
                 <p class="mb-2"><i class="fas fa-check-circle text-cuban-yellow mr-2"></i> <strong>Podés pedir temas</strong> para el blog</p>
             </div>
             
-            <!-- Llamada a la acción directa -->
-            <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20suscribirme%20al%20blog%20para%20recibir%20recetas%2C%20ofertas%20y%20novedades%20de%20El%20Resolvito" 
+            <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20suscribirme%20al%20blog" 
                target="_blank" 
-               class="newsletter-button inline-flex items-center gap-3">
+               class="newsletter-button">
                 <i class="fab fa-whatsapp text-2xl"></i>
-                SUSCRIBIRME AHORA
+                SUSCRIBIRME POR WHATSAPP
             </a>
             
-            <!-- Nota de confianza -->
             <p class="text-sm opacity-80 mt-4">
-                <i class="fas fa-lock mr-1"></i> Solo te enviaremos información útil. Puedes cancelar cuando quieras.
+                <i class="fas fa-lock mr-1"></i> Puedes cancelar cuando quieras.
             </p>
         </div>
     </section>
@@ -451,30 +468,20 @@
     <div id="checkout-modal-container"></div>
     <div id="footer-container"></div>
 
-    <!-- Toast mejorado -->
-    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none flex items-center gap-2">
-        <i class="fas fa-check-circle text-cuban-yellow text-xl"></i>
-        <div>
-            <p id="toastTitle" class="font-bold text-sm"></p>
-            <p id="toastMessage" class="text-xs opacity-90"></p>
-        </div>
+    <!-- Toast -->
+    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
+        <p id="toastMessage" class="text-sm"></p>
     </div>
-
-    <!-- Script principal -->
-    <script src="js/elresolvito.js" defer></script>
 
     <script>
         // ============================================
-        // FUNCIÓN TOAST MEJORADA
+        // TOAST SIMPLE
         // ============================================
-        function showToast(title, message) {
+        function showToast(message) {
             const toast = document.getElementById('cartToast');
-            document.getElementById('toastTitle').textContent = title;
             document.getElementById('toastMessage').textContent = message;
-            
             toast.classList.remove('opacity-0');
             toast.classList.add('opacity-100');
-            
             setTimeout(() => {
                 toast.classList.remove('opacity-100');
                 toast.classList.add('opacity-0');
@@ -482,10 +489,8 @@
         }
 
         // ============================================
-        // INTERACCIÓN EN BLOG.HTML (likes y populares)
+        // LIKES (sistema existente)
         // ============================================
-
-        // Mapeo de IDs de artículo a títulos y URLs
         const articulosInfo = {
             'recetas-atun': { titulo: '3 recetas rápidas con atún en lata', url: 'blog/recetas-rapidas-con-atun.html' },
             'tostadas-aguacate': { titulo: 'Tostadas de aguacate y huevo', url: 'blog/tostadas-de-aguacate-y-huevo.html' },
@@ -496,14 +501,11 @@
             'por-que-comprar': { titulo: '¿Por qué comprar en El Resolvito?', url: 'blog/por-que-comprar-en-el-resolvito.html' },
         };
 
-        // Cargar likes de localStorage
         function cargarLikesEnTarjetas() {
             const likesGuardados = JSON.parse(localStorage.getItem('likesBlog')) || {};
-
             document.querySelectorAll('.articulo-card').forEach(card => {
                 const articleId = card.dataset.articleId;
                 if (!articleId) return;
-
                 const likes = likesGuardados[articleId] || 0;
                 const contenedor = card.querySelector('.like-badge-container');
                 if (contenedor) {
@@ -514,33 +516,27 @@
                     }
                 }
             });
-
             return likesGuardados;
         }
 
-        // Generar sección de populares (top 3)
         function generarPopulares(likesGuardados) {
             const likesArray = Object.entries(likesGuardados).filter(([id]) => articulosInfo[id]);
             likesArray.sort((a, b) => b[1] - a[1]);
-
             const top3 = likesArray.slice(0, 3);
-
             const popularSection = document.getElementById('popularSection');
             const popularGrid = document.getElementById('popularGrid');
-
             if (top3.length > 0) {
                 popularSection.style.display = 'block';
                 popularGrid.innerHTML = top3.map(([id, likes]) => {
                     const info = articulosInfo[id];
-                    if (!info) return '';
-                    return `
+                    return info ? `
                         <div class="popular-item">
                             <a href="${info.url}">
                                 ${info.titulo}
                                 <small><i class="fas fa-heart"></i> ${likes} me gusta</small>
                             </a>
                         </div>
-                    `;
+                    ` : '';
                 }).join('');
             } else {
                 popularSection.style.display = 'none';
@@ -548,15 +544,13 @@
         }
 
         // ============================================
-        // SISTEMA DE SOLICITUD DE ARTÍCULOS
+        // SOLICITUDES DE ARTÍCULOS (MEJORADO)
         // ============================================
-
-        // Temas de ejemplo (en producción vienen de localStorage)
         let solicitudesTemas = [
-            { id: 1, tema: "Cómo hacer envíos a otras provincias", votos: 8, categoria: "servicios", activado: true },
-            { id: 2, tema: "Cómo combinar carteras con outfits", votos: 5, categoria: "moda", activado: true },
-            { id: 3, tema: "Recetas con productos enlatados", votos: 3, categoria: "cocina", activado: false },
-            { id: 4, tema: "Mantenimiento de aires acondicionados", votos: 2, categoria: "hogar", activado: false }
+            { id: 1, tema: "Cómo empezar negocio en Cuba (TCP)", votos: 7, activado: true },
+            { id: 2, tema: "Recetas con productos enlatados", votos: 4, activado: false },
+            { id: 3, tema: "Cómo cuidar carteras de cuero", votos: 3, activado: false },
+            { id: 4, tema: "Dónde comprar ropa por mayor", votos: 2, activado: false }
         ];
 
         function renderizarTemasSolicitados() {
@@ -566,105 +560,88 @@
             const temasOrdenados = [...solicitudesTemas].sort((a, b) => b.votos - a.votos);
             
             contenedor.innerHTML = temasOrdenados.map(tema => {
-                let badgeHTML = '';
-                let badgeClass = '';
-                
+                let badge = '';
                 if (tema.activado) {
-                    badgeHTML = '<span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full badge-activado">✓ EN PROCESO</span>';
+                    badge = '<span class="badge-proceso">✍️ EN PROCESO</span>';
                 } else if (tema.votos >= 5) {
-                    badgeHTML = '<span class="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded-full badge-cerca animate-pulse">⚡ ¡A PUNTO!</span>';
+                    badge = '<span class="badge-popular">🔥 ¡A ESCRIBIR!</span>';
                 }
                 
-                const iconos = {
-                    'cocina': '🥘',
-                    'moda': '👕',
-                    'hogar': '🏠',
-                    'servicios': '📦',
-                    'emprendimiento': '📊',
-                    'general': '📝'
-                };
-                const icono = iconos[tema.categoria] || '📝';
-                
                 return `
-                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:shadow-md transition tema-card">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl">${icono}</span>
-                            <div>
-                                <p class="font-semibold text-sm">${tema.tema}</p>
-                                <div class="flex items-center gap-2 text-xs text-gray-500">
-                                    <i class="fas fa-users"></i>
-                                    <span class="font-medium ${tema.votos >= 5 ? 'text-cuban-green' : ''}">${tema.votos}</span> solicitudes
-                                </div>
+                    <div class="tema-solicitado flex justify-between items-center">
+                        <div>
+                            <p class="font-semibold">${tema.tema}</p>
+                            <div class="flex items-center gap-2 text-sm text-gray-500">
+                                <i class="fas fa-users"></i>
+                                <span>${tema.votos} ${tema.votos === 1 ? 'persona' : 'personas'}</span>
                             </div>
                         </div>
-                        ${badgeHTML}
+                        ${badge}
                     </div>
                 `;
             }).join('');
-        }
-
-        function determinarCategoria(tema) {
-            tema = tema.toLowerCase();
-            if (tema.includes('cocin') || tema.includes('receta') || tema.includes('comid')) return 'cocina';
-            if (tema.includes('ropa') || tema.includes('vestir') || tema.includes('moda') || tema.includes('carter')) return 'moda';
-            if (tema.includes('negocio') || tema.includes('emprend') || tema.includes('vender')) return 'emprendimiento';
-            if (tema.includes('casa') || tema.includes('hogar') || tema.includes('repar')) return 'hogar';
-            if (tema.includes('envío') || tema.includes('mensajería') || tema.includes('delivery')) return 'servicios';
-            return 'general';
-        }
-
-        function verificarTemasActivados() {
-            const temasActivados = solicitudesTemas.filter(t => t.votos >= 5 && !t.activado);
             
-            temasActivados.forEach(tema => {
-                tema.activado = true;
-                showToast('🎉 TEMA ACTIVADO', `"${tema.tema}" será publicado pronto!`);
-            });
-            
+            // Guardar en localStorage
             localStorage.setItem('solicitudesTemas', JSON.stringify(solicitudesTemas));
         }
 
-        // Manejar envío del formulario
+        // ============================================
+        // FORMULARIO - Enviar solicitud
+        // ============================================
         document.getElementById('formSolicitudTema')?.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const nombre = document.getElementById('nombreSolicitante').value.trim() || 'Un lector';
+            const nombre = document.getElementById('nombreSolicitante').value.trim() || 'Alguien';
             const temaTexto = document.getElementById('temaSolicitado').value.trim();
-            const categoriaSel = document.getElementById('categoriaTema').value;
             
             if (!temaTexto) {
                 alert('Por favor, escribe un tema');
                 return;
             }
             
+            // Buscar si el tema ya existe (búsqueda flexible)
             const temaExistente = solicitudesTemas.find(t => 
                 t.tema.toLowerCase().includes(temaTexto.toLowerCase()) || 
                 temaTexto.toLowerCase().includes(t.tema.toLowerCase())
             );
             
             if (temaExistente) {
+                // Aumentar contador
                 temaExistente.votos++;
-                verificarTemasActivados();
-                showToast('¡Gracias por tu voto!', `"${temaExistente.tema}" ahora tiene ${temaExistente.votos} solicitudes`);
+                
+                // NOTIFICACIÓN PARA TI (ADMIN) - llega a tu WhatsApp
+                const mensajeAdmin = `🔔 *NUEVA SOLICITUD DE ARTÍCULO*\n\n*Tema:* ${temaExistente.tema}\n*Solicitado por:* ${nombre}\n*Total ahora:* ${temaExistente.votos} solicitudes\n\n`;
+                window.open(`https://wa.me/5356382909?text=${encodeURIComponent(mensajeAdmin)}`, '_blank');
+                
+                // Mensaje para el usuario
+                showToast(`¡Gracias! El tema "${temaExistente.tema}" ahora tiene ${temaExistente.votos} solicitudes.`);
             } else {
+                // Crear nuevo tema
                 const nuevoTema = {
                     id: Date.now(),
                     tema: temaTexto,
                     votos: 1,
-                    categoria: categoriaSel || determinarCategoria(temaTexto),
                     activado: false
                 };
                 solicitudesTemas.push(nuevoTema);
-                showToast(`¡Gracias ${nombre}!`, 'Tu tema ha sido registrado');
+                
+                // NOTIFICACIÓN PARA TI (ADMIN)
+                const mensajeAdmin = `🔔 *NUEVO TEMA PROPUESTO*\n\n*Tema:* ${temaTexto}\n*Propuesto por:* ${nombre}\n\n*Total de temas ahora:* ${solicitudesTemas.length}`;
+                window.open(`https://wa.me/5356382909?text=${encodeURIComponent(mensajeAdmin)}`, '_blank');
+                
+                // Mensaje para el usuario
+                showToast(`¡Gracias ${nombre}! Tu tema ha sido registrado.`);
             }
             
+            // Actualizar vista
             renderizarTemasSolicitados();
-            localStorage.setItem('solicitudesTemas', JSON.stringify(solicitudesTemas));
+            
+            // Limpiar formulario
             this.reset();
         });
 
         // ============================================
-        // CARGA DE COMPONENTES (header, footer, etc.)
+        // CARGA DE COMPONENTES
         // ============================================
         async function loadComponent(id, path) {
             try {
@@ -686,20 +663,18 @@
             await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
             await loadComponent('footer-container', 'components/footer.html');
             
-            // Inicializar sistema de likes y solicitudes
-            const likes = cargarLikesEnTarjetas();
-            generarPopulares(likes);
-            
-            // Cargar solicitudes guardadas
+            // Cargar datos guardados
             const guardadas = localStorage.getItem('solicitudesTemas');
             if (guardadas) {
                 try {
                     solicitudesTemas = JSON.parse(guardadas);
-                } catch (e) {
-                    console.error('Error cargando solicitudes:', e);
-                }
+                } catch (e) {}
             }
+            
+            // Inicializar sistemas
             renderizarTemasSolicitados();
+            const likes = cargarLikesEnTarjetas();
+            generarPopulares(likes);
         });
     </script>
 </body>
