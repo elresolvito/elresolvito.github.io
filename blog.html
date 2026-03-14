@@ -29,6 +29,7 @@
                     colors: {
                         'cuban-green': '#2E7D32', 'cuban-dark': '#1B5E20',
                         'cuban-yellow': '#FFB300', 'cuban-blue': '#0277BD',
+                        'cuban-orange': '#FF6F00',
                         'contador-azul': '#1E3A8A', 'dulce-rosa': '#FF69B4'
                     }
                 }
@@ -39,7 +40,7 @@
     <style>
         /* Estilos adicionales para la sección de populares y badges de likes */
         .popular-section {
-            background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-green-dark) 100%);
+            background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%);
             color: white;
             padding: 2rem;
             border-radius: 1rem;
@@ -88,6 +89,57 @@
         .articulo-meta .like-badge {
             background: #ef4444;
         }
+        
+        /* Estilos para la sección de solicitud de artículos */
+        .tema-card {
+            transition: all 0.3s ease;
+        }
+        .tema-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        .badge-activado {
+            background: linear-gradient(135deg, #059669, #10B981);
+        }
+        .badge-cerca {
+            background: linear-gradient(135deg, #D97706, #F59E0B);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* Newsletter mejorado */
+        .newsletter-section {
+            background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%);
+            color: white;
+            padding: 4rem 1rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+        .newsletter-section .max-w-2xl {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .newsletter-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #25D366;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 3rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .newsletter-button:hover {
+            background: #128C7E;
+            transform: scale(1.05);
+        }
+        
         @media (max-width: 640px) {
             .popular-grid {
                 grid-template-columns: 1fr;
@@ -167,23 +219,23 @@
         </article> 
         
         <!-- Artículo nuevo: Por qué comprar en El Resolvito -->
-<article class="articulo-card" data-article-id="por-que-comprar" onclick="location.href='blog/por-que-comprar-en-el-resolvito.html'">
-    <img src="https://i.postimg.cc/7YfPJ9LD/banner-1l.jpg" 
-         class="articulo-imagen" 
-         alt="El Resolvito"
-         loading="lazy"
-         onerror="this.src='https://placehold.co/600x400/2E7D32/white?text=El+Resolvito'">
-    <div class="articulo-contenido">
-        <span class="articulo-categoria" style="background:#2E7D32; color:white;">🛒 TIENDA</span>
-        <h2 class="articulo-titulo">¿Por qué comprar en El Resolvito?</h2>
-        <p class="articulo-descripcion">Descubre las ventajas de comprar en tu tienda de confianza en La Habana Vieja: atención personalizada, entregas rápidas y variedad de productos.</p>
-        <div class="articulo-meta">
-            <span class="articulo-fecha"><i class="far fa-calendar mr-1"></i>8 mar 2026</span>
-            <span class="articulo-leer-mas">Leer más <i class="fas fa-arrow-right"></i></span>
-        </div>
-        <div class="like-badge-container" style="margin-top: 0.5rem;"></div>
-    </div>
-</article>
+        <article class="articulo-card" data-article-id="por-que-comprar" onclick="location.href='blog/por-que-comprar-en-el-resolvito.html'">
+            <img src="https://i.postimg.cc/7YfPJ9LD/banner-1l.jpg" 
+                 class="articulo-imagen" 
+                 alt="El Resolvito"
+                 loading="lazy"
+                 onerror="this.src='https://placehold.co/600x400/2E7D32/white?text=El+Resolvito'">
+            <div class="articulo-contenido">
+                <span class="articulo-categoria" style="background:#2E7D32; color:white;">🛒 TIENDA</span>
+                <h2 class="articulo-titulo">¿Por qué comprar en El Resolvito?</h2>
+                <p class="articulo-descripcion">Descubre las ventajas de comprar en tu tienda de confianza en La Habana Vieja: atención personalizada, entregas rápidas y variedad de productos.</p>
+                <div class="articulo-meta">
+                    <span class="articulo-fecha"><i class="far fa-calendar mr-1"></i>8 mar 2026</span>
+                    <span class="articulo-leer-mas">Leer más <i class="fas fa-arrow-right"></i></span>
+                </div>
+                <div class="like-badge-container" style="margin-top: 0.5rem;"></div>
+            </div>
+        </article>
         
         <article class="articulo-card" data-article-id="guia-tcp" onclick="location.href='blog/como-empezar-tcp-en-cuba-guia-2026.html'">
             <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&auto=format&fit=crop" 
@@ -258,152 +310,140 @@
         </article>
     </div>
 
-    <!-- Newsletter -->
-    <section class="newsletter-section">
-        <div class="container mx-auto px-4">
-            <h3>📬 Recibe nuestras novedades</h3>
-            <p>Suscríbete por WhatsApp para recibir recetas, consejos y ofertas especiales directamente en tu teléfono</p>
-            <a href="https://wa.me/5356382909?text=Quiero%20suscribirme%20al%20blog" target="_blank" class="newsletter-button">
-                <i class="fab fa-whatsapp text-xl"></i>
-                Suscribirme por WhatsApp
-            </a>
-        </div>
-    </section> 
     <!-- ============================================ -->
-<!-- SECCIÓN: SOLICITA TU ARTÍCULO -->
-<!-- ============================================ -->
-<section class="py-12 bg-gradient-to-r from-purple-50 to-pink-50">
-    <div class="container mx-auto px-4">
-        
-        <div class="text-center mb-8">
-            <span class="inline-block bg-cuban-orange text-white px-4 py-1 rounded-full text-sm font-bold mb-3">
-                <i class="fas fa-lightbulb mr-1"></i> TU OPINIÓN CUENTA
-            </span>
-            <h2 class="text-3xl md:text-4xl font-bold mb-3">¿Sobre qué tema quieres leer?</h2>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-            Proponé el tema que te interese. Si más de 5 personas piden lo mismo, 
-                <span class="font-bold text-cuban-green">¡lo escribimos!</span>
-            </p>
-        </div>
-        
-        <!-- Grid de temas solicitados y formulario -->
-        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+    <!-- SECCIÓN: SOLICITA TU ARTÍCULO (NUEVA) -->
+    <!-- ============================================ -->
+    <section class="py-12 bg-gradient-to-r from-purple-50 to-pink-50">
+        <div class="container mx-auto px-4">
             
-            <!-- COLUMNA IZQUIERDA: Temas más solicitados -->
-            <div class="bg-white rounded-2xl shadow-xl p-6">
-                <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
-                    <i class="fas fa-chart-line text-cuban-green"></i>
-                    Temas más pedidos
-                </h3>
-                
-                <!-- Lista de temas solicitados (se carga con JS) -->
-                <div id="temasSolicitados" class="space-y-3">
-                    <!-- Ejemplo estático de cómo se vería -->
-                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl">📦</span>
-                            <div>
-                                <p class="font-semibold">Cómo hacer envíos a otras provincias</p>
-                                <div class="flex items-center gap-2 text-sm text-gray-500">
-                                    <i class="fas fa-users"></i>
-                                    <span class="font-medium text-cuban-green">8</span> personas lo pidieron
-                                </div>
-                            </div>
-                        </div>
-                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">¡EN PROCESO!</span>
-                    </div>
-                    
-                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl">👕</span>
-                            <div>
-                                <p class="font-semibold">Cómo combinar carteras con outfits</p>
-                                <div class="flex items-center gap-2 text-sm text-gray-500">
-                                    <i class="fas fa-users"></i>
-                                    <span class="font-medium text-cuban-green">5</span> personas lo pidieron
-                                </div>
-                            </div>
-                        </div>
-                        <span class="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded-full">¡ÚLTIMO PARA ACTIVAR!</span>
-                    </div>
-                    
-                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl">🥘</span>
-                            <div>
-                                <p class="font-semibold">Recetas con productos enlatados</p>
-                                <div class="flex items-center gap-2 text-sm text-gray-500">
-                                    <i class="fas fa-users"></i>
-                                    <span class="font-medium">3</span> personas lo pidieron
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Meta información -->
-                <div class="mt-4 text-xs text-gray-400 border-t pt-3">
-                    <i class="fas fa-info-circle mr-1"></i> Los temas con más de 5 solicitudes se escriben en 1 semana.
-                </div>
-            </div>
-            
-            <!-- COLUMNA DERECHA: Formulario para pedir tema -->
-            <div class="bg-white rounded-2xl shadow-xl p-6">
-                <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
-                    <i class="fas fa-pen text-cuban-orange"></i>
-                    Propone tu tema
-                </h3>
-                
-                <form id="formSolicitudTema" class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Tu nombre (opcional)</label>
-                        <input type="text" id="nombreSolicitante" placeholder="Ej: María" 
-                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">¿Sobre qué quieres leer? *</label>
-                        <textarea id="temaSolicitado" rows="3" required
-                               placeholder="Ej: 'Recetas fáciles con atún', 'Cómo cuidar carteras de cuero', 'Consejos para revender chanclas'..."
-                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent"></textarea>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">¿Por qué te interesa? (opcional)</label>
-                        <select class="w-full px-4 py-2 border border-gray-300 rounded-lg">
-                            <option value="">Selecciona una opción</option>
-                            <option value="cocinar">Me gusta cocinar</option>
-                            <option value="emprender">Soy emprendedor/a</option>
-                            <option value="moda">Me interesa la moda</option>
-                            <option value="habana">Vivo en La Habana</option>
-                        </select>
-                    </div>
-                    
-                    <button type="submit" 
-                            class="w-full bg-gradient-to-r from-cuban-orange to-cuban-yellow text-white py-3 rounded-lg font-bold hover:scale-105 transition transform">
-                        <i class="fas fa-paper-plane mr-2"></i>
-                        Proponer tema
-                    </button>
-                </form>
-                
-                <p class="text-xs text-gray-400 text-center mt-3">
-                    <i class="fas fa-shield-alt mr-1"></i> Tu opinión nos ayuda a crear contenido útil para ti
+            <div class="text-center mb-8">
+                <span class="inline-block bg-cuban-orange text-white px-4 py-1 rounded-full text-sm font-bold mb-3">
+                    <i class="fas fa-lightbulb mr-1"></i> TU OPINIÓN CUENTA
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-3">¿Sobre qué tema quieres leer?</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Proponé el tema que te interese. Si más de 5 personas piden lo mismo, 
+                    <span class="font-bold text-cuban-green">¡lo escribimos!</span>
                 </p>
             </div>
-        </div>
-        
-        <!-- Ejemplo de temas ya publicados por solicitud popular -->
-        <div class="mt-8 text-center">
-            <p class="text-sm text-gray-500 mb-2">📚 Artículos escritos por pedido de los lectores:</p>
-            <div class="flex flex-wrap gap-2 justify-center">
-                <span class="bg-white px-3 py-1 rounded-full text-xs shadow-sm border border-gray-200">✅ Cómo hacer pan sin horno (7 solicitudes)</span>
-                <span class="bg-white px-3 py-1 rounded-full text-xs shadow-sm border border-gray-200">✅ Dónde comprar ropa por mayor en La Habana (6 solicitudes)</span>
-                <span class="bg-white px-3 py-1 rounded-full text-xs shadow-sm border border-gray-200">✅ 10 usos para el aceite de coco (5 solicitudes)</span>
+            
+            <!-- Grid de temas solicitados y formulario -->
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                
+                <!-- COLUMNA IZQUIERDA: Temas más solicitados -->
+                <div class="bg-white rounded-2xl shadow-xl p-6">
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fas fa-chart-line text-cuban-green"></i>
+                        Temas más pedidos
+                    </h3>
+                    
+                    <!-- Lista de temas solicitados (se carga con JS) -->
+                    <div id="temasSolicitados" class="space-y-3">
+                        <!-- Se llenará dinámicamente -->
+                    </div>
+                    
+                    <!-- Meta información -->
+                    <div class="mt-4 text-xs text-gray-400 border-t pt-3">
+                        <i class="fas fa-info-circle mr-1"></i> Los temas con más de 5 solicitudes se escriben en 1 semana.
+                    </div>
+                </div>
+                
+                <!-- COLUMNA DERECHA: Formulario para pedir tema -->
+                <div class="bg-white rounded-2xl shadow-xl p-6">
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fas fa-pen text-cuban-orange"></i>
+                        Propone tu tema
+                    </h3>
+                    
+                    <form id="formSolicitudTema" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Tu nombre (opcional)</label>
+                            <input type="text" id="nombreSolicitante" placeholder="Ej: María" 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">¿Sobre qué quieres leer? *</label>
+                            <textarea id="temaSolicitado" rows="3" required
+                                   placeholder="Ej: 'Recetas fáciles con atún', 'Cómo cuidar carteras de cuero', 'Consejos para revender chanclas'..."
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent"></textarea>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">¿Por qué te interesa? (opcional)</label>
+                            <select id="categoriaTema" class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                                <option value="">Selecciona una opción</option>
+                                <option value="cocina">Me gusta cocinar</option>
+                                <option value="emprendimiento">Soy emprendedor/a</option>
+                                <option value="moda">Me interesa la moda</option>
+                                <option value="habana">Vivo en La Habana</option>
+                                <option value="general">Otro</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" 
+                                class="w-full bg-gradient-to-r from-cuban-orange to-cuban-yellow text-white py-3 rounded-lg font-bold hover:scale-105 transition transform">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Proponer tema
+                        </button>
+                    </form>
+                    
+                    <p class="text-xs text-gray-400 text-center mt-3">
+                        <i class="fas fa-shield-alt mr-1"></i> Tu opinión nos ayuda a crear contenido útil para ti
+                    </p>
+                </div>
             </div>
+            
+            <!-- Ejemplo de temas ya publicados por solicitud popular -->
+            <div class="mt-8 text-center">
+                <p class="text-sm text-gray-500 mb-2">📚 Artículos escritos por pedido de los lectores:</p>
+                <div class="flex flex-wrap gap-2 justify-center">
+                    <span class="bg-white px-3 py-1 rounded-full text-xs shadow-sm border border-gray-200">✅ Cómo hacer pan sin horno (7 solicitudes)</span>
+                    <span class="bg-white px-3 py-1 rounded-full text-xs shadow-sm border border-gray-200">✅ Dónde comprar ropa por mayor en La Habana (6 solicitudes)</span>
+                    <span class="bg-white px-3 py-1 rounded-full text-xs shadow-sm border border-gray-200">✅ 10 usos para el aceite de coco (5 solicitudes)</span>
+                </div>
+            </div>
+            
         </div>
-        
-    </div>
-</section>
+    </section>
+
+    <!-- Newsletter MEJORADO -->
+    <section class="newsletter-section">
+        <div class="container mx-auto px-4">
+            
+            <!-- Badge de valor -->
+            <span class="inline-block bg-cuban-yellow text-cuban-dark text-sm font-bold px-4 py-1 rounded-full mb-4">
+                ⭐ GRATIS · SIN SPAM ⭐
+            </span>
+            
+            <!-- Título llamativo -->
+            <h3 class="text-3xl font-bold mb-3">
+                📬 Únete a +200 vecinos de La Habana
+            </h3>
+            
+            <!-- Beneficios claros -->
+            <div class="max-w-2xl mx-auto mb-6 text-left bg-white/10 p-4 rounded-xl">
+                <p class="mb-2"><i class="fas fa-check-circle text-cuban-yellow mr-2"></i> <strong>Receta nueva cada semana</strong> (con productos de la tienda)</p>
+                <p class="mb-2"><i class="fas fa-check-circle text-cuban-yellow mr-2"></i> <strong>Ofertas exclusivas</strong> que no publicamos en la web</p>
+                <p class="mb-2"><i class="fas fa-check-circle text-cuban-yellow mr-2"></i> <strong>Estrenos de productos</strong> (como las chanclas de Lienys)</p>
+                <p class="mb-2"><i class="fas fa-check-circle text-cuban-yellow mr-2"></i> <strong>Consejos para tu hogar y negocio</strong></p>
+                <p class="mb-2"><i class="fas fa-check-circle text-cuban-yellow mr-2"></i> <strong>Podés pedir temas</strong> para el blog</p>
+            </div>
+            
+            <!-- Llamada a la acción directa -->
+            <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20suscribirme%20al%20blog%20para%20recibir%20recetas%2C%20ofertas%20y%20novedades%20de%20El%20Resolvito" 
+               target="_blank" 
+               class="newsletter-button inline-flex items-center gap-3">
+                <i class="fab fa-whatsapp text-2xl"></i>
+                SUSCRIBIRME AHORA
+            </a>
+            
+            <!-- Nota de confianza -->
+            <p class="text-sm opacity-80 mt-4">
+                <i class="fas fa-lock mr-1"></i> Solo te enviaremos información útil. Puedes cancelar cuando quieras.
+            </p>
+        </div>
+    </section>
 
     <!-- Contenedores para modales y footer -->
     <div id="image-modal-container"></div>
@@ -411,13 +451,36 @@
     <div id="checkout-modal-container"></div>
     <div id="footer-container"></div>
 
-    <!-- Toast -->
-    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none"></div>
+    <!-- Toast mejorado -->
+    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none flex items-center gap-2">
+        <i class="fas fa-check-circle text-cuban-yellow text-xl"></i>
+        <div>
+            <p id="toastTitle" class="font-bold text-sm"></p>
+            <p id="toastMessage" class="text-xs opacity-90"></p>
+        </div>
+    </div>
 
     <!-- Script principal -->
     <script src="js/elresolvito.js" defer></script>
 
     <script>
+        // ============================================
+        // FUNCIÓN TOAST MEJORADA
+        // ============================================
+        function showToast(title, message) {
+            const toast = document.getElementById('cartToast');
+            document.getElementById('toastTitle').textContent = title;
+            document.getElementById('toastMessage').textContent = message;
+            
+            toast.classList.remove('opacity-0');
+            toast.classList.add('opacity-100');
+            
+            setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0');
+            }, 3000);
+        }
+
         // ============================================
         // INTERACCIÓN EN BLOG.HTML (likes y populares)
         // ============================================
@@ -431,14 +494,12 @@
             'terrazas-bayona': { titulo: 'Terrazas de Bayona 59', url: 'blog/terrazas-de-bayona-59-experiencia-completa.html' },
             'cupcakes': { titulo: 'Cupcakes fáciles', url: 'blog/cupcakes-faciles-con-productos-de-nuestra-tienda.html' },
             'por-que-comprar': { titulo: '¿Por qué comprar en El Resolvito?', url: 'blog/por-que-comprar-en-el-resolvito.html' },
-};
-    
+        };
 
         // Cargar likes de localStorage
         function cargarLikesEnTarjetas() {
             const likesGuardados = JSON.parse(localStorage.getItem('likesBlog')) || {};
 
-            // Para cada tarjeta, mostrar el contador de likes
             document.querySelectorAll('.articulo-card').forEach(card => {
                 const articleId = card.dataset.articleId;
                 if (!articleId) return;
@@ -449,7 +510,7 @@
                     if (likes > 0) {
                         contenedor.innerHTML = `<span class="like-badge"><i class="fas fa-heart"></i> ${likes}</span>`;
                     } else {
-                        contenedor.innerHTML = ''; // No mostrar si es 0
+                        contenedor.innerHTML = '';
                     }
                 }
             });
@@ -459,9 +520,8 @@
 
         // Generar sección de populares (top 3)
         function generarPopulares(likesGuardados) {
-            // Convertir objeto a array de [id, likes]
-            const likesArray = Object.entries(likesGuardados).filter(([id]) => articulosInfo[id]); // solo IDs válidos
-            likesArray.sort((a, b) => b[1] - a[1]); // orden descendente
+            const likesArray = Object.entries(likesGuardados).filter(([id]) => articulosInfo[id]);
+            likesArray.sort((a, b) => b[1] - a[1]);
 
             const top3 = likesArray.slice(0, 3);
 
@@ -487,10 +547,120 @@
             }
         }
 
-        // Inicializar
-        document.addEventListener('DOMContentLoaded', function() {
-            const likes = cargarLikesEnTarjetas();
-            generarPopulares(likes);
+        // ============================================
+        // SISTEMA DE SOLICITUD DE ARTÍCULOS
+        // ============================================
+
+        // Temas de ejemplo (en producción vienen de localStorage)
+        let solicitudesTemas = [
+            { id: 1, tema: "Cómo hacer envíos a otras provincias", votos: 8, categoria: "servicios", activado: true },
+            { id: 2, tema: "Cómo combinar carteras con outfits", votos: 5, categoria: "moda", activado: true },
+            { id: 3, tema: "Recetas con productos enlatados", votos: 3, categoria: "cocina", activado: false },
+            { id: 4, tema: "Mantenimiento de aires acondicionados", votos: 2, categoria: "hogar", activado: false }
+        ];
+
+        function renderizarTemasSolicitados() {
+            const contenedor = document.getElementById('temasSolicitados');
+            if (!contenedor) return;
+            
+            const temasOrdenados = [...solicitudesTemas].sort((a, b) => b.votos - a.votos);
+            
+            contenedor.innerHTML = temasOrdenados.map(tema => {
+                let badgeHTML = '';
+                let badgeClass = '';
+                
+                if (tema.activado) {
+                    badgeHTML = '<span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full badge-activado">✓ EN PROCESO</span>';
+                } else if (tema.votos >= 5) {
+                    badgeHTML = '<span class="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded-full badge-cerca animate-pulse">⚡ ¡A PUNTO!</span>';
+                }
+                
+                const iconos = {
+                    'cocina': '🥘',
+                    'moda': '👕',
+                    'hogar': '🏠',
+                    'servicios': '📦',
+                    'emprendimiento': '📊',
+                    'general': '📝'
+                };
+                const icono = iconos[tema.categoria] || '📝';
+                
+                return `
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:shadow-md transition tema-card">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">${icono}</span>
+                            <div>
+                                <p class="font-semibold text-sm">${tema.tema}</p>
+                                <div class="flex items-center gap-2 text-xs text-gray-500">
+                                    <i class="fas fa-users"></i>
+                                    <span class="font-medium ${tema.votos >= 5 ? 'text-cuban-green' : ''}">${tema.votos}</span> solicitudes
+                                </div>
+                            </div>
+                        </div>
+                        ${badgeHTML}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function determinarCategoria(tema) {
+            tema = tema.toLowerCase();
+            if (tema.includes('cocin') || tema.includes('receta') || tema.includes('comid')) return 'cocina';
+            if (tema.includes('ropa') || tema.includes('vestir') || tema.includes('moda') || tema.includes('carter')) return 'moda';
+            if (tema.includes('negocio') || tema.includes('emprend') || tema.includes('vender')) return 'emprendimiento';
+            if (tema.includes('casa') || tema.includes('hogar') || tema.includes('repar')) return 'hogar';
+            if (tema.includes('envío') || tema.includes('mensajería') || tema.includes('delivery')) return 'servicios';
+            return 'general';
+        }
+
+        function verificarTemasActivados() {
+            const temasActivados = solicitudesTemas.filter(t => t.votos >= 5 && !t.activado);
+            
+            temasActivados.forEach(tema => {
+                tema.activado = true;
+                showToast('🎉 TEMA ACTIVADO', `"${tema.tema}" será publicado pronto!`);
+            });
+            
+            localStorage.setItem('solicitudesTemas', JSON.stringify(solicitudesTemas));
+        }
+
+        // Manejar envío del formulario
+        document.getElementById('formSolicitudTema')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('nombreSolicitante').value.trim() || 'Un lector';
+            const temaTexto = document.getElementById('temaSolicitado').value.trim();
+            const categoriaSel = document.getElementById('categoriaTema').value;
+            
+            if (!temaTexto) {
+                alert('Por favor, escribe un tema');
+                return;
+            }
+            
+            const temaExistente = solicitudesTemas.find(t => 
+                t.tema.toLowerCase().includes(temaTexto.toLowerCase()) || 
+                temaTexto.toLowerCase().includes(t.tema.toLowerCase())
+            );
+            
+            if (temaExistente) {
+                temaExistente.votos++;
+                verificarTemasActivados();
+                showToast('¡Gracias por tu voto!', `"${temaExistente.tema}" ahora tiene ${temaExistente.votos} solicitudes`);
+            } else {
+                const nuevoTema = {
+                    id: Date.now(),
+                    tema: temaTexto,
+                    votos: 1,
+                    categoria: categoriaSel || determinarCategoria(temaTexto),
+                    activado: false
+                };
+                solicitudesTemas.push(nuevoTema);
+                showToast(`¡Gracias ${nombre}!`, 'Tu tema ha sido registrado');
+            }
+            
+            renderizarTemasSolicitados();
+            localStorage.setItem('solicitudesTemas', JSON.stringify(solicitudesTemas));
+            this.reset();
         });
 
         // ============================================
@@ -506,7 +676,8 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', async () => {
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', async function() {
             await loadComponent('header-container', 'components/header.html');
             await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
             await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
@@ -514,10 +685,22 @@
             await loadComponent('cart-sidebar-container', 'components/cart-sidebar.html');
             await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
             await loadComponent('footer-container', 'components/footer.html');
+            
+            // Inicializar sistema de likes y solicitudes
+            const likes = cargarLikesEnTarjetas();
+            generarPopulares(likes);
+            
+            // Cargar solicitudes guardadas
+            const guardadas = localStorage.getItem('solicitudesTemas');
+            if (guardadas) {
+                try {
+                    solicitudesTemas = JSON.parse(guardadas);
+                } catch (e) {
+                    console.error('Error cargando solicitudes:', e);
+                }
+            }
+            renderizarTemasSolicitados();
         });
     </script>
 </body>
 </html>
-
-
-
