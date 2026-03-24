@@ -46,7 +46,7 @@
     <div id="floating-buttons-container"></div>
 
     <!-- ============================================ -->
-    <!-- BANNER DE ENTREGAS RÁPIDAS (NUEVO) -->
+    <!-- BANNER DE ENTREGAS RÁPIDAS -->
     <!-- ============================================ -->
     <div class="bg-cuban-green text-white py-2 text-center text-sm font-medium">
         <i class="fas fa-truck mr-2"></i>
@@ -55,20 +55,21 @@
     </div>
 
     <!-- Barra de búsqueda y filtros -->
-    <div class="busqueda-container">
+    <div class="busqueda-container py-4 bg-white shadow-sm sticky top-16 z-40">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row gap-3">
                 <div class="relative flex-1">
                     <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                    <input type="text" id="searchInput" placeholder="Buscar productos..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cuban-green focus:border-transparent">
+                    <input type="text" id="searchInput" placeholder="Buscar productos..." class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cuban-green focus:border-transparent">
                 </div>
                 <div class="flex gap-2 overflow-x-auto hide-scrollbar pb-1">
-                    <button onclick="filtrarCategoria('todos')" class="category-btn active px-4 py-2 rounded-full text-sm font-medium transition-colors bg-cuban-green text-white">Todos</button>
-                    <button onclick="filtrarCategoria('Alimentos y conservas')" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Alimentos</button>
-                    <button onclick="filtrarCategoria('Snacks y golosinas')" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Snacks</button>
-                    <button onclick="filtrarCategoria('Higiene personal')" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Higiene</button>
-                    <button onclick="filtrarCategoria('Bebidas alcohólicas y malta')" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Bebidas</button>
-                    <button onclick="filtrarCategoria('Perfumes y desodorantes')" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Perfumes</button>
+                    <button onclick="filtrarCategoria('todos', event)" class="category-btn active px-4 py-2 rounded-full text-sm font-medium transition-colors bg-cuban-green text-white whitespace-nowrap">Todos</button>
+                    <button onclick="filtrarCategoria('Alimentos y conservas', event)" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300 whitespace-nowrap">Alimentos</button>
+                    <button onclick="filtrarCategoria('Snacks y golosinas', event)" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300 whitespace-nowrap">Snacks</button>
+                    <button onclick="filtrarCategoria('Higiene personal', event)" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300 whitespace-nowrap">Higiene</button>
+                    <button onclick="filtrarCategoria('Bebidas alcohólicas y malta', event)" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300 whitespace-nowrap">Bebidas</button>
+                    <button onclick="filtrarCategoria('Perfumes y desodorantes', event)" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300 whitespace-nowrap">Perfumes</button>
+                    <button onclick="filtrarCategoria('Aseo del hogar', event)" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300 whitespace-nowrap">Aseo</button>
                 </div>
             </div>
         </div>
@@ -86,7 +87,7 @@
         </div>
     </section>
 
-    <!-- Contenedores para modales (una sola vez) -->
+    <!-- Contenedores para modales -->
     <div id="image-modal-container"></div>
     <div id="cart-sidebar-container"></div>
     <div id="checkout-modal-container"></div>
@@ -97,7 +98,6 @@
         <p id="cartToastMessage"></p>
     </div>
 
-    <!-- Solo cargamos el JS unificado -->
     <script src="js/elresolvito.js" defer></script>
 
     <script>
@@ -107,15 +107,12 @@
         let allProducts = [];
         let currentCategory = 'todos';
 
-        // ============================================
-        // FUNCIÓN DE RESPALDO DE IMÁGENES
-        // ============================================
         function getFallbackImage(nombre) {
             return `https://placehold.co/300x300/2E7D32/white?text=${encodeURIComponent(nombre.substring(0, 20))}`;
         }
 
         // ============================================
-        // RENDERIZAR PRODUCTOS (CON BOTÓN MEJORADO)
+        // RENDERIZAR PRODUCTOS (con botón unificado)
         // ============================================
         function renderizarProductos(productos) {
             const grid = document.getElementById('productsGrid');
@@ -145,11 +142,11 @@
                             <div class="product-descripcion text-xs text-gray-500 mb-2 line-clamp-1">${p.descripcion || ''}</div>
                             <div class="flex items-center justify-between mt-2">
                                 <span class="product-precio text-lg font-bold text-cuban-green">$${p.precio.toLocaleString()}</span>
-                                <!-- 🔥 BOTÓN MEJORADO: más ancho y con texto claro -->
+                                <!-- Botón unificado: Agregar al carrito -->
                                 <button onclick="window.addToCart({id:${p.id}, nombre:'${nombreSanitizado}', precio:${p.precio}, imagen:'${p.imagen}', cantidad:1})" 
                                         class="bg-cuban-green text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-cuban-dark transition-colors flex items-center gap-1">
                                     <i class="fas fa-cart-plus text-xs"></i>
-                                    AÑADIR
+                                    Añadir
                                 </button>
                             </div>
                         </div>
@@ -169,7 +166,7 @@
                 btn.classList.add('bg-gray-200', 'text-gray-700');
             });
             
-            if (event) {
+            if (event && event.target) {
                 event.target.classList.remove('bg-gray-200', 'text-gray-700');
                 event.target.classList.add('active', 'bg-cuban-green', 'text-white');
             }
@@ -202,7 +199,6 @@
         document.addEventListener('DOMContentLoaded', async () => {
             console.log('Inicializando tienda...');
             
-            // Cargar componentes
             await loadComponent('header-container', 'components/header.html');
             await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
             await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
@@ -211,7 +207,6 @@
             await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
             await loadComponent('footer-container', 'components/footer.html');
             
-            // Esperar un poco para que los componentes se rendericen
             setTimeout(() => {
                 if (typeof PRODUCTS !== 'undefined' && PRODUCTS.length > 0) {
                     allProducts = PRODUCTS;
