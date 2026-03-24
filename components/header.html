@@ -1,39 +1,70 @@
 <!-- components/header.html -->
-<header class="bg-white shadow-sm">
-    <div class="container mx-auto px-4">
-        <div class="flex items-center justify-between h-16 md:h-20">
-            <!-- Logo con imagen real -->
+<header class="sticky top-0 z-50 bg-white shadow-md">
+    <div class="container mx-auto px-4 py-3">
+        <div class="flex items-center justify-between">
+            <!-- Logo -->
             <a href="index.html" class="flex items-center gap-2">
-                <img src="https://i.postimg.cc/s2FHrX2Y/logo_el_resolvito.jpg" 
-                     alt="El Resolvito" 
-                     class="h-10 w-auto rounded-full">
-                <span class="font-bold text-xl text-gray-800 hidden sm:inline">El Resolvito</span>
+                <div class="w-10 h-10 bg-cuban-green rounded-full flex items-center justify-center text-white font-bold text-xl">
+                    <i class="fas fa-store"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-cuban-green leading-tight">El Resolvito</h1>
+                    <p class="text-xs text-gray-500">La Habana Vieja</p>
+                </div>
             </a>
-            
-            <!-- Navegación desktop (igual) -->
-            <nav class="hidden md:flex items-center space-x-6">
-                <a href="index.html" class="text-gray-600 hover:text-cuban-green transition font-medium">Inicio</a>
-                <a href="tienda.html" class="text-gray-600 hover:text-cuban-green transition font-medium">Tienda</a>
-                <a href="servicios.html" class="text-gray-600 hover:text-cuban-green transition font-medium">Servicios</a>
-                <a href="ofertas.html" class="text-gray-600 hover:text-cuban-green transition font-medium">Ofertas</a>
-                <a href="blog.html" class="text-gray-600 hover:text-cuban-green transition font-medium">Blog</a>
-                <a href="reservas.html" class="text-gray-600 hover:text-cuban-green transition font-medium">Alojamientos</a>
-                <a href="quienes-somos.html" class="text-gray-600 hover:text-cuban-green transition font-medium">Quiénes Somos</a>
+
+            <!-- MENÚ DE NAVEGACIÓN -->
+            <nav class="hidden lg:flex items-center gap-6">
+                <a href="index.html" class="hover:text-cuban-green font-medium">Inicio</a>
+                <a href="tienda.html" class="hover:text-cuban-green font-medium">Tienda</a>
+                <a href="servicios.html" class="hover:text-cuban-green font-medium">Servicios</a>
+                <a href="ofertas.html" class="hover:text-cuban-green font-medium">Ofertas</a>
+                <a href="blog.html" class="hover:text-cuban-green font-medium">Blog</a>
+                <a href="reservas.html" class="hover:text-cuban-green font-medium">Alojamientos</a>
+                
+                <!-- Botón de ayuda "Cómo comprar" -->
+                <a href="#como-comprar" class="bg-cuban-yellow text-cuban-dark px-3 py-1 rounded-full text-xs font-bold hover:bg-yellow-400 transition">
+                    <i class="fas fa-question-circle mr-1"></i> ¿Cómo comprar?
+                </a>
             </nav>
-            
-            <!-- Acciones (igual) -->
+
+            <!-- Botones de acción -->
             <div class="flex items-center gap-2">
-                <button onclick="window.toggleDayNight()" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition">
+                <button class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-cuban-green hover:text-white transition" onclick="toggleDayNight()">
                     <span id="headerThemeIcon">☀️</span>
                 </button>
-                <a href="tienda.html" class="relative w-10 h-10 bg-cuban-green rounded-full flex items-center justify-center text-white hover:bg-cuban-dark transition">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span id="headerCartCount" class="cart-badge hidden">0</span>
-                </a>
-                <button onclick="window.toggleMenu()" class="md:hidden w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition">
-                    <i class="fas fa-bars text-gray-600"></i>
+                <button onclick="toggleCart()" class="p-2 hover:bg-gray-100 rounded-lg relative">
+                    <i class="fas fa-shopping-cart text-2xl text-cuban-green"></i>
+                    <span id="cartCount" class="cart-badge hidden">0</span>
+                </button>
+                <button class="lg:hidden w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100" onclick="toggleMenu()">
+                    <i class="fas fa-bars text-2xl text-cuban-green"></i>
                 </button>
             </div>
         </div>
     </div>
 </header>
+
+<!-- Script para marcar la página activa y el modo oscuro -->
+<script>
+    (function() {
+        // Marcar el enlace activo según la página actual
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('header nav a');
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === currentPage) {
+                link.classList.add('text-cuban-green', 'font-medium', 'border-b-2', 'border-cuban-green');
+            } else {
+                link.classList.remove('text-cuban-green', 'font-medium', 'border-b-2', 'border-cuban-green');
+            }
+        });
+        
+        // Sincronizar icono de tema con el modo actual
+        const isNightMode = document.body.classList.contains('night-mode');
+        const themeIcon = document.getElementById('headerThemeIcon');
+        if (themeIcon) {
+            themeIcon.textContent = isNightMode ? '🌙' : '☀️';
+        }
+    })();
+</script>
