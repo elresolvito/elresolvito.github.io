@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>El Resolvito - Tu Solución en La Habana</title>
-    <meta name="description" content="Tienda online, servicios, alojamientos y más en La Habana Vieja. Entregas el mismo día.">
+    <meta name="description" content="Tienda online, servicios, alojamientos y más en La Habana Vieja. Entregas el mismo día. Compra fácil por WhatsApp.">
     
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -41,6 +41,31 @@
             }
         }
     </script>
+    
+    <style>
+        /* Estilos adicionales para tutorial y botones */
+        .tutorial-step {
+            transition: all 0.3s ease;
+        }
+        .tutorial-step:hover {
+            transform: translateY(-4px);
+        }
+        .btn-whatsapp-directo {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+        }
+        .btn-whatsapp-directo:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(37,211,102,0.4);
+        }
+        .tooltip-banner {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.9; }
+            50% { opacity: 1; background-color: #fef3c7; }
+            100% { opacity: 0.9; }
+        }
+    </style>
 </head>
 <body class="bg-white text-gray-800">
 
@@ -50,6 +75,28 @@
     <div id="header-container"></div>
     <div id="mobile-menu-container"></div>
     <div id="floating-buttons-container"></div>
+
+    <!-- ============================================ -->
+    <!-- BANNER DE CÓMO COMPRAR (visible siempre arriba) -->
+    <!-- ============================================ -->
+    <div class="bg-yellow-100 border-l-4 border-cuban-green py-3 px-4 sticky top-0 z-40 shadow-sm">
+        <div class="container mx-auto">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-2">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-info-circle text-cuban-green text-xl"></i>
+                    <p class="text-sm text-gray-700">
+                        <span class="font-bold">📱 ¿CÓMO COMPRAR?</span> 
+                        Mira los productos, haz clic en 
+                        <span class="bg-cuban-green text-white px-2 py-0.5 rounded text-xs font-bold">Agregar al carrito</span> 
+                        y luego en el botón verde flotante 🛒
+                    </p>
+                </div>
+                <a href="#como-comprar" class="text-xs text-cuban-green font-bold hover:underline whitespace-nowrap">
+                    Ver tutorial completo <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- Hero Banner -->
     <section class="hero-container">
@@ -71,6 +118,67 @@
         </div>
     </section>
 
+    <!-- ============================================ -->
+    <!-- SECCIÓN: CÓMO COMPRAR EN 3 PASOS (tutorial visual) -->
+    <!-- ============================================ -->
+    <section id="como-comprar" class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8">
+                <span class="inline-block bg-cuban-green text-white px-4 py-1 rounded-full text-sm font-bold mb-2">
+                    <i class="fas fa-graduation-cap mr-1"></i> FÁCIL Y RÁPIDO
+                </span>
+                <h2 class="text-3xl font-bold text-gray-800">📱 Cómo comprar en El Resolvito</h2>
+                <p class="text-gray-600 mt-2">Sigue estos 3 pasos y recibe tu pedido en el día</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <!-- Paso 1 -->
+                <div class="tutorial-step text-center p-6 bg-gray-50 rounded-2xl shadow-md">
+                    <div class="w-20 h-20 bg-cuban-green rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-bold shadow-lg">
+                        1
+                    </div>
+                    <div class="w-16 h-16 bg-cuban-green/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-search text-3xl text-cuban-green"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Encuentra tu producto</h3>
+                    <p class="text-sm text-gray-600">Navega por nuestra tienda o mira las ofertas destacadas. Usa el buscador si lo prefieres.</p>
+                </div>
+                
+                <!-- Paso 2 -->
+                <div class="tutorial-step text-center p-6 bg-gray-50 rounded-2xl shadow-md">
+                    <div class="w-20 h-20 bg-cuban-green rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-bold shadow-lg">
+                        2
+                    </div>
+                    <div class="w-16 h-16 bg-cuban-green/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-cart-plus text-3xl text-cuban-green"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Agrégalo al carrito</h3>
+                    <p class="text-sm text-gray-600">Haz clic en <span class="bg-cuban-green text-white px-2 py-0.5 rounded text-xs font-bold">Agregar al carrito</span>. Puedes añadir varios productos.</p>
+                </div>
+                
+                <!-- Paso 3 -->
+                <div class="tutorial-step text-center p-6 bg-gray-50 rounded-2xl shadow-md">
+                    <div class="w-20 h-20 bg-cuban-green rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-bold shadow-lg">
+                        3
+                    </div>
+                    <div class="w-16 h-16 bg-cuban-green/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fab fa-whatsapp text-3xl text-cuban-green"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Completa tus datos</h3>
+                    <p class="text-sm text-gray-600">Haz clic en el carrito 🛒 (abajo a la derecha), completa tus datos y envía por WhatsApp.</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8 bg-yellow-50 p-4 rounded-xl max-w-2xl mx-auto border border-yellow-200">
+                <p class="text-sm text-gray-700">
+                    <i class="fas fa-phone-alt text-cuban-green"></i> 
+                    <span class="font-bold">💡 ¿Prefieres comprar directo por WhatsApp?</span> 
+                    Escríbenos al <a href="https://wa.me/5356382909" class="text-cuban-green font-bold underline">+53 5 638 2909</a> y te ayudamos con tu pedido.
+                </p>
+            </div>
+        </div>
+    </section>
+
     <!-- HORARIOS DE ENTREGA -->
     <section class="py-8 bg-gradient-to-r from-cuban-green/5 to-cuban-yellow/5">
         <div class="container mx-auto px-4">
@@ -82,7 +190,6 @@
             </div>
             
             <div class="flex flex-col md:flex-row justify-center gap-4 max-w-3xl mx-auto">
-                <!-- Horario mañana -->
                 <div class="flex-1 bg-white rounded-xl shadow-md p-5 border-l-4 border-cuban-green">
                     <div class="flex items-center gap-3 mb-2">
                         <span class="text-3xl">☀️</span>
@@ -97,7 +204,6 @@
                     </p>
                 </div>
                 
-                <!-- Horario tarde -->
                 <div class="flex-1 bg-white rounded-xl shadow-md p-5 border-l-4 border-cuban-yellow">
                     <div class="flex items-center gap-3 mb-2">
                         <span class="text-3xl">🌙</span>
@@ -150,7 +256,6 @@
                     </div>
                 </a>
                 <a href="ofertas.html" class="promo-banner relative h-48 rounded-2xl overflow-hidden shadow-lg group">
-                    <!-- Imagen de chanclas con padding reducido para que se vea más grande -->
                     <img src="https://i.postimg.cc/8Cw6ZNg8/chanclas-negras-1.png" class="w-full h-full object-contain bg-white p-2" alt="Chanclas al por mayor">
                     <div class="promo-overlay" style="background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%);"></div>
                     <div class="absolute inset-0 flex flex-col justify-center p-6 text-white">
@@ -172,6 +277,14 @@
                 <a href="tienda.html" class="text-cuban-green font-medium hover:underline">Ver todo →</a>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="featuredProducts"></div>
+            
+            <!-- Tip para productos destacados -->
+            <div class="text-center mt-6">
+                <p class="text-xs text-gray-500">
+                    <i class="fas fa-cart-plus text-cuban-green"></i> 
+                    Haz clic en "Agregar al carrito" en cualquier producto
+                </p>
+            </div>
         </div>
     </section>
 
@@ -192,11 +305,9 @@
                         <span class="bg-dulce-rosa text-white text-xs px-2 py-1 rounded-full font-bold">✨ NUEVO</span>
                         <h3 class="font-bold text-xl mb-2 text-dulce-rosa">Dulce César</h3>
                         <p class="text-gray-600 text-sm mb-3">Repostería artesanal para eventos, cafeterías y pedidos especiales.</p>
-                        <div class="flex gap-2">
-                            <a href="https://wa.me/5353342167?text=Hola%2C%20vi%20Dulce%20C%C3%A9sar%20en%20El%20Resolvito%20y%20quiero%20informaci%C3%B3n" target="_blank" class="flex-1 bg-dulce-rosa text-white text-center py-2 rounded-lg text-sm font-bold hover:opacity-90 transition">
-                                <i class="fab fa-whatsapp mr-1"></i> Contactar
-                            </a>
-                        </div>
+                        <a href="https://wa.me/5353342167?text=Hola%2C%20vi%20Dulce%20C%C3%A9sar%20en%20El%20Resolvito%20y%20quiero%20informaci%C3%B3n" target="_blank" class="block w-full bg-dulce-rosa text-white text-center py-2 rounded-lg text-sm font-bold hover:opacity-90 transition">
+                            <i class="fab fa-whatsapp mr-1"></i> Contactar para cotizar
+                        </a>
                     </div>
                 </div>
                 <!-- Contador -->
@@ -208,11 +319,9 @@
                         <span class="bg-contador-azul text-white text-xs px-2 py-1 rounded-full font-bold">📊 NUEVO</span>
                         <h3 class="font-bold text-xl mb-2 text-contador-azul">Contador / Tenedor de Libros</h3>
                         <p class="text-gray-600 text-sm mb-3">Gestión contable profesional para TCP y pequeños negocios.</p>
-                        <div class="flex gap-2">
-                            <a href="https://wa.me/5356382909?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Contador" target="_blank" class="flex-1 bg-contador-azul text-white text-center py-2 rounded-lg text-sm font-bold hover:bg-blue-800 transition">
-                                <i class="fab fa-whatsapp mr-1"></i> Contactar: 56382909
-                            </a>
-                        </div>
+                        <a href="https://wa.me/5356382909?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Contador" target="_blank" class="block w-full bg-contador-azul text-white text-center py-2 rounded-lg text-sm font-bold hover:bg-blue-800 transition">
+                            <i class="fab fa-whatsapp mr-1"></i> Contactar para cotizar
+                        </a>
                     </div>
                 </div>
             </div>
@@ -233,338 +342,99 @@
                     <p class="text-lg mb-2 font-semibold">Llevamos y recogemos por ti.</p>
                     <p class="text-sm mb-4 opacity-90">Un servicio rápido, confiable y en La Habana. Coordinamos por WhatsApp.</p>
                     <div class="flex flex-col sm:flex-row gap-3">
-                        <a href="https://wa.me/5356382909?text=Hola,%20necesito%20un%20mensajero%20para%20un%20recado%20en%20La%20Habana" 
-                           target="_blank"
-                           class="bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-2 px-6 rounded-full transition flex items-center justify-center gap-2 text-sm">
-                            <i class="fab fa-whatsapp text-lg"></i> Contratar mensajero
-                        </a>
-                        <a href="servicios.html" 
-                           class="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold py-2 px-6 rounded-full transition border border-white flex items-center justify-center gap-2 text-sm">
-                            Ver servicios
+                        <button onclick="window.addToCart({id: 502, nombre: 'Servicio de Mensajería (Habana Vieja)', precio: 400, imagen: 'https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp', cantidad: 1})" 
+                                class="bg-cuban-green hover:bg-cuban-dark text-white font-bold py-2 px-6 rounded-full transition flex items-center justify-center gap-2 text-sm">
+                            <i class="fas fa-cart-plus text-lg"></i> Contratar mensajero ($400)
+                        </button>
+                        <a href="servicios.html" class="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold py-2 px-6 rounded-full transition border border-white flex items-center justify-center gap-2 text-sm">
+                            Ver todos los servicios
                         </a>
                     </div>
+                    <p class="text-xs opacity-80 mt-3">💡 Para otras zonas, contáctanos para cotizar</p>
                 </div>
             </div>
         </div>
-    </section> 
-<!-- ============================================ -->
-<!-- OFERTAS ESPECIALES - CHANCLAS Y CARTERAS DE LIENYS -->
-<!-- CON EFECTOS DE TEXTO MODERNOS -->
-<!-- ============================================ -->
-<section class="py-16 relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50">
-    
-    <!-- Elementos decorativos de fondo -->
-    <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-10 left-10 w-40 h-40 bg-cuban-orange rounded-full blur-3xl animate-pulse"></div>
-        <div class="absolute bottom-10 right-10 w-60 h-60 bg-purple-600 rounded-full blur-3xl animate-pulse delay-1000"></div>
-    </div>
-    
-    <div class="container mx-auto px-4 relative z-10">
-        
-        <!-- CABECERA CON EFECTO GLITCH -->
-        <div class="text-center mb-12">
-            <span class="inline-block bg-gradient-to-r from-cuban-orange to-red-500 text-white px-6 py-2 rounded-full text-sm font-bold mb-4 shadow-lg animate-bounce">
-                ⚡ OFERTAS RELÁMPAGO ⚡
-            </span>
-            
-            <!-- Título con efecto de sombra y gradiente -->
-            <h2 class="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-cuban-orange via-red-500 to-purple-600 bg-clip-text text-transparent animate-pulse">
-                ¡NO TE LAS PIERDAS!
-            </h2>
-            
-            <!-- Subtítulo con efecto de escritura -->
-            <p class="text-xl text-gray-700 relative inline-block">
-                <span class="relative z-10 bg-white/50 px-6 py-2 rounded-full backdrop-blur-sm">
-                    <i class="fas fa-fire text-cuban-orange mr-2 animate-ping"></i>
-                    Colección de Lienys
-                    <i class="fas fa-fire text-cuban-orange ml-2 animate-ping"></i>
+    </section>
+
+    <!-- OFERTAS ESPECIALES - CHANCLAS Y CARTERAS DE LIENYS (sección completa se mantiene igual pero con botones unificados) -->
+    <section class="py-16 relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-12">
+                <span class="inline-block bg-gradient-to-r from-cuban-orange to-red-500 text-white px-6 py-2 rounded-full text-sm font-bold mb-4 shadow-lg animate-bounce">
+                    ⚡ OFERTAS RELÁMPAGO ⚡
                 </span>
-            </p>
+                <h2 class="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-cuban-orange via-red-500 to-purple-600 bg-clip-text text-transparent">
+                    ¡NO TE LAS PIERDAS!
+                </h2>
+                <p class="text-xl text-gray-700 relative inline-block">
+                    <span class="relative z-10 bg-white/50 px-6 py-2 rounded-full backdrop-blur-sm">
+                        <i class="fas fa-fire text-cuban-orange mr-2 animate-ping"></i>
+                        Colección de Lienys
+                        <i class="fas fa-fire text-cuban-orange ml-2 animate-ping"></i>
+                    </span>
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Tarjeta Chanclas -->
+                <div class="group relative transform hover:scale-105 transition-all duration-500">
+                    <div class="relative bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden">
+                        <div class="h-72 overflow-hidden relative">
+                            <div class="grid grid-cols-2 h-full">
+                                <img src="https://i.postimg.cc/qvBVZPcH/chancletas_negras.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Chanclas negras">
+                                <img src="https://i.postimg.cc/8Pmg4pv5/CHANCLETAS_BLANCAS.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 delay-100" alt="Chanclas blancas">
+                            </div>
+                            <span class="absolute top-4 right-4 bg-gradient-to-r from-green-400 to-green-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg z-20 animate-pulse border-2 border-white">
+                                🔥 NUEVA COLECCIÓN 🔥
+                            </span>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-3xl font-bold bg-gradient-to-r from-cuban-green to-cuban-dark bg-clip-text text-transparent mb-2">Chanclas Lienys</h3>
+                            <p class="text-gray-600 mb-4">Cómodas, duraderas, ideales para el verano</p>
+                            <div class="mb-4">
+                                <span class="text-3xl font-bold text-cuban-green">$4,500</span>
+                                <span class="text-gray-500"> c/u</span>
+                            </div>
+                            <button onclick="window.addToCart({id: 201, nombre: 'Chanclas Lienys', precio: 4500, imagen: 'https://i.postimg.cc/qvBVZPcH/chancletas_negras.png', cantidad: 1})" 
+                                    class="w-full bg-gradient-to-r from-cuban-green to-cuban-dark text-white py-3 rounded-xl font-bold hover:scale-105 transition">
+                                <i class="fas fa-cart-plus mr-2"></i> Agregar al carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta Carteras -->
+                <div class="group relative transform hover:scale-105 transition-all duration-500">
+                    <div class="relative bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden">
+                        <div class="h-72 overflow-hidden relative">
+                            <div class="grid grid-cols-2 h-full">
+                                <img src="https://i.postimg.cc/Vk4RDT46/cartera_azul_muchacha.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Cartera azul">
+                                <img src="https://i.postimg.cc/2STw2JT8/cartera-beige-muchacha.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 delay-100" alt="Cartera beige">
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">Carteras Lienys</h3>
+                            <div class="mb-4 space-y-2">
+                                <p><span class="font-bold">Cartera con corbata:</span> <span class="text-cuban-green font-bold">$6,000</span></p>
+                                <p><span class="font-bold">Carteras normales:</span> <span class="text-cuban-green font-bold">$5,000</span></p>
+                            </div>
+                            <button onclick="window.addToCart({id: 301, nombre: 'Cartera Lienys', precio: 5000, imagen: 'https://i.postimg.cc/Vk4RDT46/cartera_azul_muchacha.png', cantidad: 1})" 
+                                    class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-bold hover:scale-105 transition">
+                                <i class="fas fa-cart-plus mr-2"></i> Agregar al carrito
+                            </button>
+                            <p class="text-xs text-gray-500 text-center mt-2">Selecciona el modelo en el carrito</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
-            <!-- Línea decorativa animada -->
-            <div class="w-24 h-1 bg-gradient-to-r from-cuban-orange to-purple-600 mx-auto mt-4 rounded-full animate-pulse"></div>
-        </div>
-
-        <!-- Grid de 2 columnas -->
-        <div class="grid lg:grid-cols-2 gap-8">
-            
-            <!-- ======================================== -->
-            <!-- TARJETA CHANCLAS (precio $4,500) -->
-            <!-- ======================================== -->
-            <div class="group relative transform hover:scale-105 transition-all duration-500 hover:rotate-1">
-                
-                <!-- Efecto de sombra paralaje -->
-                <div class="absolute -inset-1 bg-gradient-to-r from-cuban-orange via-red-500 to-purple-600 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition duration-500"></div>
-                
-                <!-- Contenido de la tarjeta -->
-                <div class="relative bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden">
-                    
-                    <!-- Imagen con efecto zoom -->
-                    <div class="h-72 overflow-hidden relative">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
-                        
-                        <!-- Grid de imágenes de chancletas -->
-                        <div class="grid grid-cols-2 h-full">
-                            <img src="https://i.postimg.cc/qvBVZPcH/chancletas_negras.png" 
-                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                 alt="Chancletas negras"
-                                 onerror="this.src='https://placehold.co/400x400/2E7D32/white?text=Chanclas'">
-                            <img src="https://i.postimg.cc/8Pmg4pv5/CHANCLETAS_BLANCAS.png" 
-                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 delay-100"
-                                 alt="Chancletas blancas"
-                                 onerror="this.src='https://placehold.co/400x400/2E7D32/white?text=Chanclas'">
-                        </div>
-                        
-                        <!-- Badge flotante con efecto neón -->
-                        <span class="absolute top-4 right-4 bg-gradient-to-r from-green-400 to-green-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg z-20 animate-pulse border-2 border-white">
-                            🔥 NUEVA COLECCIÓN 🔥
-                        </span>
-                        
-                        <!-- Badge de precio flotante -->
-                        <span class="absolute bottom-4 left-4 bg-black/70 backdrop-blur text-white px-4 py-2 rounded-full text-sm font-bold z-20 border border-white/50">
-                            <i class="fas fa-tag text-cuban-yellow mr-1"></i>
-                            $4,500 c/u
-                        </span>
-                    </div>
-                    
-                    <!-- Contenido -->
-                    <div class="p-8">
-                        <!-- Título con efecto de deslizamiento -->
-                        <div class="flex items-center gap-3 mb-4">
-                            <span class="text-4xl transform group-hover:rotate-12 transition">🩴</span>
-                            <h3 class="text-3xl font-bold bg-gradient-to-r from-cuban-green to-cuban-dark bg-clip-text text-transparent">
-                                Chanclas Lienys
-                            </h3>
-                        </div>
-                        
-                        <!-- Descripción con efecto de aparición -->
-                        <p class="text-gray-600 mb-6 transform transition-all duration-500 group-hover:translate-x-2 border-l-4 border-cuban-orange pl-4">
-                            <i class="fas fa-check-circle text-cuban-green mr-2"></i>
-                            Cómodas, duraderas, ideales para el verano
-                        </p>
-                        
-                        <!-- Colores con hover effect -->
-                        <div class="mb-6">
-                            <p class="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
-                                <i class="fas fa-palette text-cuban-orange animate-spin-slow"></i>
-                                Colores disponibles:
-                            </p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="color-chip bg-gray-900 text-white px-4 py-2 rounded-full text-sm hover:scale-110 transition border-2 border-transparent hover:border-white hover:shadow-xl">
-                                    ⚫ Negras
-                                </span>
-                                <span class="color-chip bg-gray-600 text-white px-4 py-2 rounded-full text-sm hover:scale-110 transition border-2 border-transparent hover:border-white hover:shadow-xl">
-                                    ⚫ Negras (clásicas)
-                                </span>
-                                <span class="color-chip bg-white text-gray-800 px-4 py-2 rounded-full text-sm hover:scale-110 transition border-2 border-gray-300 hover:border-cuban-orange hover:shadow-xl">
-                                    ⚪ Blancas
-                                </span>
-                                <span class="color-chip bg-amber-600 text-white px-4 py-2 rounded-full text-sm hover:scale-110 transition border-2 border-transparent hover:border-white hover:shadow-xl">
-                                    🟤 Beige
-                                </span>
-                                <span class="color-chip bg-pink-400 text-white px-4 py-2 rounded-full text-sm hover:scale-110 transition border-2 border-transparent hover:border-white hover:shadow-xl">
-                                    🌸 Rosadas
-                                </span>
-                            </div>
-                        </div>
-                        
-                        <!-- BOTONES CORREGIDOS - CHANCLAS -->
-                        <div class="flex gap-3">
-                            <a href="lienys.html#chanclas" 
-                               class="flex-1 bg-gradient-to-r from-cuban-green to-cuban-dark text-white text-center py-3 rounded-xl font-bold hover:from-cuban-dark hover:to-cuban-green transition-all duration-300 transform hover:scale-105">
-                                Ver colección
-                            </a>
-                            <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20consultar%20sobre%20las%20chanclas%20de%20Lienys%20a%20%244%2C500" 
-                               target="_blank"
-                               class="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white text-center py-3 rounded-xl font-bold hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
-                                <i class="fab fa-whatsapp text-xl"></i>
-                                WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ======================================== -->
-            <!-- TARJETA CARTERAS (precios $5,000 y $6,000) -->
-            <!-- ======================================== -->
-            <div class="group relative transform hover:scale-105 transition-all duration-500 hover:-rotate-1">
-                
-                <!-- Efecto de sombra con colores -->
-                <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 via-pink-500 to-rose-500 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition duration-500"></div>
-                
-                <!-- Contenido de la tarjeta con efecto vidrio -->
-                <div class="relative bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden">
-                    
-                    <!-- Galería de imágenes con hover -->
-                    <div class="h-72 overflow-hidden relative">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
-                        
-                        <!-- Grid de 2x2 para las imágenes -->
-                        <div class="grid grid-cols-2 h-full">
-                            <!-- Primera fila -->
-                            <div class="relative overflow-hidden">
-                                <img src="https://i.postimg.cc/Vk4RDT46/cartera_azul_muchacha.png" 
-                                     class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-2"
-                                     alt="Cartera azul"
-                                     onerror="this.src='https://placehold.co/400x400/6b21a5/white?text=Cartera'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-purple-600/30 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
-                            </div>
-                            <div class="relative overflow-hidden">
-                                <img src="https://i.postimg.cc/2STw2JT8/cartera_beige_muchacha.png" 
-                                     class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:-rotate-2"
-                                     alt="Cartera beige"
-                                     onerror="this.src='https://placehold.co/400x400/6b21a5/white?text=Cartera'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-pink-600/30 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
-                            </div>
-                            <!-- Segunda fila -->
-                            <div class="relative overflow-hidden">
-                                <img src="https://i.postimg.cc/nV7JsYcJ/cartera_carmelita.png" 
-                                     class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:-rotate-2"
-                                     alt="Cartera carmelita"
-                                     onerror="this.src='https://placehold.co/400x400/6b21a5/white?text=Cartera'">
-                            </div>
-                            <div class="relative overflow-hidden">
-                                <img src="https://i.postimg.cc/sxpdty04/cartera_negra.png" 
-                                     class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-2"
-                                     alt="Cartera negra"
-                                     onerror="this.src='https://placehold.co/400x400/6b21a5/white?text=Cartera'">
-                            </div>
-                        </div>
-                        
-                        <!-- Badge de "TOP" flotante -->
-                        <span class="absolute top-4 left-4 bg-gradient-to-r from-amber-400 to-yellow-500 text-gray-900 px-4 py-2 rounded-full text-sm font-bold z-20 shadow-lg animate-bounce border border-white">
-                            ⭐ COLECCIÓN TOP ⭐
-                        </span>
-                        
-                        <!-- Precio destacado flotante -->
-                        <span class="absolute bottom-4 right-4 bg-black/70 backdrop-blur text-white px-4 py-2 rounded-full text-sm font-bold z-20 border border-white/50">
-                            <i class="fas fa-gem text-yellow-400 mr-1"></i>
-                            Desde $5,000
-                        </span>
-                    </div>
-                    
-                    <!-- Contenido -->
-                    <div class="p-8">
-                        <!-- Título con efecto de brillo -->
-                        <div class="flex items-center gap-3 mb-4">
-                            <span class="text-4xl transform group-hover:scale-125 transition">👛</span>
-                            <h3 class="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                                Carteras Lienys
-                            </h3>
-                        </div>
-                        
-                        <!-- Precios con efecto de aparición -->
-                        <div class="space-y-3 mb-6 bg-gradient-to-r from-purple-50 to-pink-50 p-4 rounded-xl">
-                            <div class="flex items-center justify-between transform transition-all duration-300 hover:translate-x-2 hover:bg-white p-2 rounded-lg">
-                                <div class="flex items-center gap-3">
-                                    <span class="w-2 h-2 bg-amber-500 rounded-full animate-ping"></span>
-                                    <span class="font-semibold">Cartera con corbata</span>
-                                </div>
-                                <span class="text-2xl font-bold text-cuban-green animate-pulse">$6,000</span>
-                            </div>
-                            <div class="flex items-center justify-between transform transition-all duration-300 hover:translate-x-2 hover:bg-white p-2 rounded-lg">
-                                <span class="font-semibold">Carteras normales</span>
-                                <span class="text-xl font-bold text-cuban-green">$5,000</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Miniaturas de colores interactivas -->
-                        <div class="mb-6">
-                            <p class="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
-                                <i class="fas fa-swatchbook text-purple-600 animate-pulse"></i>
-                                Todos los colores:
-                            </p>
-                            <div class="flex gap-2 justify-center">
-                                <span class="w-10 h-10 rounded-full bg-blue-600 border-4 border-white shadow-xl hover:scale-150 transition cursor-pointer" title="Azul"></span>
-                                <span class="w-10 h-10 rounded-full bg-amber-600 border-4 border-white shadow-xl hover:scale-150 transition cursor-pointer" title="Beige"></span>
-                                <span class="w-10 h-10 rounded-full bg-amber-800 border-4 border-white shadow-xl hover:scale-150 transition cursor-pointer" title="Carmelita"></span>
-                                <span class="w-10 h-10 rounded-full bg-black border-4 border-white shadow-xl hover:scale-150 transition cursor-pointer" title="Negra"></span>
-                                <span class="w-10 h-10 rounded-full bg-pink-400 border-4 border-white shadow-xl hover:scale-150 transition cursor-pointer" title="Rosada"></span>
-                            </div>
-                        </div>
-                        
-                        <!-- BOTONES CORREGIDOS - CARTERAS -->
-                        <div class="flex gap-3">
-                            <a href="lienys.html#carteras" 
-                               class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-center py-3 rounded-xl font-bold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105">
-                                Ver colección
-                            </a>
-                            <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20consultar%20sobre%20las%20carteras%20de%20Lienys" 
-                               target="_blank"
-                               class="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white text-center py-3 rounded-xl font-bold hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
-                                <i class="fab fa-whatsapp text-xl"></i>
-                                WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            <div class="mt-8 text-center">
+                <a href="lienys.html" class="inline-block bg-cuban-green text-white px-6 py-3 rounded-full font-bold hover:bg-cuban-dark transition">
+                    Ver colección completa de Lienys
+                </a>
             </div>
         </div>
-        
-        <!-- BANNER INFERIOR CORREGIDO -->
-        <div class="mt-12 relative overflow-hidden rounded-2xl bg-gradient-to-r from-cuban-orange via-red-500 to-purple-600 p-1">
-            <div class="bg-white/90 backdrop-blur rounded-2xl p-6">
-                <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-                    <div class="flex items-center gap-4">
-                        <div class="w-16 h-16 bg-gradient-to-br from-cuban-orange to-purple-600 rounded-full flex items-center justify-center text-white text-2xl animate-bounce">
-                            <i class="fas fa-handshake"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-xl">🤝 Colaboración con Lienys</h4>
-                            <p class="text-gray-600">Productos de calidad directamente de una emprendedora cubana</p>
-                        </div>
-                    </div>
-                    <a href="lienys.html" 
-                       class="bg-gradient-to-r from-cuban-green to-cuban-dark text-white px-8 py-3 rounded-full font-bold hover:from-cuban-dark hover:to-cuban-green transition-all transform hover:scale-105 flex items-center gap-2">
-                        <i class="fas fa-arrow-right text-xl"></i>
-                        Ver catálogo completo
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Mensaje de confianza con efecto de brillo -->
-        <div class="text-center mt-8 animate-pulse">
-            <p class="text-sm text-gray-500 inline-flex items-center gap-2 bg-white/70 backdrop-blur px-6 py-3 rounded-full shadow-lg border border-gray-200">
-                <i class="fas fa-check-circle text-cuban-green text-lg"></i>
-                <span class="font-medium">Productos de Lienys · Entrega en La Habana Vieja · Pago contra entrega</span>
-            </p>
-        </div>
-    </div>
-</section>
-
-<!-- CSS adicional para animaciones personalizadas -->
-<style>
-@keyframes spin-slow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-.animate-spin-slow {
-    animation: spin-slow 3s linear infinite;
-}
-
-.color-chip {
-    position: relative;
-    overflow: hidden;
-}
-.color-chip::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
-    transform: rotate(45deg);
-    animation: shine 3s infinite;
-}
-@keyframes shine {
-    0% { transform: translateX(-100%) rotate(45deg); }
-    20% { transform: translateX(100%) rotate(45deg); }
-    100% { transform: translateX(100%) rotate(45deg); }
-}
-</style>
+    </section>
 
     <!-- OFERTAS MAYOR PREVIEW -->
     <section class="py-10">
@@ -576,9 +446,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
                 <div class="rounded-xl overflow-hidden shadow-md max-w-xs mx-auto md:max-w-full">
-                    <img src="https://i.postimg.cc/c4zrnfyN/Gemini_Generated_Image_ixeyniixeyniixey.png" 
-                         alt="Colección de chanclas" 
-                         class="w-full h-auto object-cover hover:scale-105 transition duration-500">
+                    <img src="https://i.postimg.cc/c4zrnfyN/Gemini_Generated_Image_ixeyniixeyniixey.png" alt="Colección de chanclas" class="w-full h-auto object-cover hover:scale-105 transition duration-500">
                 </div>
                 <div class="space-y-3 text-center md:text-left">
                     <span class="inline-block bg-cuban-orange text-white text-xs font-bold px-3 py-1 rounded-full">🔥 OFERTA ESPECIAL</span>
@@ -588,61 +456,51 @@
                         <span class="text-3xl font-bold text-cuban-green">$3,500</span>
                         <span class="text-gray-500 text-sm">c/u</span>
                     </div>
-                    <div class="flex flex-wrap gap-1 justify-center md:justify-start">
-                        <span class="bg-gray-200 px-2 py-0.5 rounded-full text-xs flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-black"></span> Negras</span>
-                        <span class="bg-gray-200 px-2 py-0.5 rounded-full text-xs flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-white border border-gray-400"></span> Blancas</span>
-                        <span class="bg-gray-200 px-2 py-0.5 rounded-full text-xs flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-700"></span> Beige</span>
-                        <span class="bg-gray-200 px-2 py-0.5 rounded-full text-xs flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-pink-400"></span> Rosadas</span>
-                    </div>
-                    <div class="flex flex-col sm:flex-row gap-2 pt-2">
-                        <a href="ofertas.html" class="bg-cuban-green text-white text-center px-4 py-2 rounded-full text-sm font-bold hover:bg-cuban-dark transition flex-1">Ver colección</a>
-                        <a href="https://wa.me/5356382909?text=Hola%2C%20me%20interesan%20las%20chanclas%20al%20por%20mayor" target="_blank" class="bg-cuban-yellow text-cuban-dark text-center px-4 py-2 rounded-full text-sm font-bold hover:bg-yellow-400 transition flex-1"><i class="fab fa-whatsapp mr-1"></i>Consultar</a>
-                    </div>
-                    <p class="text-xs text-gray-500 pt-1"><i class="fas fa-truck mr-1"></i> Envío disponible en La Habana Vieja</p>
+                    <button onclick="window.addToCart({id: 999, nombre: 'Chanclas Mayor (Pack de 1 par)', precio: 3500, imagen: 'https://i.postimg.cc/c4zrnfyN/Gemini_Generated_Image_ixeyniixeyniixey.png', cantidad: 1})" 
+                            class="bg-cuban-green text-white px-6 py-2 rounded-full text-sm font-bold hover:bg-cuban-dark transition inline-flex items-center gap-2">
+                        <i class="fas fa-cart-plus"></i> Agregar al carrito
+                    </button>
+                    <p class="text-xs text-gray-500">💡 Puedes cambiar la cantidad en el carrito</p>
                 </div>
             </div>
         </div>
     </section>
 
-   <!-- Blog Preview -->
-<section class="py-12 bg-gray-50">
-    <div class="container mx-auto px-4">
-        <div class="flex justify-between items-center mb-8">
-            <h2 class="text-3xl font-bold"><i class="fas fa-newspaper mr-3 text-cuban-blue"></i>Blog</h2>
-            <a href="blog.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
+    <!-- Blog Preview -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold"><i class="fas fa-newspaper mr-3 text-cuban-blue"></i>Blog</h2>
+                <a href="blog.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <article onclick="location.href='blog/recetas-rapidas-con-atun.html'" class="cursor-pointer">
+                    <img src="https://i.postimg.cc/28jzTGNk/Gemini_Generated_Image_v6ybtnv6ybtnv6yb_(1).png" alt="Tostadas de atún" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-4">
+                        <span class="text-xs text-cuban-green font-bold">🍳 RECETAS</span>
+                        <h3 class="font-bold text-lg mt-1">Tostadas de Atún en 5 minutos</h3>
+                        <p class="text-gray-600 text-sm mt-2">Una receta rápida usando productos de El Resolvito...</p>
+                    </div>
+                </article>
+                <article onclick="location.href='blog/como-empezar-tcp-en-cuba-guia-2026.html'" class="cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=500" alt="Emprendimiento" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-4">
+                        <span class="text-xs text-contador-azul font-bold">📊 EMPRENDIMIENTO</span>
+                        <h3 class="font-bold text-lg mt-1">Guía completa para emprender en Cuba (TCP)</h3>
+                        <p class="text-gray-600 text-sm mt-2">Todo lo que necesitas saber para ser trabajador por cuenta propia en 2026.</p>
+                    </div>
+                </article>
+                <article onclick="location.href='blog/que-hacer-en-la-habana-vieja-gratis.html'" class="cursor-pointer">
+                    <img src="https://i.postimg.cc/nzP73gjY/Gemini-Generated-Image-h9hdglh9hdglh9hd-1-11zon.webp" alt="La Habana" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-4">
+                        <span class="text-xs text-cuban-blue font-bold">🏠 LA HABANA</span>
+                        <h3 class="font-bold text-lg mt-1">10 planes gratis en La Habana Vieja</h3>
+                        <p class="text-gray-600 text-sm mt-2">Descubre rincones y actividades sin gastar un centavo.</p>
+                    </div>
+                </article>
+            </div>
         </div>
-        <div class="grid md:grid-cols-3 gap-6">
-            <article onclick="location.href='blog/recetas-rapidas-con-atun.html'" class="cursor-pointer">
-                <img src="https://i.postimg.cc/28jzTGNk/Gemini_Generated_Image_v6ybtnv6ybtnv6yb_(1).png" 
-                     alt="Tostadas de atún" 
-                     class="w-full h-48 object-cover rounded-t-lg"
-                     onerror="this.src='https://placehold.co/600x400/2E7D32/white?text=Recetas'">
-                <div class="p-4">
-                    <span class="text-xs text-cuban-green font-bold">🍳 RECETAS</span>
-                    <h3 class="font-bold text-lg mt-1">Tostadas de Atún en 5 minutos</h3>
-                    <p class="text-gray-600 text-sm mt-2">Una receta rápida usando productos de El Resolvito...</p>
-                </div>
-            </article>
-            <!-- Los otros dos artículos se mantienen igual -->
-            <article onclick="location.href='blog/como-empezar-tcp-en-cuba-guia-2026.html'" class="cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=500" alt="Emprendimiento" class="w-full h-48 object-cover rounded-t-lg" onerror="this.src='https://placehold.co/600x400/1E3A8A/white?text=Emprender'">
-                <div class="p-4">
-                    <span class="text-xs text-contador-azul font-bold">📊 EMPRENDIMIENTO</span>
-                    <h3 class="font-bold text-lg mt-1">Guía completa para emprender en Cuba (TCP)</h3>
-                    <p class="text-gray-600 text-sm mt-2">Todo lo que necesitas saber para ser trabajador por cuenta propia en 2026.</p>
-                </div>
-            </article>
-            <article onclick="location.href='blog/que-hacer-en-la-habana-vieja-gratis.html'" class="cursor-pointer">
-                <img src="https://i.postimg.cc/nzP73gjY/Gemini-Generated-Image-h9hdglh9hdglh9hd-1-11zon.webp" alt="La Habana" class="w-full h-48 object-cover rounded-t-lg" onerror="this.src='https://placehold.co/600x400/0277BD/white?text=La+Habana'">
-                <div class="p-4">
-                    <span class="text-xs text-cuban-blue font-bold">🏠 LA HABANA</span>
-                    <h3 class="font-bold text-lg mt-1">10 planes gratis en La Habana Vieja</h3>
-                    <p class="text-gray-600 text-sm mt-2">Descubre rincones y actividades sin gastar un centavo.</p>
-                </div>
-            </article>
-        </div>
-    </div>
-</section>
+    </section>
 
     <!-- Alojamientos Preview -->
     <section class="py-12">
@@ -687,6 +545,7 @@
 
     <!-- Scripts -->
     <script src="js/elresolvito.js" defer></script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', async function() {
             console.log('Inicializando index...');
@@ -715,14 +574,21 @@
                 if (container) {
                     container.innerHTML = FEATURED_PRODUCTS.map(p => {
                         if (!p) return '';
+                        const nombreSanitizado = p.nombre.replace(/'/g, "\\'").replace(/"/g, '&quot;');
                         return `
-                            <div class="product-card" onclick="location.href='tienda.html'">
-                                <div class="product-image-container">
-                                    <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/300x300/2E7D32/white?text=${encodeURIComponent(p.nombre)}'">
+                            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
+                                <div class="product-image-container aspect-square bg-gray-100 cursor-pointer" onclick="window.openImageModal('${p.imagen}', '${nombreSanitizado}')">
+                                    <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" class="w-full h-full object-contain p-2" onerror="this.src='https://placehold.co/300x300/2E7D32/white?text=${encodeURIComponent(p.nombre)}'">
                                 </div>
                                 <div class="product-info p-3">
                                     <h3 class="font-semibold text-sm line-clamp-2">${p.nombre}</h3>
-                                    <p class="text-cuban-green font-bold mt-1">$${p.precio.toLocaleString()}</p>
+                                    <div class="flex items-center justify-between mt-2">
+                                        <span class="text-cuban-green font-bold">$${p.precio.toLocaleString()}</span>
+                                        <button onclick="window.addToCart({id:${p.id}, nombre:'${nombreSanitizado}', precio:${p.precio}, imagen:'${p.imagen}', cantidad:1})" 
+                                                class="bg-cuban-green text-white px-2 py-1 rounded-lg text-xs font-bold hover:bg-cuban-dark transition flex items-center gap-1">
+                                            <i class="fas fa-cart-plus"></i> Añadir
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         `;
@@ -737,11 +603,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
