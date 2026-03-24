@@ -51,6 +51,14 @@
             transform: scale(1.02);
             box-shadow: 0 10px 20px -5px rgba(46,125,50,0.4);
         }
+        .servicio-boton-wa {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            transition: all 0.2s ease;
+        }
+        .servicio-boton-wa:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px -5px rgba(37,211,102,0.4);
+        }
     </style>
 </head>
 <body class="bg-white text-gray-800">
@@ -74,7 +82,7 @@
         <div class="container mx-auto px-4">
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <!-- Servicio 1: Dulce César -->
+                <!-- Servicio 1: Dulce César (WhatsApp directo porque es precio variable) -->
                 <div class="servicio-card bg-white rounded-2xl shadow-lg overflow-hidden">
                     <div class="h-56 bg-gradient-to-r from-dulce-rosa to-dulce-morado flex items-center justify-center">
                         <img src="https://i.postimg.cc/Qxz4FMGg/IMG-20260226-WA0025.jpg" 
@@ -91,17 +99,18 @@
                         <p class="text-gray-600 mb-4">Repostería artesanal para eventos, cafeterías y pedidos especiales. Tortas, cupcakes, postres personalizados.</p>
                         <div class="border-t pt-4 mt-2">
                             <p class="text-sm text-gray-500 mb-3"><i class="fas fa-map-marker-alt text-dulce-rosa mr-1"></i> La Habana Vieja</p>
-                            <!-- Botón unificado: Agregar al carrito -->
-                            <button onclick="window.addToCart({id: 500, nombre: 'Dulce César - Servicio de Repostería', precio: 0, imagen: 'https://i.postimg.cc/Qxz4FMGg/IMG-20260226-WA0025.jpg', cantidad: 1})" 
-                                    class="servicio-boton w-full text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2">
-                                <i class="fas fa-cart-plus"></i> Solicitar servicio
-                            </button>
-                            <p class="text-xs text-center text-gray-400 mt-2">Te contactaremos para cotizar</p>
+                            <!-- WhatsApp directo para servicios con precio variable -->
+                            <a href="https://wa.me/5353342167?text=Hola%2C%20vi%20Dulce%20C%C3%A9sar%20en%20El%20Resolvito%20y%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios" 
+                               target="_blank"
+                               class="servicio-boton-wa w-full text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2">
+                                <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+                            </a>
+                            <p class="text-xs text-center text-gray-400 mt-2">Cotización personalizada</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Servicio 2: Contador / Tenedor de Libros -->
+                <!-- Servicio 2: Contador / Tenedor de Libros (WhatsApp directo) -->
                 <div class="servicio-card bg-white rounded-2xl shadow-lg overflow-hidden">
                     <div class="h-56 bg-gradient-to-r from-contador-azul to-cuban-blue flex items-center justify-center">
                         <img src="https://i.postimg.cc/TPPT8GM9/photo-2026-02-15-19-00-24.jpg" 
@@ -118,16 +127,17 @@
                         <p class="text-gray-600 mb-4">Gestión contable profesional para TCP y pequeños negocios. Declaraciones, libros contables, asesoría fiscal.</p>
                         <div class="border-t pt-4 mt-2">
                             <p class="text-sm text-gray-500 mb-3"><i class="fas fa-map-marker-alt text-contador-azul mr-1"></i> La Habana (presencial y online)</p>
-                            <button onclick="window.addToCart({id: 501, nombre: 'Servicio de Contabilidad', precio: 0, imagen: 'https://i.postimg.cc/TPPT8GM9/photo-2026-02-15-19-00-24.jpg', cantidad: 1})" 
-                                    class="servicio-boton w-full text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2">
-                                <i class="fas fa-cart-plus"></i> Solicitar servicio
-                            </button>
+                            <a href="https://wa.me/5356382909?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Contador%20que%20vi%20en%20El%20Resolvito" 
+                               target="_blank"
+                               class="servicio-boton-wa w-full text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2">
+                                <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+                            </a>
                             <p class="text-xs text-center text-gray-400 mt-2">Te contactaremos para conocer tus necesidades</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Servicio 3: Mensajería -->
+                <!-- Servicio 3: Mensajería (precio fijo, puede ir al carrito) -->
                 <div class="servicio-card bg-white rounded-2xl shadow-lg overflow-hidden">
                     <div class="h-56 bg-gradient-to-r from-cuban-yellow to-cuban-orange flex items-center justify-center">
                         <img src="https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp" 
@@ -144,11 +154,12 @@
                         <p class="text-gray-600 mb-4">Llevamos y recogemos por ti. Rápido, confiable y en La Habana. Ideal para envíos locales, compras, trámites.</p>
                         <div class="border-t pt-4 mt-2">
                             <p class="text-sm text-gray-500 mb-3"><i class="fas fa-map-marker-alt text-cuban-orange mr-1"></i> La Habana Vieja y zonas cercanas</p>
-                            <button onclick="window.addToCart({id: 502, nombre: 'Servicio de Mensajería', precio: 400, imagen: 'https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp', cantidad: 1})" 
+                            <!-- Botón para agregar al carrito (precio fijo) -->
+                            <button onclick="window.addToCart({id: 502, nombre: 'Servicio de Mensajería (Habana Vieja)', precio: 400, imagen: 'https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp', cantidad: 1})" 
                                     class="servicio-boton w-full text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2">
-                                <i class="fas fa-cart-plus"></i> Contratar mensajero
+                                <i class="fas fa-cart-plus"></i> Agregar al carrito ($400)
                             </button>
-                            <p class="text-xs text-center text-gray-400 mt-2">Precio base: $400 (Habana Vieja)</p>
+                            <p class="text-xs text-center text-gray-400 mt-2">Para otras zonas, consultar por WhatsApp</p>
                         </div>
                     </div>
                 </div>
@@ -203,10 +214,11 @@
             <div class="mt-12 text-center bg-gray-50 rounded-2xl p-8">
                 <h3 class="text-xl font-bold mb-3">¿Eres un profesional y quieres aparecer aquí?</h3>
                 <p class="text-gray-600 mb-4">Si ofreces servicios profesionales en La Habana y quieres formar parte de El Resolvito, contáctanos.</p>
-                <button onclick="window.addToCart({id: 503, nombre: 'Quiero publicar mi servicio', precio: 0, imagen: '', cantidad: 1})" 
-                        class="bg-cuban-green text-white px-6 py-3 rounded-full font-bold hover:bg-cuban-dark transition">
-                    <i class="fab fa-whatsapp mr-2"></i> Contactar para publicar
-                </button>
+                <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20publicar%20mi%20servicio%20en%20El%20Resolvito" 
+                   target="_blank"
+                   class="bg-cuban-green text-white px-6 py-3 rounded-full font-bold hover:bg-cuban-dark transition inline-flex items-center gap-2">
+                    <i class="fab fa-whatsapp"></i> Contactar para publicar
+                </a>
             </div>
         </div>
     </section>
