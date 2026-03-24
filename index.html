@@ -10,6 +10,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     
+    <!-- CSS primero para evitar FOUC -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/index.css">
     
@@ -18,7 +19,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- ============================================ -->
-    <!-- PRE-CARGA Y OPTIMIZACIÓN VISUAL -->
+    <!-- PRE-CARGA Y OPTIMIZACIÓN VISUAL (CORREGIDO) -->
     <!-- ============================================ -->
     <style>
         /* Evitar FOUC (Flash of Unstyled Content) */
@@ -158,56 +159,74 @@
         .tutorial-step:hover { transform: translateY(-4px); }
         .btn-whatsapp-directo { background: linear-gradient(135deg, #25D366, #128C7E); }
         .btn-whatsapp-directo:hover { transform: scale(1.1); box-shadow: 0 6px 16px rgba(37,211,102,0.4); }
-        .tooltip-banner { animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 0.9; } 50% { opacity: 1; background-color: #fef3c7; } 100% { opacity: 0.9; } }
     </style>
-    
-    <!-- Script para mostrar loading -->
-    <script>
-        (function() {
-            const loadingDiv = document.createElement('div');
-            loadingDiv.className = 'loading-logo';
-            loadingDiv.id = 'loadingOverlay';
-            loadingDiv.innerHTML = `
-                <div class="loading-icon">
-                    <i class="fas fa-store"></i>
-                </div>
-                <div class="loading-text">
-                    El Resolvito
-                    <span class="loading-dots">
-                        <span>.</span><span>.</span><span>.</span>
-                    </span>
-                </div>
-                <p style="font-size: 0.8rem; color: #666; margin-top: 12px;">Cargando...</p>
-            `;
-            document.body.appendChild(loadingDiv);
-            document.body.style.opacity = '0';
-            
-            window.addEventListener('load', function() {
-                setTimeout(function() {
-                    const overlay = document.getElementById('loadingOverlay');
-                    if (overlay) {
-                        overlay.classList.add('hidden');
-                        setTimeout(function() { overlay.remove(); }, 500);
-                    }
-                    document.body.classList.add('loaded');
-                    document.body.style.opacity = '';
-                }, 300);
-            });
-            
-            setTimeout(function() {
-                const overlay = document.getElementById('loadingOverlay');
-                if (overlay && !overlay.classList.contains('hidden')) {
-                    overlay.classList.add('hidden');
-                    setTimeout(function() { overlay.remove(); }, 500);
-                    document.body.classList.add('loaded');
-                    document.body.style.opacity = '';
-                }
-            }, 3000);
-        })();
-    </script>
 </head>
 <body class="bg-white text-gray-800">
+
+    <!-- Script de loading CORREGIDO - se ejecuta después de que el body existe -->
+    <script>
+        (function() {
+            // Esperar a que el DOM esté listo
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    crearLoadingOverlay();
+                });
+            } else {
+                crearLoadingOverlay();
+            }
+            
+            function crearLoadingOverlay() {
+                // Verificar si ya existe
+                if (document.getElementById('loadingOverlay')) return;
+                
+                const loadingDiv = document.createElement('div');
+                loadingDiv.className = 'loading-logo';
+                loadingDiv.id = 'loadingOverlay';
+                loadingDiv.innerHTML = `
+                    <div class="loading-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <div class="loading-text">
+                        El Resolvito
+                        <span class="loading-dots">
+                            <span>.</span><span>.</span><span>.</span>
+                        </span>
+                    </div>
+                    <p style="font-size: 0.8rem; color: #666; margin-top: 12px;">Cargando...</p>
+                `;
+                document.body.appendChild(loadingDiv);
+                document.body.style.opacity = '0';
+                
+                // Ocultar cuando la página cargue
+                window.addEventListener('load', function() {
+                    setTimeout(function() {
+                        const overlay = document.getElementById('loadingOverlay');
+                        if (overlay) {
+                            overlay.classList.add('hidden');
+                            setTimeout(function() { 
+                                if (overlay && overlay.parentNode) overlay.remove(); 
+                            }, 500);
+                        }
+                        document.body.classList.add('loaded');
+                        document.body.style.opacity = '';
+                    }, 300);
+                });
+                
+                // Fallback: si tarda más de 3 segundos
+                setTimeout(function() {
+                    const overlay = document.getElementById('loadingOverlay');
+                    if (overlay && !overlay.classList.contains('hidden')) {
+                        overlay.classList.add('hidden');
+                        setTimeout(function() { 
+                            if (overlay && overlay.parentNode) overlay.remove(); 
+                        }, 500);
+                        document.body.classList.add('loaded');
+                        document.body.style.opacity = '';
+                    }
+                }, 3000);
+            }
+        })();
+    </script>
 
     <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
 
@@ -449,29 +468,27 @@
         </div>
     </section>
 
-    <!-- OFERTAS ESPECIALES - CHANCLAS Y CARTERAS DE LIENYS -->
+    <!-- OFERTAS ESPECIALES - CHANCLAS Y CARTERAS DE LIENYS (resumido) -->
     <section class="py-16 relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50">
         <div class="container mx-auto px-4 relative z-10">
             <div class="text-center mb-12">
                 <span class="inline-block bg-gradient-to-r from-cuban-orange to-red-500 text-white px-6 py-2 rounded-full text-sm font-bold mb-4 shadow-lg animate-bounce">⚡ OFERTAS RELÁMPAGO ⚡</span>
-                <h2 class="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-cuban-orange via-red-500 to-purple-600 bg-clip-text text-transparent">¡NO TE LAS PIERDAS!</h2>
-                <p class="text-xl text-gray-700 relative inline-block"><span class="relative z-10 bg-white/50 px-6 py-2 rounded-full backdrop-blur-sm"><i class="fas fa-fire text-cuban-orange mr-2 animate-ping"></i>Colección de Lienys<i class="fas fa-fire text-cuban-orange ml-2 animate-ping"></i></span></p>
+                <h2 class="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-cuban-orange via-red-500 to-purple-600 bg-clip-text text-transparent">¡NO TE LAS PIERDAS!</h2>
             </div>
             <div class="grid lg:grid-cols-2 gap-8">
                 <div class="group relative transform hover:scale-105 transition-all duration-500">
                     <div class="relative bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden">
                         <div class="h-72 overflow-hidden relative">
                             <div class="grid grid-cols-2 h-full">
-                                <img src="https://i.postimg.cc/qvBVZPcH/chancletas_negras.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                                <img src="https://i.postimg.cc/8Pmg4pv5/CHANCLETAS_BLANCAS.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 delay-100">
+                                <img src="https://i.postimg.cc/qvBVZPcH/chancletas_negras.png" class="w-full h-full object-cover">
+                                <img src="https://i.postimg.cc/8Pmg4pv5/CHANCLETAS_BLANCAS.png" class="w-full h-full object-cover">
                             </div>
-                            <span class="absolute top-4 right-4 bg-gradient-to-r from-green-400 to-green-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg z-20 animate-pulse border-2 border-white">🔥 NUEVA COLECCIÓN 🔥</span>
                         </div>
                         <div class="p-8">
-                            <h3 class="text-3xl font-bold bg-gradient-to-r from-cuban-green to-cuban-dark bg-clip-text text-transparent mb-2">Chanclas Lienys</h3>
+                            <h3 class="text-2xl font-bold text-cuban-green mb-2">Chanclas Lienys</h3>
                             <p class="text-gray-600 mb-4">Cómodas, duraderas, ideales para el verano</p>
-                            <div class="mb-4"><span class="text-3xl font-bold text-cuban-green">$4,500</span><span class="text-gray-500"> c/u</span></div>
-                            <button onclick="window.addToCart({id: 201, nombre: 'Chanclas Lienys', precio: 4500, imagen: 'https://i.postimg.cc/qvBVZPcH/chancletas_negras.png', cantidad: 1})" class="w-full bg-gradient-to-r from-cuban-green to-cuban-dark text-white py-3 rounded-xl font-bold hover:scale-105 transition"><i class="fas fa-cart-plus mr-2"></i> Agregar al carrito</button>
+                            <div class="mb-4"><span class="text-2xl font-bold text-cuban-green">$4,500</span><span class="text-gray-500"> c/u</span></div>
+                            <button onclick="window.addToCart({id: 201, nombre: 'Chanclas Lienys', precio: 4500, imagen: 'https://i.postimg.cc/qvBVZPcH/chancletas_negras.png', cantidad: 1})" class="w-full bg-cuban-green text-white py-3 rounded-xl font-bold hover:bg-cuban-dark transition"><i class="fas fa-cart-plus mr-2"></i> Agregar al carrito</button>
                         </div>
                     </div>
                 </div>
@@ -479,14 +496,14 @@
                     <div class="relative bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden">
                         <div class="h-72 overflow-hidden relative">
                             <div class="grid grid-cols-2 h-full">
-                                <img src="https://i.postimg.cc/Vk4RDT46/cartera_azul_muchacha.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                                <img src="https://i.postimg.cc/2STw2JT8/cartera-beige-muchacha.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 delay-100">
+                                <img src="https://i.postimg.cc/Vk4RDT46/cartera_azul_muchacha.png" class="w-full h-full object-cover">
+                                <img src="https://i.postimg.cc/2STw2JT8/cartera-beige-muchacha.png" class="w-full h-full object-cover">
                             </div>
                         </div>
                         <div class="p-8">
-                            <h3 class="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">Carteras Lienys</h3>
-                            <div class="mb-4 space-y-2"><p><span class="font-bold">Cartera con corbata:</span> <span class="text-cuban-green font-bold">$6,000</span></p><p><span class="font-bold">Carteras normales:</span> <span class="text-cuban-green font-bold">$5,000</span></p></div>
-                            <button onclick="window.addToCart({id: 301, nombre: 'Cartera Lienys', precio: 5000, imagen: 'https://i.postimg.cc/Vk4RDT46/cartera_azul_muchacha.png', cantidad: 1})" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-bold hover:scale-105 transition"><i class="fas fa-cart-plus mr-2"></i> Agregar al carrito</button>
+                            <h3 class="text-2xl font-bold text-purple-600 mb-2">Carteras Lienys</h3>
+                            <div class="mb-4"><span class="font-bold">Desde</span> <span class="text-cuban-green font-bold">$5,000</span></div>
+                            <button onclick="window.addToCart({id: 301, nombre: 'Cartera Lienys', precio: 5000, imagen: 'https://i.postimg.cc/Vk4RDT46/cartera_azul_muchacha.png', cantidad: 1})" class="w-full bg-purple-600 text-white py-3 rounded-xl font-bold hover:bg-purple-700 transition"><i class="fas fa-cart-plus mr-2"></i> Agregar al carrito</button>
                         </div>
                     </div>
                 </div>
