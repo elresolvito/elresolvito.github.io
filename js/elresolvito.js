@@ -3,21 +3,21 @@
 // ============================================
 var PRODUCTS = [
     { id: 1, nombre: "Atún en lata", categoria: "Alimentos y conservas", precio: 540, imagen: "https://i.postimg.cc/76xHK6zt/atun_precio_500.png", descripcion: "Lata 200g" },
-    { id: 2, nombre: "Pasta de tomate", categoria: "Alimentos y conservas", precio: 450, imagen: "https://i.postimg.cc/gjjYPTNv/pasta_tomate_precio_350.png", descripcion: "Paquete" },
+    { id: 2, nombre: "Pasta de tomate", categoria: "Alimentos y conservas", precio: 350, imagen: "https://i.postimg.cc/gjjYPTNv/pasta_tomate_precio_350.png", descripcion: "Paquete" },
     { id: 3, nombre: "Pimiento fresco", categoria: "Alimentos y conservas", precio: 750, imagen: "https://i.postimg.cc/4yyJTSBj/pimiento_presio_750.png", descripcion: "Unidad" },
     { id: 4, nombre: "Café Dualis 250g", categoria: "Alimentos y conservas", precio: 1450, imagen: "https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png", descripcion: "Paquete 250g" },
     { id: 5, nombre: "Café Dufiltro 250g", categoria: "Alimentos y conservas", precio: 1450, imagen: "https://i.postimg.cc/hG26fv31/cafe_Dufiltro_250_g_precio_1450.png", descripcion: "Paquete 250g" },
-    { id: 6, nombre: "pan molido Enepa", categoria: "Alimentos y conservas", precio: 470, imagen: "https://i.postimg.cc/nhY6f04N/pan molido_enepa_precio_450.png", descripcion: "Paquete" },
+    { id: 6, nombre: "Café Enepa", categoria: "Alimentos y conservas", precio: 470, imagen: "https://i.postimg.cc/nhY6f04N/cafe_enepa_precio_450.png", descripcion: "Paquete" },
     { id: 7, nombre: "Cartón de huevo 30u", categoria: "Alimentos y conservas", precio: 3000, imagen: "https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3000.png", descripcion: "Cartón" },
-    { id: 8, nombre: "Leche condensada", categoria: "Alimentos y conservas", precio: 520, imagen: "https://i.postimg.cc/tT2XwjtT/leche_condensada.png", descripcion: "Lata 397g" },
+    { id: 8, nombre: "Leche condensada", categoria: "Alimentos y conservas", precio: 950, imagen: "https://i.postimg.cc/tT2XwjtT/leche_condensada.png", descripcion: "Lata 397g" },
     { id: 9, nombre: "Harina blanca 1Kg", categoria: "Alimentos y conservas", precio: 600, imagen: "https://i.postimg.cc/3xc2NHFB/harina_blanca1_kg.png", descripcion: "Paquete 1Kg" },
     { id: 10, nombre: "Chicoticos Pelly 90g", categoria: "Snacks y golosinas", precio: 400, imagen: "https://i.postimg.cc/1zv2fXjZ/chicoticos_pelly_90_g_precio_400.png", descripcion: "Paquete 90g" },
     { id: 11, nombre: "Papitas Campesinas", categoria: "Snacks y golosinas", precio: 690, imagen: "https://i.postimg.cc/cLgrDtf9/papitas_campesinas_precio_690.png", descripcion: "Paquete" },
     { id: 12, nombre: "Pelly Jamón", categoria: "Snacks y golosinas", precio: 580, imagen: "https://i.postimg.cc/pdQV7frX/pelly_jamon_precio_580.png", descripcion: "Paquete" },
     { id: 13, nombre: "Mayonesa Mediana", categoria: "Salsas", precio: 850, imagen: "https://i.postimg.cc/KzJZw2rR/mayonesa_precio_850.png", descripcion: "Frasco mediano" },
     { id: 14, nombre: "Mayonesa Grande", categoria: "Salsas", precio: 1100, imagen: "https://i.postimg.cc/Px2t9jzz/mayonesa_precio1100.png", descripcion: "Frasco grande" },
-    { id: 15, nombre: "Cuchilla de Afeitar", categoria: "Higiene personal", precio: 110, imagen: "https://i.postimg.cc/8CdkdW7x/cuchilla_de_afeitar_precio_100.png", descripcion: "Unidad" },
-    { id: 16, nombre: "Jabón Marwa", categoria: "Higiene personal", precio: 170, imagen: "https://i.postimg.cc/3RK8tRpR/jabon_marwa_precio_150.png", descripcion: "Pastilla" },
+    { id: 15, nombre: "Cuchilla de Afeitar", categoria: "Higiene personal", precio: 100, imagen: "https://i.postimg.cc/8CdkdW7x/cuchilla_de_afeitar_precio_100.png", descripcion: "Unidad" },
+    { id: 16, nombre: "Jabón Marwa", categoria: "Higiene personal", precio: 150, imagen: "https://i.postimg.cc/3RK8tRpR/jabon_marwa_precio_150.png", descripcion: "Pastilla" },
     { id: 17, nombre: "Papel Sanitario", categoria: "Higiene personal", precio: 490, imagen: "https://i.postimg.cc/bwW289qD/papel_sanitario_precio_490i.png", descripcion: "Paquete" },
     { id: 18, nombre: "Toallas Sanitarias", categoria: "Higiene personal", precio: 450, imagen: "https://i.postimg.cc/KjjZyH0b/toallas_sanitarias_precio_450.png", descripcion: "Paquete" },
     { id: 19, nombre: "Toallas Húmedas", categoria: "Higiene personal", precio: 690, imagen: "https://i.postimg.cc/W4ZSP3cw/toallas_humedas_precio_690.png", descripcion: "Paquete" },
@@ -37,8 +37,7 @@ var PRODUCTS = [
     { id: 33, nombre: "Whisky 1L", categoria: "Bebidas alcohólicas y malta", precio: 1350, imagen: "https://i.postimg.cc/cLyrb4T0/whisky_1L_precio_1350.png", descripcion: "Botella 1L" },
     { id: 34, nombre: "Whisky Sir Albin", categoria: "Bebidas alcohólicas y malta", precio: 550, imagen: "https://i.postimg.cc/y84kbYnC/whisky_sir_albin_precio_550.png", descripcion: "Botella pequeña" },
     { id: 35, nombre: "Vino Pluvium", categoria: "Bebidas alcohólicas y malta", precio: 1200, imagen: "https://i.postimg.cc/XNLLWmmx/vino_pluvium_precio_1200.png", descripcion: "Botella" },
-    { id: 36, nombre: "Baterías Triple A", categoria: "Electrónicos y accesorios", precio: 300, imagen: "https://i.postimg.cc/DZ2vxZsT/Gemini_Generated_Image_824rio824rio824r.png", descripcion: "Pack 4 unidades" },
-     { id:37, nombre: "bolsa de arroz", categoria: "Alimentos y conservas", precio: 650, imagen: "https://i.postimg.cc/ZRR352mX/arroz.jpg", descripcion: "Paquete 1 kg" },
+    { id: 36, nombre: "Baterías Triple A", categoria: "Electrónicos y accesorios", precio: 300, imagen: "https://i.postimg.cc/DZ2vxZsT/Gemini_Generated_Image_824rio824rio824r.png", descripcion: "Pack 4 unidades" }
 ];
 
 var FEATURED_PRODUCTS = [
@@ -115,10 +114,6 @@ var WHOLESALE_PRODUCTS = [
         }
     };
 
-    window.removeFromCart = function(index) {
-        removeFromCart(index);
-    };
-
     function removeFromCart(index) {
         if (cart[index]) {
             cart.splice(index, 1);
@@ -128,11 +123,14 @@ var WHOLESALE_PRODUCTS = [
         }
     }
 
+    window.removeFromCart = function(index) {
+        removeFromCart(index);
+    };
+
     window.updateCartUI = function() {
         const totalItems = cart.reduce((sum, item) => sum + (item.cantidad || 0), 0);
         const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
         
-        // Actualizar contadores
         document.querySelectorAll('#cartCount, #floatingCartCount').forEach(el => {
             if (el) {
                 el.textContent = totalItems;
@@ -140,7 +138,6 @@ var WHOLESALE_PRODUCTS = [
             }
         });
         
-        // Renderizar items del carrito
         const cartItemsContainer = document.getElementById('cartItems');
         if (cartItemsContainer) {
             if (cart.length === 0) {
@@ -167,7 +164,6 @@ var WHOLESALE_PRODUCTS = [
             }
         }
         
-        // Actualizar totales en el sidebar del carrito
         const subtotalEl = document.getElementById('cartSubtotal');
         const shippingEl = document.getElementById('cartShipping');
         const totalEl = document.getElementById('cartTotal');
@@ -182,12 +178,11 @@ var WHOLESALE_PRODUCTS = [
             if (totalEl) totalEl.textContent = `$${subtotal.toLocaleString()}`;
         }
 
-        // Actualizar resumen en el modal de checkout (si está abierto)
         updateCheckoutSummary();
     };
 
     // ============================================
-    // FUNCIONES DEL CHECKOUT
+    // FUNCIONES DEL CHECKOUT (SIMPLIFICADAS)
     // ============================================
     window.openCheckoutModal = function() {
         if (cart.length === 0) {
@@ -202,7 +197,6 @@ var WHOLESALE_PRODUCTS = [
             return;
         }
 
-        // ✅ Cerrar el sidebar del carrito si está abierto
         const sidebar = document.getElementById('cartSidebar');
         const overlay = document.getElementById('cartOverlay');
         if (sidebar && sidebar.classList.contains('cart-open')) {
@@ -211,7 +205,6 @@ var WHOLESALE_PRODUCTS = [
             document.body.style.overflow = '';
         }
 
-        // Actualizar resumen en el modal antes de mostrarlo
         updateCheckoutSummary();
         
         const modal = document.getElementById('checkoutModal');
@@ -249,103 +242,75 @@ var WHOLESALE_PRODUCTS = [
     }
 
     window.sendCompleteOrder = function() {
-        // Obtener datos del carrito
         if (cart.length === 0) {
             alert('El carrito está vacío');
             return;
         }
 
-        // Obtener valores del formulario
         const customerName = document.getElementById('customerName')?.value.trim();
         const customerAddress = document.getElementById('customerAddress')?.value.trim();
         const deliveryZone = document.querySelector('input[name="deliveryZone"]:checked')?.value;
-        const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value;
-        const weight = document.getElementById('approximateWeight')?.value || '';
         const notes = document.getElementById('customerNotes')?.value.trim() || '';
 
-        // Validaciones básicas
-        if (!customerName || !customerAddress || !deliveryZone || !paymentMethod) {
-            alert('Por favor, completa todos los campos obligatorios.');
+        if (!customerName || !customerAddress) {
+            alert('Por favor, completa tu nombre y dirección');
             return;
         }
 
-        // Calcular subtotal
         const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
+        
         if (subtotal < MINIMUM_PURCHASE) {
             alert(`El pedido mínimo es de $${MINIMUM_PURCHASE}`);
             return;
         }
 
-        // Generar mensaje
         let mensaje = "🛒 *NUEVO PEDIDO - EL RESOLVITO*\n\n";
-        mensaje += "*PRODUCTOS:*\n";
+        mensaje += "*Productos:*\n";
         cart.forEach(item => {
             mensaje += `• ${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString()}\n`;
         });
 
         mensaje += `\n*Subtotal:* $${subtotal.toLocaleString()}`;
-
-        // Costo de envío según zona
-        let envioTexto = '';
+        
         if (deliveryZone === 'habana-vieja') {
-            envioTexto = `$${SHIPPING_COST_HABANA_VIEJA} (La Habana Vieja)`;
-            // Nota de peso si aplica
-            if (weight === 'mas-10kg') {
-                envioTexto += ' - Peso superior a 10kg, el costo podría ajustarse.';
-            }
+            mensaje += `\n*Envío:* $${SHIPPING_COST_HABANA_VIEJA} (La Habana Vieja)`;
+            mensaje += `\n*Total:* $${(subtotal + SHIPPING_COST_HABANA_VIEJA).toLocaleString()}`;
         } else {
-            envioTexto = 'A convenir (fuera de La Habana Vieja)';
-        }
-        mensaje += `\n*Envío:* ${envioTexto}`;
-
-        // Total estimado (solo si es La Habana Vieja y peso normal, sino se deja abierto)
-        if (deliveryZone === 'habana-vieja' && weight !== 'mas-10kg') {
-            mensaje += `\n*Total estimado:* $${(subtotal + SHIPPING_COST_HABANA_VIEJA).toLocaleString()}`;
-        } else {
-            mensaje += `\n*Total:* A confirmar`;
+            mensaje += `\n*Envío:* A convenir (fuera de La Habana Vieja)`;
         }
 
-        // Datos del cliente
-        mensaje += `\n\n*DATOS DEL CLIENTE*`;
+        mensaje += `\n\n*DATOS DE ENTREGA:*`;
         mensaje += `\n👤 *Nombre:* ${customerName}`;
         mensaje += `\n📍 *Dirección:* ${customerAddress}`;
-
-        // Peso si se seleccionó
-        const pesoTexto = {
-            'menos-1kg': 'Menos de 1 kg',
-            '1-3kg': '1-3 kg',
-            '3-5kg': '3-5 kg',
-            '5-10kg': '5-10 kg',
-            'mas-10kg': 'Más de 10 kg'
-        };
-        if (weight && pesoTexto[weight]) {
-            mensaje += `\n⚖️ *Peso aproximado:* ${pesoTexto[weight]}`;
-        }
-
-        mensaje += `\n💳 *Pago propuesto:* ${paymentMethod}`;
-
+        
         if (notes) {
             mensaje += `\n📝 *Notas:* ${notes}`;
         }
 
-        mensaje += `\n\n_Te contactaremos para confirmar disponibilidad y coordinar la entrega._`;
+        mensaje += `\n\n💵 *Pago:* Contra entrega en efectivo`;
+        mensaje += `\n_Te contactaremos para confirmar disponibilidad y coordinar la entrega._`;
 
-        // Abrir WhatsApp
         window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank');
 
-        // Cerrar modal y carrito
         window.closeCheckoutModal();
-        if (document.getElementById('cartSidebar')?.classList.contains('cart-open')) {
-            window.toggleCart(); // cierra el carrito si está abierto
+        
+        const sidebar = document.getElementById('cartSidebar');
+        const overlay = document.getElementById('cartOverlay');
+        if (sidebar && sidebar.classList.contains('cart-open')) {
+            sidebar.classList.remove('cart-open');
+            overlay?.classList.add('hidden');
+            document.body.style.overflow = '';
         }
 
-        // Opcional: limpiar carrito después de enviar? Por ahora no, para poder reutilizar.
-        // Si se desea vaciar, descomentar la siguiente línea:
-        // cart = []; saveCart(); window.updateCartUI();
+        cart = [];
+        saveCart();
+        window.updateCartUI();
+        
+        showToast('✓ Pedido enviado. Te contactaremos pronto.', 'success');
     };
 
     // ============================================
-    // FUNCIONES DE UTILIDAD (TOAST, MODALES)
+    // FUNCIONES DE UTILIDAD
     // ============================================
     function showToast(message, type = 'success') {
         const toast = document.getElementById('cartToast');
@@ -427,13 +392,50 @@ var WHOLESALE_PRODUCTS = [
     };
 
     // ============================================
+    // TUTORIAL FLOTANTE (solo una vez por sesión)
+    // ============================================
+    if (!localStorage.getItem('elresolvito_tutorial')) {
+        setTimeout(() => {
+            const tutorial = document.createElement('div');
+            tutorial.id = 'tutorial-flotante';
+            tutorial.innerHTML = `
+                <div style="position: fixed; bottom: 100px; right: 20px; background: white; border-radius: 1rem; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2); width: 280px; z-index: 9999; border-left: 4px solid #2E7D32; animation: slideInRight 0.3s ease;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; border-bottom: 1px solid #e5e7eb;">
+                        <span style="font-weight: bold; color: #2E7D32;">🛒 ¿Cómo comprar?</span>
+                        <button onclick="this.closest('#tutorial-flotante').remove()" style="background: none; border: none; font-size: 1.25rem; cursor: pointer; color: #9ca3af;">✕</button>
+                    </div>
+                    <div style="padding: 1rem;">
+                        <p style="font-size: 0.875rem; margin-bottom: 0.5rem;">1️⃣ Agrega productos al <strong>carrito</strong></p>
+                        <p style="font-size: 0.875rem; margin-bottom: 0.5rem;">2️⃣ Completa tus <strong>datos</strong> en el checkout</p>
+                        <p style="font-size: 0.875rem; margin-bottom: 0.75rem;">3️⃣ Envía el pedido por <strong>WhatsApp</strong></p>
+                        <p style="font-size: 0.7rem; color: #2E7D32; margin-top: 0.5rem;">💵 Pago contra entrega · Envíos en La Habana</p>
+                    </div>
+                </div>
+                <style>
+                    @keyframes slideInRight {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                </style>
+            `;
+            document.body.appendChild(tutorial);
+            
+            setTimeout(() => {
+                const el = document.getElementById('tutorial-flotante');
+                if (el) el.remove();
+            }, 10000);
+            
+            localStorage.setItem('elresolvito_tutorial', 'true');
+        }, 1500);
+    }
+
+    // ============================================
     // INICIALIZACIÓN
     // ============================================
     document.addEventListener('DOMContentLoaded', function() {
         const pageFade = document.getElementById('pageFade');
         if (pageFade) pageFade.classList.add('opacity-0');
         
-        // Restaurar modo nocturno
         if (localStorage.getItem('nightMode') === 'true') {
             document.body.classList.add('night-mode');
         }
@@ -445,9 +447,6 @@ var WHOLESALE_PRODUCTS = [
 
 })();
 
-// ============================================
-// FUNCIÓN DE DEPURACIÓN (OPCIONAL)
-// ============================================
 window.debugCart = function() {
     console.log('=== DEBUG CARRITO ===');
     const sidebar = document.getElementById('cartSidebar');
