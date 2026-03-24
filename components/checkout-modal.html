@@ -5,116 +5,135 @@
         <!-- Cabecera -->
         <div class="p-5 bg-gradient-to-r from-cuban-green to-cuban-dark text-white rounded-t-2xl">
             <div class="flex justify-between items-center">
-                <h3 class="text-xl font-bold flex items-center gap-2">
-                    <i class="fas fa-clipboard-list"></i> Finalizar pedido
-                </h3>
-                <button onclick="window.closeCheckoutModal()" class="w-8 h-8 bg-white/20 rounded-full hover:bg-white/30 transition flex items-center justify-center">
+                <div>
+                    <h3 class="text-xl font-bold flex items-center gap-2">
+                        <i class="fab fa-whatsapp"></i> Finalizar pedido
+                    </h3>
+                    <p class="text-sm opacity-90 mt-1">Completa tus datos y envía</p>
+                </div>
+                <button onclick="window.closeCheckoutModal()" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
                     <i class="fas fa-times text-sm"></i>
                 </button>
             </div>
-            <p class="text-sm opacity-90 mt-1">Completa tus datos y envía tu pedido</p>
         </div>
         
         <div class="p-5">
-            <!-- ============================================ -->
-            <!-- 1. RESUMEN DEL CARRITO -->
-            <!-- ============================================ -->
-            <div class="mb-5 p-3 bg-gray-50 rounded-xl border border-gray-200">
-                <p class="font-semibold text-sm mb-2 flex items-center gap-2">
-                    <i class="fas fa-shopping-cart text-cuban-green"></i> Tu pedido:
-                </p>
-                <div id="checkoutCartSummary" class="text-sm text-gray-600 max-h-32 overflow-y-auto space-y-1"></div>
-                <div class="flex justify-between font-bold mt-3 pt-2 border-t border-gray-200">
-                    <span>Total:</span>
-                    <span id="checkoutTotal" class="text-cuban-green">$0</span>
-                </div>
-                <p class="text-xs text-gray-500 mt-1">Compra mínima: $500</p>
-            </div>
-
-            <!-- ============================================ -->
-            <!-- 2. DATOS DEL CLIENTE -->
-            <!-- ============================================ -->
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Tu nombre completo *</label>
-                    <input type="text" 
-                           id="customerName" 
-                           required 
-                           placeholder="Ej: María González Pérez"
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent">
-                </div>
+            <form id="checkoutForm" onsubmit="event.preventDefault(); window.sendCompleteOrder()">
                 
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Dirección completa *</label>
-                    <input type="text" 
-                           id="customerAddress" 
-                           required 
-                           placeholder="Ej: Calle Obispo #123, entre Mercaderes y San Ignacio, La Habana Vieja"
+                <!-- ============================================ -->
+                <!-- 1. RESUMEN DEL CARRITO (simple) -->
+                <!-- ============================================ -->
+                <div class="mb-5 p-3 bg-gray-50 rounded-xl border border-gray-200">
+                    <p class="font-semibold text-sm mb-2 flex items-center gap-2">
+                        <i class="fas fa-shopping-cart text-cuban-green"></i> Tu pedido:
+                    </p>
+                    <div id="checkoutCartSummary" class="text-sm text-gray-600 max-h-32 overflow-y-auto space-y-1"></div>
+                    <div class="flex justify-between font-bold mt-3 pt-2 border-t border-gray-200">
+                        <span>Total:</span>
+                        <span id="checkoutTotal" class="text-cuban-green">$0</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">💡 Compra mínima: $500</p>
+                </div>
+
+                <!-- ============================================ -->
+                <!-- 2. DATOS DEL CLIENTE (SOLO 2 CAMPOS OBLIGATORIOS) -->
+                <!-- ============================================ -->
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Tu nombre completo *</label>
+                        <input type="text" 
+                               id="customerName" 
+                               required 
+                               placeholder="Ej: María González"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent">
+                        <p class="text-xs text-gray-400 mt-1">Como te llamas para el pedido</p>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Dirección completa *</label>
+                        <input type="text" 
+                               id="customerAddress" 
+                               required 
+                               placeholder="Ej: Calle Obispo #123, entre Mercaderes y San Ignacio"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent">
+                        <p class="text-xs text-gray-400 mt-1">Calle, número, entre qué calles, municipio</p>
+                    </div>
+                </div>
+
+                <!-- ============================================ -->
+                <!-- 3. ZONA DE ENTREGA (simple y clara) -->
+                <!-- ============================================ -->
+                <div class="mt-5">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">¿Dónde vives?</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <label class="flex items-center gap-2 p-3 border-2 rounded-xl cursor-pointer transition hover:bg-gray-50 has-[:checked]:border-cuban-green has-[:checked]:bg-cuban-green/5">
+                            <input type="radio" name="deliveryZone" value="habana-vieja" checked class="w-4 h-4 text-cuban-green">
+                            <div>
+                                <span class="font-medium text-sm">📍 La Habana Vieja</span>
+                                <p class="text-xs text-gray-500">+$400 envío</p>
+                            </div>
+                        </label>
+                        <label class="flex items-center gap-2 p-3 border-2 rounded-xl cursor-pointer transition hover:bg-gray-50 has-[:checked]:border-cuban-green has-[:checked]:bg-cuban-green/5">
+                            <input type="radio" name="deliveryZone" value="otro" class="w-4 h-4 text-cuban-green">
+                            <div>
+                                <span class="font-medium text-sm">🚚 Otro municipio</span>
+                                <p class="text-xs text-gray-500">A convenir</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- ============================================ -->
+                <!-- 4. TELÉFONO OPCIONAL (útil para coordinación) -->
+                <!-- ============================================ -->
+                <div class="mt-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Tu teléfono (opcional)</label>
+                    <input type="tel" 
+                           id="customerPhone" 
+                           placeholder="Ej: 5 123 4567"
                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent">
+                    <p class="text-xs text-gray-400 mt-1">Para coordinarte mejor si es necesario</p>
                 </div>
-            </div>
 
-            <!-- ============================================ -->
-            <!-- 3. ZONA DE ENTREGA -->
-            <!-- ============================================ -->
-            <div class="mt-5">
-                <label class="block text-sm font-medium text-gray-700 mb-2">¿Dónde te entregamos?</label>
-                <div class="grid grid-cols-2 gap-2">
-                    <label class="flex items-center gap-2 p-3 border-2 rounded-xl cursor-pointer transition hover:bg-gray-50 has-[:checked]:border-cuban-green has-[:checked]:bg-cuban-green/5">
-                        <input type="radio" name="deliveryZone" value="habana-vieja" checked class="w-4 h-4 text-cuban-green">
-                        <div>
-                            <span class="font-medium text-sm">📍 La Habana Vieja</span>
-                            <p class="text-xs text-gray-500">+$400</p>
-                        </div>
-                    </label>
-                    <label class="flex items-center gap-2 p-3 border-2 rounded-xl cursor-pointer transition hover:bg-gray-50 has-[:checked]:border-cuban-green has-[:checked]:bg-cuban-green/5">
-                        <input type="radio" name="deliveryZone" value="otro" class="w-4 h-4 text-cuban-green">
-                        <div>
-                            <span class="font-medium text-sm">🚚 Otro municipio</span>
-                            <p class="text-xs text-gray-500">A convenir</p>
-                        </div>
-                    </label>
+                <!-- ============================================ -->
+                <!-- 5. NOTAS OPCIONALES -->
+                <!-- ============================================ -->
+                <div class="mt-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">¿Algo más? (opcional)</label>
+                    <textarea id="customerNotes" 
+                              rows="2" 
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent"
+                              placeholder="Ej: Llamar antes de llegar, timbre roto, etc."></textarea>
                 </div>
-            </div>
 
-            <!-- ============================================ -->
-            <!-- 4. NOTAS OPCIONALES -->
-            <!-- ============================================ -->
-            <div class="mt-4">
-                <label class="block text-sm font-medium text-gray-700 mb-1">¿Algo que debamos saber? (opcional)</label>
-                <textarea id="customerNotes" 
-                          rows="2" 
-                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent"
-                          placeholder="Ej: Prefiero que llamen antes de llegar, el edificio es el amarillo, etc."></textarea>
-            </div>
+                <!-- ============================================ -->
+                <!-- 6. INFORMACIÓN DE HORARIOS (compacta) -->
+                <!-- ============================================ -->
+                <div class="mt-4 p-3 bg-blue-50 rounded-xl border border-blue-200">
+                    <p class="text-xs text-blue-800 flex items-center gap-1">
+                        <i class="fas fa-clock"></i> 
+                        <span>📦 Si pides antes de 7am → entregamos antes de 2pm (Habana Vieja)</span>
+                    </p>
+                    <p class="text-xs text-blue-800 flex items-center gap-1 mt-1">
+                        <i class="fas fa-clock"></i> 
+                        <span>🌙 Si pides antes de 2pm → entregamos antes de 6pm (Habana Vieja)</span>
+                    </p>
+                </div>
 
-            <!-- ============================================ -->
-            <!-- 5. HORARIO DE ENTREGA -->
-            <!-- ============================================ -->
-            <div class="mt-4 p-3 bg-blue-50 rounded-xl border border-blue-200">
-                <p class="text-xs text-blue-800 flex items-center gap-1">
-                    <i class="fas fa-clock"></i> 
-                    <span>📦 Si pides antes de las 7am → entregamos antes de 2pm (Habana Vieja)</span>
+                <!-- ============================================ -->
+                <!-- BOTÓN DE ENVÍO -->
+                <!-- ============================================ -->
+                <button type="submit" 
+                        class="w-full mt-5 bg-gradient-to-r from-green-600 to-green-700 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition shadow-md">
+                    <i class="fab fa-whatsapp text-xl"></i>
+                    Enviar pedido por WhatsApp
+                </button>
+                
+                <p class="text-xs text-center text-gray-500 mt-3 flex items-center justify-center gap-1">
+                    <i class="fas fa-shield-alt text-cuban-green"></i> 
+                    Pagas al recibir · Te contactamos para confirmar
                 </p>
-                <p class="text-xs text-blue-800 flex items-center gap-1 mt-1">
-                    <i class="fas fa-clock"></i> 
-                    <span>🌙 Si pides antes de 2pm → entregamos antes de 6pm (Habana Vieja)</span>
-                </p>
-            </div>
-
-            <!-- ============================================ -->
-            <!-- 6. BOTÓN DE ENVÍO -->
-            <!-- ============================================ -->
-            <button onclick="window.sendCompleteOrder()" 
-                    class="w-full mt-5 bg-gradient-to-r from-green-600 to-green-700 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition shadow-md">
-                <i class="fab fa-whatsapp text-xl"></i>
-                Enviar pedido por WhatsApp
-            </button>
-            
-            <p class="text-xs text-center text-gray-500 mt-3 flex items-center justify-center gap-1">
-                <i class="fas fa-lock text-cuban-green"></i> 
-                Pagas al recibir · Te contactamos para coordinar entrega
-            </p>
+            </form>
         </div>
     </div>
 </div>
