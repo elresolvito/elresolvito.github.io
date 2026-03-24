@@ -6,21 +6,17 @@
     <title>Lienys - Moda y Accesorios - El Resolvito</title>
     <meta name="description" content="Colección de Lienys: chanclas, carteras, pullovers, jeans y más. Moda cubana con estilo.">
     
-    <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     
-    <!-- ESTILOS -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/lienys.css">
     
-    <!-- Fonts y Tailwind -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Configuración de Tailwind -->
     <script>
         tailwind.config = {
             theme: {
@@ -42,17 +38,13 @@
 </head>
 <body class="bg-white text-gray-800">
 
-    <!-- Transición suave entre páginas -->
     <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
 
-    <!-- Componentes fijos -->
     <div id="header-container"></div>
     <div id="mobile-menu-container"></div>
     <div id="floating-buttons-container"></div>
 
-    <!-- ============================================ -->
     <!-- HERO DE LIENYS -->
-    <!-- ============================================ -->
     <section class="hero-lienys">
         <div class="container mx-auto px-4 h-full flex flex-col justify-center items-center text-center text-white">
             <span class="inline-block bg-white/20 backdrop-blur px-6 py-2 rounded-full text-sm font-bold mb-4 border border-white/50">
@@ -72,13 +64,9 @@
         </div>
     </section>
 
-    <!-- ============================================ -->
-    <!-- SECCIÓN CHANCLAS (id CORREGIDO a "chanclas") -->
-    <!-- ============================================ -->
+    <!-- SECCIÓN CHANCLAS -->
     <section id="chanclas" class="py-16 bg-gradient-to-b from-white to-rose-50">
         <div class="container mx-auto px-4">
-            
-            <!-- Cabecera de sección -->
             <div class="text-center mb-12">
                 <span class="inline-block bg-lienys-rosa text-white px-4 py-1 rounded-full text-sm font-bold mb-4">
                     <i class="fas fa-sun mr-1"></i> VERANO 2026
@@ -92,33 +80,20 @@
                 <div class="w-24 h-1 bg-gradient-to-r from-lienys-rosa to-lienys-morado mx-auto mt-4 rounded-full"></div>
             </div>
             
-            <!-- Grid de chanclas (id CORREGIDO a "chanclas-grid") -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4" id="chanclas-grid">
-                <!-- Se carga con JavaScript -->
-            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4" id="chanclas-grid"></div>
             
-            <!-- Precio y CTA -->
             <div class="text-center mt-12">
                 <div class="inline-block bg-white rounded-2xl shadow-xl p-6">
                     <p class="text-3xl font-bold text-cuban-green mb-2">$4,500 <span class="text-base font-normal text-gray-500">c/u</span></p>
                     <p class="text-gray-600 mb-4">Precio especial por mayoreo: <a href="ofertas.html" class="text-lienys-rosa font-bold hover:underline">ver ofertas</a></p>
-                    <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20las%20chanclas%20de%20Lienys%20(negras%2C%20blancas)" 
-                       target="_blank"
-                       class="inline-block bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-3 rounded-full font-bold hover:from-green-600 hover:to-green-700 transition transform hover:scale-105">
-                        <i class="fab fa-whatsapp mr-2"></i>Consultar por WhatsApp
-                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================ -->
     <!-- SECCIÓN CARTERAS -->
-    <!-- ============================================ -->
     <section id="carteras" class="py-16 bg-gradient-to-b from-purple-50 to-white">
         <div class="container mx-auto px-4">
-            
-            <!-- Cabecera de sección -->
             <div class="text-center mb-12">
                 <span class="inline-block bg-lienys-morado text-white px-4 py-1 rounded-full text-sm font-bold mb-4">
                     <i class="fas fa-crown mr-1"></i> COLECCIÓN EXCLUSIVA
@@ -132,12 +107,8 @@
                 <div class="w-24 h-1 bg-gradient-to-r from-lienys-morado to-lienys-azul mx-auto mt-4 rounded-full"></div>
             </div>
             
-            <!-- Grid de carteras -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4" id="carteras-grid">
-                <!-- Se carga con JavaScript -->
-            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4" id="carteras-grid"></div>
             
-            <!-- Precios y CTA -->
             <div class="text-center mt-12">
                 <div class="inline-block bg-white rounded-2xl shadow-xl p-6">
                     <div class="flex flex-col sm:flex-row gap-6 justify-center mb-4">
@@ -151,19 +122,12 @@
                             <p class="text-3xl font-bold text-cuban-green">$5,000</p>
                         </div>
                     </div>
-                    <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20las%20carteras%20de%20Lienys%20(azul%2C%20beige%2C%20carmelita%2C%20negra%2C%20rosada)" 
-                       target="_blank"
-                       class="inline-block bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-3 rounded-full font-bold hover:from-green-600 hover:to-green-700 transition transform hover:scale-105">
-                        <i class="fab fa-whatsapp mr-2"></i>Consultar por WhatsApp
-                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================ -->
     <!-- SOBRE LIENYS -->
-    <!-- ============================================ -->
     <section class="py-16 bg-gradient-to-r from-lienys-rosa to-lienys-morado text-white">
         <div class="container mx-auto px-4 text-center">
             <h3 class="text-3xl font-bold mb-4">Sobre Lienys</h3>
@@ -181,93 +145,34 @@
         </div>
     </section>
 
-    <!-- Contenedores para modales y footer -->
     <div id="image-modal-container"></div>
     <div id="cart-sidebar-container"></div>
     <div id="checkout-modal-container"></div>
     <div id="footer-container"></div>
 
-    <!-- Toast de notificación -->
     <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
         <p id="cartToastMessage"></p>
     </div>
 
     <script>
-        // ============================================
-        // DATOS DE PRODUCTOS LIENYS (CORREGIDOS)
-        // ============================================
         const lienysProducts = {
-            chanclas: [  // CAMBIADO de 'chancletas' a 'chanclas'
-                {
-                    id: 1,
-                    nombre: "Chancletas Negras",
-                    imagen: "https://i.postimg.cc/qvBVZPcH/chancletas_negras.png",
-                    precio: 4500,
-                    descripcion: "Clásicas y elegantes"
-                },
-                {
-                    id: 2,
-                    nombre: "Chancletas Blancas",
-                    imagen: "https://i.postimg.cc/8Pmg4pv5/CHANCLETAS-BLANCAS.png",
-                    precio: 4500,
-                    descripcion: "Luminosas y frescas"
-                }
+            chanclas: [
+                { id: 201, nombre: "Chanclas Negras", imagen: "https://i.postimg.cc/qvBVZPcH/chancletas_negras.png", precio: 4500, descripcion: "Clásicas y elegantes" },
+                { id: 202, nombre: "Chanclas Blancas", imagen: "https://i.postimg.cc/8Pmg4pv5/CHANCLETAS-BLANCAS.png", precio: 4500, descripcion: "Luminosas y frescas" },
+                { id: 203, nombre: "Chanclas Beige", imagen: "https://i.postimg.cc/2Sdfhtdm/chanclas_beige(1).jpg", precio: 4500, descripcion: "Beige elegante" },
+                { id: 204, nombre: "Chanclas Rosadas", imagen: "https://i.postimg.cc/7Z1y0R14/chanclas_rosas(1).jpg", precio: 4500, descripcion: "Rosadas y divertidas" },
+                { id: 205, nombre: "Chanclas Azules", imagen: "https://i.postimg.cc/525MLr5M/chanclas_blanca_y_azul(1).jpg", precio: 4500, descripcion: "Azul marino" }
             ],
             carteras: [
-                {
-                    id: 101,
-                    nombre: "Cartera Azul",
-                    imagen: "https://i.postimg.cc/Vk4RDT46/cartera-azul-muchacha.png",
-                    tipo: "normal",
-                    precio: 5000,
-                    descripcion: "Azul vibrante"
-                },
-                {
-                    id: 102,
-                    nombre: "Cartera Beige",
-                    imagen: "https://i.postimg.cc/2STw2JT8/cartera-beige-muchacha.png",
-                    tipo: "normal",
-                    precio: 5000,
-                    descripcion: "Beige elegante"
-                },
-                {
-                    id: 103,
-                    nombre: "Cartera Carmelita",
-                    imagen: "https://i.postimg.cc/nV7JsYcJ/cartera-carmelita.png",
-                    tipo: "normal",
-                    precio: 5000,
-                    descripcion: "Marrón clásico"
-                },
-                {
-                    id: 104,
-                    nombre: "Cartera Negra",
-                    imagen: "https://i.postimg.cc/sxpdty04/cartera-negra.png",
-                    tipo: "normal",
-                    precio: 5000,
-                    descripcion: "Negra elegante"
-                },
-                {
-                    id: 105,
-                    nombre: "Cartera Rosada",
-                    imagen: "https://i.postimg.cc/CxMT63C1/cartera-rozada.png",
-                    tipo: "normal",
-                    precio: 5000,
-                    descripcion: "Rosada suave"
-                },
-                {
-                    id: 106,
-                    nombre: "Cartera con Corbata",
-                    imagen: "https://i.postimg.cc/wxJptcTq/cartera-azul.png",
-                    tipo: "especial",
-                    precio: 6000,
-                    descripcion: "Diseño exclusivo con corbata"
-                }
+                { id: 301, nombre: "Cartera Azul", imagen: "https://i.postimg.cc/Vk4RDT46/cartera-azul-muchacha.png", tipo: "normal", precio: 5000, descripcion: "Azul vibrante" },
+                { id: 302, nombre: "Cartera Beige", imagen: "https://i.postimg.cc/2STw2JT8/cartera-beige-muchacha.png", tipo: "normal", precio: 5000, descripcion: "Beige elegante" },
+                { id: 303, nombre: "Cartera Carmelita", imagen: "https://i.postimg.cc/nV7JsYcJ/cartera-carmelita.png", tipo: "normal", precio: 5000, descripcion: "Marrón clásico" },
+                { id: 304, nombre: "Cartera Negra", imagen: "https://i.postimg.cc/sxpdty04/cartera-negra.png", tipo: "normal", precio: 5000, descripcion: "Negra elegante" },
+                { id: 305, nombre: "Cartera Rosada", imagen: "https://i.postimg.cc/CxMT63C1/cartera-rozada.png", tipo: "normal", precio: 5000, descripcion: "Rosada suave" },
+                { id: 306, nombre: "Cartera con Corbata", imagen: "https://i.postimg.cc/wxJptcTq/cartera-azul.png", tipo: "especial", precio: 6000, descripcion: "Diseño exclusivo con corbata" }
             ]
         };
 
-        // ============================================
-        // CARGAR COMPONENTES
-        // ============================================
         async function loadComponent(elementId, componentPath) {
             try {
                 const response = await fetch(componentPath);
@@ -278,17 +183,13 @@
             }
         }
 
-        // ============================================
-        // RENDERIZAR PRODUCTOS (VERSIÓN CORREGIDA)
-        // ============================================
         function renderProductos() {
-            // Renderizar chanclas (usando 'chanclas' y 'chanclas-grid')
             const chanclasGrid = document.getElementById('chanclas-grid');
             if (chanclasGrid) {
                 chanclasGrid.innerHTML = lienysProducts.chanclas.map(p => `
-                    <div class="producto-card group" onclick="abrirModal('${p.imagen}', '${p.nombre}', '${p.descripcion}', ${p.precio})">
-                        <div class="producto-imagen">
-                            <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/400x400/F69B9B/white?text=Chancleta'">
+                    <div class="producto-card group">
+                        <div class="producto-imagen" onclick="window.openImageModal('${p.imagen}', '${p.nombre}')">
+                            <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/400x400/2E7D32/white?text=Chancleta'">
                         </div>
                         <div class="producto-info">
                             <h3>${p.nombre}</h3>
@@ -297,22 +198,20 @@
                                 <span class="precio">$${p.precio.toLocaleString()}</span>
                                 <span class="unidad">c/u</span>
                             </div>
-                            <button class="producto-wa" onclick="event.stopPropagation(); window.open('https://wa.me/5356382909?text=Hola%2C%20me%20interesa%20${encodeURIComponent(p.nombre)}', '_blank')">
-                                <i class="fab fa-whatsapp"></i> Consultar
+                            <button onclick="window.addToCart({id: ${p.id}, nombre: '${p.nombre}', precio: ${p.precio}, imagen: '${p.imagen}', cantidad: 1})" 
+                                    class="producto-wa">
+                                <i class="fas fa-cart-plus"></i> Agregar al carrito
                             </button>
                         </div>
                     </div>
                 `).join('');
-            } else {
-                console.error('No se encontró el elemento chanclas-grid');
             }
 
-            // Renderizar carteras
             const carterasGrid = document.getElementById('carteras-grid');
             if (carterasGrid) {
                 carterasGrid.innerHTML = lienysProducts.carteras.map(p => `
-                    <div class="producto-card group" onclick="abrirModal('${p.imagen}', '${p.nombre}', '${p.descripcion}', ${p.precio})">
-                        <div class="producto-imagen">
+                    <div class="producto-card group">
+                        <div class="producto-imagen" onclick="window.openImageModal('${p.imagen}', '${p.nombre}')">
                             <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/400x400/9B59B6/white?text=Cartera'">
                         </div>
                         <div class="producto-info">
@@ -322,8 +221,9 @@
                                 <span class="precio">$${p.precio.toLocaleString()}</span>
                             </div>
                             ${p.tipo === 'especial' ? '<span class="badge-especial">🔥 Exclusiva</span>' : ''}
-                            <button class="producto-wa" onclick="event.stopPropagation(); window.open('https://wa.me/5356382909?text=Hola%2C%20me%20interesa%20${encodeURIComponent(p.nombre)}', '_blank')">
-                                <i class="fab fa-whatsapp"></i> Consultar
+                            <button onclick="window.addToCart({id: ${p.id}, nombre: '${p.nombre}', precio: ${p.precio}, imagen: '${p.imagen}', cantidad: 1})" 
+                                    class="producto-wa">
+                                <i class="fas fa-cart-plus"></i> Agregar al carrito
                             </button>
                         </div>
                     </div>
@@ -331,33 +231,6 @@
             }
         }
 
-        // ============================================
-        // MODAL DE IMAGEN
-        // ============================================
-        function abrirModal(imagen, titulo, descripcion, precio) {
-            const modalHTML = `
-                <div class="fixed inset-0 bg-black/80 z-[200] flex items-center justify-center p-4" onclick="this.remove()">
-                    <div class="bg-white rounded-2xl max-w-2xl w-full" onclick="event.stopPropagation()">
-                        <img src="${imagen}" class="w-full h-96 object-contain bg-gray-100 p-4 rounded-t-2xl">
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold mb-2">${titulo}</h3>
-                            <p class="text-gray-600 mb-4">${descripcion}</p>
-                            <p class="text-3xl font-bold text-cuban-green mb-4">$${precio.toLocaleString()}</p>
-                            <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20comprar%20${encodeURIComponent(titulo)}" 
-                               target="_blank"
-                               class="block w-full bg-green-500 text-white text-center py-3 rounded-xl font-bold hover:bg-green-600 transition">
-                                <i class="fab fa-whatsapp mr-2"></i>Comprar por WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            `;
-            document.body.insertAdjacentHTML('beforeend', modalHTML);
-        }
-
-        // ============================================
-        // INICIALIZACIÓN
-        // ============================================
         document.addEventListener('DOMContentLoaded', async function() {
             await loadComponent('header-container', 'components/header.html');
             await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
