@@ -468,4 +468,66 @@ section .relative.z-10 h2 {
     .floating-actions { bottom: 1rem !important; right: 1rem !important; }
     .floating-btn { width: 50px; height: 50px; }
     #cartSidebar { max-height: 90vh; } 
+} 
+/* ============================================ */
+/* TUTORIAL FLOTANTE ANIMACIÓN */
+/* ============================================ */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+#tutorial-flotante {
+    animation: slideInRight 0.3s ease;
+}
+
+/* ============================================ */
+/* BOTONES UNIFICADOS - MEJORA VISUAL */
+/* ============================================ */
+.producto-wa {
+    background: linear-gradient(135deg, #2E7D32, #1B5E20) !important;
+    width: 100%;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    color: white;
+}
+
+.producto-wa:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px -5px rgba(46, 125, 50, 0.4);
+}
+
+.producto-wa i {
+    font-size: 1rem;
+}
+
+/* ============================================ */
+/* MEJORAS PARA EL CARRITO EN MÓVIL */
+/* ============================================ */
+@media (max-width: 640px) {
+    .producto-wa {
+        padding: 0.6rem;
+        font-size: 0.8rem;
+    }
+    
+    #cartSidebar {
+        border-top-left-radius: 1.5rem;
+        border-top-right-radius: 1.5rem;
+    }
 }
