@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     
-    <!-- CSS primero para evitar FOUC -->
+    <!-- CSS primero -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/index.css">
     
@@ -19,37 +19,30 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- ============================================ -->
-    <!-- PRE-CARGA Y OPTIMIZACIÓN VISUAL (CORREGIDO) -->
+    <!-- LOADING OVERLAY - ESTILOS INMEDIATOS -->
     <!-- ============================================ -->
     <style>
-        /* Evitar FOUC (Flash of Unstyled Content) */
-        body {
-            opacity: 0;
-            transition: opacity 0.2s ease;
-        }
-        body.loaded {
-            opacity: 1;
-        }
-        
-        /* Logo animado durante la carga */
-        .loading-logo {
+        /* Loading overlay - aparece inmediatamente */
+        #loadingOverlay {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
             background: white;
-            z-index: 10000;
+            z-index: 99999;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             transition: opacity 0.5s ease;
         }
-        .loading-logo.hidden {
+        
+        #loadingOverlay.hidden {
             opacity: 0;
             pointer-events: none;
         }
+        
         .loading-icon {
             width: 80px;
             height: 80px;
@@ -62,10 +55,12 @@
             animation: loadingPulse 1.2s ease-in-out infinite;
             box-shadow: 0 8px 24px rgba(46, 125, 50, 0.3);
         }
+        
         .loading-icon i {
             font-size: 48px;
             color: white;
         }
+        
         .loading-text {
             font-family: 'Poppins', sans-serif;
             font-size: 1.2rem;
@@ -73,11 +68,13 @@
             color: #2E7D32;
             letter-spacing: 1px;
         }
+        
         .loading-dots {
             display: inline-flex;
             gap: 4px;
             margin-left: 4px;
         }
+        
         .loading-dots span {
             width: 6px;
             height: 6px;
@@ -86,6 +83,7 @@
             display: inline-block;
             animation: loadingBounce 1.4s infinite ease-in-out both;
         }
+        
         .loading-dots span:nth-child(1) { animation-delay: -0.32s; }
         .loading-dots span:nth-child(2) { animation-delay: -0.16s; }
         
@@ -93,39 +91,20 @@
             0%, 100% { transform: scale(1); box-shadow: 0 8px 24px rgba(46,125,50,0.3); }
             50% { transform: scale(1.05); box-shadow: 0 12px 32px rgba(46,125,50,0.4); }
         }
+        
         @keyframes loadingBounce {
             0%, 80%, 100% { transform: scale(0); }
             40% { transform: scale(1); }
         }
         
-        /* Asegurar que el logo del header sea responsivo */
-        header .w-10.h-10 {
-            width: 2.5rem;
-            height: 2.5rem;
-            min-width: 2.5rem;
+        /* Ocultar contenido principal inicialmente */
+        #main-content {
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
-        header .text-xl {
-            font-size: 1.25rem;
-            line-height: 1.2;
-        }
-        @media (max-width: 480px) {
-            header .text-xl {
-                font-size: 1rem;
-            }
-            header .text-xs {
-                font-size: 0.65rem;
-            }
-            .loading-icon {
-                width: 70px;
-                height: 70px;
-                border-radius: 20px;
-            }
-            .loading-icon i {
-                font-size: 40px;
-            }
-            .loading-text {
-                font-size: 1rem;
-            }
+        
+        #main-content.visible {
+            opacity: 1;
         }
     </style>
     
@@ -157,449 +136,439 @@
     <style>
         .tutorial-step { transition: all 0.3s ease; }
         .tutorial-step:hover { transform: translateY(-4px); }
-        .btn-whatsapp-directo { background: linear-gradient(135deg, #25D366, #128C7E); }
-        .btn-whatsapp-directo:hover { transform: scale(1.1); box-shadow: 0 6px 16px rgba(37,211,102,0.4); }
     </style>
 </head>
-<body class="bg-white text-gray-800">
-
-    <!-- Script de loading CORREGIDO - se ejecuta después de que el body existe -->
-    <script>
-        (function() {
-            // Esperar a que el DOM esté listo
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', function() {
-                    crearLoadingOverlay();
-                });
-            } else {
-                crearLoadingOverlay();
-            }
-            
-            function crearLoadingOverlay() {
-                // Verificar si ya existe
-                if (document.getElementById('loadingOverlay')) return;
-                
-                const loadingDiv = document.createElement('div');
-                loadingDiv.className = 'loading-logo';
-                loadingDiv.id = 'loadingOverlay';
-                loadingDiv.innerHTML = `
-                    <div class="loading-icon">
-                        <i class="fas fa-store"></i>
-                    </div>
-                    <div class="loading-text">
-                        El Resolvito
-                        <span class="loading-dots">
-                            <span>.</span><span>.</span><span>.</span>
-                        </span>
-                    </div>
-                    <p style="font-size: 0.8rem; color: #666; margin-top: 12px;">Cargando...</p>
-                `;
-                document.body.appendChild(loadingDiv);
-                document.body.style.opacity = '0';
-                
-                // Ocultar cuando la página cargue
-                window.addEventListener('load', function() {
-                    setTimeout(function() {
-                        const overlay = document.getElementById('loadingOverlay');
-                        if (overlay) {
-                            overlay.classList.add('hidden');
-                            setTimeout(function() { 
-                                if (overlay && overlay.parentNode) overlay.remove(); 
-                            }, 500);
-                        }
-                        document.body.classList.add('loaded');
-                        document.body.style.opacity = '';
-                    }, 300);
-                });
-                
-                // Fallback: si tarda más de 3 segundos
-                setTimeout(function() {
-                    const overlay = document.getElementById('loadingOverlay');
-                    if (overlay && !overlay.classList.contains('hidden')) {
-                        overlay.classList.add('hidden');
-                        setTimeout(function() { 
-                            if (overlay && overlay.parentNode) overlay.remove(); 
-                        }, 500);
-                        document.body.classList.add('loaded');
-                        document.body.style.opacity = '';
-                    }
-                }, 3000);
-            }
-        })();
-    </script>
-
-    <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
-
-    <!-- Contenedores de componentes -->
-    <div id="header-container"></div>
-    <div id="mobile-menu-container"></div>
-    <div id="floating-buttons-container"></div>
+<body>
 
     <!-- ============================================ -->
-    <!-- BANNER DE CÓMO COMPRAR (visible siempre arriba) -->
+    <!-- LOADING OVERLAY - DIRECTAMENTE EN EL BODY -->
     <!-- ============================================ -->
-    <div class="bg-yellow-100 border-l-4 border-cuban-green py-3 px-4 sticky top-0 z-40 shadow-sm">
-        <div class="container mx-auto">
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-2">
-                <div class="flex items-center gap-2">
-                    <i class="fas fa-info-circle text-cuban-green text-xl"></i>
-                    <p class="text-sm text-gray-700">
-                        <span class="font-bold">📱 ¿CÓMO COMPRAR?</span> 
-                        Mira los productos, haz clic en 
-                        <span class="bg-cuban-green text-white px-2 py-0.5 rounded text-xs font-bold">Agregar al carrito</span> 
-                        y luego en el botón verde flotante 🛒
-                    </p>
-                </div>
-                <a href="#como-comprar" class="text-xs text-cuban-green font-bold hover:underline whitespace-nowrap">
-                    Ver tutorial completo <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
+    <div id="loadingOverlay">
+        <div class="loading-icon">
+            <i class="fas fa-store"></i>
         </div>
+        <div class="loading-text">
+            El Resolvito
+            <span class="loading-dots">
+                <span>.</span><span>.</span><span>.</span>
+            </span>
+        </div>
+        <p style="font-size: 0.8rem; color: #666; margin-top: 12px;">Cargando...</p>
     </div>
 
-    <!-- Hero Banner -->
-    <section class="hero-container">
-        <div class="hero-bg-day"></div>
-        <div class="hero-bg-night"></div>
-        <div class="hero-overlay"></div>
-        <div class="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center text-white">
-            <h2 class="hero-text text-4xl md:text-6xl font-bold mb-4">El Resolvito</h2>
-            <p class="hero-text text-xl md:text-2xl mb-2">Tu tienda, tus servicios, tu hogar</p>
-            <p class="hero-text text-lg opacity-90 mb-8">Todo lo que necesitas en un solo lugar</p>
-            <div class="flex flex-col sm:flex-row gap-4">
-                <a href="tienda.html" class="bg-cuban-yellow text-cuban-dark px-8 py-3 rounded-full font-bold hover:bg-yellow-400 transition shadow-lg">
-                    <i class="fas fa-shopping-basket mr-2"></i>Ver Tienda
-                </a>
-                <a href="servicios.html" class="bg-white/20 backdrop-blur text-white border-2 border-white px-8 py-3 rounded-full font-bold hover:bg-white/30 transition">
-                    <i class="fas fa-tools mr-2"></i>Servicios
-                </a>
+    <!-- ============================================ -->
+    <!-- CONTENIDO PRINCIPAL (inicialmente oculto) -->
+    <!-- ============================================ -->
+    <div id="main-content">
+        <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
+
+        <!-- Contenedores de componentes -->
+        <div id="header-container"></div>
+        <div id="mobile-menu-container"></div>
+        <div id="floating-buttons-container"></div>
+
+        <!-- BANNER DE CÓMO COMPRAR -->
+        <div class="bg-yellow-100 border-l-4 border-cuban-green py-3 px-4 sticky top-0 z-40 shadow-sm">
+            <div class="container mx-auto">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-2">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-info-circle text-cuban-green text-xl"></i>
+                        <p class="text-sm text-gray-700">
+                            <span class="font-bold">📱 ¿CÓMO COMPRAR?</span> 
+                            Mira los productos, haz clic en 
+                            <span class="bg-cuban-green text-white px-2 py-0.5 rounded text-xs font-bold">Agregar al carrito</span> 
+                            y luego en el botón verde flotante 🛒
+                        </p>
+                    </div>
+                    <a href="#como-comprar" class="text-xs text-cuban-green font-bold hover:underline whitespace-nowrap">
+                        Ver tutorial completo <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
-    </section>
 
-    <!-- SECCIÓN: CÓMO COMPRAR EN 3 PASOS -->
-    <section id="como-comprar" class="py-12 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-8">
-                <span class="inline-block bg-cuban-green text-white px-4 py-1 rounded-full text-sm font-bold mb-2">
-                    <i class="fas fa-graduation-cap mr-1"></i> FÁCIL Y RÁPIDO
-                </span>
-                <h2 class="text-3xl font-bold text-gray-800">📱 Cómo comprar en El Resolvito</h2>
-                <p class="text-gray-600 mt-2">Sigue estos 3 pasos y recibe tu pedido en el día</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                <div class="tutorial-step text-center p-6 bg-gray-50 rounded-2xl shadow-md">
-                    <div class="w-20 h-20 bg-cuban-green rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-bold shadow-lg">1</div>
-                    <div class="w-16 h-16 bg-cuban-green/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <i class="fas fa-search text-3xl text-cuban-green"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-2">Encuentra tu producto</h3>
-                    <p class="text-sm text-gray-600">Navega por nuestra tienda o mira las ofertas destacadas.</p>
-                </div>
-                <div class="tutorial-step text-center p-6 bg-gray-50 rounded-2xl shadow-md">
-                    <div class="w-20 h-20 bg-cuban-green rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-bold shadow-lg">2</div>
-                    <div class="w-16 h-16 bg-cuban-green/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <i class="fas fa-cart-plus text-3xl text-cuban-green"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-2">Agrégalo al carrito</h3>
-                    <p class="text-sm text-gray-600">Haz clic en <span class="bg-cuban-green text-white px-2 py-0.5 rounded text-xs font-bold">Agregar al carrito</span></p>
-                </div>
-                <div class="tutorial-step text-center p-6 bg-gray-50 rounded-2xl shadow-md">
-                    <div class="w-20 h-20 bg-cuban-green rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-bold shadow-lg">3</div>
-                    <div class="w-16 h-16 bg-cuban-green/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <i class="fab fa-whatsapp text-3xl text-cuban-green"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-2">Completa tus datos</h3>
-                    <p class="text-sm text-gray-600">Haz clic en el carrito 🛒, completa tus datos y envía por WhatsApp.</p>
+        <!-- Hero Banner -->
+        <section class="hero-container">
+            <div class="hero-bg-day"></div>
+            <div class="hero-bg-night"></div>
+            <div class="hero-overlay"></div>
+            <div class="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center text-white">
+                <h2 class="hero-text text-4xl md:text-6xl font-bold mb-4">El Resolvito</h2>
+                <p class="hero-text text-xl md:text-2xl mb-2">Tu tienda, tus servicios, tu hogar</p>
+                <p class="hero-text text-lg opacity-90 mb-8">Todo lo que necesitas en un solo lugar</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="tienda.html" class="bg-cuban-yellow text-cuban-dark px-8 py-3 rounded-full font-bold hover:bg-yellow-400 transition shadow-lg">
+                        <i class="fas fa-shopping-basket mr-2"></i>Ver Tienda
+                    </a>
+                    <a href="servicios.html" class="bg-white/20 backdrop-blur text-white border-2 border-white px-8 py-3 rounded-full font-bold hover:bg-white/30 transition">
+                        <i class="fas fa-tools mr-2"></i>Servicios
+                    </a>
                 </div>
             </div>
-            
-            <div class="text-center mt-8 bg-yellow-50 p-4 rounded-xl max-w-2xl mx-auto border border-yellow-200">
-                <p class="text-sm text-gray-700">
-                    <i class="fas fa-phone-alt text-cuban-green"></i> 
-                    <span class="font-bold">💡 ¿Prefieres comprar directo por WhatsApp?</span> 
-                    Escríbenos al <a href="https://wa.me/5356382909" class="text-cuban-green font-bold underline">+53 5 638 2909</a>
+        </section>
+
+        <!-- SECCIÓN: CÓMO COMPRAR EN 3 PASOS -->
+        <section id="como-comprar" class="py-12 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-8">
+                    <span class="inline-block bg-cuban-green text-white px-4 py-1 rounded-full text-sm font-bold mb-2">
+                        <i class="fas fa-graduation-cap mr-1"></i> FÁCIL Y RÁPIDO
+                    </span>
+                    <h2 class="text-3xl font-bold text-gray-800">📱 Cómo comprar en El Resolvito</h2>
+                    <p class="text-gray-600 mt-2">Sigue estos 3 pasos y recibe tu pedido en el día</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                    <div class="tutorial-step text-center p-6 bg-gray-50 rounded-2xl shadow-md">
+                        <div class="w-20 h-20 bg-cuban-green rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-bold shadow-lg">1</div>
+                        <div class="w-16 h-16 bg-cuban-green/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-search text-3xl text-cuban-green"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2">Encuentra tu producto</h3>
+                        <p class="text-sm text-gray-600">Navega por nuestra tienda o mira las ofertas destacadas.</p>
+                    </div>
+                    <div class="tutorial-step text-center p-6 bg-gray-50 rounded-2xl shadow-md">
+                        <div class="w-20 h-20 bg-cuban-green rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-bold shadow-lg">2</div>
+                        <div class="w-16 h-16 bg-cuban-green/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-cart-plus text-3xl text-cuban-green"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2">Agrégalo al carrito</h3>
+                        <p class="text-sm text-gray-600">Haz clic en <span class="bg-cuban-green text-white px-2 py-0.5 rounded text-xs font-bold">Agregar al carrito</span></p>
+                    </div>
+                    <div class="tutorial-step text-center p-6 bg-gray-50 rounded-2xl shadow-md">
+                        <div class="w-20 h-20 bg-cuban-green rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-bold shadow-lg">3</div>
+                        <div class="w-16 h-16 bg-cuban-green/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fab fa-whatsapp text-3xl text-cuban-green"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2">Completa tus datos</h3>
+                        <p class="text-sm text-gray-600">Haz clic en el carrito 🛒, completa tus datos y envía por WhatsApp.</p>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8 bg-yellow-50 p-4 rounded-xl max-w-2xl mx-auto border border-yellow-200">
+                    <p class="text-sm text-gray-700">
+                        <i class="fas fa-phone-alt text-cuban-green"></i> 
+                        <span class="font-bold">💡 ¿Prefieres comprar directo por WhatsApp?</span> 
+                        Escríbenos al <a href="https://wa.me/5356382909" class="text-cuban-green font-bold underline">+53 5 638 2909</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- HORARIOS DE ENTREGA -->
+        <section class="py-8 bg-gradient-to-r from-cuban-green/5 to-cuban-yellow/5">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-6">
+                    <span class="inline-block bg-cuban-green text-white px-4 py-1 rounded-full text-sm font-bold mb-2">
+                        <i class="fas fa-clock mr-1"></i> Recibe hoy mismo
+                    </span>
+                    <h3 class="text-2xl font-bold text-gray-800">¿A qué hora llega mi pedido?</h3>
+                </div>
+                <div class="flex flex-col md:flex-row justify-center gap-4 max-w-3xl mx-auto">
+                    <div class="flex-1 bg-white rounded-xl shadow-md p-5 border-l-4 border-cuban-green">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-3xl">☀️</span>
+                            <div><p class="text-sm text-gray-500">Pide antes de las</p><p class="text-2xl font-bold text-cuban-green">7:00 AM</p></div>
+                        </div>
+                        <p class="text-gray-700"><i class="fas fa-check-circle text-cuban-green"></i> Lo recibes <strong>antes de las 2:00 PM</strong></p>
+                    </div>
+                    <div class="flex-1 bg-white rounded-xl shadow-md p-5 border-l-4 border-cuban-yellow">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-3xl">🌙</span>
+                            <div><p class="text-sm text-gray-500">Pide antes de las</p><p class="text-2xl font-bold text-cuban-yellow">2:00 PM</p></div>
+                        </div>
+                        <p class="text-gray-700"><i class="fas fa-check-circle text-cuban-green"></i> Lo recibes <strong>antes de las 6:00 PM</strong></p>
+                    </div>
+                </div>
+                <p class="text-center text-sm text-gray-500 mt-6">
+                    <i class="fas fa-truck mr-1"></i> Entregas en La Habana Vieja y zonas cercanas. 
+                    <a href="https://wa.me/5356382909" target="_blank" class="text-cuban-green font-medium hover:underline">Consulta por WhatsApp</a>
                 </p>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- HORARIOS DE ENTREGA -->
-    <section class="py-8 bg-gradient-to-r from-cuban-green/5 to-cuban-yellow/5">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-6">
-                <span class="inline-block bg-cuban-green text-white px-4 py-1 rounded-full text-sm font-bold mb-2">
-                    <i class="fas fa-clock mr-1"></i> Recibe hoy mismo
-                </span>
-                <h3 class="text-2xl font-bold text-gray-800">¿A qué hora llega mi pedido?</h3>
-            </div>
-            <div class="flex flex-col md:flex-row justify-center gap-4 max-w-3xl mx-auto">
-                <div class="flex-1 bg-white rounded-xl shadow-md p-5 border-l-4 border-cuban-green">
-                    <div class="flex items-center gap-3 mb-2">
-                        <span class="text-3xl">☀️</span>
-                        <div><p class="text-sm text-gray-500">Pide antes de las</p><p class="text-2xl font-bold text-cuban-green">7:00 AM</p></div>
-                    </div>
-                    <p class="text-gray-700"><i class="fas fa-check-circle text-cuban-green"></i> Lo recibes <strong>antes de las 2:00 PM</strong></p>
+        <!-- Promociones Especiales -->
+        <section class="py-12 bg-gradient-to-b from-white to-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold mb-2">🔥 Promociones Especiales</h2>
+                    <p class="text-gray-600">Lo mejor de El Resolvito para ti</p>
                 </div>
-                <div class="flex-1 bg-white rounded-xl shadow-md p-5 border-l-4 border-cuban-yellow">
-                    <div class="flex items-center gap-3 mb-2">
-                        <span class="text-3xl">🌙</span>
-                        <div><p class="text-sm text-gray-500">Pide antes de las</p><p class="text-2xl font-bold text-cuban-yellow">2:00 PM</p></div>
-                    </div>
-                    <p class="text-gray-700"><i class="fas fa-check-circle text-cuban-green"></i> Lo recibes <strong>antes de las 6:00 PM</strong></p>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <a href="reservas.html" class="promo-banner relative h-48 rounded-2xl overflow-hidden shadow-lg group">
+                        <img src="https://i.postimg.cc/QxWvyYGy/acuarela-(1).jpg" class="w-full h-full object-cover">
+                        <div class="promo-overlay"></div>
+                        <div class="absolute inset-0 flex flex-col justify-center p-6 text-white">
+                            <span class="bg-cuban-blue text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-2">🏠 ALOJAMIENTOS</span>
+                            <h3 class="text-2xl font-bold mb-1">Terrazas de Bayona 59</h3>
+                            <span class="text-cuban-yellow font-bold flex items-center group-hover:translate-x-2 transition">Ver alojamiento <i class="fas fa-arrow-right ml-2"></i></span>
+                        </div>
+                    </a>
+                    <a href="servicios.html" class="promo-banner relative h-48 rounded-2xl overflow-hidden shadow-lg group">
+                        <img src="https://i.postimg.cc/Qxz4FMGg/IMG-20260226-WA0025.jpg" class="w-full h-full object-cover">
+                        <div class="promo-overlay"></div>
+                        <div class="absolute inset-0 flex flex-col justify-center p-6 text-white">
+                            <span class="bg-dulce-rosa text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-2">🧁 SERVICIOS</span>
+                            <h3 class="text-2xl font-bold mb-1">Dulce César</h3>
+                            <span class="text-cuban-yellow font-bold flex items-center group-hover:translate-x-2 transition">Ver servicio <i class="fas fa-arrow-right ml-2"></i></span>
+                        </div>
+                    </a>
+                    <a href="ofertas.html" class="promo-banner relative h-48 rounded-2xl overflow-hidden shadow-lg group">
+                        <img src="https://i.postimg.cc/8Cw6ZNg8/chanclas-negras-1.png" class="w-full h-full object-contain bg-white p-2">
+                        <div class="promo-overlay" style="background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%);"></div>
+                        <div class="absolute inset-0 flex flex-col justify-center p-6 text-white">
+                            <span class="bg-cuban-orange text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-2">💰 MAYOR</span>
+                            <h3 class="text-2xl font-bold mb-1">Chanclas al por Mayor</h3>
+                            <span class="text-cuban-yellow font-bold flex items-center group-hover:translate-x-2 transition">Ver oferta <i class="fas fa-arrow-right ml-2"></i></span>
+                        </div>
+                    </a>
                 </div>
             </div>
-            <p class="text-center text-sm text-gray-500 mt-6">
-                <i class="fas fa-truck mr-1"></i> Entregas en La Habana Vieja y zonas cercanas. 
-                <a href="https://wa.me/5356382909" target="_blank" class="text-cuban-green font-medium hover:underline">Consulta por WhatsApp</a>
-            </p>
-        </div>
-    </section>
+        </section>
 
-    <!-- Promociones Especiales -->
-    <section class="py-12 bg-gradient-to-b from-white to-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold mb-2">🔥 Promociones Especiales</h2>
-                <p class="text-gray-600">Lo mejor de El Resolvito para ti</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-6">
-                <a href="reservas.html" class="promo-banner relative h-48 rounded-2xl overflow-hidden shadow-lg group">
-                    <img src="https://i.postimg.cc/QxWvyYGy/acuarela-(1).jpg" class="w-full h-full object-cover">
-                    <div class="promo-overlay"></div>
-                    <div class="absolute inset-0 flex flex-col justify-center p-6 text-white">
-                        <span class="bg-cuban-blue text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-2">🏠 ALOJAMIENTOS</span>
-                        <h3 class="text-2xl font-bold mb-1">Terrazas de Bayona 59</h3>
-                        <span class="text-cuban-yellow font-bold flex items-center group-hover:translate-x-2 transition">Ver alojamiento <i class="fas fa-arrow-right ml-2"></i></span>
-                    </div>
-                </a>
-                <a href="servicios.html" class="promo-banner relative h-48 rounded-2xl overflow-hidden shadow-lg group">
-                    <img src="https://i.postimg.cc/Qxz4FMGg/IMG-20260226-WA0025.jpg" class="w-full h-full object-cover">
-                    <div class="promo-overlay"></div>
-                    <div class="absolute inset-0 flex flex-col justify-center p-6 text-white">
-                        <span class="bg-dulce-rosa text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-2">🧁 SERVICIOS</span>
-                        <h3 class="text-2xl font-bold mb-1">Dulce César</h3>
-                        <span class="text-cuban-yellow font-bold flex items-center group-hover:translate-x-2 transition">Ver servicio <i class="fas fa-arrow-right ml-2"></i></span>
-                    </div>
-                </a>
-                <a href="ofertas.html" class="promo-banner relative h-48 rounded-2xl overflow-hidden shadow-lg group">
-                    <img src="https://i.postimg.cc/8Cw6ZNg8/chanclas-negras-1.png" class="w-full h-full object-contain bg-white p-2">
-                    <div class="promo-overlay" style="background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%);"></div>
-                    <div class="absolute inset-0 flex flex-col justify-center p-6 text-white">
-                        <span class="bg-cuban-orange text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-2">💰 MAYOR</span>
-                        <h3 class="text-2xl font-bold mb-1">Chanclas al por Mayor</h3>
-                        <span class="text-cuban-yellow font-bold flex items-center group-hover:translate-x-2 transition">Ver oferta <i class="fas fa-arrow-right ml-2"></i></span>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Productos Destacados -->
-    <section class="py-12">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-3xl font-bold"><i class="fas fa-fire mr-3 text-cuban-orange"></i>Destacados</h2>
-                <a href="tienda.html" class="text-cuban-green font-medium hover:underline">Ver todo →</a>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="featuredProducts"></div>
-            <div class="text-center mt-6">
-                <p class="text-xs text-gray-500"><i class="fas fa-cart-plus text-cuban-green"></i> Haz clic en "Agregar al carrito" en cualquier producto</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Servicios Preview -->
-    <section class="py-12 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-3xl font-bold"><i class="fas fa-tools mr-3 text-cuban-blue"></i>Servicios Destacados</h2>
-                <a href="servicios.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
-            </div>
-            <div class="grid md:grid-cols-2 gap-6" id="servicios-container">
-                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
-                    <div class="h-48 overflow-hidden bg-gradient-to-r from-dulce-rosa to-dulce-morado">
-                        <img src="https://i.postimg.cc/Qxz4FMGg/IMG-20260226-WA0025.jpg" alt="Dulce César" class="w-full h-full object-contain bg-white">
-                    </div>
-                    <div class="p-5">
-                        <span class="bg-dulce-rosa text-white text-xs px-2 py-1 rounded-full font-bold">✨ NUEVO</span>
-                        <h3 class="font-bold text-xl mb-2 text-dulce-rosa">Dulce César</h3>
-                        <p class="text-gray-600 text-sm mb-3">Repostería artesanal para eventos, cafeterías y pedidos especiales.</p>
-                        <a href="https://wa.me/5353342167?text=Hola%2C%20vi%20Dulce%20C%C3%A9sar%20en%20El%20Resolvito%20y%20quiero%20informaci%C3%B3n" target="_blank" class="block w-full bg-dulce-rosa text-white text-center py-2 rounded-lg text-sm font-bold hover:opacity-90 transition">
-                            <i class="fab fa-whatsapp mr-1"></i> Contactar para cotizar
-                        </a>
-                    </div>
+        <!-- Productos Destacados -->
+        <section class="py-12">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold"><i class="fas fa-fire mr-3 text-cuban-orange"></i>Destacados</h2>
+                    <a href="tienda.html" class="text-cuban-green font-medium hover:underline">Ver todo →</a>
                 </div>
-                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
-                    <div class="h-48 overflow-hidden bg-gradient-to-r from-contador-azul to-cuban-orange">
-                        <img src="https://i.postimg.cc/TPPT8GM9/photo-2026-02-15-19-00-24.jpg" alt="Contador" class="w-full h-full object-cover">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="featuredProducts"></div>
+                <div class="text-center mt-6">
+                    <p class="text-xs text-gray-500"><i class="fas fa-cart-plus text-cuban-green"></i> Haz clic en "Agregar al carrito" en cualquier producto</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Servicios Preview -->
+        <section class="py-12 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold"><i class="fas fa-tools mr-3 text-cuban-blue"></i>Servicios Destacados</h2>
+                    <a href="servicios.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="product-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
+                        <div class="h-48 overflow-hidden bg-gradient-to-r from-dulce-rosa to-dulce-morado">
+                            <img src="https://i.postimg.cc/Qxz4FMGg/IMG-20260226-WA0025.jpg" alt="Dulce César" class="w-full h-full object-contain bg-white">
+                        </div>
+                        <div class="p-5">
+                            <span class="bg-dulce-rosa text-white text-xs px-2 py-1 rounded-full font-bold">✨ NUEVO</span>
+                            <h3 class="font-bold text-xl mb-2 text-dulce-rosa">Dulce César</h3>
+                            <p class="text-gray-600 text-sm mb-3">Repostería artesanal para eventos, cafeterías y pedidos especiales.</p>
+                            <a href="https://wa.me/5353342167?text=Hola%2C%20vi%20Dulce%20C%C3%A9sar%20en%20El%20Resolvito%20y%20quiero%20informaci%C3%B3n" target="_blank" class="block w-full bg-dulce-rosa text-white text-center py-2 rounded-lg text-sm font-bold hover:opacity-90 transition">
+                                <i class="fab fa-whatsapp mr-1"></i> Contactar para cotizar
+                            </a>
+                        </div>
                     </div>
-                    <div class="p-5">
-                        <span class="bg-contador-azul text-white text-xs px-2 py-1 rounded-full font-bold">📊 NUEVO</span>
-                        <h3 class="font-bold text-xl mb-2 text-contador-azul">Contador / Tenedor de Libros</h3>
-                        <p class="text-gray-600 text-sm mb-3">Gestión contable profesional para TCP y pequeños negocios.</p>
-                        <a href="https://wa.me/5356382909?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Contador" target="_blank" class="block w-full bg-contador-azul text-white text-center py-2 rounded-lg text-sm font-bold hover:bg-blue-800 transition">
-                            <i class="fab fa-whatsapp mr-1"></i> Contactar para cotizar
-                        </a>
+                    <div class="product-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
+                        <div class="h-48 overflow-hidden bg-gradient-to-r from-contador-azul to-cuban-orange">
+                            <img src="https://i.postimg.cc/TPPT8GM9/photo-2026-02-15-19-00-24.jpg" alt="Contador" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-5">
+                            <span class="bg-contador-azul text-white text-xs px-2 py-1 rounded-full font-bold">📊 NUEVO</span>
+                            <h3 class="font-bold text-xl mb-2 text-contador-azul">Contador / Tenedor de Libros</h3>
+                            <p class="text-gray-600 text-sm mb-3">Gestión contable profesional para TCP y pequeños negocios.</p>
+                            <a href="https://wa.me/5356382909?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Contador" target="_blank" class="block w-full bg-contador-azul text-white text-center py-2 rounded-lg text-sm font-bold hover:bg-blue-800 transition">
+                                <i class="fab fa-whatsapp mr-1"></i> Contactar para cotizar
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- NUEVO SERVICIO: MENSAJERÍA -->
-    <section class="py-12">
-        <div class="container mx-auto px-4">
-            <div class="relative rounded-2xl overflow-hidden shadow-xl min-h-[250px] md:min-h-[300px] bg-cover bg-center flex items-center" style="background-image: url('https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp');">
-                <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
-                <div class="relative z-10 text-white p-6 md:p-10 max-w-2xl">
-                    <span class="inline-block bg-cuban-yellow text-cuban-dark text-sm font-bold px-4 py-1 rounded-full mb-3">🛵 NUEVO SERVICIO</span>
-                    <h2 class="text-2xl md:text-3xl font-bold mb-2"><i class="fas fa-box"></i> ¿Necesitas un mensajero?</h2>
-                    <p class="text-sm mb-4 opacity-90">Un servicio rápido, confiable y en La Habana. Coordinamos por WhatsApp.</p>
-                    <div class="flex flex-col sm:flex-row gap-3">
-                        <button onclick="window.addToCart({id: 502, nombre: 'Servicio de Mensajería (Habana Vieja)', precio: 400, imagen: 'https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp', cantidad: 1})" class="bg-cuban-green hover:bg-cuban-dark text-white font-bold py-2 px-6 rounded-full transition flex items-center justify-center gap-2 text-sm">
-                            <i class="fas fa-cart-plus text-lg"></i> Contratar mensajero ($400)
-                        </button>
-                        <a href="servicios.html" class="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold py-2 px-6 rounded-full transition border border-white">Ver todos los servicios</a>
+        <!-- NUEVO SERVICIO: MENSAJERÍA -->
+        <section class="py-12">
+            <div class="container mx-auto px-4">
+                <div class="relative rounded-2xl overflow-hidden shadow-xl min-h-[250px] md:min-h-[300px] bg-cover bg-center flex items-center" style="background-image: url('https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp');">
+                    <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
+                    <div class="relative z-10 text-white p-6 md:p-10 max-w-2xl">
+                        <span class="inline-block bg-cuban-yellow text-cuban-dark text-sm font-bold px-4 py-1 rounded-full mb-3">🛵 NUEVO SERVICIO</span>
+                        <h2 class="text-2xl md:text-3xl font-bold mb-2"><i class="fas fa-box"></i> ¿Necesitas un mensajero?</h2>
+                        <p class="text-sm mb-4 opacity-90">Un servicio rápido, confiable y en La Habana. Coordinamos por WhatsApp.</p>
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <button onclick="window.addToCart({id: 502, nombre: 'Servicio de Mensajería (Habana Vieja)', precio: 400, imagen: 'https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp', cantidad: 1})" class="bg-cuban-green hover:bg-cuban-dark text-white font-bold py-2 px-6 rounded-full transition flex items-center justify-center gap-2 text-sm">
+                                <i class="fas fa-cart-plus text-lg"></i> Contratar mensajero ($400)
+                            </button>
+                            <a href="servicios.html" class="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold py-2 px-6 rounded-full transition border border-white">Ver todos los servicios</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- OFERTAS ESPECIALES - CHANCLAS Y CARTERAS DE LIENYS (resumido) -->
-    <section class="py-16 relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50">
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="text-center mb-12">
-                <span class="inline-block bg-gradient-to-r from-cuban-orange to-red-500 text-white px-6 py-2 rounded-full text-sm font-bold mb-4 shadow-lg animate-bounce">⚡ OFERTAS RELÁMPAGO ⚡</span>
-                <h2 class="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-cuban-orange via-red-500 to-purple-600 bg-clip-text text-transparent">¡NO TE LAS PIERDAS!</h2>
-            </div>
-            <div class="grid lg:grid-cols-2 gap-8">
-                <div class="group relative transform hover:scale-105 transition-all duration-500">
-                    <div class="relative bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden">
-                        <div class="h-72 overflow-hidden relative">
-                            <div class="grid grid-cols-2 h-full">
-                                <img src="https://i.postimg.cc/qvBVZPcH/chancletas_negras.png" class="w-full h-full object-cover">
-                                <img src="https://i.postimg.cc/8Pmg4pv5/CHANCLETAS_BLANCAS.png" class="w-full h-full object-cover">
+        <!-- OFERTAS ESPECIALES - CHANCLAS Y CARTERAS DE LIENYS -->
+        <section class="py-16 relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50">
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="text-center mb-12">
+                    <span class="inline-block bg-gradient-to-r from-cuban-orange to-red-500 text-white px-6 py-2 rounded-full text-sm font-bold mb-4 shadow-lg animate-bounce">⚡ OFERTAS RELÁMPAGO ⚡</span>
+                    <h2 class="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-cuban-orange via-red-500 to-purple-600 bg-clip-text text-transparent">¡NO TE LAS PIERDAS!</h2>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div class="group relative transform hover:scale-105 transition-all duration-500">
+                        <div class="relative bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden">
+                            <div class="h-72 overflow-hidden relative">
+                                <div class="grid grid-cols-2 h-full">
+                                    <img src="https://i.postimg.cc/qvBVZPcH/chancletas_negras.png" class="w-full h-full object-cover">
+                                    <img src="https://i.postimg.cc/8Pmg4pv5/CHANCLETAS_BLANCAS.png" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <div class="p-8">
+                                <h3 class="text-2xl font-bold text-cuban-green mb-2">Chanclas Lienys</h3>
+                                <p class="text-gray-600 mb-4">Cómodas, duraderas, ideales para el verano</p>
+                                <div class="mb-4"><span class="text-2xl font-bold text-cuban-green">$4,500</span><span class="text-gray-500"> c/u</span></div>
+                                <button onclick="window.addToCart({id: 201, nombre: 'Chanclas Lienys', precio: 4500, imagen: 'https://i.postimg.cc/qvBVZPcH/chancletas_negras.png', cantidad: 1})" class="w-full bg-cuban-green text-white py-3 rounded-xl font-bold hover:bg-cuban-dark transition"><i class="fas fa-cart-plus mr-2"></i> Agregar al carrito</button>
                             </div>
                         </div>
-                        <div class="p-8">
-                            <h3 class="text-2xl font-bold text-cuban-green mb-2">Chanclas Lienys</h3>
-                            <p class="text-gray-600 mb-4">Cómodas, duraderas, ideales para el verano</p>
-                            <div class="mb-4"><span class="text-2xl font-bold text-cuban-green">$4,500</span><span class="text-gray-500"> c/u</span></div>
-                            <button onclick="window.addToCart({id: 201, nombre: 'Chanclas Lienys', precio: 4500, imagen: 'https://i.postimg.cc/qvBVZPcH/chancletas_negras.png', cantidad: 1})" class="w-full bg-cuban-green text-white py-3 rounded-xl font-bold hover:bg-cuban-dark transition"><i class="fas fa-cart-plus mr-2"></i> Agregar al carrito</button>
-                        </div>
                     </div>
-                </div>
-                <div class="group relative transform hover:scale-105 transition-all duration-500">
-                    <div class="relative bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden">
-                        <div class="h-72 overflow-hidden relative">
-                            <div class="grid grid-cols-2 h-full">
-                                <img src="https://i.postimg.cc/Vk4RDT46/cartera_azul_muchacha.png" class="w-full h-full object-cover">
-                                <img src="https://i.postimg.cc/2STw2JT8/cartera-beige-muchacha.png" class="w-full h-full object-cover">
+                    <div class="group relative transform hover:scale-105 transition-all duration-500">
+                        <div class="relative bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden">
+                            <div class="h-72 overflow-hidden relative">
+                                <div class="grid grid-cols-2 h-full">
+                                    <img src="https://i.postimg.cc/Vk4RDT46/cartera_azul_muchacha.png" class="w-full h-full object-cover">
+                                    <img src="https://i.postimg.cc/2STw2JT8/cartera-beige-muchacha.png" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <div class="p-8">
+                                <h3 class="text-2xl font-bold text-purple-600 mb-2">Carteras Lienys</h3>
+                                <div class="mb-4"><span class="font-bold">Desde</span> <span class="text-cuban-green font-bold">$5,000</span></div>
+                                <button onclick="window.addToCart({id: 301, nombre: 'Cartera Lienys', precio: 5000, imagen: 'https://i.postimg.cc/Vk4RDT46/cartera_azul_muchacha.png', cantidad: 1})" class="w-full bg-purple-600 text-white py-3 rounded-xl font-bold hover:bg-purple-700 transition"><i class="fas fa-cart-plus mr-2"></i> Agregar al carrito</button>
                             </div>
                         </div>
-                        <div class="p-8">
-                            <h3 class="text-2xl font-bold text-purple-600 mb-2">Carteras Lienys</h3>
-                            <div class="mb-4"><span class="font-bold">Desde</span> <span class="text-cuban-green font-bold">$5,000</span></div>
-                            <button onclick="window.addToCart({id: 301, nombre: 'Cartera Lienys', precio: 5000, imagen: 'https://i.postimg.cc/Vk4RDT46/cartera_azul_muchacha.png', cantidad: 1})" class="w-full bg-purple-600 text-white py-3 rounded-xl font-bold hover:bg-purple-700 transition"><i class="fas fa-cart-plus mr-2"></i> Agregar al carrito</button>
+                    </div>
+                </div>
+                <div class="mt-8 text-center"><a href="lienys.html" class="inline-block bg-cuban-green text-white px-6 py-3 rounded-full font-bold hover:bg-cuban-dark transition">Ver colección completa de Lienys</a></div>
+            </div>
+        </section>
+
+        <!-- OFERTAS MAYOR PREVIEW -->
+        <section class="py-10">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl md:text-3xl font-bold"><i class="fas fa-boxes mr-2 text-cuban-orange"></i>Venta por Mayor</h2>
+                    <a href="ofertas.html" class="text-cuban-green font-medium hover:underline text-sm">Ver todo →</a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+                    <div class="rounded-xl overflow-hidden shadow-md max-w-xs mx-auto md:max-w-full">
+                        <img src="https://i.postimg.cc/c4zrnfyN/Gemini_Generated_Image_ixeyniixeyniixey.png" alt="Colección de chanclas" class="w-full h-auto object-cover hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="space-y-3 text-center md:text-left">
+                        <span class="inline-block bg-cuban-orange text-white text-xs font-bold px-3 py-1 rounded-full">🔥 OFERTA ESPECIAL</span>
+                        <h3 class="text-2xl font-bold text-gray-800">Chanclas al por Mayor</h3>
+                        <p class="text-gray-600 text-sm">Ideal para revendedores. Precio especial:</p>
+                        <div><span class="text-3xl font-bold text-cuban-green">$3,500</span><span class="text-gray-500 text-sm"> c/u</span></div>
+                        <button onclick="window.addToCart({id: 999, nombre: 'Chanclas Mayor (Pack de 1 par)', precio: 3500, imagen: 'https://i.postimg.cc/c4zrnfyN/Gemini_Generated_Image_ixeyniixeyniixey.png', cantidad: 1})" class="bg-cuban-green text-white px-6 py-2 rounded-full text-sm font-bold hover:bg-cuban-dark transition inline-flex items-center gap-2"><i class="fas fa-cart-plus"></i> Agregar al carrito</button>
+                        <p class="text-xs text-gray-500">💡 Puedes cambiar la cantidad en el carrito</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Preview -->
+        <section class="py-12 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold"><i class="fas fa-newspaper mr-3 text-cuban-blue"></i>Blog</h2>
+                    <a href="blog.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <article onclick="location.href='blog/recetas-rapidas-con-atun.html'" class="cursor-pointer">
+                        <img src="https://i.postimg.cc/28jzTGNk/Gemini_Generated_Image_v6ybtnv6ybtnv6yb_(1).png" alt="Tostadas de atún" class="w-full h-48 object-cover rounded-t-lg">
+                        <div class="p-4"><span class="text-xs text-cuban-green font-bold">🍳 RECETAS</span><h3 class="font-bold text-lg mt-1">Tostadas de Atún en 5 minutos</h3></div>
+                    </article>
+                    <article onclick="location.href='blog/como-empezar-tcp-en-cuba-guia-2026.html'" class="cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=500" alt="Emprendimiento" class="w-full h-48 object-cover rounded-t-lg">
+                        <div class="p-4"><span class="text-xs text-contador-azul font-bold">📊 EMPRENDIMIENTO</span><h3 class="font-bold text-lg mt-1">Guía completa para emprender en Cuba (TCP)</h3></div>
+                    </article>
+                    <article onclick="location.href='blog/que-hacer-en-la-habana-vieja-gratis.html'" class="cursor-pointer">
+                        <img src="https://i.postimg.cc/nzP73gjY/Gemini-Generated-Image-h9hdglh9hdglh9hd-1-11zon.webp" alt="La Habana" class="w-full h-48 object-cover rounded-t-lg">
+                        <div class="p-4"><span class="text-xs text-cuban-blue font-bold">🏠 LA HABANA</span><h3 class="font-bold text-lg mt-1">10 planes gratis en La Habana Vieja</h3></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alojamientos Preview -->
+        <section class="py-12">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold"><i class="fas fa-bed mr-3 text-cuban-green"></i>Alojamientos</h2>
+                    <a href="reservas.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
+                </div>
+                <div id="alojamientos-preview" class="bg-white rounded-2xl shadow-lg overflow-hidden md:flex">
+                    <div class="md:w-1/2"><img src="https://i.postimg.cc/QxWvyYGy/acuarela-(1).jpg" class="w-full h-64 md:h-full object-cover" alt="Terrazas de Bayona"></div>
+                    <div class="md:w-1/2 p-8">
+                        <span class="text-cuban-green font-bold text-sm">🌟 ALOJAMIENTO DESTACADO</span>
+                        <h3 class="text-2xl font-bold mt-2 mb-2">Terrazas de Bayona 59</h3>
+                        <p class="text-gray-600 italic mb-4">Casa colonial en el corazón de La Habana Vieja</p>
+                        <div class="amenities-grid mb-4">
+                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Agua caliente 24/7</div>
+                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Aire acondicionado</div>
+                            <div class="amenity-item"><i class="fas fa-check-circle"></i> 2 terrazas privadas</div>
+                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Wi-Fi gratuito</div>
+                        </div>
+                        <div class="flex gap-4 mt-6">
+                            <a href="https://reservaterrazasdebayona59.com/" target="_blank" class="bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark text-center flex-1">Reservar Ahora</a>
+                            <a href="reservas.html" class="border-2 border-cuban-green text-cuban-green px-6 py-3 rounded-lg font-bold hover:bg-cuban-green hover:text-white text-center">Ver más</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="mt-8 text-center"><a href="lienys.html" class="inline-block bg-cuban-green text-white px-6 py-3 rounded-full font-bold hover:bg-cuban-dark transition">Ver colección completa de Lienys</a></div>
+        </section>
+
+        <!-- Contenedores para modales -->
+        <div id="image-modal-container"></div>
+        <div id="cart-sidebar-container"></div>
+        <div id="checkout-modal-container"></div>
+        <div id="footer-container"></div>
+
+        <!-- Toast -->
+        <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
+            <p id="cartToastMessage"></p>
         </div>
-    </section>
-
-    <!-- OFERTAS MAYOR PREVIEW -->
-    <section class="py-10">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl md:text-3xl font-bold"><i class="fas fa-boxes mr-2 text-cuban-orange"></i>Venta por Mayor</h2>
-                <a href="ofertas.html" class="text-cuban-green font-medium hover:underline text-sm">Ver todo →</a>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-                <div class="rounded-xl overflow-hidden shadow-md max-w-xs mx-auto md:max-w-full">
-                    <img src="https://i.postimg.cc/c4zrnfyN/Gemini_Generated_Image_ixeyniixeyniixey.png" alt="Colección de chanclas" class="w-full h-auto object-cover hover:scale-105 transition duration-500">
-                </div>
-                <div class="space-y-3 text-center md:text-left">
-                    <span class="inline-block bg-cuban-orange text-white text-xs font-bold px-3 py-1 rounded-full">🔥 OFERTA ESPECIAL</span>
-                    <h3 class="text-2xl font-bold text-gray-800">Chanclas al por Mayor</h3>
-                    <p class="text-gray-600 text-sm">Ideal para revendedores. Precio especial:</p>
-                    <div><span class="text-3xl font-bold text-cuban-green">$3,500</span><span class="text-gray-500 text-sm"> c/u</span></div>
-                    <button onclick="window.addToCart({id: 999, nombre: 'Chanclas Mayor (Pack de 1 par)', precio: 3500, imagen: 'https://i.postimg.cc/c4zrnfyN/Gemini_Generated_Image_ixeyniixeyniixey.png', cantidad: 1})" class="bg-cuban-green text-white px-6 py-2 rounded-full text-sm font-bold hover:bg-cuban-dark transition inline-flex items-center gap-2"><i class="fas fa-cart-plus"></i> Agregar al carrito</button>
-                    <p class="text-xs text-gray-500">💡 Puedes cambiar la cantidad en el carrito</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Blog Preview -->
-    <section class="py-12 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-3xl font-bold"><i class="fas fa-newspaper mr-3 text-cuban-blue"></i>Blog</h2>
-                <a href="blog.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
-            </div>
-            <div class="grid md:grid-cols-3 gap-6">
-                <article onclick="location.href='blog/recetas-rapidas-con-atun.html'" class="cursor-pointer">
-                    <img src="https://i.postimg.cc/28jzTGNk/Gemini_Generated_Image_v6ybtnv6ybtnv6yb_(1).png" alt="Tostadas de atún" class="w-full h-48 object-cover rounded-t-lg">
-                    <div class="p-4"><span class="text-xs text-cuban-green font-bold">🍳 RECETAS</span><h3 class="font-bold text-lg mt-1">Tostadas de Atún en 5 minutos</h3></div>
-                </article>
-                <article onclick="location.href='blog/como-empezar-tcp-en-cuba-guia-2026.html'" class="cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=500" alt="Emprendimiento" class="w-full h-48 object-cover rounded-t-lg">
-                    <div class="p-4"><span class="text-xs text-contador-azul font-bold">📊 EMPRENDIMIENTO</span><h3 class="font-bold text-lg mt-1">Guía completa para emprender en Cuba (TCP)</h3></div>
-                </article>
-                <article onclick="location.href='blog/que-hacer-en-la-habana-vieja-gratis.html'" class="cursor-pointer">
-                    <img src="https://i.postimg.cc/nzP73gjY/Gemini-Generated-Image-h9hdglh9hdglh9hd-1-11zon.webp" alt="La Habana" class="w-full h-48 object-cover rounded-t-lg">
-                    <div class="p-4"><span class="text-xs text-cuban-blue font-bold">🏠 LA HABANA</span><h3 class="font-bold text-lg mt-1">10 planes gratis en La Habana Vieja</h3></div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- Alojamientos Preview -->
-    <section class="py-12">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-3xl font-bold"><i class="fas fa-bed mr-3 text-cuban-green"></i>Alojamientos</h2>
-                <a href="reservas.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
-            </div>
-            <div id="alojamientos-preview" class="bg-white rounded-2xl shadow-lg overflow-hidden md:flex">
-                <div class="md:w-1/2"><img src="https://i.postimg.cc/QxWvyYGy/acuarela-(1).jpg" class="w-full h-64 md:h-full object-cover" alt="Terrazas de Bayona"></div>
-                <div class="md:w-1/2 p-8">
-                    <span class="text-cuban-green font-bold text-sm">🌟 ALOJAMIENTO DESTACADO</span>
-                    <h3 class="text-2xl font-bold mt-2 mb-2">Terrazas de Bayona 59</h3>
-                    <p class="text-gray-600 italic mb-4">Casa colonial en el corazón de La Habana Vieja</p>
-                    <div class="amenities-grid mb-4">
-                        <div class="amenity-item"><i class="fas fa-check-circle"></i> Agua caliente 24/7</div>
-                        <div class="amenity-item"><i class="fas fa-check-circle"></i> Aire acondicionado</div>
-                        <div class="amenity-item"><i class="fas fa-check-circle"></i> 2 terrazas privadas</div>
-                        <div class="amenity-item"><i class="fas fa-check-circle"></i> Wi-Fi gratuito</div>
-                    </div>
-                    <div class="flex gap-4 mt-6">
-                        <a href="https://reservaterrazasdebayona59.com/" target="_blank" class="bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark text-center flex-1">Reservar Ahora</a>
-                        <a href="reservas.html" class="border-2 border-cuban-green text-cuban-green px-6 py-3 rounded-lg font-bold hover:bg-cuban-green hover:text-white text-center">Ver más</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contenedores para modales -->
-    <div id="image-modal-container"></div>
-    <div id="cart-sidebar-container"></div>
-    <div id="checkout-modal-container"></div>
-    <div id="footer-container"></div>
-
-    <!-- Toast -->
-    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
-        <p id="cartToastMessage"></p>
     </div>
 
     <!-- Scripts -->
     <script src="js/elresolvito.js" defer></script>
+    
+    <script>
+        // Ocultar loading overlay y mostrar contenido cuando todo esté listo
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const overlay = document.getElementById('loadingOverlay');
+                const mainContent = document.getElementById('main-content');
+                
+                if (overlay) {
+                    overlay.classList.add('hidden');
+                    setTimeout(function() {
+                        overlay.style.display = 'none';
+                    }, 500);
+                }
+                
+                if (mainContent) {
+                    mainContent.classList.add('visible');
+                }
+            }, 800); // Pequeño delay para asegurar que se vea la animación
+        });
+        
+        // Fallback: si tarda más de 3 segundos, forzar ocultar
+        setTimeout(function() {
+            const overlay = document.getElementById('loadingOverlay');
+            const mainContent = document.getElementById('main-content');
+            
+            if (overlay && !overlay.classList.contains('hidden')) {
+                overlay.classList.add('hidden');
+                setTimeout(function() {
+                    overlay.style.display = 'none';
+                }, 500);
+            }
+            
+            if (mainContent) {
+                mainContent.classList.add('visible');
+            }
+        }, 3000);
+    </script>
     
     <script>
         document.addEventListener('DOMContentLoaded', async function() {
