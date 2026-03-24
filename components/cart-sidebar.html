@@ -3,7 +3,6 @@
 
 <div id="cartSidebar" class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl z-[10000] max-h-[85vh] flex flex-col" style="transform: translateY(100%);">
     
-    <!-- Cabecera -->
     <div class="p-5 bg-gradient-to-r from-cuban-green to-cuban-dark text-white rounded-t-3xl">
         <div class="flex justify-between items-center">
             <h3 class="text-xl font-bold flex items-center gap-2">
@@ -17,40 +16,31 @@
         <p class="text-sm opacity-90 mt-1">📦 Revisa tus productos antes de finalizar</p>
     </div>
     
-    <!-- Lista de productos -->
-    <div id="cartItems" class="flex-1 overflow-y-auto p-5 space-y-3 bg-gray-50">
-        <!-- Los items se cargan dinámicamente -->
-    </div>
+    <div id="cartItems" class="flex-1 overflow-y-auto p-5 space-y-3 bg-gray-50"></div>
     
-    <!-- Resumen y botón de checkout -->
     <div class="p-5 bg-white border-t border-gray-200 shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
         <div class="space-y-3 mb-5">
-            <!-- Subtotal -->
             <div class="flex justify-between items-center text-base">
                 <span class="text-gray-600">Subtotal:</span>
                 <span id="cartSubtotal" class="font-bold text-gray-800">$0</span>
             </div>
             
-            <!-- Advertencia de compra mínima -->
             <div id="minPurchaseWarning" class="bg-orange-50 p-2 rounded-lg text-xs text-orange-700 hidden border border-orange-200">
                 <i class="fas fa-exclamation-triangle mr-1"></i> 
                 <strong>Compra mínima: $500</strong> — Agrega más productos para continuar
             </div>
             
-            <!-- Envío (se muestra según selección) -->
             <div class="flex justify-between items-center text-base border-t border-gray-100 pt-2">
                 <span class="text-gray-600">Envío:</span>
                 <span id="cartShipping" class="text-gray-600">Selecciona en checkout</span>
             </div>
             
-            <!-- Total -->
             <div class="flex justify-between items-center text-lg font-bold border-t border-gray-200 pt-3">
                 <span>Total a pagar:</span>
                 <span id="cartTotal" class="text-cuban-green">$0</span>
             </div>
         </div>
         
-        <!-- Botón de checkout mejorado con mensaje claro -->
         <button onclick="window.openCheckoutModal()" 
                 id="checkoutButton"
                 class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-3 hover:opacity-90 transition shadow-md text-lg">
@@ -58,21 +48,14 @@
             Continuar por WhatsApp
         </button>
         
-        <!-- Mensaje de seguridad y ayuda -->
         <p class="text-xs text-center text-gray-500 mt-4 flex flex-col items-center gap-1">
-            <span class="flex items-center gap-1">
-                <i class="fas fa-lock text-cuban-green"></i> 
-                Pedido seguro · Pagas al recibir
-            </span>
-            <span class="text-xs text-gray-400">
-                <i class="fas fa-question-circle"></i> ¿Dudas? Escríbenos al <a href="https://wa.me/5356382909" class="text-cuban-green">+53 5 638 2909</a>
-            </span>
+            <span class="flex items-center gap-1"><i class="fas fa-lock text-cuban-green"></i> Pedido seguro · Pagas al recibir</span>
+            <span class="text-xs text-gray-400"><i class="fas fa-question-circle"></i> ¿Dudas? Escríbenos al <a href="https://wa.me/5356382909" class="text-cuban-green">+53 5 638 2909</a></span>
         </p>
     </div>
 </div>
 
 <script>
-    // Función para actualizar la advertencia de compra mínima
     window.updateMinPurchaseWarning = function() {
         const subtotalEl = document.getElementById('cartSubtotal');
         const warningEl = document.getElementById('minPurchaseWarning');
@@ -93,6 +76,7 @@
                 checkoutBtn.disabled = false;
                 checkoutBtn.style.opacity = '1';
                 checkoutBtn.style.cursor = 'pointer';
+                checkoutBtn.title = '';
             }
         }
     };
