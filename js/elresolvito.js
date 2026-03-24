@@ -82,6 +82,7 @@ var WHOLESALE_PRODUCTS = [
         
         if (existingItemIndex !== -1) {
             cart[existingItemIndex].cantidad += product.cantidad || 1;
+            showToast(`✓ +1 ${product.nombre}`, 'success');
         } else {
             cart.push({
                 id: product.id,
@@ -90,11 +91,11 @@ var WHOLESALE_PRODUCTS = [
                 precio: product.precio,
                 cantidad: product.cantidad || 1
             });
+            showToast(`✓ ${product.nombre} añadido al carrito`, 'success');
         }
 
         saveCart();
         window.updateCartUI();
-        showToast('✓ Producto añadido al carrito');
         return true;
     };
 
@@ -116,10 +117,11 @@ var WHOLESALE_PRODUCTS = [
 
     function removeFromCart(index) {
         if (cart[index]) {
+            const nombre = cart[index].nombre;
             cart.splice(index, 1);
             saveCart();
             window.updateCartUI();
-            showToast('Producto eliminado');
+            showToast(`✓ ${nombre} eliminado`, 'success');
         }
     }
 
@@ -131,6 +133,7 @@ var WHOLESALE_PRODUCTS = [
         const totalItems = cart.reduce((sum, item) => sum + (item.cantidad || 0), 0);
         const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
         
+        // Actualizar contadores
         document.querySelectorAll('#cartCount, #floatingCartCount').forEach(el => {
             if (el) {
                 el.textContent = totalItems;
@@ -138,10 +141,11 @@ var WHOLESALE_PRODUCTS = [
             }
         });
         
+        // Renderizar items del carrito
         const cartItemsContainer = document.getElementById('cartItems');
         if (cartItemsContainer) {
             if (cart.length === 0) {
-                cartItemsContainer.innerHTML = '<div class="text-center py-8 text-gray-500"><i class="fas fa-shopping-cart text-4xl mb-3 opacity-30"></i><p>Tu carrito está vacío</p></div>';
+                cartItemsContainer.innerHTML = '<div class="text-center py-8 text-gray-500"><i class="fas fa-shopping-cart text-4xl mb-3 opacity-30"></i><p>Tu carrito está vacío</p><p class="text-xs mt-2">Agrega productos desde la tienda</p></div>';
             } else {
                 cartItemsContainer.innerHTML = cart.map((item, index) => {
                     const imgSrc = item.imagen || 'https://placehold.co/80';
@@ -164,6 +168,7 @@ var WHOLESALE_PRODUCTS = [
             }
         }
         
+        // Actualizar totales en el sidebar del carrito
         const subtotalEl = document.getElementById('cartSubtotal');
         const shippingEl = document.getElementById('cartShipping');
         const totalEl = document.getElementById('cartTotal');
@@ -179,6 +184,11 @@ var WHOLESALE_PRODUCTS = [
         }
 
         updateCheckoutSummary();
+        
+        // Llamar a la función de advertencia de compra mínima
+        if (typeof window.updateMinPurchaseWarning === 'function') {
+            window.updateMinPurchaseWarning();
+        }
     };
 
     // ============================================
@@ -197,6 +207,7 @@ var WHOLESALE_PRODUCTS = [
             return;
         }
 
+        // Cerrar el sidebar del carrito
         const sidebar = document.getElementById('cartSidebar');
         const overlay = document.getElementById('cartOverlay');
         if (sidebar && sidebar.classList.contains('cart-open')) {
@@ -250,6 +261,7 @@ var WHOLESALE_PRODUCTS = [
         const customerName = document.getElementById('customerName')?.value.trim();
         const customerAddress = document.getElementById('customerAddress')?.value.trim();
         const deliveryZone = document.querySelector('input[name="deliveryZone"]:checked')?.value;
+        const customerPhone = document.getElementById('customerPhone')?.value.trim() || '';
         const notes = document.getElementById('customerNotes')?.value.trim() || '';
 
         if (!customerName || !customerAddress) {
@@ -264,6 +276,7 @@ var WHOLESALE_PRODUCTS = [
             return;
         }
 
+        // Generar mensaje claro para WhatsApp
         let mensaje = "🛒 *NUEVO PEDIDO - EL RESOLVITO*\n\n";
         mensaje += "*Productos:*\n";
         cart.forEach(item => {
@@ -283,6 +296,10 @@ var WHOLESALE_PRODUCTS = [
         mensaje += `\n👤 *Nombre:* ${customerName}`;
         mensaje += `\n📍 *Dirección:* ${customerAddress}`;
         
+        if (customerPhone) {
+            mensaje += `\n📱 *Teléfono:* ${customerPhone}`;
+        }
+        
         if (notes) {
             mensaje += `\n📝 *Notas:* ${notes}`;
         }
@@ -290,10 +307,13 @@ var WHOLESALE_PRODUCTS = [
         mensaje += `\n\n💵 *Pago:* Contra entrega en efectivo`;
         mensaje += `\n_Te contactaremos para confirmar disponibilidad y coordinar la entrega._`;
 
+        // Abrir WhatsApp
         window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank');
 
+        // Cerrar modal
         window.closeCheckoutModal();
         
+        // Cerrar sidebar del carrito
         const sidebar = document.getElementById('cartSidebar');
         const overlay = document.getElementById('cartOverlay');
         if (sidebar && sidebar.classList.contains('cart-open')) {
@@ -302,6 +322,7 @@ var WHOLESALE_PRODUCTS = [
             document.body.style.overflow = '';
         }
 
+        // Limpiar carrito después de enviar
         cart = [];
         saveCart();
         window.updateCartUI();
@@ -310,7 +331,7 @@ var WHOLESALE_PRODUCTS = [
     };
 
     // ============================================
-    // FUNCIONES DE UTILIDAD
+    // FUNCIONES DE UTILIDAD (TOAST, MODALES)
     // ============================================
     function showToast(message, type = 'success') {
         const toast = document.getElementById('cartToast');
@@ -324,9 +345,12 @@ var WHOLESALE_PRODUCTS = [
             if (type === 'error') {
                 toast.classList.add('bg-red-600');
                 toast.classList.remove('bg-gray-800');
+            } else if (type === 'warning') {
+                toast.classList.add('bg-orange-500');
+                toast.classList.remove('bg-gray-800');
             } else {
                 toast.classList.add('bg-gray-800');
-                toast.classList.remove('bg-red-600');
+                toast.classList.remove('bg-red-600', 'bg-orange-500');
             }
             
             setTimeout(() => {
@@ -409,6 +433,7 @@ var WHOLESALE_PRODUCTS = [
                         <p style="font-size: 0.875rem; margin-bottom: 0.5rem;">2️⃣ Completa tus <strong>datos</strong> en el checkout</p>
                         <p style="font-size: 0.875rem; margin-bottom: 0.75rem;">3️⃣ Envía el pedido por <strong>WhatsApp</strong></p>
                         <p style="font-size: 0.7rem; color: #2E7D32; margin-top: 0.5rem;">💵 Pago contra entrega · Envíos en La Habana</p>
+                        <a href="#como-comprar" style="display: block; margin-top: 0.75rem; font-size: 0.7rem; color: #2E7D32; text-align: center; text-decoration: underline;" onclick="document.getElementById('tutorial-flotante').remove()">Ver tutorial completo →</a>
                     </div>
                 </div>
                 <style>
@@ -423,7 +448,7 @@ var WHOLESALE_PRODUCTS = [
             setTimeout(() => {
                 const el = document.getElementById('tutorial-flotante');
                 if (el) el.remove();
-            }, 10000);
+            }, 12000);
             
             localStorage.setItem('elresolvito_tutorial', 'true');
         }, 1500);
@@ -436,8 +461,11 @@ var WHOLESALE_PRODUCTS = [
         const pageFade = document.getElementById('pageFade');
         if (pageFade) pageFade.classList.add('opacity-0');
         
+        // Restaurar modo nocturno
         if (localStorage.getItem('nightMode') === 'true') {
             document.body.classList.add('night-mode');
+            const themeIcon = document.getElementById('headerThemeIcon');
+            if (themeIcon) themeIcon.textContent = '🌙';
         }
         
         window.updateCartUI();
@@ -447,6 +475,9 @@ var WHOLESALE_PRODUCTS = [
 
 })();
 
+// ============================================
+// FUNCIÓN DE DEPURACIÓN (OPCIONAL)
+// ============================================
 window.debugCart = function() {
     console.log('=== DEBUG CARRITO ===');
     const sidebar = document.getElementById('cartSidebar');
@@ -465,4 +496,7 @@ window.debugCart = function() {
         console.log('overlay clases:', overlay.className);
         console.log('overlay hidden:', overlay.classList.contains('hidden'));
     }
+    
+    const cart = JSON.parse(localStorage.getItem('elResolvitoCart')) || [];
+    console.log('Carrito actual:', cart);
 };
