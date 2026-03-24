@@ -1,10 +1,9 @@
 <!-- components/floating-buttons.html -->
 <div class="floating-actions">
-    <!-- Botón de WhatsApp DIRECTO (más visible y con mensaje) -->
+    <!-- Botón de WhatsApp DIRECTO (más visible) -->
     <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20hacer%20un%20pedido%20en%20El%20Resolvito" 
        target="_blank" 
        class="floating-btn whatsapp-directo" 
-       style="background: linear-gradient(135deg, #25D366, #128C7E);"
        data-tooltip="Comprar directo por WhatsApp">
         <i class="fab fa-whatsapp"></i>
         <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse">📦</span>
@@ -50,18 +49,6 @@
     .floating-btn.cart {
         background: linear-gradient(135deg, #2E7D32, #1B5E20);
     }
-    @media (max-width: 640px) {
-        .floating-actions {
-            bottom: 1rem !important;
-            right: 1rem !important;
-        }
-        .floating-btn {
-            width: 55px;
-            height: 55px;
-        }
-    }
-    
-    /* Tooltip para los botones flotantes */
     .floating-btn[data-tooltip] {
         position: relative;
     }
@@ -87,6 +74,14 @@
         opacity: 1;
     }
     @media (max-width: 640px) {
+        .floating-actions {
+            bottom: 1rem !important;
+            right: 1rem !important;
+        }
+        .floating-btn {
+            width: 55px;
+            height: 55px;
+        }
         .floating-btn[data-tooltip]:before {
             display: none;
         }
