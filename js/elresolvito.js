@@ -18,7 +18,7 @@ var PRODUCTS = [
     { id: 14, nombre: "Mayonesa Grande", categoria: "Salsas", precio: 1100, imagen: "https://i.postimg.cc/Px2t9jzz/mayonesa_precio1100.png", descripcion: "Frasco grande" },
     { id: 15, nombre: "Cuchilla de Afeitar", categoria: "Higiene personal", precio: 100, imagen: "https://i.postimg.cc/8CdkdW7x/cuchilla_de_afeitar_precio_100.png", descripcion: "Unidad" },
     { id: 16, nombre: "Jabón Marwa", categoria: "Higiene personal", precio: 150, imagen: "https://i.postimg.cc/3RK8tRpR/jabon_marwa_precio_150.png", descripcion: "Pastilla" },
-    { id: 17, nombre: "Papel Sanitario", categoria: "Higiene personal", precio: 490, imagen: "https://i.postimg.cc/bwW289qD/papel_sanitario_precio_490i.png", descripcion: "Paquete" },
+    { id: 17, nombre: "Papel Sanitario", categoria: "Higiene personal", precio: 530, imagen: "https://i.postimg.cc/bwW289qD/papel_sanitario_precio_490i.png", descripcion: "Paquete" },
     { id: 18, nombre: "Toallas Sanitarias", categoria: "Higiene personal", precio: 450, imagen: "https://i.postimg.cc/KjjZyH0b/toallas_sanitarias_precio_450.png", descripcion: "Paquete" },
     { id: 19, nombre: "Toallas Húmedas", categoria: "Higiene personal", precio: 690, imagen: "https://i.postimg.cc/W4ZSP3cw/toallas_humedas_precio_690.png", descripcion: "Paquete" },
     { id: 20, nombre: "Jabón de Lavar", categoria: "Aseo del hogar", precio: 250, imagen: "https://i.postimg.cc/V6YfK6Mz/jabon_de_lavar_precio_250.png", descripcion: "Pastilla" },
