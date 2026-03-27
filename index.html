@@ -10,7 +10,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     
-    <!-- CSS primero -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/index.css">
     
@@ -19,10 +18,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- ============================================ -->
-    <!-- LOADING OVERLAY - ESTILOS INMEDIATOS -->
+    <!-- LOADING OVERLAY - SOLO TEXTO CON EFECTO -->
     <!-- ============================================ -->
     <style>
-        /* Loading overlay - aparece inmediatamente */
+        /* Loading overlay minimalista */
         #loadingOverlay {
             position: fixed;
             top: 0;
@@ -35,7 +34,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.6s ease;
         }
         
         #loadingOverlay.hidden {
@@ -43,32 +42,20 @@
             pointer-events: none;
         }
         
-        .loading-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #2E7D32, #1B5E20);
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            animation: loadingPulse 1.2s ease-in-out infinite;
-            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.3);
-        }
-        
-        .loading-icon i {
-            font-size: 48px;
-            color: white;
-        }
-        
-        .loading-text {
+        /* Texto principal con efecto sutil */
+        .loading-title {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.2rem;
+            font-size: 2rem;
             font-weight: 600;
-            color: #2E7D32;
-            letter-spacing: 1px;
+            background: linear-gradient(135deg, #2E7D32, #1B5E20);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+            animation: gentlePulse 1.5s ease-in-out infinite;
         }
         
+        /* Puntos animados */
         .loading-dots {
             display: inline-flex;
             gap: 4px;
@@ -81,18 +68,34 @@
             background: #2E7D32;
             border-radius: 50%;
             display: inline-block;
-            animation: loadingBounce 1.4s infinite ease-in-out both;
+            animation: dotBounce 1.4s infinite ease-in-out both;
         }
         
         .loading-dots span:nth-child(1) { animation-delay: -0.32s; }
         .loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+        .loading-dots span:nth-child(3) { animation-delay: 0s; }
         
-        @keyframes loadingPulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 8px 24px rgba(46,125,50,0.3); }
-            50% { transform: scale(1.05); box-shadow: 0 12px 32px rgba(46,125,50,0.4); }
+        /* Texto secundario */
+        .loading-sub {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.8rem;
+            color: #9ca3af;
+            margin-top: 1rem;
+            letter-spacing: 0.5px;
         }
         
-        @keyframes loadingBounce {
+        @keyframes gentlePulse {
+            0%, 100% {
+                opacity: 0.7;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.02);
+            }
+        }
+        
+        @keyframes dotBounce {
             0%, 80%, 100% { transform: scale(0); }
             40% { transform: scale(1); }
         }
@@ -100,11 +103,21 @@
         /* Ocultar contenido principal inicialmente */
         #main-content {
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s ease;
         }
         
         #main-content.visible {
             opacity: 1;
+        }
+        
+        /* Ajuste para móvil */
+        @media (max-width: 640px) {
+            .loading-title {
+                font-size: 1.5rem;
+            }
+            .loading-sub {
+                font-size: 0.7rem;
+            }
         }
     </style>
     
@@ -141,19 +154,16 @@
 <body>
 
     <!-- ============================================ -->
-    <!-- LOADING OVERLAY - DIRECTAMENTE EN EL BODY -->
+    <!-- LOADING OVERLAY - SOLO TEXTO -->
     <!-- ============================================ -->
     <div id="loadingOverlay">
-        <div class="loading-icon">
-            <i class="fas fa-store"></i>
-        </div>
-        <div class="loading-text">
+        <div class="loading-title">
             El Resolvito
             <span class="loading-dots">
                 <span>.</span><span>.</span><span>.</span>
             </span>
         </div>
-        <p style="font-size: 0.8rem; color: #666; margin-top: 12px;">Cargando...</p>
+        <div class="loading-sub">Cargando...</div>
     </div>
 
     <!-- ============================================ -->
@@ -533,7 +543,7 @@
     <script src="js/elresolvito.js" defer></script>
     
     <script>
-        // Ocultar loading overlay y mostrar contenido cuando todo esté listo
+        // Ocultar loading overlay cuando todo esté listo
         window.addEventListener('load', function() {
             setTimeout(function() {
                 const overlay = document.getElementById('loadingOverlay');
@@ -543,16 +553,16 @@
                     overlay.classList.add('hidden');
                     setTimeout(function() {
                         overlay.style.display = 'none';
-                    }, 500);
+                    }, 600);
                 }
                 
                 if (mainContent) {
                     mainContent.classList.add('visible');
                 }
-            }, 800); // Pequeño delay para asegurar que se vea la animación
+            }, 600);
         });
         
-        // Fallback: si tarda más de 3 segundos, forzar ocultar
+        // Fallback
         setTimeout(function() {
             const overlay = document.getElementById('loadingOverlay');
             const mainContent = document.getElementById('main-content');
@@ -561,7 +571,7 @@
                 overlay.classList.add('hidden');
                 setTimeout(function() {
                     overlay.style.display = 'none';
-                }, 500);
+                }, 600);
             }
             
             if (mainContent) {
