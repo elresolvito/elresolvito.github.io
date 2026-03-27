@@ -2,14 +2,14 @@
 <header class="sticky top-0 z-50 bg-white shadow-md">
     <div class="container mx-auto px-4 py-3">
         <div class="flex items-center justify-between">
-            <!-- Logo responsivo: en móvil muy pequeño solo icono -->
+            <!-- Logo con icono siempre visible -->
             <a href="index.html" class="flex items-center gap-2 flex-shrink-0">
-                <div class="w-9 h-9 sm:w-10 sm:h-10 bg-cuban-green rounded-full flex items-center justify-center text-white font-bold shadow-md">
-                    <i class="fas fa-store text-base sm:text-xl"></i>
+                <div class="w-10 h-10 bg-cuban-green rounded-full flex items-center justify-center text-white font-bold shadow-md">
+                    <i class="fas fa-store text-xl"></i>
                 </div>
-                <div class="hidden xs:block">
-                    <h1 class="text-sm sm:text-xl font-bold text-cuban-green leading-tight">El Resolvito</h1>
-                    <p class="text-[10px] sm:text-xs text-gray-500">La Habana Vieja</p>
+                <div>
+                    <h1 class="text-xl font-bold text-cuban-green leading-tight">El Resolvito</h1>
+                    <p class="text-xs text-gray-500">La Habana Vieja</p>
                 </div>
             </a>
 
@@ -28,29 +28,20 @@
 
             <!-- Botones de acción -->
             <div class="flex items-center gap-2">
-                <button class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-cuban-green hover:text-white transition" onclick="toggleDayNight()">
-                    <span id="headerThemeIcon" class="text-sm sm:text-base">☀️</span>
+                <button class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-cuban-green hover:text-white transition" onclick="toggleDayNight()">
+                    <span id="headerThemeIcon" class="text-xl">☀️</span>
                 </button>
                 <button onclick="toggleCart()" class="p-2 hover:bg-gray-100 rounded-lg relative">
-                    <i class="fas fa-shopping-cart text-xl sm:text-2xl text-cuban-green"></i>
+                    <i class="fas fa-shopping-cart text-2xl text-cuban-green"></i>
                     <span id="cartCount" class="cart-badge hidden">0</span>
                 </button>
-                <button class="lg:hidden w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center hover:bg-gray-100" onclick="toggleMenu()">
-                    <i class="fas fa-bars text-xl sm:text-2xl text-cuban-green"></i>
+                <button class="lg:hidden w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100" onclick="toggleMenu()">
+                    <i class="fas fa-bars text-2xl text-cuban-green"></i>
                 </button>
             </div>
         </div>
     </div>
 </header>
-
-<style>
-    @media (max-width: 380px) {
-        .xs\:block { display: none; }
-    }
-    @media (min-width: 381px) {
-        .xs\:block { display: block; }
-    }
-</style>
 
 <script>
     (function() {
