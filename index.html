@@ -13,19 +13,18 @@
     <link rel="manifest" href="site.webmanifest">
     <link rel="shortcut icon" href="favicon.ico">
     
-    <!-- CSS -->
+    <!-- CSS - Tus estilos existentes -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/index.css">
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
-        /* Estilos adicionales para el nuevo diseño */
-        * {
-            font-family: 'Inter', sans-serif;
-        }
+        /* ============================================ */
+        /* MEJORAS VISUALES SIN ROMPER TUS ESTILOS */
+        /* ============================================ */
         
         /* Loading Overlay */
         #loadingOverlay {
@@ -70,37 +69,24 @@
             opacity: 1;
         }
         
-        /* Mejoras para el modo noche en tarjetas */
-        body.night-mode .bg-white {
-            background-color: #1e293b !important;
+        /* Mejoras de espaciado y transiciones */
+        .tutorial-step {
+            transition: all 0.3s ease;
+        }
+        .tutorial-step:hover {
+            transform: translateY(-4px);
         }
         
-        body.night-mode .bg-gray-50,
-        body.night-mode .bg-gray-100 {
-            background-color: #0f172a !important;
+        /* Sección de horarios - mantener consistencia */
+        .horario-card {
+            transition: all 0.3s ease;
+        }
+        .horario-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
         }
         
-        body.night-mode .text-gray-600,
-        body.night-mode .text-gray-700,
-        body.night-mode .text-gray-800,
-        body.night-mode .text-gray-900 {
-            color: #cbd5e1 !important;
-        }
-        
-        body.night-mode .text-gray-500 {
-            color: #94a3b8 !important;
-        }
-        
-        body.night-mode .border-gray-100,
-        body.night-mode .border-gray-200 {
-            border-color: #334155 !important;
-        }
-        
-        body.night-mode .bg-gradient-to-r.from-primary\/5 {
-            background-color: rgba(46, 125, 50, 0.15);
-        }
-        
-        /* Section transitions */
+        /* Animaciones de entrada suaves */
         .section-fade {
             opacity: 0;
             transform: translateY(20px);
@@ -112,21 +98,40 @@
             transform: translateY(0);
         }
         
-        /* Mejoras responsivas para el hero */
+        /* Mejora en las tarjetas de producto */
+        .product-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-6px);
+        }
+        
+        /* Mejora en los artículos del blog */
+        article {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        article:hover {
+            transform: translateY(-6px);
+        }
+        
+        /* Botones con mejor feedback */
+        .btn-hover-effect {
+            transition: all 0.2s ease;
+        }
+        .btn-hover-effect:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Responsive adjustments */
         @media (max-width: 640px) {
             .hero-container h2 {
                 font-size: 2rem !important;
             }
-        }
-        
-        /* Animación sutil para el botón de ofertas */
-        @keyframes pulse-slow {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-        }
-        
-        .animate-pulse-slow {
-            animation: pulse-slow 2s ease-in-out infinite;
+            .hero-text {
+                font-size: 1rem !important;
+            }
         }
     </style>
     
@@ -143,10 +148,7 @@
                         'dulce-rosa': '#FF69B4',
                         'dulce-morado': '#9B59B6',
                         'contador-azul': '#1E3A8A',
-                    },
-                    fontFamily: {
-                        'sans': ['Inter', 'sans-serif'],
-                    },
+                    }
                 }
             }
         }
@@ -158,42 +160,43 @@
     <div id="loadingOverlay">
         <div class="loading-spinner mb-4"></div>
         <div class="text-cuban-green font-semibold text-lg">El Resolvito</div>
-        <div class="text-gray-400 text-sm mt-2">Cargando experiencia...</div>
+        <div class="text-gray-400 text-sm mt-2">Cargando...</div>
     </div>
 
     <!-- Main Content -->
     <div id="main-content">
-        
+        <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
+
         <!-- Component Containers -->
         <div id="header-container"></div>
         <div id="mobile-menu-container"></div>
         <div id="floating-buttons-container"></div>
 
-        <!-- Hero Banner (usando tus imágenes de index.css) -->
+        <!-- Hero Banner (usando tu estructura exacta de index.css) -->
         <section class="hero-container">
             <div class="hero-bg-day"></div>
             <div class="hero-bg-night"></div>
             <div class="hero-overlay"></div>
             <div class="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center text-white">
-                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6 animate-pulse-slow">
+                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
                     <span class="w-2 h-2 bg-cuban-yellow rounded-full animate-pulse"></span>
                     <span class="text-sm font-medium">Tu solución en La Habana</span>
                 </div>
-                <h2 class="hero-text text-5xl md:text-7xl font-bold mb-4 tracking-tight">El Resolvito</h2>
+                <h2 class="hero-text text-4xl md:text-6xl font-bold mb-4">El Resolvito</h2>
                 <p class="hero-text text-xl md:text-2xl mb-2">Tu tienda, tus servicios, tu hogar</p>
-                <p class="hero-text text-lg opacity-90 mb-10">Todo lo que necesitas en un solo lugar</p>
+                <p class="hero-text text-lg opacity-90 mb-8">Todo lo que necesitas en un solo lugar</p>
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="tienda.html" class="inline-flex items-center justify-center gap-2 bg-cuban-green hover:bg-cuban-dark text-white px-8 py-4 rounded-full font-semibold transition-all transform hover:scale-105 shadow-lg">
-                        <i class="fas fa-store"></i> Ver Tienda
+                    <a href="tienda.html" class="bg-cuban-yellow text-cuban-dark px-8 py-3 rounded-full font-bold hover:bg-yellow-400 transition shadow-lg inline-flex items-center gap-2">
+                        <i class="fas fa-shopping-basket"></i> Ver Tienda
                     </a>
-                    <a href="servicios.html" class="inline-flex items-center justify-center gap-2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border border-white/30 px-8 py-4 rounded-full font-semibold transition-all">
-                        <i class="fas fa-concierge-bell"></i> Servicios
+                    <a href="servicios.html" class="bg-white/20 backdrop-blur text-white border-2 border-white px-8 py-3 rounded-full font-bold hover:bg-white/30 transition inline-flex items-center gap-2">
+                        <i class="fas fa-tools"></i> Servicios
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- CÓMO COMPRAR EN 3 PASOS -->
+        <!-- SECCIÓN: CÓMO COMPRAR EN 3 PASOS -->
         <section id="como-comprar" class="py-12 bg-white section-fade">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-8">
@@ -205,7 +208,7 @@
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                    <div class="tutorial-step text-center p-6 bg-gray-50 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
+                    <div class="tutorial-step text-center p-6 bg-gray-50 rounded-2xl shadow-md hover:shadow-xl transition-all">
                         <div class="w-20 h-20 bg-cuban-green rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-bold shadow-lg">1</div>
                         <div class="w-16 h-16 bg-cuban-green/10 rounded-full flex items-center justify-center mx-auto mb-3">
                             <i class="fas fa-search text-3xl text-cuban-green"></i>
@@ -213,7 +216,7 @@
                         <h3 class="font-bold text-xl mb-2">Encuentra tu producto</h3>
                         <p class="text-sm text-gray-600">Navega por nuestra tienda o mira las ofertas destacadas.</p>
                     </div>
-                    <div class="tutorial-step text-center p-6 bg-gray-50 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
+                    <div class="tutorial-step text-center p-6 bg-gray-50 rounded-2xl shadow-md hover:shadow-xl transition-all">
                         <div class="w-20 h-20 bg-cuban-green rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-bold shadow-lg">2</div>
                         <div class="w-16 h-16 bg-cuban-green/10 rounded-full flex items-center justify-center mx-auto mb-3">
                             <i class="fas fa-cart-plus text-3xl text-cuban-green"></i>
@@ -221,7 +224,7 @@
                         <h3 class="font-bold text-xl mb-2">Agrégalo al carrito</h3>
                         <p class="text-sm text-gray-600">Haz clic en <span class="bg-cuban-green text-white px-2 py-0.5 rounded text-xs font-bold">Agregar al carrito</span></p>
                     </div>
-                    <div class="tutorial-step text-center p-6 bg-gray-50 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
+                    <div class="tutorial-step text-center p-6 bg-gray-50 rounded-2xl shadow-md hover:shadow-xl transition-all">
                         <div class="w-20 h-20 bg-cuban-green rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-bold shadow-lg">3</div>
                         <div class="w-16 h-16 bg-cuban-green/10 rounded-full flex items-center justify-center mx-auto mb-3">
                             <i class="fab fa-whatsapp text-3xl text-cuban-green"></i>
@@ -231,7 +234,7 @@
                     </div>
                 </div>
                 
-                <div class="text-center mt-8 bg-gradient-to-r from-cuban-green/10 to-cuban-yellow/10 p-4 rounded-xl max-w-2xl mx-auto border border-cuban-green/20">
+                <div class="text-center mt-8 bg-yellow-50 p-4 rounded-xl max-w-2xl mx-auto border border-yellow-200">
                     <p class="text-sm text-gray-700">
                         <i class="fas fa-phone-alt text-cuban-green"></i> 
                         <span class="font-bold">💡 ¿Prefieres comprar directo por WhatsApp?</span> 
@@ -251,14 +254,14 @@
                     <h3 class="text-2xl font-bold text-gray-800">¿A qué hora llega mi pedido?</h3>
                 </div>
                 <div class="flex flex-col md:flex-row justify-center gap-4 max-w-3xl mx-auto">
-                    <div class="flex-1 bg-white rounded-xl shadow-md p-5 border-l-4 border-cuban-green hover:shadow-lg transition-shadow">
+                    <div class="horario-card flex-1 bg-white rounded-xl shadow-md p-5 border-l-4 border-cuban-green hover:shadow-lg transition-all">
                         <div class="flex items-center gap-3 mb-2">
                             <span class="text-3xl">☀️</span>
                             <div><p class="text-sm text-gray-500">Pide antes de las</p><p class="text-2xl font-bold text-cuban-green">7:00 AM</p></div>
                         </div>
                         <p class="text-gray-700"><i class="fas fa-check-circle text-cuban-green"></i> Lo recibes <strong>antes de las 2:00 PM</strong></p>
                     </div>
-                    <div class="flex-1 bg-white rounded-xl shadow-md p-5 border-l-4 border-cuban-yellow hover:shadow-lg transition-shadow">
+                    <div class="horario-card flex-1 bg-white rounded-xl shadow-md p-5 border-l-4 border-cuban-yellow hover:shadow-lg transition-all">
                         <div class="flex items-center gap-3 mb-2">
                             <span class="text-3xl">🌙</span>
                             <div><p class="text-sm text-gray-500">Pide antes de las</p><p class="text-2xl font-bold text-cuban-yellow">2:00 PM</p></div>
@@ -374,7 +377,7 @@
                         <h2 class="text-2xl md:text-3xl font-bold mb-2"><i class="fas fa-box"></i> ¿Necesitas un mensajero?</h2>
                         <p class="text-sm mb-4 opacity-90">Un servicio rápido, confiable y en La Habana. Coordinamos por WhatsApp.</p>
                         <div class="flex flex-col sm:flex-row gap-3">
-                            <button onclick="if(window.addToCart){window.addToCart({id: 502, nombre: 'Servicio de Mensajería (Habana Vieja)', precio: 400, imagen: 'https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp', cantidad: 1});}else{console.error('addToCart no disponible'); alert('Espera un momento, el carrito está cargando...');}" class="bg-cuban-green hover:bg-cuban-dark text-white font-bold py-2 px-6 rounded-full transition flex items-center justify-center gap-2 text-sm">
+                            <button onclick="if(window.addToCart) window.addToCart({id: 502, nombre: 'Servicio de Mensajería (Habana Vieja)', precio: 400, imagen: 'https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp', cantidad: 1}); else alert('Cargando carrito...');" class="bg-cuban-green hover:bg-cuban-dark text-white font-bold py-2 px-6 rounded-full transition flex items-center justify-center gap-2 text-sm btn-hover-effect">
                                 <i class="fas fa-cart-plus text-lg"></i> Contratar mensajero ($400)
                             </button>
                             <a href="servicios.html" class="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold py-2 px-6 rounded-full transition border border-white">Ver todos los servicios</a>
@@ -404,7 +407,7 @@
                                 <h3 class="text-2xl font-bold text-cuban-green mb-2">Chanclas Lienys</h3>
                                 <p class="text-gray-600 mb-4">Cómodas, duraderas, ideales para el verano</p>
                                 <div class="mb-4"><span class="text-2xl font-bold text-cuban-green">$4,500</span><span class="text-gray-500"> c/u</span></div>
-                                <button onclick="if(window.addToCart) window.addToCart({id: 201, nombre: 'Chanclas Lienys', precio: 4500, imagen: 'https://i.postimg.cc/qvBVZPcH/chancletas_negras.png', cantidad: 1}); else alert('Cargando carrito...');" class="w-full bg-cuban-green text-white py-3 rounded-xl font-bold hover:bg-cuban-dark transition"><i class="fas fa-cart-plus mr-2"></i> Agregar al carrito</button>
+                                <button onclick="if(window.addToCart) window.addToCart({id: 201, nombre: 'Chanclas Lienys', precio: 4500, imagen: 'https://i.postimg.cc/qvBVZPcH/chancletas_negras.png', cantidad: 1}); else alert('Cargando carrito...');" class="w-full bg-cuban-green text-white py-3 rounded-xl font-bold hover:bg-cuban-dark transition btn-hover-effect"><i class="fas fa-cart-plus mr-2"></i> Agregar al carrito</button>
                             </div>
                         </div>
                     </div>
@@ -419,7 +422,7 @@
                             <div class="p-8">
                                 <h3 class="text-2xl font-bold text-purple-600 mb-2">Carteras Lienys</h3>
                                 <div class="mb-4"><span class="font-bold">Desde</span> <span class="text-cuban-green font-bold">$5,000</span></div>
-                                <button onclick="if(window.addToCart) window.addToCart({id: 301, nombre: 'Cartera Lienys', precio: 5000, imagen: 'https://i.postimg.cc/Vk4RDT46/cartera_azul_muchacha.png', cantidad: 1}); else alert('Cargando carrito...');" class="w-full bg-purple-600 text-white py-3 rounded-xl font-bold hover:bg-purple-700 transition"><i class="fas fa-cart-plus mr-2"></i> Agregar al carrito</button>
+                                <button onclick="if(window.addToCart) window.addToCart({id: 301, nombre: 'Cartera Lienys', precio: 5000, imagen: 'https://i.postimg.cc/Vk4RDT46/cartera_azul_muchacha.png', cantidad: 1}); else alert('Cargando carrito...');" class="w-full bg-purple-600 text-white py-3 rounded-xl font-bold hover:bg-purple-700 transition btn-hover-effect"><i class="fas fa-cart-plus mr-2"></i> Agregar al carrito</button>
                             </div>
                         </div>
                     </div>
@@ -444,7 +447,7 @@
                         <h3 class="text-2xl font-bold text-gray-800">Chanclas al por Mayor</h3>
                         <p class="text-gray-600 text-sm">Ideal para revendedores. Precio especial:</p>
                         <div><span class="text-3xl font-bold text-cuban-green">$3,500</span><span class="text-gray-500 text-sm"> c/u</span></div>
-                        <button onclick="if(window.addToCart) window.addToCart({id: 999, nombre: 'Chanclas Mayor (Pack de 1 par)', precio: 3500, imagen: 'https://i.postimg.cc/c4zrnfyN/Gemini_Generated_Image_ixeyniixeyniixey.png', cantidad: 1}); else alert('Cargando carrito...');" class="bg-cuban-green text-white px-6 py-2 rounded-full text-sm font-bold hover:bg-cuban-dark transition inline-flex items-center gap-2"><i class="fas fa-cart-plus"></i> Agregar al carrito</button>
+                        <button onclick="if(window.addToCart) window.addToCart({id: 999, nombre: 'Chanclas Mayor (Pack de 1 par)', precio: 3500, imagen: 'https://i.postimg.cc/c4zrnfyN/Gemini_Generated_Image_ixeyniixeyniixey.png', cantidad: 1}); else alert('Cargando carrito...');" class="bg-cuban-green text-white px-6 py-2 rounded-full text-sm font-bold hover:bg-cuban-dark transition inline-flex items-center gap-2 btn-hover-effect"><i class="fas fa-cart-plus"></i> Agregar al carrito</button>
                         <p class="text-xs text-gray-500">💡 Puedes cambiar la cantidad en el carrito</p>
                     </div>
                 </div>
@@ -539,12 +542,14 @@
             setTimeout(function() {
                 const overlay = document.getElementById('loadingOverlay');
                 const mainContent = document.getElementById('main-content');
+                const pageFade = document.getElementById('pageFade');
                 
                 if (overlay) {
                     overlay.classList.add('hidden');
                     setTimeout(() => overlay.style.display = 'none', 500);
                 }
                 if (mainContent) mainContent.classList.add('visible');
+                if (pageFade) pageFade.classList.add('opacity-0');
             }, 800);
         });
         
@@ -561,7 +566,7 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', async function() {
-            console.log('Inicializando index con nuevo diseño...');
+            console.log('Inicializando El Resolvito...');
 
             async function loadComponent(id, path) {
                 try {
@@ -610,12 +615,12 @@
                 window.updateCartUI();
             }
             
-            // Verificar que las funciones del carrito están disponibles
+            // Verificar funciones del carrito
             setTimeout(() => {
                 if (typeof window.addToCart === 'function') {
                     console.log('✅ Carrito funcionando correctamente');
                 } else {
-                    console.warn('⚠️ addToCart no está disponible aún');
+                    console.warn('⚠️ addToCart no está disponible');
                 }
             }, 500);
         });
