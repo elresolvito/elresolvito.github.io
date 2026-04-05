@@ -112,12 +112,23 @@
             transform: scale(1.02);
         }
         
-        /* Nueva tarjeta de moda */
         .moda-card {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .moda-card:hover {
             transform: translateY(-8px);
+        }
+        
+        /* Tabla de precios mensajería */
+        .tarifa-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .tarifa-row:last-child {
+            border-bottom: none;
         }
         
         @media (max-width: 640px) {
@@ -143,7 +154,6 @@
                         'dulce-rosa': '#FF69B4',
                         'dulce-morado': '#9B59B6',
                         'contador-azul': '#1E3A8A',
-                        'mensajero-ambar': '#F59E0B'
                     }
                 }
             }
@@ -269,7 +279,7 @@
             </div>
         </section>
 
-        <!-- PROMOCIONES ESPECIALES - NUEVA SECCIÓN DE MODA -->
+        <!-- PROMOCIONES ESPECIALES - COLECCIÓN DE MODA -->
         <section class="py-16 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 section-fade">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-12">
@@ -283,7 +293,6 @@
                 </div>
                 
                 <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                    <!-- Tarjeta de Ropa -->
                     <a href="moda.html#ropa" class="moda-card group relative h-64 rounded-2xl overflow-hidden shadow-xl">
                         <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
@@ -295,7 +304,6 @@
                         </div>
                     </a>
                     
-                    <!-- Tarjeta de Calzados -->
                     <a href="moda.html#calzados" class="moda-card group relative h-64 rounded-2xl overflow-hidden shadow-xl">
                         <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
@@ -307,7 +315,6 @@
                         </div>
                     </a>
                     
-                    <!-- Tarjeta de Carteras -->
                     <a href="moda.html#carteras" class="moda-card group relative h-64 rounded-2xl overflow-hidden shadow-xl">
                         <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
@@ -342,14 +349,14 @@
             </div>
         </section>
 
-        <!-- Servicios Preview -->
+        <!-- Servicios Destacados (SOLO Dulce César y Contador - SIN mensajería) -->
         <section class="py-12 bg-gray-50 section-fade">
             <div class="container mx-auto px-4">
                 <div class="flex justify-between items-center mb-8">
                     <h2 class="text-3xl font-bold"><i class="fas fa-tools mr-3 text-cuban-blue"></i>Servicios Destacados</h2>
                     <a href="servicios.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
                 </div>
-                <div class="grid md:grid-cols-3 gap-6">
+                <div class="grid md:grid-cols-2 gap-6">
                     <div class="product-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
                         <div class="h-48 overflow-hidden bg-gradient-to-r from-dulce-rosa to-dulce-morado">
                             <img src="https://i.postimg.cc/Qxz4FMGg/IMG-20260226-WA0025.jpg" alt="Dulce César" class="w-full h-full object-contain bg-white">
@@ -359,7 +366,7 @@
                             <h3 class="font-bold text-xl mb-2 text-dulce-rosa">Dulce César</h3>
                             <p class="text-gray-600 text-sm mb-3">Repostería artesanal para eventos, cafeterías y pedidos especiales.</p>
                             <a href="https://wa.me/5353342167?text=Hola%2C%20vi%20Dulce%20C%C3%A9sar%20en%20El%20Resolvito%20y%20quiero%20informaci%C3%B3n" target="_blank" class="block w-full bg-dulce-rosa text-white text-center py-2 rounded-lg text-sm font-bold hover:opacity-90 transition">
-                                <i class="fab fa-whatsapp mr-1"></i> Contactar 
+                                <i class="fab fa-whatsapp mr-1"></i> Contactar para cotizar
                             </a>
                         </div>
                     </div>
@@ -372,8 +379,7 @@
                             <h3 class="font-bold text-xl mb-2 text-contador-azul">Contador / Tenedor de Libros</h3>
                             <p class="text-gray-600 text-sm mb-3">Gestión contable profesional para TCP y pequeños negocios.</p>
                             <a href="https://wa.me/5356382909?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Contador" target="_blank" class="block w-full bg-contador-azul text-white text-center py-2 rounded-lg text-sm font-bold hover:bg-blue-800 transition">
-                                <i class="fab fa-whatsapp mr-1"></i> Contactar
-                   
+                                <i class="fab fa-whatsapp mr-1"></i> Contactar para cotizar
                             </a>
                         </div>
                     </div>
@@ -381,78 +387,78 @@
             </div>
         </section>
 
-               <!-- MENSAJERÍA - SECCIÓN DESTACADA (sin duplicación) -->
+        <!-- MENSAJERÍA - SECCIÓN DESTACADA (con tabla de precios clara y imagen de fondo) -->
         <section class="py-12 section-fade">
             <div class="container mx-auto px-4">
-                <div class="relative rounded-2xl overflow-hidden shadow-xl bg-gradient-to-r from-cuban-green to-cuban-dark">
-                    <!-- Fondo decorativo -->
-                    <div class="absolute inset-0 opacity-20">
-                        <i class="fas fa-motorcycle text-8xl absolute bottom-0 right-0 text-white"></i>
-                        <i class="fas fa-map-marker-alt text-6xl absolute top-10 left-10 text-white"></i>
-                    </div>
+                <div class="relative rounded-2xl overflow-hidden shadow-xl min-h-[480px] bg-cover bg-center" style="background-image: url('https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp');">
+                    <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/60"></div>
                     
                     <div class="relative z-10 text-white p-6 md:p-8">
                         <!-- Badge -->
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="inline-block bg-cuban-yellow text-cuban-dark text-sm font-bold px-4 py-1 rounded-full">
-                                🛵 MENSAJERÍA EL RESOLVITO
-                            </span>
+                        <div class="inline-block bg-cuban-yellow text-cuban-dark text-sm font-bold px-4 py-1 rounded-full mb-4">
+                            🚲 MENSAJERÍA EL RESOLVITO
                         </div>
                         
-                        <h2 class="text-2xl md:text-3xl font-bold mb-2">Rápida y sin letra chica</h2>
-                        <p class="text-sm opacity-90 mb-4">Entregas en La Habana Vieja y otros municipios</p>
+                        <h2 class="text-2xl md:text-3xl font-bold mb-2">Rápida, confiable y sin letra chica</h2>
+                        <p class="text-sm opacity-90 mb-5">Entregamos en La Habana Vieja y otros municipios</p>
                         
-                        <!-- Tarifas en grid responsive -->
-                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-5">
-                            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-2 text-center">
-                                <p class="text-xs opacity-80">Habana Vieja</p>
-                                <p class="text-xl font-bold text-cuban-yellow">$300</p>
-                                <p class="text-xs">hasta 8kg</p>
-                            </div>
-                            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-2 text-center">
-                                <p class="text-xs opacity-80">Hasta 1km</p>
-                                <p class="text-xl font-bold text-cuban-yellow">$300</p>
-                            </div>
-                            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-2 text-center">
-                                <p class="text-xs opacity-80">1-2km</p>
-                                <p class="text-xl font-bold text-cuban-yellow">$400</p>
-                            </div>
-                            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-2 text-center">
-                                <p class="text-xs opacity-80">2-3km</p>
-                                <p class="text-xl font-bold text-cuban-yellow">$450</p>
-                            </div>
-                            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-2 text-center">
-                                <p class="text-xs opacity-80">3-4km</p>
-                                <p class="text-xl font-bold text-cuban-yellow">$500</p>
-                            </div>
-                            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-2 text-center">
-                                <p class="text-xs opacity-80">4-5km</p>
-                                <p class="text-xl font-bold text-cuban-yellow">$550</p>
+                        <!-- Tabla de precios clara -->
+                        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 mb-5 max-w-md">
+                            <h3 class="font-bold text-cuban-yellow mb-3 text-center">💰 Tarifas por distancia</h3>
+                            <div class="space-y-2">
+                                <div class="tarifa-row">
+                                    <span class="flex items-center gap-2"><i class="fas fa-map-marker-alt text-cuban-yellow text-sm"></i> La Habana Vieja</span>
+                                    <span class="font-bold text-cuban-yellow">$300</span>
+                                    <span class="text-xs opacity-70">(hasta 8kg)</span>
+                                </div>
+                                <div class="tarifa-row">
+                                    <span><i class="fas fa-road mr-2 text-cuban-yellow text-sm"></i> Hasta 1 km</span>
+                                    <span class="font-bold text-cuban-yellow">$300</span>
+                                </div>
+                                <div class="tarifa-row">
+                                    <span><i class="fas fa-road mr-2 text-cuban-yellow text-sm"></i> 1 - 2 km</span>
+                                    <span class="font-bold text-cuban-yellow">$400</span>
+                                </div>
+                                <div class="tarifa-row">
+                                    <span><i class="fas fa-road mr-2 text-cuban-yellow text-sm"></i> 2 - 3 km</span>
+                                    <span class="font-bold text-cuban-yellow">$450</span>
+                                </div>
+                                <div class="tarifa-row">
+                                    <span><i class="fas fa-road mr-2 text-cuban-yellow text-sm"></i> 3 - 4 km</span>
+                                    <span class="font-bold text-cuban-yellow">$500</span>
+                                </div>
+                                <div class="tarifa-row">
+                                    <span><i class="fas fa-road mr-2 text-cuban-yellow text-sm"></i> 4 - 5 km</span>
+                                    <span class="font-bold text-cuban-yellow">$550</span>
+                                </div>
+                                <div class="tarifa-row">
+                                    <span><i class="fas fa-plus-circle mr-2 text-cuban-yellow text-sm"></i> +5 km</span>
+                                    <span class="font-bold text-cuban-yellow">$100/km</span>
+                                    <span class="text-xs opacity-70">adicional</span>
+                                </div>
                             </div>
                         </div>
                         
                         <!-- Ventajas -->
                         <div class="flex flex-wrap gap-3 mb-5 text-xs">
-                            <div class="flex items-center gap-1"><i class="fas fa-check-circle text-cuban-yellow"></i> Seguimiento en vivo</div>
-                            <div class="flex items-center gap-1"><i class="fas fa-check-circle text-cuban-yellow"></i> Mismo precio bajo lluvia</div>
-                            <div class="flex items-center gap-1"><i class="fas fa-check-circle text-cuban-yellow"></i> Pedido exprés +$50 (15min)</div>
-                            <div class="flex items-center gap-1"><i class="fas fa-check-circle text-cuban-yellow"></i> Pagas al recibir</div>
+                          <div class="flex items-center gap-1"><i class="fas fa-check-circle text-cuban-yellow"></i> Pagas al recibir</div>
                         </div>
                         
                         <!-- Botones -->
                         <div class="flex flex-col sm:flex-row gap-3">
-                            <button onclick="if(window.addToCart) window.addToCart({id: 502, nombre: 'Servicio de Mensajería (Habana Vieja)', precio: 300, imagen: 'https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp', cantidad: 1}); else alert('Cargando carrito...');" class="bg-white text-cuban-green font-bold py-2 px-5 rounded-full transition flex items-center justify-center gap-2 text-sm btn-hover-effect">
-                                <i class="fas fa-cart-plus text-lg"></i> Contratar ($300)
+                            <button onclick="if(window.addToCart) window.addToCart({id: 502, nombre: 'Servicio de Mensajería (La Habana Vieja)', precio: 300, imagen: 'https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp', cantidad: 1}); else alert('Cargando carrito...');" class="bg-cuban-green hover:bg-cuban-dark text-white font-bold py-2 px-5 rounded-full transition flex items-center justify-center gap-2 text-sm btn-hover-effect">
+                                <i class="fas fa-cart-plus text-lg"></i> Contratar mensajero ($300)
                             </button>
                             <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20mensajer%C3%ADa%20(MENSAJERO)" target="_blank" class="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold py-2 px-5 rounded-full transition border border-white text-center text-sm">
-                                <i class="fab fa-whatsapp mr-1"></i> Coordinar
+                                <i class="fab fa-whatsapp mr-1"></i> Coordinar por WhatsApp
                             </a>
                         </div>
-                        <p class="text-xs text-center mt-4 opacity-80">💬 Di <span class="font-bold text-cuban-yellow">"MENSAJERO"</span> y tu dirección</p>
+                        <p class="text-xs text-center mt-4 opacity-80">💬 Di <span class="font-bold text-cuban-yellow">"MENSAJERO"</span> y tu dirección para coordinar</p>
                     </div>
                 </div>
             </div>
         </section>
+
         <!-- Blog Preview -->
         <section class="py-12 bg-gray-50 section-fade">
             <div class="container mx-auto px-4">
@@ -477,7 +483,7 @@
             </div>
         </section>
 
-             <!-- Alojamientos Preview -->
+        <!-- Alojamientos Preview -->
         <section class="py-12 section-fade">
             <div class="container mx-auto px-4">
                 <div class="flex justify-between items-center mb-8">
@@ -499,7 +505,7 @@
                         <div class="flex gap-4 mt-6">
                             <a href="reservas.html" class="bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark text-center flex-1 transition">Ver detalles</a>
                             <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20reservar%20Terrazas%20de%20Bayona%2059" target="_blank" class="border-2 border-cuban-green text-cuban-green px-6 py-3 rounded-lg font-bold hover:bg-cuban-green hover:text-white text-center transition flex items-center justify-center gap-2">
-                                <i class="fab fa-whatsapp"></i> Reservar por WhatsApp
+                                <i class="fab fa-whatsapp"></i> Reservar
                             </a>
                         </div>
                     </div>
@@ -583,7 +589,6 @@
             await loadComponent('cart-sidebar-container', 'components/cart-sidebar.html');
             await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
             await loadComponent('footer-container', 'components/footer.html');
-            await loadComponent('mensajeria-info-container', 'components/mensajeria-info.html');
 
             if (typeof FEATURED_PRODUCTS !== 'undefined' && FEATURED_PRODUCTS.length) {
                 const container = document.getElementById('featuredProducts');
