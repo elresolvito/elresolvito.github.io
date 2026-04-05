@@ -313,3 +313,75 @@
         grid-template-columns: 1fr;
     }
 }
+/* ============================================ */
+/* ESTILOS PARA TARIFAS DE MENSAJERÍA */
+/* ============================================ */
+
+/* Tarjeta de tarifas dentro del servicio */
+.tarifas-mensajero {
+    background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+    border-left: 3px solid #F59E0B;
+    border-radius: 0.75rem;
+}
+
+.tarifas-mensajero .grid span:first-child {
+    color: #4B5563;
+}
+
+.tarifas-mensajero .grid span:last-child {
+    font-weight: 700;
+    color: #2E7D32;
+}
+
+/* Ajuste para el grid interno de tarifas */
+.tarifas-mensajero .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.25rem 0.75rem;
+}
+
+/* Estilos para el badge de mensajería (ya existe, pero lo dejamos consistente) */
+.badge-mensajero {
+    background: linear-gradient(135deg, #F59E0B, #D97706);
+    color: white;
+}
+
+.service-title.mensajero {
+    color: #F59E0B;
+}
+
+.price-mensajero {
+    color: #F59E0B;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 1rem 0;
+}
+
+.btn-mensajero {
+    background: linear-gradient(135deg, #F59E0B, #D97706);
+    color: white;
+    padding: 0.875rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.2s ease;
+    display: block;
+    width: 100%;
+}
+
+.btn-mensajero:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* Ajuste responsive para mantener 3 columnas en desktop y 1 en móvil */
+@media (max-width: 768px) {
+    .grid.md\:grid-cols-3 {
+        grid-template-columns: 1fr;
+    }
+    
+    .tarifas-mensajero .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+}
