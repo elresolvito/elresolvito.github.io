@@ -2,13 +2,10 @@
 <header class="sticky top-0 z-50 bg-white shadow-md">
     <div class="container mx-auto px-4 py-3">
         <div class="flex items-center justify-between">
-            <!-- Logo con imagen del favicon de El Resolvito -->
-            <a href="index.html" class="flex items-center gap-2 flex-shrink-0">
-                <div class="w-10 h-10 rounded-full overflow-hidden bg-cuban-green flex items-center justify-center shadow-md">
-                    <img src="favicon-32x32.png" 
-                         alt="El Resolvito" 
-                         class="w-8 h-8 object-contain"
-                         onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fas fa-store text-white text-xl\'></i>'">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-cuban-green rounded-full flex items-center justify-center text-white font-bold text-xl">
+                    <i class="fas fa-store"></i>
                 </div>
                 <div>
                     <h1 class="text-xl font-bold text-cuban-green leading-tight">El Resolvito</h1>
@@ -16,23 +13,20 @@
                 </div>
             </a>
 
-            <!-- MENÚ DE NAVEGACIÓN -->
+            <!-- MENÚ DE NAVEGACIÓN ACTUALIZADO - Moda en lugar de Ofertas -->
             <nav class="hidden lg:flex items-center gap-6">
                 <a href="index.html" class="hover:text-cuban-green font-medium">Inicio</a>
                 <a href="tienda.html" class="hover:text-cuban-green font-medium">Tienda</a>
                 <a href="servicios.html" class="hover:text-cuban-green font-medium">Servicios</a>
-                <a href="ofertas.html" class="hover:text-cuban-green font-medium">Ofertas</a>
+                <a href="moda.html" class="hover:text-cuban-green font-medium">Moda</a>
                 <a href="blog.html" class="hover:text-cuban-green font-medium">Blog</a>
                 <a href="reservas.html" class="hover:text-cuban-green font-medium">Alojamientos</a>
-                <a href="#como-comprar" class="bg-cuban-yellow text-cuban-dark px-3 py-1 rounded-full text-xs font-bold hover:bg-yellow-400 transition">
-                    <i class="fas fa-question-circle mr-1"></i> ¿Cómo comprar?
-                </a>
             </nav>
 
             <!-- Botones de acción -->
             <div class="flex items-center gap-2">
                 <button class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-cuban-green hover:text-white transition" onclick="toggleDayNight()">
-                    <span id="headerThemeIcon" class="text-xl">☀️</span>
+                    <span id="headerThemeIcon">☀️</span>
                 </button>
                 <button onclick="toggleCart()" class="p-2 hover:bg-gray-100 rounded-lg relative">
                     <i class="fas fa-shopping-cart text-2xl text-cuban-green"></i>
@@ -58,11 +52,5 @@
                 link.classList.remove('text-cuban-green', 'font-medium', 'border-b-2', 'border-cuban-green');
             }
         });
-        
-        const isNightMode = document.body.classList.contains('night-mode');
-        const themeIcon = document.getElementById('headerThemeIcon');
-        if (themeIcon) {
-            themeIcon.textContent = isNightMode ? '🌙' : '☀️';
-        }
     })();
 </script>
