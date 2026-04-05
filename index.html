@@ -394,33 +394,78 @@
             </div>
         </section>
 
-        <!-- MENSAJERÍA - SECCIÓN PRINCIPAL CON TARIFAS COMPLETAS -->
+               <!-- MENSAJERÍA - SECCIÓN DESTACADA (sin duplicación) -->
         <section class="py-12 section-fade">
             <div class="container mx-auto px-4">
-                <!-- Tarjeta principal con imagen de fondo -->
-                <div class="relative rounded-2xl overflow-hidden shadow-xl min-h-[280px] md:min-h-[320px] bg-cover bg-center flex items-center" style="background-image: url('https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp');">
-                    <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
-                    <div class="relative z-10 text-white p-6 md:p-10 max-w-2xl">
-                        <span class="inline-block bg-cuban-yellow text-cuban-dark text-sm font-bold px-4 py-1 rounded-full mb-3">🛵 SERVICIO PROPIO</span>
-                        <h2 class="text-2xl md:text-3xl font-bold mb-2"><i class="fas fa-motorcycle"></i> Mensajería El Resolvito</h2>
-                        <p class="text-sm mb-4 opacity-90">Rápido, confiable y con precios claros. Entregas el mismo día en La Habana Vieja y zonas cercanas.</p>
+                <div class="relative rounded-2xl overflow-hidden shadow-xl bg-gradient-to-r from-cuban-green to-cuban-dark">
+                    <!-- Fondo decorativo -->
+                    <div class="absolute inset-0 opacity-20">
+                        <i class="fas fa-motorcycle text-8xl absolute bottom-0 right-0 text-white"></i>
+                        <i class="fas fa-map-marker-alt text-6xl absolute top-10 left-10 text-white"></i>
+                    </div>
+                    
+                    <div class="relative z-10 text-white p-6 md:p-8">
+                        <!-- Badge -->
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="inline-block bg-cuban-yellow text-cuban-dark text-sm font-bold px-4 py-1 rounded-full">
+                                🛵 MENSAJERÍA EL RESOLVITO
+                            </span>
+                        </div>
+                        
+                        <h2 class="text-2xl md:text-3xl font-bold mb-2">Rápida y sin letra chica</h2>
+                        <p class="text-sm opacity-90 mb-4">Entregas en La Habana Vieja y otros municipios</p>
+                        
+                        <!-- Tarifas en grid responsive -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-5">
+                            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-2 text-center">
+                                <p class="text-xs opacity-80">Habana Vieja</p>
+                                <p class="text-xl font-bold text-cuban-yellow">$300</p>
+                                <p class="text-xs">hasta 8kg</p>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-2 text-center">
+                                <p class="text-xs opacity-80">Hasta 1km</p>
+                                <p class="text-xl font-bold text-cuban-yellow">$300</p>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-2 text-center">
+                                <p class="text-xs opacity-80">1-2km</p>
+                                <p class="text-xl font-bold text-cuban-yellow">$400</p>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-2 text-center">
+                                <p class="text-xs opacity-80">2-3km</p>
+                                <p class="text-xl font-bold text-cuban-yellow">$450</p>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-2 text-center">
+                                <p class="text-xs opacity-80">3-4km</p>
+                                <p class="text-xl font-bold text-cuban-yellow">$500</p>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-2 text-center">
+                                <p class="text-xs opacity-80">4-5km</p>
+                                <p class="text-xl font-bold text-cuban-yellow">$550</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Ventajas -->
+                        <div class="flex flex-wrap gap-3 mb-5 text-xs">
+                            <div class="flex items-center gap-1"><i class="fas fa-check-circle text-cuban-yellow"></i> Seguimiento en vivo</div>
+                            <div class="flex items-center gap-1"><i class="fas fa-check-circle text-cuban-yellow"></i> Mismo precio bajo lluvia</div>
+                            <div class="flex items-center gap-1"><i class="fas fa-check-circle text-cuban-yellow"></i> Pedido exprés +$50 (15min)</div>
+                            <div class="flex items-center gap-1"><i class="fas fa-check-circle text-cuban-yellow"></i> Pagas al recibir</div>
+                        </div>
+                        
+                        <!-- Botones -->
                         <div class="flex flex-col sm:flex-row gap-3">
-                            <a href="https://wa.me/5356382909?text=Hola,%20necesito%20un%20mensajero%20para%20un%20recado%20en%20La%20Habana%20Vieja" 
-                               class="bg-cuban-green hover:bg-cuban-dark text-white font-bold py-2 px-6 rounded-full transition flex items-center justify-center gap-2 text-sm btn-hover-effect">
-                                <i class="fab fa-whatsapp text-lg"></i> Solicitar mensajero
-                            </a>
-                            <a href="servicios.html#mensajeria" class="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold py-2 px-6 rounded-full transition border border-white">
-                                Ver tarifas
+                            <button onclick="if(window.addToCart) window.addToCart({id: 502, nombre: 'Servicio de Mensajería (Habana Vieja)', precio: 300, imagen: 'https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp', cantidad: 1}); else alert('Cargando carrito...');" class="bg-white text-cuban-green font-bold py-2 px-5 rounded-full transition flex items-center justify-center gap-2 text-sm btn-hover-effect">
+                                <i class="fas fa-cart-plus text-lg"></i> Contratar ($300)
+                            </button>
+                            <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20mensajer%C3%ADa%20(MENSAJERO)" target="_blank" class="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold py-2 px-5 rounded-full transition border border-white text-center text-sm">
+                                <i class="fab fa-whatsapp mr-1"></i> Coordinar
                             </a>
                         </div>
+                        <p class="text-xs text-center mt-4 opacity-80">💬 Di <span class="font-bold text-cuban-yellow">"MENSAJERO"</span> y tu dirección</p>
                     </div>
                 </div>
-                
-                <!-- Componente con las tarifas detalladas -->
-                <div id="mensajeria-info-container"></div>
             </div>
         </section>
-
         <!-- Blog Preview -->
         <section class="py-12 bg-gray-50 section-fade">
             <div class="container mx-auto px-4">
