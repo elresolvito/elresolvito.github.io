@@ -12,7 +12,7 @@
     --primary-orange: #FF6F00;
     --bg-light: #FFFFFF;
     --bg-dark: #0F0F1A;
-    --bg-dark-card: #16213E;
+    --bg-dark-card: #1E293B;
     --whatsapp: #25D366;
     --whatsapp-dark: #128C7E;
     --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
@@ -23,20 +23,25 @@
     --text-secondary: #4B5563;
     --text-light: #6B7280;
     --bg-card: #FFFFFF;
+    --bg-secondary: #F9FAFB;
     --border-color: #E5E7EB;
-    --image-bg: #FFFFFF; /* Fondo blanco para imagen en ambos modos */
+    --image-bg: #FFFFFF;
 }
 
-/* Variables - MODO OSCURO */
+/* Variables - MODO OSCURO (mejoradas) */
 body.night-mode {
     --bg-light: #0F0F1A;
-    --text-primary: #F9FAFB;
-    --text-secondary: #E5E7EB;
-    --text-light: #9CA3AF;
-    --bg-card: #16213E;
-    --border-color: #2D3748;
-    --image-bg: #FFFFFF;
+    --text-primary: #F1F5F9;
+    --text-secondary: #CBD5E1;
+    --text-light: #94A3B8;
+    --bg-card: #1E293B;
+    --bg-secondary: #0F172A;
+    --border-color: #334155;
+    --image-bg: #1E293B;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
     --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+    --shadow-xl: 0 20px 32px rgba(0,0,0,0.6);
     background: var(--bg-dark);
     color: var(--text-primary);
 }
@@ -54,7 +59,7 @@ body {
     background: var(--bg-light);
     color: var(--text-primary);
     line-height: 1.6;
-    transition: background-color 0.5s, color 0.5s;
+    transition: background-color 0.3s ease, color 0.3s ease;
     padding-bottom: 80px;
 }
 
@@ -68,19 +73,25 @@ h1, h2, h3, h4, h5, h6 {
 /* COMPONENTES COMPARTIDOS */
 /* ============================================ */
 
-/* Header */
+/* Header - mejorado para modo oscuro */
 header {
     position: sticky;
     top: 0;
     z-index: 50;
     background: var(--bg-card);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: var(--shadow-sm);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Footer */
+/* Footer - ahora se adapta al modo oscuro */
 footer {
     background: var(--primary-green-dark);
     color: white;
+    transition: background-color 0.3s ease;
+}
+
+body.night-mode footer {
+    background: #0A2E0F;
 }
 
 /* ============================================ */
@@ -122,7 +133,7 @@ footer {
     padding: 16px;
 }
 #cartItems::-webkit-scrollbar { width: 6px; }
-#cartItems::-webkit-scrollbar-track { background: #f1f1f1; }
+#cartItems::-webkit-scrollbar-track { background: var(--bg-secondary); }
 #cartItems::-webkit-scrollbar-thumb { background: var(--primary-green); border-radius: 3px; }
 
 #cartSidebar .bg-cuban-green {
@@ -150,8 +161,14 @@ footer {
     border: 2px solid white;
 }
 
+body.night-mode .cart-badge,
+body.night-mode #cartCount,
+body.night-mode #floatingCartCount {
+    border-color: #1E293B;
+}
+
 /* ============================================ */
-/* BOTONES FLOTANTES (CORREGIDOS CON !important) */
+/* BOTONES FLOTANTES */
 /* ============================================ */
 .floating-actions {
     position: fixed !important;
@@ -180,7 +197,7 @@ footer {
 .floating-btn:hover { transform: scale(1.1); box-shadow: 0 6px 16px rgba(0,0,0,0.3); }
 
 /* ============================================ */
-/* MODAL DE IMAGEN (compartido) - VERSIÓN CORREGIDA */
+/* MODAL DE IMAGEN */
 /* ============================================ */
 #imageModal {
     position: fixed;
@@ -192,22 +209,18 @@ footer {
     justify-content: center;
     padding: 1rem;
 }
-#imageModal:not(.hidden) { 
-    display: flex; 
-}
+#imageModal:not(.hidden) { display: flex; }
 
-/* Contenedor del modal */
 #imageModal .modal-content {
-    background: white;
+    background: var(--bg-card);
     border-radius: 1rem;
     padding: 1rem;
     max-width: 90vw;
     max-height: 90vh;
     position: relative;
-    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);
+    box-shadow: var(--shadow-xl);
 }
 
-/* Botón de cerrar */
 #imageModal .close-button {
     position: absolute;
     top: 0.5rem;
@@ -230,7 +243,6 @@ footer {
     transform: scale(1.1);
 }
 
-/* Imagen dentro del modal */
 #modalImage {
     max-width: 80vw;
     max-height: 70vh;
@@ -240,28 +252,16 @@ footer {
     border-radius: 0.5rem;
 }
 
-/* Nombre de la imagen (opcional) */
 #modalImageName {
     text-align: center;
     margin-top: 0.5rem;
     font-size: 1rem;
-    color: #333;
+    color: var(--text-primary);
     font-weight: 500;
 }
 
-/* Responsive para móvil */
-@media (max-width: 640px) {
-    #modalImage {
-        max-width: 90vw;
-        max-height: 65vh;
-    }
-    #imageModal .modal-content {
-        padding: 0.75rem;
-    }
-}
-
 /* ============================================ */
-/* TOAST (compartido) */
+/* TOAST */
 /* ============================================ */
 #cartToast {
     position: fixed;
@@ -284,12 +284,12 @@ footer {
 #cartToast.bg-red-600 { background: #dc2626; }
 
 /* ============================================ */
-/* TRANSICIÓN ENTRE PÁGINAS (compartido) */
+/* TRANSICIÓN ENTRE PÁGINAS */
 /* ============================================ */
 #pageFade {
     position: fixed;
     inset: 0;
-    background: white;
+    background: var(--bg-light);
     z-index: 10000;
     opacity: 0;
     pointer-events: none;
@@ -297,7 +297,7 @@ footer {
 }
 
 /* ============================================ */
-/* TARJETAS DE PRODUCTO (estructura base) */
+/* TARJETAS DE PRODUCTO */
 /* ============================================ */
 .product-card {
     background: var(--bg-card);
@@ -312,7 +312,6 @@ footer {
     box-shadow: var(--shadow-lg);
 }
 
-/* Contenedor de imagen - fondo blanco siempre */
 .product-image-container {
     aspect-ratio: 1 / 1;
     overflow: hidden;
@@ -323,11 +322,7 @@ footer {
     justify-content: center;
     transition: box-shadow 0.2s ease;
 }
-body.night-mode .product-image-container {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
 
-/* ===== IMAGEN - TAMAÑO BASE (95%) ===== */
 .product-image-container img {
     width: auto;
     height: auto;
@@ -338,17 +333,8 @@ body.night-mode .product-image-container {
     transition: transform 0.3s ease;
 }
 
-@media (max-width: 640px) {
-    .product-image-container img {
-        max-width: 95%;
-        max-height: 95%;
-        padding: 0.4rem;
-    }
-}
-
 .product-image-container:hover img { transform: scale(1.05); }
 
-/* Información del producto */
 .product-info { padding: 1rem; }
 .product-categoria {
     font-size: 0.7rem;
@@ -414,46 +400,83 @@ body.night-mode .product-image-container {
 }
 
 /* ============================================ */
-/* MODO OSCURO - ajustes adicionales */
+/* MODO OSCURO - CLASES DE TAILWIND */
 /* ============================================ */
 body.night-mode {
     background: var(--bg-dark);
     color: var(--text-primary);
 }
+
 body.night-mode .bg-white,
 body.night-mode .bg-gray-50,
+body.night-mode .bg-gray-100,
 body.night-mode .product-card,
 body.night-mode #cartSidebar,
-body.night-mode header {
+body.night-mode header,
+body.night-mode article,
+body.night-mode #alojamientos-preview {
     background: var(--bg-card) !important;
     color: var(--text-primary) !important;
 }
+
+body.night-mode .bg-gray-200 {
+    background: #2D3748 !important;
+}
+
 body.night-mode .text-gray-800,
-body.night-mode .product-nombre { color: var(--text-primary) !important; }
+body.night-mode .text-gray-900,
+body.night-mode .product-nombre {
+    color: var(--text-primary) !important;
+}
+
 body.night-mode .text-gray-600,
-body.night-mode .product-descripcion { color: var(--text-light) !important; }
-body.night-mode .border-gray-200 { border-color: var(--border-color) !important; }
-body.night-mode .bg-gray-100,
-body.night-mode .bg-gray-200 { background: #2d3748 !important; }
-body.night-mode .product-card:hover { box-shadow: 0 0 15px rgba(46, 125, 50, 0.3); }
+body.night-mode .text-gray-500,
+body.night-mode .product-descripcion {
+    color: var(--text-light) !important;
+}
+
+body.night-mode .border-gray-200,
+body.night-mode .border-gray-100 {
+    border-color: var(--border-color) !important;
+}
+
+body.night-mode .shadow-md,
+body.night-mode .shadow-lg,
+body.night-mode .shadow-xl {
+    box-shadow: var(--shadow-md);
+}
+
+body.night-mode .product-card:hover {
+    box-shadow: 0 0 20px rgba(46, 125, 50, 0.4);
+}
+
+body.night-mode .bg-gradient-to-r.from-primary\/5,
+body.night-mode .bg-gradient-to-r.from-cuban-green\/5 {
+    background: rgba(46, 125, 50, 0.15) !important;
+}
+
+body.night-mode .bg-yellow-50 {
+    background: rgba(255, 180, 0, 0.15) !important;
+}
+
+body.night-mode .bg-blue-50 {
+    background: rgba(2, 119, 189, 0.15) !important;
+}
+
+body.night-mode .border-yellow-200 {
+    border-color: rgba(255, 180, 0, 0.3) !important;
+}
+
+body.night-mode .border-blue-200 {
+    border-color: rgba(2, 119, 189, 0.3) !important;
+}
 
 /* ============================================ */
-/* TÍTULOS PRINCIPALES BLANCOS EN MODO CLARO */
+/* TÍTULOS PRINCIPALES BLANCOS EN HERO */
 /* ============================================ */
-
-/* Título "El Resolvito" en el hero */
 .hero-container h1,
-.hero-container .hero-text {
-    color: #ffffff !important;
-}
-
-/* Título del servicio de mensajería */
-section:has(.bg-gradient-to-r.from-black\/70) h2,
-section .relative.z-10 h2 {
-    color: #ffffff !important;
-}
-
-/* Otros títulos con overlay oscuro */
+.hero-container .hero-text,
+section .relative.z-10 h2,
 .relative.z-10 h1,
 .relative.z-10 h2,
 .relative.z-10 h3 {
@@ -467,8 +490,22 @@ section .relative.z-10 h2 {
     body { padding-bottom: 70px; }
     .floating-actions { bottom: 1rem !important; right: 1rem !important; }
     .floating-btn { width: 50px; height: 50px; }
-    #cartSidebar { max-height: 90vh; } 
-} 
+    #cartSidebar { max-height: 90vh; }
+    .product-image-container img {
+        max-width: 95%;
+        max-height: 95%;
+        padding: 0.4rem;
+    }
+    .producto-wa {
+        padding: 0.6rem;
+        font-size: 0.8rem;
+    }
+    #cartSidebar {
+        border-top-left-radius: 1.5rem;
+        border-top-right-radius: 1.5rem;
+    }
+}
+
 /* ============================================ */
 /* TUTORIAL FLOTANTE ANIMACIÓN */
 /* ============================================ */
@@ -488,7 +525,7 @@ section .relative.z-10 h2 {
 }
 
 /* ============================================ */
-/* BOTONES UNIFICADOS - MEJORA VISUAL */
+/* BOTONES UNIFICADOS */
 /* ============================================ */
 .producto-wa {
     background: linear-gradient(135deg, #2E7D32, #1B5E20) !important;
@@ -517,17 +554,47 @@ section .relative.z-10 h2 {
     font-size: 1rem;
 }
 
+body.night-mode .producto-wa {
+    background: linear-gradient(135deg, #4CAF50, #2E7D32) !important;
+}
+
 /* ============================================ */
-/* MEJORAS PARA EL CARRITO EN MÓVIL */
+/* CHECKOUT MODAL - MODO OSCURO */
 /* ============================================ */
-@media (max-width: 640px) {
-    .producto-wa {
-        padding: 0.6rem;
-        font-size: 0.8rem;
-    }
-    
-    #cartSidebar {
-        border-top-left-radius: 1.5rem;
-        border-top-right-radius: 1.5rem;
-    }
+body.night-mode #checkoutModal .bg-white {
+    background: var(--bg-card) !important;
+}
+
+body.night-mode #checkoutModal .bg-gray-50 {
+    background: var(--bg-secondary) !important;
+}
+
+body.night-mode #checkoutModal .text-gray-700,
+body.night-mode #checkoutModal .text-gray-800 {
+    color: var(--text-primary) !important;
+}
+
+body.night-mode #checkoutModal .text-gray-500,
+body.night-mode #checkoutModal .text-gray-600 {
+    color: var(--text-light) !important;
+}
+
+body.night-mode #checkoutModal .border-gray-200,
+body.night-mode #checkoutModal .border-gray-300 {
+    border-color: var(--border-color) !important;
+}
+
+body.night-mode #checkoutModal input,
+body.night-mode #checkoutModal textarea,
+body.night-mode #checkoutModal select {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.night-mode #checkoutModal input:focus,
+body.night-mode #checkoutModal textarea:focus,
+body.night-mode #checkoutModal select:focus {
+    border-color: var(--primary-green);
+    outline: none;
 }
