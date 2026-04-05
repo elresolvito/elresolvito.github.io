@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Moda & Estilo - El Resolvito</title>
+    <meta name="description" content="Ropa, calzados y carteras. Lo mejor de la moda en un solo lugar. Envíos en La Habana.">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        .producto-card {
+            background: white;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .producto-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 35px -12px rgba(0,0,0,0.2);
+        }
+
+        .producto-imagen {
+            aspect-ratio: 1 / 1;
+            width: 100%;
+            overflow: hidden;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            cursor: pointer;
+        }
+
+        .producto-imagen img {
+            width: auto;
+            height: auto;
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+        }
+
+        .producto-card:hover .producto-imagen img {
+            transform: scale(1.08);
+        }
+
+        .producto-info {
+            padding: 1.25rem;
+            background: white;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .producto-info h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+        }
+
+        .producto-info p {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-bottom: 0.75rem;
+        }
+
+        .producto-precio {
+            margin-bottom: 1rem;
+        }
+
+        .precio {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #2E7D32;
+        }
+
+        .precio-antiguo {
+            font-size: 0.9rem;
+            color: #9ca3af;
+            text-decoration: line-through;
+            margin-left: 0.5rem;
+        }
+
+        .producto-wa {
+            width: 100%;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            padding: 0.7rem;
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-top: auto;
+        }
+
+        .producto-wa:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px -5px rgba(37,211,102,0.4);
+        }
+
+        .badge-nuevo {
+            position: absolute;
+            top: 0.75rem;
+            left: 0.75rem;
+            background: linear-gradient(135deg, #FF69B4, #9B59B6);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 0.25rem 0.75rem;
+            border-radius: 2rem;
+            z-index: 10;
+        }
+
+        .badge-oferta {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: linear-gradient(135deg, #FF6F00, #FFB300);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 0.25rem 0.75rem;
+            border-radius: 2rem;
+            z-index: 10;
+        }
+
+        .hero-moda {
+            background: linear-gradient(135deg, #FF69B4 0%, #9B59B6 50%, #3498DB 100%);
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+        }
+
+        @media (max-width: 640px) {
+            .producto-imagen {
+                padding: 1rem;
+            }
+            .precio {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cuban-green': '#2E7D32',
+                        'cuban-dark': '#1B5E20',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+
+    <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
+
+    <div id="header-container"></div>
+    <div id="mobile-menu-container"></div>
+    <div id="floating-buttons-container"></div>
+
+    <!-- Hero -->
+    <section class="hero-moda">
+        <div class="container mx-auto px-4 text-center text-white">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 drop-shadow-lg">Moda & Estilo</h1>
+            <p class="text-xl md:text-2xl opacity-90">Ropa, calzados y accesorios con el mejor estilo</p>
+        </div>
+    </section>
+
+    <!-- ROPA -->
+    <section id="ropa" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10">
+                <span class="inline-block bg-pink-500 text-white px-4 py-1 rounded-full text-sm font-bold mb-3">👗 COLECCIÓN</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Ropa</h2>
+                <div class="w-20 h-1 bg-pink-500 mx-auto mt-3 rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5" id="ropa-grid"></div>
+        </div>
+    </section>
+
+    <!-- CALZADOS -->
+    <section id="calzados" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10">
+                <span class="inline-block bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-bold mb-3">👟 CALZADO</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Zapatos y Chanclas</h2>
+                <div class="w-20 h-1 bg-blue-500 mx-auto mt-3 rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5" id="calzados-grid"></div>
+        </div>
+    </section>
+
+    <!-- CARTERAS -->
+    <section id="carteras" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10">
+                <span class="inline-block bg-purple-500 text-white px-4 py-1 rounded-full text-sm font-bold mb-3">👜 ACCESORIOS</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Carteras</h2>
+                <div class="w-20 h-1 bg-purple-500 mx-auto mt-3 rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5" id="carteras-grid"></div>
+        </div>
+    </section>
+
+    <!-- CTA final -->
+    <section class="py-12 bg-gradient-to-r from-green-600 to-green-700">
+        <div class="container mx-auto px-4 text-center text-white">
+            <h3 class="text-2xl font-bold mb-3">¿Te gustó algo?</h3>
+            <p class="mb-5">Contáctanos por WhatsApp para más información o para hacer tu pedido</p>
+            <a href="https://wa.me/5356382909" target="_blank" class="inline-block bg-white text-green-600 px-8 py-3 rounded-full font-bold hover:shadow-xl transition transform hover:scale-105">
+                <i class="fab fa-whatsapp mr-2"></i>Escríbenos ahora
+            </a>
+        </div>
+    </section>
+
+    <div id="image-modal-container"></div>
+    <div id="cart-sidebar-container"></div>
+    <div id="checkout-modal-container"></div>
+    <div id="footer-container"></div>
+
+    <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
+        <p id="cartToastMessage"></p>
+    </div>
+
+    <script>
+        // Datos de productos (tomados de lienys + nuevos)
+        const productosModa = {
+            ropa: [
+                { id: 401, nombre: "Camisa Blanca", imagen: "https://images.unsplash.com/photo-1598032895397-b9472444bf93?w=400", precio: 3500, descripcion: "Clásica y elegante" },
+                { id: 402, nombre: "Vestido Floral", imagen: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400", precio: 4500, descripcion: "Perfecto para primavera" },
+                { id: 403, nombre: "Jeans Negro", imagen: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400", precio: 5000, descripcion: "Ajuste perfecto" },
+                { id: 404, nombre: "Blusa Azul", imagen: "https://images.unsplash.com/photo-1564257631407-4deb1f99d992?w=400", precio: 3200, descripcion: "Tela fresca" }
+            ],
+            calzados: [
+                { id: 501, nombre: "Chanclas Negras", imagen: "https://i.postimg.cc/qvBVZPcH/chancletas_negras.png", precio: 4500, descripcion: "Cómodas y duraderas" },
+                { id: 502, nombre: "Chanclas Blancas", imagen: "https://i.postimg.cc/8Pmg4pv5/CHANCLETAS-BLANCAS.png", precio: 4500, descripcion: "Estilo veraniego" },
+                { id: 503, nombre: "Zapatos Casual", imagen: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400", precio: 6800, descripcion: "Para el día a día" }
+            ],
+            carteras: [
+                { id: 601, nombre: "Cartera Azul", imagen: "https://i.postimg.cc/Vk4RDT46/cartera-azul-muchacha.png", precio: 5000, descripcion: "Azul vibrante" },
+                { id: 602, nombre: "Cartera Beige", imagen: "https://i.postimg.cc/2STw2JT8/cartera-beige-muchacha.png", precio: 5000, descripcion: "Beige elegante" },
+                { id: 603, nombre: "Cartera Negra", imagen: "https://i.postimg.cc/sxpdty04/cartera-negra.png", precio: 5000, descripcion: "Negra clásica" },
+                { id: 604, nombre: "Cartera Especial", imagen: "https://i.postimg.cc/wxJptcTq/cartera-azul.png", precio: 6000, descripcion: "Diseño exclusivo" }
+            ]
+        };
+
+        function abrirModal(imagen, titulo, descripcion, precio) {
+            const modalHTML = `
+                <div class="fixed inset-0 bg-black/80 z-[200] flex items-center justify-center p-4" onclick="this.remove()">
+                    <div class="bg-white rounded-2xl max-w-2xl w-full" onclick="event.stopPropagation()">
+                        <img src="${imagen}" class="w-full h-96 object-contain bg-gray-100 p-4 rounded-t-2xl">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold mb-2">${titulo}</h3>
+                            <p class="text-gray-600 mb-4">${descripcion}</p>
+                            <p class="text-3xl font-bold text-cuban-green mb-4">$${precio.toLocaleString()}</p>
+                            <button onclick="window.addToCart && window.addToCart({id: Math.random(), nombre: '${titulo}', precio: ${precio}, imagen: '${imagen}', cantidad: 1}); this.closest('.fixed').remove();" class="w-full bg-cuban-green text-white py-3 rounded-xl font-bold hover:bg-cuban-dark transition">
+                                <i class="fas fa-cart-plus mr-2"></i>Agregar al carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+        }
+
+        function renderizarProductos() {
+            // Ropa
+            const ropaGrid = document.getElementById('ropa-grid');
+            if (ropaGrid) {
+                ropaGrid.innerHTML = productosModa.ropa.map(p => `
+                    <div class="producto-card relative">
+                        <div class="badge-nuevo">✨ Nuevo</div>
+                        <div class="producto-imagen" onclick="abrirModal('${p.imagen}', '${p.nombre}', '${p.descripcion}', ${p.precio})">
+                            <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/400x400/FF69B4/white?text=Ropa'">
+                        </div>
+                        <div class="producto-info">
+                            <h3>${p.nombre}</h3>
+                            <p>${p.descripcion}</p>
+                            <div class="producto-precio">
+                                <span class="precio">$${p.precio.toLocaleString()}</span>
+                            </div>
+                            <button class="producto-wa" onclick="window.addToCart && window.addToCart({id: ${p.id}, nombre: '${p.nombre}', precio: ${p.precio}, imagen: '${p.imagen}', cantidad: 1})">
+                                <i class="fas fa-cart-plus"></i> Agregar al carrito
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Calzados
+            const calzadosGrid = document.getElementById('calzados-grid');
+            if (calzadosGrid) {
+                calzadosGrid.innerHTML = productosModa.calzados.map(p => `
+                    <div class="producto-card relative">
+                        <div class="producto-imagen" onclick="abrirModal('${p.imagen}', '${p.nombre}', '${p.descripcion}', ${p.precio})">
+                            <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/400x400/3498DB/white?text=Calzado'">
+                        </div>
+                        <div class="producto-info">
+                            <h3>${p.nombre}</h3>
+                            <p>${p.descripcion}</p>
+                            <div class="producto-precio">
+                                <span class="precio">$${p.precio.toLocaleString()}</span>
+                            </div>
+                            <button class="producto-wa" onclick="window.addToCart && window.addToCart({id: ${p.id}, nombre: '${p.nombre}', precio: ${p.precio}, imagen: '${p.imagen}', cantidad: 1})">
+                                <i class="fas fa-cart-plus"></i> Agregar al carrito
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Carteras
+            const carterasGrid = document.getElementById('carteras-grid');
+            if (carterasGrid) {
+                carterasGrid.innerHTML = productosModa.carteras.map(p => `
+                    <div class="producto-card relative">
+                        ${p.id === 604 ? '<div class="badge-oferta">🔥 Exclusiva</div>' : '<div class="badge-nuevo">✨ Nuevo</div>'}
+                        <div class="producto-imagen" onclick="abrirModal('${p.imagen}', '${p.nombre}', '${p.descripcion}', ${p.precio})">
+                            <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/400x400/9B59B6/white?text=Cartera'">
+                        </div>
+                        <div class="producto-info">
+                            <h3>${p.nombre}</h3>
+                            <p>${p.descripcion}</p>
+                            <div class="producto-precio">
+                                <span class="precio">$${p.precio.toLocaleString()}</span>
+                            </div>
+                            <button class="producto-wa" onclick="window.addToCart && window.addToCart({id: ${p.id}, nombre: '${p.nombre}', precio: ${p.precio}, imagen: '${p.imagen}', cantidad: 1})">
+                                <i class="fas fa-cart-plus"></i> Agregar al carrito
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        async function loadComponent(id, path) {
+            try {
+                const response = await fetch(path);
+                const html = await response.text();
+                document.getElementById(id).innerHTML = html;
+            } catch (error) {
+                console.error(`Error cargando ${path}:`, error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadComponent('header-container', 'components/header.html');
+            await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
+            await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
+            await loadComponent('image-modal-container', 'components/image-modal.html');
+            await loadComponent('cart-sidebar-container', 'components/cart-sidebar.html');
+            await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
+            await loadComponent('footer-container', 'components/footer.html');
+            
+            renderizarProductos();
+
+            if (typeof window.updateCartUI === 'function') {
+                window.updateCartUI();
+            }
+        });
+    </script>
+</body>
+</html>
