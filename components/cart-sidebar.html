@@ -1,83 +1,55 @@
 <!-- components/cart-sidebar.html -->
 <div id="cartOverlay" class="fixed inset-0 bg-black/50 z-[9999] hidden" onclick="window.toggleCart()"></div>
 
-<div id="cartSidebar" class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl z-[10000] max-h-[85vh] flex flex-col" style="transform: translateY(100%);">
+<div id="cartSidebar" class="fixed bottom-0 left-0 right-0 rounded-t-3xl shadow-2xl z-[10000] max-h-[85vh] flex flex-col" style="transform: translateY(100%);">
     
+    <!-- Cabecera -->
     <div class="p-5 bg-gradient-to-r from-cuban-green to-cuban-dark text-white rounded-t-3xl">
         <div class="flex justify-between items-center">
             <h3 class="text-xl font-bold flex items-center gap-2">
-                <i class="fas fa-shopping-cart"></i> Mi Carrito
+                <i class="fas fa-shopping-cart"></i> Tu Carrito
                 <span id="cartCount" class="bg-cuban-yellow text-cuban-dark text-sm px-2 py-0.5 rounded-full hidden">0</span>
             </h3>
             <button onclick="window.toggleCart()" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
                 <i class="fas fa-times"></i>
             </button>
         </div>
-        <p class="text-sm opacity-90 mt-1">📦 Revisa tus productos antes de finalizar</p>
+        <p class="text-sm opacity-90 mt-1">Revisa tus productos antes de finalizar</p>
     </div>
     
-    <div id="cartItems" class="flex-1 overflow-y-auto p-5 space-y-3 bg-gray-50"></div>
+    <!-- Lista de productos -->
+    <div id="cartItems" class="flex-1 overflow-y-auto p-5 space-y-3">
+        <!-- Los items se cargan dinámicamente -->
+    </div>
     
-    <div class="p-5 bg-white border-t border-gray-200 shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
+    <!-- Resumen y botón de checkout -->
+    <div class="p-5 border-t shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
         <div class="space-y-3 mb-5">
             <div class="flex justify-between items-center text-base">
-                <span class="text-gray-600">Subtotal:</span>
-                <span id="cartSubtotal" class="font-bold text-gray-800">$0</span>
+                <span class="text-gray-600 dark:text-gray-400">Subtotal:</span>
+                <span id="cartSubtotal" class="font-bold text-gray-800 dark:text-white">$0</span>
             </div>
             
-            <div id="minPurchaseWarning" class="bg-orange-50 p-2 rounded-lg text-xs text-orange-700 hidden border border-orange-200">
-                <i class="fas fa-exclamation-triangle mr-1"></i> 
-                <strong>Compra mínima: $500</strong> — Agrega más productos para continuar
+            <div class="flex justify-between items-center text-base border-t pt-2">
+                <span class="text-gray-600 dark:text-gray-400">Envío:</span>
+                <span id="cartShipping" class="text-gray-600 dark:text-gray-400">A calcular en checkout</span>
             </div>
             
-            <div class="flex justify-between items-center text-base border-t border-gray-100 pt-2">
-                <span class="text-gray-600">Envío:</span>
-                <span id="cartShipping" class="text-gray-600">Selecciona en checkout</span>
-            </div>
-            
-            <div class="flex justify-between items-center text-lg font-bold border-t border-gray-200 pt-3">
-                <span>Total a pagar:</span>
+            <div class="flex justify-between items-center text-lg font-bold border-t pt-3">
+                <span>Total:</span>
                 <span id="cartTotal" class="text-cuban-green">$0</span>
             </div>
         </div>
         
         <button onclick="window.openCheckoutModal()" 
-                id="checkoutButton"
                 class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-3 hover:opacity-90 transition shadow-md text-lg">
             <i class="fab fa-whatsapp text-xl"></i>
-            Continuar por WhatsApp
+            Proceder al checkout
         </button>
         
-        <p class="text-xs text-center text-gray-500 mt-4 flex flex-col items-center gap-1">
-            <span class="flex items-center gap-1"><i class="fas fa-lock text-cuban-green"></i> Pedido seguro · Pagas al recibir</span>
-            <span class="text-xs text-gray-400"><i class="fas fa-question-circle"></i> ¿Dudas? Escríbenos al <a href="https://wa.me/5356382909" class="text-cuban-green">+53 5 638 2909</a></span>
+        <p class="text-xs text-center text-gray-500 dark:text-gray-400 mt-4 flex items-center justify-center gap-1">
+            <i class="fas fa-lock text-cuban-green"></i> 
+            Pedido seguro por WhatsApp al 5356382909
         </p>
     </div>
 </div>
-
-<script>
-    window.updateMinPurchaseWarning = function() {
-        const subtotalEl = document.getElementById('cartSubtotal');
-        const warningEl = document.getElementById('minPurchaseWarning');
-        const checkoutBtn = document.getElementById('checkoutButton');
-        
-        if (subtotalEl && warningEl && checkoutBtn) {
-            const subtotalText = subtotalEl.textContent;
-            const subtotal = parseInt(subtotalText.replace(/[^0-9]/g, '')) || 0;
-            
-            if (subtotal < 500 && subtotal > 0) {
-                warningEl.classList.remove('hidden');
-                checkoutBtn.disabled = true;
-                checkoutBtn.style.opacity = '0.5';
-                checkoutBtn.style.cursor = 'not-allowed';
-                checkoutBtn.title = 'Agrega más productos para llegar al mínimo de $500';
-            } else {
-                warningEl.classList.add('hidden');
-                checkoutBtn.disabled = false;
-                checkoutBtn.style.opacity = '1';
-                checkoutBtn.style.cursor = 'pointer';
-                checkoutBtn.title = '';
-            }
-        }
-    };
-</script>
