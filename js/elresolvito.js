@@ -1,202 +1,234 @@
-<!-- components/checkout-modal.html -->
-<div id="checkoutModal" class="fixed inset-0 bg-black/50 z-[200] hidden flex items-center justify-center p-4" onclick="window.closeCheckoutModal()">
-    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
-        
-        <!-- Cabecera -->
-        <div class="p-6 bg-gradient-to-r from-cuban-green to-cuban-dark text-white rounded-t-2xl">
-            <div class="flex justify-between items-center">
-                <div>
-                    <h3 class="text-2xl font-bold flex items-center gap-2">
-                        <i class="fas fa-clipboard-list"></i> Finalizar pedido
-                    </h3>
-                    <p class="text-sm opacity-90 mt-1">Completa los datos y te contactamos</p>
-                </div>
-                <button onclick="window.closeCheckoutModal()" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        </div>
-        
-        <div class="p-6">
-            <form id="checkoutForm" onsubmit="event.preventDefault(); window.sendCompleteOrder()">
-                
-                <!-- RESUMEN DEL CARRITO -->
-                <div class="mb-6 p-4 bg-gray-50 rounded-xl border border-gray-200">
-                    <p class="text-sm font-semibold mb-2 flex items-center gap-2">
-                        <i class="fas fa-shopping-cart text-cuban-green"></i> Tu pedido:
-                    </p>
-                    <div id="checkoutCartSummary" class="text-sm text-gray-600 max-h-24 overflow-y-auto space-y-1"></div>
-                    <div class="flex justify-between text-base font-bold mt-3 pt-3 border-t border-gray-200">
-                        <span>Subtotal:</span>
-                        <span id="checkoutTotal" class="text-cuban-green">$0</span>
-                    </div>
-                    <p class="text-xs text-gray-500 mt-1">Compra mínima: $500</p>
-                </div>
+// ============================================
+// PRODUCTOS (BASE DE DATOS)
+// ============================================
+var PRODUCTS = [
+    { id: 1, nombre: "Atún en lata", categoria: "Alimentos y conservas", precio: 540, imagen: "https://i.postimg.cc/76xHK6zt/atun_precio_500.png", descripcion: "Lata 200g" },
+    { id: 2, nombre: "Pasta de tomate", categoria: "Alimentos y conservas", precio: 350, imagen: "https://i.postimg.cc/gjjYPTNv/pasta_tomate_precio_350.png", descripcion: "Paquete" },
+    { id: 3, nombre: "Pimiento fresco", categoria: "Alimentos y conservas", precio: 750, imagen: "https://i.postimg.cc/4yyJTSBj/pimiento_presio_750.png", descripcion: "Unidad" },
+    { id: 4, nombre: "Café Dualis 250g", categoria: "Alimentos y conservas", precio: 1450, imagen: "https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png", descripcion: "Paquete 250g" },
+    { id: 5, nombre: "Café Dufiltro 250g", categoria: "Alimentos y conservas", precio: 1450, imagen: "https://i.postimg.cc/hG26fv31/cafe_Dufiltro_250_g_precio_1450.png", descripcion: "Paquete 250g" },
+    { id: 6, nombre: "Café Enepa", categoria: "Alimentos y conservas", precio: 470, imagen: "https://i.postimg.cc/nhY6f04N/cafe_enepa_precio_450.png", descripcion: "Paquete" },
+    { id: 7, nombre: "Cartón de huevo 30u", categoria: "Alimentos y conservas", precio: 3000, imagen: "https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3000.png", descripcion: "Cartón" },
+    { id: 8, nombre: "Leche condensada", categoria: "Alimentos y conservas", precio: 950, imagen: "https://i.postimg.cc/tT2XwjtT/leche_condensada.png", descripcion: "Lata 397g" },
+    { id: 9, nombre: "Harina blanca 1Kg", categoria: "Alimentos y conservas", precio: 600, imagen: "https://i.postimg.cc/3xc2NHFB/harina_blanca1_kg.png", descripcion: "Paquete 1Kg" },
+    { id: 10, nombre: "Chicoticos Pelly 90g", categoria: "Snacks y golosinas", precio: 400, imagen: "https://i.postimg.cc/1zv2fXjZ/chicoticos_pelly_90_g_precio_400.png", descripcion: "Paquete 90g" },
+    { id: 11, nombre: "Papitas Campesinas", categoria: "Snacks y golosinas", precio: 690, imagen: "https://i.postimg.cc/cLgrDtf9/papitas_campesinas_precio_690.png", descripcion: "Paquete" },
+    { id: 12, nombre: "Pelly Jamón", categoria: "Snacks y golosinas", precio: 580, imagen: "https://i.postimg.cc/pdQV7frX/pelly_jamon_precio_580.png", descripcion: "Paquete" },
+    { id: 13, nombre: "Mayonesa Mediana", categoria: "Salsas", precio: 850, imagen: "https://i.postimg.cc/KzJZw2rR/mayonesa_precio_850.png", descripcion: "Frasco mediano" },
+    { id: 14, nombre: "Mayonesa Grande", categoria: "Salsas", precio: 1100, imagen: "https://i.postimg.cc/Px2t9jzz/mayonesa_precio1100.png", descripcion: "Frasco grande" },
+    { id: 15, nombre: "Cuchilla de Afeitar", categoria: "Higiene personal", precio: 100, imagen: "https://i.postimg.cc/8CdkdW7x/cuchilla_de_afeitar_precio_100.png", descripcion: "Unidad" },
+    { id: 16, nombre: "Jabón Marwa", categoria: "Higiene personal", precio: 150, imagen: "https://i.postimg.cc/3RK8tRpR/jabon_marwa_precio_150.png", descripcion: "Pastilla" },
+    { id: 17, nombre: "Papel Sanitario", categoria: "Higiene personal", precio: 490, imagen: "https://i.postimg.cc/bwW289qD/papel_sanitario_precio_490i.png", descripcion: "Paquete" },
+    { id: 18, nombre: "Toallas Sanitarias", categoria: "Higiene personal", precio: 450, imagen: "https://i.postimg.cc/KjjZyH0b/toallas_sanitarias_precio_450.png", descripcion: "Paquete" },
+    { id: 19, nombre: "Toallas Húmedas", categoria: "Higiene personal", precio: 690, imagen: "https://i.postimg.cc/W4ZSP3cw/toallas_humedas_precio_690.png", descripcion: "Paquete" },
+    { id: 20, nombre: "Jabón de Lavar", categoria: "Aseo del hogar", precio: 250, imagen: "https://i.postimg.cc/V6YfK6Mz/jabon_de_lavar_precio_250.png", descripcion: "Pastilla" },
+    { id: 21, nombre: "Perfume Candy", categoria: "Perfumes y desodorantes", precio: 3100, imagen: "https://i.postimg.cc/vTgJRyhp/perfume_candy_precio_3100.png", descripcion: "Frasco 50ml" },
+    { id: 22, nombre: "Perfume genérico", categoria: "Perfumes y desodorantes", precio: 3100, imagen: "https://i.postimg.cc/ZKrT0PPG/perfume_precio_3100.png", descripcion: "Frasco 50ml" },
+    { id: 23, nombre: "Perfume Q", categoria: "Perfumes y desodorantes", precio: 3100, imagen: "https://i.postimg.cc/CL03P3Dn/perfume_q_precio_3100.png", descripcion: "Frasco 50ml" },
+    { id: 24, nombre: "Desodorante Obao", categoria: "Perfumes y desodorantes", precio: 1100, imagen: "https://i.postimg.cc/PxtXSxD2/desodorante_obao_precio_1100.png", descripcion: "Spray/Roll-on" },
+    { id: 25, nombre: "Desodorante Rush Blanco", categoria: "Perfumes y desodorantes", precio: 1000, imagen: "https://i.postimg.cc/FR9rTRS8/desodorante_rush_blanco_precio_1000.png", descripcion: "Roll-on" },
+    { id: 26, nombre: "Desodorante Rush", categoria: "Perfumes y desodorantes", precio: 1000, imagen: "https://i.postimg.cc/sXVjTXSF/desodorante_rush_precio_1000.png", descripcion: "Spray" },
+    { id: 27, nombre: "Colonia Niña", categoria: "Perfumes y desodorantes", precio: 1100, imagen: "https://i.postimg.cc/G3v04rsM/colonia_nina.png", descripcion: "Botella 100ml" },
+    { id: 28, nombre: "Macarrones", categoria: "Pastas y fideos", precio: 300, imagen: "https://i.postimg.cc/Hsmz1H69/macarrones_precio_300.png", descripcion: "Paquete" },
+    { id: 29, nombre: "Sopas instantáneas", categoria: "Pastas y fideos", precio: 160, imagen: "https://i.postimg.cc/FzNTpQqK/sopas_instantaneas_precio_160.png", descripcion: "Paquete" },
+    { id: 30, nombre: "Licor de fresa", categoria: "Bebidas alcohólicas y malta", precio: 2500, imagen: "https://i.postimg.cc/59YT2x5p/licor_de_fresa_precio_2500.png", descripcion: "Botella" },
+    { id: 31, nombre: "Licor Cocobay", categoria: "Bebidas alcohólicas y malta", precio: 2500, imagen: "https://i.postimg.cc/7ZDW90Fz/locor_cocobay_precio_2500.png", descripcion: "Botella" },
+    { id: 32, nombre: "Whisky Spirit 200ml", categoria: "Bebidas alcohólicas y malta", precio: 320, imagen: "https://i.postimg.cc/4N8W6q1t/tea_precio_320.png", descripcion: "Botella 200ml" },
+    { id: 33, nombre: "Whisky 1L", categoria: "Bebidas alcohólicas y malta", precio: 1350, imagen: "https://i.postimg.cc/cLyrb4T0/whisky_1L_precio_1350.png", descripcion: "Botella 1L" },
+    { id: 34, nombre: "Whisky Sir Albin", categoria: "Bebidas alcohólicas y malta", precio: 550, imagen: "https://i.postimg.cc/y84kbYnC/whisky_sir_albin_precio_550.png", descripcion: "Botella pequeña" },
+    { id: 35, nombre: "Vino Pluvium", categoria: "Bebidas alcohólicas y malta", precio: 1200, imagen: "https://i.postimg.cc/XNLLWmmx/vino_pluvium_precio_1200.png", descripcion: "Botella" },
+    { id: 36, nombre: "Baterías Triple A", categoria: "Electrónicos y accesorios", precio: 300, imagen: "https://i.postimg.cc/DZ2vxZsT/Gemini_Generated_Image_824rio824rio824r.png", descripcion: "Pack 4 unidades" }
+];
 
-                <!-- DATOS DEL CLIENTE -->
-                <div class="mb-6">
-                    <h4 class="font-bold text-gray-700 mb-3 flex items-center gap-2">
-                        <i class="fas fa-user text-cuban-green"></i> ¿Quién recibe?
-                    </h4>
-                    
-                    <div class="space-y-4">
-                        <div>
-                            <label for="customerName" class="block text-sm font-medium text-gray-700 mb-1">Nombre completo *</label>
-                            <input type="text" 
-                                   id="customerName" 
-                                   required 
-                                   placeholder="Ej: María González Pérez"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent">
-                        </div>
+var FEATURED_PRODUCTS = [
+    PRODUCTS.find(p => p.id === 4),
+    PRODUCTS.find(p => p.id === 7),
+    PRODUCTS.find(p => p.id === 1),
+    PRODUCTS.find(p => p.id === 13),
+    PRODUCTS.find(p => p.id === 21),
+    PRODUCTS.find(p => p.id === 30),
+    PRODUCTS.find(p => p.id === 17),
+    PRODUCTS.find(p => p.id === 9)
+];
 
-                        <div>
-                            <label for="customerAddress" class="block text-sm font-medium text-gray-700 mb-1">Dirección completa *</label>
-                            <textarea id="customerAddress" 
-                                      rows="2" 
-                                      required 
-                                      placeholder="Ej: Calle Obispo No. 123, entre Mercaderes y San Ignacio, La Habana Vieja"
-                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent"></textarea>
-                        </div>
-                    </div>
-                </div>
+// ============================================
+// CONFIGURACIÓN DE MENSAJERÍA
+// ============================================
+const MENSAJERIA_CONFIG = {
+    // Tarifa fija para La Habana Vieja (solo si peso <= 8kg)
+    HABANA_VIEJA_TARIFA: 300,
+    PESO_MAXIMO_HABANA_VIEJA: 8, // kg
+    
+    // Tarifas por distancia (para otros municipios)
+    TARIFAS_DISTANCIA: [
+        { maxKm: 1, precio: 300 },
+        { maxKm: 2, precio: 400 },
+        { maxKm: 3, precio: 450 },
+        { maxKm: 4, precio: 500 },
+        { maxKm: 5, precio: 550 }
+    ],
+    PRECIO_POR_KM_ADICIONAL: 100,
+    
+    // Extras
+    EXPRES_EXTRA: 50, // Pedido exprés en 15 min
+    CARGO_PESO_EXCEDIDO: 100 // por kg adicional sobre 8kg
+};
 
-                <!-- ZONA DE ENTREGA - ACTUALIZADA -->
-                <div class="mb-6">
-                    <h4 class="font-bold text-gray-700 mb-3 flex items-center gap-2">
-                        <i class="fas fa-map-marker-alt text-cuban-green"></i> ¿Dónde entregamos?
-                    </h4>
-                    
-                    <div class="space-y-3">
-                        <!-- La Habana Vieja -->
-                        <label class="flex items-start gap-3 p-4 border-2 rounded-xl cursor-pointer transition hover:bg-gray-50 has-[:checked]:border-cuban-green has-[:checked]:bg-cuban-green/5">
-                            <input type="radio" name="deliveryZone" value="habana-vieja" checked class="w-5 h-5 text-cuban-green mt-1" onchange="actualizarOpcionesEnvio()">
-                            <div class="flex-1">
-                                <div class="flex justify-between items-center">
-                                    <span class="font-bold text-gray-800">La Habana Vieja</span>
-                                    <span class="font-bold text-cuban-green">$300</span>
-                                </div>
-                                <p class="text-sm text-gray-600 mt-1">Tarifa fija para pedidos de hasta 8 kg. Si excede, se aplica cargo extra.</p>
-                            </div>
-                        </label>
-
-                        <!-- Otro municipio -->
-                        <label class="flex items-start gap-3 p-4 border-2 rounded-xl cursor-pointer transition hover:bg-gray-50 has-[:checked]:border-cuban-green has-[:checked]:bg-cuban-green/5">
-                            <input type="radio" name="deliveryZone" value="otro" class="w-5 h-5 text-cuban-green mt-1" onchange="actualizarOpcionesEnvio()">
-                            <div class="flex-1">
-                                <div class="flex justify-between items-center">
-                                    <span class="font-bold text-gray-800">Otro municipio de La Habana</span>
-                                    <span class="font-bold text-amber-600">Por distancia</span>
-                                </div>
-                                <p class="text-sm text-gray-600 mt-1">El costo depende de la distancia. Selecciona abajo.</p>
-                            </div>
-                        </label>
-                    </div>
-                    
-                    <!-- Selector de distancia (se muestra solo si se selecciona otro municipio) -->
-                    <div id="distanceSelector" class="mt-4 hidden">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Distancia aproximada desde La Habana Vieja:</label>
-                        <select id="distanceKm" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green">
-                            <option value="0.5">Menos de 1 km - $300</option>
-                            <option value="1.5">1 - 2 km - $400</option>
-                            <option value="2.5">2 - 3 km - $450</option>
-                            <option value="3.5">3 - 4 km - $500</option>
-                            <option value="4.5">4 - 5 km - $550</option>
-                            <option value="6">+5 km - $550 + $100/km adicional</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- PESO APROXIMADO -->
-                <div class="mb-6">
-                    <h4 class="font-bold text-gray-700 mb-3 flex items-center gap-2">
-                        <i class="fas fa-weight-hanging text-cuban-green"></i> Peso aproximado del pedido
-                    </h4>
-                    <select id="approximateWeight" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green">
-                        <option value="menos-1kg">Menos de 1 kg</option>
-                        <option value="1-3kg">1 - 3 kg</option>
-                        <option value="3-5kg">3 - 5 kg</option>
-                        <option value="5-8kg">5 - 8 kg</option>
-                        <option value="mas-8kg">Más de 8 kg (aplica cargo extra)</option>
-                    </select>
-                    <p class="text-xs text-gray-500 mt-1">* Para La Habana Vieja, tarifa fija de $300 hasta 8 kg.</p>
-                </div>
-
-                <!-- ENTREGA EXPRÉS (NUEVO) -->
-                <div class="mb-6 p-4 bg-blue-50 rounded-xl border border-blue-200">
-                    <label class="flex items-center gap-3 cursor-pointer">
-                        <input type="checkbox" id="expressDelivery" class="w-5 h-5 text-cuban-green rounded">
-                        <div>
-                            <span class="font-bold text-blue-800">🚀 Entrega exprés (+$50)</span>
-                            <p class="text-xs text-blue-600">Recibe tu pedido en 15 minutos (sujeto a disponibilidad)</p>
-                        </div>
-                    </label>
-                </div>
-
-                <!-- MÉTODO DE PAGO -->
-                <div class="mb-6">
-                    <h4 class="font-bold text-gray-700 mb-3 flex items-center gap-2">
-                        <i class="fas fa-credit-card text-cuban-green"></i> ¿Cómo pagas?
-                    </h4>
-                    
-                    <div class="grid grid-cols-2 gap-3">
-                        <label class="flex flex-col items-center gap-2 p-4 border-2 rounded-xl cursor-pointer transition hover:bg-gray-50 has-[:checked]:border-cuban-green has-[:checked]:bg-cuban-green/5">
-                            <input type="radio" name="paymentMethod" value="Efectivo" checked class="w-5 h-5 text-cuban-green">
-                            <span class="text-2xl">💵</span>
-                            <span class="font-medium">Efectivo</span>
-                            <span class="text-xs text-gray-500">Pagas al recibir</span>
-                        </label>
-                        
-                        <label class="flex flex-col items-center gap-2 p-4 border-2 rounded-xl cursor-pointer transition hover:bg-gray-50 has-[:checked]:border-cuban-green has-[:checked]:bg-cuban-green/5">
-                            <input type="radio" name="paymentMethod" value="Transferencia" class="w-5 h-5 text-cuban-green">
-                            <span class="text-2xl">📱</span>
-                            <span class="font-medium">Transferencia</span>
-                            <span class="text-xs text-gray-500">Sujeto a disponibilidad</span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- NOTAS ADICIONALES -->
-                <div class="mb-6">
-                    <label for="customerNotes" class="block text-sm font-medium text-gray-700 mb-1">¿Algo más que debamos saber?</label>
-                    <textarea id="customerNotes" 
-                              rows="2" 
-                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent"
-                              placeholder="Ej: Prefiero que llamen antes de llegar, el edificio es el amarillo, etc."></textarea>
-                </div>
-
-                <!-- BOTONES -->
-                <div class="flex gap-3 pt-4 border-t border-gray-200">
-                    <button type="button" onclick="window.closeCheckoutModal()" class="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 rounded-xl font-bold hover:bg-gray-100 transition">
-                        Cancelar
-                    </button>
-                    <button type="submit" class="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-white px-4 py-3 rounded-xl font-bold hover:opacity-90 transition flex items-center justify-center gap-2 shadow-md">
-                        <i class="fab fa-whatsapp"></i> Enviar pedido
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<script>
-    function actualizarOpcionesEnvio() {
-        const otroMunicipio = document.querySelector('input[name="deliveryZone"]:checked')?.value === 'otro';
-        const distanceSelector = document.getElementById('distanceSelector');
-        if (distanceSelector) {
-            distanceSelector.classList.toggle('hidden', !otroMunicipio);
+function calcularTarifaMensajeria(distanciaKm, pesoKg, esExpres = false, esHabanaVieja = false) {
+    let precioBase = 0;
+    
+    if (esHabanaVieja) {
+        // Tarifa especial para La Habana Vieja
+        if (pesoKg <= MENSAJERIA_CONFIG.PESO_MAXIMO_HABANA_VIEJA) {
+            precioBase = MENSAJERIA_CONFIG.HABANA_VIEJA_TARIFA;
+        } else {
+            // Si excede el peso, se calcula por distancia normal + cargo extra
+            precioBase = calcularTarifaPorDistancia(distanciaKm);
+            const excesoPeso = pesoKg - MENSAJERIA_CONFIG.PESO_MAXIMO_HABANA_VIEJA;
+            precioBase += excesoPeso * MENSAJERIA_CONFIG.CARGO_PESO_EXCEDIDO;
         }
+    } else {
+        precioBase = calcularTarifaPorDistancia(distanciaKm);
     }
     
-    // Inicializar al cargar el modal
-    document.addEventListener('DOMContentLoaded', function() {
-        const modal = document.getElementById('checkoutModal');
-        if (modal) {
-            const observer = new MutationObserver(function() {
-                if (!modal.classList.contains('hidden')) {
-                    actualizarOpcionesEnvio();
-                }
-            });
-            observer.observe(modal, { attributes: true });
+    if (esExpres) {
+        precioBase += MENSAJERIA_CONFIG.EXPRES_EXTRA;
+    }
+    
+    return precioBase;
+}
+
+function calcularTarifaPorDistancia(distanciaKm) {
+    for (const tramo of MENSAJERIA_CONFIG.TARIFAS_DISTANCIA) {
+        if (distanciaKm <= tramo.maxKm) {
+            return tramo.precio;
         }
-    });
-</script>
+    }
+    // Para distancias mayores a 5km
+    const extra = Math.ceil(distanciaKm - 5);
+    return MENSAJERIA_CONFIG.TARIFAS_DISTANCIA[MENSAJERIA_CONFIG.TARIFAS_DISTANCIA.length - 1].precio + 
+           (extra * MENSAJERIA_CONFIG.PRECIO_POR_KM_ADICIONAL);
+}
+
+// ============================================
+// CARRITO Y FUNCIONES PRINCIPALES
+// ============================================
+(function() {
+    'use strict';
+    
+    let cart = JSON.parse(localStorage.getItem('elResolvitoCart')) || [];
+    const WHATSAPP_NUMBER = '5356382909';
+    const MINIMUM_PURCHASE = 500;
+    const SHIPPING_COST_HABANA_VIEJA = 300; // Actualizado a 300
+
+    // ... (resto de funciones anteriores se mantienen igual)
+
+    // Actualizar la función sendCompleteOrder con las nuevas tarifas
+    window.sendCompleteOrder = function() {
+        if (cart.length === 0) {
+            alert('El carrito está vacío');
+            return;
+        }
+
+        const customerName = document.getElementById('customerName')?.value.trim();
+        const customerAddress = document.getElementById('customerAddress')?.value.trim();
+        const deliveryZone = document.querySelector('input[name="deliveryZone"]:checked')?.value;
+        const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value;
+        const pesoSeleccionado = document.getElementById('approximateWeight')?.value || '';
+        const esExpres = document.getElementById('expressDelivery')?.checked || false;
+        const notes = document.getElementById('customerNotes')?.value.trim() || '';
+
+        if (!customerName || !customerAddress || !deliveryZone || !paymentMethod) {
+            showToast('⚠️ Completa todos los campos obligatorios', 'warning');
+            return;
+        }
+
+        const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
+        if (subtotal < MINIMUM_PURCHASE) {
+            showToast(`⚠️ Mínimo de compra: $${MINIMUM_PURCHASE}`, 'warning');
+            return;
+        }
+
+        // Calcular peso total aproximado del carrito
+        const pesoTotal = calcularPesoCarrito();
+        const esHabanaVieja = deliveryZone === 'habana-vieja';
+        
+        let costoEnvio = 0;
+        let mensajeEnvio = '';
+
+        if (esHabanaVieja && pesoTotal <= MENSAJERIA_CONFIG.PESO_MAXIMO_HABANA_VIEJA) {
+            costoEnvio = MENSAJERIA_CONFIG.HABANA_VIEJA_TARIFA;
+            mensajeEnvio = `$${costoEnvio} (La Habana Vieja - peso ${pesoTotal}kg ≤ ${MENSAJERIA_CONFIG.PESO_MAXIMO_HABANA_VIEJA}kg)`;
+        } else if (esHabanaVieja && pesoTotal > MENSAJERIA_CONFIG.PESO_MAXIMO_HABANA_VIEJA) {
+            // Calcular por distancia (asumimos 0-1km dentro de Habana Vieja)
+            costoEnvio = calcularTarifaPorDistancia(1);
+            const exceso = pesoTotal - MENSAJERIA_CONFIG.PESO_MAXIMO_HABANA_VIEJA;
+            costoEnvio += exceso * MENSAJERIA_CONFIG.CARGO_PESO_EXCEDIDO;
+            mensajeEnvio = `$${costoEnvio} (La Habana Vieja - peso excede ${MENSAJERIA_CONFIG.PESO_MAXIMO_HABANA_VIEJA}kg, +$${MENSAJERIA_CONFIG.CARGO_PESO_EXCEDIDO}/kg extra)`;
+        } else {
+            // Para otros municipios, usar el selector de distancia
+            const distancia = document.getElementById('distanceKm')?.value;
+            if (distancia) {
+                costoEnvio = calcularTarifaPorDistancia(parseFloat(distancia));
+                mensajeEnvio = `$${costoEnvio} (${distancia} km)`;
+            } else {
+                mensajeEnvio = 'A convenir (fuera de La Habana Vieja)';
+            }
+        }
+
+        if (esExpres) {
+            costoEnvio += MENSAJERIA_CONFIG.EXPRES_EXTRA;
+            mensajeEnvio += ' + $50 (Entrega exprés 15min)';
+        }
+
+        let mensaje = "🛒 *NUEVO PEDIDO - EL RESOLVITO*\n\n";
+        mensaje += "*PRODUCTOS:*\n";
+        cart.forEach(item => {
+            mensaje += `• ${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString()}\n`;
+        });
+
+        mensaje += `\n📦 *Peso estimado:* ${pesoTotal} kg`;
+        mensaje += `\n*Subtotal:* $${subtotal.toLocaleString()}`;
+        mensaje += `\n*Envío:* ${mensajeEnvio}`;
+        mensaje += `\n*Total:* $${(subtotal + costoEnvio).toLocaleString()}`;
+
+        mensaje += `\n\n*DATOS DEL CLIENTE*`;
+        mensaje += `\n👤 *Nombre:* ${customerName}`;
+        mensaje += `\n📍 *Dirección:* ${customerAddress}`;
+        mensaje += `\n💳 *Pago propuesto:* ${paymentMethod}`;
+        mensaje += `\n🚀 *Entrega exprés:* ${esExpres ? 'Sí (+$50)' : 'No'}`;
+
+        if (notes) {
+            mensaje += `\n📝 *Notas:* ${notes}`;
+        }
+
+        mensaje += `\n\n_Te contactaremos para confirmar disponibilidad y coordinar la entrega._`;
+
+        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank');
+
+        window.closeCheckoutModal();
+        if (document.getElementById('cartSidebar')?.classList.contains('cart-open')) {
+            window.toggleCart();
+        }
+        
+        showToast('✅ Pedido enviado por WhatsApp. Te contactaremos pronto.', 'success');
+    };
+
+    function calcularPesoCarrito() {
+        // Estimación básica de peso por producto
+        let pesoTotal = 0;
+        cart.forEach(item => {
+            // Asignar peso estimado según el tipo de producto
+            if (item.nombre.includes('Leche') || item.nombre.includes('Huevo') || item.nombre.includes('Café')) {
+                pesoTotal += 0.5 * item.cantidad;
+            } else if (item.nombre.includes('Ropa') || item.nombre.includes('Cartera') || item.nombre.includes('Chancla')) {
+                pesoTotal += 0.3 * item.cantidad;
+            } else {
+                pesoTotal += 0.2 * item.cantidad;
+            }
+        });
+        return Math.round(pesoTotal * 10) / 10;
+    }
+
+    // ... (resto de funciones se mantienen igual)
+})();
