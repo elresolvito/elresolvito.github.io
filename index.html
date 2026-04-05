@@ -119,16 +119,79 @@
             transform: translateY(-8px);
         }
         
-        /* Tabla de precios mensajería */
-        .tarifa-row {
+        /* Modal de mensajería */
+        .modal-mensajeria {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 99999;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
         }
-        .tarifa-row:last-child {
-            border-bottom: none;
+        
+        .modal-mensajeria.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-mensajeria-content {
+            background: white;
+            border-radius: 1.5rem;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-mensajeria.active .modal-mensajeria-content {
+            transform: scale(1);
+        }
+        
+        .modal-mensajeria-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .modal-mensajeria-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+        
+        .modal-mensajeria-content::-webkit-scrollbar-thumb {
+            background: #2E7D32;
+            border-radius: 3px;
+        }
+        
+        /* Campos del formulario - fondo blanco, letra oscura */
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            background: white;
+            color: #1f2937;
+            transition: all 0.2s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #2E7D32;
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
         }
         
         @media (max-width: 640px) {
@@ -137,6 +200,9 @@
             }
             .hero-text {
                 font-size: 1rem !important;
+            }
+            .modal-mensajeria-content {
+                max-height: 95vh;
             }
         }
     </style>
@@ -159,44 +225,113 @@
             }
         }
         
-        // Función para enviar solicitud de mensajería por WhatsApp
-        function enviarSolicitudMensajeria() {
-            const mensaje = `🚲 *SOLICITUD DE MENSAJERÍA - EL RESOLVITO* 🚲
-
-Hola, necesito un servicio de mensajería. Por favor, tomen mis datos:
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📍 *DIRECCIÓN DE RECOGIDA:*
-(Escribe aquí la dirección completa)
-
-📍 *DIRECCIÓN DE ENTREGA:*
-(Escribe aquí la dirección completa)
-
-📦 *QUÉ ENVIAR:*
-(Describe el paquete: tipo, tamaño, peso aproximado)
-
-📱 *TELÉFONO DE CONTACTO:*
-(Escribe tu número)
-
-📝 *NOTAS ADICIONALES:*
-(Cualquier otra información importante)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-💰 *Para tu referencia - Tarifas:*
-• La Habana Vieja (hasta 8kg): $300
-• Hasta 1 km: $300
-• 1 - 2 km: $400
-• 2 - 3 km: $450
-• 3 - 4 km: $500
-• 4 - 5 km: $550
-• +5 km: $100/km adicional
-
-📌 *Nota:* Te contactaremos para confirmar el costo total antes de enviar.
-
-¡Gracias!`;
-            
-            window.open(`https://wa.me/5356382909?text=${encodeURIComponent(mensaje)}`, '_blank');
+        // Función para abrir el modal de mensajería
+        function abrirModalMensajeria() {
+            document.getElementById('modalMensajeria').classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
+        
+        // Función para cerrar el modal de mensajería
+        function cerrarModalMensajeria() {
+            document.getElementById('modalMensajeria').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        // Función para enviar el formulario de mensajería
+        function enviarSolicitudMensajeria(event) {
+            event.preventDefault();
+            
+            // Obtener valores del formulario
+            const nombre = document.getElementById('msg_nombre').value.trim();
+            const telefono = document.getElementById('msg_telefono').value.trim();
+            const direccionRecogida = document.getElementById('msg_direccion_recogida').value.trim();
+            const direccionEntrega = document.getElementById('msg_direccion_entrega').value.trim();
+            const tipoPaquete = document.getElementById('msg_tipo_paquete').value;
+            const peso = document.getElementById('msg_peso').value;
+            const servicioExpres = document.getElementById('msg_expres').checked;
+            const notas = document.getElementById('msg_notas').value.trim();
+            
+            // Validar campos obligatorios
+            if (!nombre || !telefono || !direccionRecogida || !direccionEntrega) {
+                alert('⚠️ Por favor, completa todos los campos obligatorios.');
+                return;
+            }
+            
+            // Construir mensaje para WhatsApp
+            let mensaje = `🚲 *SOLICITUD DE MENSAJERÍA - EL RESOLVITO* 🚲\n\n`;
+            mensaje += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+            mensaje += `👤 *DATOS DEL CLIENTE*\n`;
+            mensaje += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+            mensaje += `• *Nombre:* ${nombre}\n`;
+            mensaje += `• *Teléfono:* ${telefono}\n\n`;
+            
+            mensaje += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+            mensaje += `📍 *DIRECCIONES*\n`;
+            mensaje += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+            mensaje += `• *Recogida:* ${direccionRecogida}\n`;
+            mensaje += `• *Entrega:* ${direccionEntrega}\n\n`;
+            
+            mensaje += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+            mensaje += `📦 *DETALLES DEL PAQUETE*\n`;
+            mensaje += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+            
+            const tipoTexto = {
+                'documento': '📄 Documento/sobre',
+                'paquete_pequeno': '📦 Paquete pequeño (< 2kg)',
+                'paquete_mediano': '📦📦 Paquete mediano (2-5kg)',
+                'paquete_grande': '📦📦📦 Paquete grande (> 5kg)',
+                'mercancia': '🏪 Mercancía / productos',
+                'otro': '❓ Otro'
+            };
+            mensaje += `• *Tipo:* ${tipoTexto[tipoPaquete] || tipoPaquete}\n`;
+            
+            const pesoTexo = {
+                'menos_1kg': 'Menos de 1 kg',
+                '1_3kg': '1 - 3 kg',
+                '3_5kg': '3 - 5 kg',
+                '5_8kg': '5 - 8 kg',
+                'mas_8kg': 'Más de 8 kg'
+            };
+            mensaje += `• *Peso aproximado:* ${pesoTexo[peso] || peso}\n`;
+            mensaje += `• *Servicio exprés:* ${servicioExpres ? '✅ Sí (+$50)' : '❌ No (entrega normal)'}\n\n`;
+            
+            if (notas) {
+                mensaje += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+                mensaje += `📝 *NOTAS ADICIONALES*\n`;
+                mensaje += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+                mensaje += `${notas}\n\n`;
+            }
+            
+            mensaje += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+            mensaje += `💰 *PARA TU REFERENCIA - TARIFAS*\n`;
+            mensaje += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+            mensaje += `• La Habana Vieja (hasta 8kg): $300\n`;
+            mensaje += `• Hasta 1 km: $300\n`;
+            mensaje += `• 1 - 2 km: $400\n`;
+            mensaje += `• 2 - 3 km: $450\n`;
+            mensaje += `• 3 - 4 km: $500\n`;
+            mensaje += `• 4 - 5 km: $550\n`;
+            mensaje += `• +5 km: $100/km adicional\n`;
+            mensaje += `• Servicio exprés: +$50\n\n`;
+            
+            mensaje += `📌 *Nota:* Te contactaremos para confirmar el costo total y la hora de recogida.\n\n`;
+            mensaje += `¡Gracias por confiar en El Resolvito! 🙏`;
+            
+            // Abrir WhatsApp
+            window.open(`https://wa.me/5356382909?text=${encodeURIComponent(mensaje)}`, '_blank');
+            
+            // Cerrar modal y resetear formulario
+            cerrarModalMensajeria();
+            document.getElementById('formMensajeria').reset();
+        }
+        
+        // Cerrar modal al hacer clic fuera
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('modalMensajeria');
+            if (modal && modal.classList.contains('active') && event.target === modal) {
+                cerrarModalMensajeria();
+            }
+        });
     </script>
 </head>
 <body>
@@ -318,7 +453,7 @@ Hola, necesito un servicio de mensajería. Por favor, tomen mis datos:
             </div>
         </section>
 
-        <!-- PROMOCIONES ESPECIALES - COLECCIÓN DE MODA -->
+        <!-- PROMOCIONES ESPECIALES - NUEVA SECCIÓN DE MODA -->
         <section class="py-16 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 section-fade">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-12">
@@ -388,7 +523,7 @@ Hola, necesito un servicio de mensajería. Por favor, tomen mis datos:
             </div>
         </section>
 
-        <!-- Servicios Destacados (SOLO Dulce César y Contador - SIN mensajería) -->
+        <!-- Servicios Preview -->
         <section class="py-12 bg-gray-50 section-fade">
             <div class="container mx-auto px-4">
                 <div class="flex justify-between items-center mb-8">
@@ -426,66 +561,29 @@ Hola, necesito un servicio de mensajería. Por favor, tomen mis datos:
             </div>
         </section>
 
-      <!-- Sección destacada: Mensajería El Resolvito -->
-<section class="py-12 bg-gradient-to-r from-amber-50 to-orange-50 section-fade">
-    <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row items-center gap-8">
-            <div class="md:w-1/2 text-center md:text-left">
-                <span class="inline-block bg-cuban-orange text-white text-xs font-bold px-3 py-1 rounded-full mb-3">
-                    🛵 NUEVO SERVICIO
-                </span>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
-                    Mensajería El Resolvito
-                </h2>
-                <p class="text-gray-600 mb-4">
-                    Tu mensajero de confianza en La Habana. Rápido, confiable y con precios claros.
-                    Entregas el mismo día en La Habana Vieja y zonas cercanas.
-                </p>
-                <div class="flex flex-wrap gap-3 mb-5">
-                    <div class="flex items-center gap-2 text-sm bg-white rounded-full px-3 py-1 shadow-sm">
-                        <i class="fas fa-check-circle text-cuban-green"></i> Hasta 1km: $300
-                    </div>
-                    <div class="flex items-center gap-2 text-sm bg-white rounded-full px-3 py-1 shadow-sm">
-                        <i class="fas fa-check-circle text-cuban-green"></i> 1-2km: $400
-                    </div>
-                    <div class="flex items-center gap-2 text-sm bg-white rounded-full px-3 py-1 shadow-sm">
-                        <i class="fas fa-check-circle text-cuban-green"></i> 2-3km: $450
-                    </div>
-                    <div class="flex items-center gap-2 text-sm bg-white rounded-full px-3 py-1 shadow-sm">
-                        <i class="fas fa-check-circle text-cuban-green"></i> +5km: $100/km
-                    </div>
-                </div>
-                <div class="flex flex-col sm:flex-row gap-3">
-                    <a href="mensajeriaelresolvito/" 
-                       class="bg-cuban-green hover:bg-cuban-dark text-white font-bold py-3 px-6 rounded-full transition inline-flex items-center justify-center gap-2">
-                        <i class="fas fa-motorcycle"></i> Conocer más
-                    </a>
-                    <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20mensajer%C3%ADa" 
-                       target="_blank"
-                       class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full transition inline-flex items-center justify-center gap-2">
-                        <i class="fab fa-whatsapp"></i> Consultar ahora
-                    </a>
-                </div>
-            </div>
-            <div class="md:w-1/2">
-                <div class="bg-white rounded-2xl shadow-xl p-6 text-center">
-                    <i class="fas fa-motorcycle text-6xl text-cuban-orange mb-3"></i>
-                    <h3 class="text-xl font-bold mb-2">¿Necesitas un mensajero?</h3>
-                    <p class="text-gray-500 text-sm mb-4">Entregas el mismo día · Precios claros · Pago contra entrega</p>
-                    <div class="bg-gray-50 rounded-xl p-3 text-left text-sm">
-                        <div class="flex justify-between py-1"><span>📍 La Habana Vieja</span><span class="font-bold">$300</span></div>
-                        <div class="flex justify-between py-1 border-t"><span>📍 Hasta 1 km</span><span class="font-bold">$300</span></div>
-                        <div class="flex justify-between py-1 border-t"><span>📍 1 - 2 km</span><span class="font-bold">$400</span></div>
-                        <div class="flex justify-between py-1 border-t"><span>📍 2 - 3 km</span><span class="font-bold">$450</span></div>
-                        <div class="flex justify-between py-1 border-t"><span>📍 3 - 4 km</span><span class="font-bold">$500</span></div>
-                        <div class="flex justify-between py-1 border-t"><span>📍 4 - 5 km</span><span class="font-bold">$550</span></div>
-                        <div class="flex justify-between py-1 border-t"><span>📍 +5 km</span><span class="font-bold">$100/km</span></div>
+        <!-- MENSAJERÍA - con modal para Consultar ahora -->
+        <section class="py-12 section-fade">
+            <div class="container mx-auto px-4">
+                <div class="relative rounded-2xl overflow-hidden shadow-xl min-h-[280px] md:min-h-[320px] bg-cover bg-center" style="background-image: url('https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp');">
+                    <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
+                    <div class="relative z-10 text-white p-6 md:p-10 max-w-2xl">
+                        <span class="inline-block bg-cuban-yellow text-cuban-dark text-sm font-bold px-4 py-1 rounded-full mb-3">🛵 NUEVO SERVICIO</span>
+                        <h2 class="text-2xl md:text-3xl font-bold mb-2"><i class="fas fa-box"></i> ¿Necesitas un mensajero?</h2>
+                        <p class="text-sm mb-4 opacity-90">Un servicio rápido, confiable y en La Habana. Coordinamos por WhatsApp.</p>
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <!-- Botón Conocer más - enlaza a la web de mensajería -->
+                            <a href="mensajeriaelresolvito/" target="_blank" class="bg-cuban-green hover:bg-cuban-dark text-white font-bold py-2 px-6 rounded-full transition flex items-center justify-center gap-2 text-sm btn-hover-effect">
+                                <i class="fas fa-motorcycle"></i> Conocer más
+                            </a>
+                            <!-- Botón Consultar ahora - abre el modal -->
+                            <button onclick="abrirModalMensajeria()" class="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold py-2 px-6 rounded-full transition border border-white flex items-center justify-center gap-2 text-sm">
+                                <i class="fab fa-whatsapp"></i> Consultar ahora
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 
         <!-- Blog Preview -->
         <section class="py-12 bg-gray-50 section-fade">
@@ -531,10 +629,8 @@ Hola, necesito un servicio de mensajería. Por favor, tomen mis datos:
                             <div class="amenity-item"><i class="fas fa-check-circle"></i> Wi-Fi gratuito</div>
                         </div>
                         <div class="flex gap-4 mt-6">
-                            <a href="reservas.html" class="bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark text-center flex-1 transition">Ver detalles</a>
-                            <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20reservar%20Terrazas%20de%20Bayona%2059" target="_blank" class="border-2 border-cuban-green text-cuban-green px-6 py-3 rounded-lg font-bold hover:bg-cuban-green hover:text-white text-center transition flex items-center justify-center gap-2">
-                                <i class="fab fa-whatsapp"></i> Reservar
-                            </a>
+                            <a href="https://reservaterrazasdebayona59.com/" target="_blank" class="bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark text-center flex-1 transition">Reservar Ahora</a>
+                            <a href="reservas.html" class="border-2 border-cuban-green text-cuban-green px-6 py-3 rounded-lg font-bold hover:bg-cuban-green hover:text-white text-center transition">Ver más</a>
                         </div>
                     </div>
                 </div>
@@ -549,6 +645,106 @@ Hola, necesito un servicio de mensajería. Por favor, tomen mis datos:
 
         <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
             <p id="cartToastMessage"></p>
+        </div>
+    </div>
+
+    <!-- MODAL DE MENSAJERÍA (FORMULARIO) -->
+    <div id="modalMensajeria" class="modal-mensajeria">
+        <div class="modal-mensajeria-content">
+            <!-- Cabecera -->
+            <div class="p-5 bg-gradient-to-r from-cuban-green to-cuban-dark text-white rounded-t-2xl">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="text-xl font-bold flex items-center gap-2">
+                            <i class="fas fa-motorcycle"></i> Solicitar Mensajero
+                        </h3>
+                        <p class="text-sm opacity-90 mt-1">Completa los datos y te contactamos</p>
+                    </div>
+                    <button onclick="cerrarModalMensajeria()" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Formulario -->
+            <div class="p-5">
+                <form id="formMensajeria" onsubmit="enviarSolicitudMensajeria(event)">
+                    <!-- Nombre -->
+                    <div class="mb-4">
+                        <label class="form-label">Nombre completo *</label>
+                        <input type="text" id="msg_nombre" required class="form-input" placeholder="Ej: Juan Carlos Pérez">
+                    </div>
+                    
+                    <!-- Teléfono -->
+                    <div class="mb-4">
+                        <label class="form-label">Teléfono de contacto *</label>
+                        <input type="tel" id="msg_telefono" required class="form-input" placeholder="Ej: 53 5 123 4567">
+                    </div>
+                    
+                    <!-- Dirección de recogida -->
+                    <div class="mb-4">
+                        <label class="form-label">📍 Dirección de recogida *</label>
+                        <textarea id="msg_direccion_recogida" rows="2" required class="form-input" placeholder="Ej: Calle Obispo No. 123, e/ Mercaderes y San Ignacio, La Habana Vieja"></textarea>
+                    </div>
+                    
+                    <!-- Dirección de entrega -->
+                    <div class="mb-4">
+                        <label class="form-label">📍 Dirección de entrega *</label>
+                        <textarea id="msg_direccion_entrega" rows="2" required class="form-input" placeholder="Ej: Calle 23 No. 456, e/ L y M, Vedado"></textarea>
+                    </div>
+                    
+                    <!-- Tipo de paquete -->
+                    <div class="mb-4">
+                        <label class="form-label">📦 Tipo de paquete</label>
+                        <select id="msg_tipo_paquete" class="form-input">
+                            <option value="documento">📄 Documento / Sobre</option>
+                            <option value="paquete_pequeno">📦 Paquete pequeño (menos de 2 kg)</option>
+                            <option value="paquete_mediano">📦📦 Paquete mediano (2-5 kg)</option>
+                            <option value="paquete_grande">📦📦📦 Paquete grande (más de 5 kg)</option>
+                            <option value="mercancia">🏪 Mercancía / Productos</option>
+                            <option value="otro">❓ Otro</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Peso aproximado -->
+                    <div class="mb-4">
+                        <label class="form-label">⚖️ Peso aproximado</label>
+                        <select id="msg_peso" class="form-input">
+                            <option value="menos_1kg">Menos de 1 kg</option>
+                            <option value="1_3kg">1 - 3 kg</option>
+                            <option value="3_5kg">3 - 5 kg</option>
+                            <option value="5_8kg">5 - 8 kg</option>
+                            <option value="mas_8kg">Más de 8 kg</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Servicio exprés -->
+                    <div class="mb-4">
+                        <label class="flex items-center gap-3 cursor-pointer">
+                            <input type="checkbox" id="msg_expres" class="w-5 h-5 text-cuban-green rounded">
+                            <span class="text-sm text-gray-700">⚡ Servicio exprés (+$50) - Entrega en 15 minutos</span>
+                        </label>
+                    </div>
+                    
+                    <!-- Notas adicionales -->
+                    <div class="mb-5">
+                        <label class="form-label">📝 Notas adicionales (opcional)</label>
+                        <textarea id="msg_notas" rows="2" class="form-input" placeholder="Ej: Llamar antes de llegar, el edificio es azul, etc."></textarea>
+                    </div>
+                    
+                    <!-- Botones -->
+                    <div class="flex gap-3">
+                        <button type="button" onclick="cerrarModalMensajeria()" class="flex-1 px-4 py-3 border-2 border-gray-300 rounded-xl font-bold hover:bg-gray-100 transition text-gray-700">Cancelar</button>
+                        <button type="submit" class="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-white px-4 py-3 rounded-xl font-bold hover:opacity-90 transition flex items-center justify-center gap-2">
+                            <i class="fab fa-whatsapp"></i> Enviar solicitud
+                        </button>
+                    </div>
+                    
+                    <p class="text-xs text-center text-gray-500 mt-4">
+                        Al enviar, se abrirá WhatsApp con el mensaje pre-escrito
+                    </p>
+                </form>
+            </div>
         </div>
     </div>
 
