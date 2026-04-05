@@ -92,13 +92,6 @@
             color: #2E7D32;
         }
 
-        .precio-antiguo {
-            font-size: 0.9rem;
-            color: #9ca3af;
-            text-decoration: line-through;
-            margin-left: 0.5rem;
-        }
-
         .producto-wa {
             width: 100%;
             background: linear-gradient(135deg, #25D366, #128C7E);
@@ -250,8 +243,10 @@
         <p id="cartToastMessage"></p>
     </div>
 
+    <script src="js/elresolvito.js" defer></script>
+    
     <script>
-        // Datos de productos (tomados de lienys + nuevos)
+        // Datos de productos
         const productosModa = {
             ropa: [
                 { id: 401, nombre: "Camisa Blanca", imagen: "https://images.unsplash.com/photo-1598032895397-b9472444bf93?w=400", precio: 3500, descripcion: "Clásica y elegante" },
@@ -272,6 +267,7 @@
             ]
         };
 
+        // Función para abrir modal de imagen
         function abrirModal(imagen, titulo, descripcion, precio) {
             const modalHTML = `
                 <div class="fixed inset-0 bg-black/80 z-[200] flex items-center justify-center p-4" onclick="this.remove()">
@@ -281,7 +277,7 @@
                             <h3 class="text-2xl font-bold mb-2">${titulo}</h3>
                             <p class="text-gray-600 mb-4">${descripcion}</p>
                             <p class="text-3xl font-bold text-cuban-green mb-4">$${precio.toLocaleString()}</p>
-                            <button onclick="window.addToCart && window.addToCart({id: Math.random(), nombre: '${titulo}', precio: ${precio}, imagen: '${imagen}', cantidad: 1}); this.closest('.fixed').remove();" class="w-full bg-cuban-green text-white py-3 rounded-xl font-bold hover:bg-cuban-dark transition">
+                            <button onclick="if(window.addToCart) window.addToCart({id: Math.random(), nombre: '${titulo}', precio: ${precio}, imagen: '${imagen}', cantidad: 1}); this.closest('.fixed').remove();" class="w-full bg-cuban-green text-white py-3 rounded-xl font-bold hover:bg-cuban-dark transition">
                                 <i class="fas fa-cart-plus mr-2"></i>Agregar al carrito
                             </button>
                         </div>
@@ -291,6 +287,7 @@
             document.body.insertAdjacentHTML('beforeend', modalHTML);
         }
 
+        // Renderizar productos
         function renderizarProductos() {
             // Ropa
             const ropaGrid = document.getElementById('ropa-grid');
@@ -307,7 +304,7 @@
                             <div class="producto-precio">
                                 <span class="precio">$${p.precio.toLocaleString()}</span>
                             </div>
-                            <button class="producto-wa" onclick="window.addToCart && window.addToCart({id: ${p.id}, nombre: '${p.nombre}', precio: ${p.precio}, imagen: '${p.imagen}', cantidad: 1})">
+                            <button class="producto-wa" onclick="if(window.addToCart) window.addToCart({id: ${p.id}, nombre: '${p.nombre}', precio: ${p.precio}, imagen: '${p.imagen}', cantidad: 1})">
                                 <i class="fas fa-cart-plus"></i> Agregar al carrito
                             </button>
                         </div>
@@ -329,7 +326,7 @@
                             <div class="producto-precio">
                                 <span class="precio">$${p.precio.toLocaleString()}</span>
                             </div>
-                            <button class="producto-wa" onclick="window.addToCart && window.addToCart({id: ${p.id}, nombre: '${p.nombre}', precio: ${p.precio}, imagen: '${p.imagen}', cantidad: 1})">
+                            <button class="producto-wa" onclick="if(window.addToCart) window.addToCart({id: ${p.id}, nombre: '${p.nombre}', precio: ${p.precio}, imagen: '${p.imagen}', cantidad: 1})">
                                 <i class="fas fa-cart-plus"></i> Agregar al carrito
                             </button>
                         </div>
@@ -352,7 +349,7 @@
                             <div class="producto-precio">
                                 <span class="precio">$${p.precio.toLocaleString()}</span>
                             </div>
-                            <button class="producto-wa" onclick="window.addToCart && window.addToCart({id: ${p.id}, nombre: '${p.nombre}', precio: ${p.precio}, imagen: '${p.imagen}', cantidad: 1})">
+                            <button class="producto-wa" onclick="if(window.addToCart) window.addToCart({id: ${p.id}, nombre: '${p.nombre}', precio: ${p.precio}, imagen: '${p.imagen}', cantidad: 1})">
                                 <i class="fas fa-cart-plus"></i> Agregar al carrito
                             </button>
                         </div>
@@ -361,6 +358,7 @@
             }
         }
 
+        // Cargar componentes
         async function loadComponent(id, path) {
             try {
                 const response = await fetch(path);
@@ -371,6 +369,7 @@
             }
         }
 
+        // Inicialización
         document.addEventListener('DOMContentLoaded', async function() {
             await loadComponent('header-container', 'components/header.html');
             await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
@@ -385,6 +384,15 @@
             if (typeof window.updateCartUI === 'function') {
                 window.updateCartUI();
             }
+            
+            // Verificar que addToCart está disponible
+            setTimeout(() => {
+                if (typeof window.addToCart === 'function') {
+                    console.log('✅ Carrito funcionando en Moda');
+                } else {
+                    console.warn('⚠️ addToCart no disponible en Moda');
+                }
+            }, 500);
         });
     </script>
 </body>
