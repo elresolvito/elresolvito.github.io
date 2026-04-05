@@ -112,12 +112,20 @@
             transform: scale(1.02);
         }
         
-        /* Nueva tarjeta de moda */
         .moda-card {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .moda-card:hover {
             transform: translateY(-8px);
+        }
+        
+        /* Tarifas de mensajería */
+        .tarifa-item {
+            transition: all 0.2s ease;
+        }
+        .tarifa-item:hover {
+            transform: scale(1.02);
+            background: rgba(255,255,255,0.2);
         }
         
         @media (max-width: 640px) {
@@ -126,6 +134,9 @@
             }
             .hero-text {
                 font-size: 1rem !important;
+            }
+            .tarifas-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
@@ -151,15 +162,18 @@
 </head>
 <body>
 
+    <!-- Loading Overlay -->
     <div id="loadingOverlay">
         <div class="loading-spinner mb-4"></div>
         <div class="text-cuban-green font-semibold text-lg">El Resolvito</div>
         <div class="text-gray-400 text-sm mt-2">Cargando...</div>
     </div>
 
+    <!-- Main Content -->
     <div id="main-content">
         <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
 
+        <!-- Component Containers -->
         <div id="header-container"></div>
         <div id="mobile-menu-container"></div>
         <div id="floating-buttons-container"></div>
@@ -188,7 +202,7 @@
             </div>
         </section>
 
-        <!-- CÓMO COMPRAR -->
+        <!-- CÓMO COMPRAR EN 3 PASOS -->
         <section id="como-comprar" class="py-12 bg-white section-fade">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-8">
@@ -268,7 +282,7 @@
             </div>
         </section>
 
-        <!-- PROMOCIONES ESPECIALES - NUEVA SECCIÓN DE MODA -->
+        <!-- PROMOCIONES ESPECIALES - COLECCIÓN DE MODA -->
         <section class="py-16 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 section-fade">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-12">
@@ -341,7 +355,7 @@
             </div>
         </section>
 
-        <!-- Servicios Preview -->
+        <!-- Servicios Destacados -->
         <section class="py-12 bg-gray-50 section-fade">
             <div class="container mx-auto px-4">
                 <div class="flex justify-between items-center mb-8">
@@ -379,21 +393,68 @@
             </div>
         </section>
 
-        <!-- MENSAJERÍA -->
+        <!-- MENSAJERÍA - NUEVA SECCIÓN CON TARIFAS ACTUALIZADAS -->
         <section class="py-12 section-fade">
             <div class="container mx-auto px-4">
-                <div class="relative rounded-2xl overflow-hidden shadow-xl min-h-[250px] md:min-h-[300px] bg-cover bg-center flex items-center" style="background-image: url('https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp');">
-                    <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
-                    <div class="relative z-10 text-white p-6 md:p-10 max-w-2xl">
-                        <span class="inline-block bg-cuban-yellow text-cuban-dark text-sm font-bold px-4 py-1 rounded-full mb-3">🛵 NUEVO SERVICIO</span>
-                        <h2 class="text-2xl md:text-3xl font-bold mb-2"><i class="fas fa-box"></i> ¿Necesitas un mensajero?</h2>
-                        <p class="text-sm mb-4 opacity-90">Un servicio rápido, confiable y en La Habana. Coordinamos por WhatsApp.</p>
-                        <div class="flex flex-col sm:flex-row gap-3">
-                            <button onclick="if(window.addToCart) window.addToCart({id: 502, nombre: 'Servicio de Mensajería (Habana Vieja)', precio: 400, imagen: 'https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp', cantidad: 1}); else alert('Cargando carrito...');" class="bg-cuban-green hover:bg-cuban-dark text-white font-bold py-2 px-6 rounded-full transition flex items-center justify-center gap-2 text-sm btn-hover-effect">
-                                <i class="fas fa-cart-plus text-lg"></i> Contratar mensajero ($400)
-                            </button>
-                            <a href="servicios.html" class="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold py-2 px-6 rounded-full transition border border-white">Ver todos los servicios</a>
+                <div class="relative rounded-2xl overflow-hidden shadow-xl min-h-[500px] md:min-h-[550px] bg-cover bg-center" style="background-image: url('https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp');">
+                    <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/50"></div>
+                    <div class="relative z-10 text-white p-6 md:p-8 max-w-2xl">
+                        <span class="inline-block bg-cuban-yellow text-cuban-dark text-sm font-bold px-4 py-1 rounded-full mb-4">
+                            🛵 MENSAJERÍA EL RESOLVITO
+                        </span>
+                        <h2 class="text-2xl md:text-3xl font-bold mb-3">Rápida y sin letra chica</h2>
+                        
+                        <!-- Tarifas claras -->
+                        <div class="grid grid-cols-2 gap-2 mb-4 text-sm tarifas-grid">
+                            <div class="tarifa-item bg-white/10 backdrop-blur-sm rounded-lg p-2">
+                                <span class="font-bold">Hasta 1 km</span>
+                                <span class="text-cuban-yellow block font-bold">$300</span>
+                            </div>
+                            <div class="tarifa-item bg-white/10 backdrop-blur-sm rounded-lg p-2">
+                                <span class="font-bold">1 a 2 km</span>
+                                <span class="text-cuban-yellow block font-bold">$400</span>
+                            </div>
+                            <div class="tarifa-item bg-white/10 backdrop-blur-sm rounded-lg p-2">
+                                <span class="font-bold">2 a 3 km</span>
+                                <span class="text-cuban-yellow block font-bold">$450</span>
+                            </div>
+                            <div class="tarifa-item bg-white/10 backdrop-blur-sm rounded-lg p-2">
+                                <span class="font-bold">3 a 4 km</span>
+                                <span class="text-cuban-yellow block font-bold">$500</span>
+                            </div>
+                            <div class="tarifa-item bg-white/10 backdrop-blur-sm rounded-lg p-2">
+                                <span class="font-bold">4 a 5 km</span>
+                                <span class="text-cuban-yellow block font-bold">$550</span>
+                            </div>
+                            <div class="tarifa-item bg-white/10 backdrop-blur-sm rounded-lg p-2">
+                                <span class="font-bold">+5 km</span>
+                                <span class="text-cuban-yellow block font-bold">$100/km</span>
+                            </div>
                         </div>
+                        
+                        <!-- Ventajas -->
+                        <div class="grid grid-cols-2 gap-2 mb-5 text-xs">
+                            <div class="flex items-center gap-1"><i class="fas fa-check-circle text-cuban-yellow"></i> Seguimiento en vivo</div>
+                            <div class="flex items-center gap-1"><i class="fas fa-check-circle text-cuban-yellow"></i> Mismo precio bajo lluvia</div>
+                            <div class="flex items-center gap-1"><i class="fas fa-check-circle text-cuban-yellow"></i> Pedido exprés +$50 (15min)</div>
+                            <div class="flex items-center gap-1"><i class="fas fa-check-circle text-cuban-yellow"></i> Pagas al recibir</div>
+                        </div>
+                        
+                        <!-- Tarifa especial Habana Vieja -->
+                        <div class="bg-cuban-green/40 backdrop-blur-sm rounded-lg p-3 mb-5 text-center border border-cuban-yellow/30">
+                            <p class="text-sm font-bold">📍 La Habana Vieja: <span class="text-cuban-yellow text-xl font-black">$300 fijo</span></p>
+                            <p class="text-xs opacity-80">*Para pedidos de hasta 8 kg. Si excede, se aplica cargo extra.</p>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <button onclick="if(window.addToCart) window.addToCart({id: 502, nombre: 'Servicio de Mensajería (La Habana Vieja)', precio: 300, imagen: 'https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp', cantidad: 1}); else alert('Cargando carrito...');" class="bg-cuban-green hover:bg-cuban-dark text-white font-bold py-3 px-6 rounded-full transition flex items-center justify-center gap-2 text-sm btn-hover-effect">
+                                <i class="fas fa-cart-plus text-lg"></i> Contratar mensajero ($300)
+                            </button>
+                            <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20mensajer%C3%ADa%20(MENSAJERO)" target="_blank" class="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold py-3 px-6 rounded-full transition border border-white text-center">
+                                <i class="fab fa-whatsapp mr-1"></i> Coordinar por WhatsApp
+                            </a>
+                        </div>
+                        <p class="text-xs text-center mt-4 opacity-80">💬 Di <span class="font-bold text-cuban-yellow">"MENSAJERO"</span> y tu dirección para coordinar</p>
                     </div>
                 </div>
             </div>
@@ -457,6 +518,7 @@
         <div id="checkout-modal-container"></div>
         <div id="footer-container"></div>
 
+        <!-- Toast Notification -->
         <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
             <p id="cartToastMessage"></p>
         </div>
@@ -465,6 +527,7 @@
     <script src="js/elresolvito.js" defer></script>
     
     <script>
+        // Intersection Observer for section animations
         const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -479,6 +542,7 @@
             observer.observe(section);
         });
         
+        // Loading overlay
         window.addEventListener('load', function() {
             setTimeout(function() {
                 const overlay = document.getElementById('loadingOverlay');
