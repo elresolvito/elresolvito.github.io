@@ -51,64 +51,12 @@ var FEATURED_PRODUCTS = [
     PRODUCTS.find(p => p.id === 9)
 ];
 
-// ============================================
-// CONFIGURACIÓN DE MENSAJERÍA
-// ============================================
-const MENSAJERIA_CONFIG = {
-    // Tarifa fija para La Habana Vieja (solo si peso <= 8kg)
-    HABANA_VIEJA_TARIFA: 300,
-    PESO_MAXIMO_HABANA_VIEJA: 8, // kg
-    
-    // Tarifas por distancia (para otros municipios)
-    TARIFAS_DISTANCIA: [
-        { maxKm: 1, precio: 300 },
-        { maxKm: 2, precio: 400 },
-        { maxKm: 3, precio: 450 },
-        { maxKm: 4, precio: 500 },
-        { maxKm: 5, precio: 550 }
-    ],
-    PRECIO_POR_KM_ADICIONAL: 100,
-    
-    // Extras
-    EXPRES_EXTRA: 50, // Pedido exprés en 15 min
-    CARGO_PESO_EXCEDIDO: 100 // por kg adicional sobre 8kg
-};
-
-function calcularTarifaMensajeria(distanciaKm, pesoKg, esExpres = false, esHabanaVieja = false) {
-    let precioBase = 0;
-    
-    if (esHabanaVieja) {
-        // Tarifa especial para La Habana Vieja
-        if (pesoKg <= MENSAJERIA_CONFIG.PESO_MAXIMO_HABANA_VIEJA) {
-            precioBase = MENSAJERIA_CONFIG.HABANA_VIEJA_TARIFA;
-        } else {
-            // Si excede el peso, se calcula por distancia normal + cargo extra
-            precioBase = calcularTarifaPorDistancia(distanciaKm);
-            const excesoPeso = pesoKg - MENSAJERIA_CONFIG.PESO_MAXIMO_HABANA_VIEJA;
-            precioBase += excesoPeso * MENSAJERIA_CONFIG.CARGO_PESO_EXCEDIDO;
-        }
-    } else {
-        precioBase = calcularTarifaPorDistancia(distanciaKm);
-    }
-    
-    if (esExpres) {
-        precioBase += MENSAJERIA_CONFIG.EXPRES_EXTRA;
-    }
-    
-    return precioBase;
-}
-
-function calcularTarifaPorDistancia(distanciaKm) {
-    for (const tramo of MENSAJERIA_CONFIG.TARIFAS_DISTANCIA) {
-        if (distanciaKm <= tramo.maxKm) {
-            return tramo.precio;
-        }
-    }
-    // Para distancias mayores a 5km
-    const extra = Math.ceil(distanciaKm - 5);
-    return MENSAJERIA_CONFIG.TARIFAS_DISTANCIA[MENSAJERIA_CONFIG.TARIFAS_DISTANCIA.length - 1].precio + 
-           (extra * MENSAJERIA_CONFIG.PRECIO_POR_KM_ADICIONAL);
-}
+var WHOLESALE_PRODUCTS = [
+    { nombre: "Café Dualis Caja 10u", precio: 13000, precioNormal: 14500, imagen: "https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png", desc: "Ahorra $1,500" },
+    { nombre: "Huevos 3 cartones", precio: 8400, precioNormal: 9000, imagen: "https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3000.png", desc: "Ahorra $600" },
+    { nombre: "Atún Pack 12u", precio: 6000, precioNormal: 6480, imagen: "https://i.postimg.cc/76xHK6zt/atun_precio_500.png", desc: "Ahorra $480" },
+    { nombre: "Jabón Caja 24u", precio: 5400, precioNormal: 6000, imagen: "https://i.postimg.cc/V6YfK6Mz/jabon_de_lavar_precio_250.png", desc: "Ahorra $600" }
+];
 
 // ============================================
 // CARRITO Y FUNCIONES PRINCIPALES
@@ -119,84 +67,261 @@ function calcularTarifaPorDistancia(distanciaKm) {
     let cart = JSON.parse(localStorage.getItem('elResolvitoCart')) || [];
     const WHATSAPP_NUMBER = '5356382909';
     const MINIMUM_PURCHASE = 500;
-    const SHIPPING_COST_HABANA_VIEJA = 300; // Actualizado a 300
+    const SHIPPING_COST_HABANA_VIEJA = 300; // ACTUALIZADO: de 400 a 300
 
-    // ... (resto de funciones anteriores se mantienen igual)
+    // ============================================
+    // FUNCIONES DEL CARRITO
+    // ============================================
+    window.addToCart = function(product) {
+        if (!product || !product.id || !product.nombre || !product.precio) {
+            showToast('Error al añadir producto', 'error');
+            return false;
+        }
 
-    // Actualizar la función sendCompleteOrder con las nuevas tarifas
+        const existingItemIndex = cart.findIndex(item => item.id === product.id);
+        
+        if (existingItemIndex !== -1) {
+            cart[existingItemIndex].cantidad += product.cantidad || 1;
+        } else {
+            cart.push({
+                id: product.id,
+                nombre: product.nombre,
+                imagen: product.imagen || 'https://placehold.co/300x300/2E7D32/white',
+                precio: product.precio,
+                cantidad: product.cantidad || 1
+            });
+        }
+
+        saveCart();
+        window.updateCartUI();
+        showToast('✓ Producto añadido al carrito');
+        return true;
+    };
+
+    function saveCart() {
+        localStorage.setItem('elResolvitoCart', JSON.stringify(cart));
+    }
+
+    window.updateCartQuantity = function(index, newQuantity) {
+        if (newQuantity <= 0) {
+            removeFromCart(index);
+            return;
+        }
+        if (cart[index]) {
+            cart[index].cantidad = newQuantity;
+            saveCart();
+            window.updateCartUI();
+        }
+    };
+
+    window.removeFromCart = function(index) {
+        removeFromCart(index);
+    };
+
+    function removeFromCart(index) {
+        if (cart[index]) {
+            cart.splice(index, 1);
+            saveCart();
+            window.updateCartUI();
+            showToast('Producto eliminado');
+        }
+    }
+
+    window.updateCartUI = function() {
+        const totalItems = cart.reduce((sum, item) => sum + (item.cantidad || 0), 0);
+        const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
+        
+        // Actualizar contadores
+        document.querySelectorAll('#cartCount, #floatingCartCount').forEach(el => {
+            if (el) {
+                el.textContent = totalItems;
+                el.classList.toggle('hidden', totalItems === 0);
+            }
+        });
+        
+        // Renderizar items del carrito
+        const cartItemsContainer = document.getElementById('cartItems');
+        if (cartItemsContainer) {
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<div class="text-center py-8 text-gray-500"><i class="fas fa-shopping-cart text-4xl mb-3 opacity-30"></i><p>Tu carrito está vacío</p></div>';
+            } else {
+                cartItemsContainer.innerHTML = cart.map((item, index) => {
+                    const imgSrc = item.imagen || 'https://placehold.co/80';
+                    return `
+                        <div class="flex gap-3 bg-gray-50 p-3 rounded-lg">
+                            <img src="${imgSrc}" alt="${item.nombre}" class="w-16 h-16 object-contain bg-white rounded-lg" onerror="this.src='https://placehold.co/80'">
+                            <div class="flex-1">
+                                <h4 class="font-medium text-sm">${item.nombre}</h4>
+                                <p class="text-cuban-green font-bold">$${(item.precio || 0).toLocaleString()}</p>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <button onclick="window.updateCartQuantity(${index}, ${(item.cantidad || 1) - 1})" class="w-6 h-6 bg-white rounded shadow hover:bg-gray-100">-</button>
+                                    <span class="text-sm font-medium">${item.cantidad || 1}</span>
+                                    <button onclick="window.updateCartQuantity(${index}, ${(item.cantidad || 1) + 1})" class="w-6 h-6 bg-white rounded shadow hover:bg-gray-100">+</button>
+                                    <button onclick="window.removeFromCart(${index})" class="ml-auto text-red-500 hover:text-red-700">🗑️</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+        
+        // Actualizar totales en el sidebar del carrito
+        const subtotalEl = document.getElementById('cartSubtotal');
+        const shippingEl = document.getElementById('cartShipping');
+        const totalEl = document.getElementById('cartTotal');
+        
+        if (subtotalEl) subtotalEl.textContent = `$${subtotal.toLocaleString()}`;
+        
+        if (subtotal < MINIMUM_PURCHASE) {
+            if (shippingEl) shippingEl.innerHTML = `<span class="text-orange-500">Mínimo $${MINIMUM_PURCHASE}</span>`;
+            if (totalEl) totalEl.textContent = `$${subtotal.toLocaleString()}`;
+        } else {
+            if (shippingEl) shippingEl.innerHTML = `<span class="text-gray-600">Seleccionar en checkout</span>`;
+            if (totalEl) totalEl.textContent = `$${subtotal.toLocaleString()}`;
+        }
+
+        // Actualizar resumen en el modal de checkout (si está abierto)
+        updateCheckoutSummary();
+    };
+
+    // ============================================
+    // FUNCIONES DEL CHECKOUT
+    // ============================================
+    window.openCheckoutModal = function() {
+        if (cart.length === 0) {
+            showToast('El carrito está vacío', 'warning');
+            return;
+        }
+        
+        const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
+        
+        if (subtotal < MINIMUM_PURCHASE) {
+            showToast(`Mínimo de compra: $${MINIMUM_PURCHASE}`, 'warning');
+            return;
+        }
+
+        // ✅ Cerrar el sidebar del carrito si está abierto
+        const sidebar = document.getElementById('cartSidebar');
+        const overlay = document.getElementById('cartOverlay');
+        if (sidebar && sidebar.classList.contains('cart-open')) {
+            sidebar.classList.remove('cart-open');
+            overlay?.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // Actualizar resumen en el modal antes de mostrarlo
+        updateCheckoutSummary();
+        
+        const modal = document.getElementById('checkoutModal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+    };
+
+    window.closeCheckoutModal = function() {
+        const modal = document.getElementById('checkoutModal');
+        if (modal) {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+    };
+
+    function updateCheckoutSummary() {
+        const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
+        const summaryEl = document.getElementById('checkoutCartSummary');
+        const totalEl = document.getElementById('checkoutTotal');
+        
+        if (summaryEl) {
+            if (cart.length === 0) {
+                summaryEl.innerHTML = '<p class="text-gray-500">Carrito vacío</p>';
+            } else {
+                summaryEl.innerHTML = cart.map(item => 
+                    `<div class="flex justify-between text-xs"><span>${item.nombre} x${item.cantidad}</span><span>$${(item.precio * item.cantidad).toLocaleString()}</span></div>`
+                ).join('');
+            }
+        }
+        if (totalEl) {
+            totalEl.textContent = `$${subtotal.toLocaleString()}`;
+        }
+    }
+
     window.sendCompleteOrder = function() {
+        // Obtener datos del carrito
         if (cart.length === 0) {
             alert('El carrito está vacío');
             return;
         }
 
+        // Obtener valores del formulario
         const customerName = document.getElementById('customerName')?.value.trim();
         const customerAddress = document.getElementById('customerAddress')?.value.trim();
         const deliveryZone = document.querySelector('input[name="deliveryZone"]:checked')?.value;
         const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value;
-        const pesoSeleccionado = document.getElementById('approximateWeight')?.value || '';
-        const esExpres = document.getElementById('expressDelivery')?.checked || false;
+        const weight = document.getElementById('approximateWeight')?.value || '';
         const notes = document.getElementById('customerNotes')?.value.trim() || '';
 
+        // Validaciones básicas
         if (!customerName || !customerAddress || !deliveryZone || !paymentMethod) {
-            showToast('⚠️ Completa todos los campos obligatorios', 'warning');
+            alert('Por favor, completa todos los campos obligatorios.');
             return;
         }
 
+        // Calcular subtotal
         const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
         if (subtotal < MINIMUM_PURCHASE) {
-            showToast(`⚠️ Mínimo de compra: $${MINIMUM_PURCHASE}`, 'warning');
+            alert(`El pedido mínimo es de $${MINIMUM_PURCHASE}`);
             return;
         }
 
-        // Calcular peso total aproximado del carrito
-        const pesoTotal = calcularPesoCarrito();
-        const esHabanaVieja = deliveryZone === 'habana-vieja';
-        
-        let costoEnvio = 0;
-        let mensajeEnvio = '';
-
-        if (esHabanaVieja && pesoTotal <= MENSAJERIA_CONFIG.PESO_MAXIMO_HABANA_VIEJA) {
-            costoEnvio = MENSAJERIA_CONFIG.HABANA_VIEJA_TARIFA;
-            mensajeEnvio = `$${costoEnvio} (La Habana Vieja - peso ${pesoTotal}kg ≤ ${MENSAJERIA_CONFIG.PESO_MAXIMO_HABANA_VIEJA}kg)`;
-        } else if (esHabanaVieja && pesoTotal > MENSAJERIA_CONFIG.PESO_MAXIMO_HABANA_VIEJA) {
-            // Calcular por distancia (asumimos 0-1km dentro de Habana Vieja)
-            costoEnvio = calcularTarifaPorDistancia(1);
-            const exceso = pesoTotal - MENSAJERIA_CONFIG.PESO_MAXIMO_HABANA_VIEJA;
-            costoEnvio += exceso * MENSAJERIA_CONFIG.CARGO_PESO_EXCEDIDO;
-            mensajeEnvio = `$${costoEnvio} (La Habana Vieja - peso excede ${MENSAJERIA_CONFIG.PESO_MAXIMO_HABANA_VIEJA}kg, +$${MENSAJERIA_CONFIG.CARGO_PESO_EXCEDIDO}/kg extra)`;
-        } else {
-            // Para otros municipios, usar el selector de distancia
-            const distancia = document.getElementById('distanceKm')?.value;
-            if (distancia) {
-                costoEnvio = calcularTarifaPorDistancia(parseFloat(distancia));
-                mensajeEnvio = `$${costoEnvio} (${distancia} km)`;
-            } else {
-                mensajeEnvio = 'A convenir (fuera de La Habana Vieja)';
-            }
-        }
-
-        if (esExpres) {
-            costoEnvio += MENSAJERIA_CONFIG.EXPRES_EXTRA;
-            mensajeEnvio += ' + $50 (Entrega exprés 15min)';
-        }
-
+        // Generar mensaje
         let mensaje = "🛒 *NUEVO PEDIDO - EL RESOLVITO*\n\n";
         mensaje += "*PRODUCTOS:*\n";
         cart.forEach(item => {
             mensaje += `• ${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString()}\n`;
         });
 
-        mensaje += `\n📦 *Peso estimado:* ${pesoTotal} kg`;
         mensaje += `\n*Subtotal:* $${subtotal.toLocaleString()}`;
-        mensaje += `\n*Envío:* ${mensajeEnvio}`;
-        mensaje += `\n*Total:* $${(subtotal + costoEnvio).toLocaleString()}`;
 
+        // Costo de envío según zona
+        let envioTexto = '';
+        if (deliveryZone === 'habana-vieja') {
+            envioTexto = `$${SHIPPING_COST_HABANA_VIEJA} (La Habana Vieja)`;
+            // Nota de peso si aplica
+            if (weight === 'mas-8kg') {
+                envioTexto += ' - Peso superior a 8kg, el costo podría ajustarse.';
+            }
+        } else {
+            envioTexto = 'A convenir (fuera de La Habana Vieja)';
+        }
+        mensaje += `\n*Envío:* ${envioTexto}`;
+
+        // Total estimado (solo si es La Habana Vieja y peso normal, sino se deja abierto)
+        if (deliveryZone === 'habana-vieja' && weight !== 'mas-8kg') {
+            mensaje += `\n*Total estimado:* $${(subtotal + SHIPPING_COST_HABANA_VIEJA).toLocaleString()}`;
+        } else {
+            mensaje += `\n*Total:* A confirmar`;
+        }
+
+        // Datos del cliente
         mensaje += `\n\n*DATOS DEL CLIENTE*`;
         mensaje += `\n👤 *Nombre:* ${customerName}`;
         mensaje += `\n📍 *Dirección:* ${customerAddress}`;
+
+        // Peso si se seleccionó
+        const pesoTexto = {
+            'menos-1kg': 'Menos de 1 kg',
+            '1-3kg': '1-3 kg',
+            '3-5kg': '3-5 kg',
+            '5-8kg': '5-8 kg',
+            'mas-8kg': 'Más de 8 kg'
+        };
+        if (weight && pesoTexto[weight]) {
+            mensaje += `\n⚖️ *Peso aproximado:* ${pesoTexto[weight]}`;
+        }
+
         mensaje += `\n💳 *Pago propuesto:* ${paymentMethod}`;
-        mensaje += `\n🚀 *Entrega exprés:* ${esExpres ? 'Sí (+$50)' : 'No'}`;
 
         if (notes) {
             mensaje += `\n📝 *Notas:* ${notes}`;
@@ -204,31 +329,142 @@ function calcularTarifaPorDistancia(distanciaKm) {
 
         mensaje += `\n\n_Te contactaremos para confirmar disponibilidad y coordinar la entrega._`;
 
+        // Abrir WhatsApp
         window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank');
 
+        // Cerrar modal y carrito
         window.closeCheckoutModal();
         if (document.getElementById('cartSidebar')?.classList.contains('cart-open')) {
-            window.toggleCart();
+            window.toggleCart(); // cierra el carrito si está abierto
         }
-        
-        showToast('✅ Pedido enviado por WhatsApp. Te contactaremos pronto.', 'success');
+
+        // Opcional: limpiar carrito después de enviar? Por ahora no, para poder reutilizar.
+        // Si se desea vaciar, descomentar la siguiente línea:
+        // cart = []; saveCart(); window.updateCartUI();
     };
 
-    function calcularPesoCarrito() {
-        // Estimación básica de peso por producto
-        let pesoTotal = 0;
-        cart.forEach(item => {
-            // Asignar peso estimado según el tipo de producto
-            if (item.nombre.includes('Leche') || item.nombre.includes('Huevo') || item.nombre.includes('Café')) {
-                pesoTotal += 0.5 * item.cantidad;
-            } else if (item.nombre.includes('Ropa') || item.nombre.includes('Cartera') || item.nombre.includes('Chancla')) {
-                pesoTotal += 0.3 * item.cantidad;
+    // ============================================
+    // FUNCIONES DE UTILIDAD (TOAST, MODALES)
+    // ============================================
+    function showToast(message, type = 'success') {
+        const toast = document.getElementById('cartToast');
+        const toastMessage = document.getElementById('cartToastMessage');
+        
+        if (toast && toastMessage) {
+            toastMessage.textContent = message;
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            toast.classList.add('opacity-100');
+            
+            if (type === 'error') {
+                toast.classList.add('bg-red-600');
+                toast.classList.remove('bg-gray-800');
             } else {
-                pesoTotal += 0.2 * item.cantidad;
+                toast.classList.add('bg-gray-800');
+                toast.classList.remove('bg-red-600');
             }
-        });
-        return Math.round(pesoTotal * 10) / 10;
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none');
+                toast.classList.remove('opacity-100');
+            }, 3000);
+        }
     }
 
-    // ... (resto de funciones se mantienen igual)
+    window.toggleCart = function() {
+        const sidebar = document.getElementById('cartSidebar');
+        const overlay = document.getElementById('cartOverlay');
+        
+        if (!sidebar || !overlay) {
+            console.error('Elementos del carrito no encontrados');
+            return;
+        }
+        
+        sidebar.classList.toggle('cart-open');
+        overlay.classList.toggle('hidden');
+        document.body.style.overflow = sidebar.classList.contains('cart-open') ? 'hidden' : '';
+        
+        if (sidebar.classList.contains('cart-open')) {
+            window.updateCartUI();
+        }
+    };
+
+    window.toggleDayNight = function() {
+        document.body.classList.toggle('night-mode');
+        const themeIcon = document.getElementById('headerThemeIcon');
+        if (themeIcon) {
+            themeIcon.textContent = document.body.classList.contains('night-mode') ? '🌙' : '☀️';
+        }
+        localStorage.setItem('nightMode', document.body.classList.contains('night-mode'));
+    };
+
+    window.toggleMenu = function() {
+        const menu = document.getElementById('mobileMenu');
+        if (menu) {
+            menu.classList.toggle('hidden');
+            document.body.style.overflow = menu.classList.contains('hidden') ? '' : 'hidden';
+        }
+    };
+
+    window.openImageModal = function(src, name) {
+        const modal = document.getElementById('imageModal');
+        const img = document.getElementById('modalImage');
+        const nameEl = document.getElementById('modalImageName');
+        if (modal && img && nameEl) {
+            img.src = src;
+            nameEl.textContent = name || 'Imagen';
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+    };
+
+    window.closeImageModal = function() {
+        const modal = document.getElementById('imageModal');
+        if (modal) {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+    };
+
+    // ============================================
+    // INICIALIZACIÓN
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        const pageFade = document.getElementById('pageFade');
+        if (pageFade) pageFade.classList.add('opacity-0');
+        
+        // Restaurar modo nocturno
+        if (localStorage.getItem('nightMode') === 'true') {
+            document.body.classList.add('night-mode');
+            const themeIcon = document.getElementById('headerThemeIcon');
+            if (themeIcon) themeIcon.textContent = '🌙';
+        }
+        
+        window.updateCartUI();
+        
+        console.log('✅ El Resolvito JS inicializado correctamente');
+    });
+
 })();
+
+// ============================================
+// FUNCIÓN DE DEPURACIÓN (OPCIONAL)
+// ============================================
+window.debugCart = function() {
+    console.log('=== DEBUG CARRITO ===');
+    const sidebar = document.getElementById('cartSidebar');
+    const overlay = document.getElementById('cartOverlay');
+    
+    console.log('sidebar existe:', !!sidebar);
+    console.log('overlay existe:', !!overlay);
+    
+    if (sidebar) {
+        console.log('sidebar clases:', sidebar.className);
+        console.log('sidebar tiene cart-open:', sidebar.classList.contains('cart-open'));
+        console.log('transform:', window.getComputedStyle(sidebar).transform);
+    }
+    
+    if (overlay) {
+        console.log('overlay clases:', overlay.className);
+        console.log('overlay hidden:', overlay.classList.contains('hidden'));
+    }
+};
