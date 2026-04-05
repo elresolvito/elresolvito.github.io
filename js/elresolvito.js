@@ -1,524 +1,202 @@
-// ============================================
-// PRODUCTOS (BASE DE DATOS)
-// ============================================
-var PRODUCTS = [
-    { id: 1, nombre: "Atún en lata", categoria: "Alimentos y conservas", precio: 540, imagen: "https://i.postimg.cc/76xHK6zt/atun_precio_500.png", descripcion: "Lata 200g" },
-    { id: 2, nombre: "Pasta de tomate", categoria: "Alimentos y conservas", precio: 350, imagen: "https://i.postimg.cc/gjjYPTNv/pasta_tomate_precio_350.png", descripcion: "Paquete" },
-    { id: 3, nombre: "Pimiento fresco", categoria: "Alimentos y conservas", precio: 750, imagen: "https://i.postimg.cc/4yyJTSBj/pimiento_presio_750.png", descripcion: "Unidad" },
-    { id: 4, nombre: "Café Dualis 250g", categoria: "Alimentos y conservas", precio: 1450, imagen: "https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png", descripcion: "Paquete 250g" },
-    { id: 5, nombre: "Café Dufiltro 250g", categoria: "Alimentos y conservas", precio: 1450, imagen: "https://i.postimg.cc/hG26fv31/cafe_Dufiltro_250_g_precio_1450.png", descripcion: "Paquete 250g" },
-    { id: 6, nombre: "Café Enepa", categoria: "Alimentos y conservas", precio: 470, imagen: "https://i.postimg.cc/nhY6f04N/cafe_enepa_precio_450.png", descripcion: "Paquete" },
-    { id: 7, nombre: "Cartón de huevo 30u", categoria: "Alimentos y conservas", precio: 3000, imagen: "https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3000.png", descripcion: "Cartón" },
-    { id: 8, nombre: "Leche condensada", categoria: "Alimentos y conservas", precio: 950, imagen: "https://i.postimg.cc/tT2XwjtT/leche_condensada.png", descripcion: "Lata 397g" },
-    { id: 9, nombre: "Harina blanca 1Kg", categoria: "Alimentos y conservas", precio: 600, imagen: "https://i.postimg.cc/3xc2NHFB/harina_blanca1_kg.png", descripcion: "Paquete 1Kg" },
-    { id: 10, nombre: "Chicoticos Pelly 90g", categoria: "Snacks y golosinas", precio: 400, imagen: "https://i.postimg.cc/1zv2fXjZ/chicoticos_pelly_90_g_precio_400.png", descripcion: "Paquete 90g" },
-    { id: 11, nombre: "Papitas Campesinas", categoria: "Snacks y golosinas", precio: 690, imagen: "https://i.postimg.cc/cLgrDtf9/papitas_campesinas_precio_690.png", descripcion: "Paquete" },
-    { id: 12, nombre: "Pelly Jamón", categoria: "Snacks y golosinas", precio: 580, imagen: "https://i.postimg.cc/pdQV7frX/pelly_jamon_precio_580.png", descripcion: "Paquete" },
-    { id: 13, nombre: "Mayonesa Mediana", categoria: "Salsas", precio: 850, imagen: "https://i.postimg.cc/KzJZw2rR/mayonesa_precio_850.png", descripcion: "Frasco mediano" },
-    { id: 14, nombre: "Mayonesa Grande", categoria: "Salsas", precio: 1100, imagen: "https://i.postimg.cc/Px2t9jzz/mayonesa_precio1100.png", descripcion: "Frasco grande" },
-    { id: 15, nombre: "Cuchilla de Afeitar", categoria: "Higiene personal", precio: 100, imagen: "https://i.postimg.cc/8CdkdW7x/cuchilla_de_afeitar_precio_100.png", descripcion: "Unidad" },
-    { id: 16, nombre: "Jabón Marwa", categoria: "Higiene personal", precio: 150, imagen: "https://i.postimg.cc/3RK8tRpR/jabon_marwa_precio_150.png", descripcion: "Pastilla" },
-    { id: 17, nombre: "Papel Sanitario", categoria: "Higiene personal", precio: 490, imagen: "https://i.postimg.cc/bwW289qD/papel_sanitario_precio_490i.png", descripcion: "Paquete" },
-    { id: 18, nombre: "Toallas Sanitarias", categoria: "Higiene personal", precio: 450, imagen: "https://i.postimg.cc/KjjZyH0b/toallas_sanitarias_precio_450.png", descripcion: "Paquete" },
-    { id: 19, nombre: "Toallas Húmedas", categoria: "Higiene personal", precio: 690, imagen: "https://i.postimg.cc/W4ZSP3cw/toallas_humedas_precio_690.png", descripcion: "Paquete" },
-    { id: 20, nombre: "Jabón de Lavar", categoria: "Aseo del hogar", precio: 250, imagen: "https://i.postimg.cc/V6YfK6Mz/jabon_de_lavar_precio_250.png", descripcion: "Pastilla" },
-    { id: 21, nombre: "Perfume Candy", categoria: "Perfumes y desodorantes", precio: 3100, imagen: "https://i.postimg.cc/vTgJRyhp/perfume_candy_precio_3100.png", descripcion: "Frasco 50ml" },
-    { id: 22, nombre: "Perfume genérico", categoria: "Perfumes y desodorantes", precio: 3100, imagen: "https://i.postimg.cc/ZKrT0PPG/perfume_precio_3100.png", descripcion: "Frasco 50ml" },
-    { id: 23, nombre: "Perfume Q", categoria: "Perfumes y desodorantes", precio: 3100, imagen: "https://i.postimg.cc/CL03P3Dn/perfume_q_precio_3100.png", descripcion: "Frasco 50ml" },
-    { id: 24, nombre: "Desodorante Obao", categoria: "Perfumes y desodorantes", precio: 1100, imagen: "https://i.postimg.cc/PxtXSxD2/desodorante_obao_precio_1100.png", descripcion: "Spray/Roll-on" },
-    { id: 25, nombre: "Desodorante Rush Blanco", categoria: "Perfumes y desodorantes", precio: 1000, imagen: "https://i.postimg.cc/FR9rTRS8/desodorante_rush_blanco_precio_1000.png", descripcion: "Roll-on" },
-    { id: 26, nombre: "Desodorante Rush", categoria: "Perfumes y desodorantes", precio: 1000, imagen: "https://i.postimg.cc/sXVjTXSF/desodorante_rush_precio_1000.png", descripcion: "Spray" },
-    { id: 27, nombre: "Colonia Niña", categoria: "Perfumes y desodorantes", precio: 1100, imagen: "https://i.postimg.cc/G3v04rsM/colonia_nina.png", descripcion: "Botella 100ml" },
-    { id: 28, nombre: "Macarrones", categoria: "Pastas y fideos", precio: 300, imagen: "https://i.postimg.cc/Hsmz1H69/macarrones_precio_300.png", descripcion: "Paquete" },
-    { id: 29, nombre: "Sopas instantáneas", categoria: "Pastas y fideos", precio: 160, imagen: "https://i.postimg.cc/FzNTpQqK/sopas_instantaneas_precio_160.png", descripcion: "Paquete" },
-    { id: 30, nombre: "Licor de fresa", categoria: "Bebidas alcohólicas y malta", precio: 2500, imagen: "https://i.postimg.cc/59YT2x5p/licor_de_fresa_precio_2500.png", descripcion: "Botella" },
-    { id: 31, nombre: "Licor Cocobay", categoria: "Bebidas alcohólicas y malta", precio: 2500, imagen: "https://i.postimg.cc/7ZDW90Fz/locor_cocobay_precio_2500.png", descripcion: "Botella" },
-    { id: 32, nombre: "Whisky Spirit 200ml", categoria: "Bebidas alcohólicas y malta", precio: 320, imagen: "https://i.postimg.cc/4N8W6q1t/tea_precio_320.png", descripcion: "Botella 200ml" },
-    { id: 33, nombre: "Whisky 1L", categoria: "Bebidas alcohólicas y malta", precio: 1350, imagen: "https://i.postimg.cc/cLyrb4T0/whisky_1L_precio_1350.png", descripcion: "Botella 1L" },
-    { id: 34, nombre: "Whisky Sir Albin", categoria: "Bebidas alcohólicas y malta", precio: 550, imagen: "https://i.postimg.cc/y84kbYnC/whisky_sir_albin_precio_550.png", descripcion: "Botella pequeña" },
-    { id: 35, nombre: "Vino Pluvium", categoria: "Bebidas alcohólicas y malta", precio: 1200, imagen: "https://i.postimg.cc/XNLLWmmx/vino_pluvium_precio_1200.png", descripcion: "Botella" },
-    { id: 36, nombre: "Baterías Triple A", categoria: "Electrónicos y accesorios", precio: 300, imagen: "https://i.postimg.cc/DZ2vxZsT/Gemini_Generated_Image_824rio824rio824r.png", descripcion: "Pack 4 unidades" }
-];
-
-var FEATURED_PRODUCTS = [
-    PRODUCTS.find(p => p.id === 4),
-    PRODUCTS.find(p => p.id === 7),
-    PRODUCTS.find(p => p.id === 1),
-    PRODUCTS.find(p => p.id === 13),
-    PRODUCTS.find(p => p.id === 21),
-    PRODUCTS.find(p => p.id === 30),
-    PRODUCTS.find(p => p.id === 17),
-    PRODUCTS.find(p => p.id === 9)
-];
-
-var WHOLESALE_PRODUCTS = [
-    { nombre: "Café Dualis Caja 10u", precio: 13000, precioNormal: 14500, imagen: "https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png", desc: "Ahorra $1,500" },
-    { nombre: "Huevos 3 cartones", precio: 8400, precioNormal: 9000, imagen: "https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3000.png", desc: "Ahorra $600" },
-    { nombre: "Atún Pack 12u", precio: 6000, precioNormal: 6480, imagen: "https://i.postimg.cc/76xHK6zt/atun_precio_500.png", desc: "Ahorra $480" },
-    { nombre: "Jabón Caja 24u", precio: 5400, precioNormal: 6000, imagen: "https://i.postimg.cc/V6YfK6Mz/jabon_de_lavar_precio_250.png", desc: "Ahorra $600" }
-];
-
-// ============================================
-// CARRITO Y FUNCIONES PRINCIPALES
-// ============================================
-(function() {
-    'use strict';
-    
-    let cart = JSON.parse(localStorage.getItem('elResolvitoCart')) || [];
-    const WHATSAPP_NUMBER = '5356382909';
-    const MINIMUM_PURCHASE = 500;
-    const SHIPPING_COST_HABANA_VIEJA = 400;
-
-    // ============================================
-    // ANIMACIÓN DEL BOTÓN DEL CARRITO
-    // ============================================
-    function animateCartButton() {
-        const floatingCartBtn = document.querySelector('.floating-btn.cart');
-        const headerCartBtn = document.querySelector('button[onclick*="toggleCart"]');
+<!-- components/checkout-modal.html -->
+<div id="checkoutModal" class="fixed inset-0 bg-black/50 z-[200] hidden flex items-center justify-center p-4" onclick="window.closeCheckoutModal()">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
         
-        // Función de animación para un botón
-        const animateBtn = (btn) => {
-            if (!btn) return;
-            // Efecto de rebote
-            btn.style.transform = 'scale(1.3)';
-            btn.style.transition = 'transform 0.15s ease';
-            
-            // Cambio de color temporal (efecto flash)
-            const originalBg = btn.style.background;
-            btn.style.background = '#FFB300';
-            
-            setTimeout(() => {
-                btn.style.transform = 'scale(1)';
-                setTimeout(() => {
-                    btn.style.background = originalBg;
-                }, 100);
-            }, 150);
-        };
+        <!-- Cabecera -->
+        <div class="p-6 bg-gradient-to-r from-cuban-green to-cuban-dark text-white rounded-t-2xl">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h3 class="text-2xl font-bold flex items-center gap-2">
+                        <i class="fas fa-clipboard-list"></i> Finalizar pedido
+                    </h3>
+                    <p class="text-sm opacity-90 mt-1">Completa los datos y te contactamos</p>
+                </div>
+                <button onclick="window.closeCheckoutModal()" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
         
-        animateBtn(floatingCartBtn);
-        animateBtn(headerCartBtn);
-        
-        // También hacemos vibrar el badge del contador si existe
-        const badges = document.querySelectorAll('#cartCount, #floatingCartCount');
-        badges.forEach(badge => {
-            if (badge && !badge.classList.contains('hidden')) {
-                badge.style.animation = 'none';
-                badge.offsetHeight; // reflow
-                badge.style.animation = 'badgePop 0.3s ease';
-            }
-        });
-    }
-    
-    // Añadir la animación CSS para el badge
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes badgePop {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.4); background-color: #FF6F00; }
-            100% { transform: scale(1); }
-        }
-        @keyframes cartShake {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-3px); }
-            75% { transform: translateX(3px); }
-            100% { transform: translateX(0); }
-        }
-        .cart-shake {
-            animation: cartShake 0.3s ease;
-        }
-    `;
-    document.head.appendChild(style);
+        <div class="p-6">
+            <form id="checkoutForm" onsubmit="event.preventDefault(); window.sendCompleteOrder()">
+                
+                <!-- RESUMEN DEL CARRITO -->
+                <div class="mb-6 p-4 bg-gray-50 rounded-xl border border-gray-200">
+                    <p class="text-sm font-semibold mb-2 flex items-center gap-2">
+                        <i class="fas fa-shopping-cart text-cuban-green"></i> Tu pedido:
+                    </p>
+                    <div id="checkoutCartSummary" class="text-sm text-gray-600 max-h-24 overflow-y-auto space-y-1"></div>
+                    <div class="flex justify-between text-base font-bold mt-3 pt-3 border-t border-gray-200">
+                        <span>Subtotal:</span>
+                        <span id="checkoutTotal" class="text-cuban-green">$0</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">Compra mínima: $500</p>
+                </div>
 
-    // ============================================
-    // FUNCIONES DEL CARRITO
-    // ============================================
-    window.addToCart = function(product) {
-        if (!product || !product.id || !product.nombre || !product.precio) {
-            showToast('Error al añadir producto', 'error');
-            return false;
-        }
-
-        const existingItemIndex = cart.findIndex(item => item.id === product.id);
-        
-        if (existingItemIndex !== -1) {
-            cart[existingItemIndex].cantidad += product.cantidad || 1;
-            showToast(`✓ +1 ${product.nombre} (ahora ${cart[existingItemIndex].cantidad})`);
-        } else {
-            cart.push({
-                id: product.id,
-                nombre: product.nombre,
-                imagen: product.imagen || 'https://placehold.co/300x300/2E7D32/white',
-                precio: product.precio,
-                cantidad: product.cantidad || 1
-            });
-            showToast(`✓ "${product.nombre}" añadido al carrito`);
-        }
-
-        saveCart();
-        window.updateCartUI();
-        
-        // ANIMAR EL BOTÓN DEL CARRITO
-        animateCartButton();
-        
-        return true;
-    };
-
-    function saveCart() {
-        localStorage.setItem('elResolvitoCart', JSON.stringify(cart));
-    }
-
-    window.updateCartQuantity = function(index, newQuantity) {
-        if (newQuantity <= 0) {
-            removeFromCart(index);
-            return;
-        }
-        if (cart[index]) {
-            cart[index].cantidad = newQuantity;
-            saveCart();
-            window.updateCartUI();
-            showToast(`Cantidad actualizada: ${cart[index].nombre} x${newQuantity}`);
-        }
-    };
-
-    window.removeFromCart = function(index) {
-        removeFromCart(index);
-    };
-
-    function removeFromCart(index) {
-        if (cart[index]) {
-            const nombre = cart[index].nombre;
-            cart.splice(index, 1);
-            saveCart();
-            window.updateCartUI();
-            showToast(`🗑️ "${nombre}" eliminado del carrito`);
-        }
-    }
-
-    window.updateCartUI = function() {
-        const totalItems = cart.reduce((sum, item) => sum + (item.cantidad || 0), 0);
-        const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
-        
-        // Actualizar contadores
-        document.querySelectorAll('#cartCount, #floatingCartCount').forEach(el => {
-            if (el) {
-                el.textContent = totalItems;
-                el.classList.toggle('hidden', totalItems === 0);
-            }
-        });
-        
-        // Renderizar items del carrito
-        const cartItemsContainer = document.getElementById('cartItems');
-        if (cartItemsContainer) {
-            if (cart.length === 0) {
-                cartItemsContainer.innerHTML = '<div class="text-center py-8 text-gray-500"><i class="fas fa-shopping-cart text-4xl mb-3 opacity-30"></i><p>Tu carrito está vacío</p><p class="text-xs mt-2">Agrega productos desde la tienda</p></div>';
-            } else {
-                cartItemsContainer.innerHTML = cart.map((item, index) => {
-                    const imgSrc = item.imagen || 'https://placehold.co/80';
-                    return `
-                        <div class="flex gap-3 bg-gray-50 p-3 rounded-lg">
-                            <img src="${imgSrc}" alt="${item.nombre}" class="w-16 h-16 object-contain bg-white rounded-lg" onerror="this.src='https://placehold.co/80'">
-                            <div class="flex-1">
-                                <h4 class="font-medium text-sm">${item.nombre}</h4>
-                                <p class="text-cuban-green font-bold">$${(item.precio || 0).toLocaleString()}</p>
-                                <div class="flex items-center gap-2 mt-1">
-                                    <button onclick="window.updateCartQuantity(${index}, ${(item.cantidad || 1) - 1})" class="w-6 h-6 bg-white rounded shadow hover:bg-gray-100 transition">-</button>
-                                    <span class="text-sm font-medium w-8 text-center">${item.cantidad || 1}</span>
-                                    <button onclick="window.updateCartQuantity(${index}, ${(item.cantidad || 1) + 1})" class="w-6 h-6 bg-white rounded shadow hover:bg-gray-100 transition">+</button>
-                                    <button onclick="window.removeFromCart(${index})" class="ml-auto text-red-500 hover:text-red-700 transition">🗑️</button>
-                                </div>
-                            </div>
+                <!-- DATOS DEL CLIENTE -->
+                <div class="mb-6">
+                    <h4 class="font-bold text-gray-700 mb-3 flex items-center gap-2">
+                        <i class="fas fa-user text-cuban-green"></i> ¿Quién recibe?
+                    </h4>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label for="customerName" class="block text-sm font-medium text-gray-700 mb-1">Nombre completo *</label>
+                            <input type="text" 
+                                   id="customerName" 
+                                   required 
+                                   placeholder="Ej: María González Pérez"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent">
                         </div>
-                    `;
-                }).join('');
-            }
-        }
-        
-        // Actualizar totales en el sidebar del carrito
-        const subtotalEl = document.getElementById('cartSubtotal');
-        const shippingEl = document.getElementById('cartShipping');
-        const totalEl = document.getElementById('cartTotal');
-        
-        if (subtotalEl) subtotalEl.textContent = `$${subtotal.toLocaleString()}`;
-        
-        if (subtotal < MINIMUM_PURCHASE) {
-            if (shippingEl) shippingEl.innerHTML = `<span class="text-orange-500">Mínimo $${MINIMUM_PURCHASE}</span>`;
-            if (totalEl) totalEl.textContent = `$${subtotal.toLocaleString()}`;
-        } else {
-            if (shippingEl) shippingEl.innerHTML = `<span class="text-gray-600">Seleccionar en checkout</span>`;
-            if (totalEl) totalEl.textContent = `$${subtotal.toLocaleString()}`;
-        }
 
-        updateCheckoutSummary();
-    };
+                        <div>
+                            <label for="customerAddress" class="block text-sm font-medium text-gray-700 mb-1">Dirección completa *</label>
+                            <textarea id="customerAddress" 
+                                      rows="2" 
+                                      required 
+                                      placeholder="Ej: Calle Obispo No. 123, entre Mercaderes y San Ignacio, La Habana Vieja"
+                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent"></textarea>
+                        </div>
+                    </div>
+                </div>
 
-    // ============================================
-    // FUNCIONES DEL CHECKOUT
-    // ============================================
-    window.openCheckoutModal = function() {
-        if (cart.length === 0) {
-            showToast('🛒 El carrito está vacío. Agrega productos primero.', 'warning');
-            return;
-        }
-        
-        const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
-        
-        if (subtotal < MINIMUM_PURCHASE) {
-            showToast(`⚠️ Mínimo de compra: $${MINIMUM_PURCHASE}. Agrega más productos.`, 'warning');
-            return;
-        }
+                <!-- ZONA DE ENTREGA - ACTUALIZADA -->
+                <div class="mb-6">
+                    <h4 class="font-bold text-gray-700 mb-3 flex items-center gap-2">
+                        <i class="fas fa-map-marker-alt text-cuban-green"></i> ¿Dónde entregamos?
+                    </h4>
+                    
+                    <div class="space-y-3">
+                        <!-- La Habana Vieja -->
+                        <label class="flex items-start gap-3 p-4 border-2 rounded-xl cursor-pointer transition hover:bg-gray-50 has-[:checked]:border-cuban-green has-[:checked]:bg-cuban-green/5">
+                            <input type="radio" name="deliveryZone" value="habana-vieja" checked class="w-5 h-5 text-cuban-green mt-1" onchange="actualizarOpcionesEnvio()">
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-bold text-gray-800">La Habana Vieja</span>
+                                    <span class="font-bold text-cuban-green">$300</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-1">Tarifa fija para pedidos de hasta 8 kg. Si excede, se aplica cargo extra.</p>
+                            </div>
+                        </label>
 
-        const sidebar = document.getElementById('cartSidebar');
-        const overlay = document.getElementById('cartOverlay');
-        if (sidebar && sidebar.classList.contains('cart-open')) {
-            sidebar.classList.remove('cart-open');
-            overlay?.classList.add('hidden');
-            document.body.style.overflow = '';
-        }
+                        <!-- Otro municipio -->
+                        <label class="flex items-start gap-3 p-4 border-2 rounded-xl cursor-pointer transition hover:bg-gray-50 has-[:checked]:border-cuban-green has-[:checked]:bg-cuban-green/5">
+                            <input type="radio" name="deliveryZone" value="otro" class="w-5 h-5 text-cuban-green mt-1" onchange="actualizarOpcionesEnvio()">
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-bold text-gray-800">Otro municipio de La Habana</span>
+                                    <span class="font-bold text-amber-600">Por distancia</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-1">El costo depende de la distancia. Selecciona abajo.</p>
+                            </div>
+                        </label>
+                    </div>
+                    
+                    <!-- Selector de distancia (se muestra solo si se selecciona otro municipio) -->
+                    <div id="distanceSelector" class="mt-4 hidden">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Distancia aproximada desde La Habana Vieja:</label>
+                        <select id="distanceKm" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green">
+                            <option value="0.5">Menos de 1 km - $300</option>
+                            <option value="1.5">1 - 2 km - $400</option>
+                            <option value="2.5">2 - 3 km - $450</option>
+                            <option value="3.5">3 - 4 km - $500</option>
+                            <option value="4.5">4 - 5 km - $550</option>
+                            <option value="6">+5 km - $550 + $100/km adicional</option>
+                        </select>
+                    </div>
+                </div>
 
-        updateCheckoutSummary();
-        
-        const modal = document.getElementById('checkoutModal');
-        if (modal) {
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-    };
+                <!-- PESO APROXIMADO -->
+                <div class="mb-6">
+                    <h4 class="font-bold text-gray-700 mb-3 flex items-center gap-2">
+                        <i class="fas fa-weight-hanging text-cuban-green"></i> Peso aproximado del pedido
+                    </h4>
+                    <select id="approximateWeight" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green">
+                        <option value="menos-1kg">Menos de 1 kg</option>
+                        <option value="1-3kg">1 - 3 kg</option>
+                        <option value="3-5kg">3 - 5 kg</option>
+                        <option value="5-8kg">5 - 8 kg</option>
+                        <option value="mas-8kg">Más de 8 kg (aplica cargo extra)</option>
+                    </select>
+                    <p class="text-xs text-gray-500 mt-1">* Para La Habana Vieja, tarifa fija de $300 hasta 8 kg.</p>
+                </div>
 
-    window.closeCheckoutModal = function() {
-        const modal = document.getElementById('checkoutModal');
-        if (modal) {
-            modal.classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-    };
+                <!-- ENTREGA EXPRÉS (NUEVO) -->
+                <div class="mb-6 p-4 bg-blue-50 rounded-xl border border-blue-200">
+                    <label class="flex items-center gap-3 cursor-pointer">
+                        <input type="checkbox" id="expressDelivery" class="w-5 h-5 text-cuban-green rounded">
+                        <div>
+                            <span class="font-bold text-blue-800">🚀 Entrega exprés (+$50)</span>
+                            <p class="text-xs text-blue-600">Recibe tu pedido en 15 minutos (sujeto a disponibilidad)</p>
+                        </div>
+                    </label>
+                </div>
 
-    function updateCheckoutSummary() {
-        const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
-        const summaryEl = document.getElementById('checkoutCartSummary');
-        const totalEl = document.getElementById('checkoutTotal');
-        
-        if (summaryEl) {
-            if (cart.length === 0) {
-                summaryEl.innerHTML = '<p class="text-gray-500">Carrito vacío</p>';
-            } else {
-                summaryEl.innerHTML = cart.map(item => 
-                    `<div class="flex justify-between text-xs"><span>${item.nombre} x${item.cantidad}</span><span>$${(item.precio * item.cantidad).toLocaleString()}</span></div>`
-                ).join('');
-            }
-        }
-        if (totalEl) {
-            totalEl.textContent = `$${subtotal.toLocaleString()}`;
-        }
-    }
+                <!-- MÉTODO DE PAGO -->
+                <div class="mb-6">
+                    <h4 class="font-bold text-gray-700 mb-3 flex items-center gap-2">
+                        <i class="fas fa-credit-card text-cuban-green"></i> ¿Cómo pagas?
+                    </h4>
+                    
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="flex flex-col items-center gap-2 p-4 border-2 rounded-xl cursor-pointer transition hover:bg-gray-50 has-[:checked]:border-cuban-green has-[:checked]:bg-cuban-green/5">
+                            <input type="radio" name="paymentMethod" value="Efectivo" checked class="w-5 h-5 text-cuban-green">
+                            <span class="text-2xl">💵</span>
+                            <span class="font-medium">Efectivo</span>
+                            <span class="text-xs text-gray-500">Pagas al recibir</span>
+                        </label>
+                        
+                        <label class="flex flex-col items-center gap-2 p-4 border-2 rounded-xl cursor-pointer transition hover:bg-gray-50 has-[:checked]:border-cuban-green has-[:checked]:bg-cuban-green/5">
+                            <input type="radio" name="paymentMethod" value="Transferencia" class="w-5 h-5 text-cuban-green">
+                            <span class="text-2xl">📱</span>
+                            <span class="font-medium">Transferencia</span>
+                            <span class="text-xs text-gray-500">Sujeto a disponibilidad</span>
+                        </label>
+                    </div>
+                </div>
 
-    window.sendCompleteOrder = function() {
-        if (cart.length === 0) {
-            alert('El carrito está vacío');
-            return;
-        }
+                <!-- NOTAS ADICIONALES -->
+                <div class="mb-6">
+                    <label for="customerNotes" class="block text-sm font-medium text-gray-700 mb-1">¿Algo más que debamos saber?</label>
+                    <textarea id="customerNotes" 
+                              rows="2" 
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cuban-green focus:border-transparent"
+                              placeholder="Ej: Prefiero que llamen antes de llegar, el edificio es el amarillo, etc."></textarea>
+                </div>
 
-        const customerName = document.getElementById('customerName')?.value.trim();
-        const customerAddress = document.getElementById('customerAddress')?.value.trim();
-        const deliveryZone = document.querySelector('input[name="deliveryZone"]:checked')?.value;
-        const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value;
-        const weight = document.getElementById('approximateWeight')?.value || '';
-        const notes = document.getElementById('customerNotes')?.value.trim() || '';
+                <!-- BOTONES -->
+                <div class="flex gap-3 pt-4 border-t border-gray-200">
+                    <button type="button" onclick="window.closeCheckoutModal()" class="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 rounded-xl font-bold hover:bg-gray-100 transition">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-white px-4 py-3 rounded-xl font-bold hover:opacity-90 transition flex items-center justify-center gap-2 shadow-md">
+                        <i class="fab fa-whatsapp"></i> Enviar pedido
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-        if (!customerName || !customerAddress || !deliveryZone || !paymentMethod) {
-            showToast('⚠️ Completa todos los campos obligatorios', 'warning');
-            return;
-        }
-
-        const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
-        if (subtotal < MINIMUM_PURCHASE) {
-            showToast(`⚠️ Mínimo de compra: $${MINIMUM_PURCHASE}`, 'warning');
-            return;
-        }
-
-        let mensaje = "🛒 *NUEVO PEDIDO - EL RESOLVITO*\n\n";
-        mensaje += "*PRODUCTOS:*\n";
-        cart.forEach(item => {
-            mensaje += `• ${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString()}\n`;
-        });
-
-        mensaje += `\n*Subtotal:* $${subtotal.toLocaleString()}`;
-
-        let envioTexto = '';
-        if (deliveryZone === 'habana-vieja') {
-            envioTexto = `$${SHIPPING_COST_HABANA_VIEJA} (La Habana Vieja)`;
-            if (weight === 'mas-10kg') {
-                envioTexto += ' - Peso superior a 10kg, el costo podría ajustarse.';
-            }
-        } else {
-            envioTexto = 'A convenir (fuera de La Habana Vieja)';
-        }
-        mensaje += `\n*Envío:* ${envioTexto}`;
-
-        if (deliveryZone === 'habana-vieja' && weight !== 'mas-10kg') {
-            mensaje += `\n*Total estimado:* $${(subtotal + SHIPPING_COST_HABANA_VIEJA).toLocaleString()}`;
-        } else {
-            mensaje += `\n*Total:* A confirmar`;
-        }
-
-        mensaje += `\n\n*DATOS DEL CLIENTE*`;
-        mensaje += `\n👤 *Nombre:* ${customerName}`;
-        mensaje += `\n📍 *Dirección:* ${customerAddress}`;
-
-        const pesoTexto = {
-            'menos-1kg': 'Menos de 1 kg',
-            '1-3kg': '1-3 kg',
-            '3-5kg': '3-5 kg',
-            '5-10kg': '5-10 kg',
-            'mas-10kg': 'Más de 10 kg'
-        };
-        if (weight && pesoTexto[weight]) {
-            mensaje += `\n⚖️ *Peso aproximado:* ${pesoTexto[weight]}`;
-        }
-
-        mensaje += `\n💳 *Pago propuesto:* ${paymentMethod}`;
-
-        if (notes) {
-            mensaje += `\n📝 *Notas:* ${notes}`;
-        }
-
-        mensaje += `\n\n_Te contactaremos para confirmar disponibilidad y coordinar la entrega._`;
-
-        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank');
-
-        window.closeCheckoutModal();
-        if (document.getElementById('cartSidebar')?.classList.contains('cart-open')) {
-            window.toggleCart();
-        }
-        
-        // Mostrar mensaje de éxito
-        showToast('✅ Pedido enviado por WhatsApp. Te contactaremos pronto.', 'success');
-    };
-
-    // ============================================
-    // FUNCIONES DE UTILIDAD (TOAST MEJORADO)
-    // ============================================
-    function showToast(message, type = 'success') {
-        const toast = document.getElementById('cartToast');
-        const toastMessage = document.getElementById('cartToastMessage');
-        
-        if (toast && toastMessage) {
-            toastMessage.textContent = message;
-            toast.classList.remove('opacity-0', 'pointer-events-none');
-            toast.classList.add('opacity-100');
-            
-            // Estilo según tipo
-            toast.classList.remove('bg-gray-800', 'bg-red-600', 'bg-orange-500', 'bg-green-600');
-            if (type === 'error') {
-                toast.classList.add('bg-red-600');
-            } else if (type === 'warning') {
-                toast.classList.add('bg-orange-500');
-            } else if (type === 'success') {
-                toast.classList.add('bg-green-600');
-            } else {
-                toast.classList.add('bg-gray-800');
-            }
-            
-            // Auto-ocultar después de 3 segundos
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'pointer-events-none');
-                toast.classList.remove('opacity-100');
-            }, 3000);
+<script>
+    function actualizarOpcionesEnvio() {
+        const otroMunicipio = document.querySelector('input[name="deliveryZone"]:checked')?.value === 'otro';
+        const distanceSelector = document.getElementById('distanceSelector');
+        if (distanceSelector) {
+            distanceSelector.classList.toggle('hidden', !otroMunicipio);
         }
     }
-
-    window.toggleCart = function() {
-        const sidebar = document.getElementById('cartSidebar');
-        const overlay = document.getElementById('cartOverlay');
-        
-        if (!sidebar || !overlay) {
-            console.error('Elementos del carrito no encontrados');
-            return;
-        }
-        
-        sidebar.classList.toggle('cart-open');
-        overlay.classList.toggle('hidden');
-        document.body.style.overflow = sidebar.classList.contains('cart-open') ? 'hidden' : '';
-        
-        if (sidebar.classList.contains('cart-open')) {
-            window.updateCartUI();
-        }
-    };
-
-    window.toggleDayNight = function() {
-        document.body.classList.toggle('night-mode');
-        const themeIcon = document.getElementById('headerThemeIcon');
-        if (themeIcon) {
-            themeIcon.textContent = document.body.classList.contains('night-mode') ? '🌙' : '☀️';
-        }
-        localStorage.setItem('nightMode', document.body.classList.contains('night-mode'));
-        showToast(document.body.classList.contains('night-mode') ? '🌙 Modo oscuro activado' : '☀️ Modo claro activado');
-    };
-
-    window.toggleMenu = function() {
-        const menu = document.getElementById('mobileMenu');
-        if (menu) {
-            menu.classList.toggle('hidden');
-            document.body.style.overflow = menu.classList.contains('hidden') ? '' : 'hidden';
-        }
-    };
-
-    window.openImageModal = function(src, name) {
-        const modal = document.getElementById('imageModal');
-        const img = document.getElementById('modalImage');
-        const nameEl = document.getElementById('modalImageName');
-        if (modal && img && nameEl) {
-            img.src = src;
-            nameEl.textContent = name || 'Imagen';
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-    };
-
-    window.closeImageModal = function() {
-        const modal = document.getElementById('imageModal');
-        if (modal) {
-            modal.classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-    };
-
-    // ============================================
-    // INICIALIZACIÓN
-    // ============================================
+    
+    // Inicializar al cargar el modal
     document.addEventListener('DOMContentLoaded', function() {
-        const pageFade = document.getElementById('pageFade');
-        if (pageFade) pageFade.classList.add('opacity-0');
-        
-        if (localStorage.getItem('nightMode') === 'true') {
-            document.body.classList.add('night-mode');
-            const themeIcon = document.getElementById('headerThemeIcon');
-            if (themeIcon) themeIcon.textContent = '🌙';
+        const modal = document.getElementById('checkoutModal');
+        if (modal) {
+            const observer = new MutationObserver(function() {
+                if (!modal.classList.contains('hidden')) {
+                    actualizarOpcionesEnvio();
+                }
+            });
+            observer.observe(modal, { attributes: true });
         }
-        
-        window.updateCartUI();
-        
-        console.log('✅ El Resolvito JS inicializado correctamente');
-        showToast('🛍️ ¡Bienvenido a El Resolvito! Agrega productos al carrito', 'info');
     });
-
-})();
-
-window.debugCart = function() {
-    console.log('=== DEBUG CARRITO ===');
-    const sidebar = document.getElementById('cartSidebar');
-    const overlay = document.getElementById('cartOverlay');
-    
-    console.log('sidebar existe:', !!sidebar);
-    console.log('overlay existe:', !!overlay);
-    
-    if (sidebar) {
-        console.log('sidebar clases:', sidebar.className);
-        console.log('sidebar tiene cart-open:', sidebar.classList.contains('cart-open'));
-        console.log('transform:', window.getComputedStyle(sidebar).transform);
-    }
-    
-    if (overlay) {
-        console.log('overlay clases:', overlay.className);
-        console.log('overlay hidden:', overlay.classList.contains('hidden'));
-    }
-};
+</script>
