@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Moda & Estilo - El Resolvito</title>
-    <meta name="description" content="Ropa, calzados y carteras. Lo mejor de la moda en un solo lugar. Envíos en La Habana.">
+    <meta name="description" content="Ropa, calzados y carteras. Lo mejor de la moda en un solo lugar. Precios en USD.">
     
     <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -99,7 +99,7 @@
             margin-left: 0.25rem;
         }
 
-        .producto-wa {
+        .btn-consultar {
             width: 100%;
             background: linear-gradient(135deg, #25D366, #128C7E);
             color: white;
@@ -117,7 +117,7 @@
             margin-top: auto;
         }
 
-        .producto-wa:hover {
+        .btn-consultar:hover {
             transform: scale(1.02);
             box-shadow: 0 10px 20px -5px rgba(37,211,102,0.4);
         }
@@ -127,19 +127,6 @@
             top: 0.75rem;
             left: 0.75rem;
             background: linear-gradient(135deg, #FF69B4, #9B59B6);
-            color: white;
-            font-size: 0.7rem;
-            font-weight: bold;
-            padding: 0.25rem 0.75rem;
-            border-radius: 2rem;
-            z-index: 10;
-        }
-
-        .badge-oferta {
-            position: absolute;
-            top: 0.75rem;
-            right: 0.75rem;
-            background: linear-gradient(135deg, #FF6F00, #FFB300);
             color: white;
             font-size: 0.7rem;
             font-weight: bold;
@@ -161,9 +148,10 @@
         .filtro-btn:hover {
             transform: translateY(-2px);
         }
-        .filtro-activo {
-            background-color: #2E7D32 !important;
-            color: white !important;
+
+        .aviso-mensajeria {
+            background: #FFF3E0;
+            border-left: 4px solid #FF6F00;
         }
 
         @media (max-width: 640px) {
@@ -187,6 +175,56 @@
                 }
             }
         }
+        
+        // Tu número de WhatsApp como gestor
+        const GESTOR_WHATSAPP = '5356382909';
+        
+        // Función para consultar producto
+        function consultarProducto(nombre, precioUSD, imagen, descripcion) {
+            const mensaje = `🛍️ *CONSULTA DE PRODUCTO - EL RESOLVITO* 🛍️
+
+📦 *Producto:* ${nombre}
+💰 *Precio:* $${precioUSD} USD
+📝 *Descripción:* ${descripcion}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+👤 *DATOS DEL CLIENTE:*
+• Nombre: 
+• Dirección: 
+• Teléfono: 
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❓ *Pregunta específica:*
+(Escribe aquí tu pregunta)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📌 *Notas importantes:*
+• Las mensajerías se pagan siempre que se soliciten
+• La mensajería se planifica de un día para otro
+• El mensajero siempre llama antes de ir
+
+¡Gracias por confiar en El Resolvito! 🙏`;
+            
+            window.open(`https://wa.me/${GESTOR_WHATSAPP}?text=${encodeURIComponent(mensaje)}`, '_blank');
+        }
+        
+        // Función para consulta rápida
+        function consultaRapida() {
+            const mensaje = `🛍️ *CONSULTA GENERAL - EL RESOLVITO* 🛍️
+
+Hola, me interesa conocer más sobre los productos de moda que publican.
+
+📌 *Antes de confirmar, quisiera saber:*
+• ¿Está disponible el producto?
+• ¿Cuál es el precio final?
+
+Quedo atento a su respuesta. ¡Gracias!`;
+            
+            window.open(`https://wa.me/${GESTOR_WHATSAPP}?text=${encodeURIComponent(mensaje)}`, '_blank');
+        }
     </script>
 </head>
 <body class="bg-gray-50">
@@ -202,6 +240,24 @@
         <div class="container mx-auto px-4 text-center text-white">
             <h1 class="text-5xl md:text-6xl font-bold mb-4 drop-shadow-lg">Moda & Estilo</h1>
             <p class="text-xl md:text-2xl opacity-90">Ropa, calzados y accesorios con el mejor estilo</p>
+            <p class="text-md opacity-80 mt-2">Precios en USD</p>
+            <button onclick="consultaRapida()" class="mt-6 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border border-white px-6 py-2 rounded-full transition inline-flex items-center gap-2">
+                <i class="fab fa-whatsapp"></i> Consultar disponibilidad
+            </button>
+        </div>
+    </section>
+
+    <!-- Aviso importante sobre mensajería -->
+    <section class="py-4 bg-amber-50 border-b border-amber-200">
+        <div class="container mx-auto px-4">
+            <div class="aviso-mensajeria bg-amber-50 p-3 rounded-lg text-sm text-amber-800 flex items-start gap-3">
+                <i class="fas fa-truck text-amber-600 text-lg mt-0.5"></i>
+                <div>
+                    <span class="font-bold">📌 Información importante:</span> Las mensajerías se pagan siempre que se soliciten. 
+                    Se planifican de un día para otro y el mensajero siempre llama antes de ir. 
+                    <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20las%20mensajer%C3%ADas" target="_blank" class="underline font-bold">Consultar más →</a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -224,6 +280,7 @@
                 <span class="inline-block bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-bold mb-3">👟 CALZADO</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Zapatos, Tenis y Sandalias</h2>
                 <div class="w-20 h-1 bg-blue-500 mx-auto mt-3 rounded-full"></div>
+                <p class="text-sm text-gray-500 mt-2">Precios en USD · Consulta disponibilidad</p>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5" id="calzados-grid"></div>
         </div>
@@ -236,6 +293,7 @@
                 <span class="inline-block bg-purple-500 text-white px-4 py-1 rounded-full text-sm font-bold mb-3">👜 ACCESORIOS</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Carteras</h2>
                 <div class="w-20 h-1 bg-purple-500 mx-auto mt-3 rounded-full"></div>
+                <p class="text-sm text-gray-500 mt-2">Precios en USD · Consulta disponibilidad</p>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5" id="carteras-grid"></div>
         </div>
@@ -248,6 +306,7 @@
                 <span class="inline-block bg-pink-500 text-white px-4 py-1 rounded-full text-sm font-bold mb-3">👗 ROPA</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Ropa para Hombre y Mujer</h2>
                 <div class="w-20 h-1 bg-pink-500 mx-auto mt-3 rounded-full"></div>
+                <p class="text-sm text-gray-500 mt-2">Precios en USD · Consulta disponibilidad</p>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5" id="ropa-grid"></div>
         </div>
@@ -257,10 +316,10 @@
     <section class="py-12 bg-gradient-to-r from-green-600 to-green-700">
         <div class="container mx-auto px-4 text-center text-white">
             <h3 class="text-2xl font-bold mb-3">¿Te gustó algo?</h3>
-            <p class="mb-5">Contáctanos por WhatsApp para más información o para hacer tu pedido</p>
-            <a href="https://wa.me/5356382909" target="_blank" class="inline-block bg-white text-green-600 px-8 py-3 rounded-full font-bold hover:shadow-xl transition transform hover:scale-105">
-                <i class="fab fa-whatsapp mr-2"></i>Escríbenos ahora
-            </a>
+            <p class="mb-5">Contáctanos por WhatsApp para consultar disponibilidad y precios actualizados</p>
+            <button onclick="consultaRapida()" class="inline-block bg-white text-green-600 px-8 py-3 rounded-full font-bold hover:shadow-xl transition transform hover:scale-105">
+                <i class="fab fa-whatsapp mr-2"></i>Consultar ahora
+            </button>
         </div>
     </section>
 
@@ -349,8 +408,8 @@
                             <h3 class="text-2xl font-bold mb-2">${titulo}</h3>
                             <p class="text-gray-600 mb-4">${descripcion}</p>
                             <p class="text-3xl font-bold text-cuban-green mb-4">$${precio} USD</p>
-                            <button onclick="if(window.addToCart) window.addToCart({id: Math.random(), nombre: '${titulo}', precio: ${precio * 24}, imagen: '${imagen}', cantidad: 1}); this.closest('.fixed').remove();" class="w-full bg-cuban-green text-white py-3 rounded-xl font-bold hover:bg-cuban-dark transition">
-                                <i class="fas fa-cart-plus mr-2"></i>Agregar al carrito
+                            <button onclick="consultarProducto('${titulo}', ${precio}, '${imagen}', '${descripcion}')" class="w-full bg-green-600 text-white py-3 rounded-xl font-bold hover:bg-green-700 transition flex items-center justify-center gap-2">
+                                <i class="fab fa-whatsapp"></i> Consultar disponibilidad
                             </button>
                         </div>
                     </div>
@@ -377,8 +436,8 @@
                                 <span class="precio">$${p.precio}</span>
                                 <span class="precio-usd">USD</span>
                             </div>
-                            <button class="producto-wa" onclick="if(window.addToCart) window.addToCart({id: ${p.id}, nombre: '${p.nombre}', precio: ${p.precio * 24}, imagen: '${p.imagen}', cantidad: 1})">
-                                <i class="fas fa-cart-plus"></i> Agregar al carrito
+                            <button class="btn-consultar" onclick="consultarProducto('${p.nombre}', ${p.precio}, '${p.imagen}', '${p.descripcion}')">
+                                <i class="fab fa-whatsapp"></i> Consultar disponibilidad
                             </button>
                         </div>
                     </div>
@@ -401,8 +460,8 @@
                                 <span class="precio">$${p.precio}</span>
                                 <span class="precio-usd">USD</span>
                             </div>
-                            <button class="producto-wa" onclick="if(window.addToCart) window.addToCart({id: ${p.id}, nombre: '${p.nombre}', precio: ${p.precio * 24}, imagen: '${p.imagen}', cantidad: 1})">
-                                <i class="fas fa-cart-plus"></i> Agregar al carrito
+                            <button class="btn-consultar" onclick="consultarProducto('${p.nombre}', ${p.precio}, '${p.imagen}', '${p.descripcion}')">
+                                <i class="fab fa-whatsapp"></i> Consultar disponibilidad
                             </button>
                         </div>
                     </div>
@@ -425,8 +484,8 @@
                                 <span class="precio">$${p.precio}</span>
                                 <span class="precio-usd">USD</span>
                             </div>
-                            <button class="producto-wa" onclick="if(window.addToCart) window.addToCart({id: ${p.id}, nombre: '${p.nombre}', precio: ${p.precio * 24}, imagen: '${p.imagen}', cantidad: 1})">
-                                <i class="fas fa-cart-plus"></i> Agregar al carrito
+                            <button class="btn-consultar" onclick="consultarProducto('${p.nombre}', ${p.precio}, '${p.imagen}', '${p.descripcion}')">
+                                <i class="fab fa-whatsapp"></i> Consultar disponibilidad
                             </button>
                         </div>
                     </div>
@@ -440,7 +499,6 @@
         function mostrarCategoria(categoria) {
             categoriaActual = categoria;
             
-            // Actualizar estilos de los botones
             document.querySelectorAll('.filtro-btn').forEach(btn => {
                 btn.classList.remove('bg-cuban-green', 'text-white');
                 btn.classList.add('bg-gray-200', 'text-gray-700');
@@ -451,7 +509,6 @@
                 btnActivo.classList.add('bg-cuban-green', 'text-white');
             }
             
-            // Mostrar/ocultar secciones
             const secciones = document.querySelectorAll('.categoria-section');
             secciones.forEach(seccion => {
                 if (categoria === 'todos') {
@@ -496,14 +553,6 @@
             if (typeof window.updateCartUI === 'function') {
                 window.updateCartUI();
             }
-            
-            setTimeout(() => {
-                if (typeof window.addToCart === 'function') {
-                    console.log('✅ Carrito funcionando en Moda');
-                } else {
-                    console.warn('⚠️ addToCart no disponible en Moda');
-                }
-            }, 500);
         });
     </script>
 </body>
