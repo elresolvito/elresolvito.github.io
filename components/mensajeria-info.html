@@ -1,0 +1,110 @@
+<!-- components/mensajeria-info.html -->
+<div class="bg-white rounded-2xl shadow-xl overflow-hidden max-w-4xl mx-auto mt-8">
+    <div class="bg-gradient-to-r from-mensajero-ambar to-cuban-orange px-6 py-4">
+        <h3 class="text-white text-xl font-bold flex items-center gap-2">
+            <i class="fas fa-tachometer-alt"></i> Tarifas de Mensajería
+        </h3>
+        <p class="text-white/80 text-sm">Precios claros, sin letra pequeña</p>
+    </div>
+    
+    <div class="p-6">
+        <!-- Tabla de tarifas -->
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm md:text-base">
+                <thead>
+                    <tr class="border-b-2 border-cuban-green">
+                        <th class="text-left py-3 px-2 font-bold text-gray-700">Distancia</th>
+                        <th class="text-left py-3 px-2 font-bold text-gray-700">Tarifa (cup)</th>
+                        <th class="text-left py-3 px-2 font-bold text-gray-700">Ejemplo en Habana Vieja</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="py-3 px-2 font-medium">Hasta 1 km</td>
+                        <td class="py-3 px-2 text-cuban-green font-bold">300 cup</td>
+                        <td class="py-3 px-2 text-gray-500 text-sm">Calle Obispo → Plaza Vieja</td>
+                    </tr>
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="py-3 px-2 font-medium">1 a 2 km</td>
+                        <td class="py-3 px-2 text-cuban-green font-bold">400 cup</td>
+                        <td class="py-3 px-2 text-gray-500 text-sm">Capitolio → Castillo de la Real Fuerza</td>
+                    </tr>
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="py-3 px-2 font-medium">2 a 3 km</td>
+                        <td class="py-3 px-2 text-cuban-green font-bold">450 cup</td>
+                        <td class="py-3 px-2 text-gray-500 text-sm">Maqueta → Plaza de la Catedral</td>
+                    </tr>
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="py-3 px-2 font-medium">3 a 4 km</td>
+                        <td class="py-3 px-2 text-cuban-green font-bold">500 cup</td>
+                        <td class="py-3 px-2 text-gray-500 text-sm">Habana Vieja → Vedado (Línea)</td>
+                    </tr>
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="py-3 px-2 font-medium">4 a 5 km</td>
+                        <td class="py-3 px-2 text-cuban-green font-bold">550 cup</td>
+                        <td class="py-3 px-2 text-gray-500 text-sm">Habana Vieja → Plaza de la Revolución</td>
+                    </tr>
+                    <tr class="hover:bg-gray-50">
+                        <td class="py-3 px-2 font-medium">Más de 5 km</td>
+                        <td class="py-3 px-2 text-cuban-green font-bold">100 cup x km adicional</td>
+                        <td class="py-3 px-2 text-gray-500 text-sm">Ejemplo: 6 km = 600 cup</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Información adicional -->
+        <div class="mt-6 grid md:grid-cols-2 gap-4 text-sm">
+            <div class="flex items-start gap-2">
+                <i class="fas fa-calculator text-cuban-green mt-1"></i>
+                <div>
+                    <span class="font-bold">¿Cómo calculamos?</span>
+                    <p class="text-gray-500">Usamos la ruta real que marca Google Maps desde la dirección de recogida hasta la dirección de entrega.</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-2">
+                <i class="fas fa-clock text-cuban-green mt-1"></i>
+                <div>
+                    <span class="font-bold">Tiempo de espera</span>
+                    <p class="text-gray-500">Normal: 30 min / Exprés: 15 min (+50 cup)</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-2">
+                <i class="fas fa-hand-holding-usd text-cuban-green mt-1"></i>
+                <div>
+                    <span class="font-bold">Forma de pago</span>
+                    <p class="text-gray-500">Contra entrega (efectivo o transferencia)</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-2">
+                <i class="fas fa-map-marked-alt text-cuban-green mt-1"></i>
+                <div>
+                    <span class="font-bold">Cobertura</span>
+                    <p class="text-gray-500">La Habana Vieja y zonas cercanas</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Ejemplo práctico -->
+        <div class="mt-6 bg-cuban-green/5 rounded-xl p-4 border border-cuban-green/20">
+            <div class="flex items-start gap-3">
+                <i class="fas fa-lightbulb text-cuban-yellow text-xl mt-1"></i>
+                <div>
+                    <span class="font-bold text-cuban-green">Ejemplo práctico:</span>
+                    <p class="text-gray-600 text-sm mt-1">"Necesito enviar un paquete desde Calle Obispo #305 hasta Plaza Vieja (0.7 km)."</p>
+                    <p class="text-gray-700 text-sm mt-1"><strong>Cálculo:</strong> 0.7 km → menos de 1 km → <strong class="text-cuban-green">300 cup</strong></p>
+                    <p class="text-gray-500 text-xs mt-2">📱 Para solicitar, escribe "MENSAJERO" seguido de las direcciones por WhatsApp</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Botón de acción -->
+        <div class="mt-6 text-center">
+            <a href="https://wa.me/5356382909?text=Hola,%20necesito%20un%20mensajero%20para%20un%20recado%20en%20La%20Habana%20Vieja" 
+               class="inline-flex items-center gap-2 bg-cuban-green hover:bg-cuban-dark text-white font-bold py-3 px-6 rounded-full transition shadow-lg">
+                <i class="fab fa-whatsapp text-xl"></i>
+                Solicitar mensajero por WhatsApp
+            </a>
+        </div>
+    </div>
+</div>
