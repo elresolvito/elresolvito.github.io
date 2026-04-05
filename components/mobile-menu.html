@@ -1,61 +1,27 @@
 <!-- components/mobile-menu.html -->
-<div id="mobileMenu" class="fixed inset-0 bg-white z-[60] hidden overflow-y-auto">
-    <div class="container mx-auto px-4 py-6">
-        <!-- Cabecera del menú móvil -->
+<div id="mobileMenu" class="fixed inset-0 bg-black/50 z-50 hidden" onclick="toggleMenu()">
+    <div class="bg-white w-80 max-w-sm h-full p-6" onclick="event.stopPropagation()">
         <div class="flex justify-between items-center mb-8">
-            <div class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-cuban-green rounded-full flex items-center justify-center text-white">
-                    <i class="fas fa-store"></i>
-                </div>
-                <span class="font-bold text-xl text-gray-800">El Resolvito</span>
-            </div>
-            <button onclick="window.toggleMenu()" class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition">
-                <i class="fas fa-times text-gray-600"></i>
+            <h2 class="text-xl font-bold text-cuban-green">Menú</h2>
+            <button onclick="toggleMenu()" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-cuban-green hover:text-white transition">
+                <i class="fas fa-times"></i>
             </button>
         </div>
-        
-        <!-- Enlaces del menú móvil -->
-        <nav class="flex flex-col space-y-4">
-            <a href="index.html" class="block py-3 px-4 bg-gray-50 rounded-lg hover:bg-cuban-green hover:text-white transition font-medium" onclick="window.toggleMenu()">
-                <i class="fas fa-home mr-3"></i> Inicio
-            </a>
-            <a href="tienda.html" class="block py-3 px-4 bg-gray-50 rounded-lg hover:bg-cuban-green hover:text-white transition font-medium" onclick="window.toggleMenu()">
-                <i class="fas fa-shopping-basket mr-3"></i> Tienda
-            </a>
-            <a href="servicios.html" class="block py-3 px-4 bg-gray-50 rounded-lg hover:bg-cuban-green hover:text-white transition font-medium" onclick="window.toggleMenu()">
-                <i class="fas fa-tools mr-3"></i> Servicios
-            </a>
-            <a href="ofertas.html" class="block py-3 px-4 bg-gray-50 rounded-lg hover:bg-cuban-green hover:text-white transition font-medium" onclick="window.toggleMenu()">
-                <i class="fas fa-tags mr-3"></i> Ofertas
-            </a>
-            <a href="blog.html" class="block py-3 px-4 bg-gray-50 rounded-lg hover:bg-cuban-green hover:text-white transition font-medium" onclick="window.toggleMenu()">
-                <i class="fas fa-newspaper mr-3"></i> Blog
-            </a>
-            <a href="reservas.html" class="block py-3 px-4 bg-gray-50 rounded-lg hover:bg-cuban-green hover:text-white transition font-medium" onclick="window.toggleMenu()">
-                <i class="fas fa-bed mr-3"></i> Alojamientos
-            </a>
-            <!-- 🔥 NUEVO: Quiénes Somos -->
-            <a href="quienes-somos.html" class="block py-3 px-4 bg-gray-50 rounded-lg hover:bg-cuban-green hover:text-white transition font-medium" onclick="window.toggleMenu()">
-                <i class="fas fa-users mr-3"></i> Quiénes Somos
-            </a>
-            <a href="privacidad.html" class="block py-3 px-4 bg-gray-50 rounded-lg hover:bg-cuban-green hover:text-white transition font-medium text-sm text-gray-600" onclick="window.toggleMenu()">
-                <i class="fas fa-lock mr-3"></i> Privacidad
-            </a>
-            <a href="terminos.html" class="block py-3 px-4 bg-gray-50 rounded-lg hover:bg-cuban-green hover:text-white transition font-medium text-sm text-gray-600" onclick="window.toggleMenu()">
-                <i class="fas fa-file-contract mr-3"></i> Términos
-            </a>
+        <nav class="space-y-2">
+            <a href="index.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-home w-6 text-cuban-green"></i><span>Inicio</span></a>
+            <a href="tienda.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-shopping-basket w-6 text-cuban-green"></i><span>Tienda</span></a>
+            <a href="servicios.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-tools w-6 text-cuban-green"></i><span>Servicios</span></a>
+            <a href="moda.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-tshirt w-6 text-cuban-green"></i><span>Moda</span></a>
+            <a href="blog.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-newspaper w-6 text-cuban-green"></i><span>Blog</span></a>
+            <a href="reservas.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-cuban-green/10 transition"><i class="fas fa-bed w-6 text-cuban-green"></i><span>Alojamientos</span></a>
         </nav>
-        
-        <!-- Contacto rápido en móvil -->
-        <div class="mt-8 pt-6 border-t border-gray-200">
-            <p class="text-sm text-gray-500 mb-3">Contáctanos:</p>
-            <a href="https://wa.me/5356382909" target="_blank" class="flex items-center gap-3 p-3 bg-green-50 rounded-lg hover:bg-green-100 transition">
-                <i class="fab fa-whatsapp text-2xl text-green-600"></i>
-                <div>
-                    <p class="font-medium text-gray-800">WhatsApp</p>
-                    <p class="text-xs text-gray-500">+53 5 638 2909</p>
-                </div>
-            </a>
+        <div class="absolute bottom-6 left-6 right-6">
+            <div class="border-t border-gray-200 pt-4">
+                <p class="text-sm text-gray-500 mb-3">Contáctanos</p>
+                <a href="https://wa.me/5356382909" class="flex items-center gap-2 text-cuban-green hover:text-cuban-green-dark transition">
+                    <i class="fab fa-whatsapp text-xl"></i><span class="text-sm font-medium">+53 5 638 2909</span>
+                </a>
+            </div>
         </div>
     </div>
 </div>
