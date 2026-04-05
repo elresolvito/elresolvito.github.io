@@ -426,79 +426,66 @@ Hola, necesito un servicio de mensajería. Por favor, tomen mis datos:
             </div>
         </section>
 
-        <!-- MENSAJERÍA - SECCIÓN REALISTA (SIN exprés, SIN seguimiento, SIN lluvia) -->
-        <section class="py-12 section-fade">
-            <div class="container mx-auto px-4">
-                <div class="relative rounded-2xl overflow-hidden shadow-xl min-h-[480px] bg-cover bg-center" style="background-image: url('https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp');">
-                    <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/60"></div>
-                    
-                    <div class="relative z-10 text-white p-6 md:p-8">
-                        <!-- Badge -->
-                        <div class="inline-block bg-cuban-yellow text-cuban-dark text-sm font-bold px-4 py-1 rounded-full mb-4">
-                            🚲 MENSAJERÍA EL RESOLVITO
-                        </div>
-                        
-                        <h2 class="text-2xl md:text-3xl font-bold mb-2">Servicio de mensajería en La Habana</h2>
-                        <p class="text-sm opacity-90 mb-5">Entregamos tus paquetes de forma rápida y segura</p>
-                        
-                        <!-- Tabla de precios clara -->
-                        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 mb-5 max-w-md">
-                            <h3 class="font-bold text-cuban-yellow mb-3 text-center">💰 Tarifas por distancia</h3>
-                            <div class="space-y-2">
-                                <div class="tarifa-row">
-                                    <span class="flex items-center gap-2"><i class="fas fa-map-marker-alt text-cuban-yellow text-sm"></i> La Habana Vieja</span>
-                                    <span class="font-bold text-cuban-yellow">$300</span>
-                                    <span class="text-xs opacity-70">(hasta 8kg)</span>
-                                </div>
-                                <div class="tarifa-row">
-                                    <span><i class="fas fa-road mr-2 text-cuban-yellow text-sm"></i> Hasta 1 km</span>
-                                    <span class="font-bold text-cuban-yellow">$300</span>
-                                </div>
-                                <div class="tarifa-row">
-                                    <span><i class="fas fa-road mr-2 text-cuban-yellow text-sm"></i> 1 - 2 km</span>
-                                    <span class="font-bold text-cuban-yellow">$400</span>
-                                </div>
-                                <div class="tarifa-row">
-                                    <span><i class="fas fa-road mr-2 text-cuban-yellow text-sm"></i> 2 - 3 km</span>
-                                    <span class="font-bold text-cuban-yellow">$450</span>
-                                </div>
-                                <div class="tarifa-row">
-                                    <span><i class="fas fa-road mr-2 text-cuban-yellow text-sm"></i> 3 - 4 km</span>
-                                    <span class="font-bold text-cuban-yellow">$500</span>
-                                </div>
-                                <div class="tarifa-row">
-                                    <span><i class="fas fa-road mr-2 text-cuban-yellow text-sm"></i> 4 - 5 km</span>
-                                    <span class="font-bold text-cuban-yellow">$550</span>
-                                </div>
-                                <div class="tarifa-row">
-                                    <span><i class="fas fa-plus-circle mr-2 text-cuban-yellow text-sm"></i> +5 km</span>
-                                    <span class="font-bold text-cuban-yellow">$100/km</span>
-                                    <span class="text-xs opacity-70">adicional</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Información del servicio (sin promesas falsas) -->
-                        <div class="flex flex-wrap gap-3 mb-5 text-xs">
-                            <div class="flex items-center gap-1"><i class="fas fa-check-circle text-cuban-yellow"></i> Pago contra entrega</div>
-                            <div class="flex items-center gap-1"><i class="fas fa-check-circle text-cuban-yellow"></i> Coordinamos por WhatsApp</div>
-                            <div class="flex items-center gap-1"><i class="fas fa-check-circle text-cuban-yellow"></i> Tarifas claras sin sorpresas</div>
-                        </div>
-                        
-                        <!-- Botón de WhatsApp (NO añade al carrito) -->
-                        <div class="flex flex-col sm:flex-row gap-3">
-                            <button onclick="enviarSolicitudMensajeria()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-5 rounded-full transition flex items-center justify-center gap-2 text-sm btn-hover-effect">
-                                <i class="fab fa-whatsapp text-lg"></i> Solicitar mensajero
-                            </button>
-                            <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20mensajer%C3%ADa" target="_blank" class="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold py-2 px-5 rounded-full transition border border-white text-center text-sm">
-                                <i class="fab fa-whatsapp mr-1"></i> Consultar
-                            </a>
-                        </div>
-                        <p class="text-xs text-center mt-4 opacity-80">💬 Al hacer clic, se abrirá WhatsApp con un formulario guiado</p>
+      <!-- Sección destacada: Mensajería El Resolvito -->
+<section class="py-12 bg-gradient-to-r from-amber-50 to-orange-50 section-fade">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center gap-8">
+            <div class="md:w-1/2 text-center md:text-left">
+                <span class="inline-block bg-cuban-orange text-white text-xs font-bold px-3 py-1 rounded-full mb-3">
+                    🛵 NUEVO SERVICIO
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
+                    Mensajería El Resolvito
+                </h2>
+                <p class="text-gray-600 mb-4">
+                    Tu mensajero de confianza en La Habana. Rápido, confiable y con precios claros.
+                    Entregas el mismo día en La Habana Vieja y zonas cercanas.
+                </p>
+                <div class="flex flex-wrap gap-3 mb-5">
+                    <div class="flex items-center gap-2 text-sm bg-white rounded-full px-3 py-1 shadow-sm">
+                        <i class="fas fa-check-circle text-cuban-green"></i> Hasta 1km: $300
+                    </div>
+                    <div class="flex items-center gap-2 text-sm bg-white rounded-full px-3 py-1 shadow-sm">
+                        <i class="fas fa-check-circle text-cuban-green"></i> 1-2km: $400
+                    </div>
+                    <div class="flex items-center gap-2 text-sm bg-white rounded-full px-3 py-1 shadow-sm">
+                        <i class="fas fa-check-circle text-cuban-green"></i> 2-3km: $450
+                    </div>
+                    <div class="flex items-center gap-2 text-sm bg-white rounded-full px-3 py-1 shadow-sm">
+                        <i class="fas fa-check-circle text-cuban-green"></i> +5km: $100/km
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <a href="mensajeriaelresolvito/" 
+                       class="bg-cuban-green hover:bg-cuban-dark text-white font-bold py-3 px-6 rounded-full transition inline-flex items-center justify-center gap-2">
+                        <i class="fas fa-motorcycle"></i> Conocer más
+                    </a>
+                    <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20mensajer%C3%ADa" 
+                       target="_blank"
+                       class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full transition inline-flex items-center justify-center gap-2">
+                        <i class="fab fa-whatsapp"></i> Consultar ahora
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2">
+                <div class="bg-white rounded-2xl shadow-xl p-6 text-center">
+                    <i class="fas fa-motorcycle text-6xl text-cuban-orange mb-3"></i>
+                    <h3 class="text-xl font-bold mb-2">¿Necesitas un mensajero?</h3>
+                    <p class="text-gray-500 text-sm mb-4">Entregas el mismo día · Precios claros · Pago contra entrega</p>
+                    <div class="bg-gray-50 rounded-xl p-3 text-left text-sm">
+                        <div class="flex justify-between py-1"><span>📍 La Habana Vieja</span><span class="font-bold">$300</span></div>
+                        <div class="flex justify-between py-1 border-t"><span>📍 Hasta 1 km</span><span class="font-bold">$300</span></div>
+                        <div class="flex justify-between py-1 border-t"><span>📍 1 - 2 km</span><span class="font-bold">$400</span></div>
+                        <div class="flex justify-between py-1 border-t"><span>📍 2 - 3 km</span><span class="font-bold">$450</span></div>
+                        <div class="flex justify-between py-1 border-t"><span>📍 3 - 4 km</span><span class="font-bold">$500</span></div>
+                        <div class="flex justify-between py-1 border-t"><span>📍 4 - 5 km</span><span class="font-bold">$550</span></div>
+                        <div class="flex justify-between py-1 border-t"><span>📍 +5 km</span><span class="font-bold">$100/km</span></div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
         <!-- Blog Preview -->
         <section class="py-12 bg-gray-50 section-fade">
