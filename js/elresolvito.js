@@ -22,7 +22,7 @@ var PRODUCTS = [
     { id: 18, nombre: "Toallas Sanitarias", categoria: "Higiene personal", precio: 450, imagen: "https://i.postimg.cc/KjjZyH0b/toallas_sanitarias_precio_450.png", descripcion: "Paquete" },
     { id: 19, nombre: "Toallas Húmedas", categoria: "Higiene personal", precio: 690, imagen: "https://i.postimg.cc/W4ZSP3cw/toallas_humedas_precio_690.png", descripcion: "Paquete" },
     { id: 20, nombre: "Jabón de Lavar", categoria: "Aseo del hogar", precio: 250, imagen: "https://i.postimg.cc/V6YfK6Mz/jabon_de_lavar_precio_250.png", descripcion: "Pastilla" },
-    { id: 21, nombre: "Perfume Candy", categoria: "Perfumes y desodorantes", precio: 3100, imagen: "https://i.postimg.cc/vTgJRyhp/perfume_candy_precio_3100.png", descripcion: "Frasco 50ml" },
+    { id: 21, nombre: "Arroz", categoria: "Alimentos y conservas", precio: 700, imagen: "https://i.postimg.cc/ZRR352mX/arroz.jpg", descripcion: "1kg" },
     { id: 22, nombre: "Perfume genérico", categoria: "Perfumes y desodorantes", precio: 3100, imagen: "https://i.postimg.cc/ZKrT0PPG/perfume_precio_3100.png", descripcion: "Frasco 50ml" },
     { id: 23, nombre: "Perfume Q", categoria: "Perfumes y desodorantes", precio: 3100, imagen: "https://i.postimg.cc/CL03P3Dn/perfume_q_precio_3100.png", descripcion: "Frasco 50ml" },
     { id: 24, nombre: "Desodorante Obao", categoria: "Perfumes y desodorantes", precio: 1100, imagen: "https://i.postimg.cc/PxtXSxD2/desodorante_obao_precio_1100.png", descripcion: "Spray/Roll-on" },
@@ -45,9 +45,11 @@ var FEATURED_PRODUCTS = [
     PRODUCTS.find(p => p.id === 7),
     PRODUCTS.find(p => p.id === 1),
     PRODUCTS.find(p => p.id === 13),
-    PRODUCTS.find(p => p.id === 21),
-    PRODUCTS.find(p => p.id === 30),
+    PRODUCTS.find(p => p.id === 2),
+    PRODUCTS.find(p => p.id === 16),
     PRODUCTS.find(p => p.id === 17),
+    PRODUCTS.find(p => p.id === 20),
+    PRODUCTS.find(p => p.id === 21),
     PRODUCTS.find(p => p.id === 9)
 ];
 
