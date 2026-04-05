@@ -143,6 +143,7 @@
                         'dulce-rosa': '#FF69B4',
                         'dulce-morado': '#9B59B6',
                         'contador-azul': '#1E3A8A',
+                        'mensajero-ambar': '#F59E0B'
                     }
                 }
             }
@@ -348,7 +349,7 @@
                     <h2 class="text-3xl font-bold"><i class="fas fa-tools mr-3 text-cuban-blue"></i>Servicios Destacados</h2>
                     <a href="servicios.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
                 </div>
-                <div class="grid md:grid-cols-2 gap-6">
+                <div class="grid md:grid-cols-3 gap-6">
                     <div class="product-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
                         <div class="h-48 overflow-hidden bg-gradient-to-r from-dulce-rosa to-dulce-morado">
                             <img src="https://i.postimg.cc/Qxz4FMGg/IMG-20260226-WA0025.jpg" alt="Dulce César" class="w-full h-full object-contain bg-white">
@@ -375,27 +376,48 @@
                             </a>
                         </div>
                     </div>
+                    <div class="product-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
+                        <div class="h-48 overflow-hidden bg-gradient-to-r from-mensajero-ambar to-cuban-orange">
+                            <img src="https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp" alt="Mensajería" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-5">
+                            <span class="bg-mensajero-ambar text-white text-xs px-2 py-1 rounded-full font-bold">🛵 SERVICIO PROPIO</span>
+                            <h3 class="font-bold text-xl mb-2 text-mensajero-ambar">Mensajería El Resolvito</h3>
+                            <p class="text-gray-600 text-sm mb-3">Envíos rápidos en La Habana Vieja. Precios claros por distancia.</p>
+                            <div class="text-xs text-gray-500 mb-2">Hasta 1km: 300 cup | 1-2km: 400 cup | 2-3km: 450 cup</div>
+                            <a href="https://wa.me/5356382909?text=Hola,%20necesito%20un%20mensajero%20para%20un%20recado%20en%20La%20Habana%20Vieja" target="_blank" class="block w-full bg-mensajero-ambar text-white text-center py-2 rounded-lg text-sm font-bold hover:bg-orange-600 transition">
+                                <i class="fab fa-whatsapp mr-1"></i> Solicitar mensajero
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- MENSAJERÍA -->
+        <!-- MENSAJERÍA - SECCIÓN PRINCIPAL CON TARIFAS COMPLETAS -->
         <section class="py-12 section-fade">
             <div class="container mx-auto px-4">
-                <div class="relative rounded-2xl overflow-hidden shadow-xl min-h-[250px] md:min-h-[300px] bg-cover bg-center flex items-center" style="background-image: url('https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp');">
+                <!-- Tarjeta principal con imagen de fondo -->
+                <div class="relative rounded-2xl overflow-hidden shadow-xl min-h-[280px] md:min-h-[320px] bg-cover bg-center flex items-center" style="background-image: url('https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp');">
                     <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
                     <div class="relative z-10 text-white p-6 md:p-10 max-w-2xl">
-                        <span class="inline-block bg-cuban-yellow text-cuban-dark text-sm font-bold px-4 py-1 rounded-full mb-3">🛵 NUEVO SERVICIO</span>
-                        <h2 class="text-2xl md:text-3xl font-bold mb-2"><i class="fas fa-box"></i> ¿Necesitas un mensajero?</h2>
-                        <p class="text-sm mb-4 opacity-90">Un servicio rápido, confiable y en La Habana. Coordinamos por WhatsApp.</p>
+                        <span class="inline-block bg-cuban-yellow text-cuban-dark text-sm font-bold px-4 py-1 rounded-full mb-3">🛵 SERVICIO PROPIO</span>
+                        <h2 class="text-2xl md:text-3xl font-bold mb-2"><i class="fas fa-motorcycle"></i> Mensajería El Resolvito</h2>
+                        <p class="text-sm mb-4 opacity-90">Rápido, confiable y con precios claros. Entregas el mismo día en La Habana Vieja y zonas cercanas.</p>
                         <div class="flex flex-col sm:flex-row gap-3">
-                            <button onclick="if(window.addToCart) window.addToCart({id: 502, nombre: 'Servicio de Mensajería (Habana Vieja)', precio: 400, imagen: 'https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp', cantidad: 1}); else alert('Cargando carrito...');" class="bg-cuban-green hover:bg-cuban-dark text-white font-bold py-2 px-6 rounded-full transition flex items-center justify-center gap-2 text-sm btn-hover-effect">
-                                <i class="fas fa-cart-plus text-lg"></i> Contratar mensajero ($400)
-                            </button>
-                            <a href="servicios.html" class="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold py-2 px-6 rounded-full transition border border-white">Ver todos los servicios</a>
+                            <a href="https://wa.me/5356382909?text=Hola,%20necesito%20un%20mensajero%20para%20un%20recado%20en%20La%20Habana%20Vieja" 
+                               class="bg-cuban-green hover:bg-cuban-dark text-white font-bold py-2 px-6 rounded-full transition flex items-center justify-center gap-2 text-sm btn-hover-effect">
+                                <i class="fab fa-whatsapp text-lg"></i> Solicitar mensajero
+                            </a>
+                            <a href="servicios.html#mensajeria" class="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold py-2 px-6 rounded-full transition border border-white">
+                                Ver tarifas
+                            </a>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Componente con las tarifas detalladas -->
+                <div id="mensajeria-info-container"></div>
             </div>
         </section>
 
@@ -436,11 +458,11 @@
                         <span class="text-cuban-green font-bold text-sm">🌟 ALOJAMIENTO DESTACADO</span>
                         <h3 class="text-2xl font-bold mt-2 mb-2">Terrazas de Bayona 59</h3>
                         <p class="text-gray-600 italic mb-4">Casa colonial en el corazón de La Habana Vieja</p>
-                        <div class="amenities-grid mb-4">
-                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Agua caliente 24/7</div>
-                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Aire acondicionado</div>
-                            <div class="amenity-item"><i class="fas fa-check-circle"></i> 2 terrazas privadas</div>
-                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Wi-Fi gratuito</div>
+                        <div class="grid grid-cols-2 gap-2 mb-4">
+                            <div class="flex items-center gap-2 text-sm"><i class="fas fa-check-circle text-cuban-green"></i> Agua caliente 24/7</div>
+                            <div class="flex items-center gap-2 text-sm"><i class="fas fa-check-circle text-cuban-green"></i> Aire acondicionado</div>
+                            <div class="flex items-center gap-2 text-sm"><i class="fas fa-check-circle text-cuban-green"></i> 2 terrazas privadas</div>
+                            <div class="flex items-center gap-2 text-sm"><i class="fas fa-check-circle text-cuban-green"></i> Wi-Fi gratuito</div>
                         </div>
                         <div class="flex gap-4 mt-6">
                             <a href="https://reservaterrazasdebayona59.com/" target="_blank" class="bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark text-center flex-1 transition">Reservar Ahora</a>
@@ -527,6 +549,7 @@
             await loadComponent('cart-sidebar-container', 'components/cart-sidebar.html');
             await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
             await loadComponent('footer-container', 'components/footer.html');
+            await loadComponent('mensajeria-info-container', 'components/mensajeria-info.html');
 
             if (typeof FEATURED_PRODUCTS !== 'undefined' && FEATURED_PRODUCTS.length) {
                 const container = document.getElementById('featuredProducts');
