@@ -13,7 +13,7 @@
                 </div>
             </a>
 
-            <!-- MENÚ DE NAVEGACIÓN ACTUALIZADO -->
+            <!-- MENÚ DE NAVEGACIÓN -->
             <nav class="hidden lg:flex items-center gap-6">
                 <a href="index.html" class="hover:text-cuban-green font-medium transition">Inicio</a>
                 <a href="tienda.html" class="hover:text-cuban-green font-medium transition">Tienda</a>
@@ -25,9 +25,14 @@
 
             <!-- Botones de acción -->
             <div class="flex items-center gap-2">
-                <button class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center hover:bg-cuban-green hover:text-white transition" onclick="toggleDayNight()">
-                    <span id="headerThemeIcon">☀️</span>
+                <!-- NUEVO TOGGLE VISUAL SOL/LUNA -->
+                <button onclick="toggleDayNight()" class="theme-toggle" id="themeToggle" aria-label="Cambiar tema claro/oscuro">
+                    <div class="theme-toggle-icons">
+                        <i class="fas fa-sun sun-icon"></i>
+                        <i class="fas fa-moon moon-icon"></i>
+                    </div>
                 </button>
+                
                 <button onclick="toggleCart()" class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg relative transition">
                     <i class="fas fa-shopping-cart text-2xl text-cuban-green"></i>
                     <span id="cartCount" class="cart-badge hidden">0</span>
@@ -40,6 +45,94 @@
     </div>
 </header>
 
+<!-- Estilos del toggle visual (sol/luna) -->
+<style>
+    /* Toggle de tema (sol/luna) mejorado */
+    .theme-toggle {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #f5f7fa, #e4e7eb);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .theme-toggle:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .theme-toggle:active {
+        transform: scale(0.95);
+    }
+
+    .theme-toggle-icons {
+        position: relative;
+        width: 24px;
+        height: 24px;
+    }
+
+    .sun-icon, .moon-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.2rem;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sun-icon {
+        color: #F59E0B;
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    .moon-icon {
+        color: #6366F1;
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(-90deg);
+    }
+
+    /* Modo oscuro - cambia los iconos */
+    body.night-mode .theme-toggle {
+        background: linear-gradient(135deg, #1e293b, #0f172a);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    body.night-mode .sun-icon {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(90deg);
+    }
+
+    body.night-mode .moon-icon {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    /* Ajuste para móvil */
+    @media (max-width: 640px) {
+        .theme-toggle {
+            width: 38px;
+            height: 38px;
+        }
+        .theme-toggle-icons {
+            width: 20px;
+            height: 20px;
+        }
+        .sun-icon, .moon-icon {
+            font-size: 1rem;
+        }
+    }
+</style>
+
+<!-- Script para marcar la página activa -->
 <script>
     (function() {
         const currentPage = window.location.pathname.split('/').pop() || 'index.html';
@@ -52,5 +145,26 @@
                 link.classList.remove('text-cuban-green', 'font-semibold', 'border-b-2', 'border-cuban-green');
             }
         });
+        
+        // Asegurar que el ícono del toggle refleje el estado actual
+        const updateToggleIcon = () => {
+            const isNightMode = document.body.classList.contains('night-mode');
+            // Los estilos CSS ya manejan la animación, solo necesitamos asegurar que el body tenga la clase correcta
+            if (isNightMode) {
+                document.body.classList.add('night-mode');
+            } else {
+                document.body.classList.remove('night-mode');
+            }
+        };
+        
+        // Observar cambios en la clase del body
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'class') {
+                    // Los estilos CSS manejan la animación automáticamente
+                }
+            });
+        });
+        observer.observe(document.body, { attributes: true });
     })();
 </script>
