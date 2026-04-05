@@ -3,7 +3,7 @@
 // ============================================
 var PRODUCTS = [
     { id: 1, nombre: "Atún en lata", categoria: "Alimentos y conservas", precio: 540, imagen: "https://i.postimg.cc/76xHK6zt/atun_precio_500.png", descripcion: "Lata 200g" },
-    { id: 2, nombre: "Pasta de tomate", categoria: "Alimentos y conservas", precio: 350, imagen: "https://i.postimg.cc/gjjYPTNv/pasta_tomate_precio_350.png", descripcion: "Paquete" },
+    { id: 2, nombre: "Pasta de tomate", categoria: "Alimentos y conservas", precio: 390, imagen: "https://i.postimg.cc/gjjYPTNv/pasta_tomate_precio_350.png", descripcion: "Paquete" },
     { id: 3, nombre: "Pimiento fresco", categoria: "Alimentos y conservas", precio: 750, imagen: "https://i.postimg.cc/4yyJTSBj/pimiento_presio_750.png", descripcion: "Unidad" },
     { id: 4, nombre: "Café Dualis 250g", categoria: "Alimentos y conservas", precio: 1450, imagen: "https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png", descripcion: "Paquete 250g" },
     { id: 5, nombre: "Café Dufiltro 250g", categoria: "Alimentos y conservas", precio: 1450, imagen: "https://i.postimg.cc/hG26fv31/cafe_Dufiltro_250_g_precio_1450.png", descripcion: "Paquete 250g" },
