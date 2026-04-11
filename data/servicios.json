@@ -3,16 +3,33 @@
     "id": 1,
     "titulo": "Dulce César",
     "descripcion": "Repostería artesanal para eventos, cafeterías y pedidos especiales.",
-    "boton": "Contactar para cotizar",
-    "nuevo": true,
+    "imagen": "https://i.postimg.cc/Qxz4FMGg/IMG-20260226-WA0025.jpg",
+    "gradiente": "from-dulce-rosa to-dulce-morado",
+    "whatsapp": "5353342167",
+    "precio": "Desde $150",
+    "tags": ["🎂 Tortas", "🧁 Cupcakes", "🍪 Galletas", "📦 Por mayor"],
     "destacado": true
   },
   {
     "id": 2,
     "titulo": "Contador / Tenedor de Libros",
     "descripcion": "Gestión contable profesional para TCP y pequeños negocios.",
-    "boton": "Contactar para cotizar",
-    "nuevo": true,
+    "imagen": "https://i.postimg.cc/TPPT8GM9/photo-2026-02-15-19-00-24.jpg",
+    "gradiente": "from-contador-azul to-cuban-orange",
+    "whatsapp": "5356382909",
+    "precio": "Consultar",
+    "caracteristicas": ["Gestión ONAT", "Registros Obligatorios", "Nómina", "Fichas de Costo"],
+    "destacado": true
+  },
+  {
+    "id": 3,
+    "titulo": "Mensajería El Resolvito",
+    "descripcion": "Servicio rápido y confiable para paquetes, documentos y compras en La Habana.",
+    "imagen": "https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp",
+    "gradiente": "from-mensajero-ambar to-amber-600",
+    "whatsapp": "5356382909",
+    "precio": "Precio según distancia",
+    "tags": ["📦 Paquetes", "📄 Documentos", "🛒 Compras", "🚚 Envíos"],
     "destacado": true
   }
 ]
