@@ -1,0 +1,37 @@
+id,nombre,precio,imagen,categoria,descripcion,destacado
+1,Atún en lata,540,https://i.postimg.cc/76xHK6zt/atun_precio_500.png,Alimentos y conservas,Lata 200g,NO
+2,Pasta de tomate,350,https://i.postimg.cc/gjjYPTNv/pasta_tomate_precio_350.png,Alimentos y conservas,Paquete,NO
+3,Pimiento fresco,750,https://i.postimg.cc/4yyJTSBj/pimiento_presio_750.png,Alimentos y conservas,Unidad,NO
+4,Café Dualis 250g,1450,https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png,Alimentos y conservas,Paquete 250g,SI
+5,Café Dufiltro 250g,1450,https://i.postimg.cc/hG26fv31/cafe_Dufiltro_250_g_precio_1450.png,Alimentos y conservas,Paquete 250g,NO
+6,Café Enepa,470,https://i.postimg.cc/nhY6f04N/cafe_enepa_precio_450.png,Alimentos y conservas,Paquete,NO
+7,Cartón de huevo 30u,3000,https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3000.png,Alimentos y conservas,Cartón,SI
+8,Leche condensada,950,https://i.postimg.cc/tT2XwjtT/leche_condensada.png,Alimentos y conservas,Lata 397g,NO
+9,Harina blanca 1Kg,600,https://i.postimg.cc/3xc2NHFB/harina_blanca1_kg.png,Alimentos y conservas,Paquete 1Kg,SI
+10,Chicoticos Pelly 90g,400,https://i.postimg.cc/1zv2fXjZ/chicoticos_pelly_90_g_precio_400.png,Snacks y golosinas,Paquete 90g,NO
+11,Papitas Campesinas,690,https://i.postimg.cc/cLgrDtf9/papitas_campesinas_precio_690.png,Snacks y golosinas,Paquete,NO
+12,Pelly Jamón,580,https://i.postimg.cc/pdQV7frX/pelly_jamon_precio_580.png,Snacks y golosinas,Paquete,NO
+13,Mayonesa Mediana,850,https://i.postimg.cc/KzJZw2rR/mayonesa_precio_850.png,Salsas,Frasco mediano,SI
+14,Mayonesa Grande,1100,https://i.postimg.cc/Px2t9jzz/mayonesa_precio1100.png,Salsas,Frasco grande,NO
+15,Cuchilla de Afeitar,100,https://i.postimg.cc/8CdkdW7x/cuchilla_de_afeitar_precio_100.png,Higiene personal,Unidad,NO
+16,Jabón Marwa,150,https://i.postimg.cc/3RK8tRpR/jabon_marwa_precio_150.png,Higiene personal,Pastilla,NO
+17,Papel Sanitario,490,https://i.postimg.cc/bwW289qD/papel_sanitario_precio_490i.png,Higiene personal,Paquete,SI
+18,Toallas Sanitarias,450,https://i.postimg.cc/KjjZyH0b/toallas_sanitarias_precio_450.png,Higiene personal,Paquete,NO
+19,Toallas Húmedas,690,https://i.postimg.cc/W4ZSP3cw/toallas_humedas_precio_690.png,Higiene personal,Paquete,NO
+20,Jabón de Lavar,250,https://i.postimg.cc/V6YfK6Mz/jabon_de_lavar_precio_250.png,Aseo del hogar,Pastilla,NO
+21,Perfume Candy,3100,https://i.postimg.cc/vTgJRyhp/perfume_candy_precio_3100.png,Perfumes y desodorantes,Frasco 50ml,SI
+22,Perfume genérico,3100,https://i.postimg.cc/ZKrT0PPG/perfume_precio_3100.png,Perfumes y desodorantes,Frasco 50ml,NO
+23,Perfume Q,3100,https://i.postimg.cc/CL03P3Dn/perfume_q_precio_3100.png,Perfumes y desodorantes,Frasco 50ml,NO
+24,Desodorante Obao,1100,https://i.postimg.cc/PxtXSxD2/desodorante_obao_precio_1100.png,Perfumes y desodorantes,Spray/Roll-on,NO
+25,Desodorante Rush Blanco,1000,https://i.postimg.cc/FR9rTRS8/desodorante_rush_blanco_precio_1000.png,Perfumes y desodorantes,Roll-on,NO
+26,Desodorante Rush,1000,https://i.postimg.cc/sXVjTXSF/desodorante_rush_precio_1000.png,Perfumes y desodorantes,Spray,NO
+27,Colonia Niña,1100,https://i.postimg.cc/G3v04rsM/colonia_nina.png,Perfumes y desodorantes,Botella 100ml,NO
+28,Macarrones,300,https://i.postimg.cc/Hsmz1H69/macarrones_precio_300.png,Pastas y fideos,Paquete,NO
+29,Sopas instantáneas,160,https://i.postimg.cc/FzNTpQqK/sopas_instantaneas_precio_160.png,Pastas y fideos,Paquete,NO
+30,Licor de fresa,2500,https://i.postimg.cc/59YT2x5p/licor_de_fresa_precio_2500.png,Bebidas alcohólicas y malta,Botella,SI
+31,Licor Cocobay,2500,https://i.postimg.cc/7ZDW90Fz/locor_cocobay_precio_2500.png,Bebidas alcohólicas y malta,Botella,NO
+32,Whisky Spirit 200ml,320,https://i.postimg.cc/4N8W6q1t/tea_precio_320.png,Bebidas alcohólicas y malta,Botella 200ml,NO
+33,Whisky 1L,1350,https://i.postimg.cc/cLyrb4T0/whisky_1L_precio_1350.png,Bebidas alcohólicas y malta,Botella 1L,NO
+34,Whisky Sir Albin,550,https://i.postimg.cc/y84kbYnC/whisky_sir_albin_precio_550.png,Bebidas alcohólicas y malta,Botella pequeña,NO
+35,Vino Pluvium,1200,https://i.postimg.cc/XNLLWmmx/vino_pluvium_precio_1200.png,Bebidas alcohólicas y malta,Botella,NO
+36,Baterías Triple A,300,https://i.postimg.cc/DZ2vxZsT/Gemini_Generated_Image_824rio824rio824r.png,Electrónicos y accesorios,Pack 4 unidades,NO
