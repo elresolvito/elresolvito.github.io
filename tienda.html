@@ -103,14 +103,6 @@
             }
         }
         
-        .btn-hover-effect {
-            transition: all 0.2s ease;
-        }
-        .btn-hover-effect:hover {
-            transform: scale(1.02);
-        }
-        
-        /* Filtros */
         .filtro-btn {
             transition: all 0.2s ease;
         }
@@ -174,7 +166,6 @@
             <div class="container mx-auto px-4">
                 <div class="flex flex-wrap justify-center gap-2" id="filtros-container">
                     <button data-categoria="todos" class="filtro-btn active px-4 py-2 rounded-full bg-cuban-green text-white font-medium transition">Todos</button>
-                    <!-- Las categorías se cargarán dinámicamente -->
                 </div>
             </div>
         </section>
@@ -183,10 +174,9 @@
         <section class="py-12 section-fade">
             <div class="container mx-auto px-4">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="productos-container">
-                    <!-- Los productos se cargarán desde JSON -->
+                    <!-- Los productos se cargarán desde el CSV -->
                 </div>
                 
-                <!-- Mensaje cuando no hay productos -->
                 <div id="no-productos-message" class="text-center py-12 hidden">
                     <i class="fas fa-box-open text-6xl text-gray-300 mb-4"></i>
                     <p class="text-gray-500">No hay productos en esta categoría</p>
@@ -283,12 +273,53 @@
             await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
             await loadComponent('footer-container', 'components/footer.html');
 
-            // Variables globales
+            // ==========================================
+            // FUNCIÓN PARA LEER CSV
+            // ==========================================
+            function parseCSV(csvText) {
+                const lines = csvText.split('\n');
+                const headers = lines[0].split(',');
+                
+                const productos = [];
+                for (let i = 1; i < lines.length; i++) {
+                    if (lines[i].trim() === '') continue;
+                    
+                    // Manejar comillas en los valores
+                    const values = [];
+                    let currentValue = '';
+                    let inQuotes = false;
+                    
+                    for (let char of lines[i]) {
+                        if (char === '"') {
+                            inQuotes = !inQuotes;
+                        } else if (char === ',' && !inQuotes) {
+                            values.push(currentValue.trim());
+                            currentValue = '';
+                        } else {
+                            currentValue += char;
+                        }
+                    }
+                    values.push(currentValue.trim());
+                    
+                    if (values.length >= headers.length) {
+                        const producto = {};
+                        headers.forEach((header, idx) => {
+                            producto[header.trim()] = values[idx] || '';
+                        });
+                        producto.precio = parseFloat(producto.precio) || 0;
+                        producto.destacado = producto.destacado === 'SI';
+                        productos.push(producto);
+                    }
+                }
+                return productos;
+            }
+
+            // Variables
             let allProducts = [];
             let currentCategory = 'todos';
             let categoriesSet = new Set();
 
-            // Función para renderizar productos según categoría
+            // Renderizar productos
             function renderProducts() {
                 const container = document.getElementById('productos-container');
                 const noProductsMsg = document.getElementById('no-productos-message');
@@ -310,14 +341,15 @@
                     const nombreSanitizado = (p.nombre || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
                     const imagenUrl = p.imagen || 'https://placehold.co/400x400/2E7D32/white?text=Producto';
                     const precioNum = parseFloat(p.precio) || 0;
+                    const categoria = p.categoria || 'General';
                     
                     return `
                         <div class="product-card">
-                            <div class="product-img-container" onclick="window.openImageModal('${imagenUrl}', '${nombreSanitizado}')">
+                            <div class="product-img-container" onclick="if(window.openImageModal) window.openImageModal('${imagenUrl}', '${nombreSanitizado}')">
                                 <img src="${imagenUrl}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/400x400/2E7D32/white?text=${encodeURIComponent(p.nombre)}'">
                             </div>
                             <div class="p-3">
-                                ${p.categoria ? `<span class="text-xs text-cuban-green font-medium">${p.categoria}</span>` : ''}
+                                <span class="text-xs text-cuban-green font-medium">${categoria}</span>
                                 <h3 class="font-semibold text-sm line-clamp-2 h-10 mt-1">${p.nombre || 'Producto'}</h3>
                                 <div class="flex items-center justify-between mt-2">
                                     <span class="text-cuban-green font-bold text-lg">$${precioNum.toLocaleString()}</span>
@@ -330,10 +362,10 @@
                     `;
                 }).join('');
                 
-                console.log(`✅ ${filteredProducts.length} productos renderizados (categoría: ${currentCategory})`);
+                console.log(`✅ ${filteredProducts.length} productos renderizados (${currentCategory})`);
             }
 
-            // Función para actualizar los botones de filtro
+            // Actualizar botones de filtro
             function updateFilters() {
                 const filtrosContainer = document.getElementById('filtros-container');
                 if (!filtrosContainer) return;
@@ -347,13 +379,11 @@
                 `;
                 filtrosContainer.innerHTML = filtrosHTML;
                 
-                // Re-asignar eventos a los botones
                 document.querySelectorAll('.filtro-btn').forEach(btn => {
                     btn.addEventListener('click', () => {
                         const categoria = btn.getAttribute('data-categoria');
                         currentCategory = categoria;
                         
-                        // Actualizar clase active en botones
                         document.querySelectorAll('.filtro-btn').forEach(b => {
                             if (b.getAttribute('data-categoria') === categoria) {
                                 b.classList.add('active');
@@ -370,18 +400,21 @@
                 });
             }
 
-            // Cargar productos desde data/productos.json
+            // ==========================================
+            // CARGAR PRODUCTOS DESDE CSV
+            // ==========================================
             try {
-                const response = await fetch('data/productos.json');
+                const response = await fetch('data/productos.csv');
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                allProducts = await response.json();
+                const csvText = await response.text();
+                allProducts = parseCSV(csvText);
                 
                 // Extraer categorías únicas
                 allProducts.forEach(p => {
-                    if (p.categoria) categoriesSet.add(p.categoria);
+                    if (p.categoria && p.categoria !== '') categoriesSet.add(p.categoria);
                 });
                 
-                console.log(`✅ ${allProducts.length} productos cargados desde JSON`);
+                console.log(`✅ ${allProducts.length} productos cargados desde CSV`);
                 console.log(`📁 Categorías: ${Array.from(categoriesSet).join(', ')}`);
                 
                 updateFilters();
