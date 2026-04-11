@@ -15,9 +15,9 @@ id,nombre,precio,imagen,categoria,descripcion,destacado
 14,Mayonesa Grande,1100,https://i.postimg.cc/Px2t9jzz/mayonesa_precio1100.png,Salsas,Frasco grande,NO
 15,Cuchilla de Afeitar,100,https://i.postimg.cc/8CdkdW7x/cuchilla_de_afeitar_precio_100.png,Higiene personal,Unidad,NO
 16,Jabón Marwa,150,https://i.postimg.cc/3RK8tRpR/jabon_marwa_precio_150.png,Higiene personal,Pastilla,SI
-17,Papel Sanitario,490,https://i.postimg.cc/bwW289qD/papel_sanitario_precio_490i.png,Higiene personal,Paquete,SI
+17,Papel Sanitario,530,https://i.postimg.cc/bwW289qD/papel_sanitario_precio_490i.png,Higiene personal,Paquete,SI
 18,Toallas Sanitarias,450,https://i.postimg.cc/KjjZyH0b/toallas_sanitarias_precio_450.png,Higiene personal,Paquete,NO
-19,Toallas Húmedas,690,https://i.postimg.cc/W4ZSP3cw/toallas_humedas_precio_690.png,Higiene personal,Paquete,NO
+19,Toallas Húmedas,700,https://i.postimg.cc/W4ZSP3cw/toallas_humedas_precio_690.png,Higiene personal,Paquete,NO
 20,Jabón de Lavar,250,https://i.postimg.cc/V6YfK6Mz/jabon_de_lavar_precio_250.png,Aseo del hogar,Pastilla,SI
 21,Perfume Candy,3100,https://i.postimg.cc/vTgJRyhp/perfume_candy_precio_3100.png,Perfumes y desodorantes,Frasco 50ml,NO
 22,Perfume genérico,3100,https://i.postimg.cc/ZKrT0PPG/perfume_precio_3100.png,Perfumes y desodorantes,Frasco 50ml,NO
