@@ -20,16 +20,5 @@
     "precio": "Consultar",
     "caracteristicas": ["Gestión ONAT", "Registros Obligatorios", "Nómina", "Fichas de Costo"],
     "destacado": true
-  },
-  {
-    "id": 3,
-    "titulo": "Mensajería El Resolvito",
-    "descripcion": "Servicio rápido y confiable para paquetes, documentos y compras en La Habana.",
-    "imagen": "https://i.postimg.cc/tgBh8YZM/mensajero-resolvito-1-11zon.webp",
-    "gradiente": "from-mensajero-ambar to-amber-600",
-    "whatsapp": "5356382909",
-    "precio": "Precio según distancia",
-    "tags": ["📦 Paquetes", "📄 Documentos", "🛒 Compras", "🚚 Envíos"],
-    "destacado": true
   }
 ]
