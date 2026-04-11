@@ -220,6 +220,7 @@
                         'dulce-rosa': '#FF69B4',
                         'dulce-morado': '#9B59B6',
                         'contador-azul': '#1E3A8A',
+                        'mensajero-ambar': '#F59E0B'
                     }
                 }
             }
@@ -523,40 +524,15 @@
             </div>
         </section>
 
-        <!-- Servicios Preview -->
+        <!-- Servicios Destacados (ahora DINÁMICO desde JSON) -->
         <section class="py-12 bg-gray-50 section-fade">
             <div class="container mx-auto px-4">
                 <div class="flex justify-between items-center mb-8">
                     <h2 class="text-3xl font-bold"><i class="fas fa-tools mr-3 text-cuban-blue"></i>Servicios Destacados</h2>
                     <a href="servicios.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
                 </div>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="product-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
-                        <div class="h-48 overflow-hidden bg-gradient-to-r from-dulce-rosa to-dulce-morado">
-                            <img src="https://i.postimg.cc/Qxz4FMGg/IMG-20260226-WA0025.jpg" alt="Dulce César" class="w-full h-full object-contain bg-white">
-                        </div>
-                        <div class="p-5">
-                            <span class="bg-dulce-rosa text-white text-xs px-2 py-1 rounded-full font-bold">✨ NUEVO</span>
-                            <h3 class="font-bold text-xl mb-2 text-dulce-rosa">Dulce César</h3>
-                            <p class="text-gray-600 text-sm mb-3">Repostería artesanal para eventos, cafeterías y pedidos especiales.</p>
-                            <a href="https://wa.me/5353342167?text=Hola%2C%20vi%20Dulce%20C%C3%A9sar%20en%20El%20Resolvito%20y%20quiero%20informaci%C3%B3n" target="_blank" class="block w-full bg-dulce-rosa text-white text-center py-2 rounded-lg text-sm font-bold hover:opacity-90 transition">
-                                <i class="fab fa-whatsapp mr-1"></i> Contactar para cotizar
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
-                        <div class="h-48 overflow-hidden bg-gradient-to-r from-contador-azul to-cuban-orange">
-                            <img src="https://i.postimg.cc/TPPT8GM9/photo-2026-02-15-19-00-24.jpg" alt="Contador" class="w-full h-full object-cover">
-                        </div>
-                        <div class="p-5">
-                            <span class="bg-contador-azul text-white text-xs px-2 py-1 rounded-full font-bold">📊 NUEVO</span>
-                            <h3 class="font-bold text-xl mb-2 text-contador-azul">Contador / Tenedor de Libros</h3>
-                            <p class="text-gray-600 text-sm mb-3">Gestión contable profesional para TCP y pequeños negocios.</p>
-                            <a href="https://wa.me/5356382909?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Contador" target="_blank" class="block w-full bg-contador-azul text-white text-center py-2 rounded-lg text-sm font-bold hover:bg-blue-800 transition">
-                                <i class="fab fa-whatsapp mr-1"></i> Contactar para cotizar
-                            </a>
-                        </div>
-                    </div>
+                <div class="grid md:grid-cols-3 gap-6" id="servicios-container">
+                    <!-- Los servicios se cargarán dinámicamente desde data/servicios.json -->
                 </div>
             </div>
         </section>
@@ -571,11 +547,9 @@
                         <h2 class="text-2xl md:text-3xl font-bold mb-2"><i class="fas fa-box"></i> ¿Necesitas un mensajero?</h2>
                         <p class="text-sm mb-4 opacity-90">Un servicio rápido, confiable y en La Habana. Coordinamos por WhatsApp.</p>
                         <div class="flex flex-col sm:flex-row gap-3">
-                            <!-- Botón Conocer más - enlaza a la web de mensajería -->
                             <a href="mensajeriaelresolvito/" target="_blank" class="bg-cuban-green hover:bg-cuban-dark text-white font-bold py-2 px-6 rounded-full transition flex items-center justify-center gap-2 text-sm btn-hover-effect">
                                 <i class="fas fa-motorcycle"></i> Conocer más
                             </a>
-                            <!-- Botón Consultar ahora - abre el modal -->
                             <button onclick="abrirModalMensajeria()" class="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold py-2 px-6 rounded-full transition border border-white flex items-center justify-center gap-2 text-sm">
                                 <i class="fab fa-whatsapp"></i> Consultar ahora
                             </button>
@@ -609,30 +583,15 @@
             </div>
         </section>
 
-        <!-- Alojamientos Preview -->
+        <!-- Alojamientos Preview (ahora DINÁMICO desde JSON) -->
         <section class="py-12 section-fade">
             <div class="container mx-auto px-4">
                 <div class="flex justify-between items-center mb-8">
                     <h2 class="text-3xl font-bold"><i class="fas fa-bed mr-3 text-cuban-green"></i>Alojamientos</h2>
                     <a href="reservas.html" class="text-cuban-green font-medium hover:underline">Ver todos →</a>
                 </div>
-                <div id="alojamientos-preview" class="bg-white rounded-2xl shadow-lg overflow-hidden md:flex hover:shadow-xl transition-shadow">
-                    <div class="md:w-1/2 overflow-hidden"><img src="https://i.postimg.cc/QxWvyYGy/acuarela-(1).jpg" class="w-full h-64 md:h-full object-cover transition-transform duration-500 hover:scale-105" alt="Terrazas de Bayona"></div>
-                    <div class="md:w-1/2 p-8">
-                        <span class="text-cuban-green font-bold text-sm">🌟 ALOJAMIENTO DESTACADO</span>
-                        <h3 class="text-2xl font-bold mt-2 mb-2">Terrazas de Bayona 59</h3>
-                        <p class="text-gray-600 italic mb-4">Casa colonial en el corazón de La Habana Vieja</p>
-                        <div class="amenities-grid mb-4">
-                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Agua caliente 24/7</div>
-                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Aire acondicionado</div>
-                            <div class="amenity-item"><i class="fas fa-check-circle"></i> 2 terrazas privadas</div>
-                            <div class="amenity-item"><i class="fas fa-check-circle"></i> Wi-Fi gratuito</div>
-                        </div>
-                        <div class="flex gap-4 mt-6">
-                            <a href="https://reservaterrazasdebayona59.com/" target="_blank" class="bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark text-center flex-1 transition">Reservar Ahora</a>
-                            <a href="reservas.html" class="border-2 border-cuban-green text-cuban-green px-6 py-3 rounded-lg font-bold hover:bg-cuban-green hover:text-white text-center transition">Ver más</a>
-                        </div>
-                    </div>
+                <div id="alojamientos-container">
+                    <!-- El alojamiento se cargará dinámicamente desde data/alojamientos.json -->
                 </div>
             </div>
         </section>
@@ -651,7 +610,6 @@
     <!-- MODAL DE MENSAJERÍA (FORMULARIO) -->
     <div id="modalMensajeria" class="modal-mensajeria">
         <div class="modal-mensajeria-content">
-            <!-- Cabecera -->
             <div class="p-5 bg-gradient-to-r from-cuban-green to-cuban-dark text-white rounded-t-2xl">
                 <div class="flex justify-between items-center">
                     <div>
@@ -666,34 +624,28 @@
                 </div>
             </div>
             
-            <!-- Formulario -->
             <div class="p-5">
                 <form id="formMensajeria" onsubmit="enviarSolicitudMensajeria(event)">
-                    <!-- Nombre -->
                     <div class="mb-4">
                         <label class="form-label">Nombre completo *</label>
                         <input type="text" id="msg_nombre" required class="form-input" placeholder="Ej: Juan Carlos Pérez">
                     </div>
                     
-                    <!-- Teléfono -->
                     <div class="mb-4">
                         <label class="form-label">Teléfono de contacto *</label>
                         <input type="tel" id="msg_telefono" required class="form-input" placeholder="Ej: 53 5 123 4567">
                     </div>
                     
-                    <!-- Dirección de recogida -->
                     <div class="mb-4">
                         <label class="form-label">📍 Dirección de recogida *</label>
                         <textarea id="msg_direccion_recogida" rows="2" required class="form-input" placeholder="Ej: Calle Obispo No. 123, e/ Mercaderes y San Ignacio, La Habana Vieja"></textarea>
                     </div>
                     
-                    <!-- Dirección de entrega -->
                     <div class="mb-4">
                         <label class="form-label">📍 Dirección de entrega *</label>
                         <textarea id="msg_direccion_entrega" rows="2" required class="form-input" placeholder="Ej: Calle 23 No. 456, e/ L y M, Vedado"></textarea>
                     </div>
                     
-                    <!-- Tipo de paquete -->
                     <div class="mb-4">
                         <label class="form-label">📦 Tipo de paquete</label>
                         <select id="msg_tipo_paquete" class="form-input">
@@ -706,7 +658,6 @@
                         </select>
                     </div>
                     
-                    <!-- Peso aproximado -->
                     <div class="mb-4">
                         <label class="form-label">⚖️ Peso aproximado</label>
                         <select id="msg_peso" class="form-input">
@@ -718,7 +669,6 @@
                         </select>
                     </div>
                     
-                    <!-- Servicio exprés -->
                     <div class="mb-4">
                         <label class="flex items-center gap-3 cursor-pointer">
                             <input type="checkbox" id="msg_expres" class="w-5 h-5 text-cuban-green rounded">
@@ -726,13 +676,11 @@
                         </label>
                     </div>
                     
-                    <!-- Notas adicionales -->
                     <div class="mb-5">
                         <label class="form-label">📝 Notas adicionales (opcional)</label>
                         <textarea id="msg_notas" rows="2" class="form-input" placeholder="Ej: Llamar antes de llegar, el edificio es azul, etc."></textarea>
                     </div>
                     
-                    <!-- Botones -->
                     <div class="flex gap-3">
                         <button type="button" onclick="cerrarModalMensajeria()" class="flex-1 px-4 py-3 border-2 border-gray-300 rounded-xl font-bold hover:bg-gray-100 transition text-gray-700">Cancelar</button>
                         <button type="submit" class="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-white px-4 py-3 rounded-xl font-bold hover:opacity-90 transition flex items-center justify-center gap-2">
@@ -855,6 +803,74 @@
                     container.innerHTML = '<div class="col-span-4 text-center py-8 text-gray-500">No se pudieron cargar los productos. Recarga la página.</div>';
                 }
             }, 5000);
+
+            // ==========================================
+            // CARGAR SERVICIOS desde JSON
+            // ==========================================
+            fetch('data/servicios.json')
+                .then(res => {
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    return res.json();
+                })
+                .then(servicios => {
+                    const container = document.getElementById('servicios-container');
+                    if (container) {
+                        container.innerHTML = servicios.map(s => `
+                            <div class="product-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
+                                <div class="h-48 overflow-hidden bg-gradient-to-r ${s.gradiente}">
+                                    <img src="${s.imagen}" alt="${s.titulo}" class="w-full h-full object-contain bg-white">
+                                </div>
+                                <div class="p-5">
+                                    <span class="bg-cuban-green text-white text-xs px-2 py-1 rounded-full font-bold">✨ NUEVO</span>
+                                    <h3 class="font-bold text-xl mb-2">${s.titulo}</h3>
+                                    <p class="text-gray-600 text-sm mb-3">${s.descripcion}</p>
+                                    ${s.precio ? `<p class="text-cuban-green font-bold mb-2">${s.precio}</p>` : ''}
+                                    <a href="https://wa.me/${s.whatsapp}?text=Hola%2C%20vi%20${encodeURIComponent(s.titulo)}%20en%20El%20Resolvito%20y%20quiero%20informaci%C3%B3n" target="_blank" class="block w-full bg-cuban-green text-white text-center py-2 rounded-lg text-sm font-bold hover:opacity-90 transition">
+                                        <i class="fab fa-whatsapp mr-1"></i> Contactar para cotizar
+                                    </a>
+                                </div>
+                            </div>
+                        `).join('');
+                        console.log(`✅ ${servicios.length} servicios cargados desde JSON`);
+                    }
+                })
+                .catch(error => console.error('Error cargando servicios:', error));
+
+            // ==========================================
+            // CARGAR ALOJAMIENTOS desde JSON
+            // ==========================================
+            fetch('data/alojamientos.json')
+                .then(res => {
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    return res.json();
+                })
+                .then(alojamientos => {
+                    const container = document.getElementById('alojamientos-container');
+                    if (container && alojamientos.length > 0) {
+                        const destacado = alojamientos.find(a => a.destacado) || alojamientos[0];
+                        container.innerHTML = `
+                            <div class="bg-white rounded-2xl shadow-lg overflow-hidden md:flex hover:shadow-xl transition-shadow">
+                                <div class="md:w-1/2 overflow-hidden">
+                                    <img src="${destacado.imagen_principal}" class="w-full h-64 md:h-full object-cover transition-transform duration-500 hover:scale-105" alt="${destacado.nombre}">
+                                </div>
+                                <div class="md:w-1/2 p-8">
+                                    <span class="text-cuban-green font-bold text-sm">🌟 ALOJAMIENTO DESTACADO</span>
+                                    <h3 class="text-2xl font-bold mt-2 mb-2">${destacado.nombre}</h3>
+                                    <p class="text-gray-600 italic mb-4">${destacado.descripcion}</p>
+                                    <div class="grid grid-cols-2 gap-2 mb-4">
+                                        ${destacado.amenities.map(am => `<div class="amenity-item"><i class="fas fa-check-circle text-cuban-green"></i> ${am}</div>`).join('')}
+                                    </div>
+                                    <div class="flex gap-4 mt-6">
+                                        <a href="${destacado.enlace_reserva}" target="_blank" class="bg-cuban-green text-white px-6 py-3 rounded-lg font-bold hover:bg-cuban-dark text-center flex-1 transition">Reservar Ahora</a>
+                                        <a href="reservas.html" class="border-2 border-cuban-green text-cuban-green px-6 py-3 rounded-lg font-bold hover:bg-cuban-green hover:text-white text-center transition">Ver más</a>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        console.log(`✅ Alojamiento cargado desde JSON: ${destacado.nombre}`);
+                    }
+                })
+                .catch(error => console.error('Error cargando alojamientos:', error));
 
             if (typeof window.updateCartUI === 'function') {
                 window.updateCartUI();
