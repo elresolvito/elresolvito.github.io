@@ -4,7 +4,7 @@ id,nombre,precio,imagen,categoria,descripcion,destacado
 3,Pimiento fresco,750,https://i.postimg.cc/4yyJTSBj/pimiento_presio_750.png,Alimentos y conservas,Unidad,NO
 4,Café Dualis 250g,1450,https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png,Alimentos y conservas,Paquete 250g,SI
 5,Café Dufiltro 250g,1450,https://i.postimg.cc/hG26fv31/cafe_Dufiltro_250_g_precio_1450.png,Alimentos y conservas,Paquete 250g,NO
-6,Café Enepa,470,https://i.postimg.cc/nhY6f04N/cafe_enepa_precio_450.png,Alimentos y conservas,Paquete,NO
+6,Pan rallado Enepa,470,https://i.postimg.cc/nhY6f04N/cafe_enepa_precio_450.png,Alimentos y conservas,Paquete,NO
 7,Cartón de huevo 30u,3000,https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3000.png,Alimentos y conservas,Cartón,SI
 8,Leche condensada,520,https://i.postimg.cc/tT2XwjtT/leche_condensada.png,Alimentos y conservas,Lata 397g,NO
 9,Harina blanca 1Kg,600,https://i.postimg.cc/3xc2NHFB/harina_blanca1_kg.png,Alimentos y conservas,Paquete 1Kg,SI
