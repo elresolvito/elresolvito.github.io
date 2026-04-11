@@ -25,7 +25,7 @@ id,nombre,precio,imagen,categoria,descripcion,destacado
 24,Desodorante Obao,1100,https://i.postimg.cc/PxtXSxD2/desodorante_obao_precio_1100.png,Perfumes y desodorantes,Spray/Roll-on,NO
 25,Desodorante Rush Blanco,1000,https://i.postimg.cc/FR9rTRS8/desodorante_rush_blanco_precio_1000.png,Perfumes y desodorantes,Roll-on,NO
 26,Desodorante Rush,1000,https://i.postimg.cc/sXVjTXSF/desodorante_rush_precio_1000.png,Perfumes y desodorantes,Spray,NO
-27,Arroz,700,https://i.postimg.cc/ZRR352mX/arroz.jpg,Alimentos y conservas,Paquete 1 kg,si
+27,Arroz,700,https://i.postimg.cc/ZRR352mX/arroz.jpg,Alimentos y conservas,Paquete 1 kg,SI
 28,Macarrones,300,https://i.postimg.cc/Hsmz1H69/macarrones_precio_300.png,Pastas y fideos,Paquete,NO
 29,Sopas instantáneas,160,https://i.postimg.cc/FzNTpQqK/sopas_instantaneas_precio_160.png,Pastas y fideos,Paquete,NO
 30,Licor de fresa,2500,https://i.postimg.cc/59YT2x5p/licor_de_fresa_precio_2500.png,Bebidas alcohólicas y malta,Botella,SI
