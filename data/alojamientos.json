@@ -3,7 +3,18 @@
     "id": 1,
     "nombre": "Terrazas de Bayona 59",
     "descripcion": "Casa colonial en el corazón de La Habana Vieja",
-    "servicios": ["Agua caliente 24/7", "Aire acondicionado", "2 terrazas privadas", "Wi-Fi gratuito"],
+    "descripcion_larga": "Hermoso apartamento independiente en edificio colonial restaurado. Capacidad para 4 personas, terraza con vistas a la ciudad, cocina equipada y baño privado.",
+    "ubicacion": "La Habana Vieja",
+    "precio": 2500,
+    "moneda": "CUP",
+    "imagen_principal": "https://i.postimg.cc/QxWvyYGy/acuarela-(1).jpg",
+    "imagenes": [
+      "https://i.postimg.cc/W4qCN1Ns/ba-o-de-habitacion-imagen-1.jpg",
+      "https://i.postimg.cc/3NYcFj2b/pasillo-hacia-habitacion-cocina-y-terraza.jpg",
+      "https://i.postimg.cc/PfQcrcj5/terraza-imagen-1.jpg"
+    ],
+    "amenities": ["WiFi", "A/C", "Cocina", "Terraza", "Agua caliente 24/7"],
+    "enlace_reserva": "https://reservaterrazasdebayona59.com/",
     "destacado": true
   }
 ]
