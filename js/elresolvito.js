@@ -2,7 +2,7 @@
 // PRODUCTOS - CARGADOS DESDE GOOGLE SHEETS (CSV)
 // ============================================
 
-// 🔴 ENLACE CSV DE GOOGLE SHEETS
+// 🔴 ENLACE CSV DE GOOGLE SHEETS (YA FUNCIONA)
 const CSV_URL = 'https://docs.google.com/spreadsheets/d/1RpNc46-ok47bjRUlp0rQCK3hMH8xAi-b97wlBldxktk/export?format=csv&gid=0';
 
 // Productos de respaldo (por si falla la conexión)
@@ -90,6 +90,11 @@ async function cargarProductosDesdeCSV() {
             });
             
             console.log(`⭐ ${FEATURED_PRODUCTS.length} productos destacados`);
+            
+            // Actualizar variables globales
+            window.PRODUCTS = PRODUCTS;
+            window.FEATURED_PRODUCTS = FEATURED_PRODUCTS;
+            
             return true;
         } else {
             throw new Error('No se encontraron productos en el CSV');
@@ -99,6 +104,8 @@ async function cargarProductosDesdeCSV() {
         console.log('📦 Usando productos de respaldo');
         PRODUCTS = PRODUCTOS_RESERVA;
         FEATURED_PRODUCTS = PRODUCTOS_RESERVA.filter(p => p.destacado === 'SI');
+        window.PRODUCTS = PRODUCTS;
+        window.FEATURED_PRODUCTS = FEATURED_PRODUCTS;
         return false;
     }
 }
@@ -478,7 +485,7 @@ async function cargarProductosDesdeCSV() {
 
 })();
 
-// Exportar variables globales
+// Exportar variables globales para que otros scripts las usen
 window.PRODUCTS = PRODUCTS;
 window.FEATURED_PRODUCTS = FEATURED_PRODUCTS;
 
