@@ -1,0 +1,9 @@
+[
+  {
+    "id": 1,
+    "nombre": "Terrazas de Bayona 59",
+    "descripcion": "Casa colonial en el corazón de La Habana Vieja",
+    "servicios": ["Agua caliente 24/7", "Aire acondicionado", "2 terrazas privadas", "Wi-Fi gratuito"],
+    "destacado": true
+  }
+]
