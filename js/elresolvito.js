@@ -2,8 +2,8 @@
 // PRODUCTOS - CARGADOS DESDE GOOGLE SHEETS (CSV)
 // ============================================
 
-// 🔴 ENLACE CSV DE GOOGLE SHEETS (YA FUNCIONA)
-const CSV_URL = 'https://docs.google.com/spreadsheets/d/1RpNc46-ok47bjRUlp0rQCK3hMH8xAi-b97wlBldxktk/gviz/tq?tqx=out:csv';
+// 🔴 ENLACE CSV DE GOOGLE SHEETS
+const CSV_URL = 'https://docs.google.com/spreadsheets/d/1RpNc46-ok47bjRUlp0rQCK3hMH8xAi-b97wlBldxktk/export?format=csv&gid=0';
 
 // Productos de respaldo (por si falla la conexión)
 const PRODUCTOS_RESERVA = [
@@ -22,23 +22,35 @@ async function cargarProductosDesdeCSV() {
         const response = await fetch(CSV_URL);
         const csvText = await response.text();
         
-        // Parsear CSV manualmente
-        const lines = csvText.split('\n');
+        console.log('📄 CSV recibido, longitud:', csvText.length);
+        
+        // Parsear CSV correctamente
+        const lines = csvText.split(/\r?\n/);
+        if (lines.length < 2) {
+            throw new Error('CSV vacío o con una sola línea');
+        }
+        
+        // Obtener encabezados (primera línea)
         const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
+        console.log('📋 Encabezados encontrados:', headers);
         
         const productos = [];
+        
+        // Procesar cada línea de datos
         for (let i = 1; i < lines.length; i++) {
-            if (!lines[i].trim()) continue;
+            const line = lines[i].trim();
+            if (!line) continue;
             
-            // Manejar valores con comillas
-            let values = [];
-            let inQuote = false;
+            // Parsear la línea respetando comillas
+            const values = [];
+            let inQuotes = false;
             let currentValue = '';
             
-            for (let char of lines[i]) {
+            for (let j = 0; j < line.length; j++) {
+                const char = line[j];
                 if (char === '"') {
-                    inQuote = !inQuote;
-                } else if (char === ',' && !inQuote) {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
                     values.push(currentValue.trim());
                     currentValue = '';
                 } else {
@@ -47,15 +59,22 @@ async function cargarProductosDesdeCSV() {
             }
             values.push(currentValue.trim());
             
+            // Crear objeto producto
             const producto = {};
-            headers.forEach((header, index) => {
-                let value = values[index] ? values[index].replace(/^"|"$/g, '') : '';
-                if (header === 'precio') value = parseFloat(value) || 0;
-                if (header === 'id') value = parseInt(value) || i;
-                producto[header] = value;
+            headers.forEach((header, idx) => {
+                if (idx < values.length) {
+                    let value = values[idx].replace(/^"|"$/g, '');
+                    if (header === 'precio') {
+                        value = parseFloat(value) || 0;
+                    } else if (header === 'id') {
+                        value = parseInt(value) || i;
+                    }
+                    producto[header] = value;
+                }
             });
             
-            if (producto.nombre && producto.nombre !== 'nombre') {
+            // Validar que el producto tenga nombre
+            if (producto.nombre && producto.nombre !== 'nombre' && producto.nombre !== '') {
                 productos.push(producto);
             }
         }
@@ -64,17 +83,20 @@ async function cargarProductosDesdeCSV() {
             console.log(`✅ Cargados ${productos.length} productos desde Google Sheets`);
             PRODUCTS = productos;
             
-            // Actualizar productos destacados (los que tienen "SI" en la columna destacado)
-            FEATURED_PRODUCTS = PRODUCTS.filter(p => 
-                p.destacado === 'SI' || p.destacado === 'si' || p.destacado === 'Sí'
-            );
+            // Actualizar productos destacados
+            FEATURED_PRODUCTS = PRODUCTS.filter(p => {
+                const destacado = p.destacado ? p.destacado.toString().toUpperCase() : '';
+                return destacado === 'SI' || destacado === 'SÍ';
+            });
             
+            console.log(`⭐ ${FEATURED_PRODUCTS.length} productos destacados`);
             return true;
         } else {
-            throw new Error('No se encontraron productos');
+            throw new Error('No se encontraron productos en el CSV');
         }
     } catch (error) {
-        console.warn('⚠️ Error cargando desde CSV, usando productos de respaldo:', error);
+        console.error('❌ Error cargando desde CSV:', error);
+        console.log('📦 Usando productos de respaldo');
         PRODUCTS = PRODUCTOS_RESERVA;
         FEATURED_PRODUCTS = PRODUCTOS_RESERVA.filter(p => p.destacado === 'SI');
         return false;
@@ -401,7 +423,6 @@ async function cargarProductosDesdeCSV() {
             themeIcon.textContent = document.body.classList.contains('night-mode') ? '🌙' : '☀️';
         }
         localStorage.setItem('nightMode', document.body.classList.contains('night-mode'));
-        showToast(document.body.classList.contains('night-mode') ? '🌙 Modo oscuro activado' : '☀️ Modo claro activado');
     };
 
     window.toggleMenu = function() {
@@ -453,12 +474,11 @@ async function cargarProductosDesdeCSV() {
         console.log('✅ El Resolvito JS inicializado correctamente');
         console.log(`📦 ${PRODUCTS.length} productos disponibles`);
         console.log(`⭐ ${FEATURED_PRODUCTS.length} productos destacados`);
-        showToast(`🛍️ ${PRODUCTS.length} productos disponibles`, 'info');
     });
 
 })();
 
-// Exportar variables globales para que otros scripts las usen
+// Exportar variables globales
 window.PRODUCTS = PRODUCTS;
 window.FEATURED_PRODUCTS = FEATURED_PRODUCTS;
 
