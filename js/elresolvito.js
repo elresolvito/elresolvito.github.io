@@ -1,64 +1,85 @@
 // ============================================
-// PRODUCTOS (BASE DE DATOS)
+// PRODUCTOS - CARGADOS DESDE GOOGLE SHEETS (CSV)
 // ============================================
-var PRODUCTS = [
-    { id: 1, nombre: "Atún en lata", categoria: "Alimentos y conservas", precio: 540, imagen: "https://i.postimg.cc/76xHK6zt/atun_precio_500.png", descripcion: "Lata 200g" },
-    { id: 2, nombre: "Pasta de tomate", categoria: "Alimentos y conservas", precio: 390, imagen: "https://i.postimg.cc/gjjYPTNv/pasta_tomate_precio_350.png", descripcion: "Paquete" },
-    { id: 3, nombre: "Pimiento fresco", categoria: "Alimentos y conservas", precio: 750, imagen: "https://i.postimg.cc/4yyJTSBj/pimiento_presio_750.png", descripcion: "Unidad" },
-    { id: 4, nombre: "Café Dualis 250g", categoria: "Alimentos y conservas", precio: 1450, imagen: "https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png", descripcion: "Paquete 250g" },
-    { id: 5, nombre: "Café Dufiltro 250g", categoria: "Alimentos y conservas", precio: 1450, imagen: "https://i.postimg.cc/hG26fv31/cafe_Dufiltro_250_g_precio_1450.png", descripcion: "Paquete 250g" },
-    { id: 6, nombre: "Enepa", categoria: "Alimentos y conservas", precio: 470, imagen: "https://i.postimg.cc/nhY6f04N/cafe_enepa_precio_450.png", descripcion: "pan rallado" },
-    { id: 7, nombre: "Cartón de huevo 30u", categoria: "Alimentos y conservas", precio: 3000, imagen: "https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3000.png", descripcion: "Cartón" },
-    { id: 8, nombre: "Leche condensada", categoria: "Alimentos y conservas", precio: 520, imagen: "https://i.postimg.cc/tT2XwjtT/leche_condensada.png", descripcion: "Lata 397g" },
-    { id: 9, nombre: "Harina blanca 1Kg", categoria: "Alimentos y conservas", precio: 600, imagen: "https://i.postimg.cc/3xc2NHFB/harina_blanca1_kg.png", descripcion: "Paquete 1Kg" },
-    { id: 10, nombre: "Chicoticos Pelly 90g", categoria: "Snacks y golosinas", precio: 400, imagen: "https://i.postimg.cc/1zv2fXjZ/chicoticos_pelly_90_g_precio_400.png", descripcion: "Paquete 90g" },
-    { id: 11, nombre: "Papitas Campesinas", categoria: "Snacks y golosinas", precio: 690, imagen: "https://i.postimg.cc/cLgrDtf9/papitas_campesinas_precio_690.png", descripcion: "Paquete" },
-    { id: 12, nombre: "Pelly Jamón", categoria: "Snacks y golosinas", precio: 580, imagen: "https://i.postimg.cc/pdQV7frX/pelly_jamon_precio_580.png", descripcion: "Paquete" },
-    { id: 13, nombre: "Mayonesa Mediana", categoria: "Salsas", precio: 850, imagen: "https://i.postimg.cc/KzJZw2rR/mayonesa_precio_850.png", descripcion: "Frasco mediano" },
-    { id: 14, nombre: "Mayonesa Grande", categoria: "Salsas", precio: 1100, imagen: "https://i.postimg.cc/Px2t9jzz/mayonesa_precio1100.png", descripcion: "Frasco grande" },
-    { id: 15, nombre: "Cuchilla de Afeitar", categoria: "Higiene personal", precio: 130, imagen: "https://i.postimg.cc/8CdkdW7x/cuchilla_de_afeitar_precio_100.png", descripcion: "Unidad" },
-    { id: 16, nombre: "Jabón Marwa", categoria: "Higiene personal", precio: 180, imagen: "https://i.postimg.cc/3RK8tRpR/jabon_marwa_precio_150.png", descripcion: "Pastilla" },
-    { id: 17, nombre: "Papel Sanitario", categoria: "Higiene personal", precio: 530, imagen: "https://i.postimg.cc/bwW289qD/papel_sanitario_precio_490i.png", descripcion: "Paquete" },
-    { id: 18, nombre: "Toallas Sanitarias", categoria: "Higiene personal", precio: 450, imagen: "https://i.postimg.cc/KjjZyH0b/toallas_sanitarias_precio_450.png", descripcion: "Paquete" },
-    { id: 19, nombre: "Toallas Húmedas", categoria: "Higiene personal", precio: 690, imagen: "https://i.postimg.cc/W4ZSP3cw/toallas_humedas_precio_690.png", descripcion: "Paquete" },
-    { id: 20, nombre: "Jabón de Lavar", categoria: "Aseo del hogar", precio: 250, imagen: "https://i.postimg.cc/V6YfK6Mz/jabon_de_lavar_precio_250.png", descripcion: "Pastilla" },
-    { id: 21, nombre: "Arroz", categoria: "Alimentos y conservas", precio: 700, imagen: "https://i.postimg.cc/ZRR352mX/arroz.jpg", descripcion: "1kg" },
-    { id: 22, nombre: "Perfume genérico", categoria: "Perfumes y desodorantes", precio: 3100, imagen: "https://i.postimg.cc/ZKrT0PPG/perfume_precio_3100.png", descripcion: "Frasco 50ml" },
-    { id: 23, nombre: "Perfume Q", categoria: "Perfumes y desodorantes", precio: 3100, imagen: "https://i.postimg.cc/CL03P3Dn/perfume_q_precio_3100.png", descripcion: "Frasco 50ml" },
-    { id: 24, nombre: "Desodorante Obao", categoria: "Perfumes y desodorantes", precio: 1100, imagen: "https://i.postimg.cc/PxtXSxD2/desodorante_obao_precio_1100.png", descripcion: "Spray/Roll-on" },
-    { id: 25, nombre: "Desodorante Rush Blanco", categoria: "Perfumes y desodorantes", precio: 1000, imagen: "https://i.postimg.cc/FR9rTRS8/desodorante_rush_blanco_precio_1000.png", descripcion: "Roll-on" },
-    { id: 26, nombre: "Desodorante Rush", categoria: "Perfumes y desodorantes", precio: 1000, imagen: "https://i.postimg.cc/sXVjTXSF/desodorante_rush_precio_1000.png", descripcion: "Spray" },
-    { id: 27, nombre: "Colonia Niña", categoria: "Perfumes y desodorantes", precio: 1100, imagen: "https://i.postimg.cc/G3v04rsM/colonia_nina.png", descripcion: "Botella 100ml" },
-    { id: 28, nombre: "Macarrones", categoria: "Pastas y fideos", precio: 300, imagen: "https://i.postimg.cc/Hsmz1H69/macarrones_precio_300.png", descripcion: "Paquete" },
-    { id: 29, nombre: "Sopas instantáneas", categoria: "Pastas y fideos", precio: 190, imagen: "https://i.postimg.cc/FzNTpQqK/sopas_instantaneas_precio_160.png", descripcion: "Paquete" },
-    { id: 30, nombre: "Licor de fresa", categoria: "Bebidas alcohólicas y malta", precio: 2500, imagen: "https://i.postimg.cc/59YT2x5p/licor_de_fresa_precio_2500.png", descripcion: "Botella" },
-    { id: 31, nombre: "Licor Cocobay", categoria: "Bebidas alcohólicas y malta", precio: 2500, imagen: "https://i.postimg.cc/7ZDW90Fz/locor_cocobay_precio_2500.png", descripcion: "Botella" },
-    { id: 32, nombre: "Whisky Spirit 200ml", categoria: "Bebidas alcohólicas y malta", precio: 320, imagen: "https://i.postimg.cc/4N8W6q1t/tea_precio_320.png", descripcion: "Botella 200ml" },
-    { id: 33, nombre: "Whisky 1L", categoria: "Bebidas alcohólicas y malta", precio: 1350, imagen: "https://i.postimg.cc/cLyrb4T0/whisky_1L_precio_1350.png", descripcion: "Botella 1L" },
-    { id: 34, nombre: "Whisky Sir Albin", categoria: "Bebidas alcohólicas y malta", precio: 550, imagen: "https://i.postimg.cc/y84kbYnC/whisky_sir_albin_precio_550.png", descripcion: "Botella pequeña" },
-    { id: 35, nombre: "Vino Pluvium", categoria: "Bebidas alcohólicas y malta", precio: 1200, imagen: "https://i.postimg.cc/XNLLWmmx/vino_pluvium_precio_1200.png", descripcion: "Botella" },
-    { id: 36, nombre: "Baterías Triple A", categoria: "Electrónicos y accesorios", precio: 300, imagen: "https://i.postimg.cc/DZ2vxZsT/Gemini_Generated_Image_824rio824rio824r.png", descripcion: "Pack 4 unidades" }
+
+// 🔴 ENLACE CSV DE GOOGLE SHEETS (YA FUNCIONA)
+const CSV_URL = 'https://docs.google.com/spreadsheets/d/1RpNc46-ok47bjRUlp0rQCK3hMH8xAi-b97wlBldxktk/gviz/tq?tqx=out:csv';
+
+// Productos de respaldo (por si falla la conexión)
+const PRODUCTOS_RESERVA = [
+    { id: 1, nombre: "Atún en lata", precio: 540, imagen: "https://i.postimg.cc/76xHK6zt/atun_precio_500.png", categoria: "Alimentos y conservas", descripcion: "Lata 200g", destacado: "SI" },
+    { id: 2, nombre: "Café Dualis 250g", precio: 1450, imagen: "https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png", categoria: "Alimentos y conservas", descripcion: "Paquete 250g", destacado: "SI" },
+    { id: 3, nombre: "Cartón de huevo 30u", precio: 3000, imagen: "https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3000.png", categoria: "Alimentos y conservas", descripcion: "Cartón", destacado: "SI" }
 ];
 
-var FEATURED_PRODUCTS = [
-    PRODUCTS.find(p => p.id === 4),
-    PRODUCTS.find(p => p.id === 7),
-    PRODUCTS.find(p => p.id === 1),
-    PRODUCTS.find(p => p.id === 13),
-    PRODUCTS.find(p => p.id === 2),
-    PRODUCTS.find(p => p.id === 16),
-    PRODUCTS.find(p => p.id === 17),
-    PRODUCTS.find(p => p.id === 20),
-    PRODUCTS.find(p => p.id === 21),
-    PRODUCTS.find(p => p.id === 9)
-];
+let PRODUCTS = [];
+let FEATURED_PRODUCTS = [];
 
-var WHOLESALE_PRODUCTS = [
-    { nombre: "Café Dualis Caja 10u", precio: 13000, precioNormal: 14500, imagen: "https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png", desc: "Ahorra $1,500" },
-    { nombre: "Huevos 3 cartones", precio: 8400, precioNormal: 9000, imagen: "https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3000.png", desc: "Ahorra $600" },
-    { nombre: "Atún Pack 12u", precio: 6000, precioNormal: 6480, imagen: "https://i.postimg.cc/76xHK6zt/atun_precio_500.png", desc: "Ahorra $480" },
-    { nombre: "Jabón Caja 24u", precio: 5400, precioNormal: 6000, imagen: "https://i.postimg.cc/V6YfK6Mz/jabon_de_lavar_precio_250.png", desc: "Ahorra $600" }
-];
+// Función para cargar productos desde Google Sheets CSV
+async function cargarProductosDesdeCSV() {
+    try {
+        console.log('🔄 Cargando productos desde Google Sheets...');
+        const response = await fetch(CSV_URL);
+        const csvText = await response.text();
+        
+        // Parsear CSV manualmente
+        const lines = csvText.split('\n');
+        const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
+        
+        const productos = [];
+        for (let i = 1; i < lines.length; i++) {
+            if (!lines[i].trim()) continue;
+            
+            // Manejar valores con comillas
+            let values = [];
+            let inQuote = false;
+            let currentValue = '';
+            
+            for (let char of lines[i]) {
+                if (char === '"') {
+                    inQuote = !inQuote;
+                } else if (char === ',' && !inQuote) {
+                    values.push(currentValue.trim());
+                    currentValue = '';
+                } else {
+                    currentValue += char;
+                }
+            }
+            values.push(currentValue.trim());
+            
+            const producto = {};
+            headers.forEach((header, index) => {
+                let value = values[index] ? values[index].replace(/^"|"$/g, '') : '';
+                if (header === 'precio') value = parseFloat(value) || 0;
+                if (header === 'id') value = parseInt(value) || i;
+                producto[header] = value;
+            });
+            
+            if (producto.nombre && producto.nombre !== 'nombre') {
+                productos.push(producto);
+            }
+        }
+        
+        if (productos.length > 0) {
+            console.log(`✅ Cargados ${productos.length} productos desde Google Sheets`);
+            PRODUCTS = productos;
+            
+            // Actualizar productos destacados (los que tienen "SI" en la columna destacado)
+            FEATURED_PRODUCTS = PRODUCTS.filter(p => 
+                p.destacado === 'SI' || p.destacado === 'si' || p.destacado === 'Sí'
+            );
+            
+            return true;
+        } else {
+            throw new Error('No se encontraron productos');
+        }
+    } catch (error) {
+        console.warn('⚠️ Error cargando desde CSV, usando productos de respaldo:', error);
+        PRODUCTS = PRODUCTOS_RESERVA;
+        FEATURED_PRODUCTS = PRODUCTOS_RESERVA.filter(p => p.destacado === 'SI');
+        return false;
+    }
+}
 
 // ============================================
 // CARRITO Y FUNCIONES PRINCIPALES
@@ -69,7 +90,7 @@ var WHOLESALE_PRODUCTS = [
     let cart = JSON.parse(localStorage.getItem('elResolvitoCart')) || [];
     const WHATSAPP_NUMBER = '5356382909';
     const MINIMUM_PURCHASE = 500;
-    const SHIPPING_COST_HABANA_VIEJA = 300; // ACTUALIZADO: de 400 a 300
+    const SHIPPING_COST_HABANA_VIEJA = 400;
 
     // ============================================
     // FUNCIONES DEL CARRITO
@@ -84,6 +105,7 @@ var WHOLESALE_PRODUCTS = [
         
         if (existingItemIndex !== -1) {
             cart[existingItemIndex].cantidad += product.cantidad || 1;
+            showToast(`✓ +1 ${product.nombre}`);
         } else {
             cart.push({
                 id: product.id,
@@ -92,11 +114,11 @@ var WHOLESALE_PRODUCTS = [
                 precio: product.precio,
                 cantidad: product.cantidad || 1
             });
+            showToast(`✓ "${product.nombre}" añadido al carrito`);
         }
 
         saveCart();
         window.updateCartUI();
-        showToast('✓ Producto añadido al carrito');
         return true;
     };
 
@@ -113,21 +135,19 @@ var WHOLESALE_PRODUCTS = [
             cart[index].cantidad = newQuantity;
             saveCart();
             window.updateCartUI();
+            showToast(`Cantidad actualizada: ${cart[index].nombre} x${newQuantity}`);
         }
     };
 
     window.removeFromCart = function(index) {
-        removeFromCart(index);
-    };
-
-    function removeFromCart(index) {
         if (cart[index]) {
+            const nombre = cart[index].nombre;
             cart.splice(index, 1);
             saveCart();
             window.updateCartUI();
-            showToast('Producto eliminado');
+            showToast(`🗑️ "${nombre}" eliminado`);
         }
-    }
+    };
 
     window.updateCartUI = function() {
         const totalItems = cart.reduce((sum, item) => sum + (item.cantidad || 0), 0);
@@ -145,7 +165,7 @@ var WHOLESALE_PRODUCTS = [
         const cartItemsContainer = document.getElementById('cartItems');
         if (cartItemsContainer) {
             if (cart.length === 0) {
-                cartItemsContainer.innerHTML = '<div class="text-center py-8 text-gray-500"><i class="fas fa-shopping-cart text-4xl mb-3 opacity-30"></i><p>Tu carrito está vacío</p></div>';
+                cartItemsContainer.innerHTML = '<div class="text-center py-8 text-gray-500"><i class="fas fa-shopping-cart text-4xl mb-3 opacity-30"></i><p>Tu carrito está vacío</p><p class="text-xs mt-2">Agrega productos desde la tienda</p></div>';
             } else {
                 cartItemsContainer.innerHTML = cart.map((item, index) => {
                     const imgSrc = item.imagen || 'https://placehold.co/80';
@@ -157,7 +177,7 @@ var WHOLESALE_PRODUCTS = [
                                 <p class="text-cuban-green font-bold">$${(item.precio || 0).toLocaleString()}</p>
                                 <div class="flex items-center gap-2 mt-1">
                                     <button onclick="window.updateCartQuantity(${index}, ${(item.cantidad || 1) - 1})" class="w-6 h-6 bg-white rounded shadow hover:bg-gray-100">-</button>
-                                    <span class="text-sm font-medium">${item.cantidad || 1}</span>
+                                    <span class="text-sm font-medium w-8 text-center">${item.cantidad || 1}</span>
                                     <button onclick="window.updateCartQuantity(${index}, ${(item.cantidad || 1) + 1})" class="w-6 h-6 bg-white rounded shadow hover:bg-gray-100">+</button>
                                     <button onclick="window.removeFromCart(${index})" class="ml-auto text-red-500 hover:text-red-700">🗑️</button>
                                 </div>
@@ -168,7 +188,7 @@ var WHOLESALE_PRODUCTS = [
             }
         }
         
-        // Actualizar totales en el sidebar del carrito
+        // Actualizar totales
         const subtotalEl = document.getElementById('cartSubtotal');
         const shippingEl = document.getElementById('cartShipping');
         const totalEl = document.getElementById('cartTotal');
@@ -183,7 +203,6 @@ var WHOLESALE_PRODUCTS = [
             if (totalEl) totalEl.textContent = `$${subtotal.toLocaleString()}`;
         }
 
-        // Actualizar resumen en el modal de checkout (si está abierto)
         updateCheckoutSummary();
     };
 
@@ -203,7 +222,6 @@ var WHOLESALE_PRODUCTS = [
             return;
         }
 
-        // ✅ Cerrar el sidebar del carrito si está abierto
         const sidebar = document.getElementById('cartSidebar');
         const overlay = document.getElementById('cartOverlay');
         if (sidebar && sidebar.classList.contains('cart-open')) {
@@ -212,7 +230,6 @@ var WHOLESALE_PRODUCTS = [
             document.body.style.overflow = '';
         }
 
-        // Actualizar resumen en el modal antes de mostrarlo
         updateCheckoutSummary();
         
         const modal = document.getElementById('checkoutModal');
@@ -250,13 +267,11 @@ var WHOLESALE_PRODUCTS = [
     }
 
     window.sendCompleteOrder = function() {
-        // Obtener datos del carrito
         if (cart.length === 0) {
             alert('El carrito está vacío');
             return;
         }
 
-        // Obtener valores del formulario
         const customerName = document.getElementById('customerName')?.value.trim();
         const customerAddress = document.getElementById('customerAddress')?.value.trim();
         const deliveryZone = document.querySelector('input[name="deliveryZone"]:checked')?.value;
@@ -264,20 +279,17 @@ var WHOLESALE_PRODUCTS = [
         const weight = document.getElementById('approximateWeight')?.value || '';
         const notes = document.getElementById('customerNotes')?.value.trim() || '';
 
-        // Validaciones básicas
         if (!customerName || !customerAddress || !deliveryZone || !paymentMethod) {
             alert('Por favor, completa todos los campos obligatorios.');
             return;
         }
 
-        // Calcular subtotal
         const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
         if (subtotal < MINIMUM_PURCHASE) {
             alert(`El pedido mínimo es de $${MINIMUM_PURCHASE}`);
             return;
         }
 
-        // Generar mensaje
         let mensaje = "🛒 *NUEVO PEDIDO - EL RESOLVITO*\n\n";
         mensaje += "*PRODUCTOS:*\n";
         cart.forEach(item => {
@@ -286,38 +298,33 @@ var WHOLESALE_PRODUCTS = [
 
         mensaje += `\n*Subtotal:* $${subtotal.toLocaleString()}`;
 
-        // Costo de envío según zona
         let envioTexto = '';
         if (deliveryZone === 'habana-vieja') {
             envioTexto = `$${SHIPPING_COST_HABANA_VIEJA} (La Habana Vieja)`;
-            // Nota de peso si aplica
-            if (weight === 'mas-8kg') {
-                envioTexto += ' - Peso superior a 8kg, el costo podría ajustarse.';
+            if (weight === 'mas-10kg') {
+                envioTexto += ' - Peso superior a 10kg, el costo podría ajustarse.';
             }
         } else {
             envioTexto = 'A convenir (fuera de La Habana Vieja)';
         }
         mensaje += `\n*Envío:* ${envioTexto}`;
 
-        // Total estimado (solo si es La Habana Vieja y peso normal, sino se deja abierto)
-        if (deliveryZone === 'habana-vieja' && weight !== 'mas-8kg') {
+        if (deliveryZone === 'habana-vieja' && weight !== 'mas-10kg') {
             mensaje += `\n*Total estimado:* $${(subtotal + SHIPPING_COST_HABANA_VIEJA).toLocaleString()}`;
         } else {
             mensaje += `\n*Total:* A confirmar`;
         }
 
-        // Datos del cliente
         mensaje += `\n\n*DATOS DEL CLIENTE*`;
         mensaje += `\n👤 *Nombre:* ${customerName}`;
         mensaje += `\n📍 *Dirección:* ${customerAddress}`;
 
-        // Peso si se seleccionó
         const pesoTexto = {
             'menos-1kg': 'Menos de 1 kg',
             '1-3kg': '1-3 kg',
             '3-5kg': '3-5 kg',
-            '5-8kg': '5-8 kg',
-            'mas-8kg': 'Más de 8 kg'
+            '5-10kg': '5-10 kg',
+            'mas-10kg': 'Más de 10 kg'
         };
         if (weight && pesoTexto[weight]) {
             mensaje += `\n⚖️ *Peso aproximado:* ${pesoTexto[weight]}`;
@@ -331,22 +338,16 @@ var WHOLESALE_PRODUCTS = [
 
         mensaje += `\n\n_Te contactaremos para confirmar disponibilidad y coordinar la entrega._`;
 
-        // Abrir WhatsApp
         window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank');
 
-        // Cerrar modal y carrito
         window.closeCheckoutModal();
         if (document.getElementById('cartSidebar')?.classList.contains('cart-open')) {
-            window.toggleCart(); // cierra el carrito si está abierto
+            window.toggleCart();
         }
-
-        // Opcional: limpiar carrito después de enviar? Por ahora no, para poder reutilizar.
-        // Si se desea vaciar, descomentar la siguiente línea:
-        // cart = []; saveCart(); window.updateCartUI();
     };
 
     // ============================================
-    // FUNCIONES DE UTILIDAD (TOAST, MODALES)
+    // FUNCIONES DE UTILIDAD
     // ============================================
     function showToast(message, type = 'success') {
         const toast = document.getElementById('cartToast');
@@ -357,12 +358,15 @@ var WHOLESALE_PRODUCTS = [
             toast.classList.remove('opacity-0', 'pointer-events-none');
             toast.classList.add('opacity-100');
             
+            toast.classList.remove('bg-gray-800', 'bg-red-600', 'bg-orange-500', 'bg-green-600');
             if (type === 'error') {
                 toast.classList.add('bg-red-600');
-                toast.classList.remove('bg-gray-800');
+            } else if (type === 'warning') {
+                toast.classList.add('bg-orange-500');
+            } else if (type === 'success') {
+                toast.classList.add('bg-green-600');
             } else {
                 toast.classList.add('bg-gray-800');
-                toast.classList.remove('bg-red-600');
             }
             
             setTimeout(() => {
@@ -397,6 +401,7 @@ var WHOLESALE_PRODUCTS = [
             themeIcon.textContent = document.body.classList.contains('night-mode') ? '🌙' : '☀️';
         }
         localStorage.setItem('nightMode', document.body.classList.contains('night-mode'));
+        showToast(document.body.classList.contains('night-mode') ? '🌙 Modo oscuro activado' : '☀️ Modo claro activado');
     };
 
     window.toggleMenu = function() {
@@ -430,27 +435,33 @@ var WHOLESALE_PRODUCTS = [
     // ============================================
     // INICIALIZACIÓN
     // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', async function() {
         const pageFade = document.getElementById('pageFade');
         if (pageFade) pageFade.classList.add('opacity-0');
         
-        // Restaurar modo nocturno
         if (localStorage.getItem('nightMode') === 'true') {
             document.body.classList.add('night-mode');
             const themeIcon = document.getElementById('headerThemeIcon');
             if (themeIcon) themeIcon.textContent = '🌙';
         }
         
+        // Cargar productos desde Google Sheets
+        await cargarProductosDesdeCSV();
+        
         window.updateCartUI();
         
         console.log('✅ El Resolvito JS inicializado correctamente');
+        console.log(`📦 ${PRODUCTS.length} productos disponibles`);
+        console.log(`⭐ ${FEATURED_PRODUCTS.length} productos destacados`);
+        showToast(`🛍️ ${PRODUCTS.length} productos disponibles`, 'info');
     });
 
 })();
 
-// ============================================
-// FUNCIÓN DE DEPURACIÓN (OPCIONAL)
-// ============================================
+// Exportar variables globales para que otros scripts las usen
+window.PRODUCTS = PRODUCTS;
+window.FEATURED_PRODUCTS = FEATURED_PRODUCTS;
+
 window.debugCart = function() {
     console.log('=== DEBUG CARRITO ===');
     const sidebar = document.getElementById('cartSidebar');
@@ -462,11 +473,12 @@ window.debugCart = function() {
     if (sidebar) {
         console.log('sidebar clases:', sidebar.className);
         console.log('sidebar tiene cart-open:', sidebar.classList.contains('cart-open'));
-        console.log('transform:', window.getComputedStyle(sidebar).transform);
     }
     
     if (overlay) {
-        console.log('overlay clases:', overlay.className);
         console.log('overlay hidden:', overlay.classList.contains('hidden'));
     }
+    
+    console.log('📦 Productos totales:', PRODUCTS.length);
+    console.log('⭐ Productos destacados:', FEATURED_PRODUCTS.length);
 };
