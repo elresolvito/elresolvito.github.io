@@ -14,21 +14,21 @@ id,nombre,precio,imagen,categoria,descripcion,destacado
 13,Mayonesa Mediana,850,https://i.postimg.cc/KzJZw2rR/mayonesa_precio_850.png,Salsas,Frasco mediano,SI
 14,Mayonesa Grande,1100,https://i.postimg.cc/Px2t9jzz/mayonesa_precio1100.png,Salsas,Frasco grande,NO
 15,Cuchilla de Afeitar,100,https://i.postimg.cc/8CdkdW7x/cuchilla_de_afeitar_precio_100.png,Higiene personal,Unidad,NO
-16,Jabón Marwa,150,https://i.postimg.cc/3RK8tRpR/jabon_marwa_precio_150.png,Higiene personal,Pastilla,NO
+16,Jabón Marwa,150,https://i.postimg.cc/3RK8tRpR/jabon_marwa_precio_150.png,Higiene personal,Pastilla,SI
 17,Papel Sanitario,490,https://i.postimg.cc/bwW289qD/papel_sanitario_precio_490i.png,Higiene personal,Paquete,SI
 18,Toallas Sanitarias,450,https://i.postimg.cc/KjjZyH0b/toallas_sanitarias_precio_450.png,Higiene personal,Paquete,NO
 19,Toallas Húmedas,690,https://i.postimg.cc/W4ZSP3cw/toallas_humedas_precio_690.png,Higiene personal,Paquete,NO
-20,Jabón de Lavar,250,https://i.postimg.cc/V6YfK6Mz/jabon_de_lavar_precio_250.png,Aseo del hogar,Pastilla,NO
-21,Perfume Candy,3100,https://i.postimg.cc/vTgJRyhp/perfume_candy_precio_3100.png,Perfumes y desodorantes,Frasco 50ml,SI
+20,Jabón de Lavar,250,https://i.postimg.cc/V6YfK6Mz/jabon_de_lavar_precio_250.png,Aseo del hogar,Pastilla,SI
+21,Perfume Candy,3100,https://i.postimg.cc/vTgJRyhp/perfume_candy_precio_3100.png,Perfumes y desodorantes,Frasco 50ml,NO
 22,Perfume genérico,3100,https://i.postimg.cc/ZKrT0PPG/perfume_precio_3100.png,Perfumes y desodorantes,Frasco 50ml,NO
 23,Perfume Q,3100,https://i.postimg.cc/CL03P3Dn/perfume_q_precio_3100.png,Perfumes y desodorantes,Frasco 50ml,NO
 24,Desodorante Obao,1100,https://i.postimg.cc/PxtXSxD2/desodorante_obao_precio_1100.png,Perfumes y desodorantes,Spray/Roll-on,NO
 25,Desodorante Rush Blanco,1000,https://i.postimg.cc/FR9rTRS8/desodorante_rush_blanco_precio_1000.png,Perfumes y desodorantes,Roll-on,NO
 26,Desodorante Rush,1000,https://i.postimg.cc/sXVjTXSF/desodorante_rush_precio_1000.png,Perfumes y desodorantes,Spray,NO
 27,Arroz,700,https://i.postimg.cc/ZRR352mX/arroz.jpg,Alimentos y conservas,Paquete 1 kg,SI
-28,Macarrones,300,https://i.postimg.cc/Hsmz1H69/macarrones_precio_300.png,Pastas y fideos,Paquete,NO
-29,Sopas instantáneas,160,https://i.postimg.cc/FzNTpQqK/sopas_instantaneas_precio_160.png,Pastas y fideos,Paquete,NO
-30,Licor de fresa,2500,https://i.postimg.cc/59YT2x5p/licor_de_fresa_precio_2500.png,Bebidas alcohólicas y malta,Botella,SI
+28,Macarrones,300,https://i.postimg.cc/Hsmz1H69/macarrones_precio_350.png,Pastas y fideos,Paquete,SI
+29,Sopas instantáneas,160,https://i.postimg.cc/FzNTpQqK/sopas_instantaneas_precio_160.png,Pastas y fideos,Paquete,SI
+30,Licor de fresa,2500,https://i.postimg.cc/59YT2x5p/licor_de_fresa_precio_2500.png,Bebidas alcohólicas y malta,Botella,NO
 31,Licor Cocobay,2500,https://i.postimg.cc/7ZDW90Fz/locor_cocobay_precio_2500.png,Bebidas alcohólicas y malta,Botella,NO
 32,Whisky Spirit 200ml,320,https://i.postimg.cc/4N8W6q1t/tea_precio_320.png,Bebidas alcohólicas y malta,Botella 200ml,NO
 33,Whisky 1L,1350,https://i.postimg.cc/cLyrb4T0/whisky_1L_precio_1350.png,Bebidas alcohólicas y malta,Botella 1L,NO
