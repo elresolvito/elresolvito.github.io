@@ -339,7 +339,7 @@
     <div id="loadingOverlay">
         <div class="loading-spinner mb-4"></div>
         <div class="text-cuban-green font-semibold text-lg">El Resolvito</div>
-        <div class="text-gray-400 text-sm mt-2">Cargando...</div>
+        <div class="text-gray-400 text-sm mt-2">Cargando productos...</div>
     </div>
 
     <div id="main-content">
@@ -718,6 +718,14 @@
                         </select>
                     </div>
                     
+                    <!-- Servicio exprés -->
+                    <div class="mb-4">
+                        <label class="flex items-center gap-3 cursor-pointer">
+                            <input type="checkbox" id="msg_expres" class="w-5 h-5 text-cuban-green rounded">
+                            <span class="text-sm text-gray-700">⚡ Servicio exprés (+$50) - Entrega en 15 minutos</span>
+                        </label>
+                    </div>
+                    
                     <!-- Notas adicionales -->
                     <div class="mb-5">
                         <label class="form-label">📝 Notas adicionales (opcional)</label>
@@ -806,29 +814,47 @@
             await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
             await loadComponent('footer-container', 'components/footer.html');
 
-            if (typeof FEATURED_PRODUCTS !== 'undefined' && FEATURED_PRODUCTS.length) {
-                const container = document.getElementById('featuredProducts');
-                if (container) {
-                    container.innerHTML = FEATURED_PRODUCTS.map(p => {
-                        if (!p) return '';
-                        const nombreSanitizado = p.nombre.replace(/'/g, "\\'").replace(/"/g, '&quot;');
-                        return `
-                            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
-                                <div class="product-image-container aspect-square bg-gray-100 cursor-pointer" onclick="window.openImageModal('${p.imagen}', '${nombreSanitizado}')">
-                                    <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" class="w-full h-full object-contain p-2" onerror="this.src='https://placehold.co/300x300/2E7D32/white?text=${encodeURIComponent(p.nombre)}'">
-                                </div>
-                                <div class="product-info p-3">
-                                    <h3 class="font-semibold text-sm line-clamp-2">${p.nombre}</h3>
-                                    <div class="flex items-center justify-between mt-2">
-                                        <span class="text-cuban-green font-bold">$${p.precio.toLocaleString()}</span>
-                                        <button onclick="if(window.addToCart) window.addToCart({id:${p.id}, nombre:'${nombreSanitizado}', precio:${p.precio}, imagen:'${p.imagen}', cantidad:1}); else alert('Cargando carrito...');" class="bg-cuban-green text-white px-2 py-1 rounded-lg text-xs font-bold hover:bg-cuban-dark transition flex items-center gap-1"><i class="fas fa-cart-plus"></i> Añadir</button>
+            // ESPERAR a que los productos se carguen desde Google Sheets
+            const esperarProductos = setInterval(() => {
+                if (window.FEATURED_PRODUCTS && window.FEATURED_PRODUCTS.length > 0) {
+                    clearInterval(esperarProductos);
+                    
+                    const container = document.getElementById('featuredProducts');
+                    if (container) {
+                        container.innerHTML = window.FEATURED_PRODUCTS.map(p => {
+                            if (!p) return '';
+                            const nombreSanitizado = (p.nombre || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+                            const imagenUrl = p.imagen || 'https://placehold.co/300x300/2E7D32/white?text=Producto';
+                            const precioNum = parseFloat(p.precio) || 0;
+                            
+                            return `
+                                <div class="product-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
+                                    <div class="product-image-container aspect-square bg-gray-100 cursor-pointer" onclick="window.openImageModal('${imagenUrl}', '${nombreSanitizado}')">
+                                        <img src="${imagenUrl}" alt="${p.nombre}" loading="lazy" class="w-full h-full object-contain p-2" onerror="this.src='https://placehold.co/300x300/2E7D32/white?text=${encodeURIComponent(p.nombre)}'">
+                                    </div>
+                                    <div class="product-info p-3">
+                                        <h3 class="font-semibold text-sm line-clamp-2">${p.nombre || 'Producto'}</h3>
+                                        <div class="flex items-center justify-between mt-2">
+                                            <span class="text-cuban-green font-bold">$${precioNum.toLocaleString()}</span>
+                                            <button onclick="if(window.addToCart) window.addToCart({id:${p.id || Math.random()}, nombre:'${nombreSanitizado}', precio:${precioNum}, imagen:'${imagenUrl}', cantidad:1}); else alert('Cargando carrito...');" class="bg-cuban-green text-white px-2 py-1 rounded-lg text-xs font-bold hover:bg-cuban-dark transition flex items-center gap-1"><i class="fas fa-cart-plus"></i> Añadir</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        `;
-                    }).join('');
+                            `;
+                        }).join('');
+                    }
+                    console.log(`✅ ${window.FEATURED_PRODUCTS.length} productos destacados renderizados`);
                 }
-            }
+            }, 100);
+            
+            // Timeout por si algo falla
+            setTimeout(() => {
+                clearInterval(esperarProductos);
+                const container = document.getElementById('featuredProducts');
+                if (container && container.innerHTML === '') {
+                    container.innerHTML = '<div class="col-span-4 text-center py-8 text-gray-500">No se pudieron cargar los productos. Recarga la página.</div>';
+                }
+            }, 5000);
 
             if (typeof window.updateCartUI === 'function') {
                 window.updateCartUI();
