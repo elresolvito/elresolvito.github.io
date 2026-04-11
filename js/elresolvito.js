@@ -1,9 +1,9 @@
 // ============================================
-// PRODUCTOS - CARGADOS DESDE GOOGLE SHEETS (CSV)
+// PRODUCTOS - CARGADOS DESDE CSV EN GITHUB
 // ============================================
 
-// 🔴 ENLACE CSV DE GOOGLE SHEETS (YA FUNCIONA)
-const CSV_URL = 'https://docs.google.com/spreadsheets/d/1RpNc46-ok47bjRUlp0rQCK3hMH8xAi-b97wlBldxktk/export?format=csv&gid=0';
+// 🔴 CAMBIA ESTA URL POR LA URL RAW DE TU CSV EN GITHUB
+const CSV_URL = 'https://raw.githubusercontent.com/tu-usuario/tu-repositorio/main/productos.csv';
 
 // Productos de respaldo (por si falla la conexión)
 const PRODUCTOS_RESERVA = [
@@ -15,13 +15,17 @@ const PRODUCTOS_RESERVA = [
 let PRODUCTS = [];
 let FEATURED_PRODUCTS = [];
 
-// Función para cargar productos desde Google Sheets CSV
+// Función para cargar productos desde CSV en GitHub
 async function cargarProductosDesdeCSV() {
     try {
-        console.log('🔄 Cargando productos desde Google Sheets...');
+        console.log('🔄 Cargando productos desde GitHub CSV...');
         const response = await fetch(CSV_URL);
-        const csvText = await response.text();
         
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+        
+        const csvText = await response.text();
         console.log('📄 CSV recibido, longitud:', csvText.length);
         
         // Parsear CSV correctamente
@@ -80,7 +84,7 @@ async function cargarProductosDesdeCSV() {
         }
         
         if (productos.length > 0) {
-            console.log(`✅ Cargados ${productos.length} productos desde Google Sheets`);
+            console.log(`✅ Cargados ${productos.length} productos desde GitHub CSV`);
             PRODUCTS = productos;
             
             // Actualizar productos destacados
@@ -100,7 +104,7 @@ async function cargarProductosDesdeCSV() {
             throw new Error('No se encontraron productos en el CSV');
         }
     } catch (error) {
-        console.error('❌ Error cargando desde CSV:', error);
+        console.error('❌ Error cargando desde GitHub CSV:', error);
         console.log('📦 Usando productos de respaldo');
         PRODUCTS = PRODUCTOS_RESERVA;
         FEATURED_PRODUCTS = PRODUCTOS_RESERVA.filter(p => p.destacado === 'SI');
@@ -473,7 +477,7 @@ async function cargarProductosDesdeCSV() {
             if (themeIcon) themeIcon.textContent = '🌙';
         }
         
-        // Cargar productos desde Google Sheets
+        // Cargar productos desde GitHub CSV
         await cargarProductosDesdeCSV();
         
         window.updateCartUI();
