@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "titulo": "Dulce César",
+    "descripcion": "Repostería artesanal para eventos, cafeterías y pedidos especiales.",
+    "boton": "Contactar para cotizar",
+    "nuevo": true,
+    "destacado": true
+  },
+  {
+    "id": 2,
+    "titulo": "Contador / Tenedor de Libros",
+    "descripcion": "Gestión contable profesional para TCP y pequeños negocios.",
+    "boton": "Contactar para cotizar",
+    "nuevo": true,
+    "destacado": true
+  }
+]
