@@ -3,7 +3,7 @@
 // ============================================
 
 // 🔴 CAMBIA ESTA URL POR LA URL RAW DE TU CSV EN GITHUB
-const CSV_URL = 'https://raw.githubusercontent.com/tu-usuario/tu-repositorio/main/productos.csv';
+const CSV_URL = 'https://raw.githubusercontent.com/elresolvito/elresolvito.github.io/main/data/productos.csv';
 
 // Productos de respaldo (por si falla la conexión)
 const PRODUCTOS_RESERVA = [
