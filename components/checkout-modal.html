@@ -1,61 +1,170 @@
 <!-- components/checkout-modal.html -->
-<div id="checkoutModal" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 99999; display: none; align-items: center; justify-content: center; padding: 1rem;">
-    <div style="background: white; border-radius: 1.5rem; max-width: 28rem; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);">
+<div id="checkoutModal" class="fixed inset-0 bg-black/50 z-[200] hidden flex items-center justify-center p-4" onclick="window.closeCheckoutModal()">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
         
         <!-- Cabecera -->
-        <div style="padding: 1.5rem; background: linear-gradient(135deg, #2E7D32, #1B5E20); color: white; border-radius: 1.5rem 1.5rem 0 0;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="p-6 bg-gradient-to-r from-cuban-green to-cuban-dark text-white rounded-t-2xl">
+            <div class="flex justify-between items-center">
                 <div>
-                    <h3 style="font-size: 1.5rem; font-weight: bold; margin: 0;">
+                    <h3 class="text-2xl font-bold flex items-center gap-2">
                         <i class="fas fa-clipboard-list"></i> Finalizar pedido
                     </h3>
-                    <p style="font-size: 0.875rem; opacity: 0.9; margin-top: 0.25rem;">Completa los datos y te contactamos</p>
+                    <p class="text-sm opacity-90 mt-1">Completa los datos y te contactamos</p>
                 </div>
-                <button onclick="window.closeCheckoutModal()" style="width: 2.5rem; height: 2.5rem; background: rgba(255,255,255,0.2); border: none; border-radius: 9999px; cursor: pointer; color: white;">
+                <button onclick="window.closeCheckoutModal()" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
         </div>
         
-        <div style="padding: 1.5rem; background: white;">
-            <form id="checkoutForm">
+        <div class="p-6" style="background: white;">
+            <form id="checkoutForm" onsubmit="event.preventDefault(); window.sendCompleteOrder()">
                 
-                <!-- Resumen del carrito -->
-                <div style="margin-bottom: 1.5rem; padding: 1rem; background: #f9fafb; border-radius: 0.75rem; border: 1px solid #e5e7eb;">
-                    <p style="font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem; color: #1f2937;">
-                        <i class="fas fa-shopping-cart" style="color: #2E7D32;"></i> Tu pedido:
+                <!-- ============================================ -->
+                <!-- 1. RESUMEN DEL CARRITO -->
+                <!-- ============================================ -->
+                <div class="mb-6 p-4 bg-gray-50 rounded-xl border border-gray-200">
+                    <p class="text-sm font-semibold mb-2 flex items-center gap-2" style="color: #1f2937;">
+                        <i class="fas fa-shopping-cart text-cuban-green"></i> Tu pedido:
                     </p>
-                    <div id="checkoutCartSummary" style="font-size: 0.875rem; color: #4b5563;"></div>
-                    <div style="display: flex; justify-content: space-between; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #e5e7eb;">
-                        <span style="font-weight: bold;">Total:</span>
-                        <span id="checkoutTotal" style="font-weight: bold; color: #2E7D32;">$0</span>
+                    <div id="checkoutCartSummary" class="text-sm max-h-24 overflow-y-auto space-y-1" style="color: #4b5563;"></div>
+                    <div class="flex justify-between text-base font-bold mt-3 pt-3 border-t border-gray-200">
+                        <span style="color: #1f2937;">Subtotal:</span>
+                        <span id="checkoutTotal" class="text-cuban-green" style="color: #2E7D32;">$0</span>
+                    </div>
+                    <p class="text-xs mt-1" style="color: #6b7280;">Compra mínima: $500</p>
+                </div>
+
+                <!-- ============================================ -->
+                <!-- 2. DATOS DEL CLIENTE -->
+                <!-- ============================================ -->
+                <div class="mb-6">
+                    <h4 class="font-bold mb-3 flex items-center gap-2" style="color: #374151;">
+                        <i class="fas fa-user text-cuban-green"></i> ¿Quién recibe?
+                    </h4>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label for="customerName" class="block text-sm font-medium mb-1" style="color: #374151;">Nombre completo *</label>
+                            <input type="text" 
+                                   id="customerName" 
+                                   required 
+                                   placeholder="Ej: María González Pérez"
+                                   style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; background: white; color: #1f2937;">
+                        </div>
+
+                        <div>
+                            <label for="customerAddress" class="block text-sm font-medium mb-1" style="color: #374151;">Dirección completa *</label>
+                            <textarea id="customerAddress" 
+                                      rows="2" 
+                                      required 
+                                      placeholder="Ej: Calle Obispo No. 123, entre Mercaderes y San Ignacio, La Habana Vieja"
+                                      style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; background: white; color: #1f2937;"></textarea>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Nombre -->
-                <div style="margin-bottom: 1rem;">
-                    <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #374151; margin-bottom: 0.25rem;">Nombre completo *</label>
-                    <input type="text" id="customerName" required style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.5rem; background: white; color: #1f2937;">
+                <!-- ============================================ -->
+                <!-- 3. ZONA DE ENTREGA -->
+                <!-- ============================================ -->
+                <div class="mb-6">
+                    <h4 class="font-bold mb-3 flex items-center gap-2" style="color: #374151;">
+                        <i class="fas fa-map-marker-alt text-cuban-green"></i> ¿Dónde entregamos?
+                    </h4>
+                    
+                    <div class="space-y-3">
+                        <label class="flex items-start gap-3 p-4 border-2 rounded-xl cursor-pointer transition hover:bg-gray-50" style="border-color: #e5e7eb;">
+                            <input type="radio" name="deliveryZone" value="habana-vieja" checked class="w-5 h-5 text-cuban-green mt-1" style="accent-color: #2E7D32;">
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-bold" style="color: #1f2937;">La Habana Vieja</span>
+                                    <span class="font-bold" style="color: #2E7D32;">+ $300</span>
+                                </div>
+                                <p class="text-sm mt-1" style="color: #6b7280;">Tarifa fija para pedidos de hasta 8 kg.</p>
+                            </div>
+                        </label>
+
+                        <label class="flex items-start gap-3 p-4 border-2 rounded-xl cursor-pointer transition hover:bg-gray-50" style="border-color: #e5e7eb;">
+                            <input type="radio" name="deliveryZone" value="otro" class="w-5 h-5 text-cuban-green mt-1" style="accent-color: #2E7D32;">
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-bold" style="color: #1f2937;">Otro municipio de La Habana</span>
+                                    <span class="font-bold" style="color: #d97706;">A convenir</span>
+                                </div>
+                                <p class="text-sm mt-1" style="color: #6b7280;">El costo de la mensajería se acuerda directamente. Te contactaremos para coordinarlo.</p>
+                            </div>
+                        </label>
+                    </div>
                 </div>
 
-                <!-- Dirección -->
-                <div style="margin-bottom: 1rem;">
-                    <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #374151; margin-bottom: 0.25rem;">Dirección completa *</label>
-                    <textarea id="customerAddress" rows="2" required style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.5rem; background: white; color: #1f2937;"></textarea>
+                <!-- ============================================ -->
+                <!-- 4. MÉTODO DE PAGO -->
+                <!-- ============================================ -->
+                <div class="mb-6">
+                    <h4 class="font-bold mb-3 flex items-center gap-2" style="color: #374151;">
+                        <i class="fas fa-credit-card text-cuban-green"></i> ¿Cómo pagas?
+                    </h4>
+                    
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="flex flex-col items-center gap-2 p-4 border-2 rounded-xl cursor-pointer transition hover:bg-gray-50" style="border-color: #e5e7eb;">
+                            <input type="radio" name="paymentMethod" value="Efectivo" checked class="w-5 h-5" style="accent-color: #2E7D32;">
+                            <span class="text-2xl">💵</span>
+                            <span class="font-medium" style="color: #1f2937;">Efectivo</span>
+                            <span class="text-xs" style="color: #6b7280;">Pagas al recibir</span>
+                        </label>
+                        
+                        <label class="flex flex-col items-center gap-2 p-4 border-2 rounded-xl cursor-pointer transition hover:bg-gray-50" style="border-color: #e5e7eb;">
+                            <input type="radio" name="paymentMethod" value="Transferencia" class="w-5 h-5" style="accent-color: #2E7D32;">
+                            <span class="text-2xl">📱</span>
+                            <span class="font-medium" style="color: #1f2937;">Transferencia</span>
+                            <span class="text-xs" style="color: #6b7280;">Sujeto a disponibilidad*</span>
+                        </label>
+                    </div>
+                    <p class="text-xs mt-2" style="color: #6b7280;">* Te confirmaremos si se puede aceptar transferencia. Si no, puedes pagar en efectivo.</p>
                 </div>
 
-                <!-- Notas -->
-                <div style="margin-bottom: 1.5rem;">
-                    <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #374151; margin-bottom: 0.25rem;">Notas adicionales</label>
-                    <textarea id="customerNotes" rows="2" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.5rem; background: white; color: #1f2937;"></textarea>
+                <!-- ============================================ -->
+                <!-- 5. NOTAS ADICIONALES -->
+                <!-- ============================================ -->
+                <div class="mb-6">
+                    <label for="customerNotes" class="block text-sm font-medium mb-1" style="color: #374151;">¿Algo más que debamos saber?</label>
+                    <textarea id="customerNotes" 
+                              rows="2" 
+                              style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; background: white; color: #1f2937;"
+                              placeholder="Ej: Prefiero que llamen antes de llegar, el edificio es el amarillo, etc."></textarea>
                 </div>
 
-                <!-- Botones -->
-                <div style="display: flex; gap: 0.75rem;">
-                    <button type="button" onclick="window.closeCheckoutModal()" style="flex: 1; padding: 0.75rem; border: 2px solid #d1d5db; background: white; color: #4b5563; border-radius: 0.75rem; font-weight: bold; cursor: pointer;">
+                <!-- ============================================ -->
+                <!-- 6. CUÁNDO SE ENTREGA -->
+                <!-- ============================================ -->
+                <div class="mb-6 p-4 bg-blue-50 rounded-xl border border-blue-200">
+                    <h4 class="font-bold text-blue-800 mb-2 flex items-center gap-2">
+                        <i class="fas fa-clock"></i> ¿Cuándo recibes?
+                    </h4>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-start gap-2">
+                            <span class="bg-blue-600 text-white rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs">✓</span>
+                            <p style="color: #1e3a8a;"><span class="font-bold">Si pides antes de las 7:00 AM:</span> Lo entregamos antes de las 2:00 PM (si estás en La Habana Vieja).</p>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="bg-blue-600 text-white rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs">✓</span>
+                            <p style="color: #1e3a8a;"><span class="font-bold">Si pides antes de las 2:00 PM:</span> Lo entregamos antes de las 6:00 PM (si estás en La Habana Vieja).</p>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="bg-blue-600 text-white rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs">✓</span>
+                            <p style="color: #1e3a8a;"><span class="font-bold">Para otros municipios:</span> Coordinamos la entrega después de confirmar el pedido.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================ -->
+                <!-- BOTONES DE ACCIÓN -->
+                <!-- ============================================ -->
+                <div class="flex gap-3 pt-4 border-t border-gray-200">
+                    <button type="button" onclick="window.closeCheckoutModal()" class="flex-1 px-4 py-3 border-2 rounded-xl font-bold hover:bg-gray-100 transition" style="border-color: #d1d5db; color: #4b5563; background: white;">
                         Cancelar
                     </button>
-                    <button type="button" onclick="window.sendCompleteOrder()" style="flex: 1; padding: 0.75rem; background: linear-gradient(135deg, #16a34a, #15803d); color: white; border: none; border-radius: 0.75rem; font-weight: bold; cursor: pointer;">
+                    <button type="submit" class="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-white px-4 py-3 rounded-xl font-bold hover:opacity-90 transition flex items-center justify-center gap-2 shadow-md">
                         <i class="fab fa-whatsapp"></i> Enviar pedido
                     </button>
                 </div>
@@ -65,37 +174,39 @@
 </div>
 
 <script>
+    // Función para actualizar el resumen del carrito en el modal
+    window.updateCheckoutSummary = function() {
+        var summaryDiv = document.getElementById('checkoutCartSummary');
+        var totalSpan = document.getElementById('checkoutTotal');
+        
+        if (window.cart && window.cart.length > 0) {
+            var html = '';
+            var total = 0;
+            for (var i = 0; i < window.cart.length; i++) {
+                var item = window.cart[i];
+                var itemTotal = item.precio * item.cantidad;
+                total += itemTotal;
+                html += '<div style="display: flex; justify-content: space-between; margin-bottom: 4px;">' +
+                        '<span style="color: #4b5563;">' + item.nombre + ' x' + item.cantidad + '</span>' +
+                        '<span style="color: #4b5563;">$' + itemTotal.toLocaleString() + '</span>' +
+                        '</div>';
+            }
+            summaryDiv.innerHTML = html;
+            totalSpan.innerHTML = '$' + total.toLocaleString();
+            totalSpan.style.color = '#2E7D32';
+        } else {
+            summaryDiv.innerHTML = '<p style="color: #ef4444;">Carrito vacío</p>';
+            totalSpan.innerHTML = '$0';
+        }
+    };
+    
     // Función para abrir el modal
     window.openCheckoutModal = function() {
         var modal = document.getElementById('checkoutModal');
-        if (!modal) {
-            console.error('Modal no encontrado');
-            return;
-        }
+        if (!modal) return;
         
-        // Actualizar resumen del carrito
-        if (window.cart && window.cart.length > 0) {
-            var summaryDiv = document.getElementById('checkoutCartSummary');
-            var totalSpan = document.getElementById('checkoutTotal');
-            var total = 0;
-            
-            if (summaryDiv) {
-                summaryDiv.innerHTML = '';
-                for (var i = 0; i < window.cart.length; i++) {
-                    var item = window.cart[i];
-                    var itemTotal = item.precio * item.cantidad;
-                    total += itemTotal;
-                    summaryDiv.innerHTML += '<div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;"><span>' + item.nombre + ' x' + item.cantidad + '</span><span>$' + itemTotal.toLocaleString() + '</span></div>';
-                }
-            }
-            if (totalSpan) {
-                totalSpan.innerHTML = '$' + total.toLocaleString();
-            }
-        } else {
-            document.getElementById('checkoutCartSummary').innerHTML = '<p style="color: #ef4444;">Carrito vacío</p>';
-            document.getElementById('checkoutTotal').innerHTML = '$0';
-        }
-        
+        window.updateCheckoutSummary();
+        modal.classList.remove('hidden');
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
     };
@@ -103,17 +214,19 @@
     // Función para cerrar el modal
     window.closeCheckoutModal = function() {
         var modal = document.getElementById('checkoutModal');
-        if (modal) {
-            modal.style.display = 'none';
-            document.body.style.overflow = '';
-        }
+        if (!modal) return;
+        modal.classList.add('hidden');
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
     };
     
-    // Función para enviar el pedido
+    // Función para enviar el pedido completo
     window.sendCompleteOrder = function() {
         var nombre = document.getElementById('customerName').value.trim();
         var direccion = document.getElementById('customerAddress').value.trim();
         var notas = document.getElementById('customerNotes').value.trim();
+        var zona = document.querySelector('input[name="deliveryZone"]:checked');
+        var pago = document.querySelector('input[name="paymentMethod"]:checked');
         
         if (!nombre) {
             alert('⚠️ Por favor, ingresa tu nombre completo.');
@@ -128,17 +241,22 @@
             return;
         }
         
-        // Calcular total
-        var total = 0;
+        var zonaTexto = zona ? (zona.value === 'habana-vieja' ? 'La Habana Vieja (+$300)' : 'Otro municipio (costo a convenir)') : 'No especificado';
+        var pagoTexto = pago ? pago.value : 'No especificado';
+        
+        var subtotal = 0;
         var productosTexto = '';
         for (var i = 0; i < window.cart.length; i++) {
             var item = window.cart[i];
             var itemTotal = item.precio * item.cantidad;
-            total += itemTotal;
+            subtotal += itemTotal;
             productosTexto += '• ' + item.nombre + ' x' + item.cantidad + ' = $' + itemTotal.toLocaleString() + '\n';
         }
         
-        // Construir mensaje
+        var total = subtotal;
+        var costoEnvio = (zona && zona.value === 'habana-vieja') ? 300 : 0;
+        if (costoEnvio > 0) total += costoEnvio;
+        
         var mensaje = '🛒 *NUEVO PEDIDO - EL RESOLVITO* 🛒\n\n';
         mensaje += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
         mensaje += '👤 *DATOS DEL CLIENTE*\n';
@@ -152,41 +270,40 @@
         mensaje += productosTexto;
         
         mensaje += '\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
-        mensaje += '💰 *TOTAL:* $' + total.toLocaleString() + '\n';
+        mensaje += '💰 *RESUMEN DEL PAGO*\n';
         mensaje += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+        mensaje += '• Subtotal: $' + subtotal.toLocaleString() + '\n';
+        if (costoEnvio > 0) mensaje += '• Envío (La Habana Vieja): $300\n';
+        mensaje += '• Método de pago: ' + pagoTexto + '\n';
+        mensaje += '• Zona de entrega: ' + zonaTexto + '\n';
+        mensaje += '• *TOTAL A PAGAR:* $' + total.toLocaleString() + '\n\n';
         
         if (notas) {
-            mensaje += '\n📝 *NOTAS:* ' + notas + '\n';
+            mensaje += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+            mensaje += '📝 *NOTAS ADICIONALES*\n';
+            mensaje += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+            mensaje += notas + '\n\n';
         }
         
-        mensaje += '\n🚚 *ENTREGA:* La Habana Vieja (tarifa fija hasta 8kg). Para otros municipios, te contactamos.\n\n';
-        mensaje += '¡Gracias por tu compra! 🙏';
+        mensaje += '¡Gracias por tu compra en El Resolvito! 🙏';
         
-        // Abrir WhatsApp
         window.open('https://wa.me/5356382909?text=' + encodeURIComponent(mensaje), '_blank');
         
         // Limpiar carrito
         if (window.cart) {
             window.cart = [];
             localStorage.removeItem('elresolvito_cart');
-            if (typeof window.updateCartUI === 'function') {
-                window.updateCartUI();
-            }
+            if (typeof window.updateCartUI === 'function') window.updateCartUI();
         }
         
-        // Cerrar modal
         window.closeCheckoutModal();
-        
-        // Limpiar formulario
-        document.getElementById('customerName').value = '';
-        document.getElementById('customerAddress').value = '';
-        document.getElementById('customerNotes').value = '';
+        document.getElementById('checkoutForm').reset();
     };
     
     // Cerrar al hacer clic fuera
     document.addEventListener('click', function(event) {
         var modal = document.getElementById('checkoutModal');
-        if (modal && modal.style.display === 'flex' && event.target === modal) {
+        if (modal && !modal.classList.contains('hidden') && event.target === modal) {
             window.closeCheckoutModal();
         }
     });
