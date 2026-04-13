@@ -4,7 +4,7 @@ id,nombre,precio,imagen,categoria,descripcion,destacado
 3,Pimiento fresco,750,https://i.postimg.cc/4yyJTSBj/pimiento_presio_750.png,Alimentos y conservas,Unidad,NO
 4,Café Dualis 250g,1450,https://i.postimg.cc/WbZBX2hN/cafe_dualis_250_g_precio_1450.png,Alimentos y conservas,Paquete 250g,SI
 5,Café Dufiltro 250g,1450,https://i.postimg.cc/hG26fv31/cafe_Dufiltro_250_g_precio_1450.png,Alimentos y conservas,Paquete 250g,NO
-6,Pan rallado Enepa,470,https://i.postimg.cc/nhY6f04N/cafe_enepa_precio_450.png,Alimentos y conservas,Paquete,NO
+6,Café Enepa,470,https://i.postimg.cc/nhY6f04N/cafe_enepa_precio_450.png,Alimentos y conservas,Paquete,NO
 7,Cartón de huevo 30u,3000,https://i.postimg.cc/sDWkwVvv/carton_de_huevo_30_u_precio_3000.png,Alimentos y conservas,Cartón,SI
 8,Leche condensada,520,https://i.postimg.cc/tT2XwjtT/leche_condensada.png,Alimentos y conservas,Lata 397g,NO
 9,Harina blanca 1Kg,600,https://i.postimg.cc/3xc2NHFB/harina_blanca1_kg.png,Alimentos y conservas,Paquete 1Kg,SI
@@ -34,4 +34,7 @@ id,nombre,precio,imagen,categoria,descripcion,destacado
 33,Whisky 1L,1350,https://i.postimg.cc/cLyrb4T0/whisky_1L_precio_1350.png,Bebidas alcohólicas y malta,Botella 1L,NO
 34,Whisky Sir Albin,550,https://i.postimg.cc/y84kbYnC/whisky_sir_albin_precio_550.png,Bebidas alcohólicas y malta,Botella pequeña,NO
 35,Vino Pluvium,1200,https://i.postimg.cc/XNLLWmmx/vino_pluvium_precio_1200.png,Bebidas alcohólicas y malta,Botella,NO
-
+36,Café Isla Grande 250g,1240,https://i.postimg.cc/pdpCSgSd/cafe_isla_grande_250_g_(1).png,Venta al por mayor,Café molido 250g - Venta por mayor,NO
+37,Malta Guajira 1500ml,918,https://i.postimg.cc/YSZRBdch/malta_guajira_formato_familiar_1500_ml_(1).png,Venta al por mayor,Malta familiar 1500ml - Venta por mayor,NO
+38,Refresco Cintra,225,https://i.postimg.cc/YSZRBdcF/refresco_cintra_(1).png,Venta al por mayor,Refresco - Venta por mayor,NO
+39,Cerveza Cristal,250,https://i.postimg.cc/dQb0ZrFm/cerveza-cristal-(1).png,Venta al por mayor,Cerveza - Venta por mayor,NO
