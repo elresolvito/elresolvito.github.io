@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Venta por Mayor - El Resolvito</title>
-    <meta name="description" content="Productos al por mayor en La Habana. Precios especiales para negocios, cafeterías y emprendedores.">
+    <title>Venta al por Mayor - El Resolvito</title>
+    <meta name="description" content="Productos al por mayor en La Habana. Precios especiales para negocios, cafeterías y emprendedores. Café, malta, refrescos y cerveza.">
     
     <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -19,7 +19,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
-        /* Loading Overlay */
         #loadingOverlay {
             position: fixed;
             top: 0;
@@ -44,7 +43,7 @@
             width: 48px;
             height: 48px;
             border: 3px solid #e2e8f0;
-            border-top-color: #2E7D32;
+            border-top-color: #F59E0B;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
@@ -62,7 +61,6 @@
             opacity: 1;
         }
         
-        /* Estilo para la tarjeta de producto - IMAGEN GRANDE */
         .product-card {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             background: white;
@@ -76,12 +74,12 @@
             box-shadow: 0 20px 25px -5px rgba(0,0,0,0.15);
         }
         
-        /* Contenedor de imagen - MÁS GRANDE */
         .product-img-container {
             height: 280px;
             overflow: hidden;
             background-color: #f3f4f6;
             cursor: pointer;
+            position: relative;
         }
         
         .product-img-container img {
@@ -95,21 +93,20 @@
             transform: scale(1.05);
         }
         
-        /* Badge de Mayorista */
-        .badge-mayor {
+        .badge-mayorista {
             position: absolute;
             top: 10px;
             right: 10px;
-            background: linear-gradient(135deg, #f59e0b, #d97706);
+            background: linear-gradient(135deg, #F59E0B, #D97706);
             color: white;
-            padding: 4px 10px;
+            padding: 4px 12px;
             border-radius: 20px;
             font-size: 0.7rem;
             font-weight: bold;
             z-index: 10;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         
-        /* Para móviles */
         @media (max-width: 640px) {
             .product-img-container {
                 height: 200px;
@@ -125,6 +122,13 @@
         .section-fade.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+        
+        .beneficio-card {
+            transition: all 0.3s ease;
+        }
+        .beneficio-card:hover {
+            transform: translateY(-4px);
         }
     </style>
     
@@ -148,7 +152,7 @@
 
     <div id="loadingOverlay">
         <div class="loading-spinner mb-4"></div>
-        <div class="text-cuban-green font-semibold text-lg">El Resolvito</div>
+        <div class="text-mayorista font-semibold text-lg">El Resolvito</div>
         <div class="text-gray-400 text-sm mt-2">Cargando productos al por mayor...</div>
     </div>
 
@@ -162,71 +166,113 @@
         <!-- Hero Venta por Mayor -->
         <section class="bg-gradient-to-r from-amber-600 to-orange-600 text-white py-16">
             <div class="container mx-auto px-4 text-center">
-                <i class="fas fa-boxes text-5xl mb-4"></i>
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">Venta al por Mayor</h1>
-                <p class="text-xl opacity-90">Precios especiales para negocios, cafeterías y emprendedores</p>
-                <div class="mt-6 inline-block bg-white/20 backdrop-blur rounded-full px-4 py-2 text-sm">
-                    <i class="fas fa-truck"></i> Consulta por cantidades y descuentos especiales
+                <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur rounded-full px-4 py-2 mb-6">
+                    <i class="fas fa-chart-line text-amber-200"></i>
+                    <span class="text-sm font-bold uppercase tracking-wider">Para negocios y emprendedores</span>
+                </div>
+                <i class="fas fa-boxes text-6xl md:text-7xl mb-4"></i>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Venta al por Mayor</h1>
+                <p class="text-xl md:text-2xl opacity-90 max-w-2xl mx-auto">
+                    Precios especiales para cafeterías, tiendas y negocios en La Habana
+                </p>
+                <div class="mt-8 flex flex-wrap justify-center gap-4">
+                    <div class="bg-white/20 backdrop-blur rounded-full px-4 py-2 text-sm">
+                        <i class="fas fa-truck"></i> Entregas en La Habana
+                    </div>
+                    <div class="bg-white/20 backdrop-blur rounded-full px-4 py-2 text-sm">
+                        <i class="fas fa-percent"></i> Descuentos por volumen
+                    </div>
+                    <div class="bg-white/20 backdrop-blur rounded-full px-4 py-2 text-sm">
+                        <i class="fas fa-headset"></i> Atención personalizada
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Info Mayorista -->
-        <section class="py-8 bg-amber-50 border-b border-amber-200">
+        <!-- Beneficios Section -->
+        <section class="py-12 bg-gray-50">
             <div class="container mx-auto px-4">
-                <div class="flex flex-wrap justify-center gap-6 text-center">
-                    <div class="flex items-center gap-2 text-amber-700">
-                        <i class="fas fa-check-circle text-amber-600"></i>
-                        <span>Precios competitivos</span>
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-gray-800">¿Por qué comprar al por mayor con nosotros?</h2>
+                    <p class="text-gray-600 mt-2">Beneficios exclusivos para tu negocio</p>
+                </div>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="beneficio-card text-center p-6 bg-white rounded-xl shadow-md">
+                        <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-tag text-2xl text-amber-600"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Precios competitivos</h3>
+                        <p class="text-sm text-gray-600">Tarifas especiales para compras al por mayor</p>
                     </div>
-                    <div class="flex items-center gap-2 text-amber-700">
-                        <i class="fas fa-check-circle text-amber-600"></i>
-                        <span>Entregas en La Habana</span>
+                    <div class="beneficio-card text-center p-6 bg-white rounded-xl shadow-md">
+                        <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-truck-fast text-2xl text-amber-600"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Entregas rápidas</h3>
+                        <p class="text-sm text-gray-600">Envíos a toda La Habana en el día</p>
                     </div>
-                    <div class="flex items-center gap-2 text-amber-700">
-                        <i class="fas fa-check-circle text-amber-600"></i>
-                        <span>Descuentos por volumen</span>
+                    <div class="beneficio-card text-center p-6 bg-white rounded-xl shadow-md">
+                        <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-chart-line text-2xl text-amber-600"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Margen garantizado</h3>
+                        <p class="text-sm text-gray-600">Productos ideales para revender</p>
                     </div>
-                    <div class="flex items-center gap-2 text-amber-700">
-                        <i class="fas fa-check-circle text-amber-600"></i>
-                        <span>Atención personalizada</span>
+                    <div class="beneficio-card text-center p-6 bg-white rounded-xl shadow-md">
+                        <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-handshake text-2xl text-amber-600"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Atención personal</h3>
+                        <p class="text-sm text-gray-600">Te ayudamos a armar tu pedido</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Listado de productos al por mayor -->
+        <!-- Productos al por mayor -->
         <section class="py-12 section-fade">
             <div class="container mx-auto px-4">
                 <div class="flex justify-between items-center mb-8">
                     <h2 class="text-3xl font-bold">
-                        <i class="fas fa-boxes mr-3 text-amber-600"></i>Productos al por Mayor
+                        <i class="fas fa-boxes mr-3 text-amber-600"></i>Catálogo Mayorista
                     </h2>
                     <a href="tienda.html" class="text-cuban-green font-medium hover:underline">
                         <i class="fas fa-store"></i> Ver tienda regular
                     </a>
                 </div>
                 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="productos-mayor-container">
-                    <!-- Los productos se cargarán desde el CSV -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="mayorista-container">
+                    <!-- Productos se cargarán desde JSON -->
                 </div>
                 
-                <div id="no-productos-message" class="text-center py-12 hidden">
+                <div id="no-productos" class="text-center py-12 hidden">
                     <i class="fas fa-box-open text-6xl text-gray-300 mb-4"></i>
-                    <p class="text-gray-500">No hay productos disponibles en venta al por mayor en este momento.</p>
-                    <a href="tienda.html" class="inline-block mt-4 bg-cuban-green text-white px-6 py-2 rounded-full">Ver tienda regular</a>
+                    <p class="text-gray-500">No hay productos disponibles en este momento.</p>
                 </div>
             </div>
         </section>
 
-        <!-- CTA para negocios -->
-        <section class="py-12 bg-gradient-to-r from-amber-600 to-orange-600 text-white">
+        <!-- CTA WhatsApp -->
+        <section class="py-16 bg-gradient-to-r from-amber-600 to-orange-600 text-white">
             <div class="container mx-auto px-4 text-center">
-                <h2 class="text-2xl md:text-3xl font-bold mb-3">¿Tienes un negocio o cafetería?</h2>
-                <p class="text-lg mb-6 opacity-90">Contáctanos para precios especiales por volumen y acuerdos comerciales</p>
-                <a href="https://wa.me/5356382909?text=Hola,%20quiero%20información%20sobre%20venta%20al%20por%20mayor%20para%20mi%20negocio" target="_blank" class="inline-block bg-white text-amber-700 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition shadow-lg">
-                    <i class="fab fa-whatsapp mr-2"></i>Consultar por mayor
-                </a>
+                <div class="max-w-2xl mx-auto">
+                    <i class="fab fa-whatsapp text-5xl mb-4"></i>
+                    <h2 class="text-3xl font-bold mb-3">¿Tienes un negocio o cafetería?</h2>
+                    <p class="text-lg mb-6 opacity-90">
+                        Contáctanos para precios especiales por volumen y acuerdos comerciales
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="https://wa.me/5356382909?text=Hola,%20quiero%20información%20sobre%20venta%20al%20por%20mayor%20para%20mi%20negocio" target="_blank" class="inline-flex items-center justify-center gap-2 bg-white text-amber-700 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition shadow-lg">
+                            <i class="fab fa-whatsapp"></i> Consultar por mayor
+                        </a>
+                        <a href="tienda.html" class="inline-flex items-center justify-center gap-2 bg-amber-500 text-white px-8 py-3 rounded-full font-bold hover:bg-amber-400 transition shadow-lg">
+                            <i class="fas fa-shopping-cart"></i> Seguir comprando
+                        </a>
+                    </div>
+                    <p class="text-sm opacity-80 mt-4">
+                        Responde en menos de 24 horas | Entregas en La Habana
+                    </p>
+                </div>
             </div>
         </section>
 
@@ -236,9 +282,7 @@
         <div id="checkout-modal-container"></div>
         <div id="footer-container"></div>
 
-        <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
-            <p id="cartToastMessage"></p>
-        </div>
+        <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none"></div>
     </div>
 
     <script src="js/elresolvito.js" defer></script>
@@ -262,25 +306,20 @@
             setTimeout(function() {
                 const overlay = document.getElementById('loadingOverlay');
                 const mainContent = document.getElementById('main-content');
-                const pageFade = document.getElementById('pageFade');
-                
                 if (overlay) {
                     overlay.classList.add('hidden');
                     setTimeout(() => overlay.style.display = 'none', 500);
                 }
                 if (mainContent) mainContent.classList.add('visible');
-                if (pageFade) pageFade.classList.add('opacity-0');
             }, 800);
         });
         
         setTimeout(function() {
             const overlay = document.getElementById('loadingOverlay');
-            const mainContent = document.getElementById('main-content');
             if (overlay && !overlay.classList.contains('hidden')) {
                 overlay.classList.add('hidden');
                 setTimeout(() => overlay.style.display = 'none', 500);
             }
-            if (mainContent) mainContent.classList.add('visible');
         }, 3000);
     </script>
     
@@ -308,91 +347,54 @@
             await loadComponent('footer-container', 'components/footer.html');
 
             // ==========================================
-            // FUNCIÓN PARA LEER CSV
-            // ==========================================
-            function parseCSV(csvText) {
-                const lines = csvText.split('\n');
-                const headers = lines[0].split(',');
-                
-                const productos = [];
-                for (let i = 1; i < lines.length; i++) {
-                    if (lines[i].trim() === '') continue;
-                    
-                    const values = [];
-                    let currentValue = '';
-                    let inQuotes = false;
-                    
-                    for (let char of lines[i]) {
-                        if (char === '"') {
-                            inQuotes = !inQuotes;
-                        } else if (char === ',' && !inQuotes) {
-                            values.push(currentValue.trim());
-                            currentValue = '';
-                        } else {
-                            currentValue += char;
-                        }
-                    }
-                    values.push(currentValue.trim());
-                    
-                    if (values.length >= headers.length) {
-                        const producto = {};
-                        headers.forEach((header, idx) => {
-                            producto[header.trim()] = values[idx] || '';
-                        });
-                        producto.precio = parseFloat(producto.precio) || 0;
-                        producto.destacado = producto.destacado === 'SI';
-                        productos.push(producto);
-                    }
-                }
-                return productos;
-            }
-
-            // ==========================================
-            // CARGAR Y FILTRAR PRODUCTOS AL POR MAYOR
+            // CARGAR PRODUCTOS DESDE JSON
             // ==========================================
             try {
-                const response = await fetch('data/productos.csv');
+                const response = await fetch('data/mayorista.json');
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                const csvText = await response.text();
-                const allProducts = parseCSV(csvText);
+                const productos = await response.json();
                 
-                // Filtrar solo productos con categoría "Venta al por mayor"
-                const mayorProducts = allProducts.filter(p => p.categoria === 'Venta al por mayor');
+                console.log(`✅ ${productos.length} productos mayoristas cargados`);
                 
-                console.log(`✅ ${mayorProducts.length} productos al por mayor encontrados`);
+                const container = document.getElementById('mayorista-container');
+                const noProductos = document.getElementById('no-productos');
                 
-                const container = document.getElementById('productos-mayor-container');
-                const noProductsMsg = document.getElementById('no-productos-message');
-                
-                if (mayorProducts.length === 0) {
+                if (productos.length === 0) {
                     container.innerHTML = '';
-                    noProductsMsg.classList.remove('hidden');
+                    noProductos.classList.remove('hidden');
                 } else {
-                    noProductsMsg.classList.add('hidden');
+                    noProductos.classList.add('hidden');
                     
-                    container.innerHTML = mayorProducts.map(p => {
+                    container.innerHTML = productos.map(p => {
                         const nombreSanitizado = (p.nombre || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
-                        const imagenUrl = p.imagen || 'https://placehold.co/400x400/2E7D32/white?text=Producto';
+                        const imagenUrl = p.imagen || 'https://placehold.co/400x400/F59E0B/white?text=Producto';
                         const precioNum = parseFloat(p.precio) || 0;
                         
                         return `
                             <div class="product-card relative">
-                                <span class="badge-mayor">
+                                <div class="badge-mayorista">
                                     <i class="fas fa-chart-line"></i> Mayorista
-                                </span>
+                                </div>
                                 <div class="product-img-container" onclick="if(window.openImageModal) window.openImageModal('${imagenUrl}', '${nombreSanitizado}')">
-                                    <img src="${imagenUrl}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/400x400/2E7D32/white?text=${encodeURIComponent(p.nombre)}'">
+                                    <img src="${imagenUrl}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/400x400/F59E0B/white?text=${encodeURIComponent(p.nombre)}'">
                                 </div>
                                 <div class="p-3">
-                                    <span class="text-xs text-amber-600 font-bold">🏪 Venta por mayor</span>
-                                    <h3 class="font-semibold text-sm line-clamp-2 h-10 mt-1">${p.nombre || 'Producto'}</h3>
-                                    <div class="flex items-center justify-between mt-2">
-                                        <span class="text-amber-600 font-bold text-lg">$${precioNum.toLocaleString()}</span>
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span class="text-xs text-amber-600 font-bold">🏪 Venta por mayor</span>
+                                        <span class="text-xs text-gray-400">${p.unidad || 'Unidad'}</span>
+                                    </div>
+                                    <h3 class="font-semibold text-sm line-clamp-2 h-10">${p.nombre || 'Producto'}</h3>
+                                    <p class="text-xs text-gray-500 mt-1 line-clamp-2">${p.descripcion || ''}</p>
+                                    <div class="flex items-center justify-between mt-3">
+                                        <div>
+                                            <span class="text-amber-600 font-bold text-lg">$${precioNum.toLocaleString()}</span>
+                                            <span class="text-xs text-gray-400">/u</span>
+                                        </div>
                                         <button onclick="if(window.addToCart) window.addToCart({id:${p.id || Math.random()}, nombre:'${nombreSanitizado}', precio:${precioNum}, imagen:'${imagenUrl}', cantidad:1}); else alert('Cargando carrito...');" class="bg-amber-600 text-white px-3 py-1.5 rounded-lg text-sm font-bold hover:bg-amber-700 transition flex items-center gap-1">
                                             <i class="fas fa-cart-plus"></i> Añadir
                                         </button>
                                     </div>
-                                    <p class="text-xs text-gray-500 mt-2">
+                                    <p class="text-xs text-gray-400 mt-2">
                                         <i class="fas fa-tag"></i> Precio por unidad - Consulta descuentos por volumen
                                     </p>
                                 </div>
@@ -403,20 +405,12 @@
                 
             } catch (error) {
                 console.error('Error cargando productos:', error);
-                document.getElementById('productos-mayor-container').innerHTML = '<div class="col-span-4 text-center py-8 text-red-500">Error al cargar los productos. Recarga la página.</div>';
+                document.getElementById('mayorista-container').innerHTML = '<div class="col-span-4 text-center py-8 text-red-500">Error al cargar los productos. Recarga la página.</div>';
             }
 
             if (typeof window.updateCartUI === 'function') {
                 window.updateCartUI();
             }
-            
-            setTimeout(() => {
-                if (typeof window.addToCart === 'function') {
-                    console.log('✅ Carrito funcionando correctamente');
-                } else {
-                    console.warn('⚠️ addToCart no está disponible');
-                }
-            }, 500);
         });
     </script>
 </body>
