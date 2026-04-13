@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Venta por Mayor - El Resolvito</title>
+    <meta name="description" content="Productos al por mayor en La Habana. Precios especiales para negocios, cafeterías y emprendedores.">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        /* Loading Overlay */
+        #loadingOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #ffffff;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+        
+        #loadingOverlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid #e2e8f0;
+            border-top-color: #2E7D32;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        #main-content {
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        #main-content.visible {
+            opacity: 1;
+        }
+        
+        /* Estilo para la tarjeta de producto - IMAGEN GRANDE */
+        .product-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.15);
+        }
+        
+        /* Contenedor de imagen - MÁS GRANDE */
+        .product-img-container {
+            height: 280px;
+            overflow: hidden;
+            background-color: #f3f4f6;
+            cursor: pointer;
+        }
+        
+        .product-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover .product-img-container img {
+            transform: scale(1.05);
+        }
+        
+        /* Badge de Mayorista */
+        .badge-mayor {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            z-index: 10;
+        }
+        
+        /* Para móviles */
+        @media (max-width: 640px) {
+            .product-img-container {
+                height: 200px;
+            }
+        }
+        
+        .section-fade {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .section-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cuban-green': '#2E7D32',
+                        'cuban-dark': '#1B5E20',
+                        'cuban-yellow': '#FFB300',
+                        'cuban-blue': '#0277BD',
+                        'mayorista': '#F59E0B'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div id="loadingOverlay">
+        <div class="loading-spinner mb-4"></div>
+        <div class="text-cuban-green font-semibold text-lg">El Resolvito</div>
+        <div class="text-gray-400 text-sm mt-2">Cargando productos al por mayor...</div>
+    </div>
+
+    <div id="main-content">
+        <div id="pageFade" class="fixed inset-0 bg-white z-[100] opacity-0 transition-opacity duration-200 pointer-events-none"></div>
+
+        <div id="header-container"></div>
+        <div id="mobile-menu-container"></div>
+        <div id="floating-buttons-container"></div>
+
+        <!-- Hero Venta por Mayor -->
+        <section class="bg-gradient-to-r from-amber-600 to-orange-600 text-white py-16">
+            <div class="container mx-auto px-4 text-center">
+                <i class="fas fa-boxes text-5xl mb-4"></i>
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Venta al por Mayor</h1>
+                <p class="text-xl opacity-90">Precios especiales para negocios, cafeterías y emprendedores</p>
+                <div class="mt-6 inline-block bg-white/20 backdrop-blur rounded-full px-4 py-2 text-sm">
+                    <i class="fas fa-truck"></i> Consulta por cantidades y descuentos especiales
+                </div>
+            </div>
+        </section>
+
+        <!-- Info Mayorista -->
+        <section class="py-8 bg-amber-50 border-b border-amber-200">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-wrap justify-center gap-6 text-center">
+                    <div class="flex items-center gap-2 text-amber-700">
+                        <i class="fas fa-check-circle text-amber-600"></i>
+                        <span>Precios competitivos</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-amber-700">
+                        <i class="fas fa-check-circle text-amber-600"></i>
+                        <span>Entregas en La Habana</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-amber-700">
+                        <i class="fas fa-check-circle text-amber-600"></i>
+                        <span>Descuentos por volumen</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-amber-700">
+                        <i class="fas fa-check-circle text-amber-600"></i>
+                        <span>Atención personalizada</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Listado de productos al por mayor -->
+        <section class="py-12 section-fade">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold">
+                        <i class="fas fa-boxes mr-3 text-amber-600"></i>Productos al por Mayor
+                    </h2>
+                    <a href="tienda.html" class="text-cuban-green font-medium hover:underline">
+                        <i class="fas fa-store"></i> Ver tienda regular
+                    </a>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="productos-mayor-container">
+                    <!-- Los productos se cargarán desde el CSV -->
+                </div>
+                
+                <div id="no-productos-message" class="text-center py-12 hidden">
+                    <i class="fas fa-box-open text-6xl text-gray-300 mb-4"></i>
+                    <p class="text-gray-500">No hay productos disponibles en venta al por mayor en este momento.</p>
+                    <a href="tienda.html" class="inline-block mt-4 bg-cuban-green text-white px-6 py-2 rounded-full">Ver tienda regular</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA para negocios -->
+        <section class="py-12 bg-gradient-to-r from-amber-600 to-orange-600 text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-2xl md:text-3xl font-bold mb-3">¿Tienes un negocio o cafetería?</h2>
+                <p class="text-lg mb-6 opacity-90">Contáctanos para precios especiales por volumen y acuerdos comerciales</p>
+                <a href="https://wa.me/5356382909?text=Hola,%20quiero%20información%20sobre%20venta%20al%20por%20mayor%20para%20mi%20negocio" target="_blank" class="inline-block bg-white text-amber-700 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition shadow-lg">
+                    <i class="fab fa-whatsapp mr-2"></i>Consultar por mayor
+                </a>
+            </div>
+        </section>
+
+        <!-- Modals and Footer -->
+        <div id="image-modal-container"></div>
+        <div id="cart-sidebar-container"></div>
+        <div id="checkout-modal-container"></div>
+        <div id="footer-container"></div>
+
+        <div id="cartToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-[200] transition-opacity duration-300 opacity-0 pointer-events-none">
+            <p id="cartToastMessage"></p>
+        </div>
+    </div>
+
+    <script src="js/elresolvito.js" defer></script>
+    
+    <script>
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.section-fade').forEach(section => {
+            observer.observe(section);
+        });
+        
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const overlay = document.getElementById('loadingOverlay');
+                const mainContent = document.getElementById('main-content');
+                const pageFade = document.getElementById('pageFade');
+                
+                if (overlay) {
+                    overlay.classList.add('hidden');
+                    setTimeout(() => overlay.style.display = 'none', 500);
+                }
+                if (mainContent) mainContent.classList.add('visible');
+                if (pageFade) pageFade.classList.add('opacity-0');
+            }, 800);
+        });
+        
+        setTimeout(function() {
+            const overlay = document.getElementById('loadingOverlay');
+            const mainContent = document.getElementById('main-content');
+            if (overlay && !overlay.classList.contains('hidden')) {
+                overlay.classList.add('hidden');
+                setTimeout(() => overlay.style.display = 'none', 500);
+            }
+            if (mainContent) mainContent.classList.add('visible');
+        }, 3000);
+    </script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('Inicializando Venta por Mayor...');
+
+            async function loadComponent(id, path) {
+                try {
+                    const response = await fetch(path);
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    const html = await response.text();
+                    document.getElementById(id).innerHTML = html;
+                } catch (error) {
+                    console.error(`Error cargando ${path}:`, error);
+                }
+            }
+
+            await loadComponent('header-container', 'components/header.html');
+            await loadComponent('mobile-menu-container', 'components/mobile-menu.html');
+            await loadComponent('floating-buttons-container', 'components/floating-buttons.html');
+            await loadComponent('image-modal-container', 'components/image-modal.html');
+            await loadComponent('cart-sidebar-container', 'components/cart-sidebar.html');
+            await loadComponent('checkout-modal-container', 'components/checkout-modal.html');
+            await loadComponent('footer-container', 'components/footer.html');
+
+            // ==========================================
+            // FUNCIÓN PARA LEER CSV
+            // ==========================================
+            function parseCSV(csvText) {
+                const lines = csvText.split('\n');
+                const headers = lines[0].split(',');
+                
+                const productos = [];
+                for (let i = 1; i < lines.length; i++) {
+                    if (lines[i].trim() === '') continue;
+                    
+                    const values = [];
+                    let currentValue = '';
+                    let inQuotes = false;
+                    
+                    for (let char of lines[i]) {
+                        if (char === '"') {
+                            inQuotes = !inQuotes;
+                        } else if (char === ',' && !inQuotes) {
+                            values.push(currentValue.trim());
+                            currentValue = '';
+                        } else {
+                            currentValue += char;
+                        }
+                    }
+                    values.push(currentValue.trim());
+                    
+                    if (values.length >= headers.length) {
+                        const producto = {};
+                        headers.forEach((header, idx) => {
+                            producto[header.trim()] = values[idx] || '';
+                        });
+                        producto.precio = parseFloat(producto.precio) || 0;
+                        producto.destacado = producto.destacado === 'SI';
+                        productos.push(producto);
+                    }
+                }
+                return productos;
+            }
+
+            // ==========================================
+            // CARGAR Y FILTRAR PRODUCTOS AL POR MAYOR
+            // ==========================================
+            try {
+                const response = await fetch('data/productos.csv');
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const csvText = await response.text();
+                const allProducts = parseCSV(csvText);
+                
+                // Filtrar solo productos con categoría "Venta al por mayor"
+                const mayorProducts = allProducts.filter(p => p.categoria === 'Venta al por mayor');
+                
+                console.log(`✅ ${mayorProducts.length} productos al por mayor encontrados`);
+                
+                const container = document.getElementById('productos-mayor-container');
+                const noProductsMsg = document.getElementById('no-productos-message');
+                
+                if (mayorProducts.length === 0) {
+                    container.innerHTML = '';
+                    noProductsMsg.classList.remove('hidden');
+                } else {
+                    noProductsMsg.classList.add('hidden');
+                    
+                    container.innerHTML = mayorProducts.map(p => {
+                        const nombreSanitizado = (p.nombre || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+                        const imagenUrl = p.imagen || 'https://placehold.co/400x400/2E7D32/white?text=Producto';
+                        const precioNum = parseFloat(p.precio) || 0;
+                        
+                        return `
+                            <div class="product-card relative">
+                                <span class="badge-mayor">
+                                    <i class="fas fa-chart-line"></i> Mayorista
+                                </span>
+                                <div class="product-img-container" onclick="if(window.openImageModal) window.openImageModal('${imagenUrl}', '${nombreSanitizado}')">
+                                    <img src="${imagenUrl}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/400x400/2E7D32/white?text=${encodeURIComponent(p.nombre)}'">
+                                </div>
+                                <div class="p-3">
+                                    <span class="text-xs text-amber-600 font-bold">🏪 Venta por mayor</span>
+                                    <h3 class="font-semibold text-sm line-clamp-2 h-10 mt-1">${p.nombre || 'Producto'}</h3>
+                                    <div class="flex items-center justify-between mt-2">
+                                        <span class="text-amber-600 font-bold text-lg">$${precioNum.toLocaleString()}</span>
+                                        <button onclick="if(window.addToCart) window.addToCart({id:${p.id || Math.random()}, nombre:'${nombreSanitizado}', precio:${precioNum}, imagen:'${imagenUrl}', cantidad:1}); else alert('Cargando carrito...');" class="bg-amber-600 text-white px-3 py-1.5 rounded-lg text-sm font-bold hover:bg-amber-700 transition flex items-center gap-1">
+                                            <i class="fas fa-cart-plus"></i> Añadir
+                                        </button>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-2">
+                                        <i class="fas fa-tag"></i> Precio por unidad - Consulta descuentos por volumen
+                                    </p>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                }
+                
+            } catch (error) {
+                console.error('Error cargando productos:', error);
+                document.getElementById('productos-mayor-container').innerHTML = '<div class="col-span-4 text-center py-8 text-red-500">Error al cargar los productos. Recarga la página.</div>';
+            }
+
+            if (typeof window.updateCartUI === 'function') {
+                window.updateCartUI();
+            }
+            
+            setTimeout(() => {
+                if (typeof window.addToCart === 'function') {
+                    console.log('✅ Carrito funcionando correctamente');
+                } else {
+                    console.warn('⚠️ addToCart no está disponible');
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html>
