@@ -1,0 +1,42 @@
+[
+  {
+    "id": 36,
+    "nombre": "Café Isla Grande 250g",
+    "precio": 1240,
+    "imagen": "https://i.postimg.cc/pdpCSgSd/cafe_isla_grande_250-g-1.png",
+    "categoria": "Venta al por mayor",
+    "descripcion": "Café molido 250g - Ideal para cafeterías y negocios",
+    "unidad": "250g",
+    "destacado": true
+  },
+  {
+    "id": 37,
+    "nombre": "Malta Guajira 1500ml",
+    "precio": 918,
+    "imagen": "https://i.postimg.cc/YSZRBdch/malta-guajira-familiar-1500-ml-1.png",
+    "categoria": "Venta al por mayor",
+    "descripcion": "Malta familiar 1500ml - Perfecta para revendedores",
+    "unidad": "1500ml",
+    "destacado": true
+  },
+  {
+    "id": 38,
+    "nombre": "Refresco Cintra",
+    "precio": 225,
+    "imagen": "https://i.postimg.cc/YSZRBdcF/refresco-cintra-1.png",
+    "categoria": "Venta al por mayor",
+    "descripcion": "Refresco - Venta por mayor para tiendas y cafeterías",
+    "unidad": "Botella",
+    "destacado": true
+  },
+  {
+    "id": 39,
+    "nombre": "Cerveza Cristal",
+    "precio": 250,
+    "imagen": "https://i.postimg.cc/dQb0ZrFm/cerveza-cristal-1.png",
+    "categoria": "Venta al por mayor",
+    "descripcion": "Cerveza - Precio especial por volumen para negocios",
+    "unidad": "Botella",
+    "destacado": true
+  }
+]
