@@ -2,8 +2,11 @@
 // PRODUCTOS - CARGADOS DESDE CSV EN GITHUB
 // ============================================
 
-// 🔴 CAMBIA ESTA URL POR LA URL RAW DE TU CSV EN GITHUB
+// 🔴 URL RAW DE TU CSV EN GITHUB (YA ESTÁ CORRECTA)
 const CSV_URL = 'https://raw.githubusercontent.com/elresolvito/elresolvito.github.io/main/data/productos.csv';
+
+// 🔴 URL DE TU GOOGLE APPS SCRIPT PARA REGISTRAR PEDIDOS
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyETRqV0jXEhnaMXHCJDtey01f1qCEvz72VbBK38jBXJC1h1zsiqQRAAwTaVUy7PrxR/exec';
 
 // Productos de respaldo (por si falla la conexión)
 const PRODUCTOS_RESERVA = [
@@ -28,24 +31,21 @@ async function cargarProductosDesdeCSV() {
         const csvText = await response.text();
         console.log('📄 CSV recibido, longitud:', csvText.length);
         
-        // Parsear CSV correctamente
         const lines = csvText.split(/\r?\n/);
         if (lines.length < 2) {
             throw new Error('CSV vacío o con una sola línea');
         }
         
-        // Obtener encabezados (primera línea)
         const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
         console.log('📋 Encabezados encontrados:', headers);
         
         const productos = [];
         
-        // Procesar cada línea de datos
         for (let i = 1; i < lines.length; i++) {
             const line = lines[i].trim();
             if (!line) continue;
             
-            // Parsear la línea respetando comillas
+            // Parsear CSV respetando comillas
             const values = [];
             let inQuotes = false;
             let currentValue = '';
@@ -63,7 +63,6 @@ async function cargarProductosDesdeCSV() {
             }
             values.push(currentValue.trim());
             
-            // Crear objeto producto
             const producto = {};
             headers.forEach((header, idx) => {
                 if (idx < values.length) {
@@ -72,12 +71,15 @@ async function cargarProductosDesdeCSV() {
                         value = parseFloat(value) || 0;
                     } else if (header === 'id') {
                         value = parseInt(value) || i;
+                    } else if (header === 'precio_mayor') {
+                        value = parseFloat(value) || 0;
+                    } else if (header === 'cantidad_minima') {
+                        value = parseInt(value) || 0;
                     }
                     producto[header] = value;
                 }
             });
             
-            // Validar que el producto tenga nombre
             if (producto.nombre && producto.nombre !== 'nombre' && producto.nombre !== '') {
                 productos.push(producto);
             }
@@ -87,7 +89,6 @@ async function cargarProductosDesdeCSV() {
             console.log(`✅ Cargados ${productos.length} productos desde GitHub CSV`);
             PRODUCTS = productos;
             
-            // Actualizar productos destacados
             FEATURED_PRODUCTS = PRODUCTS.filter(p => {
                 const destacado = p.destacado ? p.destacado.toString().toUpperCase() : '';
                 return destacado === 'SI' || destacado === 'SÍ';
@@ -95,7 +96,6 @@ async function cargarProductosDesdeCSV() {
             
             console.log(`⭐ ${FEATURED_PRODUCTS.length} productos destacados`);
             
-            // Actualizar variables globales
             window.PRODUCTS = PRODUCTS;
             window.FEATURED_PRODUCTS = FEATURED_PRODUCTS;
             
@@ -123,10 +123,10 @@ async function cargarProductosDesdeCSV() {
     let cart = JSON.parse(localStorage.getItem('elResolvitoCart')) || [];
     const WHATSAPP_NUMBER = '5356382909';
     const MINIMUM_PURCHASE = 500;
-    const SHIPPING_COST_HABANA_VIEJA = 400;
+    const SHIPPING_COST_HABANA_VIEJA = 300; // ✅ ACTUALIZADO: 300 CUP (antes 400)
 
     // ============================================
-    // FUNCIONES DEL CARRITO
+    // FUNCIONES DEL CARRITO (CON PRECIOS MAYORISTAS)
     // ============================================
     window.addToCart = function(product) {
         if (!product || !product.id || !product.nombre || !product.precio) {
@@ -137,15 +137,40 @@ async function cargarProductosDesdeCSV() {
         const existingItemIndex = cart.findIndex(item => item.id === product.id);
         
         if (existingItemIndex !== -1) {
-            cart[existingItemIndex].cantidad += product.cantidad || 1;
-            showToast(`✓ +1 ${product.nombre}`);
+            // Producto ya existe: actualizar cantidad
+            let nuevaCantidad = cart[existingItemIndex].cantidad + (product.cantidad || 1);
+            cart[existingItemIndex].cantidad = nuevaCantidad;
+            
+            // Verificar si aplica precio mayorista
+            if (product.precio_mayor && product.cantidad_minima && nuevaCantidad >= product.cantidad_minima) {
+                cart[existingItemIndex].precio = product.precio_mayor;
+                showToast(`✓ ${product.nombre} x${nuevaCantidad} (precio mayor: $${product.precio_mayor} c/u)`);
+            } else {
+                // Si no alcanza la cantidad mínima, mantener precio normal
+                if (cart[existingItemIndex].precio !== product.precio) {
+                    cart[existingItemIndex].precio = product.precio;
+                }
+                showToast(`✓ +1 ${product.nombre}`);
+            }
         } else {
+            // Producto nuevo: agregar al carrito
+            let precioInicial = product.precio;
+            let cantidadInicial = product.cantidad || 1;
+            
+            // Verificar si desde la primera compra ya alcanza la cantidad mínima
+            if (product.precio_mayor && product.cantidad_minima && cantidadInicial >= product.cantidad_minima) {
+                precioInicial = product.precio_mayor;
+            }
+            
             cart.push({
                 id: product.id,
                 nombre: product.nombre,
                 imagen: product.imagen || 'https://placehold.co/300x300/2E7D32/white',
-                precio: product.precio,
-                cantidad: product.cantidad || 1
+                precio: precioInicial,
+                cantidad: cantidadInicial,
+                precio_normal: product.precio,           // Guardamos precio normal para futuras comparaciones
+                precio_mayor: product.precio_mayor,
+                cantidad_minima: product.cantidad_minima
             });
             showToast(`✓ "${product.nombre}" añadido al carrito`);
         }
@@ -165,10 +190,20 @@ async function cargarProductosDesdeCSV() {
             return;
         }
         if (cart[index]) {
-            cart[index].cantidad = newQuantity;
+            const item = cart[index];
+            const cantidadAnterior = item.cantidad;
+            item.cantidad = newQuantity;
+            
+            // Recalcular precio según nueva cantidad y umbral mayorista
+            if (item.precio_mayor && item.cantidad_minima && newQuantity >= item.cantidad_minima) {
+                item.precio = item.precio_mayor;
+            } else {
+                item.precio = item.precio_normal;
+            }
+            
             saveCart();
             window.updateCartUI();
-            showToast(`Cantidad actualizada: ${cart[index].nombre} x${newQuantity}`);
+            showToast(`Cantidad actualizada: ${item.nombre} x${newQuantity}`);
         }
     };
 
@@ -186,7 +221,6 @@ async function cargarProductosDesdeCSV() {
         const totalItems = cart.reduce((sum, item) => sum + (item.cantidad || 0), 0);
         const subtotal = cart.reduce((sum, item) => sum + (item.precio * (item.cantidad || 0)), 0);
         
-        // Actualizar contadores
         document.querySelectorAll('#cartCount, #floatingCartCount').forEach(el => {
             if (el) {
                 el.textContent = totalItems;
@@ -194,7 +228,6 @@ async function cargarProductosDesdeCSV() {
             }
         });
         
-        // Renderizar items del carrito
         const cartItemsContainer = document.getElementById('cartItems');
         if (cartItemsContainer) {
             if (cart.length === 0) {
@@ -202,18 +235,22 @@ async function cargarProductosDesdeCSV() {
             } else {
                 cartItemsContainer.innerHTML = cart.map((item, index) => {
                     const imgSrc = item.imagen || 'https://placehold.co/80';
+                    // Mostrar precio unitario y si es mayorista
+                    const esMayor = (item.precio === item.precio_mayor && item.precio_mayor);
+                    const badgeMayor = esMayor ? '<span class="text-xs bg-cuban-yellow text-cuban-dark px-1 rounded ml-1">Mayor</span>' : '';
                     return `
                         <div class="flex gap-3 bg-gray-50 p-3 rounded-lg">
                             <img src="${imgSrc}" alt="${item.nombre}" class="w-16 h-16 object-contain bg-white rounded-lg" onerror="this.src='https://placehold.co/80'">
                             <div class="flex-1">
-                                <h4 class="font-medium text-sm">${item.nombre}</h4>
-                                <p class="text-cuban-green font-bold">$${(item.precio || 0).toLocaleString()}</p>
+                                <h4 class="font-medium text-sm">${item.nombre} ${badgeMayor}</h4>
+                                <p class="text-cuban-green font-bold">$${(item.precio || 0).toLocaleString()} <span class="text-xs text-gray-500">c/u</span></p>
                                 <div class="flex items-center gap-2 mt-1">
                                     <button onclick="window.updateCartQuantity(${index}, ${(item.cantidad || 1) - 1})" class="w-6 h-6 bg-white rounded shadow hover:bg-gray-100">-</button>
                                     <span class="text-sm font-medium w-8 text-center">${item.cantidad || 1}</span>
                                     <button onclick="window.updateCartQuantity(${index}, ${(item.cantidad || 1) + 1})" class="w-6 h-6 bg-white rounded shadow hover:bg-gray-100">+</button>
                                     <button onclick="window.removeFromCart(${index})" class="ml-auto text-red-500 hover:text-red-700">🗑️</button>
                                 </div>
+                                ${item.cantidad_minima && item.precio_mayor && item.cantidad < item.cantidad_minima ? `<p class="text-xs text-gray-400 mt-1">Faltan ${item.cantidad_minima - item.cantidad} para precio mayor ($${item.precio_mayor} c/u)</p>` : ''}
                             </div>
                         </div>
                     `;
@@ -221,7 +258,6 @@ async function cargarProductosDesdeCSV() {
             }
         }
         
-        // Actualizar totales
         const subtotalEl = document.getElementById('cartSubtotal');
         const shippingEl = document.getElementById('cartShipping');
         const totalEl = document.getElementById('cartTotal');
@@ -299,6 +335,9 @@ async function cargarProductosDesdeCSV() {
         }
     }
 
+    // ============================================
+    // ENVÍO DE PEDIDO A WHATSAPP Y GOOGLE SHEETS
+    // ============================================
     window.sendCompleteOrder = function() {
         if (cart.length === 0) {
             alert('El carrito está vacío');
@@ -309,6 +348,7 @@ async function cargarProductosDesdeCSV() {
         const customerAddress = document.getElementById('customerAddress')?.value.trim();
         const deliveryZone = document.querySelector('input[name="deliveryZone"]:checked')?.value;
         const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value;
+        const customerPhone = document.getElementById('customerPhone')?.value.trim() || 'No especificado';
         const weight = document.getElementById('approximateWeight')?.value || '';
         const notes = document.getElementById('customerNotes')?.value.trim() || '';
 
@@ -323,60 +363,72 @@ async function cargarProductosDesdeCSV() {
             return;
         }
 
-        let mensaje = "🛒 *NUEVO PEDIDO - EL RESOLVITO*\n\n";
-        mensaje += "*PRODUCTOS:*\n";
-        cart.forEach(item => {
-            mensaje += `• ${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString()}\n`;
-        });
-
-        mensaje += `\n*Subtotal:* $${subtotal.toLocaleString()}`;
-
+        // Calcular costo de envío
+        let shippingCost = 0;
         let envioTexto = '';
         if (deliveryZone === 'habana-vieja') {
-            envioTexto = `$${SHIPPING_COST_HABANA_VIEJA} (La Habana Vieja)`;
+            shippingCost = SHIPPING_COST_HABANA_VIEJA;
+            envioTexto = `$${shippingCost} (La Habana Vieja)`;
             if (weight === 'mas-10kg') {
                 envioTexto += ' - Peso superior a 10kg, el costo podría ajustarse.';
             }
         } else {
             envioTexto = 'A convenir (fuera de La Habana Vieja)';
         }
+        
+        const totalAPagar = subtotal + shippingCost;
+        
+        // Mensaje para WhatsApp
+        let mensaje = "🛒 *NUEVO PEDIDO - EL RESOLVITO*\n\n";
+        mensaje += "*PRODUCTOS:*\n";
+        cart.forEach(item => {
+            mensaje += `• ${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString()}\n`;
+        });
+        mensaje += `\n*Subtotal:* $${subtotal.toLocaleString()}`;
         mensaje += `\n*Envío:* ${envioTexto}`;
-
-        if (deliveryZone === 'habana-vieja' && weight !== 'mas-10kg') {
-            mensaje += `\n*Total estimado:* $${(subtotal + SHIPPING_COST_HABANA_VIEJA).toLocaleString()}`;
-        } else {
-            mensaje += `\n*Total:* A confirmar`;
-        }
-
+        mensaje += `\n*Total:* $${totalAPagar.toLocaleString()}`;
         mensaje += `\n\n*DATOS DEL CLIENTE*`;
         mensaje += `\n👤 *Nombre:* ${customerName}`;
+        mensaje += `\n📞 *Teléfono:* ${customerPhone}`;
         mensaje += `\n📍 *Dirección:* ${customerAddress}`;
-
-        const pesoTexto = {
-            'menos-1kg': 'Menos de 1 kg',
-            '1-3kg': '1-3 kg',
-            '3-5kg': '3-5 kg',
-            '5-10kg': '5-10 kg',
-            'mas-10kg': 'Más de 10 kg'
-        };
-        if (weight && pesoTexto[weight]) {
-            mensaje += `\n⚖️ *Peso aproximado:* ${pesoTexto[weight]}`;
-        }
-
-        mensaje += `\n💳 *Pago propuesto:* ${paymentMethod}`;
-
-        if (notes) {
-            mensaje += `\n📝 *Notas:* ${notes}`;
-        }
-
-        mensaje += `\n\n_Te contactaremos para confirmar disponibilidad y coordinar la entrega._`;
-
+        mensaje += `\n💳 *Pago:* ${paymentMethod}`;
+        if (notes) mensaje += `\n📝 *Notas:* ${notes}`;
+        mensaje += `\n\n_Te contactaremos para confirmar._`;
+        
+        // Abrir WhatsApp
         window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank');
-
+        
+        // Enviar a Google Sheets
+        const orderData = {
+            'fecha y hora recibido': new Date().toISOString(),
+            'id pedido': new Date().getTime(),
+            'nombre': customerName,
+            'telefono': customerPhone,
+            'direccion completa': customerAddress,
+            'total': totalAPagar,
+            'metodo de pago': paymentMethod,
+            'costo de mensajeria': shippingCost,
+            'productos': cart.map(item => `${item.nombre} x${item.cantidad}`).join(', ')
+        };
+        
+        fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(orderData)
+        }).catch(err => console.error('Error enviando a Google Sheets:', err));
+        
+        // Cerrar modal y vaciar carrito (opcional)
         window.closeCheckoutModal();
         if (document.getElementById('cartSidebar')?.classList.contains('cart-open')) {
             window.toggleCart();
         }
+        
+        // Vaciar carrito después de enviar
+        cart = [];
+        saveCart();
+        window.updateCartUI();
+        showToast('✅ Pedido enviado. Te contactaremos pronto.');
     };
 
     // ============================================
@@ -385,23 +437,15 @@ async function cargarProductosDesdeCSV() {
     function showToast(message, type = 'success') {
         const toast = document.getElementById('cartToast');
         const toastMessage = document.getElementById('cartToastMessage');
-        
         if (toast && toastMessage) {
             toastMessage.textContent = message;
             toast.classList.remove('opacity-0', 'pointer-events-none');
             toast.classList.add('opacity-100');
-            
             toast.classList.remove('bg-gray-800', 'bg-red-600', 'bg-orange-500', 'bg-green-600');
-            if (type === 'error') {
-                toast.classList.add('bg-red-600');
-            } else if (type === 'warning') {
-                toast.classList.add('bg-orange-500');
-            } else if (type === 'success') {
-                toast.classList.add('bg-green-600');
-            } else {
-                toast.classList.add('bg-gray-800');
-            }
-            
+            if (type === 'error') toast.classList.add('bg-red-600');
+            else if (type === 'warning') toast.classList.add('bg-orange-500');
+            else if (type === 'success') toast.classList.add('bg-green-600');
+            else toast.classList.add('bg-gray-800');
             setTimeout(() => {
                 toast.classList.add('opacity-0', 'pointer-events-none');
                 toast.classList.remove('opacity-100');
@@ -412,36 +456,24 @@ async function cargarProductosDesdeCSV() {
     window.toggleCart = function() {
         const sidebar = document.getElementById('cartSidebar');
         const overlay = document.getElementById('cartOverlay');
-        
-        if (!sidebar || !overlay) {
-            console.error('Elementos del carrito no encontrados');
-            return;
-        }
-        
+        if (!sidebar || !overlay) return;
         sidebar.classList.toggle('cart-open');
         overlay.classList.toggle('hidden');
         document.body.style.overflow = sidebar.classList.contains('cart-open') ? 'hidden' : '';
-        
-        if (sidebar.classList.contains('cart-open')) {
-            window.updateCartUI();
-        }
+        if (sidebar.classList.contains('cart-open')) window.updateCartUI();
     };
 
     window.toggleDayNight = function() {
         document.body.classList.toggle('night-mode');
         const themeIcon = document.getElementById('headerThemeIcon');
-        if (themeIcon) {
-            themeIcon.textContent = document.body.classList.contains('night-mode') ? '🌙' : '☀️';
-        }
+        if (themeIcon) themeIcon.textContent = document.body.classList.contains('night-mode') ? '🌙' : '☀️';
         localStorage.setItem('nightMode', document.body.classList.contains('night-mode'));
     };
 
     window.toggleMenu = function() {
         const menu = document.getElementById('mobileMenu');
-        if (menu) {
-            menu.classList.toggle('hidden');
-            document.body.style.overflow = menu.classList.contains('hidden') ? '' : 'hidden';
-        }
+        if (menu) menu.classList.toggle('hidden');
+        document.body.style.overflow = menu?.classList.contains('hidden') ? '' : 'hidden';
     };
 
     window.openImageModal = function(src, name) {
@@ -477,9 +509,7 @@ async function cargarProductosDesdeCSV() {
             if (themeIcon) themeIcon.textContent = '🌙';
         }
         
-        // Cargar productos desde GitHub CSV
         await cargarProductosDesdeCSV();
-        
         window.updateCartUI();
         
         console.log('✅ El Resolvito JS inicializado correctamente');
@@ -489,27 +519,12 @@ async function cargarProductosDesdeCSV() {
 
 })();
 
-// Exportar variables globales para que otros scripts las usen
+// Exportar variables globales
 window.PRODUCTS = PRODUCTS;
 window.FEATURED_PRODUCTS = FEATURED_PRODUCTS;
 
 window.debugCart = function() {
     console.log('=== DEBUG CARRITO ===');
-    const sidebar = document.getElementById('cartSidebar');
-    const overlay = document.getElementById('cartOverlay');
-    
-    console.log('sidebar existe:', !!sidebar);
-    console.log('overlay existe:', !!overlay);
-    
-    if (sidebar) {
-        console.log('sidebar clases:', sidebar.className);
-        console.log('sidebar tiene cart-open:', sidebar.classList.contains('cart-open'));
-    }
-    
-    if (overlay) {
-        console.log('overlay hidden:', overlay.classList.contains('hidden'));
-    }
-    
-    console.log('📦 Productos totales:', PRODUCTS.length);
-    console.log('⭐ Productos destacados:', FEATURED_PRODUCTS.length);
+    console.log('Productos totales:', PRODUCTS.length);
+    console.log('Destacados:', FEATURED_PRODUCTS.length);
 };
