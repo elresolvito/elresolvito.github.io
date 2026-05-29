@@ -1,6 +1,7 @@
-/* ============================================ */
-/* ESTILOS GLOBALES - EL RESOLVITO */
-/* ============================================ */
+/* ============================================
+   ESTILOS GLOBALES - EL RESOLVITO v2.0
+   UNIFICADO (reemplaza index.css y tienda.css)
+   ============================================ */
 
 /* Variables de color - MODO CLARO */
 :root {
@@ -12,7 +13,7 @@
     --primary-orange: #FF6F00;
     --bg-light: #FFFFFF;
     --bg-dark: #0F0F1A;
-    --bg-dark-card: #1E293B;
+    --bg-dark-card: #16213E;
     --whatsapp: #25D366;
     --whatsapp-dark: #128C7E;
     --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
@@ -23,25 +24,20 @@
     --text-secondary: #4B5563;
     --text-light: #6B7280;
     --bg-card: #FFFFFF;
-    --bg-secondary: #F9FAFB;
     --border-color: #E5E7EB;
     --image-bg: #FFFFFF;
 }
 
-/* Variables - MODO OSCURO (mejoradas) */
+/* Variables - MODO OSCURO */
 body.night-mode {
     --bg-light: #0F0F1A;
-    --text-primary: #F1F5F9;
-    --text-secondary: #CBD5E1;
-    --text-light: #94A3B8;
-    --bg-card: #1E293B;
-    --bg-secondary: #0F172A;
-    --border-color: #334155;
-    --image-bg: #1E293B;
-    --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
-    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --text-primary: #F9FAFB;
+    --text-secondary: #E5E7EB;
+    --text-light: #9CA3AF;
+    --bg-card: #16213E;
+    --border-color: #2D3748;
+    --image-bg: #1a1a2e;
     --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
-    --shadow-xl: 0 20px 32px rgba(0,0,0,0.6);
     background: var(--bg-dark);
     color: var(--text-primary);
 }
@@ -59,7 +55,7 @@ body {
     background: var(--bg-light);
     color: var(--text-primary);
     line-height: 1.6;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s, color 0.3s;
     padding-bottom: 80px;
 }
 
@@ -70,32 +66,78 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================ */
+/* HERO BANNER - INDEX */
+/* ============================================ */
+.hero-container {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+}
+
+.hero-bg-day {
+    background-image: url('https://i.postimg.cc/7YfPJ9LD/banner_1l.jpg');
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    inset: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.hero-bg-night {
+    background-image: url('https://i.postimg.cc/MGfKwYjq/plaza-nocturna-1.png');
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+body.night-mode .hero-bg-day { opacity: 0; }
+body.night-mode .hero-bg-night { opacity: 1; }
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 100%);
+}
+
+body.night-mode .hero-overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%);
+}
+
+.hero-text {
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    line-height: 1.2;
+}
+
+.hero-container h1,
+.hero-container .hero-text {
+    color: #ffffff !important;
+}
+
+/* ============================================ */
 /* COMPONENTES COMPARTIDOS */
 /* ============================================ */
 
-/* Header - mejorado para modo oscuro */
+/* Header */
 header {
     position: sticky;
     top: 0;
     z-index: 50;
     background: var(--bg-card);
-    box-shadow: var(--shadow-sm);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-/* Footer - ahora se adapta al modo oscuro */
+/* Footer */
 footer {
     background: var(--primary-green-dark);
     color: white;
-    transition: background-color 0.3s ease;
-}
-
-body.night-mode footer {
-    background: #0A2E0F;
 }
 
 /* ============================================ */
-/* CARRITO (compartido) */
+/* CARRITO */
 /* ============================================ */
 #cartOverlay {
     position: fixed;
@@ -133,16 +175,8 @@ body.night-mode footer {
     padding: 16px;
 }
 #cartItems::-webkit-scrollbar { width: 6px; }
-#cartItems::-webkit-scrollbar-track { background: var(--bg-secondary); }
+#cartItems::-webkit-scrollbar-track { background: #f1f1f1; }
 #cartItems::-webkit-scrollbar-thumb { background: var(--primary-green); border-radius: 3px; }
-
-#cartSidebar .bg-cuban-green {
-    background-color: #2E7D32 !important;
-    color: white;
-    padding: 16px;
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
-}
 
 .cart-badge, #cartCount, #floatingCartCount {
     position: absolute;
@@ -159,12 +193,6 @@ body.night-mode footer {
     align-items: center;
     justify-content: center;
     border: 2px solid white;
-}
-
-body.night-mode .cart-badge,
-body.night-mode #cartCount,
-body.night-mode #floatingCartCount {
-    border-color: #1E293B;
 }
 
 /* ============================================ */
@@ -212,13 +240,13 @@ body.night-mode #floatingCartCount {
 #imageModal:not(.hidden) { display: flex; }
 
 #imageModal .modal-content {
-    background: var(--bg-card);
+    background: white;
     border-radius: 1rem;
     padding: 1rem;
     max-width: 90vw;
     max-height: 90vh;
     position: relative;
-    box-shadow: var(--shadow-xl);
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);
 }
 
 #imageModal .close-button {
@@ -256,7 +284,7 @@ body.night-mode #floatingCartCount {
     text-align: center;
     margin-top: 0.5rem;
     font-size: 1rem;
-    color: var(--text-primary);
+    color: #333;
     font-weight: 500;
 }
 
@@ -289,7 +317,7 @@ body.night-mode #floatingCartCount {
 #pageFade {
     position: fixed;
     inset: 0;
-    background: var(--bg-light);
+    background: white;
     z-index: 10000;
     opacity: 0;
     pointer-events: none;
@@ -297,7 +325,7 @@ body.night-mode #floatingCartCount {
 }
 
 /* ============================================ */
-/* TARJETAS DE PRODUCTO */
+/* TARJETAS DE PRODUCTO (ESTRUCTURA BASE) */
 /* ============================================ */
 .product-card {
     background: var(--bg-card);
@@ -322,7 +350,6 @@ body.night-mode #floatingCartCount {
     justify-content: center;
     transition: box-shadow 0.2s ease;
 }
-
 .product-image-container img {
     width: auto;
     height: auto;
@@ -332,7 +359,6 @@ body.night-mode #floatingCartCount {
     padding: 0.5rem;
     transition: transform 0.3s ease;
 }
-
 .product-image-container:hover img { transform: scale(1.05); }
 
 .product-info { padding: 1rem; }
@@ -361,28 +387,96 @@ body.night-mode #floatingCartCount {
     font-weight: 700;
     color: var(--primary-green);
 }
-.product-btn {
-    width: 2rem;
-    height: 2rem;
-    background: var(--primary-green);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: var(--shadow-sm);
-}
-.product-btn:hover {
-    background: var(--primary-green-dark);
-    transform: scale(1.1);
-}
-.product-btn i { font-size: 0.9rem; }
 
 /* ============================================ */
-/* UTILIDADES GENERALES */
+/* PRODUCTOS DESTACADOS - INDEX */
+/* ============================================ */
+#featuredProducts {
+    min-height: 200px;
+}
+
+#featuredProducts .product-image-container {
+    height: 200px;
+    background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+}
+
+#featuredProducts .product-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 1rem;
+}
+
+/* ============================================ */
+/* BLOG PREVIEW Y ARTÍCULOS */
+/* ============================================ */
+article {
+    background: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+article:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+article img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+article h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+}
+
+/* ============================================ */
+/* ALOJAMIENTOS PREVIEW */
+/* ============================================ */
+#alojamientos-preview {
+    background: white;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+#alojamientos-preview .amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+#alojamientos-preview .amenity-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #4B5563;
+}
+#alojamientos-preview .amenity-item i {
+    color: #2E7D32;
+}
+
+/* ============================================ */
+/* BÚSQUEDA EN TIENDA */
+/* ============================================ */
+.busqueda-container {
+    background: var(--bg-card);
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 70px;
+    z-index: 40;
+}
+
+.category-btn.active {
+    background: var(--primary-green) !important;
+    color: white !important;
+}
+
+/* ============================================ */
+/* UTILIDADES */
 /* ============================================ */
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -400,201 +494,55 @@ body.night-mode #floatingCartCount {
 }
 
 /* ============================================ */
-/* MODO OSCURO - CLASES DE TAILWIND */
+/* MODO OSCURO - AJUSTES ADICIONALES */
 /* ============================================ */
-body.night-mode {
-    background: var(--bg-dark);
-    color: var(--text-primary);
-}
-
 body.night-mode .bg-white,
 body.night-mode .bg-gray-50,
-body.night-mode .bg-gray-100,
 body.night-mode .product-card,
 body.night-mode #cartSidebar,
-body.night-mode header,
-body.night-mode article,
-body.night-mode #alojamientos-preview {
+body.night-mode header {
     background: var(--bg-card) !important;
     color: var(--text-primary) !important;
 }
-
-body.night-mode .bg-gray-200 {
-    background: #2D3748 !important;
-}
-
 body.night-mode .text-gray-800,
-body.night-mode .text-gray-900,
-body.night-mode .product-nombre {
-    color: var(--text-primary) !important;
-}
-
+body.night-mode .product-nombre { color: var(--text-primary) !important; }
 body.night-mode .text-gray-600,
-body.night-mode .text-gray-500,
-body.night-mode .product-descripcion {
-    color: var(--text-light) !important;
-}
-
-body.night-mode .border-gray-200,
-body.night-mode .border-gray-100 {
-    border-color: var(--border-color) !important;
-}
-
-body.night-mode .shadow-md,
-body.night-mode .shadow-lg,
-body.night-mode .shadow-xl {
-    box-shadow: var(--shadow-md);
-}
-
-body.night-mode .product-card:hover {
-    box-shadow: 0 0 20px rgba(46, 125, 50, 0.4);
-}
-
-body.night-mode .bg-gradient-to-r.from-primary\/5,
-body.night-mode .bg-gradient-to-r.from-cuban-green\/5 {
-    background: rgba(46, 125, 50, 0.15) !important;
-}
-
-body.night-mode .bg-yellow-50 {
-    background: rgba(255, 180, 0, 0.15) !important;
-}
-
-body.night-mode .bg-blue-50 {
-    background: rgba(2, 119, 189, 0.15) !important;
-}
-
-body.night-mode .border-yellow-200 {
-    border-color: rgba(255, 180, 0, 0.3) !important;
-}
-
-body.night-mode .border-blue-200 {
-    border-color: rgba(2, 119, 189, 0.3) !important;
-}
+body.night-mode .product-descripcion { color: var(--text-light) !important; }
+body.night-mode .border-gray-200 { border-color: var(--border-color) !important; }
+body.night-mode .bg-gray-100,
+body.night-mode .bg-gray-200 { background: #2d3748 !important; }
+body.night-mode .product-card:hover { box-shadow: 0 0 15px rgba(46, 125, 50, 0.3); }
+body.night-mode article { background: var(--bg-card); }
+body.night-mode #alojamientos-preview { background: var(--bg-card); }
 
 /* ============================================ */
-/* TÍTULOS PRINCIPALES BLANCOS EN HERO */
-/* ============================================ */
-.hero-container h1,
-.hero-container .hero-text,
-section .relative.z-10 h2,
-.relative.z-10 h1,
-.relative.z-10 h2,
-.relative.z-10 h3 {
-    color: #ffffff !important;
-}
-
-/* ============================================ */
-/* RESPONSIVE GENERAL */
+/* RESPONSIVE */
 /* ============================================ */
 @media (max-width: 640px) {
     body { padding-bottom: 70px; }
     .floating-actions { bottom: 1rem !important; right: 1rem !important; }
     .floating-btn { width: 50px; height: 50px; }
     #cartSidebar { max-height: 90vh; }
-    .product-image-container img {
-        max-width: 95%;
-        max-height: 95%;
-        padding: 0.4rem;
-    }
-    .producto-wa {
-        padding: 0.6rem;
-        font-size: 0.8rem;
-    }
-    #cartSidebar {
-        border-top-left-radius: 1.5rem;
-        border-top-right-radius: 1.5rem;
-    }
+    .hero-container { height: 350px; }
+    .hero-text { font-size: 1rem; }
+    .hero-container h2 { font-size: 2rem; margin-bottom: 0.5rem; }
+    #featuredProducts .product-image-container { height: 150px; }
+    article img { height: 140px; }
+    article h3 { font-size: 1rem; }
+    #alojamientos-preview .amenities-grid { grid-template-columns: 1fr; }
+    .busqueda-container { top: 60px; }
 }
 
-/* ============================================ */
-/* TUTORIAL FLOTANTE ANIMACIÓN */
-/* ============================================ */
-@keyframes slideInRight {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
+@media (min-width: 641px) and (max-width: 1024px) {
+    .hero-container { height: 400px; }
+    #featuredProducts .product-image-container { height: 170px; }
 }
 
-#tutorial-flotante {
-    animation: slideInRight 0.3s ease;
-}
-
-/* ============================================ */
-/* BOTONES UNIFICADOS */
-/* ============================================ */
-.producto-wa {
-    background: linear-gradient(135deg, #2E7D32, #1B5E20) !important;
-    width: 100%;
-    border: none;
-    padding: 0.75rem;
-    border-radius: 2rem;
-    font-size: 0.9rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    margin-top: 0.5rem;
-    color: white;
-}
-
-.producto-wa:hover {
-    transform: scale(1.02);
-    box-shadow: 0 10px 20px -5px rgba(46, 125, 50, 0.4);
-}
-
-.producto-wa i {
-    font-size: 1rem;
-}
-
-body.night-mode .producto-wa {
-    background: linear-gradient(135deg, #4CAF50, #2E7D32) !important;
-}
-
-/* ============================================ */
-/* CHECKOUT MODAL - MODO OSCURO */
-/* ============================================ */
-body.night-mode #checkoutModal .bg-white {
-    background: var(--bg-card) !important;
-}
-
-body.night-mode #checkoutModal .bg-gray-50 {
-    background: var(--bg-secondary) !important;
-}
-
-body.night-mode #checkoutModal .text-gray-700,
-body.night-mode #checkoutModal .text-gray-800 {
-    color: var(--text-primary) !important;
-}
-
-body.night-mode #checkoutModal .text-gray-500,
-body.night-mode #checkoutModal .text-gray-600 {
-    color: var(--text-light) !important;
-}
-
-body.night-mode #checkoutModal .border-gray-200,
-body.night-mode #checkoutModal .border-gray-300 {
-    border-color: var(--border-color) !important;
-}
-
-body.night-mode #checkoutModal input,
-body.night-mode #checkoutModal textarea,
-body.night-mode #checkoutModal select {
-    background: var(--bg-secondary);
-    border-color: var(--border-color);
-    color: var(--text-primary);
-}
-
-body.night-mode #checkoutModal input:focus,
-body.night-mode #checkoutModal textarea:focus,
-body.night-mode #checkoutModal select:focus {
-    border-color: var(--primary-green);
-    outline: none;
+/* Títulos con overlay oscuro (mantener blancos) */
+.relative.z-10 h1,
+.relative.z-10 h2,
+.relative.z-10 h3,
+section:has(.bg-gradient-to-r.from-black\/70) h2,
+section .relative.z-10 h2 {
+    color: #ffffff !important;
 }
