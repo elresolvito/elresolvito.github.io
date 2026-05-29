@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Moda & Estilo - El Resolvito</title>
-    <meta name="description" content="Ropa, calzados y carteras. Lo mejor de la moda en un solo lugar. Precios en USD.">
+    <meta name="description" content="Ropa, calzados y carteras. Lo mejor de la moda en un solo lugar. Envíos en La Habana.">
     
     <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     
-    <!-- Estilos -->
+    <!-- CSS UNIFICADO -->
     <link rel="stylesheet" href="css/styles.css">
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -92,14 +92,7 @@
             color: #2E7D32;
         }
 
-        .precio-usd {
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: #6b7280;
-            margin-left: 0.25rem;
-        }
-
-        .btn-consultar {
+        .producto-wa {
             width: 100%;
             background: linear-gradient(135deg, #25D366, #128C7E);
             color: white;
@@ -117,7 +110,7 @@
             margin-top: auto;
         }
 
-        .btn-consultar:hover {
+        .producto-wa:hover {
             transform: scale(1.02);
             box-shadow: 0 10px 20px -5px rgba(37,211,102,0.4);
         }
@@ -135,23 +128,24 @@
             z-index: 10;
         }
 
+        .badge-oferta {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: linear-gradient(135deg, #FF6F00, #FFB300);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 0.25rem 0.75rem;
+            border-radius: 2rem;
+            z-index: 10;
+        }
+
         .hero-moda {
             background: linear-gradient(135deg, #FF69B4 0%, #9B59B6 50%, #3498DB 100%);
             min-height: 50vh;
             display: flex;
             align-items: center;
-        }
-
-        .filtro-btn {
-            transition: all 0.3s ease;
-        }
-        .filtro-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .aviso-mensajeria {
-            background: #FFF3E0;
-            border-left: 4px solid #FF6F00;
         }
 
         @media (max-width: 640px) {
@@ -175,56 +169,6 @@
                 }
             }
         }
-        
-        // Tu número de WhatsApp como gestor
-        const GESTOR_WHATSAPP = '5356382909';
-        
-        // Función para consultar producto
-        function consultarProducto(nombre, precioUSD, imagen, descripcion) {
-            const mensaje = `🛍️ *CONSULTA DE PRODUCTO - EL RESOLVITO* 🛍️
-
-📦 *Producto:* ${nombre}
-💰 *Precio:* $${precioUSD} USD
-📝 *Descripción:* ${descripcion}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-👤 *DATOS DEL CLIENTE:*
-• Nombre: 
-• Dirección: 
-• Teléfono: 
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-❓ *Pregunta específica:*
-(Escribe aquí tu pregunta)
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-📌 *Notas importantes:*
-• Las mensajerías se pagan siempre que se soliciten
-• La mensajería se planifica de un día para otro
-• El mensajero siempre llama antes de ir
-
-¡Gracias por confiar en El Resolvito! 🙏`;
-            
-            window.open(`https://wa.me/${GESTOR_WHATSAPP}?text=${encodeURIComponent(mensaje)}`, '_blank');
-        }
-        
-        // Función para consulta rápida
-        function consultaRapida() {
-            const mensaje = `🛍️ *CONSULTA GENERAL - EL RESOLVITO* 🛍️
-
-Hola, me interesa conocer más sobre los productos de moda que publican.
-
-📌 *Antes de confirmar, quisiera saber:*
-• ¿Está disponible el producto?
-• ¿Cuál es el precio final?
-
-Quedo atento a su respuesta. ¡Gracias!`;
-            
-            window.open(`https://wa.me/${GESTOR_WHATSAPP}?text=${encodeURIComponent(mensaje)}`, '_blank');
-        }
     </script>
 </head>
 <body class="bg-gray-50">
@@ -240,75 +184,42 @@ Quedo atento a su respuesta. ¡Gracias!`;
         <div class="container mx-auto px-4 text-center text-white">
             <h1 class="text-5xl md:text-6xl font-bold mb-4 drop-shadow-lg">Moda & Estilo</h1>
             <p class="text-xl md:text-2xl opacity-90">Ropa, calzados y accesorios con el mejor estilo</p>
-            <p class="text-md opacity-80 mt-2">Precios en USD</p>
-            <button onclick="consultaRapida()" class="mt-6 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border border-white px-6 py-2 rounded-full transition inline-flex items-center gap-2">
-                <i class="fab fa-whatsapp"></i> Consultar disponibilidad
-            </button>
-        </div>
-    </section>
-
-    <!-- Aviso importante sobre mensajería -->
-    <section class="py-4 bg-amber-50 border-b border-amber-200">
-        <div class="container mx-auto px-4">
-            <div class="aviso-mensajeria bg-amber-50 p-3 rounded-lg text-sm text-amber-800 flex items-start gap-3">
-                <i class="fas fa-truck text-amber-600 text-lg mt-0.5"></i>
-                <div>
-                    <span class="font-bold">📌 Información importante:</span> Las mensajerías se pagan siempre que se soliciten. 
-                    Se planifican de un día para otro y el mensajero siempre llama antes de ir. 
-                    <a href="https://wa.me/5356382909?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20las%20mensajer%C3%ADas" target="_blank" class="underline font-bold">Consultar más →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Filtros rápidos -->
-    <section class="py-6 bg-white border-b border-gray-200 sticky top-[72px] z-20 shadow-sm">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-wrap justify-center gap-3">
-                <button onclick="mostrarCategoria('todos')" id="filtro-todos" class="filtro-btn px-5 py-2 rounded-full bg-cuban-green text-white font-medium shadow-md">📱 Todos</button>
-                <button onclick="mostrarCategoria('calzados')" id="filtro-calzados" class="filtro-btn px-5 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 font-medium">👟 Calzados</button>
-                <button onclick="mostrarCategoria('carteras')" id="filtro-carteras" class="filtro-btn px-5 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 font-medium">👜 Carteras</button>
-                <button onclick="mostrarCategoria('ropa')" id="filtro-ropa" class="filtro-btn px-5 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 font-medium">👕 Ropa</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- CALZADOS -->
-    <section id="calzados-section" class="py-8 bg-gray-50 categoria-section">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-8">
-                <span class="inline-block bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-bold mb-3">👟 CALZADO</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Zapatos, Tenis y Sandalias</h2>
-                <div class="w-20 h-1 bg-blue-500 mx-auto mt-3 rounded-full"></div>
-                <p class="text-sm text-gray-500 mt-2">Precios en USD · Consulta disponibilidad</p>
-            </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5" id="calzados-grid"></div>
-        </div>
-    </section>
-
-    <!-- CARTERAS -->
-    <section id="carteras-section" class="py-8 bg-white categoria-section">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-8">
-                <span class="inline-block bg-purple-500 text-white px-4 py-1 rounded-full text-sm font-bold mb-3">👜 ACCESORIOS</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Carteras</h2>
-                <div class="w-20 h-1 bg-purple-500 mx-auto mt-3 rounded-full"></div>
-                <p class="text-sm text-gray-500 mt-2">Precios en USD · Consulta disponibilidad</p>
-            </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5" id="carteras-grid"></div>
         </div>
     </section>
 
     <!-- ROPA -->
-    <section id="ropa-section" class="py-8 bg-gray-50 categoria-section">
+    <section id="ropa" class="py-16 bg-white">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-8">
-                <span class="inline-block bg-pink-500 text-white px-4 py-1 rounded-full text-sm font-bold mb-3">👗 ROPA</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Ropa para Hombre y Mujer</h2>
+            <div class="text-center mb-10">
+                <span class="inline-block bg-pink-500 text-white px-4 py-1 rounded-full text-sm font-bold mb-3">👗 COLECCIÓN</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Ropa</h2>
                 <div class="w-20 h-1 bg-pink-500 mx-auto mt-3 rounded-full"></div>
-                <p class="text-sm text-gray-500 mt-2">Precios en USD · Consulta disponibilidad</p>
             </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5" id="ropa-grid"></div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5" id="ropa-grid"></div>
+        </div>
+    </section>
+
+    <!-- CALZADOS -->
+    <section id="calzados" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10">
+                <span class="inline-block bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-bold mb-3">👟 CALZADO</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Zapatos y Chanclas</h2>
+                <div class="w-20 h-1 bg-blue-500 mx-auto mt-3 rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5" id="calzados-grid"></div>
+        </div>
+    </section>
+
+    <!-- CARTERAS -->
+    <section id="carteras" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10">
+                <span class="inline-block bg-purple-500 text-white px-4 py-1 rounded-full text-sm font-bold mb-3">👜 ACCESORIOS</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Carteras</h2>
+                <div class="w-20 h-1 bg-purple-500 mx-auto mt-3 rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5" id="carteras-grid"></div>
         </div>
     </section>
 
@@ -316,10 +227,10 @@ Quedo atento a su respuesta. ¡Gracias!`;
     <section class="py-12 bg-gradient-to-r from-green-600 to-green-700">
         <div class="container mx-auto px-4 text-center text-white">
             <h3 class="text-2xl font-bold mb-3">¿Te gustó algo?</h3>
-            <p class="mb-5">Contáctanos por WhatsApp para consultar disponibilidad y precios actualizados</p>
-            <button onclick="consultaRapida()" class="inline-block bg-white text-green-600 px-8 py-3 rounded-full font-bold hover:shadow-xl transition transform hover:scale-105">
-                <i class="fab fa-whatsapp mr-2"></i>Consultar ahora
-            </button>
+            <p class="mb-5">Contáctanos por WhatsApp para más información o para hacer tu pedido</p>
+            <a href="https://wa.me/5356382909" target="_blank" class="inline-block bg-white text-green-600 px-8 py-3 rounded-full font-bold hover:shadow-xl transition transform hover:scale-105">
+                <i class="fab fa-whatsapp mr-2"></i>Escríbenos ahora
+            </a>
         </div>
     </section>
 
@@ -335,109 +246,68 @@ Quedo atento a su respuesta. ¡Gracias!`;
     <script src="js/elresolvito.js" defer></script>
     
     <script>
-        // ============================================
-        // PRODUCTOS DE MODA
-        // ============================================
+        // Datos de productos
         const productosModa = {
+            ropa: [
+                { id: 401, nombre: "Camisa Blanca", imagen: "https://images.unsplash.com/photo-1598032895397-b9472444bf93?w=400", precio: 3500, descripcion: "Clásica y elegante" },
+                { id: 402, nombre: "Vestido Floral", imagen: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400", precio: 4500, descripcion: "Perfecto para primavera" },
+                { id: 403, nombre: "Jeans Negro", imagen: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400", precio: 5000, descripcion: "Ajuste perfecto" },
+                { id: 404, nombre: "Blusa Azul", imagen: "https://images.unsplash.com/photo-1564257631407-4deb1f99d992?w=400", precio: 3200, descripcion: "Tela fresca" }
+            ],
             calzados: [
-                { id: 501, nombre: "Tenis Blancos", precio: 23, imagen: "https://i.postimg.cc/nhvmtFWN/1tenis_blancos23usd.jpg", descripcion: "Tenis deportivos color blanco" },
-                { id: 502, nombre: "Tenis Negros", precio: 28, imagen: "https://i.postimg.cc/T3rbXdSM/2tenis28usd.jpg", descripcion: "Tenis casuales de color negro" },
-                { id: 503, nombre: "Tenis Deportivos", precio: 28, imagen: "https://i.postimg.cc/ZqxM7yhd/3tenis28usd.jpg", descripcion: "Calzado cómodo para entrenamiento" },
-                { id: 504, nombre: "Tenis Urbanos", precio: 28, imagen: "https://i.postimg.cc/xT8gYzGP/4tenis28usd.jpg", descripcion: "Estilo moderno para el día a día" },
-                { id: 505, nombre: "Sandalias de Verano", precio: 28, imagen: "https://i.postimg.cc/DZfYty2L/5zandalias28usd.jpg", descripcion: "Calzado abierto confortable" },
-                { id: 506, nombre: "Zapatos de Mujer", precio: 28, imagen: "https://i.postimg.cc/DwTVxhbM/6zapatosdemujer28usd.jpg", descripcion: "Elegancia y confort" },
-                { id: 507, nombre: "Zapatos de Mujer Casual", precio: 28, imagen: "https://i.postimg.cc/zDb95vC2/7zapatosdemujer28usd.jpg", descripcion: "Diseño versátil" },
-                { id: 508, nombre: "Zapatos de Mujer Premium", precio: 28, imagen: "https://i.postimg.cc/MZCgGwt2/8zapatpsdemujer28usd.jpg", descripcion: "Acabado de alta calidad" },
-                { id: 509, nombre: "Zapatos de Mujer Estilizados", precio: 28, imagen: "https://i.postimg.cc/8CX0ggjg/9zapatosdemujer28usd.jpg", descripcion: "Ideales para eventos" },
-                { id: 510, nombre: "Zapatos de Mujer Chic", precio: 28, imagen: "https://i.postimg.cc/k5YpPPDh/10zapatosdemujer28usd.jpg", descripcion: "Tendencia actual" },
-                { id: 511, nombre: "Sandalias Casuales", precio: 23, imagen: "https://i.postimg.cc/tgc2mdmw/11zandalias23usd.jpg", descripcion: "Ligeras y frescas" },
-                { id: 512, nombre: "Sandalias de Paseo", precio: 23, imagen: "https://i.postimg.cc/DzNBYQYB/12zandalias23usd.jpg", descripcion: "Comodidad garantizada" },
-                { id: 513, nombre: "Sandalias Confort", precio: 23, imagen: "https://i.postimg.cc/mrn8636V/13zandalias23usd.jpg", descripcion: "Ideales para climas cálidos" },
-                { id: 514, nombre: "Zapatos de Mujer Office", precio: 28, imagen: "https://i.postimg.cc/ncKScDCD/14apatosdemujer28usd.jpg", descripcion: "Perfectos para el trabajo" },
-                { id: 515, nombre: "Zapatos de Mujer Gala", precio: 28, imagen: "https://i.postimg.cc/xCbtrkw0/15zapatosdemujer28usd.jpg", descripcion: "Sofisticación en cada paso" },
-                { id: 516, nombre: "Tenis Deportivos Pro", precio: 28, imagen: "https://i.postimg.cc/sDzK8gwV/19tenis28usd.jpg", descripcion: "Máximo rendimiento" },
-                { id: 517, nombre: "Sandalias Elegantes", precio: 28, imagen: "https://i.postimg.cc/g2nhB9FY/31zandalias28usd.jpg", descripcion: "Toque distinguido" },
-                { id: 518, nombre: "Sandalias de Moda", precio: 28, imagen: "https://i.postimg.cc/GmVyWMdX/32zandalias28usd.jpg", descripcion: "Diseño de temporada" },
-                { id: 519, nombre: "Zapatos de Mujer Classic", precio: 28, imagen: "https://i.postimg.cc/nhCmw8b7/34zapatosdemujer28usd.jpg", descripcion: "Un básico imprescindible" },
-                { id: 520, nombre: "Sandalias Urbanas", precio: 28, imagen: "https://i.postimg.cc/TPbDfrPP/36zandalias28usd.jpg", descripcion: "Estilo veraniego" },
-                { id: 521, nombre: "Tenis Light", precio: 23, imagen: "https://i.postimg.cc/ZRhyRC9x/37tenis23usd.jpg", descripcion: "Ultra ligeros" },
-                { id: 522, nombre: "Tenis Daily", precio: 23, imagen: "https://i.postimg.cc/yx1gmtyV/38tenis23usd.jpg", descripcion: "Para el uso diario" },
-                { id: 523, nombre: "Zapatos Oxford Style", precio: 28, imagen: "https://i.postimg.cc/kGTVfsTQ/39zapatos28usd.jpg", descripcion: "Estilo clásico formal" },
-                { id: 524, nombre: "Sandalias de Playa", precio: 28, imagen: "https://i.postimg.cc/ncL9C8L0/40zandalias28usd.jpg", descripcion: "Resistentes y cómodas" },
-                { id: 525, nombre: "Zapatos Derby", precio: 28, imagen: "https://i.postimg.cc/05nJk59y/41zapatos28usd.jpg", descripcion: "Elegancia masculina" },
-                { id: 526, nombre: "Zapatos de Vestir", precio: 28, imagen: "https://i.postimg.cc/pT4VTS1N/43zapatos28usd.jpg", descripcion: "Para momentos especiales" },
-                { id: 527, nombre: "Zapatos Formales", precio: 28, imagen: "https://i.postimg.cc/k4zM4Hhq/44zapatos28usd.jpg", descripcion: "Diseño impecable" }
+                { id: 501, nombre: "Chanclas Negras", imagen: "https://i.postimg.cc/qvBVZPcH/chancletas_negras.png", precio: 4500, descripcion: "Cómodas y duraderas" },
+                { id: 502, nombre: "Chanclas Blancas", imagen: "https://i.postimg.cc/8Pmg4pv5/CHANCLETAS-BLANCAS.png", precio: 4500, descripcion: "Estilo veraniego" },
+                { id: 503, nombre: "Zapatos Casual", imagen: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400", precio: 6800, descripcion: "Para el día a día" }
             ],
             carteras: [
-                { id: 601, nombre: "Cartera Elegante", precio: 28, imagen: "https://i.postimg.cc/Z52dGf4L/33cartera28usd.jpg", descripcion: "Diseño exclusivo y moderno" },
-                { id: 602, nombre: "Cartera Clásica", precio: 28, imagen: "https://i.postimg.cc/3RVrRqb7/42cartera28usd.jpg", descripcion: "Para toda ocasión" },
-                { id: 603, nombre: "Cartera Premium", precio: 33, imagen: "https://i.postimg.cc/zffqkN9K/50cartera33usd.jpg", descripcion: "Material de alta calidad y lujo" }
-            ],
-            ropa: [
-                { id: 701, nombre: "Vestido Floral", precio: 33, imagen: "https://i.postimg.cc/MH2tz6wN/17ropademujer33usd.jpg", descripcion: "Perfecto para primavera" },
-                { id: 702, nombre: "Blusa Elegante", precio: 33, imagen: "https://i.postimg.cc/VLF4cPVt/18ropademujer33usd.jpg", descripcion: "Para ocasiones especiales" },
-                { id: 703, nombre: "Conjunto Masculino Pro", precio: 38, imagen: "https://i.postimg.cc/SN4V5xDk/20ropadehombre38usd.jpg", descripcion: "Ropa de hombre de alta gama" },
-                { id: 704, nombre: "Camisa Casual Hombre", precio: 33, imagen: "https://i.postimg.cc/bwNgyFXy/21ropadehombre33usd.jpg", descripcion: "Estilo relajado" },
-                { id: 705, nombre: "Outfit Hombre Moderno", precio: 33, imagen: "https://i.postimg.cc/rwP18VCH/22ropadehombre33usd.jpg", descripcion: "Tendencia masculina" },
-                { id: 706, nombre: "Ropa Masculina Sport", precio: 33, imagen: "https://i.postimg.cc/t4M3Xqtz/23ropadehombre33usd.jpg", descripcion: "Comodidad y estilo" },
-                { id: 707, nombre: "Suéter Masculino", precio: 33, imagen: "https://i.postimg.cc/pL6f2WYF/24ropadehombre33usd.jpg", descripcion: "Tejido suave" },
-                { id: 708, nombre: "Chaqueta Hombre", precio: 33, imagen: "https://i.postimg.cc/GpTktWq7/25ropadehombre33usd.jpg", descripcion: "Ideal para media estación" },
-                { id: 709, nombre: "Pantalón Casual Hombre", precio: 33, imagen: "https://i.postimg.cc/B6W2Kmzn/26ropadehombre33usd.jpg", descripcion: "Corte ergonómico" },
-                { id: 710, nombre: "Vestido de Noche", precio: 33, imagen: "https://i.postimg.cc/ZRk6dwQq/27ropademujer33usd.jpg", descripcion: "Elegancia femenina" },
-                { id: 711, nombre: "Conjunto Mujer Casual", precio: 33, imagen: "https://i.postimg.cc/hj9Tb9FZ/28ropademujer33usd.jpg", descripcion: "Para el día a día" },
-                { id: 712, nombre: "Blusa de Temporada", precio: 33, imagen: "https://i.postimg.cc/6qtRHywH/29ropademujer33usd.jpg", descripcion: "Colores vibrantes" },
-                { id: 713, nombre: "Outfit Femenino Chic", precio: 33, imagen: "https://i.postimg.cc/cCh3P0Lt/30ropademujer33usd.jpg", descripcion: "Estilo sofisticado" },
-                { id: 714, nombre: "Top Mujer Moderno", precio: 31, imagen: "https://i.postimg.cc/Y9Z29Py7/45ropademujer31usd.jpg", descripcion: "Diseño vanguardista" },
-                { id: 715, nombre: "Ropa Mujer Daily", precio: 28, imagen: "https://i.postimg.cc/28fmKhs0/47ropademujer28usd.jpg", descripcion: "Frescura y comodidad" },
-                { id: 716, nombre: "Vestido de Verano Mujer", precio: 31, imagen: "https://i.postimg.cc/Y2FMRbsp/48ropademujer31usdjpeg.jpg", descripcion: "Ligero y con estilo" },
-                { id: 717, nombre: "Prenda Femenina Soft", precio: 28, imagen: "https://i.postimg.cc/Qxrsy12X/49ropademujer28usd.jpg", descripcion: "Textura delicada" },
-                { id: 718, nombre: "Camiseta Hombre Básica", precio: 28, imagen: "https://i.postimg.cc/jdrKFPp6/52ropadehombre28usd.jpg", descripcion: "Esencial en el armario" },
-                { id: 719, nombre: "Ropa de Hombre Urbana", precio: 28, imagen: "https://i.postimg.cc/SxS4yqN0/53ropadehombre28usd.jpg", descripcion: "Look moderno" },
-                { id: 720, nombre: "Outfit Hombre Premium", precio: 33, imagen: "https://i.postimg.cc/kXF93D97/ropadehombre33usd.jpg", descripcion: "Calidad superior" },
-                { id: 721, nombre: "Vestido Elegante Mujer", precio: 33, imagen: "https://i.postimg.cc/sgjzVyDg/ropademujer33usd.jpg", descripcion: "Distinción total" }
+                { id: 601, nombre: "Cartera Azul", imagen: "https://i.postimg.cc/Vk4RDT46/cartera-azul-muchacha.png", precio: 5000, descripcion: "Azul vibrante" },
+                { id: 602, nombre: "Cartera Beige", imagen: "https://i.postimg.cc/2STw2JT8/cartera-beige-muchacha.png", precio: 5000, descripcion: "Beige elegante" },
+                { id: 603, nombre: "Cartera Negra", imagen: "https://i.postimg.cc/sxpdty04/cartera-negra.png", precio: 5000, descripcion: "Negra clásica" },
+                { id: 604, nombre: "Cartera Especial", imagen: "https://i.postimg.cc/wxJptcTq/cartera-azul.png", precio: 6000, descripcion: "Diseño exclusivo" }
             ]
         };
 
-        // Función para abrir modal de imagen
-        function abrirModal(imagen, titulo, descripcion, precio) {
-            const modalHTML = `
-                <div class="fixed inset-0 bg-black/80 z-[200] flex items-center justify-center p-4" onclick="this.remove()">
-                    <div class="bg-white rounded-2xl max-w-2xl w-full" onclick="event.stopPropagation()">
-                        <img src="${imagen}" class="w-full h-96 object-contain bg-gray-100 p-4 rounded-t-2xl">
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold mb-2">${titulo}</h3>
-                            <p class="text-gray-600 mb-4">${descripcion}</p>
-                            <p class="text-3xl font-bold text-cuban-green mb-4">$${precio} USD</p>
-                            <button onclick="consultarProducto('${titulo}', ${precio}, '${imagen}', '${descripcion}')" class="w-full bg-green-600 text-white py-3 rounded-xl font-bold hover:bg-green-700 transition flex items-center justify-center gap-2">
-                                <i class="fab fa-whatsapp"></i> Consultar disponibilidad
+        // Renderizar productos (usando window.openImageModal global)
+        function renderizarProductos() {
+            // Ropa
+            const ropaGrid = document.getElementById('ropa-grid');
+            if (ropaGrid) {
+                ropaGrid.innerHTML = productosModa.ropa.map(p => `
+                    <div class="producto-card relative">
+                        <div class="badge-nuevo">✨ Nuevo</div>
+                        <div class="producto-imagen" onclick="window.openImageModal('${p.imagen}', '${p.nombre}')">
+                            <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/400x400/FF69B4/white?text=Ropa'">
+                        </div>
+                        <div class="producto-info">
+                            <h3>${p.nombre}</h3>
+                            <p>${p.descripcion}</p>
+                            <div class="producto-precio">
+                                <span class="precio">$${p.precio.toLocaleString()}</span>
+                            </div>
+                            <button class="producto-wa" onclick="if(window.addToCart) window.addToCart({id: ${p.id}, nombre: '${p.nombre.replace(/'/g, "\\'")}', precio: ${p.precio}, imagen: '${p.imagen}', cantidad: 1})">
+                                <i class="fas fa-cart-plus"></i> Agregar al carrito
                             </button>
                         </div>
                     </div>
-                </div>
-            `;
-            document.body.insertAdjacentHTML('beforeend', modalHTML);
-        }
+                `).join('');
+            }
 
-        // Renderizar productos
-        function renderizarProductos() {
             // Calzados
             const calzadosGrid = document.getElementById('calzados-grid');
             if (calzadosGrid) {
                 calzadosGrid.innerHTML = productosModa.calzados.map(p => `
                     <div class="producto-card relative">
-                        <div class="badge-nuevo">✨ Nuevo</div>
-                        <div class="producto-imagen" onclick="abrirModal('${p.imagen}', '${p.nombre}', '${p.descripcion}', ${p.precio})">
+                        <div class="producto-imagen" onclick="window.openImageModal('${p.imagen}', '${p.nombre}')">
                             <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/400x400/3498DB/white?text=Calzado'">
                         </div>
                         <div class="producto-info">
                             <h3>${p.nombre}</h3>
                             <p>${p.descripcion}</p>
                             <div class="producto-precio">
-                                <span class="precio">$${p.precio}</span>
-                                <span class="precio-usd">USD</span>
+                                <span class="precio">$${p.precio.toLocaleString()}</span>
                             </div>
-                            <button class="btn-consultar" onclick="consultarProducto('${p.nombre}', ${p.precio}, '${p.imagen}', '${p.descripcion}')">
-                                <i class="fab fa-whatsapp"></i> Consultar disponibilidad
+                            <button class="producto-wa" onclick="if(window.addToCart) window.addToCart({id: ${p.id}, nombre: '${p.nombre.replace(/'/g, "\\'")}', precio: ${p.precio}, imagen: '${p.imagen}', cantidad: 1})">
+                                <i class="fas fa-cart-plus"></i> Agregar al carrito
                             </button>
                         </div>
                     </div>
@@ -449,81 +319,23 @@ Quedo atento a su respuesta. ¡Gracias!`;
             if (carterasGrid) {
                 carterasGrid.innerHTML = productosModa.carteras.map(p => `
                     <div class="producto-card relative">
-                        <div class="badge-nuevo">✨ Exclusiva</div>
-                        <div class="producto-imagen" onclick="abrirModal('${p.imagen}', '${p.nombre}', '${p.descripcion}', ${p.precio})">
+                        ${p.id === 604 ? '<div class="badge-oferta">🔥 Exclusiva</div>' : '<div class="badge-nuevo">✨ Nuevo</div>'}
+                        <div class="producto-imagen" onclick="window.openImageModal('${p.imagen}', '${p.nombre}')">
                             <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/400x400/9B59B6/white?text=Cartera'">
                         </div>
                         <div class="producto-info">
                             <h3>${p.nombre}</h3>
                             <p>${p.descripcion}</p>
                             <div class="producto-precio">
-                                <span class="precio">$${p.precio}</span>
-                                <span class="precio-usd">USD</span>
+                                <span class="precio">$${p.precio.toLocaleString()}</span>
                             </div>
-                            <button class="btn-consultar" onclick="consultarProducto('${p.nombre}', ${p.precio}, '${p.imagen}', '${p.descripcion}')">
-                                <i class="fab fa-whatsapp"></i> Consultar disponibilidad
+                            <button class="producto-wa" onclick="if(window.addToCart) window.addToCart({id: ${p.id}, nombre: '${p.nombre.replace(/'/g, "\\'")}', precio: ${p.precio}, imagen: '${p.imagen}', cantidad: 1})">
+                                <i class="fas fa-cart-plus"></i> Agregar al carrito
                             </button>
                         </div>
                     </div>
                 `).join('');
             }
-
-            // Ropa
-            const ropaGrid = document.getElementById('ropa-grid');
-            if (ropaGrid) {
-                ropaGrid.innerHTML = productosModa.ropa.map(p => `
-                    <div class="producto-card relative">
-                        <div class="badge-nuevo">✨ Nuevo</div>
-                        <div class="producto-imagen" onclick="abrirModal('${p.imagen}', '${p.nombre}', '${p.descripcion}', ${p.precio})">
-                            <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/400x400/FF69B4/white?text=Ropa'">
-                        </div>
-                        <div class="producto-info">
-                            <h3>${p.nombre}</h3>
-                            <p>${p.descripcion}</p>
-                            <div class="producto-precio">
-                                <span class="precio">$${p.precio}</span>
-                                <span class="precio-usd">USD</span>
-                            </div>
-                            <button class="btn-consultar" onclick="consultarProducto('${p.nombre}', ${p.precio}, '${p.imagen}', '${p.descripcion}')">
-                                <i class="fab fa-whatsapp"></i> Consultar disponibilidad
-                            </button>
-                        </div>
-                    </div>
-                `).join('');
-            }
-        }
-
-        // Función para filtrar por categoría
-        let categoriaActual = 'todos';
-        
-        function mostrarCategoria(categoria) {
-            categoriaActual = categoria;
-            
-            document.querySelectorAll('.filtro-btn').forEach(btn => {
-                btn.classList.remove('bg-cuban-green', 'text-white');
-                btn.classList.add('bg-gray-200', 'text-gray-700');
-            });
-            const btnActivo = document.getElementById(`filtro-${categoria}`);
-            if (btnActivo) {
-                btnActivo.classList.remove('bg-gray-200', 'text-gray-700');
-                btnActivo.classList.add('bg-cuban-green', 'text-white');
-            }
-            
-            const secciones = document.querySelectorAll('.categoria-section');
-            secciones.forEach(seccion => {
-                if (categoria === 'todos') {
-                    seccion.style.display = 'block';
-                } else {
-                    const id = seccion.id;
-                    if ((categoria === 'calzados' && id === 'calzados-section') ||
-                        (categoria === 'carteras' && id === 'carteras-section') ||
-                        (categoria === 'ropa' && id === 'ropa-section')) {
-                        seccion.style.display = 'block';
-                    } else {
-                        seccion.style.display = 'none';
-                    }
-                }
-            });
         }
 
         // Cargar componentes
@@ -548,11 +360,18 @@ Quedo atento a su respuesta. ¡Gracias!`;
             await loadComponent('footer-container', 'components/footer.html');
             
             renderizarProductos();
-            mostrarCategoria('todos');
 
             if (typeof window.updateCartUI === 'function') {
                 window.updateCartUI();
             }
+            
+            setTimeout(() => {
+                if (typeof window.addToCart === 'function') {
+                    console.log('✅ Carrito funcionando en Moda');
+                } else {
+                    console.warn('⚠️ addToCart no disponible en Moda');
+                }
+            }, 500);
         });
     </script>
 </body>
